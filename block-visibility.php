@@ -1,41 +1,36 @@
 <?php
 /**
-* Plugin Name: 		Block Visibility
-* Plugin URI: 		http://www.outermost.co/
-* Description: 		Control the visibility of any block.
-* Author: 			Nick Diego
-* Author URI: 		https://www.nickdiego.com
-* Version: 			0.1.0
-* Text Domain: 		block-visibility
-* Domain Path: 		/languages
-* Tested up to: 	5.4
-* License: 			GPLv2
-*
-* Block Visibility is free software: you can redistribute it and/or
-* modify it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 2 of the License, or
-* any later version.
-*
-* You should have received a copy of the GNU General Public License
-* along with Block Visibility. If not, see <http://www.gnu.org/licenses/>.
-*
-* @package BlockVisibility
-*/
+ * Plugin Name:         Block Visibility
+ * Plugin URI:          http://www.outermost.co/
+ * Description:         Control the visibility of any block.
+ * Version:             0.1.0
+ * Requires at least:   5.2
+ * Requires PHP:        5.6
+ * Author:              Nick Diego
+ * Author URI:          https://www.nickdiego.com
+ * License:             GPLv2
+ * License URI:         https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * Text Domain:         block-visibility
+ * Domain Path:         /languages/
+ *
+ * @package block-visibility
+ */
+ 
+namespace BlockVisibility;
 
-// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
-   exit;
+   exit; // Exit if accessed directly.
 }
 
-define( 'BLOCK_VISIBILITY_VERSION', '0.1.0' );
-define( 'BLOCK_VISIBILITY_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'BLOCK_VISIBILITY_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'BLOCK_VISIBILITY_PLUGIN_FILE', __FILE__ );
-define( 'BLOCK_VISIBILITY_PLUGIN_BASE', plugin_basename( __FILE__ ) );
-define( 'BLOCK_VISIBILITY_REVIEW_URL', 'https://wordpress.org/support/plugin/block-visibility/reviews/?filter=5' );
+define( 'BV_VERSION', '0.1.0' );
+define( 'BV_PLUGIN_FILE', __FILE__ );
+define( 'BV_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'BV_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'BV_PLUGIN_BASE', plugin_basename( __FILE__ ) );
+define( 'BV_REVIEW_URL', 'https://wordpress.org/support/plugin/block-visibility/reviews/?filter=5' );
 
 
-if ( ! class_exists( 'BlockVisibility' ) ) :
+if ( ! class_exists( 'BlockVisibility' ) ) {
 	/**
 	 * Main Block Visibility Class.
 	 *
@@ -43,29 +38,20 @@ if ( ! class_exists( 'BlockVisibility' ) ) :
 	 */
 	final class BlockVisibility {
 		/**
-		 * This plugin's instance.
-		 *
-		 * @var BlockVisibility
-		 * @since 1.0.0
-		 */
-		private static $instance;
-
-		/**
-		 * Main Block Visibility Instance.
-		 *
-		 * Insures that only one instance of Block Visibility exists in memory at any one
-		 * time. Also prevents needing to define globals all over the place.
+		 * Return singleton instance of the Block Visibility plugin.
 		 *
 		 * @since 1.0.0
-		 * @return object|BlockVisibility 
+		 * @return self 
 		 */
-		public static function instance() {
-			if ( ! isset( self::$instance ) && ! ( self::$instance instanceof BlockVisibility ) ) {
-				self::$instance = new BlockVisibility();
-				self::$instance->init();
-				self::$instance->includes();
+		public static function factory() {
+            static $instance = false;
+            
+			if ( ! $instance ) {
+				$instance = new self();
+				$instance->init();
+				$instance->includes();
 			}
-			return self::$instance;
+			return $instance;
 		}
 
 		/**
@@ -102,15 +88,13 @@ if ( ! class_exists( 'BlockVisibility' ) ) :
 		 * @since 1.0.0
 		 * @return void
 		 */
-		private function includes() {
-			require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/class-gfpa-block-assets.php';
-            require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/get-dynamic-blocks.php';
-            
-            require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/class-gfpa-widget.php';
+		public function includes() {
+			//require_once BV_PLUGIN_DIR . 'includes/class-gfpa-block-assets.php';
+            //require_once BV_PLUGIN_DIR . 'includes/get-dynamic-blocks.php';
 
 			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
-				require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/admin/class-gfpa-action-links.php';
-                require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/admin/class-gfpa-install.php';
+				require_once BV_PLUGIN_DIR . 'includes/admin/plugin-action-links.php';
+                //require_once BV_PLUGIN_DIR . 'includes/admin/class-gfpa-install.php';
 			}
 		}
 
@@ -120,7 +104,7 @@ if ( ! class_exists( 'BlockVisibility' ) ) :
          * @since 1.0.0
 		 * @return void
 		 */
-		private function init() {
+		public function init() {
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ), 99 );
 			add_action( 'enqueue_block_editor_assets', array( $this, 'block_localization' ) );
 		}
@@ -152,7 +136,7 @@ if ( ! class_exists( 'BlockVisibility' ) ) :
 			load_plugin_textdomain( 
                 'block-visibility', 
                 false, 
-                basename( BLOCK_VISIBILITY_PLUGIN_DIR ) . '/languages' 
+                basename( BV_PLUGIN_DIR ) . '/languages' 
             );
 		}
 
@@ -168,13 +152,13 @@ if ( ! class_exists( 'BlockVisibility' ) ) :
 				wp_set_script_translations( 
                     'EDIT-genesis-featured-page-advanced-editor-js', 
                     'block-visibility', 
-                    BLOCK_VISIBILITY_PLUGIN_DIR . '/languages' 
+                    BV_PLUGIN_DIR . '/languages' 
                 );
 			}
 		}
                 
 	}
-endif;
+}
 
 /**
  * The main function for that returns the Block Visibility class
@@ -182,14 +166,14 @@ endif;
  * @since 1.0.0
  * @return object|BlockVisibility 
  */
-function load_block_visibility() {
-	return BlockVisibility::instance();
+function load_plugin() {
+	return BlockVisibility::factory();
 }
 
 // Get the plugin running. Load on plugins_loaded action to avoid issue on multisite.
 if ( function_exists( 'is_multisite' ) && is_multisite() ) {
-	add_action( 'plugins_loaded', 'load_block_visibility', 90 );
+	add_action( 'plugins_loaded', __NAMESPACE__ . 'load_plugin', 90 );
 } else {
-	load_block_visibility();
+	load_plugin();
 }
 
