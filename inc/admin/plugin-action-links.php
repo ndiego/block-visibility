@@ -9,7 +9,7 @@
 namespace BlockVisibility\Admin;
 
 /**
- * Adds link to Settings page in plugin action links
+ * Adds link to Settings page in plugin action links.
  *
  * @since 1.0.0
  *
@@ -35,7 +35,7 @@ function add_plugin_action_links( $plugin_links, $plugin_file ) {
 add_filter( 'plugin_action_links', __NAMESPACE__ . '\add_plugin_action_links', 10, 2 );
 
 /**
- * Adds additional plugin row meta links
+ * Adds additional plugin row meta links.
  *
  * @since 1.0.0
  *
