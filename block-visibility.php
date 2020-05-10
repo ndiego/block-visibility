@@ -94,6 +94,7 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 
 			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 				require_once BV_PLUGIN_DIR . 'includes/admin/plugin-action-links.php';
+                require_once BV_PLUGIN_DIR . 'includes/admin/settings.php';
                 //require_once BV_PLUGIN_DIR . 'includes/admin/class-gfpa-install.php';
 			}
 		}
