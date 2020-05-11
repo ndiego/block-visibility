@@ -1,6 +1,15 @@
 /**
+ * Internal dependencies
+ */
+import BlockManager from './block-manager';
+
+/**
  * WordPress dependencies
  */
+const { registerCoreBlocks } = wp.blockLibrary;
+const { withSelect } = wp.data;
+const { compose, withState } = wp.compose;
+ 
 const { __ } = wp.i18n;
 
 const {
@@ -19,6 +28,8 @@ const {
 	Fragment,
 	Component,
 } = wp.element;
+
+const { getBlockTypes, getCategories } = wp.blocks;
 
 class Settings extends Component {
 	constructor() {
@@ -74,13 +85,22 @@ class Settings extends Component {
 				</Placeholder>
 			);
 		}
+		
+        const {
+            categories,
+            blockTypes,
+            
+        } = this.props;
+        
+		//console.log( getBlockTypes() );
+        //console.log( blockTypes );
 
 		return (
 			<>
 				<div className="codeinwp-header">
 					<div className="codeinwp-container">
 						<div className="codeinwp-logo">
-							<h1>{ __( 'My Awesome Plugin' ) }</h1>
+							<BlockManager />
 						</div>
 					</div>
 				</div>
@@ -102,7 +122,10 @@ class Settings extends Component {
 	}
 }
 
-ReactDOM.render(
-	<Settings />,
-	document.getElementById( 'bv-settings-container' )
-);
+wp.domReady( () => {
+	registerCoreBlocks();
+	render(
+		<Settings />,
+		document.getElementById( 'bv-settings-container' )
+	);
+} );

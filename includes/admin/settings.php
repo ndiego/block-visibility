@@ -57,7 +57,7 @@ function enqueue_settings_scripts() {
 		BV_PLUGIN_URL . $filepath . '.js',
 		//array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
 		//$asset_file['version'],
-        array( 'wp-api', 'wp-i18n', 'wp-components', 'wp-element' ),
+        array( 'wp-api', 'wp-i18n', 'wp-components', 'wp-element', 'wp-blocks', 'wp-block-library', 'wp-data', 'wp-compose' ),
         BV_VERSION,
 		true
 	);
@@ -68,6 +68,31 @@ function enqueue_settings_scripts() {
         array( 'wp-components' ),
         BV_VERSION
     );
+    
+    // This picks up all of the custom blocks that are added to the site, otherwise you just get the core blocks
+    // Make sure all blocks plugin were registered.
+    $block_categories = array();
+    if ( function_exists( 'gutenberg_get_block_categories' ) ) {
+            $block_categories = gutenberg_get_block_categories( get_post() );
+    } elseif ( function_exists( 'get_block_categories' ) ) {
+            $block_categories = get_block_categories( get_post() );
+    }
+    wp_add_inline_script(
+        'wp-blocks',
+        sprintf( 'wp.blocks.setCategories( %s );', wp_json_encode( $block_categories ) ),
+        'after'
+    );
+    
+    // TODO: What does this do?????
+    do_action( 'enqueue_block_editor_assets' );
+
+    $block_registry = \WP_Block_Type_Registry::get_instance();
+    foreach ( $block_registry->get_all_registered() as $block_name => $block_type ) {
+        // Front-end script.
+        if ( ! empty( $block_type->editor_script ) ) {
+            wp_enqueue_script( $block_type->editor_script );
+        }
+    }
 
 }
 add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_settings_scripts' );
