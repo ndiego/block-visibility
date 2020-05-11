@@ -4,7 +4,6 @@
 const { __ } = wp.i18n;
 
 const {
-	BaseControl,
 	Button,
 	ExternalLink,
 	PanelBody,
@@ -14,8 +13,10 @@ const {
 	ToggleControl
 } = wp.components;
 
+
 const {
 	render,
+	Fragment,
 	Component,
 } = wp.element;
 
@@ -35,7 +36,9 @@ class Settings extends Component {
 	componentDidMount() {
 		wp.api.loadPromise.then( () => {
 			this.settings = new wp.api.models.Settings();
-
+			
+			console.log( this.settings );
+			
 			if ( false === this.state.isAPILoaded ) {
 				this.settings.fetch().then( response => {
 					this.setState({
@@ -83,6 +86,7 @@ class Settings extends Component {
 				</div>
 
 				<div className="codeinwp-main">
+					<PanelBody>
 						<PanelRow>
 							<ToggleControl
 								label={ __( 'Disable All Blocks?' ) }
@@ -98,7 +102,7 @@ class Settings extends Component {
 	}
 }
 
-render(
-	<App/>,
+ReactDOM.render(
+	<Settings />,
 	document.getElementById( 'bv-settings-container' )
 );

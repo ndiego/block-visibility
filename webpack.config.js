@@ -9,10 +9,11 @@ module.exports = {
     ...defaultConfig,
 
     entry: {
-        'bv-blocks' : path.resolve( process.cwd(), 'src/blocks.js' ),
+        //'bv-blocks' : path.resolve( process.cwd(), 'src/blocks.js' ),
         'bv-admin' : path.resolve( process.cwd(), 'src/admin.js' ),
-        'bv-editor' : path.resolve( process.cwd(), 'src/styles/editor.scss' ),
+        'bv-editor': path.resolve( process.cwd(), 'src/styles/editor.scss' ),
         'bv-style' : path.resolve( process.cwd(), 'src/styles/style.scss' ),
+        'bv-admin-styles' : path.resolve( process.cwd(), 'src/styles/admin.scss' ),
     },
 
     output: {

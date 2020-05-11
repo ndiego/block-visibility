@@ -177,4 +177,29 @@ if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 } else {
 	load_plugin();
 }
+/*
+function loader() {
+    //if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
+        require_once BV_PLUGIN_DIR . 'includes/admin/plugin-action-links.php';
+        require_once BV_PLUGIN_DIR . 'includes/admin/settings.php';
+        //require_once BV_PLUGIN_DIR . 'includes/admin/class-gfpa-install.php';
+    //}
+}
+
+add_action( 'init', __NAMESPACE__ . '\loader' );
+*/
+
+function register_settings() {
+	register_setting(
+		'block_visibility_settings',
+		'bv_disable_all_blocks',
+		array(
+            'type'         => 'boolean',
+			'show_in_rest' => true,
+			'default'      => false,
+		)
+	);
+}
+add_action( 'init', __NAMESPACE__ . '\register_settings' );
+
 

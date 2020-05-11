@@ -1,2 +1,2 @@
 
-import Settings from './admin/settings';
+import './admin/settings';
