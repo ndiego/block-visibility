@@ -48,6 +48,11 @@ function print_settings_page() {
  * @since 1.0.0
  */
 function enqueue_settings_scripts() {
+    
+    if ( ! isset( $_GET['page'] ) || 'block-visibility-settings' !== $_GET['page'] ) {
+        return;
+    }
+    
     // Scripts.
 	$filepath   = 'dist/bv-admin';
 	$asset_file = get_asset_file( $filepath );
@@ -57,7 +62,7 @@ function enqueue_settings_scripts() {
 		BV_PLUGIN_URL . $filepath . '.js',
 		//array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
 		//$asset_file['version'],
-        array( 'wp-api', 'wp-i18n', 'wp-components', 'wp-element', 'wp-blocks', 'wp-block-library', 'wp-data', 'wp-compose' ),
+        array( 'wp-api', 'wp-i18n', 'wp-components', 'wp-element', 'wp-blocks', 'wp-block-library', 'wp-data', 'wp-compose', 'wp-block-editor' ),
         BV_VERSION,
 		true
 	);

@@ -106,7 +106,9 @@ class Settings extends Component {
 				</div>
 
 				<div className="codeinwp-main">
-					<PanelBody>
+					<PanelBody
+                        title="Category 1"
+                    >
 						<PanelRow>
 							<ToggleControl
 								label={ __( 'Disable All Blocks?' ) }

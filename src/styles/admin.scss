@@ -1,1 +1,49 @@
 /* This is a test */
+.bv-block-manager__category {
+    background: #FFFFFF;
+    border: 1px solid #E2E4E7;
+    box-sizing: border-box;
+    
+    padding: 16px;
+    margin: 24px;
+    
+    .components-base-control {
+        flex: 1;
+    }
+    
+    .components-base-control .components-base-control__field {
+        margin: 0;
+    }
+    
+}
+.bv-block-manager__category-title {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;    
+    letter-spacing: 0.25px;
+    padding: 4px 10px 16px 0;
+    border-bottom: 1px solid #E2E4E7;
+}
+.bv-block-manager__blocks {
+    margin: 0;
+    
+    .bv-block-manager__blocks-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 12px 12px 30px;
+        margin: 0;
+        border-bottom: 1px solid #E2E4E7;
+        
+        &:last-child {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .block-editor-block-icon {
+            width: 22px;
+            height: 22px;
+        }
+    }
+}
+

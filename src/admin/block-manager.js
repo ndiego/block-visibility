@@ -4,9 +4,15 @@
 const { __, _n, sprintf } = wp.i18n;
 const { withSelect } = wp.data;
 const { compose, withState } = wp.compose;
-const { TextControl } = wp.components;
-const { getBlockTypes,
-hasBlockSupport } = wp.blocks;
+const { 
+	TextControl,
+	CheckboxControl, 
+} = wp.components;
+
+const { 
+	getBlockTypes,
+	hasBlockSupport
+ } = wp.blocks;
 
 const {
 	render,
@@ -14,11 +20,12 @@ const {
 	Component,
 } = wp.element;
 
+const { BlockIcon } = wp.blockEditor;
 
 /**
  * External dependencies
  */
-import { filter, isArray } from 'lodash';
+import { filter, isArray, partial, map, includes } from 'lodash';
 
 class BlockManager extends Component {
 	
@@ -36,13 +43,110 @@ class BlockManager extends Component {
 			! blockType.parent
 		) );
 		
-		console.log( filteredBlockTypes );
-		console.log( blockTypes );
+		//console.log( filteredBlockTypes );
+		//console.log( blockTypes );
+		
+		const blockNames = map( filteredBlockTypes, 'name' );
+		
+		console.log( blockNames );
+		console.log( categories );
+
 		
 		return (
-			'This is all out blocks'
-		)
+			<div>
+				{ categories.map( ( category ) => (
+					<BlockCategory
+						key={ category.slug }
+						category={ category }
+						blockTypes={ filter( blockTypes, {
+							category: category.slug,
+						} ) }
+					/>
+				) ) }
+			</div>
+		);
 	}
+}
+
+class BlockCategory extends Component {
+	
+	render() {
+		const {
+			category,
+			blockTypes,
+		} = this. props
+		
+		if ( ! blockTypes.length ) {
+			return null;
+		}
+		
+		const categoryTitleId = 'bv-block-manager__category-title' + category.slug;
+		
+		return (
+			<div 
+				role="group"
+				aria-labelledby={ categoryTitleId }
+				className="bv-block-manager__category"
+			>
+				<div
+					className="bv-block-manager__category-title"
+				>
+					<CheckboxControl
+						//checked={ }
+						//onChange={ }
+						//aria-checked={ }
+						label={ <span id={ categoryTitleId }>{ category.title }</span> }
+					/>
+					{ category.icon && (
+						<BlockIcon icon={ category.icon } />
+					) }
+				</div>
+
+				<ul className="bv-block-manager__blocks">
+					{ blockTypes.map( ( blockType ) => (
+						<li
+							key={ blockType.name }
+							className="bv-block-manager__blocks-item"
+						>
+							<CheckboxControl
+								label={ blockType.title }
+								//checked={ value.includes( blockType.name ) }
+								//onChange={ partial( onItemChange, blockType.name ) }
+							/>
+							{ blockType.icon && (
+								<BlockIcon icon={ blockType.icon } />
+							) }
+						</li>
+					) ) }
+				</ul>
+
+			</div>
+		);
+	}
+}
+
+function BlockTypesChecklist( { blockTypes, value, onItemChange } ) {
+	return (
+		<ul className="edit-post-manage-blocks-modal__checklist">
+			{ blockTypes.map( ( blockType ) => (
+				<li
+					key={ blockType.name }
+					className="edit-post-manage-blocks-modal__checklist-item"
+				>
+					<CheckboxControl
+						label={ (
+							<Fragment>
+								{ blockType.title }
+								<BlockIcon icon={ blockType.icon } />
+							</Fragment>
+						) }
+						checked={ value.includes( blockType.name ) }
+						onChange={ partial( onItemChange, blockType.name ) }
+					/>
+				</li>
+			) ) }
+		</ul>
+	);
 }
 
 export default compose( [
