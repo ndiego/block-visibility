@@ -1,11 +1,19 @@
 /* This is a test */
+.bv-block-manager__category-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;    
+}
+
 .bv-block-manager__category {
     background: #FFFFFF;
     border: 1px solid #E2E4E7;
     box-sizing: border-box;
-    
     padding: 16px;
-    margin: 24px;
+    margin: 12px;
+    max-height: 500px;
+    overflow-y: scroll;
+    flex: 1 1 20%;
     
     .components-base-control {
         flex: 1;

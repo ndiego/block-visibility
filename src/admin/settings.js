@@ -6,13 +6,14 @@ import BlockManager from './block-manager';
 /**
  * WordPress dependencies
  */
-const { registerCoreBlocks } = wp.blockLibrary;
-const { withSelect } = wp.data;
-const { compose, withState } = wp.compose;
- 
-const { __ } = wp.i18n;
-
-const {
+import { __ } from '@wordpress/i18n';
+import { compose, withState } from '@wordpress/compose';
+import { withSelect } from '@wordpress/data';
+import { Component, render } from '@wordpress/element';
+import { BlockIcon } from '@wordpress/block-editor';
+import { registerCoreBlocks } from '@wordpress/block-library';
+import { getBlockTypes, getCategories } from '@wordpress/blocks';
+import {
 	Button,
 	ExternalLink,
 	PanelBody,
@@ -20,16 +21,8 @@ const {
 	Placeholder,
 	Spinner,
 	ToggleControl
-} = wp.components;
+} from '@wordpress/components';
 
-
-const {
-	render,
-	Fragment,
-	Component,
-} = wp.element;
-
-const { getBlockTypes, getCategories } = wp.blocks;
 
 class Settings extends Component {
 	constructor() {
@@ -41,6 +34,7 @@ class Settings extends Component {
 			isAPILoaded: false,
 			isAPISaving: false,
 			bv_disable_all_blocks: false,
+            search: '',
 		};
 	}
 
@@ -97,13 +91,9 @@ class Settings extends Component {
 
 		return (
 			<>
-				<div className="codeinwp-header">
-					<div className="codeinwp-container">
-						<div className="codeinwp-logo">
-							<BlockManager />
-						</div>
-					</div>
-				</div>
+					
+                <BlockManager />
+				
 
 				<div className="codeinwp-main">
 					<PanelBody

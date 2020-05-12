@@ -1,31 +1,36 @@
-/**
- * WordPress dependencies
- */
+
+ /*
 const { __, _n, sprintf } = wp.i18n;
 const { withSelect } = wp.data;
 const { compose, withState } = wp.compose;
-const { 
-	TextControl,
-	CheckboxControl, 
-} = wp.components;
-
-const { 
-	getBlockTypes,
-	hasBlockSupport
- } = wp.blocks;
-
 const {
 	render,
-	Fragment,
 	Component,
 } = wp.element;
 
 const { BlockIcon } = wp.blockEditor;
+*/
 
 /**
  * External dependencies
  */
 import { filter, isArray, partial, map, includes } from 'lodash';
+
+/**
+ * WordPress dependencies
+ */
+import { __, _n, sprintf } from '@wordpress/i18n';
+import { compose, withState } from '@wordpress/compose';
+import { withSelect } from '@wordpress/data';
+import { Component, render } from '@wordpress/element';
+import { BlockIcon } from '@wordpress/block-editor';
+import {
+	TextControl,
+	CheckboxControl,
+	Button,
+} from '@wordpress/components';
+
+
 
 class BlockManager extends Component {
 	
@@ -33,36 +38,62 @@ class BlockManager extends Component {
 		
 		const {
 			blockTypes,
-			categories
+			categories,
+			setState,
+			search,
+			isMatchingSearchTerm,
+			hasBlockSupport,
 		} = this.props;
 		
-		// We currently only want to show blocks that can be inserted from the 
-		// Block Inserter and are not child blocks https://developer.wordpress.org/block-editor/developers/block-api/block-registration/#parent-optional
+		
+		// Filter the blocks by the following criteria
 		const filteredBlockTypes = blockTypes.filter( ( blockType ) => (
+			// Is allowed to be inserted into a page/post
 			hasBlockSupport( blockType, 'inserter', true ) &&
-			! blockType.parent
+			// Is not a child block https://developer.wordpress.org/block-editor/developers/block-api/block-registration/#parent-optional
+			! blockType.parent &&
+			// Meets our search criteria
+			( ! search || isMatchingSearchTerm( blockType, search ) )
 		) );
 		
-		//console.log( filteredBlockTypes );
-		//console.log( blockTypes );
-		
+
+		// TODO: Remove
 		const blockNames = map( filteredBlockTypes, 'name' );
-		
-		console.log( blockNames );
-		console.log( categories );
+		console.log( search );
 
 		
 		return (
-			<div>
-				{ categories.map( ( category ) => (
-					<BlockCategory
-						key={ category.slug }
-						category={ category }
-						blockTypes={ filter( blockTypes, {
-							category: category.slug,
+			<div className="bv-block-manager">
+				<div className="bv-block-manager__controls">
+					<TextControl
+						type="search"
+						value={ search }
+						onChange={ ( searchValue ) => setState( {
+							search: searchValue,
 						} ) }
 					/>
-				) ) }
+					<Button
+						//onClick={ () => setAttributes( { pageType: 'url' } )  }
+						//disabled={ ! this.state.initialCustomUrl }
+						isPrimary
+					>
+						{ __(
+							'Update',
+							'block-visibility'
+						) }
+					</Button>
+				</div>
+				<div className="bv-block-manager__category-container">
+					{ categories.map( ( category ) => (
+						<BlockCategory
+							key={ category.slug }
+							category={ category }
+							blockTypes={ filter( filteredBlockTypes, {
+								category: category.slug,
+							} ) }
+						/>
+					) ) }
+				</div>
 			</div>
 		);
 	}
@@ -135,10 +166,10 @@ function BlockTypesChecklist( { blockTypes, value, onItemChange } ) {
 				>
 					<CheckboxControl
 						label={ (
-							<Fragment>
+							<>
 								{ blockType.title }
 								<BlockIcon icon={ blockType.icon } />
-							</Fragment>
+							</>
 						) }
 						checked={ value.includes( blockType.name ) }
 						onChange={ partial( onItemChange, blockType.name ) }
@@ -148,15 +179,16 @@ function BlockTypesChecklist( { blockTypes, value, onItemChange } ) {
 		</ul>
 	);
 }
-
 export default compose( [
 	withState( { search: '' } ),
 	withSelect( ( select ) => {
 		const {
 			getCategories,
+			getBlockTypes,
 			hasBlockSupport,
 			isMatchingSearchTerm,
 		} = select( 'core/blocks' );
+		
 		//const { getPreference } = select( 'core/edit-post' );
 		//const hiddenBlockTypes = getPreference( 'hiddenBlockTypes' );
 		//const numberOfHiddenBlocks = isArray( hiddenBlockTypes ) && hiddenBlockTypes.length;
@@ -164,9 +196,14 @@ export default compose( [
 		return {
 			blockTypes: getBlockTypes(),
 			categories: getCategories(),
-		//	hasBlockSupport,
-			//isMatchingSearchTerm,
+			hasBlockSupport,
+			isMatchingSearchTerm,
 			//numberOfHiddenBlocks,
 		};
 	} ),
 ] )( BlockManager );
+
+/*
+export default withState( {
+	withState( { search: '' } ),
+} )( BlockManager );*/

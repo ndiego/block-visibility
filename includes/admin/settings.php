@@ -8,7 +8,7 @@
  
 namespace BlockVisibility\Admin;
 
-//use function BlockVisibility\Utils\get_asset_file;
+use function BlockVisibility\Utils\get_asset_file as get_asset_file;
 
 /**
  * Register the plugin settings page.
@@ -60,10 +60,8 @@ function enqueue_settings_scripts() {
 	wp_enqueue_script(
 		'bv-admin-scripts',
 		BV_PLUGIN_URL . $filepath . '.js',
-		//array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
-		//$asset_file['version'],
-        array( 'wp-api', 'wp-i18n', 'wp-components', 'wp-element', 'wp-blocks', 'wp-block-library', 'wp-data', 'wp-compose', 'wp-block-editor' ),
-        BV_VERSION,
+		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
+		$asset_file['version'],
 		true
 	);
     
@@ -78,9 +76,9 @@ function enqueue_settings_scripts() {
     // Make sure all blocks plugin were registered.
     $block_categories = array();
     if ( function_exists( 'gutenberg_get_block_categories' ) ) {
-            $block_categories = gutenberg_get_block_categories( get_post() );
+        $block_categories = gutenberg_get_block_categories( get_post() );
     } elseif ( function_exists( 'get_block_categories' ) ) {
-            $block_categories = get_block_categories( get_post() );
+        $block_categories = get_block_categories( get_post() );
     }
     wp_add_inline_script(
         'wp-blocks',
@@ -102,19 +100,6 @@ function enqueue_settings_scripts() {
 }
 add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_settings_scripts' );
 
-/** 
- * @// TODO: figure out why the asset path is not updated, might have to do with @wordress/scripts issue
- */
-function get_asset_file( $filepath ) {
-    $asset_path = BV_PLUGIN_DIR . $filepath . '.asset.php';
-
-    return file_exists( $asset_path )
-        ? include $asset_path
-        : array(
-            'dependencies' => array(),
-            'version'      => BV_VERSION,
-        );
-}
 
 /*
 function register_settings() {
