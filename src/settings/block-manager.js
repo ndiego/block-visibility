@@ -64,7 +64,7 @@ class BlockManager extends Component {
 
 		
 		return (
-			<div className="bv-block-manager">
+			<div className="bv-block-manager inner-container">
 				<div className="bv-block-manager__controls">
 					<TextControl
 						type="search"								

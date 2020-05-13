@@ -16,11 +16,13 @@ import { useEntityProp } from '@wordpress/core-data';
 const blockVisibilityControls = createHigherOrderComponent( ( BlockEdit ) => {
     return ( props ) => {
 		
-		console.log( props );
+		//console.log( props.name );
 		
+		// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
 		const [ blocks, setBlocks ] = useEntityProp( 'root', 'site', 'bv_disable_all_blocks_new' );
 		
-		console.log( blocks ); 
+		// Idea is to check the props.name against blocks to make sure we should proceed
+		//console.log( blocks ); 
 		
         return (
             <>
@@ -29,7 +31,7 @@ const blockVisibilityControls = createHigherOrderComponent( ( BlockEdit ) => {
                     <PanelBody
 						title={ __( 'Visibility', 'block-visibility' ) }
 					>
-                        My custom control
+                        All of the visibility settings
                     </PanelBody>
                 </InspectorControls>
             </>
@@ -41,5 +43,6 @@ const blockVisibilityControls = createHigherOrderComponent( ( BlockEdit ) => {
 addFilter(
 	'editor.BlockEdit',
 	'outermost/block-visibility/inspector-controls',
-	blockVisibilityControls
+	blockVisibilityControls,
+	100
 );
