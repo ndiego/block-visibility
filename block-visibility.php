@@ -91,6 +91,8 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 		public function includes() {
 			//require_once BV_PLUGIN_DIR . 'includes/class-gfpa-block-assets.php';
             //require_once BV_PLUGIN_DIR . 'includes/get-dynamic-blocks.php';
+            
+            require_once BV_PLUGIN_DIR . 'includes/admin/editor.php';
 
 			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 				require_once BV_PLUGIN_DIR . 'includes/admin/plugin-action-links.php';
@@ -193,17 +195,32 @@ function loader() {
 add_action( 'init', __NAMESPACE__ . '\loader' );
 */
 
+//https://github.com/WordPress/gutenberg/issues/20731
+
 function register_settings() {
 	register_setting(
 		'block_visibility_settings',
 		'bv_disable_all_blocks',
 		array(
-            'type'         => 'boolean',
+            'type'         => 'string',
 			'show_in_rest' => true,
-			'default'      => false,
+            'sanitize_callback' => 'sanitize_text_field',
+			'default'      => 'this is a test',
 		)
 	);
+    
+    register_setting(
+        'block_visibility_settings',
+        'bv_disable_all_blocks_new',
+        array(
+            'type'         => 'string',
+            'show_in_rest' => true,
+            'sanitize_callback' => 'sanitize_text_field',
+            'default'      => 'this is a test',
+        )
+    );
 }
-add_action( 'init', __NAMESPACE__ . '\register_settings' );
+add_action( 'rest_api_init', __NAMESPACE__ . '\register_settings' );
+add_action( 'admin_init', __NAMESPACE__ . '\register_settings' );
 
 

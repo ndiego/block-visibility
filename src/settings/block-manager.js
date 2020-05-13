@@ -14,7 +14,7 @@ const { BlockIcon } = wp.blockEditor;
 /**
  * External dependencies
  */
-import { filter, isArray, partial, map, includes } from 'lodash';
+import { filter, isArray, partial, map, includes, without } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -43,6 +43,7 @@ class BlockManager extends Component {
 			search,
 			isMatchingSearchTerm,
 			hasBlockSupport,
+			disabledBlocks,
 		} = this.props;
 		
 		
@@ -59,19 +60,26 @@ class BlockManager extends Component {
 
 		// TODO: Remove
 		const blockNames = map( filteredBlockTypes, 'name' );
-		console.log( search );
+		//console.log( disabledBlocks );
 
 		
 		return (
 			<div className="bv-block-manager">
 				<div className="bv-block-manager__controls">
 					<TextControl
-						type="search"
+						type="search"								
+						placeholder={ __(
+							'Search for a block',
+							'block-visibility'
+						) }
 						value={ search }
 						onChange={ ( searchValue ) => setState( {
 							search: searchValue,
 						} ) }
 					/>
+					<div>
+						X Blocks Disabled
+					</div>
 					<Button
 						//onClick={ () => setAttributes( { pageType: 'url' } )  }
 						//disabled={ ! this.state.initialCustomUrl }
@@ -91,6 +99,7 @@ class BlockManager extends Component {
 							blockTypes={ filter( filteredBlockTypes, {
 								category: category.slug,
 							} ) }
+							disabledBlocks={ disabledBlocks }
 						/>
 					) ) }
 				</div>
@@ -105,11 +114,32 @@ class BlockCategory extends Component {
 		const {
 			category,
 			blockTypes,
+			disabledBlocks,
 		} = this. props
 		
 		if ( ! blockTypes.length ) {
 			return null;
 		}
+		
+		//console.log( map( blockTypes, 'name' ) );
+		
+		const checkedBlockNames = without(
+			map( blockTypes, 'name' ),
+			...disabledBlocks
+		);
+
+		const isAllChecked = checkedBlockNames.length === blockTypes.length;
+		
+		// This might not actually work with the CheckboxControl component
+		let ariaChecked;
+		if ( isAllChecked ) {
+			ariaChecked = 'true';
+		} else if ( checkedBlockNames.length > 0 ) {
+			ariaChecked = 'mixed';
+		} else {
+			ariaChecked = 'false';
+		}
+
 		
 		const categoryTitleId = 'bv-block-manager__category-title' + category.slug;
 		
@@ -123,9 +153,9 @@ class BlockCategory extends Component {
 					className="bv-block-manager__category-title"
 				>
 					<CheckboxControl
-						//checked={ }
-						//onChange={ }
-						//aria-checked={ }
+						checked={ isAllChecked }
+						//onChange={ toggleAllVisible }
+						aria-checked={ ariaChecked }
 						label={ <span id={ categoryTitleId }>{ category.title }</span> }
 					/>
 					{ category.icon && (
@@ -156,29 +186,6 @@ class BlockCategory extends Component {
 	}
 }
 
-function BlockTypesChecklist( { blockTypes, value, onItemChange } ) {
-	return (
-		<ul className="edit-post-manage-blocks-modal__checklist">
-			{ blockTypes.map( ( blockType ) => (
-				<li
-					key={ blockType.name }
-					className="edit-post-manage-blocks-modal__checklist-item"
-				>
-					<CheckboxControl
-						label={ (
-							<>
-								{ blockType.title }
-								<BlockIcon icon={ blockType.icon } />
-							</>
-						) }
-						checked={ value.includes( blockType.name ) }
-						onChange={ partial( onItemChange, blockType.name ) }
-					/>
-				</li>
-			) ) }
-		</ul>
-	);
-}
 export default compose( [
 	withState( { search: '' } ),
 	withSelect( ( select ) => {

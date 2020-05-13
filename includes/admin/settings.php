@@ -47,30 +47,31 @@ function print_settings_page() {
  *
  * @since 1.0.0
  */
-function enqueue_settings_scripts() {
+function enqueue_setting_scripts() {
     
     if ( ! isset( $_GET['page'] ) || 'block-visibility-settings' !== $_GET['page'] ) {
         return;
     }
     
     // Scripts.
-	$filepath   = 'dist/bv-admin';
-	$asset_file = get_asset_file( $filepath );
+	$asset_file = get_asset_file( 'dist/bv-settings' );
 
 	wp_enqueue_script(
-		'bv-admin-scripts',
-		BV_PLUGIN_URL . $filepath . '.js',
+		'bv-setting-scripts',
+		BV_PLUGIN_URL . 'dist/bv-settings.js',
 		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
 		$asset_file['version'],
 		true
 	);
     
+    // Styles.
     wp_enqueue_style( 
-        'bv-admin-styles', 
-        BV_PLUGIN_URL . 'dist/bv-admin-styles.css', 
+        'bv-setting-styles', 
+        BV_PLUGIN_URL . 'dist/bv-setting-styles.css', 
         array( 'wp-components' ),
         BV_VERSION
     );
+    
     
     // This picks up all of the custom blocks that are added to the site, otherwise you just get the core blocks
     // Make sure all blocks plugin were registered.
@@ -96,9 +97,8 @@ function enqueue_settings_scripts() {
             wp_enqueue_script( $block_type->editor_script );
         }
     }
-
 }
-add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_settings_scripts' );
+add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_setting_scripts' );
 
 
 /*

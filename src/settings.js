@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import BlockManager from './block-manager';
+import BlockManager from './settings/block-manager';
 
 /**
  * WordPress dependencies
@@ -88,11 +88,20 @@ class Settings extends Component {
         
 		//console.log( getBlockTypes() );
         //console.log( blockTypes );
-
+		
+		const disabledBlocks = [
+			"core/paragraph",
+			"core/image",
+			"core/heading",
+		];
+		
+		// We beed Tabs here (TabControl)	
 		return (
 			<>
-					
-                <BlockManager />
+				
+                <BlockManager 
+					disabledBlocks={ disabledBlocks }
+				/>
 				
 
 				<div className="codeinwp-main">
