@@ -11,12 +11,12 @@ const {
 const { BlockIcon } = wp.blockEditor;
 */
 
-import PropsTest from './props-test';
+//import PropsTest from './props-test';
 
 /**
  * External dependencies
  */
-import { filter, isArray, partial, map, includes, without } from 'lodash';
+import { filter, isArray, partial, map, includes, without, union } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -50,9 +50,29 @@ class BlockManager extends Component {
 	constructor() {
 		super( ...arguments );
 
-		//this.getSettings = this.getSettings.bind( this );
+		this.updateDisabledBlocks = this.updateDisabledBlocks.bind( this );
+        this.state = {
+            hasUpdates: false,
+			disabledBlocks: [
+    			"core/paragraph",
+    			"core/image",
+    			"core/heading",
+    		],
+		};
 	}
 	
+    updateDisabledBlocks( blocks ) {
+        
+        const currentDisabled = this.state.disabledBlocks;
+        
+        const blockNames = map( blocks, 'name' );
+        
+        const newDisabled = union( currentDisabled, blockNames );
+        console.log( newDisabled );
+        //this.setState( { disabledBlocks: newDisabled } );
+        this.setState( { hasUpdates: true } );
+    }
+    
 	render() {
 		
 		const {
@@ -84,7 +104,7 @@ class BlockManager extends Component {
 		
 		// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
 		//const test = propsTest();
-
+        const disabledBlocksState = this.state.disabledBlocks;
 		
 		return (
 			<div className="bv-block-manager inner-container">
@@ -101,12 +121,11 @@ class BlockManager extends Component {
 						} ) }
 					/>
 					<div>
-						Block setting value: 
+						Block setting value: { disabledBlocksState }
 					</div>
-					<PropsTest />
 					<Button
 						//onClick={ () => saveEditedEntityRecord( 'root', 'site', 'bv_disable_all_blocks_new', 'blocks test' )  }
-						//disabled={ ! this.state.initialCustomUrl }
+						disabled={ ! this.state.hasUpdates }
 						isPrimary
 					>
 						{ __(
@@ -123,7 +142,8 @@ class BlockManager extends Component {
 							blockTypes={ filter( filteredBlockTypes, {
 								category: category.slug,
 							} ) }
-							disabledBlocks={ disabledBlocks }
+							disabledBlocks={ disabledBlocksState }
+                            onChange={ this.updateDisabledBlocks }
 						/>
 					) ) }
 				</div>
@@ -134,13 +154,32 @@ class BlockManager extends Component {
 
 
 class BlockCategory extends Component {
+    
+    constructor() {
+        super( ...arguments );
+
+        this.onCategoryChange = this.onCategoryChange.bind( this );
+    }
+    
+    onCategoryChange( isAllChecked, blockTypes ) {
+        
+        const blockNames = map( blockTypes, 'name' );
+        
+        if ( isAllChecked ) {
+            console.log( blockNames );
+        } else {
+            console.log( 'Not all checked' );
+        }
+        
+    }
 	
 	render() {
 		const {
 			category,
 			blockTypes,
 			disabledBlocks,
-		} = this. props
+            onChange,
+		} = this.props
 		
 		if ( ! blockTypes.length ) {
 			return null;
@@ -179,7 +218,7 @@ class BlockCategory extends Component {
 				>
 					<CheckboxControl
 						checked={ isAllChecked }
-						//onChange={ toggleAllVisible }
+						onChange={ this.onCategoryChange( isAllChecked, blockTypes ) }
 						aria-checked={ ariaChecked }
 						label={ <span id={ categoryTitleId }>{ category.title }</span> }
 					/>
@@ -196,7 +235,7 @@ class BlockCategory extends Component {
 						>
 							<CheckboxControl
 								label={ blockType.title }
-								//checked={ value.includes( blockType.name ) }
+								checked={ ! disabledBlocks.includes( blockType.name ) }
 								//onChange={ partial( onItemChange, blockType.name ) }
 							/>
 							{ blockType.icon && (
