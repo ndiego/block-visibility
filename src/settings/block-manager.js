@@ -51,6 +51,8 @@ class BlockManager extends Component {
 		super( ...arguments );
 
 		this.updateDisabledBlocks = this.updateDisabledBlocks.bind( this );
+        this.handleStateChange = this.handleStateChange.bind( this );
+        
         this.state = {
             hasUpdates: false,
 			disabledBlocks: [
@@ -58,19 +60,24 @@ class BlockManager extends Component {
     			"core/image",
     			"core/heading",
     		],
+            testText: '',
 		};
 	}
 	
-    updateDisabledBlocks( blocks ) {
+    updateDisabledBlocks( blocksNames ) {
         
         const currentDisabled = this.state.disabledBlocks;
         
-        const blockNames = map( blocks, 'name' );
+        //const blockNames = map( blocks, 'name' );
         
         const newDisabled = union( currentDisabled, blockNames );
         console.log( newDisabled );
         //this.setState( { disabledBlocks: newDisabled } );
         this.setState( { hasUpdates: true } );
+    }
+    
+    handleStateChange( value ){
+        this.setState( { testText: value } );
     }
     
 	render() {
@@ -123,6 +130,9 @@ class BlockManager extends Component {
 					<div>
 						Block setting value: { disabledBlocksState }
 					</div>
+                    <div>
+                        Test text: { this.state.testText }
+                    </div>
 					<Button
 						//onClick={ () => saveEditedEntityRecord( 'root', 'site', 'bv_disable_all_blocks_new', 'blocks test' )  }
 						disabled={ ! this.state.hasUpdates }
@@ -133,6 +143,10 @@ class BlockManager extends Component {
 							'block-visibility'
 						) }
 					</Button>
+                    <TestTextInput
+                        value={ this.state.testText }
+                        handleStateChange={ this.handleStateChange }
+                    />
 				</div>
 				<div className="bv-block-manager__category-container">
 					{ categories.map( ( category ) => (
@@ -143,13 +157,50 @@ class BlockManager extends Component {
 								category: category.slug,
 							} ) }
 							disabledBlocks={ disabledBlocksState }
-                            onChange={ this.updateDisabledBlocks }
+                            updateDisabled={ this.updateDisabledBlocks }
 						/>
 					) ) }
 				</div>
 			</div>
 		);
 	}
+}
+
+class TestTextInput extends Component {
+    
+    constructor() {
+        super( ...arguments );
+
+        this.handleTextUpdate = this.handleTextUpdate.bind( this );
+        
+        this.state ={
+            newTest: '',
+        }
+    }
+    
+    handleTextUpdate( value ) {
+        
+        this.setState( { newTest: value } );
+        this.props.handleStateChange( value );
+    }
+    
+    render() {
+        
+        return(
+            <>
+            <div>This is a: { this.state.newTest }</div>
+            <TextControl
+                type="string"
+                value={ this.props.value }
+                onChange={ this.handleTextUpdate }
+                placeholder={ __(
+                    'Read More',
+                    'genesis-featured-page-advanced'
+                ) }
+            />
+            </>
+        )
+    }
 }
 
 
@@ -161,14 +212,31 @@ class BlockCategory extends Component {
         this.onCategoryChange = this.onCategoryChange.bind( this );
     }
     
-    onCategoryChange( isAllChecked, blockTypes ) {
-        
-        const blockNames = map( blockTypes, 'name' );
+    /*
+    onCategoryChange( isAllChecked, catBlockNames ) {
         
         if ( isAllChecked ) {
-            console.log( blockNames );
+            //console.log( catBlockNames );
+            
+            this.props.updateDisabled( catBlockNames );
         } else {
-            console.log( 'Not all checked' );
+            //console.log( 'Not all checked' );
+            this.props.updateDisabled( [] );
+        }
+        
+    }
+    */
+    onCategoryChange( checked ) {
+        
+        const blockNames = map( this.props.blockTypes, 'name' );
+        
+        if ( checked ) {
+            //console.log( catBlockNames );
+            
+            this.props.updateDisabled( blockNames );
+        } else {
+            //console.log( 'Not all checked' );
+            this.props.updateDisabled( [] );
         }
         
     }
@@ -178,7 +246,7 @@ class BlockCategory extends Component {
 			category,
 			blockTypes,
 			disabledBlocks,
-            onChange,
+            //updateDisabled,
 		} = this.props
 		
 		if ( ! blockTypes.length ) {
@@ -186,9 +254,10 @@ class BlockCategory extends Component {
 		}
 		
 		//console.log( map( blockTypes, 'name' ) );
-		
+		const catBlockNames = map( blockTypes, 'name' );
+        
 		const checkedBlockNames = without(
-			map( blockTypes, 'name' ),
+			catBlockNames,
 			...disabledBlocks
 		);
 
@@ -218,7 +287,8 @@ class BlockCategory extends Component {
 				>
 					<CheckboxControl
 						checked={ isAllChecked }
-						onChange={ this.onCategoryChange( isAllChecked, blockTypes ) }
+						//onChange={ () => this.onCategoryChange( isAllChecked, catBlockNames ) }
+                        onChange={ this.onCategoryChange }
 						aria-checked={ ariaChecked }
 						label={ <span id={ categoryTitleId }>{ category.title }</span> }
 					/>
