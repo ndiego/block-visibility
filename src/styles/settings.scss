@@ -37,20 +37,32 @@
 }
 
 .bv-block-manager__category-container {
+    /*
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;    
+    flex-direction: row;  
+    */
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .bv-block-manager__category {
     background: #FFFFFF;
     border: 1px solid #E2E4E7;
     box-sizing: border-box;
+    /*
     padding: 16px;
     margin: 12px;
     max-height: 500px;
     overflow-y: scroll;
     flex: 1 1 30%;
+    */
+    
+    width: 32%;
+    padding-bottom: 18%; /* 32:18, i.e. 16:9 */
+    margin-bottom: 2%; /* (100-32*3)/2 */
     
     .components-base-control {
         flex: 1;
@@ -91,4 +103,5 @@
         }
     }
 }
+
 

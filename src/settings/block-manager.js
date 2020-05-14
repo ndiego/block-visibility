@@ -11,6 +11,8 @@ const {
 const { BlockIcon } = wp.blockEditor;
 */
 
+import PropsTest from './props-test';
+
 /**
  * External dependencies
  */
@@ -19,6 +21,11 @@ import { filter, isArray, partial, map, includes, without } from 'lodash';
 /**
  * WordPress dependencies
  */
+ 
+import {
+ 	createContext,
+ 	useContext,
+} from '@wordpress/element';
 import { __, _n, sprintf } from '@wordpress/i18n';
 import { compose, withState } from '@wordpress/compose';
 import { withSelect } from '@wordpress/data';
@@ -30,9 +37,21 @@ import {
 	Button,
 } from '@wordpress/components';
 
+import { 
+	useEntityProp,
+	saveEditedEntityRecord 
+} from '@wordpress/core-data';
+
+
 
 
 class BlockManager extends Component {
+	
+	constructor() {
+		super( ...arguments );
+
+		//this.getSettings = this.getSettings.bind( this );
+	}
 	
 	render() {
 		
@@ -44,6 +63,7 @@ class BlockManager extends Component {
 			isMatchingSearchTerm,
 			hasBlockSupport,
 			disabledBlocks,
+			blocksTest,
 		} = this.props;
 		
 		
@@ -61,6 +81,9 @@ class BlockManager extends Component {
 		// TODO: Remove
 		const blockNames = map( filteredBlockTypes, 'name' );
 		//console.log( disabledBlocks );
+		
+		// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
+		//const test = propsTest();
 
 		
 		return (
@@ -78,10 +101,11 @@ class BlockManager extends Component {
 						} ) }
 					/>
 					<div>
-						X Blocks Disabled
+						Block setting value: 
 					</div>
+					<PropsTest />
 					<Button
-						//onClick={ () => setAttributes( { pageType: 'url' } )  }
+						//onClick={ () => saveEditedEntityRecord( 'root', 'site', 'bv_disable_all_blocks_new', 'blocks test' )  }
 						//disabled={ ! this.state.initialCustomUrl }
 						isPrimary
 					>
@@ -107,6 +131,7 @@ class BlockManager extends Component {
 		);
 	}
 }
+
 
 class BlockCategory extends Component {
 	
@@ -195,7 +220,6 @@ export default compose( [
 			hasBlockSupport,
 			isMatchingSearchTerm,
 		} = select( 'core/blocks' );
-		
 		//const { getPreference } = select( 'core/edit-post' );
 		//const hiddenBlockTypes = getPreference( 'hiddenBlockTypes' );
 		//const numberOfHiddenBlocks = isArray( hiddenBlockTypes ) && hiddenBlockTypes.length;
@@ -209,6 +233,10 @@ export default compose( [
 		};
 	} ),
 ] )( BlockManager );
+
+
+
+
 
 /*
 export default withState( {
