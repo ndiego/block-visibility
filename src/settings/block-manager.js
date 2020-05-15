@@ -16,7 +16,7 @@ const { BlockIcon } = wp.blockEditor;
 /**
  * External dependencies
  */
-import { filter, isArray, partial, map, includes, without, union } from 'lodash';
+import { filter, isArray, partial, map, includes, without, union, difference } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -51,7 +51,9 @@ class BlockManager extends Component {
 		super( ...arguments );
 
 		this.updateDisabledBlocks = this.updateDisabledBlocks.bind( this );
-        this.handleStateChange = this.handleStateChange.bind( this );
+        this.handleBlockCategoryChange = this.handleBlockCategoryChange.bind( this );
+        this.handleBlockTypeChange = this.handleBlockTypeChange.bind( this );
+
         
         this.state = {
             hasUpdates: false,
@@ -76,9 +78,45 @@ class BlockManager extends Component {
         this.setState( { hasUpdates: true } );
     }
     
-    handleStateChange( value ){
-        this.setState( { testText: value } );
+    handleBlockCategoryChange( checked, blockTypes ){    
+        let disabledBlocks = this.state.disabledBlocks;
+        
+        if ( ! checked ) {
+            console.log( 'add blocks');
+            disabledBlocks = union( disabledBlocks, blockTypes );
+            this.setState( { disabledBlocks: disabledBlocks } );
+        } else {
+            console.log( 'remove blocks');
+            disabledBlocks = difference( disabledBlocks, blockTypes );
+            this.setState( { disabledBlocks: disabledBlocks } );
+        }
+        
+        this.setState( { hasUpdates: true } );
     }
+    
+    handleBlockTypeChange( checked, blockType ){
+        let disabledBlocks = this.state.disabledBlocks;
+        
+        this.setState( { hasUpdates: false } );
+        
+        if ( ! checked ) {
+            console.log( 'add block');
+            //console.log( disabledBlocks.push( blockType ) );
+            //if ( disabledBlocks.indexOf( blockType ) === -1 ) {
+                disabledBlocks.push( blockType );
+            //}
+                
+            //console.log( disabledBlocks );
+            this.setState( { disabledBlocks: disabledBlocks } );
+        } else {
+            console.log( 'remove block');
+            disabledBlocks = without( disabledBlocks, blockType );
+            this.setState( { disabledBlocks: disabledBlocks } );
+        }
+        
+        this.setState( { hasUpdates: true } );
+    }
+
     
 	render() {
 		
@@ -113,6 +151,7 @@ class BlockManager extends Component {
 		//const test = propsTest();
         const disabledBlocksState = this.state.disabledBlocks;
 		
+        console.log( disabledBlocksState );
 		return (
 			<div className="bv-block-manager inner-container">
 				<div className="bv-block-manager__controls">
@@ -143,10 +182,7 @@ class BlockManager extends Component {
 							'block-visibility'
 						) }
 					</Button>
-                    <TestTextInput
-                        value={ this.state.testText }
-                        handleStateChange={ this.handleStateChange }
-                    />
+
 				</div>
 				<div className="bv-block-manager__category-container">
 					{ categories.map( ( category ) => (
@@ -157,7 +193,9 @@ class BlockManager extends Component {
 								category: category.slug,
 							} ) }
 							disabledBlocks={ disabledBlocksState }
-                            updateDisabled={ this.updateDisabledBlocks }
+                            //updateDisabled={ this.updateDisabledBlocks }
+                            handleBlockCategoryChange={ this.handleBlockCategoryChange }
+                            handleBlockTypeChange={ this.handleBlockTypeChange }
 						/>
 					) ) }
 				</div>
@@ -166,79 +204,26 @@ class BlockManager extends Component {
 	}
 }
 
-class TestTextInput extends Component {
-    
-    constructor() {
-        super( ...arguments );
-
-        this.handleTextUpdate = this.handleTextUpdate.bind( this );
-        
-        this.state ={
-            newTest: '',
-        }
-    }
-    
-    handleTextUpdate( value ) {
-        
-        this.setState( { newTest: value } );
-        this.props.handleStateChange( value );
-    }
-    
-    render() {
-        
-        return(
-            <>
-            <div>This is a: { this.state.newTest }</div>
-            <TextControl
-                type="string"
-                value={ this.props.value }
-                onChange={ this.handleTextUpdate }
-                placeholder={ __(
-                    'Read More',
-                    'genesis-featured-page-advanced'
-                ) }
-            />
-            </>
-        )
-    }
-}
-
-
 class BlockCategory extends Component {
     
     constructor() {
         super( ...arguments );
 
-        this.onCategoryChange = this.onCategoryChange.bind( this );
+        this.onBlockCategoryChange = this.onBlockCategoryChange.bind( this );
+        this.handleBlockTypeChange = this.handleBlockTypeChange.bind( this );
     }
     
-    /*
-    onCategoryChange( isAllChecked, catBlockNames ) {
+
+    onBlockCategoryChange( checked ) {
+        const { blockTypes, handleBlockCategoryChange } = this.props;
         
-        if ( isAllChecked ) {
-            //console.log( catBlockNames );
-            
-            this.props.updateDisabled( catBlockNames );
-        } else {
-            //console.log( 'Not all checked' );
-            this.props.updateDisabled( [] );
-        }
+        const blockNames = map( blockTypes, 'name' );
         
+        handleBlockCategoryChange( checked, blockNames );
     }
-    */
-    onCategoryChange( checked ) {
-        
-        const blockNames = map( this.props.blockTypes, 'name' );
-        
-        if ( checked ) {
-            //console.log( catBlockNames );
-            
-            this.props.updateDisabled( blockNames );
-        } else {
-            //console.log( 'Not all checked' );
-            this.props.updateDisabled( [] );
-        }
-        
+    
+    handleBlockTypeChange( checked, blockName ) {
+        this.props.handleBlockTypeChange( checked, blockName );
     }
 	
 	render() {
@@ -246,18 +231,17 @@ class BlockCategory extends Component {
 			category,
 			blockTypes,
 			disabledBlocks,
-            //updateDisabled,
 		} = this.props
 		
 		if ( ! blockTypes.length ) {
 			return null;
 		}
 		
-		//console.log( map( blockTypes, 'name' ) );
-		const catBlockNames = map( blockTypes, 'name' );
+		//console.log( blockTypes );
+		const blockNames = map( blockTypes, 'name' );
         
 		const checkedBlockNames = without(
-			catBlockNames,
+			blockNames,
 			...disabledBlocks
 		);
 
@@ -273,7 +257,6 @@ class BlockCategory extends Component {
 			ariaChecked = 'false';
 		}
 
-		
 		const categoryTitleId = 'bv-block-manager__category-title' + category.slug;
 		
 		return (
@@ -287,8 +270,7 @@ class BlockCategory extends Component {
 				>
 					<CheckboxControl
 						checked={ isAllChecked }
-						//onChange={ () => this.onCategoryChange( isAllChecked, catBlockNames ) }
-                        onChange={ this.onCategoryChange }
+						onChange={ ( isAllChecked ) => this.onBlockCategoryChange( isAllChecked ) }
 						aria-checked={ ariaChecked }
 						label={ <span id={ categoryTitleId }>{ category.title }</span> }
 					/>
@@ -299,25 +281,56 @@ class BlockCategory extends Component {
 
 				<ul className="bv-block-manager__blocks">
 					{ blockTypes.map( ( blockType ) => (
-						<li
-							key={ blockType.name }
-							className="bv-block-manager__blocks-item"
-						>
-							<CheckboxControl
-								label={ blockType.title }
-								checked={ ! disabledBlocks.includes( blockType.name ) }
-								//onChange={ partial( onItemChange, blockType.name ) }
-							/>
-							{ blockType.icon && (
-								<BlockIcon icon={ blockType.icon } />
-							) }
-						</li>
+						<BlockType
+                            blockType={ blockType }
+                            handleBlockTypeChange={ this.handleBlockTypeChange }
+                            disabledBlocks={ disabledBlocks }
+                        />
 					) ) }
 				</ul>
 
 			</div>
 		);
 	}
+}
+
+class BlockType extends Component {
+    
+    constructor() {
+        super( ...arguments );
+        
+        this.onBlockTypeChange = this.onBlockTypeChange.bind( this );
+    }
+    
+    onBlockTypeChange( checked ) {
+        const { blockType, handleBlockTypeChange } = this.props;
+        
+        const blockName = blockType.name;
+        
+        handleBlockTypeChange( checked, blockName );
+    }
+    
+    render() {
+        const { blockType, disabledBlocks } = this.props;
+        
+        const isChecked = ! disabledBlocks.includes( blockType.name );
+        
+        return (
+            <li
+                key={ blockType.name }
+                className="bv-block-manager__blocks-item"
+            >
+                <CheckboxControl
+                    label={ blockType.title }
+                    checked={ isChecked }
+                    onChange={ ( isChecked ) => this.onBlockTypeChange( isChecked ) }
+                />
+                { blockType.icon && (
+                    <BlockIcon icon={ blockType.icon } />
+                ) }
+            </li>    
+        );
+    }
 }
 
 export default compose( [
