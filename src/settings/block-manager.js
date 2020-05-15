@@ -151,7 +151,7 @@ class BlockManager extends Component {
 		//const test = propsTest();
         const disabledBlocksState = this.state.disabledBlocks;
 		
-        console.log( disabledBlocksState );
+        //console.log( disabledBlocksState );
 		return (
 			<div className="bv-block-manager inner-container">
 				<div className="bv-block-manager__controls">
@@ -167,11 +167,8 @@ class BlockManager extends Component {
 						} ) }
 					/>
 					<div>
-						Block setting value: { disabledBlocksState }
+						{ sprintf( __( 'Visibility settings are disabled for %s blocks', 'block-visibility' ), disabledBlocksState.length ) }
 					</div>
-                    <div>
-                        Test text: { this.state.testText }
-                    </div>
 					<Button
 						//onClick={ () => saveEditedEntityRecord( 'root', 'site', 'bv_disable_all_blocks_new', 'blocks test' )  }
 						disabled={ ! this.state.hasUpdates }

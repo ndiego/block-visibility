@@ -26,7 +26,7 @@
 }
 
 .components-tab-panel__tab-content {
-    margin: 0 auto;
+    margin: 40px auto;
     width: 1024px;
 }
 
@@ -34,6 +34,9 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row; 
+    justify-content: space-between;
+
+    margin: 0 0 16px;
 }
 
 .bv-block-manager__category-container {
