@@ -47,7 +47,7 @@ function print_settings_page() {
  *
  * @since 1.0.0
  */
-function enqueue_setting_scripts() {
+function enqueue_settings_assets() {
     
     if ( ! isset( $_GET['page'] ) || 'block-visibility-settings' !== $_GET['page'] ) {
         return;
@@ -65,40 +65,52 @@ function enqueue_setting_scripts() {
 	);
     
     // Styles.
+    $asset_file = get_asset_file( 'dist/bv-setting-styles' );
+    
     wp_enqueue_style( 
         'bv-setting-styles', 
         BV_PLUGIN_URL . 'dist/bv-setting-styles.css', 
-        array( 'wp-components' ),
-        BV_VERSION
+        array(),
+        $asset_file['version']
     );
     
-    
-    // This picks up all of the custom blocks that are added to the site, otherwise you just get the core blocks
-    // Make sure all blocks plugin were registered.
+    // Get all the registed block categories
     $block_categories = array();
+    
     if ( function_exists( 'gutenberg_get_block_categories' ) ) {
         $block_categories = gutenberg_get_block_categories( get_post() );
     } elseif ( function_exists( 'get_block_categories' ) ) {
         $block_categories = get_block_categories( get_post() );
     }
+    
     wp_add_inline_script(
         'wp-blocks',
-        sprintf( 'wp.blocks.setCategories( %s );', wp_json_encode( $block_categories ) ),
+        sprintf( 
+            'wp.blocks.setCategories( %s );', 
+            wp_json_encode( $block_categories ) 
+        ),
         'after'
     );
     
-    // TODO: What does this do?????
+    // Make sure all custom blocks are registered. This picks up all of the 
+    // custom blocks that are added to the site, otherwise you just get the 
+    // core blocks.
     do_action( 'enqueue_block_editor_assets' );
-
+    
+    // Core class used for interacting with block types.
+    // https://developer.wordpress.org/reference/classes/wp_block_type_registry/
     $block_registry = \WP_Block_Type_Registry::get_instance();
+    
     foreach ( $block_registry->get_all_registered() as $block_name => $block_type ) {
+        
         // Front-end script.
         if ( ! empty( $block_type->editor_script ) ) {
             wp_enqueue_script( $block_type->editor_script );
         }
     }
+    
 }
-add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_setting_scripts' );
+add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_settings_assets' );
 
 
 /*

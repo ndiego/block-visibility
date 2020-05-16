@@ -27,7 +27,7 @@
 
 .components-tab-panel__tab-content {
     margin: 40px auto;
-    width: 1024px;
+    max-width: 1024px;
 }
 
 .bv-block-manager__controls {
@@ -76,21 +76,36 @@
     }
     
 }
+
+
 .bv-block-manager__category-title {
-    display: flex;
-    align-items: center;
     font-size: 14px;
     font-weight: bold;    
     letter-spacing: 0.25px;
     padding: 4px 10px 16px 0;
     border-bottom: 1px solid #E2E4E7;
+    
+    .components-base-control__field {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        label {
+            flex: 1;
+            
+            &>span {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+    }
 }
+
 .bv-block-manager__blocks {
     margin: 0;
     
     .bv-block-manager__blocks-item {
-        display: flex;
-        align-items: center;
         padding: 12px 12px 12px 30px;
         margin: 0;
         border-bottom: 1px solid #E2E4E7;
@@ -103,6 +118,22 @@
         .block-editor-block-icon {
             width: 22px;
             height: 22px;
+        }
+        
+        .components-base-control__field {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+            label {
+                flex: 1;
+                
+                &>span {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+            }
         }
     }
 }

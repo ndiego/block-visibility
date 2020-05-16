@@ -1,6 +1,6 @@
 <?php
 /**
- * WRITE A TITLE
+ * Add assets for the block editor
  *
  * @package block-visibility
  * @since   1.0.0
@@ -15,9 +15,8 @@ use function BlockVisibility\Utils\get_asset_file as get_asset_file;
  *
  * @since 1.0.0
  */
-function enqueue_editor_scripts() {
+function enqueue_editor_assets() {
     
-     
      // Scripts.
  	$asset_file = get_asset_file( 'dist/bv-editor' );
 
@@ -30,11 +29,13 @@ function enqueue_editor_scripts() {
  	);
     
     // Styles.
+    $asset_file = get_asset_file( 'dist/bv-editor-styles' );
+
     wp_enqueue_style( 
         'bv-editor-styles', 
         BV_PLUGIN_URL . 'dist/bv-editor-styles.css', 
-        array( 'wp-components' ),
-        BV_VERSION
+        array(),
+        $asset_file['version']
     );
  }
- add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_editor_scripts' );
+ add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_editor_assets' );
