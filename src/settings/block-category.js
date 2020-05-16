@@ -26,7 +26,7 @@ class BlockCategory extends Component {
     }
     
     onBlockCategoryChange( checked ) {
-        const { blockType, handleBlockCategoryChange } = this.props;      
+        const { blockTypes, handleBlockCategoryChange } = this.props;      
         const blockNames = map( blockTypes, 'name' );
         
         handleBlockCategoryChange( checked, blockNames );

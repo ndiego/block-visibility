@@ -16,9 +16,11 @@ import { compose, withState } from '@wordpress/compose';
 import { withSelect } from '@wordpress/data';
 import { Component, render } from '@wordpress/element';
 import {
-	TextControl,
-	CheckboxControl,
 	Button,
+	CheckboxControl,
+	Placeholder,
+	Spinner,
+	TextControl
 } from '@wordpress/components';
 
 import {
@@ -37,15 +39,22 @@ class BlockManager extends Component {
 
         this.handleBlockCategoryChange = this.handleBlockCategoryChange.bind( this );
         this.handleBlockTypeChange = this.handleBlockTypeChange.bind( this );
+		this.onSettingsChange = this.onSettingsChange.bind( this );
         
         this.state = {
             hasUpdates: false,
-			disabledBlocks: [
-    			"core/paragraph",
-    			"core/image",
-    			"core/heading",
-    		],
+			disabledBlocks: [],
 		};
+	}
+	
+	componentDidMount() {	
+		this.setState( { disabledBlocks: this.props.disabledBlocks } );
+	}
+	
+	onSettingsChange() {
+		const disabledBlocks = this.state.disabledBlocks;
+		this.props.handSettingsChange( 'bv_disabled_blocks', disabledBlocks );
+		this.setState( { hasUpdates: false } );
 	}
     
     handleBlockCategoryChange( checked, blockTypes ){    
@@ -66,27 +75,19 @@ class BlockManager extends Component {
     
     handleBlockTypeChange( checked, blockType ){
         let disabledBlocks = this.state.disabledBlocks;
-        
-        this.setState( { hasUpdates: false } );
-        
+                
         if ( ! checked ) {
-            // @// TODO: console.log( 'add block');
-            //if ( disabledBlocks.indexOf( blockType ) === -1 ) {
-                disabledBlocks.push( blockType );
-            //}
+            disabledBlocks.push( blockType );
             this.setState( { disabledBlocks: disabledBlocks } );
         } else {
-            // @// TODO: console.log( 'remove block');
             disabledBlocks = without( disabledBlocks, blockType );
             this.setState( { disabledBlocks: disabledBlocks } );
         }
         
         this.setState( { hasUpdates: true } );
     }
-
     
 	render() {
-		
 		const {
 			blockTypes,
 			categories,
@@ -129,7 +130,7 @@ class BlockManager extends Component {
 						{ sprintf( __( 'Visibility settings are disabled for %s blocks', 'block-visibility' ), disabledBlocksState.length ) }
 					</div>
 					<Button
-						// @// TODO: nClick={ () => saveEditedEntityRecord( 'root', 'site', 'bv_disable_all_blocks_new', 'blocks test' )  }
+						onClick={ this.onSettingsChange }
 						disabled={ ! this.state.hasUpdates }
 						isPrimary
 					>

@@ -211,12 +211,22 @@ function register_settings() {
     
     register_setting(
         'block_visibility_settings',
-        'bv_disable_all_blocks_new',
+        'bv_disabled_blocks',
         array(
-            'type'         => 'string',
-            'show_in_rest' => true,
-            'sanitize_callback' => 'sanitize_text_field',
-            'default'      => 'this is a test',
+            'type'         => 'array',
+            'show_in_rest' => array(
+                'schema' => array(
+                    'type'  => 'array',
+                    'items' => array(
+                        'type' => 'string',
+                    ),
+                ),
+            ),
+            'default' => array(
+    			"core/paragraph",
+    			"core/image",
+    			"core/heading",
+    		),
         )
     );
 }

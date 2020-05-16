@@ -34,9 +34,9 @@ add_action( 'admin_menu', __NAMESPACE__ . '\add_settings_page' );
  * @since 1.0.0
  */
 function print_settings_page() {
-    //$disabled = get_option( 'block_visibility_settings' );
+    $disabledBlocks = get_option( 'bv_disabled_blocks' );
     //$result= $disabled ? "true" : "false";
-    //echo $result;//echo print_r($php_blocks );
+    echo print_r( $disabledBlocks );
     ?>
         <div id="bv-settings-container"></div>
     <?php

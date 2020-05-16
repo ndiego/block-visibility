@@ -30,13 +30,13 @@ class Settings extends Component {
 	constructor() {
 		super( ...arguments );
 
-		this.changeOptions = this.changeOptions.bind( this );
+		this.handSettingsChange = this.handSettingsChange.bind( this );
 
 		this.state = {
 			isAPILoaded: false,
 			isAPISaving: false,
 			bv_disable_all_blocks: false,
-            search: '',
+			disabledBlocks: [],
 		};
 	}
 
@@ -44,20 +44,21 @@ class Settings extends Component {
 		wp.api.loadPromise.then( () => {
 			this.settings = new wp.api.models.Settings();
 			
-			console.log( this.settings );
+			//console.log( this.settings );
 			
 			if ( false === this.state.isAPILoaded ) {
 				this.settings.fetch().then( response => {
-					this.setState({
+					this.setState( {
 						bv_disable_all_blocks: Boolean( response.bv_disable_all_blocks ),
+						disabledBlocks: response.bv_disabled_blocks,
 						isAPILoaded: true
-					});
+					} );
 				});
 			}
 		});
 	}
 
-	changeOptions( option, value ) {
+	handSettingsChange( option, value ) {
 		this.setState({ isAPISaving: true });
 
 		const model = new wp.api.models.Settings({
@@ -74,6 +75,8 @@ class Settings extends Component {
 	}
 
 	render() {
+		
+
 		if ( ! this.state.isAPILoaded ) {
 			return (
 				<Placeholder>
@@ -81,21 +84,24 @@ class Settings extends Component {
 				</Placeholder>
 			);
 		}
-		
+
         const {
             categories,
             blockTypes,
             
         } = this.props;
         
+		console.log( this.state.disabledBlocks );
 		//console.log( getBlockTypes() );
         //console.log( blockTypes );
-		
+		/*
 		const disabledBlocks = [
 			"core/paragraph",
 			"core/image",
 			"core/heading",
 		];
+		*/
+		const disabledBlocks = this.state.disabledBlocks;
 		
 		const settingTabs = [
 			{
@@ -126,6 +132,9 @@ class Settings extends Component {
 						<div className="bv-description">
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et condimentum libero. Etiam vel pulvinar eros, tincidunt molestie est. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 						</div>
+						{ this.state.isAPISaving && (
+							<div>We are saving</div>
+						) }
 					</div>
 				</div>
 				<TabPanel 
@@ -167,7 +176,10 @@ class Settings extends Component {
 
 								case 'bv-blocks-manager':
 									return (
-										<BlockManager 
+										<BlockManager
+											isAPILoaded={ this.state.isAPILoaded }
+											isAPISaving={ this.state.isAPISaving }
+											handSettingsChange={ this.handSettingsChange }
 											disabledBlocks={ disabledBlocks }
 										/>
 									);
