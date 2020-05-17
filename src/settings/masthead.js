@@ -4,7 +4,7 @@
 import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
 import { Animate } from '@wordpress/components';
-import { Icon, cloud, starFilled, starEmpty, help } from '@wordpress/icons';
+import { Icon, starFilled, starEmpty, search } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -35,6 +35,7 @@ class Masthead extends Component {
                     </div>
                     <div className="bv-masthead__meta">
                         <div className="saving-notices">
+                            <Icon icon={ search } />
                             { isAPISaving && (
                                 <Animate type="loading">
                                     { ( { className: animateClassName } ) => (

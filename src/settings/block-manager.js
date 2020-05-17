@@ -22,6 +22,7 @@ import {
 	Spinner,
 	TextControl
 } from '@wordpress/components';
+import { Icon, search } from '@wordpress/icons';
 
 import {
  	createContext,
@@ -31,6 +32,11 @@ import {
 	useEntityProp,
 	saveEditedEntityRecord 
 } from '@wordpress/core-data';
+
+/**
+ * Internal dependencies
+ */
+import icons from './../icons';
 
 
 class BlockManager extends Component {
@@ -112,6 +118,22 @@ class BlockManager extends Component {
 		//const test = propsTest();
         const disabledBlocksState = this.state.disabledBlocks;
 		
+		let visibilityIcon = icons.visibility;
+		let visibilityMessage = __( 'Visibility is enabled for all blocks', 'block-visibility' );
+		
+		if ( disabledBlocksState.length ) {
+			visibilityIcon = icons.visibilityHidden;
+			visibilityMessage = sprintf( 
+				_n( 
+					'Visibility is disabled for %s block', 
+					'Visibility is disabled for %s blocks', 
+					disabledBlocksState.length,  
+					'block-visibility' 
+				), 
+				disabledBlocksState.length 
+			);
+		}
+		
 		return (
 			<div className="bv-block-manager inner-container">
 				<div className="bv-tab-panel__description">
@@ -125,6 +147,7 @@ class BlockManager extends Component {
 				</div>
 				<div className="bv-block-manager__controls">
 					<TextControl
+						className="search-blocks"
 						type="search"								
 						placeholder={ __(
 							'Search for a block',
@@ -135,11 +158,13 @@ class BlockManager extends Component {
 							search: searchValue,
 						} ) }
 					/>
-					<div>
-						{ sprintf( __( 'Visibility settings are disabled for %s blocks', 'block-visibility' ), disabledBlocksState.length ) }
-					</div>
-					<div className="bv-save-settings-container">
+					<div className="save-settings-container">
+						<div className="visibility-message">
+							<Icon icon={ visibilityIcon } />
+							{ visibilityMessage }
+						</div>
 						<Button
+							className="save-button"
 							onClick={ this.onSettingsChange }
 							disabled={ ! this.state.hasUpdates }
 							isPrimary
