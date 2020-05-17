@@ -11,6 +11,38 @@ namespace BlockVisibility\Admin;
 use function BlockVisibility\Utils\get_asset_file as get_asset_file;
 
 /**
+ * Register plugin settings.
+ *
+ * @since 1.0.0
+ */
+function register_settings() {
+    // @todo how do we sanitize the strings???
+    // @todo add filter here for developers can preset a list of disabled block types
+    register_setting(
+        'block_visibility_settings',
+        'bv_disabled_blocks',
+        array(
+            'type'         => 'array',
+            'show_in_rest' => array(
+                'schema' => array(
+                    'type'  => 'array',
+                    'items' => array(
+                        'type' => 'string',
+                    ),
+                ),
+            ),
+            'default' => array(
+    			"core/paragraph",
+    			"core/image",
+    			"core/heading",
+    		),
+        )
+    );
+}
+add_action( 'rest_api_init', __NAMESPACE__ . '\register_settings' );
+add_action( 'admin_init', __NAMESPACE__ . '\register_settings' );
+
+/**
  * Register the plugin settings page.
  *
  * @since 1.0.0
@@ -34,6 +66,7 @@ add_action( 'admin_menu', __NAMESPACE__ . '\add_settings_page' );
  * @since 1.0.0
  */
 function print_settings_page() {
+    // @// TODO: Remove this
     $disabledBlocks = get_option( 'bv_disabled_blocks' );
     //$result= $disabled ? "true" : "false";
     echo print_r( $disabledBlocks );
@@ -74,6 +107,19 @@ function enqueue_settings_assets() {
         $asset_file['version']
     );
     
+    // Create a global variable to hold all our plugin variables, not ideal, 
+    // but does the trick...
+    $plugin_variables = array(
+        'version'       => BV_VERSION,
+        'reviewUrl'    => BV_REVIEW_URL,
+        'supportUrl'   => BV_SUPPORT_URL,
+    );
+    
+    $stringified_plugin_variables = "const blockVisibilityVariables = " . wp_json_encode( $plugin_variables ) . ";";
+    
+    wp_add_inline_script( 'bv-setting-scripts', $stringified_plugin_variables, 'after');
+
+    
     // Get all the registed block categories
     $block_categories = array();
     
@@ -111,21 +157,3 @@ function enqueue_settings_assets() {
     
 }
 add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_settings_assets' );
-
-
-/*
-function register_settings() {
-	register_setting(
-		'block_visibility_settings',
-		'bv_disable_all_blocks',
-		array(
-            'type'         => 'boolean',
-			'show_in_rest' => true,
-			'default'      => false,
-		)
-	);
-}
-add_action( 'init', __NAMESPACE__ . '\register_settings' );
-*/
-// Get all blocks registered with PHP
-//$block_types = WP_Block_Type_Registry::get_instance()->get_all_registered();

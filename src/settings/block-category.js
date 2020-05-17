@@ -1,9 +1,4 @@
 /**
- * Internal dependencies
- */
-import BlockType from './block-type';
-
-/**
  * External dependencies
  */
 import { map, without} from 'lodash';
@@ -15,6 +10,11 @@ import { __, _n, sprintf } from '@wordpress/i18n';
 import { Component, render } from '@wordpress/element';
 import { BlockIcon } from '@wordpress/block-editor';
 import { CheckboxControl } from '@wordpress/components';
+
+/**
+ * Internal dependencies
+ */
+import BlockType from './block-type';
 
 
 class BlockCategory extends Component {

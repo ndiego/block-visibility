@@ -10,6 +10,7 @@ import { Component, render } from '@wordpress/element';
 import { BlockIcon } from '@wordpress/block-editor';
 import { CheckboxControl } from '@wordpress/components';
 
+
 class BlockType extends Component {
     constructor() {
         super( ...arguments );

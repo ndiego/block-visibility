@@ -28,6 +28,7 @@ define( 'BV_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'BV_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'BV_PLUGIN_BASE', plugin_basename( __FILE__ ) );
 define( 'BV_REVIEW_URL', 'https://wordpress.org/support/plugin/block-visibility/reviews/?filter=5' );
+define( 'BV_SUPPORT_URL', 'https://wordpress.org/support/plugin/block-visibility/' );
 
 
 if ( ! class_exists( 'BlockVisibility' ) ) {
@@ -150,6 +151,7 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 		/**
          * Enqueue localization data for our blocks.
          * @// TODO: fix script identifier
+         * @// TODO: figure out how to load translators for the settings js
 		 *
 		 * @since 2.0.0
          * @return void
@@ -157,7 +159,7 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 		public function block_localization() {
 			if ( function_exists( 'wp_set_script_translations' ) ) {
 				wp_set_script_translations( 
-                    'EDIT-genesis-featured-page-advanced-editor-js', 
+                    'bv-editor-scripts', 
                     'block-visibility', 
                     BV_PLUGIN_DIR . '/languages' 
                 );
@@ -183,32 +185,16 @@ if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 } else {
 	load_plugin();
 }
-/*
-function loader() {
-    //if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
-        require_once BV_PLUGIN_DIR . 'includes/admin/plugin-action-links.php';
-        require_once BV_PLUGIN_DIR . 'includes/admin/settings.php';
-        //require_once BV_PLUGIN_DIR . 'includes/admin/class-gfpa-install.php';
-    //}
-}
 
-add_action( 'init', __NAMESPACE__ . '\loader' );
-*/
 
-//https://github.com/WordPress/gutenberg/issues/20731
-
+/**
+ * Register plugin settings.
+ *
+ * @since 1.0.0
+ */
 function register_settings() {
-	register_setting(
-		'block_visibility_settings',
-		'bv_disable_all_blocks',
-		array(
-            'type'         => 'string',
-			'show_in_rest' => true,
-            'sanitize_callback' => 'sanitize_text_field',
-			'default'      => 'this is a test',
-		)
-	);
-    
+    // @todo how do we sanitize the strings???
+    // @todo add filter here for developers can preset a list of disabled block types
     register_setting(
         'block_visibility_settings',
         'bv_disabled_blocks',

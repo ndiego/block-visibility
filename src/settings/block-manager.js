@@ -129,13 +129,15 @@ class BlockManager extends Component {
 					<div>
 						{ sprintf( __( 'Visibility settings are disabled for %s blocks', 'block-visibility' ), disabledBlocksState.length ) }
 					</div>
-					<Button
-						onClick={ this.onSettingsChange }
-						disabled={ ! this.state.hasUpdates }
-						isPrimary
-					>
-						{ __( 'Update', 'block-visibility' ) }
-					</Button>
+					<div className="bv-save-settings-container">
+						<Button
+							onClick={ this.onSettingsChange }
+							disabled={ ! this.state.hasUpdates }
+							isPrimary
+						>
+							{ __( 'Update', 'block-visibility' ) }
+						</Button>
+					</div>
 				</div>
 				<div className="bv-block-manager__category-container">
 					{ categories.map( ( category ) => (

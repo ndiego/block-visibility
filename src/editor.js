@@ -7,7 +7,6 @@ import {
 	SelectControl,
  	PanelBody
 } from "@wordpress/components";
-
 import { InspectorControls } from "@wordpress/editor";
 import { createHigherOrderComponent } from "@wordpress/compose";
 import { useEntityProp } from '@wordpress/core-data';
@@ -16,26 +15,33 @@ import { useEntityProp } from '@wordpress/core-data';
 const blockVisibilityControls = createHigherOrderComponent( ( BlockEdit ) => {
     return ( props ) => {
 		
-		//console.log( props.name );
-		
 		// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
-		const [ blocks, setBlocks ] = useEntityProp( 'root', 'site', 'bv_disable_all_blocks_new' );
+		const [ disabledBlocks, setDisabledBlocks ] = useEntityProp( 
+			'root', 
+			'site', 
+			'bv_disabled_blocks' 
+		);
 		
-		// Idea is to check the props.name against blocks to make sure we should proceed
-		//console.log( blocks ); 
+		// Wait till disabledBlocks are loaded, then make sue the block is not part of the array
+		if ( disabledBlocks && ! disabledBlocks.includes( props.name ) ) {
+			return (
+				<>
+					<BlockEdit { ...props } />
+					<InspectorControls>
+						<PanelBody
+							title={ __( 'Visibility', 'block-visibility' ) }
+							initialOpen={ false }
+						>
+							All of the visibility settings
+						</PanelBody>
+					</InspectorControls>
+				</>
+			);
+		}
 		
-        return (
-            <>
-                <BlockEdit { ...props } />
-                <InspectorControls>
-                    <PanelBody
-						title={ __( 'Visibility', 'block-visibility' ) }
-					>
-                        All of the visibility settings
-                    </PanelBody>
-                </InspectorControls>
-            </>
-        );
+		return (
+			<BlockEdit { ...props } />
+		);	
     };
 }, 'blockVisibilityControls' );
 

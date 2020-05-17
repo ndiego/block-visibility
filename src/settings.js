@@ -1,7 +1,7 @@
 /**
- * Internal dependencies
+ * External dependencies
  */
-import BlockManager from './settings/block-manager';
+import classnames from 'classnames';
 
 /**
  * WordPress dependencies
@@ -24,6 +24,12 @@ import {
 	TabPanel
 } from '@wordpress/components';
 
+/**
+ * Internal dependencies
+ */
+import Masthead from './settings/masthead';
+import GettingStarted from './settings/getting-started';
+import BlockManager from './settings/block-manager';
 
 
 class Settings extends Component {
@@ -35,7 +41,6 @@ class Settings extends Component {
 		this.state = {
 			isAPILoaded: false,
 			isAPISaving: false,
-			bv_disable_all_blocks: false,
 			disabledBlocks: [],
 		};
 	}
@@ -49,7 +54,6 @@ class Settings extends Component {
 			if ( false === this.state.isAPILoaded ) {
 				this.settings.fetch().then( response => {
 					this.setState( {
-						bv_disable_all_blocks: Boolean( response.bv_disable_all_blocks ),
 						disabledBlocks: response.bv_disabled_blocks,
 						isAPILoaded: true
 					} );
@@ -75,32 +79,15 @@ class Settings extends Component {
 	}
 
 	render() {
-		
 
-		if ( ! this.state.isAPILoaded ) {
-			return (
-				<Placeholder>
-					<Spinner/>
-				</Placeholder>
-			);
-		}
 
         const {
             categories,
             blockTypes,
-            
         } = this.props;
         
-		console.log( this.state.disabledBlocks );
-		//console.log( getBlockTypes() );
-        //console.log( blockTypes );
-		/*
-		const disabledBlocks = [
-			"core/paragraph",
-			"core/image",
-			"core/heading",
-		];
-		*/
+		//console.log( this.state.disabledBlocks );
+
 		const disabledBlocks = this.state.disabledBlocks;
 		
 		const settingTabs = [
@@ -115,29 +102,19 @@ class Settings extends Component {
 				className: 'bv-settings-functionality-manager',
 			},
 			{
-				name: 'bv-blocks-manager',
-				title: __( 'Blocks Manager', 'block-visibility' ),
+				name: 'bv-block-manager',
+				title: __( 'Block Manager', 'block-visibility' ),
 				className: 'bv-settings-blocks-manager',
 			},
 		];
 		
-		// We beed Tabs here (TabControl)	
+			
 		return (
 			<>
-				<div className="bv-masthead">
-					<div className="bv-masthead-container inner-container">
-						<div className="bv-logo">
-							Block Visibility
-						</div>
-						<div className="bv-description">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et condimentum libero. Etiam vel pulvinar eros, tincidunt molestie est. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						</div>
-						{ this.state.isAPISaving && (
-							<div>We are saving</div>
-						) }
-					</div>
-				</div>
-				<TabPanel 
+				<Masthead
+					isAPISaving={ this.state.isAPISaving }
+				/>
+				<TabPanel 	
 					className="bv-tab-panel"
 					activeClass="active-tab"
 					initialTabName="bv-getting-started"
@@ -145,26 +122,21 @@ class Settings extends Component {
 				>
 					{
 						( tab ) => {
+							// Don't load tabs is settings have not yet loaded
+							if ( ! this.state.isAPILoaded ) {
+								return (
+									<div className="bv-settings-loading">
+										<Spinner/>
+									</div>
+								);
+							}
+							
 							switch ( tab.name ) {
 								case 'bv-getting-started':
 									return (
-										<div className="bv-getting-started">
-											Getting Started Content
-											<div className="codeinwp-main">
-												<PanelBody
-							                        title="Category 1"
-							                    >
-													<PanelRow>
-														<ToggleControl
-															label={ __( 'Disable All Blocks?' ) }
-															help={ 'Would you like to track views of logged-in admin accounts?.' }
-															checked={ this.state.bv_disable_all_blocks }
-															onChange={ () => this.changeOptions( 'bv_disable_all_blocks', ! this.state.bv_disable_all_blocks ) }
-														/>
-													</PanelRow>
-												</PanelBody>
-											</div>
-										</div>
+										<GettingStarted
+											isAPISaving={ this.state.isAPISaving }
+										/>
 									);
 
 								case 'bv-functionality-manager':
@@ -174,7 +146,7 @@ class Settings extends Component {
 										</div>
 									);
 
-								case 'bv-blocks-manager':
+								case 'bv-block-manager':
 									return (
 										<BlockManager
 											isAPILoaded={ this.state.isAPILoaded }
