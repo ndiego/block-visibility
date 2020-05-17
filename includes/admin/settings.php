@@ -67,9 +67,9 @@ add_action( 'admin_menu', __NAMESPACE__ . '\add_settings_page' );
  */
 function print_settings_page() {
     // @// TODO: Remove this
-    $disabledBlocks = get_option( 'bv_disabled_blocks' );
+    //$disabledBlocks = get_option( 'bv_disabled_blocks' );
     //$result= $disabled ? "true" : "false";
-    echo print_r( $disabledBlocks );
+    //echo print_r( $disabledBlocks );
     ?>
         <div id="bv-settings-container"></div>
     <?php

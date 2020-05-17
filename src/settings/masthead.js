@@ -31,21 +31,12 @@ class Masthead extends Component {
                                 'block-visibility'
                             ) }
                         </p>
-                        <span className="plugin-version">{ 'v' + blockVisibilityVariables.version }</span>
                     </div>
                     <div className="bv-masthead__meta">
-                        <div className="saving-notices">
-                            <Icon icon={ search } />
-                            { isAPISaving && (
-                                <Animate type="loading">
-                                    { ( { className: animateClassName } ) => (
-                                        <span className={ animateClassName }>
-                                            <Icon icon={ icons.cloud } />
-                                            { __( 'Saving', 'block-visibility' ) }
-                                        </span>
-                                    ) }
-                                </Animate>
-                            ) }
+                        <div className="plugin-version">
+                            <span>
+                                { 'v' + blockVisibilityVariables.version }
+                            </span>
                         </div>
                         <div className="plugin-links">
                             <a

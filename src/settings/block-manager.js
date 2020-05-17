@@ -16,6 +16,7 @@ import { compose, withState } from '@wordpress/compose';
 import { withSelect } from '@wordpress/data';
 import { Component, render } from '@wordpress/element';
 import {
+	Animate,
 	Button,
 	CheckboxControl,
 	Placeholder,
@@ -102,6 +103,7 @@ class BlockManager extends Component {
 			isMatchingSearchTerm,
 			hasBlockSupport,
 			disabledBlocks,
+			isAPISaving,
 		} = this.props;
 		
 		// Filter the blocks by the following criteria
@@ -134,6 +136,10 @@ class BlockManager extends Component {
 			);
 		}
 		
+		const updateButton = isAPISaving 
+			? __( 'Updating...', 'block-visibility' )
+			: __( 'Update', 'block-visibility' );
+		
 		return (
 			<div className="bv-block-manager inner-container">
 				<div className="bv-tab-panel__description">
@@ -159,17 +165,29 @@ class BlockManager extends Component {
 						} ) }
 					/>
 					<div className="save-settings-container">
+						<div className="saving-notices">
+							{ isAPISaving && (
+								<Animate type="loading">
+									{ ( { className: animateClassName } ) => (
+										<span className={ animateClassName }>
+											<Icon icon={ icons.cloud } />
+											{ __( 'Saving', 'block-visibility' ) }
+										</span>
+									) }
+								</Animate>
+							) }
+						</div>
 						<div className="visibility-message">
 							<Icon icon={ visibilityIcon } />
 							{ visibilityMessage }
 						</div>
 						<Button
-							className="save-button"
+							className="save-button is-busy"
 							onClick={ this.onSettingsChange }
 							disabled={ ! this.state.hasUpdates }
 							isPrimary
 						>
-							{ __( 'Update', 'block-visibility' ) }
+							{ updateButton }
 						</Button>
 					</div>
 				</div>
