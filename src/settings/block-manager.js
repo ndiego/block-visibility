@@ -1,12 +1,9 @@
 /**
- * Internal dependencies
- */
-import BlockCategory from './block-category';
-
-/**
  * External dependencies
  */
-import { filter, map, without, union, difference } from 'lodash';
+import { filter, map, without, union, difference, intersection } from 'lodash';
+import classnames from 'classnames';
+
 
 /**
  * WordPress dependencies
@@ -37,6 +34,7 @@ import {
 /**
  * Internal dependencies
  */
+import BlockCategory from './block-category';
 import icons from './../icons';
 
 
@@ -68,11 +66,9 @@ class BlockManager extends Component {
         let disabledBlocks = this.state.disabledBlocks;
         
         if ( ! checked ) {
-            // @// TODO: console.log( 'add blocks');
             disabledBlocks = union( disabledBlocks, blockTypes );
             this.setState( { disabledBlocks: disabledBlocks } );
         } else {
-            // @// TODO: console.log( 'remove blocks');
             disabledBlocks = difference( disabledBlocks, blockTypes );
             this.setState( { disabledBlocks: disabledBlocks } );
         }
@@ -106,6 +102,11 @@ class BlockManager extends Component {
 			isAPISaving,
 		} = this.props;
 		
+		// @// TODO: See if we can get this working in the future....
+		// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
+		// const test = propsTest();
+		// const disabledBlocksState = this.state.disabledBlocks;
+		
 		// Filter the blocks by the following criteria
 		const filteredBlockTypes = blockTypes.filter( ( blockType ) => (
 			// Is allowed to be inserted into a page/post
@@ -116,10 +117,14 @@ class BlockManager extends Component {
 			( ! search || isMatchingSearchTerm( blockType, search ) )
 		) );
 		
-		// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
-		//const test = propsTest();
-        const disabledBlocksState = this.state.disabledBlocks;
-		
+		// If a plugin with custom blocks is deactivated, we want to keep the 
+		// disabled blocks settings, but we should not include them in the UI
+		// of the Block Manager
+		const disabledBlocksState = intersection( 
+			this.state.disabledBlocks, 
+			map( filteredBlockTypes, 'name' ) 
+		);
+
 		let visibilityIcon = icons.visibility;
 		let visibilityMessage = __( 'Visibility is enabled for all blocks', 'block-visibility' );
 		
@@ -146,7 +151,7 @@ class BlockManager extends Component {
 					<h2>Block Manager</h2>
 					<p>
 						{ __( 
-							'Use the settings below to disable Block Visibility functionality on specific blocks. This is useful if there are only a handful of blocks you want control visibility for. Once a block is disabled, all visibility settings will be turned off, even if they had visibility settings before.', 
+							'Use the settings below to disable visibility functionality on specific block types. This can be useful if you want to restrict visibility settings to a selection of blocks. Once a block type is disabled, all visibility settings will also be disabled, even if settings had previously been set on blocks of that type.', 
 							'block-visibility'
 						) }
 					</p>
@@ -164,25 +169,32 @@ class BlockManager extends Component {
 							search: searchValue,
 						} ) }
 					/>
-					<div className="save-settings-container">
-						<div className="saving-notices">
-							{ isAPISaving && (
-								<Animate type="loading">
-									{ ( { className: animateClassName } ) => (
-										<span className={ animateClassName }>
-											<Icon icon={ icons.cloud } />
-											{ __( 'Saving', 'block-visibility' ) }
-										</span>
-									) }
-								</Animate>
-							) }
-						</div>
-						<div className="visibility-message">
-							<Icon icon={ visibilityIcon } />
-							{ visibilityMessage }
+					<div className="bv-save-settings">
+						<div className="bv-save-settings__messages">
+							{ [
+								isAPISaving && (
+									<Animate type="loading">
+										{ ( { className: animateClassName } ) => (
+											<span className={ animateClassName } >
+												<Icon icon={ icons.cloud } />
+												{ __( 'Saving', 'block-visibility' ) }
+											</span>
+										) }
+									</Animate>
+								),
+								! isAPISaving && (
+									<span className="visibility-message">
+										<Icon icon={ visibilityIcon } />
+										{ visibilityMessage }
+									</span>
+								),
+							] }
 						</div>
 						<Button
-							className="save-button is-busy"
+							className={ classnames(
+								'bv-save-settings__button',
+								{ 'is-busy': isAPISaving },
+							) }
 							onClick={ this.onSettingsChange }
 							disabled={ ! this.state.hasUpdates }
 							isPrimary

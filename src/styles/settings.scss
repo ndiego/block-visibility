@@ -40,24 +40,50 @@
     }
 }
 
+.bv-save-settings {
+    display: flex;
+    align-items: center;
+    
+    .bv-save-settings__messages {
+        color: #777;
+        display: inline-block;
+        margin-right: 24px;
+        
+        svg {
+            fill: #777;
+            vertical-align: middle;
+            margin: 0px 6px 4px 0;
+            width: 20px;
+            height: 20px;
+        }
+    }
+    
+    .save-button {
+        &.is-busy {
+            color: #ffffff;
+            background-size: 100px 100%;
+            // Disable reason: This function call looks nicer when each argument is on its own line.
+            /* stylelint-disable */
+            background-image: linear-gradient(
+                -45deg,
+                #1989c1 28%,
+                color(#1989c1 shade(20%)) 28%,
+                color(#1989c1 shade(20%)) 72%,
+                #1989c1 72%
+            );
+            /* stylelint-enable */
+            border-color: color(#1989c1);
+        }
+    }
+}
+
+
 .bv-masthead__meta {
     width: 30%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     text-align: right;
-    
-    .saving-notices {
-        .components-animate__loading {
-            color: #777;
-            display: inline-block;
-        }
-        svg {
-            fill: #777;
-            vertical-align: middle;
-            margin: 0px 2px 4px 0;
-        }
-    }
     
     .plugin-version {
         span {
@@ -158,36 +184,6 @@
         input {
             border: 1px solid #dddddd;
             padding: 9px 12px;
-        }
-    }
-    
-    .visibility-message {
-        color: #777;
-        display: inline-block;
-        margin-right: 30px;
-        
-        svg {
-            fill: #777;
-            vertical-align: middle;
-            margin: 0px 6px 4px 0;
-        }
-    }
-    
-    .save-button {
-        &.is-busy {
-            color: #ffffff;
-            background-size: 100px 100%;
-            // Disable reason: This function call looks nicer when each argument is on its own line.
-            /* stylelint-disable */
-            background-image: linear-gradient(
-                -45deg,
-                #1989c1 28%,
-                color(#1989c1 shade(20%)) 28%,
-                color(#1989c1 shade(20%)) 72%,
-                #1989c1 72%
-            );
-            /* stylelint-enable */
-            border-color: color(#1989c1);
         }
     }
 }
