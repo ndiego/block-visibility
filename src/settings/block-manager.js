@@ -114,6 +114,15 @@ class BlockManager extends Component {
 		
 		return (
 			<div className="bv-block-manager inner-container">
+				<div className="bv-tab-panel__description">
+					<h2>Block Manager</h2>
+					<p>
+						{ __( 
+							'Use the settings below to disable Block Visibility functionality on specific blocks. This is useful if there are only a handful of blocks you want control visibility for. Once a block is disabled, all visibility settings will be turned off, even if they had visibility settings before.', 
+							'block-visibility'
+						) }
+					</p>
+				</div>
 				<div className="bv-block-manager__controls">
 					<TextControl
 						type="search"								

@@ -21,19 +21,19 @@ class Masthead extends Component {
         return (
             <div className="bv-masthead">
                 <div className="inner-container">
-                    <div className="bv-masthead-branding">
-                        <h1 className="plugin-logo">
+                    <div className="bv-masthead__branding">
+                        <h1>
                             { __( 'Block Visibility', 'block-visibility' ) }
                         </h1>
-                        <div className="plugin-description">
+                        <p>
                             { __( 
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et condimentum libero. Etiam vel pulvinar eros, tincidunt molestie est. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
                                 'block-visibility'
                             ) }
-                        </div>
+                        </p>
                         <span className="plugin-version">{ 'v' + blockVisibilityVariables.version }</span>
                     </div>
-                    <div className="bv-masthead-meta">
+                    <div className="bv-masthead__meta">
                         <div className="saving-notices">
                             { isAPISaving && (
                                 <Animate type="loading">

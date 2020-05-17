@@ -92,19 +92,19 @@ class Settings extends Component {
 		
 		const settingTabs = [
 			{
-				name: 'bv-getting-started',
+				name: 'getting-started',
 				title: __( 'Getting Started', 'block-visibility' ),
-				className: 'bv-settings-getting-started',
+				className: 'bv-settings__getting-started',
 			},
 			{
-				name: 'bv-functionality-manager',
-				title: __( 'Functionality Manager', 'block-visibility' ),
-				className: 'bv-settings-functionality-manager',
+				name: 'visibility-settings',
+				title: __( 'Visibility Settings', 'block-visibility' ),
+				className: 'bv-settings__visibility-settings',
 			},
 			{
-				name: 'bv-block-manager',
+				name: 'block-manager',
 				title: __( 'Block Manager', 'block-visibility' ),
-				className: 'bv-settings-blocks-manager',
+				className: 'bv-settings__blocks-manager',
 			},
 		];
 		
@@ -117,7 +117,7 @@ class Settings extends Component {
 				<TabPanel 	
 					className="bv-tab-panel"
 					activeClass="active-tab"
-					initialTabName="bv-getting-started"
+					initialTabName="getting-started"
 					tabs={ settingTabs }
 				>
 					{
@@ -125,28 +125,28 @@ class Settings extends Component {
 							// Don't load tabs is settings have not yet loaded
 							if ( ! this.state.isAPILoaded ) {
 								return (
-									<div className="bv-settings-loading">
+									<div className="bv-loading-settings">
 										<Spinner/>
 									</div>
 								);
 							}
 							
 							switch ( tab.name ) {
-								case 'bv-getting-started':
+								case 'getting-started':
 									return (
 										<GettingStarted
 											isAPISaving={ this.state.isAPISaving }
 										/>
 									);
 
-								case 'bv-functionality-manager':
+								case 'visibility-settings':
 									return (
 										<div className="bv-functionality-manager">
 											Functionality Content
 										</div>
 									);
 
-								case 'bv-block-manager':
+								case 'block-manager':
 									return (
 										<BlockManager
 											isAPILoaded={ this.state.isAPILoaded }
