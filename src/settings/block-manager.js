@@ -4,24 +4,23 @@
 import { filter, map, without, union, difference, intersection } from 'lodash';
 import classnames from 'classnames';
 
-
 /**
  * WordPress dependencies
  */
 import { __, _n, sprintf } from '@wordpress/i18n';
 import { compose, withState } from '@wordpress/compose';
 import { withSelect } from '@wordpress/data';
-import { Component, render } from '@wordpress/element';
+import { Component } from '@wordpress/element';
 import {
 	Animate,
 	Button,
 	CheckboxControl,
-	Placeholder,
-	Spinner,
 	TextControl
 } from '@wordpress/components';
-import { Icon, search } from '@wordpress/icons';
+import { Icon } from '@wordpress/icons';
 
+// @// TODO: Figure out if this useable to retrieve settings or strip
+/*
 import {
  	createContext,
  	useContext,
@@ -30,6 +29,7 @@ import {
 	useEntityProp,
 	saveEditedEntityRecord 
 } from '@wordpress/core-data';
+*/
 
 /**
  * Internal dependencies
@@ -132,8 +132,8 @@ class BlockManager extends Component {
 			visibilityIcon = icons.visibilityHidden;
 			visibilityMessage = sprintf( 
 				_n( 
-					'Visibility is disabled for %s block', 
-					'Visibility is disabled for %s blocks', 
+					'Visibility is disabled for %s block type', 
+					'Visibility is disabled for %s block types', 
 					disabledBlocksState.length,  
 					'block-visibility' 
 				), 
@@ -148,10 +148,10 @@ class BlockManager extends Component {
 		return (
 			<div className="bv-block-manager inner-container">
 				<div className="bv-tab-panel__description">
-					<h2>Block Manager</h2>
+					<h2>{ __( 'Block Manager', 'block-visibility' ) }</h2>
 					<p>
 						{ __( 
-							'Use the settings below to disable visibility functionality on specific block types. This can be useful if you want to restrict visibility settings to a selection of blocks. Once a block type is disabled, all visibility settings will also be disabled, even if settings had previously been set on blocks of that type.', 
+							'[Needs work] Use the settings below to disable visibility functionality on specific block types. This can be useful if you want to restrict visibility settings to a selection of blocks. Once a block type is disabled, all visibility settings will also be disabled, even if settings had previously been set on blocks of that type.', 
 							'block-visibility'
 						) }
 					</p>

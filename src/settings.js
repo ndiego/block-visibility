@@ -29,6 +29,7 @@ import {
  */
 import Masthead from './settings/masthead';
 import GettingStarted from './settings/getting-started';
+import VisibilitySettings from './settings/visibility-settings';
 import BlockManager from './settings/block-manager';
 
 
@@ -141,9 +142,9 @@ class Settings extends Component {
 
 								case 'visibility-settings':
 									return (
-										<div className="bv-functionality-manager">
-											Functionality Content
-										</div>
+										<VisibilitySettings
+											isAPISaving={ this.state.isAPISaving }
+										/>
 									);
 
 								case 'block-manager':

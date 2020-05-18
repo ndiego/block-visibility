@@ -14,16 +14,16 @@ import {
 import { Icon, cloud } from '@wordpress/icons';
 
 
-class GettingStarted extends Component {
+class VisibilitySettings extends Component {
     
     render() {
         
         const { isAPISaving } = this.props;
         
         return (
-			<div className="bv-getting-started inner-container">
+			<div className="bv-visibility-settings inner-container">
 				<div className="bv-tab-panel__description">
-					<h2>{ __( 'Getting Started', 'block-visibility' ) }</h2>
+					<h2>{ __( 'Visibility Settings', 'block-visibility' ) }</h2>
 					<p>
 						{ __( 
 							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et condimentum libero. Etiam vel pulvinar eros, tincidunt molestie est. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -31,18 +31,9 @@ class GettingStarted extends Component {
 						) }
 					</p>
 				</div>
-				<div>
-                    <PanelBody
-                        title="Getting Started"
-                    >
-                        <PanelRow>
-                            Getting Started...
-                        </PanelRow>
-                    </PanelBody>
-                </div>
 			</div>
         );
     }
 }
 
-export default GettingStarted;
+export default VisibilitySettings;

@@ -1,4 +1,9 @@
 
+// Medai query variables
+$desktop: 1024px;
+$tablet: 768px;
+
+
 #bv-settings-container {
     margin-left: -20px;
     
@@ -17,9 +22,12 @@
     .inner-container {
         margin: 0 auto;
         max-width: 1024px;
-        
         display: flex;
         justify-content: space-between;
+        
+        @media ( max-width: $desktop ) {
+            display: block;
+        }
     }
 }
 
@@ -40,50 +48,19 @@
     }
 }
 
-.bv-save-settings {
-    display: flex;
-    align-items: center;
-    
-    .bv-save-settings__messages {
-        color: #777;
-        display: inline-block;
-        margin-right: 24px;
-        
-        svg {
-            fill: #777;
-            vertical-align: middle;
-            margin: 0px 6px 4px 0;
-            width: 20px;
-            height: 20px;
-        }
-    }
-    
-    .save-button {
-        &.is-busy {
-            color: #ffffff;
-            background-size: 100px 100%;
-            // Disable reason: This function call looks nicer when each argument is on its own line.
-            /* stylelint-disable */
-            background-image: linear-gradient(
-                -45deg,
-                #1989c1 28%,
-                color(#1989c1 shade(20%)) 28%,
-                color(#1989c1 shade(20%)) 72%,
-                #1989c1 72%
-            );
-            /* stylelint-enable */
-            border-color: color(#1989c1);
-        }
-    }
-}
-
-
 .bv-masthead__meta {
     width: 30%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     text-align: right;
+    
+    @media ( max-width: $desktop ) {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
     
     .plugin-version {
         span {
@@ -129,7 +106,6 @@
     }
 }
 
-
 .bv-tab-panel {
     .components-tab-panel__tabs {
         justify-content: center;
@@ -145,10 +121,20 @@
         }
     }
     
+    .components-tab-panel__tab-content {
+        padding: 40px 30px;
+        
+        .inner-container {
+            margin: 0 auto;
+            max-width: 1024px;
+        }
+    }
+    
     .bv-tab-panel__description {
         h2 {
             font-size: 20px;
             font-weight: 500;
+            margin: 0 0 20px;
         }
         
         p {
@@ -158,11 +144,6 @@
             margin: 0;
         }
     }
-}
-
-.components-tab-panel__tab-content {
-    margin: 40px auto;
-    max-width: 1024px;
 }
 
 .bv-block-manager__controls {
@@ -186,6 +167,47 @@
             padding: 9px 12px;
         }
     }
+    
+    .bv-save-settings {
+        display: flex;
+        align-items: center;
+        
+        .bv-save-settings__messages {
+            color: #777;
+            display: inline-block;
+            margin-right: 24px;
+            
+            svg {
+                fill: #777;
+                vertical-align: middle;
+                margin: 0px 6px 4px 0;
+                width: 20px;
+                height: 20px;
+            }
+            
+            @media ( max-width: $tablet ) {
+                display: none;
+            }
+        }
+        
+        .save-button {
+            &.is-busy {
+                color: #ffffff;
+                background-size: 100px 100%;
+                // Disable reason: This function call looks nicer when each argument is on its own line.
+                /* stylelint-disable */
+                background-image: linear-gradient(
+                    -45deg,
+                    #1989c1 28%,
+                    color(#1989c1 shade(20%)) 28%,
+                    color(#1989c1 shade(20%)) 72%,
+                    #1989c1 72%
+                );
+                /* stylelint-enable */
+                border-color: color(#1989c1);
+            }
+        }
+    }
 }
 
 .bv-block-manager__category-container {
@@ -193,6 +215,14 @@
     grid-template-columns: repeat(3, 1fr);
     column-gap: 20px;
     row-gap: 20px;
+    
+    @media ( max-width: $desktop ) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @media ( max-width: $tablet ) {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
 
 .bv-block-manager__category {
@@ -209,7 +239,6 @@
         margin: 0;
     }
 }
-
 
 .bv-block-manager__category-title {
     font-size: 14px;
