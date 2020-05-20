@@ -62,7 +62,7 @@ class BlockManager extends Component {
 		this.setState( { hasUpdates: false } );
 	}
     
-    handleBlockCategoryChange( checked, blockTypes ){    
+    handleBlockCategoryChange( checked, blockTypes ) {    
         let disabledBlocks = this.state.disabledBlocks;
         
         if ( ! checked ) {
@@ -76,7 +76,7 @@ class BlockManager extends Component {
         this.setState( { hasUpdates: true } );
     }
     
-    handleBlockTypeChange( checked, blockType ){
+    handleBlockTypeChange( checked, blockType ) {
         let disabledBlocks = this.state.disabledBlocks;
                 
         if ( ! checked ) {

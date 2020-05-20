@@ -12,6 +12,7 @@ import { Component, render } from '@wordpress/element';
 import { 
 	ToggleControl,
 	SelectControl,
+	RadioControl,
  	PanelBody
 } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/editor";
@@ -30,17 +31,15 @@ const blockVisibilityAttribute = ( settings ) => {
 				hideBlock: {
 					type: 'boolean',
 				},
-				hideLoggedIn: {
-					type: 'boolean',
-				},
-				hideLoggedOut: {
-					type: 'boolean',
+				visibilityByRole: {
+					type: 'string',
 				}	
 			},
 			default: {
 				hideBlock: true,
 				hideLoggedIn: false,
 				hideLoggedOut: false,
+				visibilityByRole: 'all'
 			}
 		}
 	} );
@@ -64,14 +63,12 @@ class EditorVisibilityControls extends Component {
 	
 	render() {
 		
+		const { attributes, setAttributes } = this.props;
+		const { blockVisibility } = attributes;
 		const {
-			attributes,
-			setAttributes
-		} = this.props;
-		
-		const {
-			blockVisibility,
-		} = attributes;
+			hideBlock,
+			visibilityByRole,
+		} = blockVisibility;
 		
 		console.log( this.props );
 		
@@ -85,37 +82,48 @@ class EditorVisibilityControls extends Component {
 						'Hide block',
 						'block-visibility'
 					) }
-					checked={ blockVisibility.hideBlock }
-					onChange={ () => {
-						const atts = { ...blockVisibility };
-						atts.hideBlock = ! blockVisibility.hideBlock;
-						setAttributes( { blockVisibility: atts } );
-					} }
+					checked={ hideBlock }
+					onChange={ () => setAttributes( {
+							blockVisibility: assign( 
+								{ ...blockVisibility }, 
+								{ hideBlock: ! hideBlock } 
+							)
+						} )
+					}
 				/>
-				<ToggleControl
-					label={ __(
-						'Hide for Logged In Users',
-						'block-visibility'
-					) }
-					checked={ blockVisibility.hideBlock }
-					onChange={ () => {
-						const atts = { ...blockVisibility };
-						atts.hideBlock = ! blockVisibility.hideBlock;
-						setAttributes( { blockVisibility: atts } );
-					} }
+				<RadioControl
+					label={ __( 'Visibility by Role', 'block-visibility' ) }
+					help={ __( 'this is a test', 'block-visibility' ) }
+					selected={ visibilityByRole }
+					options={ [
+						{
+							label: __( 'Visible to all', 'block-visibility' ),
+							value: 'all',
+							help: __( 'this is a test', 'block-visibility' )
+
+						},
+						{
+							label: __( 'Public', 'block-visibility' ),
+							value: 'logged-in',
+						},
+						{
+							label: __( 'Private', 'block-visibility' ),
+							value: 'logged-out',
+						},
+						{
+							label: __( 'Restrict by user role', 'block-visibility' ),
+							value: 'user-role',
+						},
+					] }
+					onChange={ ( value ) => setAttributes( {
+							blockVisibility: assign( 
+								{ ...blockVisibility }, 
+								{ visibilityByRole: value } 
+							)
+						} )
+					}
 				/>
-				<ToggleControl
-					label={ __(
-						'Hide for Logged Out Users',
-						'block-visibility'
-					) }
-					checked={ blockVisibility.hideBlock }
-					onChange={ () => {
-						const atts = { ...blockVisibility };
-						atts.hideBlock = ! blockVisibility.hideBlock;
-						setAttributes( { blockVisibility: atts } );
-					} }
-				/>
+					
 				All of the visibility settings
 			</PanelBody>
 		)
