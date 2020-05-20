@@ -76,6 +76,7 @@ class EditorVisibilityControls extends Component {
 			<PanelBody
 				title={ __( 'Visibility', 'block-visibility' ) }
 				initialOpen={ false }
+				className='block-visibility-settings'
 			>
 				<ToggleControl
 					label={ __(
@@ -90,41 +91,66 @@ class EditorVisibilityControls extends Component {
 							)
 						} )
 					}
+					help={ __( 'Hides the block completely', 'block-visibility' ) }
 				/>
-				<RadioControl
-					label={ __( 'Visibility by Role', 'block-visibility' ) }
-					help={ __( 'this is a test', 'block-visibility' ) }
-					selected={ visibilityByRole }
-					options={ [
-						{
-							label: __( 'Visible to all', 'block-visibility' ),
-							value: 'all',
-							help: __( 'this is a test', 'block-visibility' )
-
-						},
-						{
-							label: __( 'Public', 'block-visibility' ),
-							value: 'logged-in',
-						},
-						{
-							label: __( 'Private', 'block-visibility' ),
-							value: 'logged-out',
-						},
-						{
-							label: __( 'Restrict by user role', 'block-visibility' ),
-							value: 'user-role',
-						},
-					] }
-					onChange={ ( value ) => setAttributes( {
-							blockVisibility: assign( 
-								{ ...blockVisibility }, 
-								{ visibilityByRole: value } 
-							)
-						} )
-					}
-				/>
-					
-				All of the visibility settings
+				{ ! hideBlock && (
+					<>
+						<RadioControl
+							label={ __( 'Visibility Control', 'block-visibility' ) }
+							selected={ visibilityByRole }
+							options={ [
+								{
+									label: (
+										<div className="compound-radio-label">
+											{ __( 'All', 'block-visibility' ) }
+											<span>{ __( 'Visible to everyone', 'block-visibility' ) }</span>
+										</div>
+									),
+									value: 'all',
+								},
+								{
+									label: (
+										<div className="compound-radio-label">
+											{ __( 'Public', 'block-visibility' ) }
+											<span>{ __( 'Visible to logged-out users', 'block-visibility' ) }</span>
+										</div>
+									),
+									value: 'logged-out',
+								},
+								{
+									label: (
+										<div className="compound-radio-label">
+											{ __( 'Private', 'block-visibility' ) }
+											<span>{ __( 'Visible to logged-in users', 'block-visibility' ) }</span>
+										</div>
+									),
+									value: 'logged-in',
+								},
+								{
+									label: (
+										<div className="compound-radio-label">
+											{ __( 'User Role', 'block-visibility' ) }
+											<span>{ __( 'Visible based on the role of logged-in users', 'block-visibility' ) }</span>
+										</div>
+									),
+									value: 'user-role',
+								},
+							] }
+							onChange={ ( value ) => setAttributes( {
+									blockVisibility: assign( 
+										{ ...blockVisibility }, 
+										{ visibilityByRole: value } 
+									)
+								} )
+							}
+						/>
+					</>
+				) }
+				{ ! hideBlock && visibilityByRole === 'user-role' && (
+					<div>
+						Role settings
+					</div>
+				) }
 			</PanelBody>
 		)
 	}

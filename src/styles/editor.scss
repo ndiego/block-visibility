@@ -1,0 +1,24 @@
+.block-visibility-settings {
+    
+    .components-radio-control__option {
+        &:not(:last-child) {
+            margin-bottom: 6px;
+        }
+        input {
+            vertical-align: top;
+            margin-top: 2px;
+        }
+        
+        .compound-radio-label {
+            display: inline-block;
+            font-weight: 600;
+            
+            span {
+                display: block;
+                font-weight: 400;
+                max-width: 200px;
+            }
+        }
+    }
+}
+
