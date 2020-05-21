@@ -13,11 +13,19 @@ import {
 	ToggleControl,
 	SelectControl,
 	RadioControl,
- 	PanelBody
+ 	PanelBody,
 } from "@wordpress/components";
-import { InspectorControls } from "@wordpress/editor";
 import { createHigherOrderComponent } from "@wordpress/compose";
-import { useEntityProp } from '@wordpress/core-data';
+import { useEntityProp } from "@wordpress/core-data";
+
+import { withSelect } from '@wordpress/data';
+
+//import { getBlockTypes } from '@wordpress/block';
+
+/**
+ * Internal dependencies
+ */
+import EditorVisibilityControls from './editor/inspector-controls';
 
 
 const blockVisibilityAttribute = ( settings ) => {
@@ -36,9 +44,7 @@ const blockVisibilityAttribute = ( settings ) => {
 				}	
 			},
 			default: {
-				hideBlock: true,
-				hideLoggedIn: false,
-				hideLoggedOut: false,
+				hideBlock: false,
 				visibilityByRole: 'all'
 			}
 		}
@@ -54,111 +60,11 @@ addFilter(
 	blockVisibilityAttribute
 );
 
-
-class EditorVisibilityControls extends Component {
-	
-	constructor() {
-		super( ...arguments );
-	}
-	
-	render() {
-		
-		const { attributes, setAttributes } = this.props;
-		const { blockVisibility } = attributes;
-		const {
-			hideBlock,
-			visibilityByRole,
-		} = blockVisibility;
-		
-		console.log( this.props );
-		
-		return(
-			<PanelBody
-				title={ __( 'Visibility', 'block-visibility' ) }
-				initialOpen={ false }
-				className='block-visibility-settings'
-			>
-				<ToggleControl
-					label={ __(
-						'Hide block',
-						'block-visibility'
-					) }
-					checked={ hideBlock }
-					onChange={ () => setAttributes( {
-							blockVisibility: assign( 
-								{ ...blockVisibility }, 
-								{ hideBlock: ! hideBlock } 
-							)
-						} )
-					}
-					help={ __( 'Hides the block completely', 'block-visibility' ) }
-				/>
-				{ ! hideBlock && (
-					<>
-						<RadioControl
-							label={ __( 'Visibility Control', 'block-visibility' ) }
-							selected={ visibilityByRole }
-							options={ [
-								{
-									label: (
-										<div className="compound-radio-label">
-											{ __( 'All', 'block-visibility' ) }
-											<span>{ __( 'Visible to everyone', 'block-visibility' ) }</span>
-										</div>
-									),
-									value: 'all',
-								},
-								{
-									label: (
-										<div className="compound-radio-label">
-											{ __( 'Public', 'block-visibility' ) }
-											<span>{ __( 'Visible to logged-out users', 'block-visibility' ) }</span>
-										</div>
-									),
-									value: 'logged-out',
-								},
-								{
-									label: (
-										<div className="compound-radio-label">
-											{ __( 'Private', 'block-visibility' ) }
-											<span>{ __( 'Visible to logged-in users', 'block-visibility' ) }</span>
-										</div>
-									),
-									value: 'logged-in',
-								},
-								{
-									label: (
-										<div className="compound-radio-label">
-											{ __( 'User Role', 'block-visibility' ) }
-											<span>{ __( 'Visible based on the role of logged-in users', 'block-visibility' ) }</span>
-										</div>
-									),
-									value: 'user-role',
-								},
-							] }
-							onChange={ ( value ) => setAttributes( {
-									blockVisibility: assign( 
-										{ ...blockVisibility }, 
-										{ visibilityByRole: value } 
-									)
-								} )
-							}
-						/>
-					</>
-				) }
-				{ ! hideBlock && visibilityByRole === 'user-role' && (
-					<div>
-						Role settings
-					</div>
-				) }
-			</PanelBody>
-		)
-	}
-}
-
 const blockVisibilityControls = createHigherOrderComponent( ( BlockEdit ) => {
+
     return ( props ) => {
-		
+		//const { blockTypes } = props;
+		//console.log( props )
 		// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
 		const [ disabledBlocks, setDisabledBlocks ] = useEntityProp( 
 			'root', 
@@ -171,9 +77,7 @@ const blockVisibilityControls = createHigherOrderComponent( ( BlockEdit ) => {
 			return (
 				<>
 					<BlockEdit { ...props } />
-					<InspectorControls>
-						<EditorVisibilityControls { ...props } />
-					</InspectorControls>
+					<EditorVisibilityControls { ...props } />
 				</>
 			);
 		}
