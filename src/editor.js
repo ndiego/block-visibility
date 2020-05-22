@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { assign } from 'lodash';
+import { assign, has } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -87,7 +87,7 @@ const blockVisibilityEditorControls = createHigherOrderComponent( ( BlockEdit ) 
 
     return ( props ) => {
 		
-		//console.log( props )
+		console.log( props )
 		// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
 		const [ disabledBlocks, setDisabledBlocks ] = useEntityProp( 
 			'root', 
@@ -95,19 +95,22 @@ const blockVisibilityEditorControls = createHigherOrderComponent( ( BlockEdit ) 
 			'bv_disabled_blocks' 
 		);
 		
-		const notDisabled = disabledBlocks && ! disabledBlocks.includes( props.name );
-		const isAllowed = hasBlockSupport( props.name, 'inserter', true ) && props.attributes.blockVisibility;
-		
-		//console.log( allowed );
-
-		// Wait till disabledBlocks are loaded, then make sure the block is not part of the array
-		if ( notDisabled && isAllowed ) {			
-			return (
-				<>
-					<BlockEdit { ...props } />
-					<VisibilityInspectorControls { ...props } />
-				</>
-			);
+		// Make sure we have the disabled blocks setting, otherwise just return
+		// normal BlockEdit
+		if ( disabledBlocks ) {
+			const blockDisabled = disabledBlocks.includes( props.name );
+			
+			// Make sure the visibility attribute exists
+			const isAllowed = has( props, 'attributes.blockVisibility' );
+			
+			if ( blockDisabled && isAllowed ) {			
+				return (
+					<>
+						<BlockEdit { ...props } />
+						<VisibilityInspectorControls { ...props } />
+					</>
+				);
+			}
 		}
 		
 		return (
