@@ -1,70 +1,70 @@
 /**
  * External dependencies
  */
-import { filter, map, without, union, difference, intersection } from 'lodash';
-import classnames from 'classnames';
+import { assign } from 'lodash';
 
 /**
  * WordPress dependencies
  */
-import { compose } from '@wordpress/compose';
+import { __ } from '@wordpress/i18n';
+import { addFilter } from "@wordpress/hooks";
+import { Component, render } from '@wordpress/element';
+import { 
+	ToggleControl,
+	SelectControl,
+	RadioControl,
+ 	PanelBody,
+} from "@wordpress/components";
+import { InspectorControls } from "@wordpress/editor";
+import { createHigherOrderComponent } from "@wordpress/compose";
+import { useEntityProp } from "@wordpress/core-data";
+
 import { withSelect } from '@wordpress/data';
-import { Component } from '@wordpress/element';
-import { getBlockTypes } from '@wordpress/block';
 
-class AllowedBlockTypes extends Component {
-
-	render() {
-		const {
-			blockTypes,
-			categories,
-			hasBlockSupport,
-		} = this.props;
-		
-		
-		// Filter the blocks by the following criteria
-		const filteredBlockTypes = blockTypes.filter( ( blockType ) => (
-			// Is allowed to be inserted into a page/post
-			hasBlockSupport( blockType, 'inserter', true ) &&
-			// Is not a child block https://developer.wordpress.org/block-editor/developers/block-api/block-registration/#parent-optional
-			! blockType.parent
-		) );
-		
-		// If a plugin with custom blocks is deactivated, we want to keep the 
-		// disabled blocks settings, but we should not include them in the UI
-		// of the Block Manager
-		const disabledBlocksState = intersection( 
-			this.state.disabledBlocks, 
-			map( filteredBlockTypes, 'name' ) 
-		);
-		
-		//console.log( filteredBlockTypes);
+const allowedBlockTypes = ( props ) => {
 	
-		return filteredBlockTypes;
+	// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
+	const [ disabledBlocks, setDisabledBlocks ] = useEntityProp( 
+		'root', 
+		'site', 
+		'bv_disabled_blocks' 
+	);
+	
+	//console.log( disabledBlocks );
+	
+	// Wait till disabledBlocks are loaded, then make sue the block is not part of the array
+	if ( ! disabledBlocks && disabledBlocks.includes( props.name ) ) {
+		return null;
 	}
+	
+	const { 
+		attributes, 
+		setAttributes,
+		blockTypes,
+		hasBlockSupport
+	} = props;
+	
+	const { blockVisibility } = attributes;
+	
+	const {
+		hideBlock,
+		visibilityByRole,
+	} = blockVisibility;
+	
+	///console.log( props );
+	
+	return disabledBlocks;
 }
 
-/*export default compose( [
-	withSelect( ( select ) => {
-		const {
-			getCategories,
-			getBlockTypes,
-			hasBlockSupport,
-		} = select( 'core/blocks' );
+export default withSelect( ( select ) => {
+	const {
+		getBlockTypes,
+		hasBlockSupport,
+	} = select( 'core/blocks' );
 
-		return {
-			blockTypes: getBlockTypes(),
-			categories: getCategories(),
-			hasBlockSupport,
-		};
-	} ),
-] )( AllowedBlockTypes );*/
+	return {
+		blockTypes: getBlockTypes(),
+		hasBlockSupport
+	};
+} )( allowedBlockTypes );
 
-
-const allowedBlockTypes = () => {
-	const blockTypes = getBlockTypes();
-	console.log( blockTypes );
-	return blockTypes;
-}
-
-export default allowedBlockTypes;

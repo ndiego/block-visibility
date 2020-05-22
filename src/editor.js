@@ -20,35 +20,58 @@ import { useEntityProp } from "@wordpress/core-data";
 
 import { withSelect } from '@wordpress/data';
 
-//import { getBlockTypes } from '@wordpress/block';
+import { 
+	//getBlockTypes,
+	hasBlockSupport
+} from '@wordpress/blocks';
 
 /**
  * Internal dependencies
  */
-import EditorVisibilityControls from './editor/inspector-controls';
+import VisibilityInspectorControls from './editor/inspector-controls';
 
+//import allowedBlockTypes from './utils/allowed-block-types';
 
-const blockVisibilityAttribute = ( settings ) => {
+function DisabledBlocks() {
 	
-	//console.log( settings.attributes );
+	// Blocks manually disabled by the user, retrieved from settings
+	const [ disabledBlocks, setDisabledBlocks ] = useEntityProp( 
+		'root', 
+		'site', 
+		'bv_disabled_blocks' 
+	);
 	
-	settings.attributes = assign( settings.attributes, {
-		blockVisibility: {
-			type: 'object',
-			properties: {
-				hideBlock: {
-					type: 'boolean',
+	return disabledBlocks;
+}
+
+function SiteTitleEdit() {
+	const [ title, setTitle ] = useEntityProp( 'root', 'site', 'title' );
+	return title;
+}
+
+function blockVisibilityAttribute( settings ) {
+	// We don't want to enable visibility for blocks that cannot be added via 
+	// the inserter of is a child block. This excludes blocks such as reusable
+	// blocks, individual column block, etc.
+	if ( hasBlockSupport( settings, 'inserter', true ) && ! settings.parent ) {
+		settings.attributes = assign( settings.attributes, {
+			blockVisibility: {
+				type: 'object',
+				properties: {
+					hideBlock: {
+						type: 'boolean',
+					},
+					visibilityByRole: {
+						type: 'string',
+					}	
 				},
-				visibilityByRole: {
-					type: 'string',
-				}	
-			},
-			default: {
-				hideBlock: false,
-				visibilityByRole: 'all'
+				default: {
+					hideBlock: false,
+					visibilityByRole: 'all'
+				}
 			}
-		}
-	} );
+		} );
+	}
 	
 	return settings;
 }
@@ -60,10 +83,10 @@ addFilter(
 	blockVisibilityAttribute
 );
 
-const blockVisibilityControls = createHigherOrderComponent( ( BlockEdit ) => {
+const blockVisibilityEditorControls = createHigherOrderComponent( ( BlockEdit ) => {
 
     return ( props ) => {
-		//const { blockTypes } = props;
+		
 		//console.log( props )
 		// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
 		const [ disabledBlocks, setDisabledBlocks ] = useEntityProp( 
@@ -72,12 +95,17 @@ const blockVisibilityControls = createHigherOrderComponent( ( BlockEdit ) => {
 			'bv_disabled_blocks' 
 		);
 		
-		// Wait till disabledBlocks are loaded, then make sue the block is not part of the array
-		if ( disabledBlocks && ! disabledBlocks.includes( props.name ) ) {			
+		const notDisabled = disabledBlocks && ! disabledBlocks.includes( props.name );
+		const isAllowed = hasBlockSupport( props.name, 'inserter', true ) && props.attributes.blockVisibility;
+		
+		//console.log( allowed );
+
+		// Wait till disabledBlocks are loaded, then make sure the block is not part of the array
+		if ( notDisabled && isAllowed ) {			
 			return (
 				<>
 					<BlockEdit { ...props } />
-					<EditorVisibilityControls { ...props } />
+					<VisibilityInspectorControls { ...props } />
 				</>
 			);
 		}
@@ -86,17 +114,12 @@ const blockVisibilityControls = createHigherOrderComponent( ( BlockEdit ) => {
 			<BlockEdit { ...props } />
 		);	
     };
-}, 'blockVisibilityControls' );
+}, 'blockVisibilityEditorControls' );
 
 // Add visibility controls to all blocks.
 addFilter(
 	'editor.BlockEdit',
 	'outermost/block-visibility/inspector-controls',
-	blockVisibilityControls,
+	blockVisibilityEditorControls,
 	100
 );
-
-
-
-
-
