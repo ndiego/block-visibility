@@ -117,7 +117,11 @@ function enqueue_settings_assets() {
     
     $stringified_plugin_variables = "const blockVisibilityVariables = " . wp_json_encode( $plugin_variables ) . ";";
     
-    wp_add_inline_script( 'bv-setting-scripts', $stringified_plugin_variables, 'after');
+    wp_add_inline_script( 
+        'bv-setting-scripts', 
+        $stringified_plugin_variables, 
+        'after' 
+    );
 
     
     // Get all the registed block categories

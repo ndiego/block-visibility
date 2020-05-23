@@ -11,7 +11,7 @@ namespace BlockVisibility\Admin;
 use function BlockVisibility\Utils\get_asset_file as get_asset_file;
 use function BlockVisibility\Utils\get_user_roles as get_user_roles;
  
-get_user_roles();
+
 /**
  * Enqueue plugin specific editor scripts and styles
  *
@@ -29,6 +29,14 @@ function enqueue_editor_assets() {
  		$asset_file['version'],
  		true
  	);
+    
+    $stringified_user_roles = "const blockVisibilityUserRoles = " . wp_json_encode( get_user_roles() ) . ";";
+    
+    wp_add_inline_script( 
+        'bv-editor-scripts', 
+        $stringified_user_roles, 
+        'before' 
+    );
     
     // Styles.
     $asset_file = get_asset_file( 'dist/bv-editor-styles' );

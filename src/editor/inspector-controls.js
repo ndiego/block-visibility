@@ -19,6 +19,11 @@ import { InspectorControls } from "@wordpress/editor";
 import { useEntityProp } from "@wordpress/core-data";
 import { withSelect } from '@wordpress/data';
 
+/**
+ * Internal dependencies
+ */
+import UserRoleControl from './user-role-control';
+
 function VisibilityInspectorControls( props ) {
 	
 	// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
@@ -40,7 +45,7 @@ function VisibilityInspectorControls( props ) {
 	
 	//console.log( name );
 	
-	const currentBlockType = _.filter( blockTypes, { 'name' : name } );
+	//const currentBlockType = _.filter( blockTypes, { 'name' : name } );
 	//console.log( currentBlockType );
 	// Make sure the visibility attribute exists
 	const isAllowed = has( attributes, 'blockVisibility' );
@@ -132,9 +137,9 @@ function VisibilityInspectorControls( props ) {
 				</>
 			) }
 			{ ! hideBlock && visibilityByRole === 'user-role' && (
-				<div>
-					Role settings
-				</div>
+				<UserRoleControl
+					{ ...props }
+				/>
 			) }
 		</PanelBody>
 		</InspectorControls>

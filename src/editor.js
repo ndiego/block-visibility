@@ -63,7 +63,10 @@ function blockVisibilityAttribute( settings ) {
 					},
 					visibilityByRole: {
 						type: 'string',
-					}	
+					},
+					restrictedRoles: {
+						type: 'array',
+					}		
 				},
 				default: {
 					hideBlock: false,
