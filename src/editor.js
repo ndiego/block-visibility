@@ -53,7 +53,7 @@ function blockVisibilityAttribute( settings ) {
 	// We don't want to enable visibility for blocks that cannot be added via 
 	// the inserter of is a child block. This excludes blocks such as reusable
 	// blocks, individual column block, etc.
-	if ( hasBlockSupport( settings, 'inserter', true ) && ! settings.parent ) {
+	if ( hasBlockSupport( settings, 'inserter', true ) && ! settings.hasOwnProperty( 'parent' ) ) {
 		settings.attributes = assign( settings.attributes, {
 			blockVisibility: {
 				type: 'object',
@@ -84,37 +84,12 @@ addFilter(
 );
 
 const blockVisibilityEditorControls = createHigherOrderComponent( ( BlockEdit ) => {
-
     return ( props ) => {
-		
-		console.log( props )
-		// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
-		const [ disabledBlocks, setDisabledBlocks ] = useEntityProp( 
-			'root', 
-			'site', 
-			'bv_disabled_blocks' 
-		);
-		
-		// Make sure we have the disabled blocks setting, otherwise just return
-		// normal BlockEdit
-		if ( disabledBlocks ) {
-			const blockDisabled = disabledBlocks.includes( props.name );
-			
-			// Make sure the visibility attribute exists
-			const isAllowed = has( props, 'attributes.blockVisibility' );
-			
-			if ( blockDisabled && isAllowed ) {			
-				return (
-					<>
-						<BlockEdit { ...props } />
-						<VisibilityInspectorControls { ...props } />
-					</>
-				);
-			}
-		}
-		
 		return (
-			<BlockEdit { ...props } />
+			<>
+				<BlockEdit { ...props } />
+				<VisibilityInspectorControls { ...props } />
+			</>
 		);	
     };
 }, 'blockVisibilityEditorControls' );
