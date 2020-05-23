@@ -70,7 +70,8 @@ function blockVisibilityAttribute( settings ) {
 				},
 				default: {
 					hideBlock: false,
-					visibilityByRole: 'all'
+					visibilityByRole: 'all',
+					restrictedRoles: []
 				}
 			}
 		} );
