@@ -1,56 +1,30 @@
 /**
  * External dependencies
  */
-import { assign, has } from 'lodash';
+import { assign } from 'lodash';
 
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
-import { addFilter } from "@wordpress/hooks";
-import { Component, render } from '@wordpress/element';
-import { 
-	ToggleControl,
-	SelectControl,
-	RadioControl,
- 	PanelBody,
-} from "@wordpress/components";
-import { createHigherOrderComponent } from "@wordpress/compose";
-import { useEntityProp } from "@wordpress/core-data";
-
-import { withSelect } from '@wordpress/data';
-
-import { 
-	//getBlockTypes,
-	hasBlockSupport
-} from '@wordpress/blocks';
+import { addFilter } from '@wordpress/hooks';
+import { createHigherOrderComponent } from '@wordpress/compose';
+import { hasBlockSupport } from '@wordpress/blocks';
 
 /**
  * Internal dependencies
  */
 import VisibilityInspectorControls from './editor/inspector-controls';
 
-//import allowedBlockTypes from './utils/allowed-block-types';
-
-function DisabledBlocks() {
-	
-	// Blocks manually disabled by the user, retrieved from settings
-	const [ disabledBlocks, setDisabledBlocks ] = useEntityProp( 
-		'root', 
-		'site', 
-		'bv_disabled_blocks' 
-	);
-	
-	return disabledBlocks;
-}
-
-function SiteTitleEdit() {
-	const [ title, setTitle ] = useEntityProp( 'root', 'site', 'title' );
-	return title;
-}
-
+/**
+ * Add the visibility setting sttribute to selected blocks.
+ * 
+ * @param {Object} settings All settings associated with a block type.
+ * 
+ * @return {Object} settings The updated array of settings.
+ */
 function blockVisibilityAttribute( settings ) {
-	// We don't want to enable visibility for blocks that cannot be added via 
+	
+	// We don't want to enable visibility for blocks that cannot be added via
 	// the inserter of is a child block. This excludes blocks such as reusable
 	// blocks, individual column block, etc.
 	if ( hasBlockSupport( settings, 'inserter', true ) && ! settings.hasOwnProperty( 'parent' ) ) {
@@ -80,13 +54,9 @@ function blockVisibilityAttribute( settings ) {
 	return settings;
 }
 
-// Add the visibility attributes to all blocks.
-addFilter(
-	'blocks.registerBlockType',
-	'outermost/block-visibility/block-visibility-attribute',
-	blockVisibilityAttribute
-);
-
+/**
+ * Filter the block edit object and add visibility controls to selected blocks.
+ */
 const blockVisibilityEditorControls = createHigherOrderComponent( ( BlockEdit ) => {
     return ( props ) => {
 		return (
@@ -98,10 +68,15 @@ const blockVisibilityEditorControls = createHigherOrderComponent( ( BlockEdit ) 
     };
 }, 'blockVisibilityEditorControls' );
 
-// Add visibility controls to all blocks.
+
+addFilter(
+	'blocks.registerBlockType',
+	'block-visibility/block-visibility-attribute',
+	blockVisibilityAttribute,
+);
 addFilter(
 	'editor.BlockEdit',
-	'outermost/block-visibility/inspector-controls',
+	'block-visibility/inspector-controls',
 	blockVisibilityEditorControls,
-	100
+	100 // We want Visibility to appear rigth above Advanced controls
 );

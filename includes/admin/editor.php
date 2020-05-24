@@ -19,6 +19,17 @@ use function BlockVisibility\Utils\get_user_roles as get_user_roles;
  */
 function enqueue_editor_assets() {
     
+    /**
+     * Since we are using admin_init, we need to make sure the js is only loaded  
+     * on post edit, or new post screens.
+     *
+     * This will need to be adapted if we want to allow vsibility settings
+     * within full-site editing and whatnot.
+     */
+    if ( ! is_edit_or_new_admin_page() ) {
+        return;
+    }
+    
      // Scripts.
  	$asset_file = get_asset_file( 'dist/bv-editor' );
 
@@ -48,4 +59,26 @@ function enqueue_editor_assets() {
         $asset_file['version']
     );
  }
- add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_editor_assets' );
+ 
+ /**
+  * Need to add at admin_init instead of the normal enqueue_block_editor_assets  
+  * so that our attributes load for third-party blocks. Hopefully this will be 
+  * resolved in future releases of WP. Using enqueue_block_editor_assets is the 
+  * ideal implementation.
+  */
+ add_action( 'admin_init', __NAMESPACE__ . '\enqueue_editor_assets', 10000 );
+ 
+ 
+ /**
+  * Make sure we are either on a post edit screen, or new post screen
+  *
+  * @return bool true or false
+  */
+ function is_edit_or_new_admin_page() {
+     global $pagenow;
+     
+     return ( 
+        is_admin() && 
+        ( $pagenow === 'post.php' || $pagenow === 'post-new.php' ) 
+    );
+ }

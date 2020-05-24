@@ -12,35 +12,27 @@ import {
 	CheckboxControl,
 } from '@wordpress/components';
 
-function UserRoleControl( props ) {
+function UserRoles( props ) {
 	
-	const { name, attributes, setAttributes, blockTypes } = props;
+	const { attributes, setAttributes } = props;
 	const { blockVisibility } = attributes;
     
     console.log( blockVisibility );
+	
+	// This is a global variable added to the page via PHP
     const roles = blockVisibilityUserRoles;
-	
-	
-	const {
-		hideBlock,
-		visibilityByRole,
-		restrictedRoles,
-	} = blockVisibility;
+	const {	restrictedRoles } = blockVisibility;
     
     return (
         <div>
 			{ roles.map( ( role ) => {
 				
-				const isChecked = restrictedRoles ? restrictedRoles.includes( role.name ) : false;
-				
-				let newRestrictedRoles = restrictedRoles ? restrictedRoles : [];
-				
-				// Not working 100%
+				let newRestrictedRoles = [ ...restrictedRoles ];
+				const isChecked = restrictedRoles.includes( role.name );
+								
 				if ( isChecked ) {
 					const index = newRestrictedRoles.indexOf( role.name );
-					if (index > -1) {
-					  newRestrictedRoles.splice(index, 1);
-					}
+					index > -1 && newRestrictedRoles.splice(index, 1);
 				} else {
 					newRestrictedRoles.indexOf( role.name ) === -1 && newRestrictedRoles.push( role.name );
 				}
@@ -63,4 +55,4 @@ function UserRoleControl( props ) {
     );
 }
 
-export default UserRoleControl;
+export default UserRoles;
