@@ -94,6 +94,7 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
             //require_once BV_PLUGIN_DIR . 'includes/get-dynamic-blocks.php';
             
             require_once BV_PLUGIN_DIR . 'includes/admin/editor.php';
+            require_once BV_PLUGIN_DIR . 'includes/frontend/render-block.php';
 
 			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 				require_once BV_PLUGIN_DIR . 'includes/admin/plugin-action-links.php';
@@ -102,8 +103,6 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
                 // Utility functions
                 require_once BV_PLUGIN_DIR . 'includes/utils/get_asset_file.php';
                 require_once BV_PLUGIN_DIR . 'includes/utils/get_user_roles.php';
-                
-                //require_once BV_PLUGIN_DIR . 'includes/admin/class-gfpa-install.php';
 			}
 		}
 
