@@ -28,7 +28,7 @@ function HideBlock( props ) {
                     )
                 } )
             }
-            help={ __( 'Hides the block completely', 'block-visibility' ) }
+            help={ __( 'Hide the block completely', 'block-visibility' ) }
         />
     );
 }

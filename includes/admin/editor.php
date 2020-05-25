@@ -38,7 +38,7 @@ function enqueue_editor_assets() {
  		BV_PLUGIN_URL . 'dist/bv-editor.js',
  		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
  		$asset_file['version'],
- 		true
+ 		false // Need false to ensure our filters can target third-party plugins
  	);
     
     $stringified_user_roles = "const blockVisibilityUserRoles = " . wp_json_encode( get_user_roles() ) . ";";

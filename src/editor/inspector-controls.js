@@ -56,7 +56,7 @@ function VisibilityInspectorControls( props ) {
 		<InspectorControls>
 			<PanelBody
 				title={ __( 'Visibility', 'block-visibility' ) }
-				className='block-visibility-settings'
+				className='bv-settings'
 				initialOpen={ false }
 			>
 				<HideBlock { ...props } />

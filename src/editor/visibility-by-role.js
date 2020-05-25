@@ -53,14 +53,14 @@ function VisibilityByRole( props ) {
         {
             label: optionLabel( 
                 __( 'User Role', 'block-visibility' ), 
-                __( 'Visible based on the role of logged-in user', 'block-visibility' ) 
+                __( 'Restrict visibility to specific user roles', 'block-visibility' ) 
             ),
             value: 'user-role',
         },
     ]
     
     return (
-        <div className="block-visibility-settings__visibility-by-role">
+        <div className="bv-settings__visibility-by-role">
             <RadioControl
                 label={ __( 'Visibility by User Role', 'block-visibility' ) }
                 selected={ visibilityByRole }

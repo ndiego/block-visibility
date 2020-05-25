@@ -10,7 +10,14 @@ namespace BlockVisibility\Utils;
 
 function get_user_roles() {
     
-    $roles = array();
+    // Initialize the roles array with the default Public role
+    $roles = array(
+        array(
+            'name'  => 'public',
+            'title' => __( 'Public (Logged-out Users)', 'block-visibility' ),
+            'type'  => 'public'
+        )
+    );
     
     if ( ! function_exists( 'get_editable_roles' ) ) {
         return $roles;
@@ -25,7 +32,9 @@ function get_user_roles() {
         'subscriber'    => 'core',
     );
     
-    $role_types2 = array(
+    // Possible future implementation
+    /*
+    $role_types_demo = array(
         'core' => array(
             'name' => __( 'WordPress Core', 'block-visibility' ),
             'roles' => array(
@@ -41,7 +50,7 @@ function get_user_roles() {
             'roles' => array(),
         ),
     );
-    
+    */
     
     foreach ( get_editable_roles() as $role_slug => $role_atts ) {
         $atts = array(

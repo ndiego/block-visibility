@@ -1,4 +1,8 @@
-.block-visibility-settings {
+.bv-settings {
+    
+    .components-panel__body.is-opened>.components-panel__body-title {
+        margin-bottom: 10px;
+    }
     
     .components-radio-control__option {
         &:not(:last-child) {
@@ -20,5 +24,26 @@
             }
         }
     }
+    
+    .bv-settings__user-roles {
+        
+        .bv-settings__user-roles-label {
+            margin-bottom: 6px;
+            display: inline-block;
+        }
+        
+        .bv-settings__user-roles-help {
+            font-style: italic;
+        }
+        
+        .bv-settings__user-roles-control {
+            .components-base-control {
+                margin-bottom: 16px;
+            }
+        }
+    }
+    
+
+    
 }
 
