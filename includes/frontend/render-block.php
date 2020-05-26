@@ -9,15 +9,16 @@
 namespace BlockVisibility\Admin;
 
 /**
- * Check if the given block is disabled via the visibility settings
+ * Check if the given block type is disabled via the visibility settings
  *
  * @since   1.0.0
  *
  * @param array    $block The block info and attributes
  * @return boolean Is the block disabled or not
  */
-function is_block_disabled( $block ) {
-    $disabled_blocks = get_option( 'bv_disabled_blocks' );
+function is_block_type_disabled( $block ) {
+    $settings        = get_option( 'block_visibility_settings' );
+    $disabled_blocks = $settings['disabled_blocks'];
     
     if ( in_array( $block['blockName'], $disabled_blocks ) ) {
         return true;
@@ -42,6 +43,17 @@ function has_visibility_settings( $block ) {
     return false; 
 }
 
+
+function get_enabled_functionality() {
+    
+    $functionality = array(
+        'hideBlock',
+        'visibilityByRole',
+    );
+    
+    return $functionality;
+}
+
 /**
  * Check if the given block has visibility settings
  *
@@ -54,7 +66,10 @@ function has_visibility_settings( $block ) {
 function render_with_visibility( $block_content, $block ) {
     
     //echo print_r( $block );
-    if ( ! is_block_disabled( $block ) && has_visibility_settings( $block ) ) {
+    
+    // Make sure we are allowed to control visibility for this block type and 
+    // ensure the block actually has visibility settings set.
+    if ( ! is_block_type_disabled( $block ) && has_visibility_settings( $block ) ) {
         return $block[ 'blockName' ] . $block_content;
     }
     

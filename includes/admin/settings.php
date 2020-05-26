@@ -11,38 +11,6 @@ namespace BlockVisibility\Admin;
 use function BlockVisibility\Utils\get_asset_file as get_asset_file;
 
 /**
- * Register plugin settings.
- *
- * @since 1.0.0
- */
-function register_settings() {
-    // @todo how do we sanitize the strings???
-    // @todo add filter here for developers can preset a list of disabled block types
-    register_setting(
-        'block_visibility_settings',
-        'bv_disabled_blocks',
-        array(
-            'type'         => 'array',
-            'show_in_rest' => array(
-                'schema' => array(
-                    'type'  => 'array',
-                    'items' => array(
-                        'type' => 'string',
-                    ),
-                ),
-            ),
-            'default' => array(
-    			"core/paragraph",
-    			"core/image",
-    			"core/heading",
-    		),
-        )
-    );
-}
-add_action( 'rest_api_init', __NAMESPACE__ . '\register_settings' );
-add_action( 'admin_init', __NAMESPACE__ . '\register_settings' );
-
-/**
  * Register the plugin settings page.
  *
  * @since 1.0.0
@@ -66,10 +34,6 @@ add_action( 'admin_menu', __NAMESPACE__ . '\add_settings_page' );
  * @since 1.0.0
  */
 function print_settings_page() {
-    // @// TODO: Remove this
-    //$disabledBlocks = get_option( 'bv_disabled_blocks' );
-    //$result= $disabled ? "true" : "false";
-    //echo print_r( $disabledBlocks );
     ?>
         <div id="bv-settings-container"></div>
     <?php

@@ -58,7 +58,7 @@ class BlockManager extends Component {
 	
 	onSettingsChange() {
 		const disabledBlocks = this.state.disabledBlocks;
-		this.props.handSettingsChange( 'bv_disabled_blocks', disabledBlocks );
+		this.props.handleSettingsChange( 'disabled_blocks', disabledBlocks );
 		this.setState( { hasUpdates: false } );
 	}
     

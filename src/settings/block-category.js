@@ -66,7 +66,7 @@ class BlockCategory extends Component {
 
 		const categoryTitleId = 'bv-block-manager__category-title' + category.slug;
         
-        console.log( blockTypes );
+        //console.log( blockTypes );
 		
 		return (
 			<div 

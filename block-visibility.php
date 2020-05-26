@@ -196,23 +196,40 @@ function register_settings() {
     // @todo how do we sanitize the strings???
     // @todo add filter here for developers can preset a list of disabled block types
     register_setting(
+        'block_visibility',
         'block_visibility_settings',
-        'bv_disabled_blocks',
         array(
-            'type'         => 'array',
+            'type'         => 'object',
             'show_in_rest' => array(
                 'schema' => array(
-                    'type'  => 'array',
-                    'items' => array(
-                        'type' => 'string',
+                    'type'  => 'object',
+                    'properties' => array(
+                        'general_settings' => array(
+                            'type'  => 'array',
+                            'items' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                        'disabled_functionality' => array(
+                            'type'  => 'array',
+                            'items' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                        'disabled_blocks' => array(
+                            'type'  => 'array',
+                            'items' => array(
+                                'type' => 'string',
+                            ),
+                        ),
                     ),
                 ),
             ),
             'default' => array(
-    			"core/paragraph",
-    			"core/image",
-    			"core/heading",
-    		),
+                'general_settings' => array(),
+                'disabled_functionality' => array(),
+                'disabled_blocks' => array()
+            ),
         )
     );
 }

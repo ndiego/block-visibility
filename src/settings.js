@@ -1,28 +1,14 @@
 /**
  * External dependencies
  */
-import classnames from 'classnames';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { compose, withState } from '@wordpress/compose';
-import { withSelect } from '@wordpress/data';
 import { Component, render } from '@wordpress/element';
-import { BlockIcon } from '@wordpress/block-editor';
 import { registerCoreBlocks } from '@wordpress/block-library';
-import { getBlockTypes, getCategories } from '@wordpress/blocks';
-import {
-	Button,
-	ExternalLink,
-	PanelBody,
-	PanelRow,
-	Placeholder,
-	Spinner,
-	ToggleControl,
-	TabPanel
-} from '@wordpress/components';
+import { Spinner, TabPanel } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -31,6 +17,7 @@ import Masthead from './settings/masthead';
 import GettingStarted from './settings/getting-started';
 import VisibilitySettings from './settings/visibility-settings';
 import BlockManager from './settings/block-manager';
+import { snakeToCamel } from './utils/utility-functions';
 
 
 class Settings extends Component {
@@ -42,20 +29,26 @@ class Settings extends Component {
 		this.state = {
 			isAPILoaded: false,
 			isAPISaving: false,
+			generalSettings: [],
+			disabledFunctionality: [],
 			disabledBlocks: [],
 		};
 	}
 
 	componentDidMount() {
+		// Here we are using the Backbone JavaScript Client
+		// https://developer.wordpress.org/rest-api/using-the-rest-api/backbone-javascript-client/
 		wp.api.loadPromise.then( () => {
 			this.settings = new wp.api.models.Settings();
-			
-			//console.log( this.settings );
-			
-			if ( false === this.state.isAPILoaded ) {
-				this.settings.fetch().then( response => {
+						
+			if ( this.state.isAPILoaded === false ) {
+				this.settings.fetch().then( ( response ) => {
+					const settings = response.block_visibility_settings;
+										
 					this.setState( {
-						disabledBlocks: response.bv_disabled_blocks,
+						generalSettings: settings.general_settings,
+						disabledFunctionality: settings.disabled_functionality,
+						disabledBlocks: settings.disabled_blocks,
 						isAPILoaded: true
 					} );
 				});
@@ -63,32 +56,27 @@ class Settings extends Component {
 		});
 	}
 
-	handSettingsChange( option, value ) {
-		this.setState({ isAPISaving: true });
+	handleSettingsChange( option, value ) {
+		this.setState( { isAPISaving: true } );
 
-		const model = new wp.api.models.Settings({
-			// eslint-disable-next-line camelcase
-			[option]: value
-		});
+		const model = new wp.api.models.Settings( {
+			'block_visibility_settings': {
+				[option]: value
+			}
+		} );
 
-		model.save().then( response => {
-			this.setState({
-				[option]: response[option],
+		model.save().then( ( response ) => {
+			const settings = response.block_visibility_settings;
+			const optionState = snakeToCamel( option );
+			
+			this.setState( {
+				[optionState]: settings[option],
 				isAPISaving: false
-			});
-		});
+			} );
+		} );
 	}
 
 	render() {
-
-
-        const {
-            categories,
-            blockTypes,
-        } = this.props;
-        
-		//console.log( this.state.disabledBlocks );
-
 		const disabledBlocks = this.state.disabledBlocks;
 		
 		const settingTabs = [
@@ -109,7 +97,6 @@ class Settings extends Component {
 			},
 		];
 		
-			
 		return (
 			<>
 				<Masthead

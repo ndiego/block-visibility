@@ -20,11 +20,14 @@ import VisibilityByRole from './visibility-by-role';
 function VisibilityInspectorControls( props ) {
 	
 	// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
-	const [ disabledBlocks, setDisabledBlocks ] = useEntityProp( 
+	const [ blockVisibilitySettings, setBlockVisibilitySettings ] = useEntityProp( 
 		'root', 
 		'site', 
-		'bv_disabled_blocks' 
+		'block_visibility_settings' 
 	);
+
+	// Need to wait until the main settings object is loaded.
+	const disabledBlocks = blockVisibilitySettings ? blockVisibilitySettings.disabled_blocks : null;
 
 	// Make sure we have the disabled blocks setting, otherwise just abort. 
 	// Something is not working properly
