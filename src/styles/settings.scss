@@ -300,3 +300,21 @@ $tablet: 768px;
 }
 
 
+
+.settings-panel {
+    background: #fff;
+    border: 1px solid #E0E5E9;
+    
+    .settings-panel__header {
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .settings-panel__row {
+        padding: 10px;
+        border-top: 1px solid #E0E5E9;
+    }
+}
+
+

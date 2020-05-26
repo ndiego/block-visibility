@@ -24,7 +24,7 @@ class Settings extends Component {
 	constructor() {
 		super( ...arguments );
 
-		this.handSettingsChange = this.handSettingsChange.bind( this );
+		this.handleSettingsChange = this.handleSettingsChange.bind( this );
 
 		this.state = {
 			isAPILoaded: false,
