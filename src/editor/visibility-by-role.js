@@ -39,14 +39,14 @@ function VisibilityByRole( props ) {
         {
             label: optionLabel( 
                 __( 'Public', 'block-visibility' ), 
-                __( 'Visible to logged-out users', 'block-visibility' ) 
+                __( 'Visible to all logged-out users', 'block-visibility' ) 
             ),
             value: 'logged-out',
         },
         {
             label: optionLabel( 
                 __( 'Private', 'block-visibility' ), 
-                __( 'Visible to logged-in users', 'block-visibility' ) 
+                __( 'Visible to all logged-in users', 'block-visibility' ) 
             ),
             value: 'logged-in',
         },
