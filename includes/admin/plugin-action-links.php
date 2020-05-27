@@ -25,8 +25,10 @@ function add_plugin_action_links( $plugin_links, $plugin_file ) {
 	}
 	
 	if ( BV_PLUGIN_BASE === $plugin_file ) {
-		$settings_link = '<a href="' . admin_url( 'options-general.php?page=block-visibility-settings' ) . '">' . __( 'Settings', 'block-visibility' ) . '</a>';
-	
+		$settings_link =  '<a href="' . admin_url( 'options-general.php?page=block-visibility-settings' ) . '">';
+		$settings_link .= __( 'Settings', 'block-visibility' );
+		$settings_link .= '</a>';
+		
 		array_push( $plugin_links, $settings_link );
 	}
 
@@ -39,9 +41,9 @@ add_filter( 'plugin_action_links', __NAMESPACE__ . '\add_plugin_action_links', 1
  *
  * @since 1.0.0
  *
- * @param array  $plugin_meta 	An array of the plugin's metadata.
- * @param string $plugin_file 	Path to the plugin file.
- * @return array $plugin_meta	Updated plugin metadata
+ * @param array  $plugin_meta An array of the plugin's metadata.
+ * @param string $plugin_file Path to the plugin file.
+ * @return array $plugin_meta Updated plugin metadata
  */
 function add_plugin_row_meta( $plugin_meta, $plugin_file ) {
 
@@ -51,8 +53,12 @@ function add_plugin_row_meta( $plugin_meta, $plugin_file ) {
 	}
 
 	if ( BV_PLUGIN_BASE === $plugin_file ) {
+		$review_link =  '<a href="' . esc_url( BV_REVIEW_URL ) . '" aria-label="' . esc_attr( __( 'Review Block Visibility on WordPress.org', 'block-visibility' ) ) . '" target="_blank">';
+		$review_link .= __( 'Leave a Review', 'block-visibility' );
+		$review_link .= '</a>';
+		
 		$row_meta = array(
-			'review' => '<a href="' . esc_url( BV_REVIEW_URL ) . '" aria-label="' . esc_attr( __( 'Review Block Visibility on WordPress.org', 'block-visibility' ) ) . '" target="_blank">' . __( 'Leave a Review', 'block-visibility' ) . '</a>',
+			'review' =>  $review_link,
 		);
 
 		$plugin_meta = array_merge( $plugin_meta, $row_meta );

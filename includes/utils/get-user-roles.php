@@ -1,13 +1,20 @@
 <?php 
 /**
- * Retrieves all editable roles on the website
+ * Helper function for retrieving all editable user roles.
+ *
+ * @package block-visibility
+ * @since   1.0.0
+ */
+ 
+namespace BlockVisibility\Utils;
+
+/**
+ * Retrieves all editable user roles on the website
  *
  * @since 1.0.0
  *
  * @return array User $user_roles
 */
-namespace BlockVisibility\Utils;
-
 function get_user_roles() {
     
     // Initialize the roles array with the default Public role

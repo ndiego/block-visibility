@@ -101,8 +101,8 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
                 require_once BV_PLUGIN_DIR . 'includes/admin/settings.php';
                 
                 // Utility functions
-                require_once BV_PLUGIN_DIR . 'includes/utils/get_asset_file.php';
-                require_once BV_PLUGIN_DIR . 'includes/utils/get_user_roles.php';
+                require_once BV_PLUGIN_DIR . 'includes/utils/get-asset-file.php';
+                require_once BV_PLUGIN_DIR . 'includes/utils/get-user-roles.php';
 			}
 		}
 
