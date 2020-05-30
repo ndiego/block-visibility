@@ -8,7 +8,7 @@
  
 namespace BlockVisibility\Frontend\VisibilityTests;
 
-use function BlockVisibility\Utils\get_disabled_functionality as get_disabled_functionality;
+use function BlockVisibility\Utils\get_visibility_controls as get_visibility_controls;
 
 /**
  * Run test to see if the hide block setting is enabled for the block.
@@ -27,7 +27,7 @@ use function BlockVisibility\Utils\get_disabled_functionality as get_disabled_fu
 function test_hide_block( $is_visible, $settings, $block ) {
         
     // If this functionality has been disabled, skip test.
-    if ( in_array( 'hide_block', get_disabled_functionality( $settings ) ) ) {
+    if ( in_array( 'hide_block', get_visibility_controls( $settings ) ) ) {
         return $is_visible;
     }
 

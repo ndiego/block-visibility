@@ -16,8 +16,9 @@ import { Spinner, TabPanel } from '@wordpress/components';
  */
 import Masthead from './settings/masthead';
 import GettingStarted from './settings/getting-started';
-import VisibilitySettings from './settings/visibility-settings';
+import VisibilityControls from './settings/visibility-controls';
 import BlockManager from './settings/block-manager';
+import PluginSettings from './settings/plugin-settings';
 import { snakeToCamel } from './utils/utility-functions';
 
 
@@ -76,6 +77,13 @@ class Settings extends Component {
 
 		console.log( this.state.settings );
 		
+		const isAPISaving = this.state.isAPISaving;
+		const isAPILoaded = this.state.isAPILoaded;
+		
+		const visibilityControls = this.state.settings.visibility_controls;
+		const disabledBlocks = this.state.settings.disabled_blocks;
+		const pluginSettings = this.state.settings.plugin_settings;
+		
 		const settingTabs = [
 			{
 				name: 'getting-started',
@@ -83,22 +91,21 @@ class Settings extends Component {
 				className: 'bv-settings__getting-started',
 			},
 			{
-				name: 'visibility-settings',
-				title: __( 'Visibility Settings', 'block-visibility' ),
-				className: 'bv-settings__visibility-settings',
+				name: 'visibility-controls',
+				title: __( 'Visibility Controls', 'block-visibility' ),
+				className: 'bv-settings__visibility-controls',
 			},
 			{
 				name: 'block-manager',
 				title: __( 'Block Manager', 'block-visibility' ),
 				className: 'bv-settings__blocks-manager',
 			},
+			{
+				name: 'plugin-settings',
+				title: __( 'Settings', 'block-visibility' ),
+				className: 'bv-settings__plugin-settings',
+			},
 		];
-		
-		const isAPISaving = this.state.isAPISaving;
-		const isAPILoaded = this.state.isAPILoaded;
-		
-		const visibilitySettings = this.state.settings.visibility_settings;
-		const disabledBlocks = this.state.settings.disabled_blocks;
 		
 		return (
 			<>
@@ -108,8 +115,7 @@ class Settings extends Component {
 				<TabPanel 	
 					className="bv-tab-panel"
 					activeClass="active-tab"
-					initialTabName="visibility-settings"
-					//initialTabName="getting-started"
+					initialTabName="getting-started"
 					tabs={ settingTabs }
 				>
 					{
@@ -130,22 +136,28 @@ class Settings extends Component {
 											isAPISaving={ isAPISaving }
 										/>
 									);
-
-								case 'visibility-settings':
+								case 'visibility-controls':
 									return (
-										<VisibilitySettings
+										<VisibilityControls
 											isAPISaving={ isAPISaving }
 											handleSettingsChange={ this.handleSettingsChange }
-											visibilitySettings={ visibilitySettings }
+											visibilityControls={ visibilityControls }
 										/>
 									);
-
 								case 'block-manager':
 									return (
 										<BlockManager
 											isAPISaving={ isAPISaving }
 											handleSettingsChange={ this.handleSettingsChange }
 											disabledBlocks={ disabledBlocks }
+										/>
+									);
+								case 'plugin-settings':
+									return (
+										<PluginSettings
+											isAPISaving={ isAPISaving }
+											handleSettingsChange={ this.handleSettingsChange }
+											pluginSettings={ pluginSettings }
 										/>
 									);
 							}

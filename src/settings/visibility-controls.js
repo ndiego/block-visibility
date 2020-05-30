@@ -19,12 +19,12 @@ import {
 import { Icon, cloud } from '@wordpress/icons';
 
 
-function VisibilitySettings( props ) {
+function VisibilityControls( props ) {
 	
-	const [ visibilitySettings, setVisibilitySettings ] = useState( props.visibilitySettings );
+	const [ visibilityControls, setVisibilityControls ] = useState( props.visibilityControls );
 	const [ hasUpdates, setHasUpdates ] = useState( false );
     
-	console.log( visibilitySettings );
+	console.log( visibilityControls );
 	
 	const { 
 		handleSettingsChange,
@@ -32,29 +32,34 @@ function VisibilitySettings( props ) {
 	} = props;
 	
 	function onSettingsChange() {
-		handleSettingsChange( 'visibility_settings', visibilitySettings );
+		handleSettingsChange( 'visibility_controls', visibilityControls );
 		setHasUpdates( false );
 	}
 	
-	function onVisibilitySettingChange( option, subOption, newSetting ) {
-		setVisibilitySettings( { 
-			...visibilitySettings, 
+	function onVisibilityControlChange( option, subOption, newSetting ) {
+		setVisibilityControls( { 
+			...visibilityControls, 
 			[option]: {
-				...visibilitySettings[option],
+				...visibilityControls[option],
 				[subOption]: newSetting,
 			}
-		} )	
+		} );
+		setHasUpdates( true );
 	}
 
-	
 	const updateButton = isAPISaving 
 		? __( 'Updating...', 'block-visibility' )
 		: __( 'Update', 'block-visibility' );
+		
+	// Manually set defaults, this ensures the main settings function properly
+	const hideBlockEnable = visibilityControls?.hide_block?.enable ?? true;
+	const visibilityByRoleEnable = visibilityControls?.visibility_by_role?.enable ?? true;
+	const visibilityByRoleEnableUseRoles = visibilityControls?.visibility_by_role?.enable_user_roles ?? true;
     
     return (
-		<div className="bv-visibility-settings inner-container">
+		<div className="bv-visibility-controls inner-container">
 			<div className="bv-tab-panel__description">
-				<h2>{ __( 'Visibility Settings', 'block-visibility' ) }</h2>
+				<h2>{ __( 'Visibility Controls', 'block-visibility' ) }</h2>
 				<p>
 					{ __( 
 						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et condimentum libero. Etiam vel pulvinar eros, tincidunt molestie est. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -73,7 +78,7 @@ function VisibilitySettings( props ) {
 							{ 'is-busy': isAPISaving },
 						) }
 						onClick={ onSettingsChange }
-						//disabled={ ! hasUpdates }
+						disabled={ ! hasUpdates }
 						isPrimary
 					>
 						{ updateButton }
@@ -82,31 +87,31 @@ function VisibilitySettings( props ) {
 				<div className="settings-panel__row">
 					<ToggleControl
 						label={ __( 'Hide Block', 'block-visibility' ) }
-						checked={ visibilitySettings.hide_block.enable }
-						onChange={ () => onVisibilitySettingChange( 
+						checked={ hideBlockEnable }
+						onChange={ () => onVisibilityControlChange( 
 							'hide_block', 
 							'enable', 
-							! visibilitySettings.hide_block.enable 
+							! hideBlockEnable 
 						) }
 					/>
 				</div>
 				<div className="settings-panel__row">
 					<ToggleControl
 						label={ __( 'Visibility by User Role', 'block-visibility' ) }
-						checked={ visibilitySettings.visibility_by_role.enable }
-						onChange={ () => onVisibilitySettingChange( 
+						checked={ visibilityByRoleEnable }
+						onChange={ () => onVisibilityControlChange( 
 							'visibility_by_role', 
 							'enable', 
-							! visibilitySettings.visibility_by_role.enable 
+							! visibilityByRoleEnable 
 						) }
 					/>
 					<ToggleControl
 						label={ __( 'Enable Restriction by User Role', 'block-visibility' ) }
-						checked={ visibilitySettings.visibility_by_role.enable_user_roles }
-						onChange={ () => onVisibilitySettingChange( 
+						checked={ visibilityByRoleEnableUseRoles }
+						onChange={ () => onVisibilityControlChange( 
 							'visibility_by_role', 
 							'enable_user_roles', 
-							! visibilitySettings.visibility_by_role.enable_user_roles 
+							! visibilityByRoleEnableUseRoles
 						) }
 					/>
 				</div>
@@ -115,4 +120,4 @@ function VisibilitySettings( props ) {
 	);
 }
 
-export default VisibilitySettings;
+export default VisibilityControls;

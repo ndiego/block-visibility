@@ -8,7 +8,7 @@
  
 namespace BlockVisibility\Frontend\VisibilityTests;
 
-use function BlockVisibility\Utils\get_disabled_functionality as get_disabled_functionality;
+use function BlockVisibility\Utils\get_visibility_controls as get_visibility_controls;
 
 /**
  * Run test to see if block visibility should be restricted by user role.
@@ -23,7 +23,7 @@ use function BlockVisibility\Utils\get_disabled_functionality as get_disabled_fu
 function test_visibility_by_role( $is_visible, $settings, $block ) {
 
     // If this functionality has been disabled, skip test.
-    if ( in_array( 'visibility_by_role', get_disabled_functionality( $settings ) ) ) {
+    if ( in_array( 'visibility_by_role', get_visibility_controls( $settings ) ) ) {
         return $is_visible;
     }
 

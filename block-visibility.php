@@ -206,18 +206,7 @@ function register_settings() {
                 'schema' => array(
                     'type'  => 'object',
                     'properties' => array(
-                        'general_settings' => array(
-                            'type'  => 'object',
-                            'properties' => array(
-                                'test' => array(
-                                    'type'  => 'string',
-                                ),
-                                'test2' => array(
-                                    'type'  => 'boolean',
-                                ),
-                            ),
-                        ),
-                        'visibility_settings' => array(
+                        'visibility_controls' => array(
                             'type'  => 'object',
                             'properties' => array(
                                 'hide_block' => array(
@@ -247,15 +236,19 @@ function register_settings() {
                                 'type'  => 'string',
                             ),
                         ),
+                        'plugin_settings' => array(
+                            'type'  => 'object',
+                            'properties' => array(
+                                'remove_on_uninstall' => array(
+                                    'type'  => 'boolean',
+                                ),
+                            ),
+                        ),
                     )
                 ),
             ),
             'default' => [ 
-                'general_settings' => [
-                    'test' => 'nick',
-                    'test2' => false,
-                ],
-                'visibility_settings' => [
+                'visibility_controls' => [
                     'hide_block' => [
                         'enable' => true,
                     ],
@@ -264,7 +257,10 @@ function register_settings() {
                         'enable_user_roles' => true,
                     ],
                 ],
-                'disabled_blocks' => ["core/paragraph", "core/image", "core/heading"],
+                // @TODO remove after testing is complete
+                //'disabled_blocks' => ["core/paragraph", "core/image", "core/heading"],
+                'disabled_blocks' => [],
+                'plugin_settings' => [],
             ],
         )    
     );
