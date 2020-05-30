@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import { assign } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -29,9 +30,7 @@ class Settings extends Component {
 		this.state = {
 			isAPILoaded: false,
 			isAPISaving: false,
-			generalSettings: [],
-			disabledFunctionality: [],
-			disabledBlocks: [],
+			settings: [],
 		};
 	}
 
@@ -43,12 +42,9 @@ class Settings extends Component {
 						
 			if ( this.state.isAPILoaded === false ) {
 				this.settings.fetch().then( ( response ) => {
-					const settings = response.block_visibility_settings;
-										
+			
 					this.setState( {
-						generalSettings: settings.general_settings,
-						disabledFunctionality: settings.disabled_functionality,
-						disabledBlocks: settings.disabled_blocks,
+						settings: response.block_visibility_settings,
 						isAPILoaded: true
 					} );
 				});
@@ -58,26 +54,27 @@ class Settings extends Component {
 
 	handleSettingsChange( option, value ) {
 		this.setState( { isAPISaving: true } );
+		
+		const currentSettings = this.state.settings;
 
 		const model = new wp.api.models.Settings( {
-			'block_visibility_settings': {
-				[option]: value
-			}
+			'block_visibility_settings': assign(
+				{ ...currentSettings },
+				{ [option]: value }
+			)
 		} );
 
-		model.save().then( ( response ) => {
-			const settings = response.block_visibility_settings;
-			const optionState = snakeToCamel( option );
-			
+		model.save().then( ( response ) => {			
 			this.setState( {
-				[optionState]: settings[option],
+				settings: response.block_visibility_settings,
 				isAPISaving: false
 			} );
 		} );
 	}
 
 	render() {
-		const disabledBlocks = this.state.disabledBlocks;
+
+		console.log( this.state.settings );
 		
 		const settingTabs = [
 			{
@@ -97,21 +94,28 @@ class Settings extends Component {
 			},
 		];
 		
+		const isAPISaving = this.state.isAPISaving;
+		const isAPILoaded = this.state.isAPILoaded;
+		
+		const visibilitySettings = this.state.settings.visibility_settings;
+		const disabledBlocks = this.state.settings.disabled_blocks;
+		
 		return (
 			<>
 				<Masthead
-					isAPISaving={ this.state.isAPISaving }
+					isAPISaving={ isAPISaving }
 				/>
 				<TabPanel 	
 					className="bv-tab-panel"
 					activeClass="active-tab"
-					initialTabName="getting-started"
+					initialTabName="visibility-settings"
+					//initialTabName="getting-started"
 					tabs={ settingTabs }
 				>
 					{
 						( tab ) => {
-							// Don't load tabs is settings have not yet loaded
-							if ( ! this.state.isAPILoaded ) {
+							// Don't load tabs if settings have not yet loaded
+							if ( ! isAPILoaded ) {
 								return (
 									<div className="bv-loading-settings">
 										<Spinner/>
@@ -123,23 +127,24 @@ class Settings extends Component {
 								case 'getting-started':
 									return (
 										<GettingStarted
-											isAPISaving={ this.state.isAPISaving }
+											isAPISaving={ isAPISaving }
 										/>
 									);
 
 								case 'visibility-settings':
 									return (
 										<VisibilitySettings
-											isAPISaving={ this.state.isAPISaving }
+											isAPISaving={ isAPISaving }
+											handleSettingsChange={ this.handleSettingsChange }
+											visibilitySettings={ visibilitySettings }
 										/>
 									);
 
 								case 'block-manager':
 									return (
 										<BlockManager
-											isAPILoaded={ this.state.isAPILoaded }
-											isAPISaving={ this.state.isAPISaving }
-											handSettingsChange={ this.handSettingsChange }
+											isAPISaving={ isAPISaving }
+											handleSettingsChange={ this.handleSettingsChange }
 											disabledBlocks={ disabledBlocks }
 										/>
 									);

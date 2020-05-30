@@ -2,7 +2,6 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Component } from '@wordpress/element';
 import {
 	Button,
 	ExternalLink,
@@ -14,35 +13,30 @@ import {
 import { Icon, cloud } from '@wordpress/icons';
 
 
-class GettingStarted extends Component {
+function GettingStarted( props ) {
+    const { isAPISaving } = props;
     
-    render() {
-        
-        const { isAPISaving } = this.props;
-        
-        return (
-			<div className="bv-getting-started inner-container">
-				<div className="bv-tab-panel__description">
-					<h2>{ __( 'Getting Started', 'block-visibility' ) }</h2>
-					<p>
-						{ __( 
-							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et condimentum libero. Etiam vel pulvinar eros, tincidunt molestie est. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-							'block-visibility'
-						) }
-					</p>
-				</div>
-				<div>
-                    <PanelBody
-                        title="Getting Started"
-                    >
-                        <PanelRow>
-                            Getting Started...
-                        </PanelRow>
-                    </PanelBody>
-                </div>
+    return (
+		<div className="bv-getting-started inner-container">
+			<div className="bv-tab-panel__description">
+				<h2>{ __( 'Getting Started', 'block-visibility' ) }</h2>
+				<p>
+					{ __( 
+						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et condimentum libero. Etiam vel pulvinar eros, tincidunt molestie est. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+						'block-visibility'
+					) }
+				</p>
 			</div>
-        );
-    }
+			<div>
+                <PanelBody
+                    title="Getting Started"
+                >
+                    <PanelRow>
+                        Getting Started...
+                    </PanelRow>
+                </PanelBody>
+            </div>
+		</div>
+    );
 }
-
 export default GettingStarted;

@@ -186,6 +186,8 @@ if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 	load_plugin();
 }
 
+/* @// TODO: remove eventually, use to reset plugin settings */
+//delete_option( 'block_visibility_settings' );
 
 /**
  * Register plugin settings.
@@ -199,12 +201,90 @@ function register_settings() {
         'block_visibility',
         'block_visibility_settings',
         array(
+            'type' => 'object',
+            'show_in_rest' => array(
+                'schema' => array(
+                    'type'  => 'object',
+                    'properties' => array(
+                        'general_settings' => array(
+                            'type'  => 'object',
+                            'properties' => array(
+                                'test' => array(
+                                    'type'  => 'string',
+                                ),
+                                'test2' => array(
+                                    'type'  => 'boolean',
+                                ),
+                            ),
+                        ),
+                        'visibility_settings' => array(
+                            'type'  => 'object',
+                            'properties' => array(
+                                'hide_block' => array(
+                                    'type'  => 'object',
+                                    'properties' => array(
+                                        'enable' => array(
+                                            'type'  => 'boolean',
+                                        ),
+                                    ),
+                                ),
+                                'visibility_by_role' => array(
+                                    'type'  => 'object',
+                                    'properties' => array(
+                                        'enable' => array(
+                                            'type'  => 'boolean',
+                                        ),
+                                        'enable_user_roles' => array(
+                                            'type'  => 'boolean',
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+                        'disabled_blocks' => array(
+                            'type'  => 'array',
+                            'items' => array(
+                                'type'  => 'string',
+                            ),
+                        ),
+                    )
+                ),
+            ),
+            'default' => [ 
+                'general_settings' => [
+                    'test' => 'nick',
+                    'test2' => false,
+                ],
+                'visibility_settings' => [
+                    'hide_block' => [
+                        'enable' => true,
+                    ],
+                    'visibility_by_role' => [
+                        'enable' => true,
+                        'enable_user_roles' => true,
+                    ],
+                ],
+                'disabled_blocks' => ["core/paragraph", "core/image", "core/heading"],
+            ],
+        )    
+    );
+    /*
+    register_setting(
+        'block_visibility',
+        'block_visibility_settings',
+        array(
             'type'         => 'object',
             'show_in_rest' => array(
                 'schema' => array(
                     'type'  => 'object',
                     'properties' => array(
                         'general_settings' => array(
+                            'type'  => 'array',
+                            'items' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                        'visibility_settings' => array(
                             'type'  => 'array',
                             'items' => array(
                                 'type' => 'string',
@@ -227,11 +307,48 @@ function register_settings() {
             ),
             'default' => array(
                 'general_settings' => array(),
-                'disabled_functionality' => array(),
-                'disabled_blocks' => array()
+                'visibility_settings' => array(),
+                'disabled_functionality' => array(
+                    'hideBlock' => array(
+                        'disable' => false,
+                    ),
+                    'visibilityByRole' => array(
+                        'disable' => false,
+                        'disableAdvancedUserRoles' => false,
+                    )
+                ),
+                'disabled_blocks' => array( 'test0', 'helo')
             ),
         )
     );
+    
+    register_setting(
+        'block_visibility',
+        'block_visibility_settings',
+        array(
+            'type'         => 'array',
+            'show_in_rest' => array(
+                'schema' => array(
+                    'type'  => 'array',
+                    'items' => array(
+                        'visibility_settings' => array(
+                            'type'  => 'array',
+                            'items' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+            'default' => [
+                'visibility_settings' => [
+                    'hideBlock',
+                    'visibilityByRole',
+                ],
+            ],
+        )
+    );
+    */
 }
 add_action( 'rest_api_init', __NAMESPACE__ . '\register_settings' );
 add_action( 'admin_init', __NAMESPACE__ . '\register_settings' );
