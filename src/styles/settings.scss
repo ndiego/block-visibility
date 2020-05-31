@@ -33,7 +33,7 @@ $tablet: 768px;
 
 .bv-masthead__branding {
     h1 {
-        font-weight: 500;
+        font-weight: 400;
         margin: 0 0 20px;
         display: flex;
         justify-content: space-between;
@@ -131,9 +131,12 @@ $tablet: 768px;
     }
     
     .bv-tab-panel__description {
+        max-width: 660px;
+        margin: 0 auto;
+        
         h2 {
             font-size: 20px;
-            font-weight: 500;
+            font-weight: 400;
             margin: 0 0 20px;
         }
         
@@ -146,7 +149,7 @@ $tablet: 768px;
     }
 }
 
-.bv-block-manager__controls {
+.bv-setting-controls {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -154,19 +157,6 @@ $tablet: 768px;
     margin: 30px 0 20px;
     padding-top: 30px;
     border-top: 1px solid #E0E5E9;
-    
-    .search-blocks {
-        width: 250px;
-        
-        div {
-            margin: 0;
-        }
-        
-        input {
-            border: 1px solid #dddddd;
-            padding: 9px 12px;
-        }
-    }
     
     .bv-save-settings {
         display: flex;
@@ -208,7 +198,22 @@ $tablet: 768px;
             }
         }
     }
+    
+    /* Used on Block Manager tab */
+    .search-blocks {
+        width: 250px;
+        
+        div {
+            margin: 0;
+        }
+        
+        input {
+            border: 1px solid #dddddd;
+            padding: 9px 12px;
+        }
+    }
 }
+
 
 .bv-block-manager__category-container {
     display: grid;

@@ -17,6 +17,7 @@ import { Icon } from '@wordpress/icons';
  * Internal dependencies
  */
 import BlockCategory from './block-category';
+import SaveSettings from './save-settings';
 import icons from './../icons';
 
 
@@ -125,7 +126,7 @@ function BlockManager( props ) {
 					) }
 				</p>
 			</div>
-			<div className="bv-block-manager__controls">
+			<div className="bv-setting-controls">
 				<TextControl
 					className="search-blocks"
 					type="search"								
@@ -136,39 +137,13 @@ function BlockManager( props ) {
 					value={ search }
 					onChange={ ( searchValue ) => setSearch( searchValue ) }
 				/>
-				<div className="bv-save-settings">
-					<div className="bv-save-settings__messages">
-						{ [
-							isAPISaving && (
-								<Animate type="loading">
-									{ ( { className: animateClassName } ) => (
-										<span className={ animateClassName } >
-											<Icon icon={ icons.cloud } />
-											{ __( 'Saving', 'block-visibility' ) }
-										</span>
-									) }
-								</Animate>
-							),
-							! isAPISaving && (
-								<span className="visibility-message">
-									<Icon icon={ visibilityIcon } />
-									{ visibilityMessage }
-								</span>
-							),
-						] }
-					</div>
-					<Button
-						className={ classnames(
-							'bv-save-settings__button',
-							{ 'is-busy': isAPISaving },
-						) }
-						onClick={ onSettingsChange }
-						disabled={ ! hasUpdates }
-						isPrimary
-					>
-						{ updateButton }
-					</Button>
-				</div>
+				<SaveSettings 
+					isAPISaving={ isAPISaving }
+					hasUpdates={ hasUpdates }
+					onSettingsChange={ onSettingsChange }
+					notSavingMessage={ visibilityMessage }
+					notSavingIcon={ visibilityIcon }
+				/>
 			</div>
 			<div className="bv-block-manager__category-container">
 				{ categories.map( ( category ) => (

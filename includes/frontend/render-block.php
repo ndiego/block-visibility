@@ -91,7 +91,7 @@ require_once BV_PLUGIN_DIR . 'includes/frontend/visibility-tests/hide-block.php'
 require_once BV_PLUGIN_DIR . 'includes/frontend/visibility-tests/visibility-by-role.php';
 
 // Require utlity functions for tests
-require_once BV_PLUGIN_DIR . 'includes/utils/get-visibility-controls.php';
+require_once BV_PLUGIN_DIR . 'includes/utils/get-control-settings.php';
 
 
 

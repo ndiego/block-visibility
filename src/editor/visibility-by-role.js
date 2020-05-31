@@ -7,7 +7,7 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { RadioControl } from '@wordpress/components';
+import { RadioControl, Notice } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -15,9 +15,17 @@ import { RadioControl } from '@wordpress/components';
 import UserRoles from './user-roles';
 
 function VisibilityByRole( props ) {
-    const { attributes, setAttributes } = props;
+    const { attributes, setAttributes, visibilityControls } = props;
     const { blockVisibility } = attributes;
     const { hideBlock, visibilityByRole } = blockVisibility;
+    
+    
+    const visibilityByRoleEnable = visibilityControls?.visibility_by_role?.enable ?? true;
+    const visibilityByRoleEnableUseRoles = visibilityControls?.visibility_by_role?.enable_user_roles ?? true;
+
+    if ( ! visibilityByRoleEnable ) {
+        return null;
+    }
     
     function optionLabel( title, description ) {
         return (
@@ -57,7 +65,12 @@ function VisibilityByRole( props ) {
             ),
             value: 'user-role',
         },
-    ]
+    ];
+    
+    // If the User Roles option is not enabled in plugin settings, remove it.
+    if ( ! visibilityByRoleEnableUseRoles ) {
+        options.pop();
+    }
     
     return (
         <div className="bv-settings__visibility-by-role">
@@ -73,8 +86,16 @@ function VisibilityByRole( props ) {
                     } )
                 }
             />
-            { visibilityByRole === 'user-role' && (
+            { visibilityByRole === 'user-role' && visibilityByRoleEnableUseRoles && (
                 <UserRoles { ...props } />
+            ) }
+            { visibilityByRole === 'user-role' && ! visibilityByRoleEnableUseRoles && (
+                <Notice 
+                    status="warning"
+                    isDismissible={ false }
+                >
+                    { __( 'The User Role option has been disabled by the main plugin settings, choose a different option.', 'block-visibility' ) }
+                </Notice>
             ) }
         </div>
     );

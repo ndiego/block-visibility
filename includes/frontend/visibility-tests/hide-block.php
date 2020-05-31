@@ -8,7 +8,7 @@
  
 namespace BlockVisibility\Frontend\VisibilityTests;
 
-use function BlockVisibility\Utils\get_visibility_controls as get_visibility_controls;
+use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
 
 /**
  * Run test to see if the hide block setting is enabled for the block.
@@ -25,21 +25,21 @@ use function BlockVisibility\Utils\get_visibility_controls as get_visibility_con
  * @return boolean  Return true is the block should be visible, false if not
  */
 function test_hide_block( $is_visible, $settings, $block ) {
-        
-    // If this functionality has been disabled, skip test.
-    if ( in_array( 'hide_block', get_visibility_controls( $settings ) ) ) {
-        return $is_visible;
-    }
-
+    
     // The test is already false, so skip this test, the block should be hidden.
     if ( ! $is_visible ) {
         return $is_visible;
     }
+        
+    // If this control has been disabled, skip test.
+    if ( ! is_control_enabled( $settings, 'hide_block' ) ) {
+        return true;
+    }
     
     if ( $block['attrs']['blockVisibility']['hideBlock'] ) {
         return false;
+    } else {
+        return true;
     }
-        
-    return true;
 }
 add_filter( 'block_visibility_test', __NAMESPACE__ . '\test_hide_block', 20, 3 );

@@ -8,7 +8,7 @@
  
 namespace BlockVisibility\Frontend\VisibilityTests;
 
-use function BlockVisibility\Utils\get_visibility_controls as get_visibility_controls;
+use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
 
 /**
  * Run test to see if block visibility should be restricted by user role.
@@ -22,14 +22,14 @@ use function BlockVisibility\Utils\get_visibility_controls as get_visibility_con
  */
 function test_visibility_by_role( $is_visible, $settings, $block ) {
 
-    // If this functionality has been disabled, skip test.
-    if ( in_array( 'visibility_by_role', get_visibility_controls( $settings ) ) ) {
-        return $is_visible;
-    }
-
     // The test is already false, so skip this test, the block should be hidden.
     if ( ! $is_visible ) {
         return $is_visible;
+    }
+
+    // If this functionality has been disabled, skip test.
+    if ( ! is_control_enabled( $settings, 'visibility_by_role' ) ) {
+        return true;
     }
     
     $visibility_by_role = isset( $block['attrs']['blockVisibility']['visibilityByRole'] ) 
@@ -44,6 +44,11 @@ function test_visibility_by_role( $is_visible, $settings, $block ) {
     } else if ( $visibility_by_role === 'logged-in' && is_user_logged_in() ) {
         return true;
     } else if ( $visibility_by_role === 'user-role' ) {
+        
+        // If this functionality has been disabled, skip test.
+        if ( ! is_control_enabled( $settings, 'visibility_by_role', 'enable_user_roles' ) ) {
+            return true;
+        }
         
         $restricted_roles = isset( $block['attrs']['blockVisibility']['restrictedRoles'] ) 
             ? $block['attrs']['blockVisibility']['restrictedRoles'] 

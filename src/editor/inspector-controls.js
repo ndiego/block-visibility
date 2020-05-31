@@ -1,13 +1,13 @@
 /**
  * External dependencies
  */
-import { has } from 'lodash';
+import { has, filter } from 'lodash';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { PanelBody } from "@wordpress/components";
+import { PanelBody, Notice } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
 import { useEntityProp } from "@wordpress/core-data";
 
@@ -28,16 +28,13 @@ function VisibilityInspectorControls( props ) {
 
 	// Need to wait until the main settings object is loaded.
 	const disabledBlocks = blockVisibilitySettings ? blockVisibilitySettings.disabled_blocks : null;
+	const visibilityControls = blockVisibilitySettings ? blockVisibilitySettings.visibility_controls : null;
 
 	// Make sure we have the disabled blocks setting, otherwise just abort. 
 	// Something is not working properly
 	if ( ! disabledBlocks ) {
 		return null;
 	}
-	
-	// @// TODO: remove
-	//console.log( props.name );
-	//console.log( props );
 	
 	const { name, attributes, setAttributes, blockTypes, hasBlockSupport } = props;
 	const { blockVisibility } = attributes;
@@ -50,11 +47,14 @@ function VisibilityInspectorControls( props ) {
 		return null;
 	}
 	
-	const {
-		hideBlock,
-		visibilityByRole,
-	} = blockVisibility;
+	const controlsEnabled = filter( visibilityControls, { enable: true } ).length;
 	
+	console.log( controlsEnabled );
+
+	// Check is the hide block control is set, default to "true".
+	const hideBlockEnable = visibilityControls?.hide_block?.enable ?? true;
+	const showAdditionalControls = ( ! blockVisibility.hideBlock || ! hideBlockEnable ) ? true : false;
+
 	return (
 		<InspectorControls>
 			<PanelBody
@@ -62,10 +62,31 @@ function VisibilityInspectorControls( props ) {
 				className='bv-settings'
 				initialOpen={ false }
 			>
-				<HideBlock { ...props } />
-				{ ! hideBlock && (
-					<VisibilityByRole { ...props } />
-				) }
+				<div className='bv-settings__controls'>
+					{ controlsEnabled > 0 && (
+						<>
+							{ hideBlockEnable && (
+								<HideBlock { ...props } />
+							) }
+							{ showAdditionalControls && (
+								<VisibilityByRole 
+									visibilityControls={ visibilityControls }
+									{ ...props } 
+								/>
+								// More controls here in the future...
+							) }
+						</>
+					) }
+					{ ! controlsEnabled && (
+						<Notice 
+		                    status="warning"
+		                    isDismissible={ false }
+		                >
+		                    { __( 'All visibility controls have been disabled.', 'block-visibility' ) }
+		                </Notice>
+					) }
+					
+				</div>
 			</PanelBody>
 		</InspectorControls>
 	);

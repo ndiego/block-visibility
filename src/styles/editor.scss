@@ -1,5 +1,13 @@
 .bv-settings {
     
+    .bv-settings__controls {
+        padding-top: 10px;
+        
+        .components-notice {
+            margin: 0;
+        }
+    }
+    
     .components-panel__body.is-opened>.components-panel__body-title {
         margin-bottom: 10px;
     }

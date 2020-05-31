@@ -16,7 +16,13 @@ import {
 	Placeholder,
 	ToggleControl
 } from '@wordpress/components';
-import { Icon, cloud } from '@wordpress/icons';
+import { Icon } from '@wordpress/icons';
+
+/**
+ * Internal dependencies
+ */
+import SaveSettings from './save-settings';
+import icons from './../icons';
 
 
 function VisibilityControls( props ) {
@@ -67,22 +73,18 @@ function VisibilityControls( props ) {
 					) }
 				</p>
 			</div>
+			<div className="bv-setting-controls">
+				<SaveSettings 
+					isAPISaving={ isAPISaving }
+					hasUpdates={ hasUpdates }
+					onSettingsChange={ onSettingsChange }
+				/>
+			</div>
 			<div className="settings-panel">
 				<div className="settings-panel__header">
 					<span>
 						{ __( 'Enabled Functionality', 'block-visibility' ) }
 					</span>
-					<Button
-						className={ classnames(
-							'bv-save-settings__button',
-							{ 'is-busy': isAPISaving },
-						) }
-						onClick={ onSettingsChange }
-						disabled={ ! hasUpdates }
-						isPrimary
-					>
-						{ updateButton }
-					</Button>
 				</div>
 				<div className="settings-panel__row">
 					<ToggleControl
