@@ -71,14 +71,14 @@ function enqueue_settings_assets() {
         $asset_file['version']
     );
     
-    // Create a global variable to hold all our plugin variables, not ideal, 
-    // but does the trick...
     $plugin_variables = array(
-        'version'       => BV_VERSION,
-        'reviewUrl'    => BV_REVIEW_URL,
-        'supportUrl'   => BV_SUPPORT_URL,
+        'version'    => BV_VERSION,
+        'reviewUrl'  => BV_REVIEW_URL,
+        'supportUrl' => BV_SUPPORT_URL,
     );
     
+    // Create a global variable to hold all our plugin variables, not ideal, 
+    // but does the trick for now...
     $stringified_plugin_variables = "const blockVisibilityVariables = " . wp_json_encode( $plugin_variables ) . ";";
     
     wp_add_inline_script( 

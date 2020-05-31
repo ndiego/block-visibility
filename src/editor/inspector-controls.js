@@ -17,6 +17,7 @@ import { useEntityProp } from "@wordpress/core-data";
 import HideBlock from './hide-block';
 import VisibilityByRole from './visibility-by-role';
 
+
 function VisibilityInspectorControls( props ) {
 	
 	// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
@@ -48,8 +49,6 @@ function VisibilityInspectorControls( props ) {
 	}
 	
 	const controlsEnabled = filter( visibilityControls, { enable: true } ).length;
-	
-	console.log( controlsEnabled );
 
 	// Check is the hide block control is set, default to "true".
 	const hideBlockEnable = visibilityControls?.hide_block?.enable ?? true;
@@ -82,7 +81,16 @@ function VisibilityInspectorControls( props ) {
 		                    status="warning"
 		                    isDismissible={ false }
 		                >
-		                    { __( 'All visibility controls have been disabled.', 'block-visibility' ) }
+							{ __( 
+								'Looks like all Visibility Controls have been disabled. To control block visibility again, re-enable some ', 
+								'block-visibility' 
+							) 
+		                    // Note we need a better way to handle translation on warning links. Watch
+		                    // https://github.com/WordPress/gutenberg/issues/18614
+		                    }
+							<a href={ blockVisibilityVariables.settingsUrl } target="_blank">
+								{ __( 'Visibility Controls.', 'block-visibility' ) }
+							</a>
 		                </Notice>
 					) }
 					

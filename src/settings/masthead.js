@@ -10,6 +10,7 @@ import { Icon, starFilled, starEmpty, search } from '@wordpress/icons';
  */
 import icons from './../icons';
 
+
 function Masthead( props ) {
     const { isAPISaving } = props;
     

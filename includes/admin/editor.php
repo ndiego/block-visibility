@@ -41,11 +41,19 @@ function enqueue_editor_assets() {
  		false // Need false to ensure our filters can target third-party plugins
  	);
     
-    $stringified_user_roles = "const blockVisibilityUserRoles = " . wp_json_encode( get_user_roles() ) . ";";
+    $plugin_variables = array(
+        'version'    => BV_VERSION,
+        'settingsUrl' => BV_SETTINGS_URL,
+    );
+    
+    // Create a global variable to hold all our plugin variables and user roles, 
+    // not ideal, but does the trick for now...
+    $stringified_editor_data = "const blockVisibilityUserRoles = " . wp_json_encode( get_user_roles() ) . ";";
+    $stringified_editor_data .= "const blockVisibilityVariables = " . wp_json_encode( $plugin_variables ) . ";";
     
     wp_add_inline_script( 
         'bv-editor-scripts', 
-        $stringified_user_roles, 
+        $stringified_editor_data, 
         'before' 
     );
     

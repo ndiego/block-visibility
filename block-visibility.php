@@ -29,6 +29,7 @@ define( 'BV_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'BV_PLUGIN_BASE', plugin_basename( __FILE__ ) );
 define( 'BV_REVIEW_URL', 'https://wordpress.org/support/plugin/block-visibility/reviews/?filter=5' );
 define( 'BV_SUPPORT_URL', 'https://wordpress.org/support/plugin/block-visibility/' );
+define( 'BV_SETTINGS_URL', admin_url( 'options-general.php?page=block-visibility-settings' ) );
 
 
 if ( ! class_exists( 'BlockVisibility' ) ) {

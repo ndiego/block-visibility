@@ -12,6 +12,7 @@ import {
 	CheckboxControl,
 } from '@wordpress/components';
 
+
 function UserRoles( props ) {
 	const { attributes, setAttributes } = props;
 	const { blockVisibility } = attributes;

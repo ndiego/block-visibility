@@ -25,7 +25,7 @@ function add_plugin_action_links( $plugin_links, $plugin_file ) {
 	}
 	
 	if ( BV_PLUGIN_BASE === $plugin_file ) {
-		$settings_link =  '<a href="' . admin_url( 'options-general.php?page=block-visibility-settings' ) . '">';
+		$settings_link =  '<a href="' . BV_SETTINGS_URL . '">';
 		$settings_link .= __( 'Settings', 'block-visibility' );
 		$settings_link .= '</a>';
 		

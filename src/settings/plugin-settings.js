@@ -16,7 +16,8 @@ import {
 	Placeholder,
 	ToggleControl
 } from '@wordpress/components';
-import { Icon, cloud } from '@wordpress/icons';
+import { Icon } from '@wordpress/icons';
+
 
 function PluginSettings( props ) {
     

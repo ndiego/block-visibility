@@ -6,7 +6,7 @@ import { assign } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { RadioControl, Notice } from '@wordpress/components';
 
 /**
@@ -14,11 +14,11 @@ import { RadioControl, Notice } from '@wordpress/components';
  */
 import UserRoles from './user-roles';
 
+
 function VisibilityByRole( props ) {
     const { attributes, setAttributes, visibilityControls } = props;
     const { blockVisibility } = attributes;
     const { hideBlock, visibilityByRole } = blockVisibility;
-    
     
     const visibilityByRoleEnable = visibilityControls?.visibility_by_role?.enable ?? true;
     const visibilityByRoleEnableUseRoles = visibilityControls?.visibility_by_role?.enable_user_roles ?? true;
@@ -26,7 +26,7 @@ function VisibilityByRole( props ) {
     if ( ! visibilityByRoleEnable ) {
         return null;
     }
-    
+        
     function optionLabel( title, description ) {
         return (
             <div className="compound-radio-label">
@@ -93,8 +93,17 @@ function VisibilityByRole( props ) {
                 <Notice 
                     status="warning"
                     isDismissible={ false }
-                >
-                    { __( 'The User Role option has been disabled by the main plugin settings, choose a different option.', 'block-visibility' ) }
+                >   
+                    { __( 
+                        'The User Role option was previously selected, but is now disabled. Choose another option or update the ', 
+                        'block-visibility' 
+                    ) 
+                    // Note we need a better way to handle translation on warning links. Watch
+                    // https://github.com/WordPress/gutenberg/issues/18614
+                    }
+                    <a href={ blockVisibilityVariables.settingsUrl } target="_blank">
+                        { __( 'Visibility Control settings.', 'block-visibility' ) }
+                    </a>
                 </Notice>
             ) }
         </div>
