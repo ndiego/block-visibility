@@ -165,8 +165,9 @@ $tablet: 768px;
         .bv-save-settings__messages {
             color: #777;
             display: inline-block;
+            margin-top: 5px;
             margin-right: 24px;
-            
+                        
             svg {
                 fill: #777;
                 vertical-align: middle;
@@ -319,6 +320,47 @@ $tablet: 768px;
     .settings-panel__row {
         padding: 10px;
         border-top: 1px solid #E0E5E9;
+    }
+}
+
+
+/* Style correction for WordPress 5.4, this is not needed for newer versions of Gutenberg */
+.components-tab-panel__tabs {
+    display: flex;
+    align-items: stretch;
+    
+    .components-button {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        cursor: pointer;
+        height: 48px;
+        padding: 3px 16px;
+        margin-left: 0;
+        font-size: 15px;
+        font-weight: 500;
+        transition: box-shadow .1s linear;
+        box-sizing: border-box;
+        color: #1e1e1e;
+        
+        &:focus, &:hover {
+            color: #007cba;
+        }
+        
+        .active-tab, 
+        &:focus:not(:disabled) {
+            background-color: transparent;
+            color: #1e1e1e;
+            box-shadow: inset 0 -2px #007cba !important;
+            outline: none;
+        }
+        
+        &:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link):hover {
+            background-color: transparent;
+            color: #007cba;
+            box-shadow: none;
+        }
     }
 }
 

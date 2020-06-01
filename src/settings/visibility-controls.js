@@ -74,6 +74,9 @@ function VisibilityControls( props ) {
 				</p>
 			</div>
 			<div className="bv-setting-controls">
+				<span>
+					{ __( 'Enabled Functionality', 'block-visibility' ) }
+				</span>
 				<SaveSettings 
 					isAPISaving={ isAPISaving }
 					hasUpdates={ hasUpdates }
@@ -83,12 +86,12 @@ function VisibilityControls( props ) {
 			<div className="settings-panel">
 				<div className="settings-panel__header">
 					<span>
-						{ __( 'Enabled Functionality', 'block-visibility' ) }
+						{ __( 'Hide Block', 'block-visibility' ) }
 					</span>
 				</div>
 				<div className="settings-panel__row">
 					<ToggleControl
-						label={ __( 'Hide Block', 'block-visibility' ) }
+						label={ __( 'Enable the option to hide blocks completely from the frontend of your website', 'block-visibility' ) }
 						checked={ hideBlockEnable }
 						onChange={ () => onVisibilityControlChange( 
 							'hide_block', 
@@ -97,9 +100,14 @@ function VisibilityControls( props ) {
 						) }
 					/>
 				</div>
+				<div className="settings-panel__header">
+					<span>
+						{ __( 'Visibility by User Role', 'block-visibility' ) }
+					</span>
+				</div>
 				<div className="settings-panel__row">
 					<ToggleControl
-						label={ __( 'Visibility by User Role', 'block-visibility' ) }
+						label={ __( 'Enable to option to restrict block visibility by whether a user is logged-in or logged-out', 'block-visibility' ) }
 						checked={ visibilityByRoleEnable }
 						onChange={ () => onVisibilityControlChange( 
 							'visibility_by_role', 
