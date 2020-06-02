@@ -75,8 +75,8 @@ function VisibilityControls( props ) {
 				</p>
 			</div>
 			<div className="bv-setting-controls">
-				<span>
-					{ __( 'Enabled Functionality', 'block-visibility' ) }
+				<span className="bv-setting-controls__title">
+					{ __( 'Configure Controls', 'block-visibility' ) }
 				</span>
 				<SaveSettings 
 					isAPISaving={ isAPISaving }
@@ -86,11 +86,11 @@ function VisibilityControls( props ) {
 			</div>
 			<div className="settings-panel">
 				<div className="settings-panel__header">
-					<span>
+					<span className="settings-panel__header-title">
 						{ __( 'Hide Block', 'block-visibility' ) }
 					</span>
 					<InformationPopover
-						message={ __( 'This is a popover test', 'block-visibility' ) }
+						message={ __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et condimentum libero. Etiam vel pulvinar eros, tincidunt molestie est. Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'block-visibility' ) }
 					/>
 				</div>
 				<div className="settings-panel__row">
@@ -104,8 +104,10 @@ function VisibilityControls( props ) {
 						) }
 					/>
 				</div>
+			</div>
+			<div className="settings-panel">
 				<div className="settings-panel__header">
-					<span>
+				<span className="settings-panel__header-title">
 						{ __( 'Visibility by User Role', 'block-visibility' ) }
 					</span>
 					<InformationPopover
@@ -123,6 +125,7 @@ function VisibilityControls( props ) {
 						) }
 					/>
 					<ToggleControl
+						className="settings-panel__row-subsetting"
 						label={ __( 'Enable Restriction by User Role', 'block-visibility' ) }
 						checked={ visibilityByRoleEnableUseRoles }
 						onChange={ () => onVisibilityControlChange( 

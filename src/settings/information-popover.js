@@ -8,7 +8,7 @@ import {
     Popover,
     Button
 } from '@wordpress/components';
-import { Icon } from '@wordpress/icons';
+import { Icon, info } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -32,7 +32,7 @@ function InformationPopover( props ) {
                 className="information-popover__button"
                 onClick={ () => setPopoverVisible( ! popoverVisible ) }
             >
-                <Icon icon={ icons.help } />
+                <Icon icon={ info } />
             </Button>
             { popoverVisible && (
                 <Popover

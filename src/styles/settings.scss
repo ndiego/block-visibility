@@ -158,6 +158,11 @@ $tablet: 768px;
     padding-top: 30px;
     border-top: 1px solid #E0E5E9;
     
+    .bv-setting-controls__title {
+        font-size: 16px;
+        font-weight: 500;
+    }
+    
     .bv-save-settings {
         display: flex;
         align-items: center;
@@ -310,16 +315,54 @@ $tablet: 768px;
 .settings-panel {
     background: #fff;
     border: 1px solid #E0E5E9;
+    font-size: 15px;
+    margin-bottom: 20px;
     
     .settings-panel__header {
-        padding: 10px;
+        padding: 10px 10px 10px 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        
+        .settings-panel__header-title {
+            font-weight: 500;
+        }
+        
+        .information-popover {
+            line-height: 0; /* Correction for button */
+            
+            .information-popover__button {
+                height: 24px;
+                color: #c8c8c8;
+                
+                &:hover {
+                    box-shadow: none !important;
+                }
+            }
+            
+            .information-popover__popover {
+                .components-popover__content {
+                    line-height: 1.4;
+                    padding: 16px;
+                    font-size: 13px;
+                    text-align: left;
+                }    
+            }
+        }
     }
     .settings-panel__row {
-        padding: 10px;
+        padding: 20px 20px 10px;
         border-top: 1px solid #E0E5E9;
+        
+        label {
+            font-size: 14px;
+        }
+        
+        .settings-panel__row-subsetting {
+            margin: 16px 0 0 50px;
+            border-top: 1px solid #E0E5E9;
+            padding-top: 16px;
+        }
     }
 }
 
