@@ -22,6 +22,7 @@ import { Icon } from '@wordpress/icons';
  * Internal dependencies
  */
 import SaveSettings from './save-settings';
+import InformationPopover from './information-popover';
 import icons from './../icons';
 
 
@@ -88,6 +89,9 @@ function VisibilityControls( props ) {
 					<span>
 						{ __( 'Hide Block', 'block-visibility' ) }
 					</span>
+					<InformationPopover
+						message={ __( 'This is a popover test', 'block-visibility' ) }
+					/>
 				</div>
 				<div className="settings-panel__row">
 					<ToggleControl
@@ -104,6 +108,9 @@ function VisibilityControls( props ) {
 					<span>
 						{ __( 'Visibility by User Role', 'block-visibility' ) }
 					</span>
+					<InformationPopover
+						message={ __( 'This is a popover test for visibility by role', 'block-visibility' ) }
+					/>
 				</div>
 				<div className="settings-panel__row">
 					<ToggleControl
