@@ -12,15 +12,20 @@ import {
 	CheckboxControl,
 } from '@wordpress/components';
 
-
-function UserRoles( props ) {
+/**
+ * Add the User Roles control to the main Visibility By User Role control
+ *
+ * @since 1.0.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
+export default function UserRoles( props ) {
 	const { attributes, setAttributes } = props;
 	const { blockVisibility } = attributes;
 	const {	restrictedRoles } = blockVisibility;
 	
 	// This is a global variable added to the page via PHP
     const roles = blockVisibilityUserRoles;
-	// const roleTypes = [ ...new Set( roles.map( role => role.type ) ) ];
 	
     return (
         <div className="bv-settings__user-roles">
@@ -35,7 +40,6 @@ function UserRoles( props ) {
 			</p>
 			<div className="bv-settings__user-roles-control">
 				{ roles.map( ( role ) => {
-					
 					let newRestrictedRoles = [ ...restrictedRoles ];
 					const isChecked = restrictedRoles.includes( role.name );
 									
@@ -65,5 +69,3 @@ function UserRoles( props ) {
         </div>
     );
 }
-
-export default UserRoles;

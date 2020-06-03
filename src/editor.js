@@ -18,8 +18,8 @@ import VisibilityInspectorControls from './editor/inspector-controls';
 /**
  * Add the visibility setting sttribute to selected blocks.
  * 
- * @param {Object} settings All settings associated with a block type.
- * 
+ * @since 1.0.0
+ * @param {Object}  settings All settings associated with a block type.
  * @return {Object} settings The updated array of settings.
  */
 function blockVisibilityAttribute( settings ) {

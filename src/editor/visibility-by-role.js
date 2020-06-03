@@ -14,8 +14,14 @@ import { RadioControl, Notice } from '@wordpress/components';
  */
 import UserRoles from './user-roles';
 
-
-function VisibilityByRole( props ) {
+/**
+ * Add the Visibility By User Role control
+ *
+ * @since 1.0.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
+export default function VisibilityByRole( props ) {
     const { attributes, setAttributes, visibilityControls } = props;
     const { blockVisibility } = attributes;
     const { hideBlock, visibilityByRole } = blockVisibility;
@@ -109,5 +115,3 @@ function VisibilityByRole( props ) {
         </div>
     );
 }
-
-export default VisibilityByRole;

@@ -18,9 +18,14 @@ import {
 } from '@wordpress/components';
 import { Icon } from '@wordpress/icons';
 
-
-function PluginSettings( props ) {
-    
+/**
+ * Renders the plugin Settings tab of the Block Visibility settings page
+ *
+ * @since 1.0.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
+export default function PluginSettings( props ) {
     const [ pluginSettings, setPluginSettings ] = useState( props.pluginSettings );
     const [ hasUpdates, setHasUpdates ] = useState( false );
     
@@ -91,5 +96,3 @@ function PluginSettings( props ) {
 		</div>
     );
 }
-
-export default PluginSettings;

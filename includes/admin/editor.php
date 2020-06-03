@@ -10,7 +10,6 @@ namespace BlockVisibility\Admin;
 
 use function BlockVisibility\Utils\get_asset_file as get_asset_file;
 use function BlockVisibility\Utils\get_user_roles as get_user_roles;
- 
 
 /**
  * Enqueue plugin specific editor scripts and styles

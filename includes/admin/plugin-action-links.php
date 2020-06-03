@@ -12,7 +12,6 @@ namespace BlockVisibility\Admin;
  * Adds link to Settings page in plugin action links.
  *
  * @since 1.0.0
- *
  * @param array $plugin_links  Already defined action links
  * @param string $plugin_file  Plugin file path and name being processed
  * @return array $plugin_links The new array of action links

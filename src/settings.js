@@ -21,7 +21,11 @@ import BlockManager from './settings/block-manager';
 import PluginSettings from './settings/plugin-settings';
 import { snakeToCamel } from './utils/utility-functions';
 
-
+/**
+ * Renders the Block Visibility settings page 
+ * 
+ * @since 1.0.0
+ */
 class Settings extends Component {
 	constructor() {
 		super( ...arguments );
@@ -109,60 +113,57 @@ class Settings extends Component {
 		
 		return (
 			<>
-				<Masthead
-					isAPISaving={ isAPISaving }
-				/>
+				<Masthead />
 				<TabPanel 	
 					className="bv-tab-panel"
 					activeClass="active-tab"
 					initialTabName="getting-started"
 					tabs={ settingTabs }
 				>
-					{
-						( tab ) => {
-							// Don't load tabs if settings have not yet loaded
-							if ( ! isAPILoaded ) {
-								return (
-									<div className="bv-loading-settings">
-										<Spinner/>
-									</div>
-								);
-							}
-							
-							switch ( tab.name ) {
-								case 'getting-started':
-									return (
-										<GettingStarted
-											isAPISaving={ isAPISaving }
-										/>
-									);
-								case 'visibility-controls':
-									return (
-										<VisibilityControls
-											isAPISaving={ isAPISaving }
-											handleSettingsChange={ this.handleSettingsChange }
-											visibilityControls={ visibilityControls }
-										/>
-									);
-								case 'block-manager':
-									return (
-										<BlockManager
-											isAPISaving={ isAPISaving }
-											handleSettingsChange={ this.handleSettingsChange }
-											disabledBlocks={ disabledBlocks }
-										/>
-									);
-								case 'plugin-settings':
-									return (
-										<PluginSettings
-											isAPISaving={ isAPISaving }
-											handleSettingsChange={ this.handleSettingsChange }
-											pluginSettings={ pluginSettings }
-										/>
-									);
-							}
+					{ ( tab ) => {
+						
+						// Don't load tabs if settings have not yet loaded
+						if ( ! isAPILoaded ) {
+							return (
+								<div className="bv-loading-settings">
+									<Spinner />
+								</div>
+							);
 						}
-					}
+						
+						switch ( tab.name ) {
+							case 'getting-started':
+								return (
+									<GettingStarted
+										isAPISaving={ isAPISaving }
+									/>
+								);
+							case 'visibility-controls':
+								return (
+									<VisibilityControls
+										isAPISaving={ isAPISaving }
+										handleSettingsChange={ this.handleSettingsChange }
+										visibilityControls={ visibilityControls }
+									/>
+								);
+							case 'block-manager':
+								return (
+									<BlockManager
+										isAPISaving={ isAPISaving }
+										handleSettingsChange={ this.handleSettingsChange }
+										disabledBlocks={ disabledBlocks }
+									/>
+								);
+							case 'plugin-settings':
+								return (
+									<PluginSettings
+										isAPISaving={ isAPISaving }
+										handleSettingsChange={ this.handleSettingsChange }
+										pluginSettings={ pluginSettings }
+									/>
+								);
+						}
+					} }
 				</TabPanel>
 			</>
 		);

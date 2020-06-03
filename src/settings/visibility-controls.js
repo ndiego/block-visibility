@@ -1,42 +1,27 @@
 /**
- * External dependencies
- */
-import classnames from 'classnames';
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useState, useEffect } from '@wordpress/element';
-import {
-	Button,
-	ExternalLink,
-	PanelBody,
-	PanelRow,
-	Placeholder,
-	ToggleControl
-} from '@wordpress/components';
-import { Icon } from '@wordpress/icons';
+import { useState } from '@wordpress/element';
+import { ToggleControl } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
 import SaveSettings from './save-settings';
 import InformationPopover from './information-popover';
-import icons from './../icons';
 
-
-function VisibilityControls( props ) {
-	
+/**
+ * Renders the Visibility Controls tab of the Block Visibility settings page
+ *
+ * @since 1.0.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
+export default function VisibilityControls( props ) {
 	const [ visibilityControls, setVisibilityControls ] = useState( props.visibilityControls );
 	const [ hasUpdates, setHasUpdates ] = useState( false );
-    
-	console.log( visibilityControls );
-	
-	const { 
-		handleSettingsChange,
-		isAPISaving,
-	} = props;
+	const { handleSettingsChange, isAPISaving } = props;
 	
 	function onSettingsChange() {
 		handleSettingsChange( 'visibility_controls', visibilityControls );
@@ -44,19 +29,15 @@ function VisibilityControls( props ) {
 	}
 	
 	function onVisibilityControlChange( option, subOption, newSetting ) {
-		setVisibilityControls( { 
-			...visibilityControls, 
-			[option]: {
+		setVisibilityControls( {
+			...visibilityControls,
+			[ option ]: {
 				...visibilityControls[option],
-				[subOption]: newSetting,
-			}
+				[ subOption ]: newSetting,
+			},
 		} );
 		setHasUpdates( true );
 	}
-
-	const updateButton = isAPISaving 
-		? __( 'Updating...', 'block-visibility' )
-		: __( 'Update', 'block-visibility' );
 		
 	// Manually set defaults, this ensures the main settings function properly
 	const hideBlockEnable = visibilityControls?.hide_block?.enable ?? true;
@@ -139,5 +120,3 @@ function VisibilityControls( props ) {
 		</div>
 	);
 }
-
-export default VisibilityControls;

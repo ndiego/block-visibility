@@ -12,7 +12,6 @@ namespace BlockVisibility\Frontend;
  * Check if the given block type is disabled via the visibility settings
  *
  * @since   1.0.0
- *
  * @param array    $block The block info and attributes
  * @return boolean Is the block disabled or not
  */

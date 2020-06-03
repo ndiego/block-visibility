@@ -17,8 +17,14 @@ import { useEntityProp } from "@wordpress/core-data";
 import HideBlock from './hide-block';
 import VisibilityByRole from './visibility-by-role';
 
-
-function VisibilityInspectorControls( props ) {
+/**
+ * Add the Visibility inspector control to each allowed block in the editor
+ *
+ * @since 1.0.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
+export default function VisibilityInspectorControls( props ) {
 	
 	// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
 	const [ blockVisibilitySettings, setBlockVisibilitySettings ] = useEntityProp( 
@@ -93,11 +99,8 @@ function VisibilityInspectorControls( props ) {
 							</a>
 		                </Notice>
 					) }
-					
 				</div>
 			</PanelBody>
 		</InspectorControls>
 	);
 }
-
-export default VisibilityInspectorControls;

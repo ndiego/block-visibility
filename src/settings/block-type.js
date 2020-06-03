@@ -9,8 +9,15 @@ import { includes } from 'lodash';
 import { BlockIcon } from '@wordpress/block-editor';
 import { CheckboxControl } from '@wordpress/components';
 
-
-function BlockType( props ) {
+/**
+ * Renders an individual list item and checkbox control for a given block type
+ * on the Block Manager tab of the Block Visibility settings page.
+ *
+ * @since 1.0.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
+export default function BlockType( props ) {
     const { blockType, disabledBlocks, handleBlockTypeChange } = props;
     const isChecked = ! disabledBlocks.includes( blockType.name );
     
@@ -38,4 +45,3 @@ function BlockType( props ) {
         </li>    
     );
 }
-export default BlockType;

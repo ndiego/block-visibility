@@ -15,17 +15,23 @@ import { Icon } from '@wordpress/icons';
  */
 import icons from './../icons';
 
-
-function SaveSettings( props ) {
-    const { 
+/**
+ * Renders the save settings button and animation
+ *
+ * @since 1.0.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
+export default function SaveSettings( props ) {
+    const {
         isAPISaving,
         hasUpdates,
         onSettingsChange,
         notSavingMessage,
-        notSavingIcon
+        notSavingIcon,
     } = props;
     
-    const updateButton = isAPISaving 
+    const updateButton = isAPISaving
         ? __( 'Updating...', 'block-visibility' )
         : __( 'Update', 'block-visibility' );
     
@@ -43,6 +49,7 @@ function SaveSettings( props ) {
                             ) }
                         </Animate>
                     ),
+                    
                     // If a message has been supplied to show when we are not 
                     // actively saving settings, display it.
                     ! isAPISaving && notSavingMessage && (
@@ -67,4 +74,3 @@ function SaveSettings( props ) {
         </div>
     );
 }
-export default SaveSettings;

@@ -15,8 +15,15 @@ import { CheckboxControl } from '@wordpress/components';
  */
 import BlockType from './block-type';
 
-
-function BlockCategory( props ) {
+/**
+ * Renders the list of BlockType controls for a given block category on the
+ * Block Manager tab of the Block Visibility settings page.
+ *
+ * @since 1.0.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
+export default function BlockCategory( props ) {
     const { 
         blockTypes, 
         category, 
@@ -35,14 +42,8 @@ function BlockCategory( props ) {
 		return null;
 	}
 	
-	//console.log( blockTypes );
 	const blockNames = map( blockTypes, 'name' );
-    
-	const checkedBlockNames = without(
-		blockNames,
-		...disabledBlocks
-	);
-
+	const checkedBlockNames = without( blockNames, ...disabledBlocks );
 	const isAllChecked = checkedBlockNames.length === blockNames.length;
 	
 	// This might not actually work with the CheckboxControl component
@@ -92,4 +93,3 @@ function BlockCategory( props ) {
 		</div>
 	);
 }
-export default BlockCategory;

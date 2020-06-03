@@ -12,8 +12,14 @@ import {
 } from '@wordpress/components';
 import { Icon, cloud } from '@wordpress/icons';
 
-
-function GettingStarted( props ) {
+/**
+ * Renders the Getting Started tab of the Block Visibility settings page
+ *
+ * @since 1.0.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
+export default function GettingStarted( props ) {
     const { isAPISaving } = props;
     
     return (
@@ -39,4 +45,3 @@ function GettingStarted( props ) {
 		</div>
     );
 }
-export default GettingStarted;

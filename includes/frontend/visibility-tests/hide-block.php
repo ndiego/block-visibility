@@ -18,11 +18,10 @@ use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
  * other tests. 
  *
  * @since   1.0.0
- *
  * @param boolean   $is_visible The current value of the visibility test
  * @param array     $settings   The core plugin settings
  * @param array     $block      The block info and attributes
- * @return boolean  Return true is the block should be visible, false if not
+ * @return boolean              Return true is the block should be visible, false if not
  */
 function test_hide_block( $is_visible, $settings, $block ) {
     

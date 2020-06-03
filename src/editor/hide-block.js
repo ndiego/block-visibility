@@ -9,8 +9,14 @@ import { assign } from 'lodash';
 import { __ } from '@wordpress/i18n';
 import { ToggleControl } from '@wordpress/components';
 
-
-function HideBlock( props ) {
+/**
+ * Add the Hide Block control
+ *
+ * @since 1.0.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
+export default function HideBlock( props ) {
     const { attributes, setAttributes } = props;
     const { blockVisibility } = attributes;
     const { hideBlock } = blockVisibility;
@@ -33,5 +39,3 @@ function HideBlock( props ) {
         />
     );
 }
-
-export default HideBlock;

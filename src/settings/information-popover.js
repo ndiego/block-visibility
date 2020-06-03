@@ -15,15 +15,16 @@ import { Icon, info } from '@wordpress/icons';
  */
 import icons from './../icons';
 
-function InformationPopover( props ) {
-    
+/**
+ * Renders the more information icon and the information popover
+ *
+ * @since 1.0.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
+export default function InformationPopover( props ) {
     const [ popoverVisible, setPopoverVisible ] = useState( false );
-    
-    const {
-        message,
-        position
-    } = props;
-    
+    const { message, position, } = props;
     const popoverPosition = position ?? 'bottom center';
     
     return (
@@ -47,4 +48,3 @@ function InformationPopover( props ) {
         </div>
     );
 }
-export default InformationPopover;

@@ -16,7 +16,6 @@ use function BlockVisibility\Utils\get_asset_file as get_asset_file;
  * @since 1.0.0
  */
 function add_settings_page() {
-    
     add_submenu_page( 
         'options-general.php', 
         __( 'Block Visibility', 'block-visibility' ), 

@@ -20,7 +20,13 @@ import BlockCategory from './block-category';
 import SaveSettings from './save-settings';
 import icons from './../icons';
 
-
+/**
+ * Renders the Block Manager tab of the Block Visibility settings page
+ *
+ * @since 1.0.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
 function BlockManager( props ) {
 	const [ disabledBlocks, setDisabledBlocks ] = useState( props.disabledBlocks );
 	const [ hasUpdates, setHasUpdates ] = useState( false );

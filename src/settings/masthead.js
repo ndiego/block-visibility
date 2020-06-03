@@ -10,9 +10,14 @@ import { Icon, starFilled, starEmpty, search } from '@wordpress/icons';
  */
 import icons from './../icons';
 
-
-function Masthead( props ) {
-    const { isAPISaving } = props;
+/**
+ * Renders the masthead of the Block Visibility settings pages
+ *
+ * @since 1.0.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
+export default function Masthead( props ) {
     
     return (
         <div className="bv-masthead">
@@ -57,4 +62,3 @@ function Masthead( props ) {
         </div>
     );
 }
-export default Masthead;
