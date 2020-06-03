@@ -261,91 +261,12 @@ function register_settings() {
                 // @TODO remove after testing is complete
                 //'disabled_blocks' => ["core/paragraph", "core/image", "core/heading"],
                 'disabled_blocks' => [],
-                'plugin_settings' => [],
+                'plugin_settings' => [
+                    'remove_on_uninstall' => false,
+                ],
             ],
         )    
     );
-    /*
-    register_setting(
-        'block_visibility',
-        'block_visibility_settings',
-        array(
-            'type'         => 'object',
-            'show_in_rest' => array(
-                'schema' => array(
-                    'type'  => 'object',
-                    'properties' => array(
-                        'general_settings' => array(
-                            'type'  => 'array',
-                            'items' => array(
-                                'type' => 'string',
-                            ),
-                        ),
-                        'visibility_settings' => array(
-                            'type'  => 'array',
-                            'items' => array(
-                                'type' => 'string',
-                            ),
-                        ),
-                        'disabled_functionality' => array(
-                            'type'  => 'array',
-                            'items' => array(
-                                'type' => 'string',
-                            ),
-                        ),
-                        'disabled_blocks' => array(
-                            'type'  => 'array',
-                            'items' => array(
-                                'type' => 'string',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'default' => array(
-                'general_settings' => array(),
-                'visibility_settings' => array(),
-                'disabled_functionality' => array(
-                    'hideBlock' => array(
-                        'disable' => false,
-                    ),
-                    'visibilityByRole' => array(
-                        'disable' => false,
-                        'disableAdvancedUserRoles' => false,
-                    )
-                ),
-                'disabled_blocks' => array( 'test0', 'helo')
-            ),
-        )
-    );
-    
-    register_setting(
-        'block_visibility',
-        'block_visibility_settings',
-        array(
-            'type'         => 'array',
-            'show_in_rest' => array(
-                'schema' => array(
-                    'type'  => 'array',
-                    'items' => array(
-                        'visibility_settings' => array(
-                            'type'  => 'array',
-                            'items' => array(
-                                'type' => 'string',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'default' => [
-                'visibility_settings' => [
-                    'hideBlock',
-                    'visibilityByRole',
-                ],
-            ],
-        )
-    );
-    */
 }
 add_action( 'rest_api_init', __NAMESPACE__ . '\register_settings' );
 add_action( 'admin_init', __NAMESPACE__ . '\register_settings' );
