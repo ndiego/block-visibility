@@ -18,6 +18,7 @@ import { Icon } from '@wordpress/icons';
  */
 import BlockCategory from './block-category';
 import SaveSettings from './save-settings';
+import InformationPopover from './information-popover';
 import icons from './../icons';
 
 /**
@@ -124,10 +125,17 @@ function BlockManager( props ) {
 	return (
 		<div className="bv-block-manager inner-container">
 			<div className="bv-tab-panel__description">
-				<h2>{ __( 'Block Manager', 'block-visibility' ) }</h2>
+				<div className="bv-tab-panel__description-header">
+					<h2>{ __( 'Block Manager', 'block-visibility' ) }</h2>
+					<span>
+						<InformationPopover
+							message={ __( 'NEED TO WRITE!!!!', 'block-visibility' ) }
+						/>
+					</span>
+				</div>
 				<p>
 					{ __( 
-						'[Needs work] Use the settings below to disable visibility functionality on specific block types. This can be useful if you want to restrict visibility settings to a selection of blocks. Once a block type is disabled, all visibility settings will also be disabled, even if settings had previously been set on blocks of that type.', 
+						'The settings below allow you restrict visibility controls to specific block types. By default, all block types have visibility enabled, but you may want to limit this functionality.', 
 						'block-visibility'
 					) }
 				</p>

@@ -47,10 +47,17 @@ export default function VisibilityControls( props ) {
     return (
 		<div className="bv-visibility-controls inner-container">
 			<div className="bv-tab-panel__description">
-				<h2>{ __( 'Visibility Controls', 'block-visibility' ) }</h2>
+				<div className="bv-tab-panel__description-header">
+					<h2>{ __( 'Visibility Controls', 'block-visibility' ) }</h2>
+					<span>
+						<InformationPopover
+							message={ __( 'NEED TO WRITE!!!!', 'block-visibility' ) }
+						/>
+					</span>
+				</div>
 				<p>
 					{ __( 
-						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et condimentum libero. Etiam vel pulvinar eros, tincidunt molestie est. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+						'The settings below allow you to configure the visibility controls that power this plugin. Pick and choose which controls you would like to enable and how you would like them to function.',
 						'block-visibility'
 					) }
 				</p>

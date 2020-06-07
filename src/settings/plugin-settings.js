@@ -19,6 +19,12 @@ import {
 import { Icon } from '@wordpress/icons';
 
 /**
+ * Internal dependencies
+ */
+import SaveSettings from './save-settings';
+import InformationPopover from './information-popover';
+
+/**
  * Renders the plugin Settings tab of the Block Visibility settings page
  *
  * @since 1.0.0
@@ -57,34 +63,43 @@ export default function PluginSettings( props ) {
     return (
 		<div className="bv-plugin-settings inner-container">
 			<div className="bv-tab-panel__description">
-				<h2>{ __( 'Settings', 'block-visibility' ) }</h2>
+				<div className="bv-tab-panel__description-header">
+					<h2>{ __( 'Settings', 'block-visibility' ) }</h2>
+					<span>
+						<InformationPopover
+							message={ __( 'NEED TO WRITE!!!!', 'block-visibility' ) }
+						/>
+					</span>
+				</div>
 				<p>
 					{ __( 
-						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et condimentum libero. Etiam vel pulvinar eros, tincidunt molestie est. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+						'This page allows you to confiure settings that effect the general functionality of the Block Visibility plugin. As development continues, addtional settings will be added, giving you even more control over how the plugin operates.',
 						'block-visibility'
 					) }
 				</p>
 			</div>
+			<div className="bv-setting-controls">
+				<span className="bv-setting-controls__title">
+					{ __( 'Configure Settings', 'block-visibility' ) }
+				</span>
+				<SaveSettings 
+					isAPISaving={ isAPISaving }
+					hasUpdates={ hasUpdates }
+					onSettingsChange={ onSettingsChange }
+				/>
+			</div>
 			<div className="settings-panel">
 				<div className="settings-panel__header">
-					<span>
-						{ __( 'Enabled Functionality', 'block-visibility' ) }
+					<span className="settings-panel__header-title">
+						{ __( 'Uninstall', 'block-visibility' ) }
 					</span>
-					<Button
-						className={ classnames(
-							'bv-save-settings__button',
-							{ 'is-busy': isAPISaving },
-						) }
-						onClick={ onSettingsChange }
-						disabled={ ! hasUpdates }
-						isPrimary
-					>
-						{ updateButton }
-					</Button>
+					<InformationPopover
+						message={ __( 'Settings that impact what happens when the Block Visibility plugin is uninstalled.', 'block-visibility' ) }
+					/>
 				</div>
 				<div className="settings-panel__row">
 					<ToggleControl
-						label={ __( 'Remove plugin settings on uninstall', 'block-visibility' ) }
+						label={ __( 'Remove all plugin settings when it is uninstalled', 'block-visibility' ) }
 						checked={ removeOnUninstall }
 						onChange={ () => onPluginSettingChange( 
 							'remove_on_uninstall', 

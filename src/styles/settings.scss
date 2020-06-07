@@ -146,6 +146,15 @@ $tablet: 768px;
             line-height: 1.4;
             margin: 0;
         }
+        
+        .bv-tab-panel__description-header {
+            display: flex;
+            justify-content: space-between;
+            
+            .information-popover__button {
+                color: #777;
+            }
+        }
     }
 }
 
@@ -327,28 +336,6 @@ $tablet: 768px;
         .settings-panel__header-title {
             font-weight: 500;
         }
-        
-        .information-popover {
-            line-height: 0; /* Correction for button */
-            
-            .information-popover__button {
-                height: 24px;
-                color: #c8c8c8;
-                
-                &:hover {
-                    box-shadow: none !important;
-                }
-            }
-            
-            .information-popover__popover {
-                .components-popover__content {
-                    line-height: 1.4;
-                    padding: 16px;
-                    font-size: 13px;
-                    text-align: left;
-                }    
-            }
-        }
     }
     .settings-panel__row {
         padding: 20px 20px 10px;
@@ -363,6 +350,31 @@ $tablet: 768px;
             border-top: 1px solid #E0E5E9;
             padding-top: 16px;
         }
+    }
+}
+
+
+/* Information Popover */
+.information-popover {
+    line-height: 0; /* Correction for button */
+    
+    .information-popover__button {
+        height: 24px;
+        color: #c8c8c8;
+        
+        &:hover {
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+    }
+    
+    .information-popover__popover {
+        .components-popover__content {
+            line-height: 1.4;
+            padding: 16px;
+            font-size: 13px;
+            text-align: left;
+        }    
     }
 }
 
@@ -404,6 +416,53 @@ $tablet: 768px;
             color: #007cba;
             box-shadow: none;
         }
+    }
+}
+
+
+.bv-getting-started {
+    &>div {
+        max-width: 660px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    h2 {
+        font-size: 20px;
+        font-weight: 400;
+    }
+    
+    p {
+        font-size: 15px;
+        line-height: 1.4;
+        margin-bottom: 1.5em;
+    }
+    
+    .bv-getting-started__video {
+        max-width: 1024px;
+        height: 400px;
+        background: lightgrey;
+        margin: 40px 0;
+        text-align: center;
+    }
+    
+    .bv-getting-started__details {
+        
+    }
+    
+    .bv-getting-started__panels {
+        button {
+        }
+    }
+    
+    .bv-getting-started__help {
+        background: #FFFFFF;
+        border: 1px solid #E5E5E5;
+        box-sizing: border-box;
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.07);
+        padding: 1em 3em 2em;
+        margin: 40px auto 0;
+        text-align: center;
     }
 }
 
