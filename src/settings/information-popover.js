@@ -6,7 +6,8 @@ import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
 import {
     Popover,
-    Button
+    Button,
+    ExternalLink
 } from '@wordpress/components';
 import { Icon, info } from '@wordpress/icons';
 
@@ -24,7 +25,7 @@ import icons from './../icons';
  */
 export default function InformationPopover( props ) {
     const [ popoverVisible, setPopoverVisible ] = useState( false );
-    const { message, position, } = props;
+    const { message, link, position, } = props;
     const popoverPosition = position ?? 'bottom center';
     
     return (
@@ -43,6 +44,11 @@ export default function InformationPopover( props ) {
                     onFocusOutside={ () => setPopoverVisible( ! popoverVisible ) }
                 >
                     { message }
+                    { link && (
+                        <ExternalLink href={ link }>
+                            { __( 'Learn More', 'block-visibility' ) }
+                        </ExternalLink>
+                    ) }
                 </Popover>
             ) }
         </div>

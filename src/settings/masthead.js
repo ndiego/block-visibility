@@ -28,7 +28,7 @@ export default function Masthead( props ) {
                     </h1>
                     <p>
                         { __( 
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et condimentum libero. Etiam vel pulvinar eros, tincidunt molestie est. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                            'Block-based visibility control for the WordPress editor. Allows you to dynamically control which blocks are visible on your website and who can see them. Compatible with all blocks.',
                             'block-visibility'
                         ) }
                     </p>

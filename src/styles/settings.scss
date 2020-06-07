@@ -374,7 +374,15 @@ $tablet: 768px;
             padding: 16px;
             font-size: 13px;
             text-align: left;
-        }    
+            min-width: 200px;
+            max-width: 250px;
+        }
+        .components-external-link {
+            display: block;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #d0d0d0;
+        }
     }
 }
 

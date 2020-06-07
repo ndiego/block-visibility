@@ -130,12 +130,13 @@ function BlockManager( props ) {
 					<span>
 						<InformationPopover
 							message={ __( 'NEED TO WRITE!!!!', 'block-visibility' ) }
+							link="https://www.blockvisibilitywp.com"
 						/>
 					</span>
 				</div>
 				<p>
 					{ __( 
-						'The settings below allow you restrict visibility controls to specific block types. By default, all block types have visibility enabled, but you may want to limit this functionality.', 
+						'The settings below allow you restrict visibility controls to specific block types. By default, all block types have visibility enabled, but you may want to limit this functionality depending on your needs.', 
 						'block-visibility'
 					) }
 				</p>
