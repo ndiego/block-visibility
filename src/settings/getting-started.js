@@ -14,11 +14,6 @@ import {
 import { Icon, cloud } from '@wordpress/icons';
 
 /**
- * Internal dependencies
- */
-import InformationPopover from './information-popover';
-
-/**
  * Renders the Getting Started tab of the Block Visibility settings page
  *
  * @since 1.0.0
@@ -31,14 +26,7 @@ export default function GettingStarted( props ) {
     return (
 		<div className="bv-getting-started inner-container">
 			<div className="bv-tab-panel__description">
-				<div className="bv-tab-panel__description-header">
-					<h2>{ __( 'Welcome', 'block-visibility' ) }</h2>
-					<span>
-						<InformationPopover
-							message={ __( 'NEED TO WRITE!!!!', 'block-visibility' ) }
-						/>
-					</span>
-				</div>
+				<h2>{ __( 'Welcome', 'block-visibility' ) }</h2>
 				<p>
 					{ __( 
 						'Thank you for choosing Block Visibility. As the name suggests, this plugin allows you to easily control the visibility of blocks in the WordPress editor. To get started, watch the quick video below for an overview of how the plugin works. You will become a master in no time!',
