@@ -2,9 +2,9 @@
 /**
  * Plugin Name:         Block Visibility
  * Plugin URI:          http://www.outermost.co/
- * Description:         Control the visibility of any block.
+ * Description:         Block-based visibility control for WordPress
  * Version:             0.1.0
- * Requires at least:   5.2
+ * Requires at least:   5.4
  * Requires PHP:        5.6
  * Author:              Nick Diego
  * Author URI:          https://www.nickdiego.com
@@ -240,6 +240,9 @@ function register_settings() {
                         'plugin_settings' => array(
                             'type'  => 'object',
                             'properties' => array(
+                                'enable_full_control_mode' => array(
+                                    'type'  => 'boolean',
+                                ),
                                 'remove_on_uninstall' => array(
                                     'type'  => 'boolean',
                                 ),

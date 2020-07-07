@@ -35,6 +35,7 @@ class Settings extends Component {
 		this.state = {
 			isAPILoaded: false,
 			isAPISaving: false,
+			hasSaveError: false,
 			settings: [],
 		};
 	}
@@ -58,7 +59,10 @@ class Settings extends Component {
 	}
 
 	handleSettingsChange( option, value ) {
-		this.setState( { isAPISaving: true } );
+		this.setState( { 
+			isAPISaving: true,
+			hasSaveError: false
+		} );
 		
 		const currentSettings = this.state.settings;
 
@@ -69,25 +73,34 @@ class Settings extends Component {
 			)
 		} );
 
-		model.save().then( ( response ) => {			
-			this.setState( {
-				settings: response.block_visibility_settings,
-				isAPISaving: false
-			} );
-		} );
+		model.save().then( 
+			( response ) => {		
+				this.setState( {
+					settings: response.block_visibility_settings,
+					isAPISaving: false,
+				} );
+			},
+			( response ) => {
+				this.setState( {
+					isAPISaving: false,
+					hasSaveError: true,
+				} );
+			}
+		);
 	}
 
 	render() {
 
 		console.log( this.state.settings );
 		
+		const isAPILoaded = this.state.isAPILoaded;	
 		const isAPISaving = this.state.isAPISaving;
-		const isAPILoaded = this.state.isAPILoaded;
-		
+		const hasSaveError = this.state.hasSaveError;
+
 		const visibilityControls = this.state.settings.visibility_controls;
 		const disabledBlocks = this.state.settings.disabled_blocks;
 		const pluginSettings = this.state.settings.plugin_settings;
-		
+				
 		const settingTabs = [
 			{
 				name: 'getting-started',
@@ -136,12 +149,14 @@ class Settings extends Component {
 								return (
 									<GettingStarted
 										isAPISaving={ isAPISaving }
+										hasSaveError={ hasSaveError }
 									/>
 								);
 							case 'visibility-controls':
 								return (
 									<VisibilityControls
 										isAPISaving={ isAPISaving }
+										hasSaveError={ hasSaveError }
 										handleSettingsChange={ this.handleSettingsChange }
 										visibilityControls={ visibilityControls }
 									/>
@@ -150,14 +165,17 @@ class Settings extends Component {
 								return (
 									<BlockManager
 										isAPISaving={ isAPISaving }
+										hasSaveError={ hasSaveError }
 										handleSettingsChange={ this.handleSettingsChange }
 										disabledBlocks={ disabledBlocks }
+										pluginSettings={ pluginSettings }
 									/>
 								);
 							case 'plugin-settings':
 								return (
 									<PluginSettings
 										isAPISaving={ isAPISaving }
+										hasSaveError={ hasSaveError }
 										handleSettingsChange={ this.handleSettingsChange }
 										pluginSettings={ pluginSettings }
 									/>

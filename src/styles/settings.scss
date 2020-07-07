@@ -193,6 +193,10 @@ $tablet: 768px;
             @media ( max-width: $tablet ) {
                 display: none;
             }
+            
+            .update-failed { 
+                color: #b52727;
+            }
         }
         
         .save-button {

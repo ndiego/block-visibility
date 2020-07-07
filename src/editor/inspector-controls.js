@@ -10,6 +10,17 @@ import { __ } from '@wordpress/i18n';
 import { PanelBody, Notice } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
 import { useEntityProp } from "@wordpress/core-data";
+import { 
+	__experimentalCreateInterpolateElement,
+	createInterpolateElement 
+} from '@wordpress/element';
+
+/**
+ * Temporary solution until WP 5.5 is released with createInterpolateElement
+ */
+const interpolateElement = ( typeof createInterpolateElement === 'function' )
+    ? createInterpolateElement 
+    : __experimentalCreateInterpolateElement;
 
 /**
  * Internal dependencies
@@ -87,16 +98,15 @@ export default function VisibilityInspectorControls( props ) {
 		                    status="warning"
 		                    isDismissible={ false }
 		                >
-							{ __( 
-								'Looks like all Visibility Controls have been disabled. To control block visibility again, re-enable some ', 
-								'block-visibility' 
-							) 
-		                    // Note we need a better way to handle translation on warning links. Watch
-		                    // https://github.com/WordPress/gutenberg/issues/18614
-		                    }
-							<a href={ blockVisibilityVariables.settingsUrl } target="_blank">
-								{ __( 'Visibility Controls.', 'block-visibility' ) }
-							</a>
+							{ interpolateElement(
+								__( 
+									'Looks like all Visibility Controls have been disabled. To control block visibility again, re-enable some <a>Visibility Controls</a>.', 
+									'block-visibility' 
+								),
+								{
+									a: <a href={ blockVisibilityVariables.settingsUrl } target="_blank" />,
+								}
+							) }
 		                </Notice>
 					) }
 				</div>

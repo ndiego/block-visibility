@@ -25,6 +25,7 @@ import icons from './../icons';
 export default function SaveSettings( props ) {
     const {
         isAPISaving,
+        hasSaveError,
         hasUpdates,
         onSettingsChange,
         notSavingMessage,
@@ -58,6 +59,11 @@ export default function SaveSettings( props ) {
                             { notSavingMessage }
                         </span>
                     ),
+                    hasSaveError && (
+                        <span className="update-failed">
+                            { __( 'Update failed. Try again or contact support.' ) }
+                        </span>
+                    ),
                 ] }
             </div>
             <Button
@@ -66,7 +72,7 @@ export default function SaveSettings( props ) {
                     { 'is-busy': isAPISaving },
                 ) }
                 onClick={ onSettingsChange }
-                disabled={ ! hasUpdates }
+                disabled={ ! hasUpdates && ! hasSaveError }
                 isPrimary
             >
                 { updateButton }

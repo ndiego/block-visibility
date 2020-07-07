@@ -7,7 +7,6 @@ import classnames from 'classnames';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useState, useEffect } from '@wordpress/element';
 import {
 	Button,
 	ExternalLink,
@@ -17,6 +16,19 @@ import {
 	ToggleControl
 } from '@wordpress/components';
 import { Icon } from '@wordpress/icons';
+import { 
+	useState, 
+	useEffect,
+	__experimentalCreateInterpolateElement,
+	createInterpolateElement 
+} from '@wordpress/element';
+
+/**
+ * Temporary solution until WP 5.5 is released with createInterpolateElement
+ */
+const interpolateElement = ( typeof createInterpolateElement === 'function' )
+    ? createInterpolateElement 
+    : __experimentalCreateInterpolateElement;
 
 /**
  * Internal dependencies
@@ -38,6 +50,7 @@ export default function PluginSettings( props ) {
     const { 
         handleSettingsChange,
         isAPISaving,
+		hasSaveError,
     } = props;
     
     function onSettingsChange() {
@@ -59,15 +72,17 @@ export default function PluginSettings( props ) {
 		
 	// Manually set defaults, this ensures the main settings function properly
 	const removeOnUninstall = pluginSettings?.remove_on_uninstall ?? false;
+	const enabledFullControlMode = pluginSettings?.enable_full_control_mode ?? false;
     
     return (
 		<div className="bv-plugin-settings inner-container">
 			<div className="bv-tab-panel__description">
 				<div className="bv-tab-panel__description-header">
-					<h2>{ __( 'Settings', 'block-visibility' ) }</h2>
+					<h2>{ __( 'General Settings', 'block-visibility' ) }</h2>
 					<span>
 						<InformationPopover
-							message={ __( 'NEED TO WRITE!!!!', 'block-visibility' ) }
+							message={ __( 'To learn more about General Settings, review the settings documentation via the link below.', 'block-visibility' ) }
+							link="https://www.blockvisibilitywp.com/documentation/general-settings/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 						/>
 					</span>
 				</div>
@@ -84,9 +99,37 @@ export default function PluginSettings( props ) {
 				</span>
 				<SaveSettings 
 					isAPISaving={ isAPISaving }
+					hasSaveError={ hasSaveError }
 					hasUpdates={ hasUpdates }
 					onSettingsChange={ onSettingsChange }
 				/>
+			</div>
+			<div className="settings-panel">
+				<div className="settings-panel__header">
+					<span className="settings-panel__header-title">
+						{ __( 'Full Control Mode', 'block-visibility' ) }
+					</span>
+					<InformationPopover
+						message={ __( 'By default, not all blocks are provided with visibility controls. These include child blocks and blocks that may exist in WordPress, but cannot actually be added directly to the editor. Most of the time, you will not need Full Control Mode, but it\'s there in case you do. Use with caution. Click the link below for complete details.', 'block-visibility' ) }
+						link={ 'https://www.blockvisibilitywp.com/documentation/general-settings/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals' }
+					/>
+				</div>
+				<div className="settings-panel__row">
+					<ToggleControl
+						label={ interpolateElement( 
+							__( 'Enable Full Control Mode to add visibility controls to <strong>every</strong> block. <a>Use with caution</a>.', 'block-visibility' ), 
+							{
+								strong: <strong/>,
+								a: <a href='https://www.blockvisibilitywp.com/documentation/general-settings/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals' target='_blank' />,
+							}
+						) }
+						checked={ enabledFullControlMode }
+						onChange={ () => onPluginSettingChange( 
+							'enable_full_control_mode', 
+							! enabledFullControlMode 
+						) }
+					/>
+				</div>
 			</div>
 			<div className="settings-panel">
 				<div className="settings-panel__header">
@@ -99,7 +142,7 @@ export default function PluginSettings( props ) {
 				</div>
 				<div className="settings-panel__row">
 					<ToggleControl
-						label={ __( 'Remove all plugin settings when it is uninstalled', 'block-visibility' ) }
+						label={ __( 'Remove all plugin settings when Block Visibility is uninstalled.', 'block-visibility' ) }
 						checked={ removeOnUninstall }
 						onChange={ () => onPluginSettingChange( 
 							'remove_on_uninstall', 

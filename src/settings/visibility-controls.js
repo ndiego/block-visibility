@@ -21,7 +21,7 @@ import InformationPopover from './information-popover';
 export default function VisibilityControls( props ) {
 	const [ visibilityControls, setVisibilityControls ] = useState( props.visibilityControls );
 	const [ hasUpdates, setHasUpdates ] = useState( false );
-	const { handleSettingsChange, isAPISaving } = props;
+	const { handleSettingsChange, isAPISaving, hasSaveError, } = props;
 	
 	function onSettingsChange() {
 		handleSettingsChange( 'visibility_controls', visibilityControls );
@@ -68,6 +68,7 @@ export default function VisibilityControls( props ) {
 				</span>
 				<SaveSettings 
 					isAPISaving={ isAPISaving }
+					hasSaveError={ hasSaveError }
 					hasUpdates={ hasUpdates }
 					onSettingsChange={ onSettingsChange }
 				/>

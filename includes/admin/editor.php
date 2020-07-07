@@ -49,6 +49,7 @@ function enqueue_editor_assets() {
     // not ideal, but does the trick for now...
     $stringified_editor_data = "const blockVisibilityUserRoles = " . wp_json_encode( get_user_roles() ) . ";";
     $stringified_editor_data .= "const blockVisibilityVariables = " . wp_json_encode( $plugin_variables ) . ";";
+    $stringified_editor_data .= "const blockVisibilityFullControlMode = " . wp_json_encode( is_full_control_mode() ) . ";";
     
     wp_add_inline_script( 
         'bv-editor-scripts', 
@@ -89,3 +90,18 @@ function enqueue_editor_assets() {
         ( $pagenow === 'post.php' || $pagenow === 'post-new.php' ) 
     );
  }
+ 
+ /**
+  * See if we are in full control mode
+  *
+  * @return bool true or false
+  */
+ function is_full_control_mode() {
+    $settings = get_option( 'block_visibility_settings' );
+    
+    if ( isset( $settings[ 'plugin_settings' ][ 'enable_full_control_mode' ] ) ) {
+        return $settings[ 'plugin_settings' ][ 'enable_full_control_mode' ]; 
+    } else {
+        return false;
+    }
+}

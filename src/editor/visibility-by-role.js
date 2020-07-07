@@ -8,6 +8,17 @@ import { assign } from 'lodash';
  */
 import { __, sprintf } from '@wordpress/i18n';
 import { RadioControl, Notice } from '@wordpress/components';
+import { 
+	__experimentalCreateInterpolateElement,
+	createInterpolateElement 
+} from '@wordpress/element';
+
+/**
+ * Temporary solution until WP 5.5 is released with createInterpolateElement
+ */
+const interpolateElement = ( typeof createInterpolateElement === 'function' )
+    ? createInterpolateElement 
+    : __experimentalCreateInterpolateElement;
 
 /**
  * Internal dependencies
@@ -100,16 +111,15 @@ export default function VisibilityByRole( props ) {
                     status="warning"
                     isDismissible={ false }
                 >   
-                    { __( 
-                        'The User Role option was previously selected, but is now disabled. Choose another option or update the ', 
-                        'block-visibility' 
-                    ) 
-                    // Note we need a better way to handle translation on warning links. Watch
-                    // https://github.com/WordPress/gutenberg/issues/18614
-                    }
-                    <a href={ blockVisibilityVariables.settingsUrl } target="_blank">
-                        { __( 'Visibility Control settings.', 'block-visibility' ) }
-                    </a>
+                    { interpolateElement(
+                        __( 
+                            'The User Role option was previously selected, but is now disabled. Choose another option or update the <a>Visibility Control</a> settings.',
+                            'block-visibility'
+                        ),
+                        {
+                            a: <a href={ blockVisibilityVariables.settingsUrl } target="_blank" />,
+                        }
+                    ) }
                 </Notice>
             ) }
         </div>

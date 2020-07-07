@@ -51,7 +51,7 @@ function has_visibility_settings( $block ) {
  * @return mixed  Return either the $block_content or nothing depending on visibility settings
  */
 function render_with_visibility( $block_content, $block ) {
-    
+        
     // Get the plugin core settings
     $settings = get_option( 'block_visibility_settings' );
     

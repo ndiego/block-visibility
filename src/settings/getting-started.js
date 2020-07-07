@@ -2,7 +2,6 @@
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
-import { __experimentalCreateInterpolateElement } from '@wordpress/element';
 import {
 	Button,
 	ExternalLink,
@@ -12,7 +11,18 @@ import {
 	ToggleControl
 } from '@wordpress/components';
 import { Icon, cloud } from '@wordpress/icons';
+import { 
+	__experimentalCreateInterpolateElement,
+	createInterpolateElement 
+} from '@wordpress/element';
 
+/**
+ * Temporary solution until WP 5.5 is released with createInterpolateElement
+ */
+const interpolateElement = ( typeof createInterpolateElement === 'function' )
+    ? createInterpolateElement 
+    : __experimentalCreateInterpolateElement;
+	
 /**
  * Renders the Getting Started tab of the Block Visibility settings page
  *
@@ -20,9 +30,7 @@ import { Icon, cloud } from '@wordpress/icons';
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
-export default function GettingStarted( props ) {
-    const { isAPISaving } = props;
-    
+export default function GettingStarted( props ) {    
     return (
 		<div className="bv-getting-started inner-container">
 			<div className="bv-tab-panel__description">
@@ -46,15 +54,25 @@ export default function GettingStarted( props ) {
 					) }
 				</p>
 				<p>
-					{ __experimentalCreateInterpolateElement(
-						__( 
-							'By default, this plugin adds a Visibility panel to the  <a>Settings Sidebar</a> of each selected block in the Block Editor. While there are a few minor exceptions, see the FAQs below, this means that visibility control will be enabled for all core WordPress blocks as well as any third-party blocks provided by a plugin, or that came with your theme.',
-							'block-visibility'
-						),
-						{
-							a: <a href="https://wordpress.org/support/article/wordpress-editor/#the-anatomy-of-a-block" target="_blank" />,
-						}
-					) }
+					{ //() => {
+						//if ( typeof __experimentalCreateInterpolateElement === 'function' ) {
+
+						//} else {
+							//return (
+								interpolateElement(
+									__( 
+										'By default, this plugin adds a Visibility panel to the  <a>Settings Sidebar</a> of each selected block in the Block Editor. While there are a few minor exceptions, see the FAQs below, this means that visibility control will be enabled for all core WordPress blocks as well as any third-party blocks provided by a plugin, or that came with your theme.',
+										'block-visibility'
+									),
+									{
+										a: <a href="https://wordpress.org/support/article/wordpress-editor/#the-anatomy-of-a-block" target="_blank" />,
+									}
+								) 
+							//);
+
+						//}
+					//}
+				}
 				</p>
 				<p>
 					{ __( 

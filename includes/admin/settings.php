@@ -66,7 +66,7 @@ function enqueue_settings_assets() {
     wp_enqueue_style( 
         'bv-setting-styles', 
         BV_PLUGIN_URL . 'dist/bv-setting-styles.css', 
-        array(),
+        [ 'wp-edit-blocks' ], 
         $asset_file['version']
     );
     

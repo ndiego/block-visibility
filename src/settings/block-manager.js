@@ -36,10 +36,12 @@ function BlockManager( props ) {
 	const { 
 		handleSettingsChange,
 		isAPISaving,
+		hasSaveError,
 		blockTypes,
 		categories,
 		hasBlockSupport,
 		isMatchingSearchTerm,
+		pluginSettings,
 	} = props;
 	
 	function onSettingsChange() {
@@ -73,14 +75,25 @@ function BlockManager( props ) {
 		setHasUpdates( true );
     }
 	
-	//console.log( disabledBlocks );
+	// Manually set defaults, this ensures the main settings function properly
+	const enabledFullControlMode = pluginSettings?.enable_full_control_mode ?? false;
+		
+	let allowedBlockTypes;
 	
-	const allowedBlockTypes = blockTypes.filter( ( blockType ) => (
-		// Is allowed to be inserted into a page/post
-		hasBlockSupport( blockType, 'inserter', true ) &&
-		// Is not a child block https://developer.wordpress.org/block-editor/developers/block-api/block-registration/#parent-optional
-		! blockType.parent
-	) );
+	if ( enabledFullControlMode ) {
+		
+		// If we are in full control mode, allow all blocks
+		allowedBlockTypes = blockTypes;
+	} else {
+		allowedBlockTypes = blockTypes.filter( ( blockType ) => (
+			
+			// Is allowed to be inserted into a page/post
+			hasBlockSupport( blockType, 'inserter', true ) &&
+			
+			// Is not a child block https://developer.wordpress.org/block-editor/developers/block-api/block-registration/#parent-optional
+			! blockType.parent
+		) );
+	}
 	
 	// The allowed blocks that match our search criteria
 	const filteredBlockTypes = allowedBlockTypes.filter( ( blockType ) => (
@@ -154,6 +167,7 @@ function BlockManager( props ) {
 				/>
 				<SaveSettings 
 					isAPISaving={ isAPISaving }
+					hasSaveError={ hasSaveError }
 					hasUpdates={ hasUpdates }
 					onSettingsChange={ onSettingsChange }
 					notSavingMessage={ visibilityMessage }

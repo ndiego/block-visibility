@@ -9,6 +9,7 @@ import { assign } from 'lodash';
 import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { hasBlockSupport } from '@wordpress/blocks';
+import { useEntityProp } from "@wordpress/core-data";
 
 /**
  * Internal dependencies
@@ -24,10 +25,8 @@ import VisibilityInspectorControls from './editor/inspector-controls';
  */
 function blockVisibilityAttribute( settings ) {
 	
-	// We don't want to enable visibility for blocks that cannot be added via
-	// the inserter of is a child block. This excludes blocks such as reusable
-	// blocks, individual column block, etc.
-	if ( hasBlockSupport( settings, 'inserter', true ) && ! settings.hasOwnProperty( 'parent' ) ) {
+	// Note blockVisibilityFullControlMode is a global variable
+	if ( blockVisibilityFullControlMode ) {
 		settings.attributes = assign( settings.attributes, {
 			blockVisibility: {
 				type: 'object',
@@ -49,8 +48,36 @@ function blockVisibilityAttribute( settings ) {
 				}
 			}
 		} );
+	} else {
+		
+		// We don't want to enable visibility for blocks that cannot be added via
+		// the inserter of is a child block. This excludes blocks such as reusable
+		// blocks, individual column block, etc.
+		if ( hasBlockSupport( settings, 'inserter', true ) && ! settings.hasOwnProperty( 'parent' ) ) {
+			settings.attributes = assign( settings.attributes, {
+				blockVisibility: {
+					type: 'object',
+					properties: {
+						hideBlock: {
+							type: 'boolean',
+						},
+						visibilityByRole: {
+							type: 'string',
+						},
+						restrictedRoles: {
+							type: 'array',
+						}		
+					},
+					default: {
+						hideBlock: false,
+						visibilityByRole: 'all',
+						restrictedRoles: []
+					}
+				}
+			} );
+		}
 	}
-	
+
 	return settings;
 }
 
