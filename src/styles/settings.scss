@@ -479,3 +479,14 @@ $tablet: 768px;
 }
 
 
+.bv-logo {
+    svg {
+        fill: #000000;
+        
+        .transparent {
+            opacity: .6;
+        }
+    }
+}
+
+

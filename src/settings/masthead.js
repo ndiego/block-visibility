@@ -24,7 +24,12 @@ export default function Masthead( props ) {
             <div className="inner-container">
                 <div className="bv-masthead__branding">
                     <h1>
-                        { __( 'Block Visibility', 'block-visibility' ) }
+                        <span class="bv-logo">
+                            { icons.logo }
+                        </span>
+                        <span class="screen-reader-text">
+                            { __( 'Block Visibility', 'block-visibility' ) }
+                        </span>
                     </h1>
                     <p>
                         { __( 

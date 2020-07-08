@@ -37,7 +37,7 @@ export default function GettingStarted( props ) {
 				<h2>{ __( 'Welcome', 'block-visibility' ) }</h2>
 				<p>
 					{ __( 
-						'Thank you for choosing Block Visibility. As the name suggests, this plugin allows you to easily control the visibility of blocks in the WordPress editor. To get started, watch the quick video below for an overview of how the plugin works. You will become a master in no time!',
+						'Thank you for choosing Block Visibility. As the name suggests, this plugin allows you to easily control the visibility of blocks in the WordPress editor. To get started, watch the quick video below for an overview of how the plugin works. You\'ll become a pro in no time!',
 						'block-visibility'
 					) }
 				</p>
