@@ -34,7 +34,7 @@ export default function UserRoles( props ) {
 			</label>
 			<p className="bv-settings__user-roles-help">
 				{ __( 
-					'The block will only be visible to users with one of the selected roles', 
+					'The block will only be visible to users with one of the selected roles.', 
 					'block-visibility' 
 				) }
 			</p>

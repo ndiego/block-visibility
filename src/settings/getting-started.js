@@ -54,25 +54,15 @@ export default function GettingStarted( props ) {
 					) }
 				</p>
 				<p>
-					{ //() => {
-						//if ( typeof __experimentalCreateInterpolateElement === 'function' ) {
-
-						//} else {
-							//return (
-								interpolateElement(
-									__( 
-										'By default, this plugin adds a Visibility panel to the  <a>Settings Sidebar</a> of each selected block in the Block Editor. While there are a few minor exceptions, see the FAQs below, this means that visibility control will be enabled for all core WordPress blocks as well as any third-party blocks provided by a plugin, or that came with your theme.',
-										'block-visibility'
-									),
-									{
-										a: <a href="https://wordpress.org/support/article/wordpress-editor/#the-anatomy-of-a-block" target="_blank" />,
-									}
-								) 
-							//);
-
-						//}
-					//}
-				}
+					{ interpolateElement(
+						__( 
+							'By default, this plugin adds a Visibility panel to the  <a>Settings Sidebar</a> of each selected block in the Block Editor. While there are a few minor exceptions, see the FAQs below, this means that visibility control will be enabled for all core WordPress blocks as well as any third-party blocks provided by a plugin or that came with your theme.',
+							'block-visibility'
+						),
+						{
+							a: <a href="https://wordpress.org/support/article/wordpress-editor/#the-anatomy-of-a-block" target="_blank" />,
+						}
+					) }
 				</p>
 				<p>
 					{ __( 
@@ -94,13 +84,7 @@ export default function GettingStarted( props ) {
                 >
 						<p>
 							{ __( 
-								'Visibility controls form the engine that powers this plugin. These are the settings that determine whether a block is hidden on the frontend of your website. We strive to provide as much visibility control as possible, and as development for Block Visibility continues, expect even more functionality in the future. However, we understand that some users do not need every option. It is equally important to have a decluttered and streamlined user interface. Therefore, on the Visibility Controls tab of this settings page, you can enable or disable any control!',
-								'block-visibility'
-							) }
-						</p>
-						<p>
-							{ __( 
-								'Please note that when a control is disabled, blocks that relied on the disabled control will likely become visible again. For example, the “Hide Block” control globally hides blocks for all users. A block with this setting enabled would become visible again if you disable the “Hide Block” control. Likely this is what you intended, but we wanted to provide this warning just in case.',
+								'Visibility controls form the engine that powers Block Visibility. These are the settings that determine whether a block is hidden on the frontend of your website. We strive to provide as much visibility control as possible, and as development for Block Visibility continues, expect even more functionality in the future. However, we understand that some users do not need every option. It is equally important to have a decluttered and streamlined user interface. Therefore, on the Visibility Controls tab of this settings page, you can enable or disable any control.',
 								'block-visibility'
 							) }
 						</p>
@@ -119,7 +103,7 @@ export default function GettingStarted( props ) {
                     </PanelRow>
                 </PanelBody>
 				<PanelBody
-					title={ __( 'Settings', 'block-visibility' ) }
+					title={ __( 'General Settings', 'block-visibility' ) }
 					initialOpen={ false }
 				>
 					<PanelRow>

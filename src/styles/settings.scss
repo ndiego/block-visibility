@@ -2,6 +2,7 @@
 // Medai query variables
 $desktop: 1024px;
 $tablet: 768px;
+$mobile: 420px;
 
 
 #bv-settings-container {
@@ -84,10 +85,11 @@ $tablet: 768px;
         align-self: flex-end;
         
         a {
-            color: #32373C;
+            color: #23282d;
             cursor: pointer;
             display: inline-block;
             margin-left: 16px;
+            text-decoration: none;
             
             svg {
                 fill: currentColor;
@@ -229,6 +231,11 @@ $tablet: 768px;
         input {
             border: 1px solid #dddddd;
             padding: 9px 12px;
+        }
+        
+        @media ( max-width: $mobile ) {
+            width: 100%;
+            margin-bottom: 15px;
         }
     }
 }
@@ -373,6 +380,12 @@ $tablet: 768px;
     }
     
     .information-popover__popover {
+        p {
+            font-size: 13px;
+            color: #32373C;
+            line-height: 1.5;
+            margin: 0 0 1em;
+        }
         .components-popover__content {
             line-height: 1.4;
             padding: 16px;
@@ -481,7 +494,7 @@ $tablet: 768px;
 
 .bv-logo {
     svg {
-        fill: #000000;
+        fill: #23282d;
         
         .transparent {
             opacity: .6;

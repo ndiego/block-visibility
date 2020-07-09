@@ -81,14 +81,14 @@ export default function PluginSettings( props ) {
 					<h2>{ __( 'General Settings', 'block-visibility' ) }</h2>
 					<span>
 						<InformationPopover
-							message={ __( 'To learn more about General Settings, review the settings documentation via the link below.', 'block-visibility' ) }
+							message={ __( 'To learn more about General Settings, review the plugin documentation using the link below.', 'block-visibility' ) }
 							link="https://www.blockvisibilitywp.com/documentation/general-settings/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 						/>
 					</span>
 				</div>
 				<p>
 					{ __( 
-						'This page allows you to confiure settings that effect the general functionality of the Block Visibility plugin. As development continues, addtional settings will be added, giving you even more control over how the plugin operates.',
+						'This page allows you to confiure settings that affect the general functionality of the Block Visibility plugin. As development continues, addtional settings will be added, giving you even more control over how the plugin operates.',
 						'block-visibility'
 					) }
 				</p>

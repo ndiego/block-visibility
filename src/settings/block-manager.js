@@ -142,8 +142,15 @@ function BlockManager( props ) {
 					<h2>{ __( 'Block Manager', 'block-visibility' ) }</h2>
 					<span>
 						<InformationPopover
-							message={ __( 'NEED TO WRITE!!!!', 'block-visibility' ) }
-							link="https://www.blockvisibilitywp.com"
+							message={ __( 
+								'Not every block type may need visibility controls. The Block Manager allows you to decide which blocks do. If you are looking for a block, and do not see it listed, you may need to enable Full Control Mode on the Settings tab.', 
+								'block-visibility' 
+							) }
+							subMessage={ __( 
+								'To learn more about the Block Manager, review the plugin documentation using the link below.',
+								'block-visibility' 
+							) }
+							link="https://www.blockvisibilitywp.com/documentation/block-manager/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 						/>
 					</span>
 				</div>

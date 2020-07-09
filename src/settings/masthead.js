@@ -46,7 +46,7 @@ export default function Masthead( props ) {
                     </div>
                     <div className="plugin-links">
                         <a
-                            src={ blockVisibilityVariables.reviewUrl }
+                            href={ blockVisibilityVariables.reviewUrl }
                             className="plugin-review"
                             target="_blank"
                         >
@@ -54,7 +54,7 @@ export default function Masthead( props ) {
                             { __( 'Review', 'block-visibility' ) }
                         </a>
                         <a
-                            src={ blockVisibilityVariables.supportUrl }
+                            href={ blockVisibilityVariables.supportUrl }
                             className="plugin-support"
                             target="_blank"
                         >

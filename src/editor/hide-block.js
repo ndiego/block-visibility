@@ -35,7 +35,10 @@ export default function HideBlock( props ) {
                     )
                 } )
             }
-            help={ __( 'Hide the block completely', 'block-visibility' ) }
+            help={ __( 
+                'Hide selected block from everyone.', 
+                'block-visibility' 
+            ) }
         />
     );
 }

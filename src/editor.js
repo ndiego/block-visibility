@@ -25,8 +25,10 @@ import VisibilityInspectorControls from './editor/inspector-controls';
  */
 function blockVisibilityAttribute( settings ) {
 	
-	// Note blockVisibilityFullControlMode is a global variable
-	if ( blockVisibilityFullControlMode ) {
+	// This is a global variable added to the page via PHP
+	const fullControlMode = blockVisibilityFullControlMode;
+	
+	if ( fullControlMode ) {
 		settings.attributes = assign( settings.attributes, {
 			blockVisibility: {
 				type: 'object',

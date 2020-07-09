@@ -25,7 +25,7 @@ import icons from './../icons';
  */
 export default function InformationPopover( props ) {
     const [ popoverVisible, setPopoverVisible ] = useState( false );
-    const { message, link, position, } = props;
+    const { message, subMessage, link, position, } = props;
     const popoverPosition = position ?? 'bottom center';
     
     return (
@@ -43,7 +43,10 @@ export default function InformationPopover( props ) {
                     focusOnMount="container"
                     onFocusOutside={ () => setPopoverVisible( ! popoverVisible ) }
                 >
-                    { message }
+                    <p>{ message }</p>
+                    { subMessage && (
+                        <p>{ subMessage }</p>
+                    ) }
                     { link && (
                         <ExternalLink href={ link }>
                             { __( 'Learn More', 'block-visibility' ) }
