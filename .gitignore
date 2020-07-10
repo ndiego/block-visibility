@@ -47,3 +47,4 @@ vendor/
 dist/*
 !dist/images/
 !dist/assets/
+package-lock.json

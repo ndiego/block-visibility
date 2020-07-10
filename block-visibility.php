@@ -15,7 +15,7 @@
  *
  * @package block-visibility
  */
- 
+
 namespace BlockVisibility;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -43,11 +43,11 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 		 * Return singleton instance of the Block Visibility plugin.
 		 *
 		 * @since 1.0.0
-		 * @return self 
+		 * @return self
 		 */
 		public static function factory() {
             static $instance = false;
-            
+
 			if ( ! $instance ) {
 				$instance = new self();
 				$instance->init();
@@ -63,10 +63,10 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 		 * @return void
 		 */
 		public function __clone() {
-			_doing_it_wrong( 
-                __FUNCTION__, 
-                esc_html__( 'Something went wrong.', 'block-visibility' ), 
-                '1.0' 
+			_doing_it_wrong(
+                __FUNCTION__,
+                esc_html__( 'Something went wrong.', 'block-visibility' ),
+                '1.0'
             );
 		}
 
@@ -77,10 +77,10 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 		 * @return void
 		 */
 		public function __wakeup() {
-            _doing_it_wrong( 
-                __FUNCTION__, 
-                esc_html__( 'Something went wrong.', 'block-visibility' ), 
-                '1.0' 
+            _doing_it_wrong(
+                __FUNCTION__,
+                esc_html__( 'Something went wrong.', 'block-visibility' ),
+                '1.0'
             );
 		}
 
@@ -91,16 +91,13 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 		 * @return void
 		 */
 		public function includes() {
-			//require_once BV_PLUGIN_DIR . 'includes/class-gfpa-block-assets.php';
-            //require_once BV_PLUGIN_DIR . 'includes/get-dynamic-blocks.php';
-            
             require_once BV_PLUGIN_DIR . 'includes/admin/editor.php';
             require_once BV_PLUGIN_DIR . 'includes/frontend/render-block.php';
 
 			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 				require_once BV_PLUGIN_DIR . 'includes/admin/plugin-action-links.php';
                 require_once BV_PLUGIN_DIR . 'includes/admin/settings.php';
-                
+
                 // Utility functions
                 require_once BV_PLUGIN_DIR . 'includes/utils/get-asset-file.php';
                 require_once BV_PLUGIN_DIR . 'includes/utils/get-user-roles.php';
@@ -119,33 +116,16 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 		}
 
 		/**
-         * @TODO Figure this out
-		 * If debug is on, serve unminified source assets.
-		 *
-		 * @since 1.0.0
-		 * @param string|string $type The type of resource.
-		 * @param string|string $directory Any extra directories needed.
-		 */
-		/*public function asset_source( $type = 'js', $directory = null ) {
-
-			if ( 'js' === $type ) {
-				return GFPA_PLUGIN_URL . 'dist/' . $type . '/' . $directory;
-			} else {
-				return GFPA_PLUGIN_URL . 'dist/css/' . $directory;
-			}
-		}*/
-
-		/**
 		 * Loads the plugin language files.
 		 *
 		 * @since 1.0.0
 		 * @return void
 		 */
 		public function load_textdomain() {
-			load_plugin_textdomain( 
-                'block-visibility', 
-                false, 
-                basename( BV_PLUGIN_DIR ) . '/languages' 
+			load_plugin_textdomain(
+                'block-visibility',
+                false,
+                basename( BV_PLUGIN_DIR ) . '/languages'
             );
 		}
 
@@ -159,14 +139,14 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 		 */
 		public function block_localization() {
 			if ( function_exists( 'wp_set_script_translations' ) ) {
-				wp_set_script_translations( 
-                    'bv-editor-scripts', 
-                    'block-visibility', 
-                    BV_PLUGIN_DIR . '/languages' 
+				wp_set_script_translations(
+                    'bv-editor-scripts',
+                    'block-visibility',
+                    BV_PLUGIN_DIR . '/languages'
                 );
 			}
 		}
-                
+
 	}
 }
 
@@ -174,7 +154,7 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
  * The main function for that returns the Block Visibility class
  *
  * @since 1.0.0
- * @return object|BlockVisibility 
+ * @return object|BlockVisibility
  */
 function load_plugin() {
 	return BlockVisibility::factory();
@@ -187,17 +167,17 @@ if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 	load_plugin();
 }
 
-/* @// TODO: remove eventually, use to reset plugin settings */
+/* TODO: remove eventually, use to reset plugin settings */
 //delete_option( 'block_visibility_settings' );
 
 /**
  * Register plugin settings.
  *
+ * @TODO Add filter here for developers can preset a list of setting defaults
+ *
  * @since 1.0.0
  */
 function register_settings() {
-    // @todo how do we sanitize the strings???
-    // @todo add filter here for developers can preset a list of disabled block types
     register_setting(
         'block_visibility',
         'block_visibility_settings',
@@ -251,7 +231,7 @@ function register_settings() {
                     )
                 ),
             ),
-            'default' => [ 
+            'default' => [
                 'visibility_controls' => [
                     'hide_block' => [
                         'enable' => true,
@@ -261,17 +241,14 @@ function register_settings() {
                         'enable_user_roles' => true,
                     ],
                 ],
-                // @TODO remove after testing is complete
-                //'disabled_blocks' => ["core/paragraph", "core/image", "core/heading"],
                 'disabled_blocks' => [],
                 'plugin_settings' => [
+                    'enable_full_control_mode' => false,
                     'remove_on_uninstall' => false,
                 ],
             ],
-        )    
+        )
     );
 }
 add_action( 'rest_api_init', __NAMESPACE__ . '\register_settings' );
 add_action( 'admin_init', __NAMESPACE__ . '\register_settings' );
-
-

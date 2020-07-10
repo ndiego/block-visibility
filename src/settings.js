@@ -22,8 +22,8 @@ import PluginSettings from './settings/plugin-settings';
 import { snakeToCamel } from './utils/utility-functions';
 
 /**
- * Renders the Block Visibility settings page 
- * 
+ * Renders the Block Visibility settings page
+ *
  * @since 1.0.0
  */
 class Settings extends Component {
@@ -45,10 +45,10 @@ class Settings extends Component {
 		// https://developer.wordpress.org/rest-api/using-the-rest-api/backbone-javascript-client/
 		wp.api.loadPromise.then( () => {
 			this.settings = new wp.api.models.Settings();
-						
+
 			if ( this.state.isAPILoaded === false ) {
 				this.settings.fetch().then( ( response ) => {
-			
+
 					this.setState( {
 						settings: response.block_visibility_settings,
 						isAPILoaded: true
@@ -59,11 +59,11 @@ class Settings extends Component {
 	}
 
 	handleSettingsChange( option, value ) {
-		this.setState( { 
+		this.setState( {
 			isAPISaving: true,
 			hasSaveError: false
 		} );
-		
+
 		const currentSettings = this.state.settings;
 
 		const model = new wp.api.models.Settings( {
@@ -73,8 +73,8 @@ class Settings extends Component {
 			)
 		} );
 
-		model.save().then( 
-			( response ) => {		
+		model.save().then(
+			( response ) => {
 				this.setState( {
 					settings: response.block_visibility_settings,
 					isAPISaving: false,
@@ -89,18 +89,15 @@ class Settings extends Component {
 		);
 	}
 
-	render() {
-
-		console.log( this.state.settings );
-		
-		const isAPILoaded = this.state.isAPILoaded;	
+	render() {		
+		const isAPILoaded = this.state.isAPILoaded;
 		const isAPISaving = this.state.isAPISaving;
 		const hasSaveError = this.state.hasSaveError;
 
 		const visibilityControls = this.state.settings.visibility_controls;
 		const disabledBlocks = this.state.settings.disabled_blocks;
 		const pluginSettings = this.state.settings.plugin_settings;
-				
+
 		const settingTabs = [
 			{
 				name: 'getting-started',
@@ -123,18 +120,18 @@ class Settings extends Component {
 				className: 'bv-settings__plugin-settings',
 			},
 		];
-		
+
 		return (
 			<>
 				<Masthead />
-				<TabPanel 	
+				<TabPanel
 					className="bv-tab-panel"
 					activeClass="active-tab"
 					initialTabName="getting-started"
 					tabs={ settingTabs }
 				>
 					{ ( tab ) => {
-						
+
 						// Don't load tabs if settings have not yet loaded
 						if ( ! isAPILoaded ) {
 							return (
@@ -143,7 +140,7 @@ class Settings extends Component {
 								</div>
 							);
 						}
-						
+
 						switch ( tab.name ) {
 							case 'getting-started':
 								return (
