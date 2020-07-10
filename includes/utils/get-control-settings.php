@@ -33,5 +33,4 @@ function is_control_enabled( $settings, $control, $subcontrol = 'enable' ) {
     } else {
         return true;
     }
-
 }
