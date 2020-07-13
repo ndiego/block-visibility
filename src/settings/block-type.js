@@ -18,30 +18,27 @@ import { CheckboxControl } from '@wordpress/components';
  * @return {string}		 Return the rendered JSX
  */
 export default function BlockType( props ) {
-    const { blockType, disabledBlocks, handleBlockTypeChange } = props;
-    const isChecked = ! disabledBlocks.includes( blockType.name );
-    
-    function onBlockTypeChange( checked ) {
-        handleBlockTypeChange( checked, blockType.name );
-    }
-    
-    return (
-        <li
-            key={ blockType.name }
-            className="bv-block-manager__blocks-item"
-        >
-            <CheckboxControl
-                checked={ isChecked }
-                onChange={ ( isChecked ) => onBlockTypeChange( isChecked ) }
-                label={ 
-                    <span>
-                        { blockType.title  }
-                        { blockType.icon && (
-                            <BlockIcon icon={ blockType.icon } />
-                        ) }
-                    </span> 
-                }
-            />
-        </li>    
-    );
+	const { blockType, disabledBlocks, handleBlockTypeChange } = props;
+	const isChecked = ! disabledBlocks.includes( blockType.name );
+
+	function onBlockTypeChange( checked ) {
+		handleBlockTypeChange( checked, blockType.name );
+	}
+
+	return (
+		<li key={ blockType.name } className="bv-block-manager__blocks-item">
+			<CheckboxControl
+				checked={ isChecked }
+				onChange={ ( isChecked ) => onBlockTypeChange( isChecked ) }
+				label={
+					<span>
+						{ blockType.title }
+						{ blockType.icon && (
+							<BlockIcon icon={ blockType.icon } />
+						) }
+					</span>
+				}
+			/>
+		</li>
+	);
 }

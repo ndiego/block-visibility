@@ -1,7 +1,7 @@
 {
 	"name": "block-visibility",
 	"version": "1.0.0",
-	"description": "Control the visibility of any block in WordPress.",
+	"description": "Block-based visibility control for WordPress",
 	"author": "Nick Diego",
 	"license": "GPL-2.0-or-later",
 	"repository": {

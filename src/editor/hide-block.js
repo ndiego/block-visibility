@@ -17,28 +17,28 @@ import { ToggleControl } from '@wordpress/components';
  * @return {string}		 Return the rendered JSX
  */
 export default function HideBlock( props ) {
-    const { attributes, setAttributes } = props;
-    const { blockVisibility } = attributes;
-    const { hideBlock } = blockVisibility;
+	const { attributes, setAttributes } = props;
+	const { blockVisibility } = attributes;
+	const { hideBlock } = blockVisibility;
 
-    return (
-        <ToggleControl
-            label={ __(
-                'Hide block',
-                'block-visibility'
-            ) }
-            checked={ hideBlock }
-            onChange={ () => setAttributes( {
-                    blockVisibility: assign( 
-                        { ...blockVisibility }, 
-                        { hideBlock: ! hideBlock } 
-                    )
-                } )
-            }
-            help={ __( 
-                'Hide selected block from everyone.', 
-                'block-visibility' 
-            ) }
-        />
-    );
+	return (
+		<ToggleControl
+			label={ __(
+				'Hide block',
+				'block-visibility'
+			) }
+			checked={ hideBlock }
+			onChange={ () => setAttributes( {
+					blockVisibility: assign(
+						{ ...blockVisibility },
+						{ hideBlock: ! hideBlock }
+					)
+				} )
+			}
+			help={ __(
+				'Hide selected block from everyone.',
+				'block-visibility'
+			) }
+		/>
+	);
 }

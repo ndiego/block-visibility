@@ -19,7 +19,6 @@ import GettingStarted from './settings/getting-started';
 import VisibilityControls from './settings/visibility-controls';
 import BlockManager from './settings/block-manager';
 import PluginSettings from './settings/plugin-settings';
-import { snakeToCamel } from './utils/utility-functions';
 
 /**
  * Renders the Block Visibility settings page
@@ -48,29 +47,28 @@ class Settings extends Component {
 
 			if ( this.state.isAPILoaded === false ) {
 				this.settings.fetch().then( ( response ) => {
-
 					this.setState( {
 						settings: response.block_visibility_settings,
-						isAPILoaded: true
+						isAPILoaded: true,
 					} );
-				});
+				} );
 			}
-		});
+		} );
 	}
 
 	handleSettingsChange( option, value ) {
 		this.setState( {
 			isAPISaving: true,
-			hasSaveError: false
+			hasSaveError: false,
 		} );
 
 		const currentSettings = this.state.settings;
 
 		const model = new wp.api.models.Settings( {
-			'block_visibility_settings': assign(
+			block_visibility_settings: assign(
 				{ ...currentSettings },
-				{ [option]: value }
-			)
+				{ [ option ]: value }
+			),
 		} );
 
 		model.save().then(
@@ -80,7 +78,7 @@ class Settings extends Component {
 					isAPISaving: false,
 				} );
 			},
-			( response ) => {
+			() => {
 				this.setState( {
 					isAPISaving: false,
 					hasSaveError: true,
@@ -89,7 +87,7 @@ class Settings extends Component {
 		);
 	}
 
-	render() {		
+	render() {
 		const isAPILoaded = this.state.isAPILoaded;
 		const isAPISaving = this.state.isAPISaving;
 		const hasSaveError = this.state.hasSaveError;
@@ -131,7 +129,6 @@ class Settings extends Component {
 					tabs={ settingTabs }
 				>
 					{ ( tab ) => {
-
 						// Don't load tabs if settings have not yet loaded
 						if ( ! isAPILoaded ) {
 							return (
@@ -154,8 +151,12 @@ class Settings extends Component {
 									<VisibilityControls
 										isAPISaving={ isAPISaving }
 										hasSaveError={ hasSaveError }
-										handleSettingsChange={ this.handleSettingsChange }
-										visibilityControls={ visibilityControls }
+										handleSettingsChange={
+											this.handleSettingsChange
+										}
+										visibilityControls={
+											visibilityControls
+										}
 									/>
 								);
 							case 'block-manager':
@@ -163,7 +164,9 @@ class Settings extends Component {
 									<BlockManager
 										isAPISaving={ isAPISaving }
 										hasSaveError={ hasSaveError }
-										handleSettingsChange={ this.handleSettingsChange }
+										handleSettingsChange={
+											this.handleSettingsChange
+										}
 										disabledBlocks={ disabledBlocks }
 										pluginSettings={ pluginSettings }
 									/>
@@ -173,7 +176,9 @@ class Settings extends Component {
 									<PluginSettings
 										isAPISaving={ isAPISaving }
 										hasSaveError={ hasSaveError }
-										handleSettingsChange={ this.handleSettingsChange }
+										handleSettingsChange={
+											this.handleSettingsChange
+										}
 										pluginSettings={ pluginSettings }
 									/>
 								);
@@ -187,8 +192,5 @@ class Settings extends Component {
 
 wp.domReady( () => {
 	registerCoreBlocks();
-	render(
-		<Settings />,
-		document.getElementById( 'bv-settings-container' )
-	);
+	render( <Settings />, document.getElementById( 'bv-settings-container' ) );
 } );

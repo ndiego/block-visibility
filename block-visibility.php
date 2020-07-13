@@ -11,7 +11,7 @@
  * License:             GPLv2
  * License URI:         https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain:         block-visibility
- * Domain Path:         /languages/
+ * Domain Path:         /languages
  *
  * @package block-visibility
  */
@@ -149,6 +149,12 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 			if ( function_exists( 'wp_set_script_translations' ) ) {
 				wp_set_script_translations(
                     'bv-editor-scripts',
+                    'block-visibility',
+                    BV_PLUGIN_DIR . '/languages'
+                );
+                
+                wp_set_script_translations(
+                    'bv-setting-scripts',
                     'block-visibility',
                     BV_PLUGIN_DIR . '/languages'
                 );

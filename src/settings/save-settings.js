@@ -23,60 +23,59 @@ import icons from './../icons';
  * @return {string}		 Return the rendered JSX
  */
 export default function SaveSettings( props ) {
-    const {
-        isAPISaving,
-        hasSaveError,
-        hasUpdates,
-        onSettingsChange,
-        notSavingMessage,
-        notSavingIcon,
-    } = props;
-    
-    const updateButton = isAPISaving
-        ? __( 'Updating...', 'block-visibility' )
-        : __( 'Update', 'block-visibility' );
-    
-    return (
-        <div className="bv-save-settings">
-            <div className="bv-save-settings__messages">
-                { [
-                    isAPISaving && (
-                        <Animate type="loading">
-                            { ( { className: animateClassName } ) => (
-                                <span className={ animateClassName } >
-                                    <Icon icon={ icons.cloud } />
-                                    { __( 'Saving', 'block-visibility' ) }
-                                </span>
-                            ) }
-                        </Animate>
-                    ),
-                    
-                    // If a message has been supplied to show when we are not 
-                    // actively saving settings, display it.
-                    ! isAPISaving && notSavingMessage && (
-                        <span className="visibility-message">
-                            <Icon icon={ notSavingIcon } />
-                            { notSavingMessage }
-                        </span>
-                    ),
-                    hasSaveError && (
-                        <span className="update-failed">
-                            { __( 'Update failed. Try again or contact support.' ) }
-                        </span>
-                    ),
-                ] }
-            </div>
-            <Button
-                className={ classnames(
-                    'bv-save-settings__button',
-                    { 'is-busy': isAPISaving },
-                ) }
-                onClick={ onSettingsChange }
-                disabled={ ! hasUpdates && ! hasSaveError }
-                isPrimary
-            >
-                { updateButton }
-            </Button>
-        </div>
-    );
+	const {
+		isAPISaving,
+		hasSaveError,
+		hasUpdates,
+		onSettingsChange,
+		notSavingMessage,
+		notSavingIcon,
+	} = props;
+	const updateButton = isAPISaving
+		? __( 'Updating…', 'block-visibility' )
+		: __( 'Update', 'block-visibility' );
+	return (
+		<div className="bv-save-settings">
+			<div className="bv-save-settings__messages">
+				{ [
+					isAPISaving && (
+						<Animate type="loading">
+							{ ( { className: animateClassName } ) => (
+								<span className={ animateClassName }>
+									<Icon icon={ icons.cloud } />
+									{ __( 'Saving', 'block-visibility' ) }
+								</span>
+							) }
+						</Animate>
+					),
+					// If a message has been supplied to show when we are not
+					// actively saving settings, display it.
+					! isAPISaving && notSavingMessage && (
+						<span className="visibility-message">
+							<Icon icon={ notSavingIcon } />
+							{ notSavingMessage }
+						</span>
+					),
+					hasSaveError && (
+						<span className="update-failed">
+							{ __(
+								'Update failed. Try again or contact support.',
+								'block-visibility'
+							) }
+						</span>
+					),
+				] }
+			</div>
+			<Button
+				className={ classnames( 'bv-save-settings__button', {
+					'is-busy': isAPISaving,
+				} ) }
+				onClick={ onSettingsChange }
+				disabled={ ! hasUpdates && ! hasSaveError }
+				isPrimary
+			>
+				{ updateButton }
+			</Button>
+		</div>
+	);
 }

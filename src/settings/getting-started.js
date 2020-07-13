@@ -20,8 +20,8 @@ import {
  * Temporary solution until WP 5.5 is released with createInterpolateElement
  */
 const interpolateElement = ( typeof createInterpolateElement === 'function' )
-    ? createInterpolateElement
-    : __experimentalCreateInterpolateElement;
+	? createInterpolateElement
+	: __experimentalCreateInterpolateElement;
 
 /**
  * Renders the Getting Started tab of the Block Visibility settings page
@@ -31,7 +31,7 @@ const interpolateElement = ( typeof createInterpolateElement === 'function' )
  * @return {string}		 Return the rendered JSX
  */
 export default function GettingStarted( props ) {
-    return (
+	return (
 		<div className="bv-getting-started inner-container">
 			<div className="bv-tab-panel__description">
 				<h2>{ __( 'Welcome', 'block-visibility' ) }</h2>
@@ -60,7 +60,7 @@ export default function GettingStarted( props ) {
 							'block-visibility'
 						),
 						{
-							a: <a href="https://wordpress.org/support/article/wordpress-editor/#the-anatomy-of-a-block" target="_blank" />,
+							a: <a href="https://wordpress.org/support/article/wordpress-editor/#the-anatomy-of-a-block" target="_blank" rel="noreferrer"/>,
 						}
 					) }
 				</p>
@@ -78,30 +78,30 @@ export default function GettingStarted( props ) {
 				</p>
 			</div>
 			<div className="bv-getting-started__panels">
-                <PanelBody
-                    title={ __( 'Visibility Controls', 'block-visibility' ) }
+				<PanelBody
+					title={ __( 'Visibility Controls', 'block-visibility' ) }
 					initialOpen={ false }
-                >
+				>
 						<p>
 							{ __(
 								'Visibility controls form the engine that powers Block Visibility. These are the settings that determine whether a block is hidden on the frontend of your website. We strive to provide as much visibility control as possible, and as development for Block Visibility continues, expect even more functionality in the future. However, we understand that some users do not need every option. It is equally important to have a decluttered and streamlined user interface. Therefore, on the Visibility Controls tab of this settings page, you can enable or disable any control.',
 								'block-visibility'
 							) }
 						</p>
-                </PanelBody>
+				</PanelBody>
 				<PanelBody
-                    title={ __( 'Block Manager', 'block-visibility' ) }
+					title={ __( 'Block Manager', 'block-visibility' ) }
 					initialOpen={ false }
-                >
-                    <PanelRow>
+				>
+					<PanelRow>
 						<p>
 							{ __(
 								'Please note that when a control is disabled, blocks that relied on the disabled control will likely become visible again. For example, the “Hide Block” control globally hides blocks for all users. A block with this setting enabled would become visible again if you disable the “Hide Block” control. Likely this is what you intended, but we wanted to provide this warning just in case.',
 								'block-visibility'
 							) }
 						</p>
-                    </PanelRow>
-                </PanelBody>
+					</PanelRow>
+				</PanelBody>
 				<PanelBody
 					title={ __( 'General Settings', 'block-visibility' ) }
 					initialOpen={ false }
@@ -116,16 +116,24 @@ export default function GettingStarted( props ) {
 					</PanelRow>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'Frequently Asked Questions', 'block-visibility' ) }
+					title={ __(
+						'Frequently Asked Questions',
+						'block-visibility'
+					) }
 					initialOpen={ false }
 				>
 					<PanelRow>
 						Getting Started...
 					</PanelRow>
 				</PanelBody>
-            </div>
+			</div>
 			<div className="bv-getting-started__help">
-				<h2>{ __( 'Need more help? Have a question?', 'block-visibility' ) }</h2>
+				<h2>
+					{ __(
+						'Need more help? Have a question?',
+						'block-visibility'
+					) }
+				</h2>
 				<p>
 					{ __(
 						'Whether you need more help, have a quick question, or you have a feature request, please create a topic in this plugin\'s support forum on WordPress.org.',
@@ -136,9 +144,9 @@ export default function GettingStarted( props ) {
 					href={ blockVisibilityVariables.supportUrl }
 					isPrimary
 				>
-				 	{ __( 'Get Support', 'block-visibility' ) }
+					{ __( 'Get Support', 'block-visibility' ) }
 				</Button>
 			</div>
 		</div>
-    );
+	);
 }

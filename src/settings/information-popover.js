@@ -1,20 +1,10 @@
-
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useState, useEffect } from '@wordpress/element';
-import {
-    Popover,
-    Button,
-    ExternalLink
-} from '@wordpress/components';
+import { useState } from '@wordpress/element';
+import { Popover, Button, ExternalLink } from '@wordpress/components';
 import { Icon, info } from '@wordpress/icons';
-
-/**
- * Internal dependencies
- */
-import icons from './../icons';
 
 /**
  * Renders the more information icon and the information popover
@@ -24,36 +14,36 @@ import icons from './../icons';
  * @return {string}		 Return the rendered JSX
  */
 export default function InformationPopover( props ) {
-    const [ popoverVisible, setPopoverVisible ] = useState( false );
-    const { message, subMessage, link, position, } = props;
-    const popoverPosition = position ?? 'bottom center';
-    
-    return (
-        <div className="information-popover">
-            <Button 
-                className="information-popover__button"
-                onClick={ () => setPopoverVisible( ! popoverVisible ) }
-            >
-                <Icon icon={ info } />
-            </Button>
-            { popoverVisible && (
-                <Popover
-                    className="information-popover__popover"
-                    position={ popoverPosition }
-                    focusOnMount="container"
-                    onFocusOutside={ () => setPopoverVisible( ! popoverVisible ) }
-                >
-                    <p>{ message }</p>
-                    { subMessage && (
-                        <p>{ subMessage }</p>
-                    ) }
-                    { link && (
-                        <ExternalLink href={ link }>
-                            { __( 'Learn More', 'block-visibility' ) }
-                        </ExternalLink>
-                    ) }
-                </Popover>
-            ) }
-        </div>
-    );
+	const [ popoverVisible, setPopoverVisible ] = useState( false );
+	const { message, subMessage, link, position } = props;
+	const popoverPosition = position ?? 'bottom center';
+
+	return (
+		<div className="information-popover">
+			<Button
+				className="information-popover__button"
+				onClick={ () => setPopoverVisible( ! popoverVisible ) }
+			>
+				<Icon icon={ info } />
+			</Button>
+			{ popoverVisible && (
+				<Popover
+					className="information-popover__popover"
+					position={ popoverPosition }
+					focusOnMount="container"
+					onFocusOutside={ () =>
+						setPopoverVisible( ! popoverVisible )
+					}
+				>
+					<p>{ message }</p>
+					{ subMessage && <p>{ subMessage }</p> }
+					{ link && (
+						<ExternalLink href={ link }>
+							{ __( 'Learn More', 'block-visibility' ) }
+						</ExternalLink>
+					) }
+				</Popover>
+			) }
+		</div>
+	);
 }

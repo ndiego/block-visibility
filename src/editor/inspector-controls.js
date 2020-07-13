@@ -10,17 +10,17 @@ import { __ } from '@wordpress/i18n';
 import { PanelBody, Notice } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
 import { useEntityProp } from "@wordpress/core-data";
-import { 
+import {
 	__experimentalCreateInterpolateElement,
-	createInterpolateElement 
+	createInterpolateElement
 } from '@wordpress/element';
 
 /**
  * Temporary solution until WP 5.5 is released with createInterpolateElement
  */
 const interpolateElement = ( typeof createInterpolateElement === 'function' )
-    ? createInterpolateElement 
-    : __experimentalCreateInterpolateElement;
+	? createInterpolateElement
+	: __experimentalCreateInterpolateElement;
 
 /**
  * Internal dependencies
@@ -36,35 +36,35 @@ import VisibilityByRole from './visibility-by-role';
  * @return {string}		 Return the rendered JSX
  */
 export default function VisibilityInspectorControls( props ) {
-	
+
 	// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
-	const [ blockVisibilitySettings, setBlockVisibilitySettings ] = useEntityProp( 
-		'root', 
-		'site', 
-		'block_visibility_settings' 
+	const [ blockVisibilitySettings, setBlockVisibilitySettings ] = useEntityProp(
+		'root',
+		'site',
+		'block_visibility_settings'
 	);
 
 	// Need to wait until the main settings object is loaded.
 	const disabledBlocks = blockVisibilitySettings ? blockVisibilitySettings.disabled_blocks : null;
 	const visibilityControls = blockVisibilitySettings ? blockVisibilitySettings.visibility_controls : null;
 
-	// Make sure we have the disabled blocks setting, otherwise just abort. 
+	// Make sure we have the disabled blocks setting, otherwise just abort.
 	// Something is not working properly
 	if ( ! disabledBlocks ) {
 		return null;
 	}
-	
+
 	const { name, attributes, setAttributes, blockTypes, hasBlockSupport } = props;
 	const { blockVisibility } = attributes;
 	const blockDisabled = disabledBlocks.includes( name );
 	const isAllowed = has( attributes, 'blockVisibility' );
-	
+
 	// If the visibility settings have been disabled for the block type or the
 	// block type does not have the blockVisibility attribute registered, abort
-	if ( blockDisabled || ! isAllowed ) {		
+	if ( blockDisabled || ! isAllowed ) {
 		return null;
 	}
-	
+
 	const controlsEnabled = filter( visibilityControls, { enable: true } ).length;
 
 	// Check is the hide block control is set, default to "true".
@@ -85,29 +85,29 @@ export default function VisibilityInspectorControls( props ) {
 								<HideBlock { ...props } />
 							) }
 							{ showAdditionalControls && (
-								<VisibilityByRole 
+								<VisibilityByRole
 									visibilityControls={ visibilityControls }
-									{ ...props } 
+									{ ...props }
 								/>
 								// More controls here in the future...
 							) }
 						</>
 					) }
 					{ ! controlsEnabled && (
-						<Notice 
-		                    status="warning"
-		                    isDismissible={ false }
-		                >
+						<Notice
+							status="warning"
+							isDismissible={ false }
+						>
 							{ interpolateElement(
-								__( 
-									'Looks like all Visibility Controls have been disabled. To control block visibility again, re-enable some <a>Visibility Controls</a>.', 
-									'block-visibility' 
+								__(
+									'Looks like all Visibility Controls have been disabled. To control block visibility again, re-enable some <a>Visibility Controls</a>.',
+									'block-visibility'
 								),
 								{
 									a: <a href={ blockVisibilityVariables.settingsUrl } target="_blank" />,
 								}
 							) }
-		                </Notice>
+						</Notice>
 					) }
 				</div>
 			</PanelBody>

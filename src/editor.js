@@ -18,16 +18,16 @@ import VisibilityInspectorControls from './editor/inspector-controls';
 
 /**
  * Add the visibility setting sttribute to selected blocks.
- * 
+ *
  * @since 1.0.0
  * @param {Object}  settings All settings associated with a block type.
  * @return {Object} settings The updated array of settings.
  */
 function blockVisibilityAttribute( settings ) {
-	
+
 	// This is a global variable added to the page via PHP
 	const fullControlMode = blockVisibilityFullControlMode;
-	
+
 	if ( fullControlMode ) {
 		settings.attributes = assign( settings.attributes, {
 			blockVisibility: {
@@ -41,7 +41,7 @@ function blockVisibilityAttribute( settings ) {
 					},
 					restrictedRoles: {
 						type: 'array',
-					}		
+					}
 				},
 				default: {
 					hideBlock: false,
@@ -51,7 +51,7 @@ function blockVisibilityAttribute( settings ) {
 			}
 		} );
 	} else {
-		
+
 		// We don't want to enable visibility for blocks that cannot be added via
 		// the inserter of is a child block. This excludes blocks such as reusable
 		// blocks, individual column block, etc.
@@ -68,7 +68,7 @@ function blockVisibilityAttribute( settings ) {
 						},
 						restrictedRoles: {
 							type: 'array',
-						}		
+						}
 					},
 					default: {
 						hideBlock: false,
@@ -87,14 +87,14 @@ function blockVisibilityAttribute( settings ) {
  * Filter the block edit object and add visibility controls to selected blocks.
  */
 const blockVisibilityEditorControls = createHigherOrderComponent( ( BlockEdit ) => {
-    return ( props ) => {
+	return ( props ) => {
 		return (
 			<>
 				<BlockEdit { ...props } />
 				<VisibilityInspectorControls { ...props } />
 			</>
-		);	
-    };
+		);
+	};
 }, 'blockVisibilityEditorControls' );
 
 
