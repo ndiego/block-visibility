@@ -23,16 +23,14 @@ export default function HideBlock( props ) {
 
 	return (
 		<ToggleControl
-			label={ __(
-				'Hide block',
-				'block-visibility'
-			) }
+			label={ __( 'Hide block', 'block-visibility' ) }
 			checked={ hideBlock }
-			onChange={ () => setAttributes( {
+			onChange={ () =>
+				setAttributes( {
 					blockVisibility: assign(
 						{ ...blockVisibility },
 						{ hideBlock: ! hideBlock }
-					)
+					),
 				} )
 			}
 			help={ __(

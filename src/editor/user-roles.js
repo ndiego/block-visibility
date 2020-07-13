@@ -1,16 +1,13 @@
 /**
  * External dependencies
  */
-import { map, assign, includes } from 'lodash';
+import { map, assign, includes } from 'lodash'; // eslint-disable-line
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import {
-	ToggleControl,
-	CheckboxControl,
-} from '@wordpress/components';
+import { CheckboxControl } from '@wordpress/components';
 
 /**
  * Add the User Roles control to the main Visibility By User Role control
@@ -22,14 +19,17 @@ import {
 export default function UserRoles( props ) {
 	const { attributes, setAttributes } = props;
 	const { blockVisibility } = attributes;
-	const {	restrictedRoles } = blockVisibility;
+	const { restrictedRoles } = blockVisibility;
 
 	// This is a global variable added to the page via PHP
-	const roles = blockVisibilityUserRoles;
+	const roles = blockVisibilityUserRoles; // eslint-disable-line
 
 	return (
 		<div className="bv-settings__user-roles">
-			<label className="bv-settings__user-roles-label">
+			<label
+				id="bv-control__user-roles"
+				className="bv-settings__user-roles-label"
+			>
 				{ __( 'Restrict by User Role', 'block-visibility' ) }
 			</label>
 			<p className="bv-settings__user-roles-help">
@@ -40,30 +40,32 @@ export default function UserRoles( props ) {
 			</p>
 			<div className="bv-settings__user-roles-control">
 				{ roles.map( ( role ) => {
-					let newRestrictedRoles = [ ...restrictedRoles ];
+					const newRestrictedRoles = [ ...restrictedRoles ];
 					const isChecked = restrictedRoles.includes( role.name );
 
 					if ( isChecked ) {
 						const index = newRestrictedRoles.indexOf( role.name );
-						index > -1 && newRestrictedRoles.splice(index, 1);
+						index > -1 && newRestrictedRoles.splice( index, 1 ); // eslint-disable-line
 					} else {
-						newRestrictedRoles.indexOf( role.name ) === -1 &&
-						newRestrictedRoles.push( role.name );
+						newRestrictedRoles.indexOf( role.name ) === -1 && // eslint-disable-line
+							newRestrictedRoles.push( role.name );
 					}
 
 					return (
 						<CheckboxControl
+							key={ role }
 							checked={ isChecked }
 							label={ <span>{ role.title }</span> }
-							onChange={ () => setAttributes( {
+							onChange={ () =>
+								setAttributes( {
 									blockVisibility: assign(
 										{ ...blockVisibility },
 										{ restrictedRoles: newRestrictedRoles }
-									)
+									),
 								} )
 							}
 						/>
-					)
+					);
 				} ) }
 			</div>
 		</div>

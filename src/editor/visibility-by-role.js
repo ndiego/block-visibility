@@ -6,19 +6,20 @@ import { assign } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import { RadioControl, Notice } from '@wordpress/components';
 import {
 	__experimentalCreateInterpolateElement,
-	createInterpolateElement
+	createInterpolateElement,
 } from '@wordpress/element';
 
 /**
  * Temporary solution until WP 5.5 is released with createInterpolateElement
  */
-const interpolateElement = ( typeof createInterpolateElement === 'function' )
-	? createInterpolateElement
-	: __experimentalCreateInterpolateElement;
+const interpolateElement =
+	typeof createInterpolateElement === 'function'
+		? createInterpolateElement
+		: __experimentalCreateInterpolateElement;
 
 /**
  * Internal dependencies
@@ -35,10 +36,12 @@ import UserRoles from './user-roles';
 export default function VisibilityByRole( props ) {
 	const { attributes, setAttributes, visibilityControls } = props;
 	const { blockVisibility } = attributes;
-	const { hideBlock, visibilityByRole } = blockVisibility;
+	const { visibilityByRole } = blockVisibility;
 
-	const visibilityByRoleEnable = visibilityControls?.visibility_by_role?.enable ?? true;
-	const visibilityByRoleEnableUseRoles = visibilityControls?.visibility_by_role?.enable_user_roles ?? true;
+	// This is a global variable added to the page via PHP
+	const settingsUrl = blockVisibilityVariables.settingsUrl; // eslint-disable-line
+	const visibilityByRoleEnable = visibilityControls?.visibility_by_role?.enable ?? true; // eslint-disable-line
+	const visibilityByRoleEnableUseRoles = visibilityControls?.visibility_by_role?.enable_user_roles ?? true; // eslint-disable-line
 
 	if ( ! visibilityByRoleEnable ) {
 		return null;
@@ -78,7 +81,10 @@ export default function VisibilityByRole( props ) {
 		{
 			label: optionLabel(
 				__( 'User Role', 'block-visibility' ),
-				__( 'Restrict visibility to specific user roles', 'block-visibility' )
+				__(
+					'Restrict visibility to specific user roles',
+					'block-visibility'
+				)
 			),
 			value: 'user-role',
 		},
@@ -95,33 +101,37 @@ export default function VisibilityByRole( props ) {
 				label={ __( 'Visibility by User Role', 'block-visibility' ) }
 				selected={ visibilityByRole }
 				options={ options }
-				onChange={ ( value ) => setAttributes( {
+				onChange={ ( value ) =>
+					setAttributes( {
 						blockVisibility: assign(
 							{ ...blockVisibility },
 							{ visibilityByRole: value }
-						)
+						),
 					} )
 				}
 			/>
-			{ visibilityByRole === 'user-role' && visibilityByRoleEnableUseRoles && (
-				<UserRoles { ...props } />
-			) }
-			{ visibilityByRole === 'user-role' && ! visibilityByRoleEnableUseRoles && (
-				<Notice
-					status="warning"
-					isDismissible={ false }
-				>
-					{ interpolateElement(
-						__(
-							'The User Role option was previously selected, but is now disabled. Choose another option or update the <a>Visibility Control</a> settings.',
-							'block-visibility'
-						),
-						{
-							a: <a href={ blockVisibilityVariables.settingsUrl } target="_blank" />,
-						}
-					) }
-				</Notice>
-			) }
+			{ visibilityByRole === 'user-role' &&
+				visibilityByRoleEnableUseRoles && <UserRoles { ...props } /> }
+			{ visibilityByRole === 'user-role' &&
+				! visibilityByRoleEnableUseRoles && (
+					<Notice status="warning" isDismissible={ false }>
+						{ interpolateElement(
+							__(
+								'The User Role option was previously selected, but is now disabled. Choose another option or update the <a>Visibility Control</a> settings.',
+								'block-visibility'
+							),
+							{
+								a: (
+									<a // eslint-disable-line
+										href={ settingsUrl }
+										target="_blank"
+										rel="noreferrer"
+									/>
+								),
+							}
+						) }
+					</Notice>
+				) }
 		</div>
 	);
 }

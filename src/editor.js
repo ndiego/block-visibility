@@ -9,7 +9,6 @@ import { assign } from 'lodash';
 import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { hasBlockSupport } from '@wordpress/blocks';
-import { useEntityProp } from "@wordpress/core-data";
 
 /**
  * Internal dependencies
@@ -24,9 +23,8 @@ import VisibilityInspectorControls from './editor/inspector-controls';
  * @return {Object} settings The updated array of settings.
  */
 function blockVisibilityAttribute( settings ) {
-
 	// This is a global variable added to the page via PHP
-	const fullControlMode = blockVisibilityFullControlMode;
+	const fullControlMode = blockVisibilityFullControlMode; // eslint-disable-line
 
 	if ( fullControlMode ) {
 		settings.attributes = assign( settings.attributes, {
@@ -41,21 +39,23 @@ function blockVisibilityAttribute( settings ) {
 					},
 					restrictedRoles: {
 						type: 'array',
-					}
+					},
 				},
 				default: {
 					hideBlock: false,
 					visibilityByRole: 'all',
-					restrictedRoles: []
-				}
-			}
+					restrictedRoles: [],
+				},
+			},
 		} );
 	} else {
-
 		// We don't want to enable visibility for blocks that cannot be added via
 		// the inserter of is a child block. This excludes blocks such as reusable
 		// blocks, individual column block, etc.
-		if ( hasBlockSupport( settings, 'inserter', true ) && ! settings.hasOwnProperty( 'parent' ) ) {
+		if (
+			hasBlockSupport( settings, 'inserter', true ) &&
+			! settings.hasOwnProperty( 'parent' )
+		) {
 			settings.attributes = assign( settings.attributes, {
 				blockVisibility: {
 					type: 'object',
@@ -68,14 +68,14 @@ function blockVisibilityAttribute( settings ) {
 						},
 						restrictedRoles: {
 							type: 'array',
-						}
+						},
 					},
 					default: {
 						hideBlock: false,
 						visibilityByRole: 'all',
-						restrictedRoles: []
-					}
-				}
+						restrictedRoles: [],
+					},
+				},
 			} );
 		}
 	}
@@ -86,22 +86,24 @@ function blockVisibilityAttribute( settings ) {
 /**
  * Filter the block edit object and add visibility controls to selected blocks.
  */
-const blockVisibilityEditorControls = createHigherOrderComponent( ( BlockEdit ) => {
-	return ( props ) => {
-		return (
-			<>
-				<BlockEdit { ...props } />
-				<VisibilityInspectorControls { ...props } />
-			</>
-		);
-	};
-}, 'blockVisibilityEditorControls' );
-
+const blockVisibilityEditorControls = createHigherOrderComponent(
+	( BlockEdit ) => {
+		return ( props ) => {
+			return (
+				<>
+					<BlockEdit { ...props } />
+					<VisibilityInspectorControls { ...props } />
+				</>
+			);
+		};
+	},
+	'blockVisibilityEditorControls'
+);
 
 addFilter(
 	'blocks.registerBlockType',
 	'block-visibility/block-visibility-attribute',
-	blockVisibilityAttribute,
+	blockVisibilityAttribute
 );
 addFilter(
 	'editor.BlockEdit',

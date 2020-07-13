@@ -43,10 +43,8 @@ export default function VisibilityControls( props ) {
 
 	// Manually set defaults, this ensures the main settings function properly
 	const hideBlockEnable = visibilityControls?.hide_block?.enable ?? true; // eslint-disable-line
-	const visibilityByRoleEnable =
-		visibilityControls?.visibility_by_role?.enable ?? true; // eslint-disable-line
-	const visibilityByRoleEnableUseRoles =
-		visibilityControls?.visibility_by_role?.enable_user_roles ?? true; // eslint-disable-line
+	const visibilityByRoleEnable = visibilityControls?.visibility_by_role?.enable ?? true; // eslint-disable-line
+	const visibilityByRoleEnableUseRoles = visibilityControls?.visibility_by_role?.enable_user_roles ?? true; // eslint-disable-line
 
 	return (
 		<div className="bv-visibility-controls inner-container">
