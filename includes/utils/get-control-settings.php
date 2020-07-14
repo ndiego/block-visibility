@@ -5,7 +5,7 @@
  * @package block-visibility
  * @since   1.0.0
  */
- 
+
 namespace BlockVisibility\Utils;
 
 /**
@@ -18,19 +18,19 @@ namespace BlockVisibility\Utils;
  * @return boolean             Is the control (or subcontrol) enabled?
  */
 function is_control_enabled( $settings, $control, $subcontrol = 'enable' ) {
-    
-    if ( isset( $settings['visibility_controls'] ) ) {
-        $visibility_controls = $settings['visibility_controls'];
-    } else {
-        // We want controls to be enabled by default, so if the visibility 
-        // control settings are missing for some reason just return "true".
-        return true;
-    }
-    
-    // If the settings don't exist, again, we want to default to "true".
-    if ( isset( $visibility_controls[$control][$subcontrol] ) ) {
-        return $visibility_controls[$control][$subcontrol];
-    } else {
-        return true;
-    }
+
+	if ( isset( $settings['visibility_controls'] ) ) {
+		$visibility_controls = $settings['visibility_controls'];
+	} else {
+		// We want controls to be enabled by default, so if the visibility
+		// control settings are missing for some reason just return "true".
+		return true;
+	}
+
+	// If the settings don't exist, again, we want to default to "true".
+	if ( isset( $visibility_controls[$control][$subcontrol] ) ) {
+		return $visibility_controls[$control][$subcontrol];
+	} else {
+		return true;
+	}
 }

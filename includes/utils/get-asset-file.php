@@ -5,7 +5,7 @@
  * @package block-visibility
  * @since   1.0.0
  */
- 
+
 namespace BlockVisibility\Utils;
 
 /**
@@ -17,12 +17,12 @@ namespace BlockVisibility\Utils;
  * @return array           The asset file contents.
  */
 function get_asset_file( $filepath ) {
-    $asset_path = BV_PLUGIN_DIR . $filepath . '.asset.php';
+	$asset_path = BV_PLUGIN_DIR . $filepath . '.asset.php';
 
-    return file_exists( $asset_path )
-        ? include $asset_path
-        : array(
-            'dependencies' => array(),
-            'version'      => BV_VERSION,
-        );
+	return file_exists( $asset_path )
+		? include $asset_path
+		: array(
+			'dependencies' => array(),
+			'version'      => BV_VERSION,
+		);
 }

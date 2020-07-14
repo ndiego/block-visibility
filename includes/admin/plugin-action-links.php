@@ -17,17 +17,17 @@ namespace BlockVisibility\Admin;
  * @return array $plugin_links The new array of action links
  */
 function add_plugin_action_links( $plugin_links, $plugin_file ) {
-	
+
 	// If we are not on the correct plugin, abort.
 	if ( ! defined( 'BV_PLUGIN_BASE' ) ) {
 		define( 'BV_PLUGIN_BASE', null );
 	}
-	
+
 	if ( BV_PLUGIN_BASE === $plugin_file ) {
 		$settings_link =  '<a href="' . BV_SETTINGS_URL . '">';
 		$settings_link .= __( 'Settings', 'block-visibility' );
 		$settings_link .= '</a>';
-		
+
 		array_push( $plugin_links, $settings_link );
 	}
 
@@ -55,7 +55,7 @@ function add_plugin_row_meta( $plugin_meta, $plugin_file ) {
 		$review_link =  '<a href="' . esc_url( BV_REVIEW_URL ) . '" aria-label="' . esc_attr( __( 'Review Block Visibility on WordPress.org', 'block-visibility' ) ) . '" target="_blank">';
 		$review_link .= __( 'Leave a Review', 'block-visibility' );
 		$review_link .= '</a>';
-		
+
 		$row_meta = array(
 			'review' =>  $review_link,
 		);
