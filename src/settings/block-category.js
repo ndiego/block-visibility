@@ -32,8 +32,8 @@ export default function BlockCategory( props ) {
 	} = props;
 
 	function onBlockCategoryChange( checked ) {
-		const blockNames = map( blockTypes, 'name' );
-		handleBlockCategoryChange( checked, blockNames );
+		const blockTypeNames = map( blockTypes, 'name' );
+		handleBlockCategoryChange( checked, blockTypeNames );
 	}
 
 	// If category has no blocks, abort.
@@ -66,9 +66,7 @@ export default function BlockCategory( props ) {
 			<div className="bv-block-manager__category-title">
 				<CheckboxControl
 					checked={ isAllChecked }
-					onChange={ ( isAllChecked ) =>
-						onBlockCategoryChange( isAllChecked )
-					}
+					onChange={ ( checked ) => onBlockCategoryChange( checked ) }
 					aria-checked={ ariaChecked }
 					label={
 						<span id={ categoryTitleId }>

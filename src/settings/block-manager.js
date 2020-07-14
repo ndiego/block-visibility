@@ -49,15 +49,18 @@ function BlockManager( props ) {
 		setHasUpdates( false );
 	}
 
-	function handleBlockCategoryChange( checked, blockTypes ) {
+	function handleBlockCategoryChange( checked, blockTypeNames ) {
 		let currentDisabledBlocks = [ ...disabledBlocks ];
 
 		if ( ! checked ) {
-			currentDisabledBlocks = union( currentDisabledBlocks, blockTypes );
+			currentDisabledBlocks = union(
+				currentDisabledBlocks,
+				blockTypeNames
+			);
 		} else {
 			currentDisabledBlocks = difference(
 				currentDisabledBlocks,
-				blockTypes
+				blockTypeNames
 			);
 		}
 
@@ -65,13 +68,16 @@ function BlockManager( props ) {
 		setHasUpdates( true );
 	}
 
-	function handleBlockTypeChange( checked, blockType ) {
+	function handleBlockTypeChange( checked, blockTypeName ) {
 		let currentDisabledBlocks = [ ...disabledBlocks ];
 
 		if ( ! checked ) {
-			currentDisabledBlocks.push( blockType );
+			currentDisabledBlocks.push( blockTypeName );
 		} else {
-			currentDisabledBlocks = without( currentDisabledBlocks, blockType );
+			currentDisabledBlocks = without(
+				currentDisabledBlocks,
+				blockTypeName
+			);
 		}
 
 		setDisabledBlocks( currentDisabledBlocks );
@@ -123,6 +129,7 @@ function BlockManager( props ) {
 	if ( trueDisabledBlocks.length ) {
 		visibilityIcon = icons.visibilityHidden;
 		visibilityMessage = sprintf(
+			/* translators: %s: The total number of visible block types */
 			_n(
 				'Visibility is disabled for %s block type',
 				'Visibility is disabled for %s block types',

@@ -1,0 +1,24 @@
+{
+	"name": "block-visibility",
+	"description": "Block-based visibility control for WordPress.",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"require": {
+		"php": ">=5.6"
+	},
+	"config": {
+		"platform": {
+			"php": "5.6"
+		}
+	},
+	"require-dev": {
+		"squizlabs/php_codesniffer": "^3.5",
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+		"phpcompatibility/phpcompatibility-wp": "^2.1",
+		"wp-coding-standards/wpcs": "^2.1",
+		"wp-cli/wp-cli-bundle": "^2.4"
+	},
+	"scripts": {
+		"lint": "@php ./vendor/bin/phpcs",
+	}
+}

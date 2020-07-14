@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { includes } from 'lodash';
+import { includes } from 'lodash';  // eslint-disable-line
 
 /**
  * WordPress dependencies
@@ -29,7 +29,7 @@ export default function BlockType( props ) {
 		<li key={ blockType.name } className="bv-block-manager__blocks-item">
 			<CheckboxControl
 				checked={ isChecked }
-				onChange={ ( isChecked ) => onBlockTypeChange( isChecked ) }
+				onChange={ ( checked ) => onBlockTypeChange( checked ) }
 				label={
 					<span>
 						{ blockType.title }

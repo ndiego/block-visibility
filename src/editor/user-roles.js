@@ -27,7 +27,7 @@ export default function UserRoles( props ) {
 	return (
 		<div className="bv-settings__user-roles">
 			<label
-				id="bv-control__user-roles"
+				htmlFor="bv-control__user-roles"
 				className="bv-settings__user-roles-label"
 			>
 				{ __( 'Restrict by User Role', 'block-visibility' ) }
@@ -38,7 +38,10 @@ export default function UserRoles( props ) {
 					'block-visibility'
 				) }
 			</p>
-			<div className="bv-settings__user-roles-control">
+			<div
+				id="bv-control__user-roles"
+				className="bv-settings__user-roles-control"
+			>
 				{ roles.map( ( role ) => {
 					const newRestrictedRoles = [ ...restrictedRoles ];
 					const isChecked = restrictedRoles.includes( role.name );
