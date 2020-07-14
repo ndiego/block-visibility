@@ -14,10 +14,10 @@ use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
  * Run test to see if block visibility should be restricted by user role.
  *
  * @since   1.0.0
- * @param boolean   $is_visible The current value of the visibility test
- * @param array     $settings   The core plugin settings
- * @param array     $block      The block info and attributes
- * @return boolean              Return true is the block should be visible, false if not
+ * @param boolean $is_visible The current value of the visibility test.
+ * @param array   $settings   The core plugin settings.
+ * @param array   $block      The block info and attributes.
+ * @return boolean            Return true is the block should be visible, false if not.
  */
 function test_visibility_by_role( $is_visible, $settings, $block ) {
 
@@ -36,13 +36,13 @@ function test_visibility_by_role( $is_visible, $settings, $block ) {
 		: null;
 
 	// Run through our visibility by role tests.
-	if ( ! $visibility_by_role || $visibility_by_role === 'all' ){
+	if ( ! $visibility_by_role || 'all' === $visibility_by_role ) {
 		return true;
-	} else if ( $visibility_by_role === 'logged-out' && ! is_user_logged_in() ) {
+	} elseif ( 'logged-out' === $visibility_by_role && ! is_user_logged_in() ) {
 		return true;
-	} else if ( $visibility_by_role === 'logged-in' && is_user_logged_in() ) {
+	} elseif ( 'logged-in' === $visibility_by_role && is_user_logged_in() ) {
 		return true;
-	} else if ( $visibility_by_role === 'user-role' ) {
+	} elseif ( 'user-role' === $visibility_by_role ) {
 
 		// If this functionality has been disabled, skip test.
 		if ( ! is_control_enabled( $settings, 'visibility_by_role', 'enable_user_roles' ) ) {
@@ -57,7 +57,7 @@ function test_visibility_by_role( $is_visible, $settings, $block ) {
 		// hidden.
 		if ( ! empty( $restricted_roles ) ) {
 
-			if ( in_array( 'public', $restricted_roles ) && ! is_user_logged_in() ){
+			if ( in_array( 'public', $restricted_roles, true ) && ! is_user_logged_in() ) {
 				return true;
 			}
 
@@ -79,4 +79,4 @@ function test_visibility_by_role( $is_visible, $settings, $block ) {
 	// If we don't pass any of the above tests, hide the block.
 	return false;
 }
-add_filter( 'block_visibility_test', __NAMESPACE__ . '\test_visibility_by_role', 10, 3 );
+add_filter( 'blockvisibility_visibility_test', __NAMESPACE__ . '\test_visibility_by_role', 10, 3 );

@@ -20,76 +20,76 @@ function register_settings() {
 		'block_visibility',
 		'block_visibility_settings',
 		array(
-			'type' => 'object',
+			'type'         => 'object',
 			'show_in_rest' => array(
 				'schema' => array(
-					'type'  => 'object',
+					'type'       => 'object',
 					'properties' => array(
 						'visibility_controls' => array(
-							'type'  => 'object',
+							'type'       => 'object',
 							'properties' => array(
-								'hide_block' => array(
-									'type'  => 'object',
+								'hide_block'         => array(
+									'type'       => 'object',
 									'properties' => array(
 										'enable' => array(
-											'type'  => 'boolean',
+											'type' => 'boolean',
 										),
 									),
 								),
 								'visibility_by_role' => array(
-									'type'  => 'object',
+									'type'       => 'object',
 									'properties' => array(
 										'enable' => array(
-											'type'  => 'boolean',
+											'type' => 'boolean',
 										),
 										'enable_user_roles' => array(
-											'type'  => 'boolean',
+											'type' => 'boolean',
 										),
 									),
 								),
 							),
 						),
-						'disabled_blocks' => array(
+						'disabled_blocks'     => array(
 							'type'  => 'array',
 							'items' => array(
-								'type'  => 'string',
+								'type' => 'string',
 							),
 						),
-						'plugin_settings' => array(
-							'type'  => 'object',
+						'plugin_settings'     => array(
+							'type'       => 'object',
 							'properties' => array(
 								'enable_full_control_mode' => array(
-									'type'  => 'boolean',
+									'type' => 'boolean',
 								),
-								'remove_on_uninstall' => array(
-									'type'  => 'boolean',
+								'remove_on_uninstall'      => array(
+									'type' => 'boolean',
 								),
 							),
 						),
-					)
+					),
 				),
 			),
-			'default' => [
-				'visibility_controls' => [
-					'hide_block' => [
+			'default'      => array(
+				'visibility_controls' => array(
+					'hide_block'         => array(
 						'enable' => true,
-					],
-					'visibility_by_role' => [
-						'enable' => true,
+					),
+					'visibility_by_role' => array(
+						'enable'            => true,
 						'enable_user_roles' => true,
-					],
-				],
-				'disabled_blocks' => [],
-				'plugin_settings' => [
+					),
+				),
+				'disabled_blocks'     => array(),
+				'plugin_settings'     => array(
 					'enable_full_control_mode' => false,
-					'remove_on_uninstall' => false,
-				],
-			],
+					'remove_on_uninstall'      => false,
+				),
+			),
 		)
 	);
 }
 add_action( 'rest_api_init', __NAMESPACE__ . '\register_settings' );
 add_action( 'admin_init', __NAMESPACE__ . '\register_settings' );
 
-/* TODO: remove eventually, use to reset plugin settings */
-//delete_option( 'block_visibility_settings' );
+// TODO: remove eventually, use to reset plugin settings.
+// delete_option( 'block_visibility_settings' );

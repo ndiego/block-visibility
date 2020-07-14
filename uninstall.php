@@ -16,13 +16,13 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 // Load main plugin file.
-require_once 'block-visibility.php';
+require_once 'class-blockvisibility.php';
 
 global $wpdb;
 
-$settings = get_option( 'block_visibility_settings' );
+$blockvisibility_settings = get_option( 'block_visibility_settings' );
 
 // Delete all Block Visibility settings.
-if ( $settings['plugin_settings']['remove_on_uninstall'] ) {
+if ( $blockvisibility_settings['plugin_settings']['remove_on_uninstall'] ) {
 	delete_option( 'block_visibility_settings' );
 }

@@ -45,6 +45,7 @@ function print_settings_page() {
  */
 function enqueue_settings_assets() {
 
+	// @codingStandardsIgnoreLine
 	if ( ! isset( $_GET['page'] ) || 'block-visibility-settings' !== $_GET['page'] ) {
 		return;
 	}
@@ -54,7 +55,7 @@ function enqueue_settings_assets() {
 
 	wp_enqueue_script(
 		'bv-setting-scripts',
-		BV_PLUGIN_URL . 'dist/bv-settings.js',
+		BLOCKVISIBILITY_PLUGIN_URL . 'dist/bv-settings.js',
 		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
 		$asset_file['version'],
 		true
@@ -65,20 +66,20 @@ function enqueue_settings_assets() {
 
 	wp_enqueue_style(
 		'bv-setting-styles',
-		BV_PLUGIN_URL . 'dist/bv-setting-styles.css',
-		[ 'wp-edit-blocks' ],
+		BLOCKVISIBILITY_PLUGIN_URL . 'dist/bv-setting-styles.css',
+		array( 'wp-edit-blocks' ),
 		$asset_file['version']
 	);
 
 	$plugin_variables = array(
-		'version'    => BV_VERSION,
-		'reviewUrl'  => BV_REVIEW_URL,
-		'supportUrl' => BV_SUPPORT_URL,
+		'version'    => BLOCKVISIBILITY_VERSION,
+		'reviewUrl'  => BLOCKVISIBILITY_REVIEW_URL,
+		'supportUrl' => BLOCKVISIBILITY_SUPPORT_URL,
 	);
 
 	// Create a global variable to hold all our plugin variables, not ideal,
 	// but does the trick for now...
-	$stringified_plugin_variables = "const blockVisibilityVariables = " . wp_json_encode( $plugin_variables ) . ";";
+	$stringified_plugin_variables = 'const blockVisibilityVariables = ' . wp_json_encode( $plugin_variables ) . ';';
 
 	wp_add_inline_script(
 		'bv-setting-scripts',
@@ -86,8 +87,7 @@ function enqueue_settings_assets() {
 		'after'
 	);
 
-
-	// Get all the registed block categories
+	// Get all the registed block categories.
 	$block_categories = array();
 
 	if ( function_exists( 'gutenberg_get_block_categories' ) ) {
@@ -108,10 +108,11 @@ function enqueue_settings_assets() {
 	// Make sure all custom blocks are registered. This picks up all of the
 	// custom blocks that are added to the site, otherwise you just get the
 	// core blocks.
+	// @codingStandardsIgnoreLine
 	do_action( 'enqueue_block_editor_assets' );
 
 	// Core class used for interacting with block types.
-	// https://developer.wordpress.org/reference/classes/wp_block_type_registry/
+	// https://developer.wordpress.org/reference/classes/wp_block_type_registry/.
 	$block_registry = \WP_Block_Type_Registry::get_instance();
 
 	foreach ( $block_registry->get_all_registered() as $block_name => $block_type ) {

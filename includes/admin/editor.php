@@ -29,27 +29,27 @@ function enqueue_editor_assets() {
 		return;
 	}
 
-	 // Scripts.
+	// Scripts.
 	$asset_file = get_asset_file( 'dist/bv-editor' );
 
 	wp_enqueue_script(
 		'bv-editor-scripts',
-		BV_PLUGIN_URL . 'dist/bv-editor.js',
+		BLOCKVISIBILITY_PLUGIN_URL . 'dist/bv-editor.js',
 		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
 		$asset_file['version'],
-		false // Need false to ensure our filters can target third-party plugins
+		false // Need false to ensure our filters can target third-party plugins.
 	);
 
 	$plugin_variables = array(
-		'version'    => BV_VERSION,
-		'settingsUrl' => BV_SETTINGS_URL,
+		'version'     => BLOCKVISIBILITY_VERSION,
+		'settingsUrl' => BLOCKVISIBILITY_SETTINGS_URL,
 	);
 
 	// Create a global variable to hold all our plugin variables and user roles,
 	// not ideal, but does the trick for now...
-	$stringified_editor_data = "const blockVisibilityUserRoles = " . wp_json_encode( get_user_roles() ) . ";";
-	$stringified_editor_data .= "const blockVisibilityVariables = " . wp_json_encode( $plugin_variables ) . ";";
-	$stringified_editor_data .= "const blockVisibilityFullControlMode = " . wp_json_encode( is_full_control_mode() ) . ";";
+	$stringified_editor_data  = 'const blockVisibilityUserRoles = ' . wp_json_encode( get_user_roles() ) . ';';
+	$stringified_editor_data .= 'const blockVisibilityVariables = ' . wp_json_encode( $plugin_variables ) . ';';
+	$stringified_editor_data .= 'const blockVisibilityFullControlMode = ' . wp_json_encode( is_full_control_mode() ) . ';';
 
 	wp_add_inline_script(
 		'bv-editor-scripts',
@@ -62,45 +62,45 @@ function enqueue_editor_assets() {
 
 	wp_enqueue_style(
 		'bv-editor-styles',
-		BV_PLUGIN_URL . 'dist/bv-editor-styles.css',
+		BLOCKVISIBILITY_PLUGIN_URL . 'dist/bv-editor-styles.css',
 		array(),
 		$asset_file['version']
 	);
- }
+}
 
- /**
-  * Need to add at admin_init instead of the normal enqueue_block_editor_assets
-  * so that our attributes load for third-party blocks. Hopefully this will be
-  * resolved in future releases of WP. Using enqueue_block_editor_assets is the
-  * ideal implementation.
-  */
- add_action( 'admin_init', __NAMESPACE__ . '\enqueue_editor_assets', 10000 );
+/**
+ * Need to add at admin_init instead of the normal enqueue_block_editor_assets
+ * so that our attributes load for third-party blocks. Hopefully this will be
+ * resolved in future releases of WP. Using enqueue_block_editor_assets is the
+ * ideal implementation.
+ */
+add_action( 'admin_init', __NAMESPACE__ . '\enqueue_editor_assets', 10000 );
 
 
- /**
-  * Make sure we are either on a post edit screen, or new post screen
-  *
-  * @return bool true or false
-  */
- function is_edit_or_new_admin_page() {
-	 global $pagenow;
+/**
+ * Make sure we are either on a post edit screen, or new post screen.
+ *
+ * @return bool Returns true or false.
+ */
+function is_edit_or_new_admin_page() {
+	global $pagenow;
 
-	 return (
+	return (
 		is_admin() &&
-		( $pagenow === 'post.php' || $pagenow === 'post-new.php' )
+		( 'post.php' === $pagenow || 'post-new.php' === $pagenow )
 	);
- }
+}
 
- /**
-  * See if we are in full control mode
-  *
-  * @return bool true or false
-  */
- function is_full_control_mode() {
+/**
+ * See if we are in full control mode.
+ *
+ * @return bool Returns true or false.
+ */
+function is_full_control_mode() {
 	$settings = get_option( 'block_visibility_settings' );
 
-	if ( isset( $settings[ 'plugin_settings' ][ 'enable_full_control_mode' ] ) ) {
-		return $settings[ 'plugin_settings' ][ 'enable_full_control_mode' ];
+	if ( isset( $settings['plugin_settings']['enable_full_control_mode'] ) ) {
+		return $settings['plugin_settings']['enable_full_control_mode'];
 	} else {
 		return false;
 	}

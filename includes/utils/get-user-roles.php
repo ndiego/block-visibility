@@ -13,23 +13,23 @@ namespace BlockVisibility\Utils;
  *
  * @since 1.0.0
  * @return array User $user_roles
-*/
+ */
 function get_user_roles() {
 
-	// Initialize the roles array with the default Public role
+	// Initialize the roles array with the default Public role.
 	$roles = array(
 		array(
 			'name'  => 'public',
 			'title' => __( 'Public (Logged-out Users)', 'block-visibility' ),
-			'type'  => 'public'
-		)
+			'type'  => 'public',
+		),
 	);
 
 	if ( ! function_exists( 'get_editable_roles' ) ) {
 		return $roles;
 	}
 
-	// Need to add a filter here
+	// Need to add a filter here.
 	$role_types = array(
 		'administrator' => 'core',
 		'editor'        => 'core',
@@ -38,8 +38,7 @@ function get_user_roles() {
 		'subscriber'    => 'core',
 	);
 
-	// Possible future implementation
-	/*
+	/* TODO: Possible future implementation.
 	$role_types_demo = array(
 		'core' => array(
 			'name' => __( 'WordPress Core', 'block-visibility' ),
@@ -60,12 +59,12 @@ function get_user_roles() {
 
 	foreach ( get_editable_roles() as $role_slug => $role_atts ) {
 		$atts = array(
-			'name' => $role_slug,
-			'title' => $role_atts[ 'name' ],
+			'name'  => $role_slug,
+			'title' => $role_atts['name'],
 		);
 
 		if ( array_key_exists( $role_slug, $role_types ) ) {
-			$atts['type'] = $role_types[$role_slug];
+			$atts['type'] = $role_types[ $role_slug ];
 		} else {
 			$atts['type'] = 'custom';
 		}

@@ -19,18 +19,17 @@
 namespace BlockVisibility;
 
 if ( ! defined( 'ABSPATH' ) ) {
-   exit; // Exit if accessed directly.
+	exit; // Exit if accessed directly.
 }
 
-define( 'BV_VERSION', '0.1.0' );
-define( 'BV_PLUGIN_FILE', __FILE__ );
-define( 'BV_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'BV_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'BV_PLUGIN_BASE', plugin_basename( __FILE__ ) );
-define( 'BV_REVIEW_URL', 'https://wordpress.org/support/plugin/block-visibility/reviews/?filter=5' );
-define( 'BV_SUPPORT_URL', 'https://wordpress.org/support/plugin/block-visibility/' );
-define( 'BV_SETTINGS_URL', admin_url( 'options-general.php?page=block-visibility-settings' ) );
-
+define( 'BLOCKVISIBILITY_VERSION', '0.1.0' );
+define( 'BLOCKVISIBILITY_PLUGIN_FILE', __FILE__ );
+define( 'BLOCKVISIBILITY_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'BLOCKVISIBILITY_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'BLOCKVISIBILITY_PLUGIN_BASE', plugin_basename( __FILE__ ) );
+define( 'BLOCKVISIBILITY_REVIEW_URL', 'https://wordpress.org/support/plugin/block-visibility/reviews/?filter=5' );
+define( 'BLOCKVISIBILITY_SUPPORT_URL', 'https://wordpress.org/support/plugin/block-visibility/' );
+define( 'BLOCKVISIBILITY_SETTINGS_URL', admin_url( 'options-general.php?page=block-visibility-settings' ) );
 
 if ( ! class_exists( 'BlockVisibility' ) ) {
 	/**
@@ -92,23 +91,23 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 		 */
 		public function includes() {
 
-			// Needs to be included at all times due to show_in_rest
-			require_once BV_PLUGIN_DIR . 'includes/register-settings.php';
+			// Needs to be included at all times due to show_in_rest.
+			require_once BLOCKVISIBILITY_PLUGIN_DIR . 'includes/register-settings.php';
 
-			// Only include in the admin
+			// Only include in the admin.
 			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
-				require_once BV_PLUGIN_DIR . 'includes/admin/editor.php';
-				require_once BV_PLUGIN_DIR . 'includes/admin/settings.php';
-				require_once BV_PLUGIN_DIR . 'includes/admin/plugin-action-links.php';
+				require_once BLOCKVISIBILITY_PLUGIN_DIR . 'includes/admin/editor.php';
+				require_once BLOCKVISIBILITY_PLUGIN_DIR . 'includes/admin/settings.php';
+				require_once BLOCKVISIBILITY_PLUGIN_DIR . 'includes/admin/plugin-action-links.php';
 
-				// Utility functions
-				require_once BV_PLUGIN_DIR . 'includes/utils/get-asset-file.php';
-				require_once BV_PLUGIN_DIR . 'includes/utils/get-user-roles.php';
+				// Utility functions.
+				require_once BLOCKVISIBILITY_PLUGIN_DIR . 'includes/utils/get-asset-file.php';
+				require_once BLOCKVISIBILITY_PLUGIN_DIR . 'includes/utils/get-user-roles.php';
 			}
 
-			// Only include on the frontend
-			if ( ! is_admin() ){
-				require_once BV_PLUGIN_DIR . 'includes/frontend/render-block.php';
+			// Only include on the frontend.
+			if ( ! is_admin() ) {
+				require_once BLOCKVISIBILITY_PLUGIN_DIR . 'includes/frontend/render-block.php';
 			}
 		}
 
@@ -133,14 +132,14 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 			load_plugin_textdomain(
 				'block-visibility',
 				false,
-				basename( BV_PLUGIN_DIR ) . '/languages'
+				basename( BLOCKVISIBILITY_PLUGIN_DIR ) . '/languages'
 			);
 		}
 
 		/**
 		 * Enqueue localization data for our blocks.
-		 * @// TODO: fix script identifier
-		 * @// TODO: figure out how to load translators for the settings js
+		 * TODO: fix script identifier
+		 * TODO: figure out how to load translators for the settings js
 		 *
 		 * @since 2.0.0
 		 * @return void
@@ -150,13 +149,13 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 				wp_set_script_translations(
 					'bv-editor-scripts',
 					'block-visibility',
-					BV_PLUGIN_DIR . '/languages'
+					BLOCKVISIBILITY_PLUGIN_DIR . '/languages'
 				);
 
 				wp_set_script_translations(
 					'bv-setting-scripts',
 					'block-visibility',
-					BV_PLUGIN_DIR . '/languages'
+					BLOCKVISIBILITY_PLUGIN_DIR . '/languages'
 				);
 			}
 		}
