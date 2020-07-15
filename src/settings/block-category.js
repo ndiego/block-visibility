@@ -55,15 +55,15 @@ export default function BlockCategory( props ) {
 		ariaChecked = 'false';
 	}
 
-	const categoryTitleId = 'bv-block-manager__category-title' + category.slug;
+	const categoryTitleId = 'block-manager__category-title-' + category.slug;
 
 	return (
 		<div
 			role="group"
 			aria-labelledby={ categoryTitleId }
-			className="bv-block-manager__category"
+			className="block-manager__block-category"
 		>
-			<div className="bv-block-manager__category-title">
+			<div className="block-category__title">
 				<CheckboxControl
 					checked={ isAllChecked }
 					onChange={ ( checked ) => onBlockCategoryChange( checked ) }
@@ -78,7 +78,7 @@ export default function BlockCategory( props ) {
 					}
 				/>
 			</div>
-			<ul className="bv-block-manager__blocks">
+			<ul className="block-category__blocks-list">
 				{ blockTypes.map( ( blockType ) => (
 					<BlockType
 						key={ blockType }

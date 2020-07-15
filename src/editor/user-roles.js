@@ -25,22 +25,22 @@ export default function UserRoles( props ) {
 	const roles = blockVisibilityUserRoles; // eslint-disable-line
 
 	return (
-		<div className="bv-settings__user-roles">
+		<>
 			<label
-				htmlFor="bv-control__user-roles"
-				className="bv-settings__user-roles-label"
+				htmlFor="block-visibility-control__user-roles"
+				className="user-roles__label"
 			>
 				{ __( 'Restrict by User Role', 'block-visibility' ) }
 			</label>
-			<p className="bv-settings__user-roles-help">
+			<p className="user-roles__help">
 				{ __(
 					'The block will only be visible to users with one of the selected roles.',
 					'block-visibility'
 				) }
 			</p>
 			<div
-				id="bv-control__user-roles"
-				className="bv-settings__user-roles-control"
+				id="block-visibility-control__user-roles"
+				className="user-roles__control"
 			>
 				{ roles.map( ( role ) => {
 					const newRestrictedRoles = [ ...restrictedRoles ];
@@ -71,6 +71,6 @@ export default function UserRoles( props ) {
 					);
 				} ) }
 			</div>
-		</div>
+		</>
 	);
 }

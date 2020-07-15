@@ -123,7 +123,7 @@ class Settings extends Component {
 			<>
 				<Masthead />
 				<TabPanel
-					className="bv-tab-panel"
+					className="setting-tabs"
 					activeClass="active-tab"
 					initialTabName="getting-started"
 					tabs={ settingTabs }
@@ -132,7 +132,7 @@ class Settings extends Component {
 						// Don't load tabs if settings have not yet loaded
 						if ( ! isAPILoaded ) {
 							return (
-								<div className="bv-loading-settings">
+								<div className="setting-tabs__loading-settings">
 									<Spinner />
 								</div>
 							);
@@ -192,5 +192,5 @@ class Settings extends Component {
 
 wp.domReady( () => {
 	registerCoreBlocks();
-	render( <Settings />, document.getElementById( 'bv-settings-container' ) );
+	render( <Settings />, document.getElementById( 'block-visibility-settings-container' ) );
 } );

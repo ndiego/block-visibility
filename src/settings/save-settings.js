@@ -35,8 +35,8 @@ export default function SaveSettings( props ) {
 		? __( 'Updating…', 'block-visibility' )
 		: __( 'Update', 'block-visibility' );
 	return (
-		<div className="bv-save-settings">
-			<div className="bv-save-settings__messages">
+		<div className="setting-controls__save-settings">
+			<div className="save-settings__messages">
 				{ [
 					isAPISaving && (
 						<Animate type="loading">
@@ -51,13 +51,13 @@ export default function SaveSettings( props ) {
 					// If a message has been supplied to show when we are not
 					// actively saving settings, display it.
 					! isAPISaving && notSavingMessage && (
-						<span className="visibility-message">
+						<span className="messages__visibility-status">
 							<Icon icon={ notSavingIcon } />
 							{ notSavingMessage }
 						</span>
 					),
 					hasSaveError && (
-						<span className="update-failed">
+						<span className="messages__update-failed">
 							{ __(
 								'Update failed. Try again or contact support.',
 								'block-visibility'
@@ -67,7 +67,7 @@ export default function SaveSettings( props ) {
 				] }
 			</div>
 			<Button
-				className={ classnames( 'bv-save-settings__button', {
+				className={ classnames( 'save-settings__save-button', {
 					'is-busy': isAPISaving,
 				} ) }
 				onClick={ onSettingsChange }

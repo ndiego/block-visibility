@@ -47,9 +47,9 @@ export default function VisibilityControls( props ) {
 	const visibilityByRoleEnableUseRoles = visibilityControls?.visibility_by_role?.enable_user_roles ?? true; // eslint-disable-line
 
 	return (
-		<div className="bv-visibility-controls inner-container">
-			<div className="bv-tab-panel__description">
-				<div className="bv-tab-panel__description-header">
+		<div className="setting-tabs__visibility-controls inner-container">
+			<div className="setting-tabs__tab-description">
+				<div className="tab-description__header">
 					<h2>{ __( 'Visibility Controls', 'block-visibility' ) }</h2>
 					<span>
 						<InformationPopover
@@ -72,8 +72,8 @@ export default function VisibilityControls( props ) {
 					) }
 				</p>
 			</div>
-			<div className="bv-setting-controls">
-				<span className="bv-setting-controls__title">
+			<div className="setting-tabs__setting-controls">
+				<span className="setting-controls__title">
 					{ __( 'Configure Controls', 'block-visibility' ) }
 				</span>
 				<SaveSettings
@@ -83,7 +83,7 @@ export default function VisibilityControls( props ) {
 					onSettingsChange={ onSettingsChange }
 				/>
 			</div>
-			<div className="settings-panel">
+			<div className="setting-tabs__settings-panel">
 				<div className="settings-panel__header">
 					<span className="settings-panel__header-title">
 						{ __( 'Hide Block', 'block-visibility' ) }

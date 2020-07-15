@@ -96,7 +96,7 @@ export default function VisibilityByRole( props ) {
 	}
 
 	return (
-		<div className="bv-settings__visibility-by-role">
+		<div className="visibility-controls__user-roles">
 			<RadioControl
 				label={ __( 'Visibility by User Role', 'block-visibility' ) }
 				selected={ visibilityByRole }

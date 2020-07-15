@@ -34,7 +34,7 @@ add_action( 'admin_menu', __NAMESPACE__ . '\add_settings_page' );
  */
 function print_settings_page() {
 	?>
-		<div id="bv-settings-container"></div>
+		<div id="block-visibility-settings-container"></div>
 	<?php
 }
 

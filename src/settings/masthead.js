@@ -20,11 +20,11 @@ export default function Masthead() {
 	const pluginVariables = blockVisibilityVariables; // eslint-disable-line
 
 	return (
-		<div className="bv-masthead">
+		<div className="masthead">
 			<div className="inner-container">
-				<div className="bv-masthead__branding">
+				<div className="masthead__branding">
 					<h1>
-						<span className="bv-logo">{ icons.logo }</span>
+						<span className="branding__logo">{ icons.logo }</span>
 						<span className="screen-reader-text">
 							{ __( 'Block Visibility', 'block-visibility' ) }
 						</span>
@@ -36,14 +36,14 @@ export default function Masthead() {
 						) }
 					</p>
 				</div>
-				<div className="bv-masthead__meta">
-					<div className="plugin-version">
+				<div className="masthead__plugin-meta">
+					<div className="plugin-meta__version">
 						<span>{ 'v' + pluginVariables.version }</span>
 					</div>
-					<div className="plugin-links">
+					<div className="plugin-meta__plugin-links">
 						<a
 							href={ pluginVariables.reviewUrl }
-							className="plugin-review"
+							className="plugin-links__review"
 							target="_blank"
 							rel="noreferrer"
 						>
@@ -52,7 +52,7 @@ export default function Masthead() {
 						</a>
 						<a
 							href={ pluginVariables.supportUrl }
-							className="plugin-support"
+							className="plugin-links__support"
 							target="_blank"
 							rel="noreferrer"
 						>

@@ -32,9 +32,11 @@ const interpolateElement = ( typeof createInterpolateElement === 'function' )
  */
 export default function GettingStarted( props ) {
 	return (
-		<div className="bv-getting-started inner-container">
-			<div className="bv-tab-panel__description">
-				<h2>{ __( 'Welcome', 'block-visibility' ) }</h2>
+		<div className="setting-tabs__getting-started inner-container">
+			<div className="setting-tabs__tab-description">
+				<div className="tab-description__header">
+					<h2>{ __( 'Welcome', 'block-visibility' ) }</h2>
+				</div>
 				<p>
 					{ __(
 						'Thank you for choosing Block Visibility. As the name suggests, this plugin allows you to easily control the visibility of blocks in the WordPress editor. To get started, watch the quick video below for an overview of how the plugin works. You\'ll become a pro in no time!',
@@ -42,10 +44,10 @@ export default function GettingStarted( props ) {
 					) }
 				</p>
 			</div>
-			<div className="bv-getting-started__video">
+			<div className="getting-started__video">
 				video goes here
 			</div>
-			<div className="bv-getting-started__details">
+			<div className="getting-started__details">
 				<h2>{ __( 'How does it work?', 'block-visibility' ) }</h2>
 				<p>
 					{ __(
@@ -77,7 +79,7 @@ export default function GettingStarted( props ) {
 					) }
 				</p>
 			</div>
-			<div className="bv-getting-started__panels">
+			<div className="getting-started__panels">
 				<PanelBody
 					title={ __( 'Visibility Controls', 'block-visibility' ) }
 					initialOpen={ false }
@@ -127,7 +129,7 @@ export default function GettingStarted( props ) {
 					</PanelRow>
 				</PanelBody>
 			</div>
-			<div className="bv-getting-started__help">
+			<div className="getting-started__help">
 				<h2>
 					{ __(
 						'Need more help? Have a question?',

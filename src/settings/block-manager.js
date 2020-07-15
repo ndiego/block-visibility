@@ -141,9 +141,9 @@ function BlockManager( props ) {
 	}
 
 	return (
-		<div className="bv-block-manager inner-container">
-			<div className="bv-tab-panel__description">
-				<div className="bv-tab-panel__description-header">
+		<div className="setting-tabs__block-manager inner-container">
+			<div className="setting-tabs__tab-description">
+				<div className="tab-description__header">
 					<h2>{ __( 'Block Manager', 'block-visibility' ) }</h2>
 					<span>
 						<InformationPopover
@@ -166,9 +166,9 @@ function BlockManager( props ) {
 					) }
 				</p>
 			</div>
-			<div className="bv-setting-controls">
+			<div className="setting-tabs__setting-controls">
 				<TextControl
-					className="search-blocks"
+					className="setting-controls__search-blocks"
 					type="search"
 					placeholder={ __(
 						'Search for a block',
@@ -186,7 +186,7 @@ function BlockManager( props ) {
 					notSavingIcon={ visibilityIcon }
 				/>
 			</div>
-			<div className="bv-block-manager__category-container">
+			<div className="block-manager__category-container">
 				{ categories.map( ( category ) => (
 					<BlockCategory
 						key={ category.slug }

@@ -55,9 +55,9 @@ export default function PluginSettings( props ) {
 	const enabledFullControlMode = pluginSettings?.enable_full_control_mode ?? false; // eslint-disable-line
 
 	return (
-		<div className="bv-plugin-settings inner-container">
-			<div className="bv-tab-panel__description">
-				<div className="bv-tab-panel__description-header">
+		<div className="settings-tab__plugin-settings inner-container">
+			<div className="setting-tabs__tab-description">
+				<div className="tab-description__header">
 					<h2>{ __( 'General Settings', 'block-visibility' ) }</h2>
 					<span>
 						<InformationPopover
@@ -76,8 +76,8 @@ export default function PluginSettings( props ) {
 					) }
 				</p>
 			</div>
-			<div className="bv-setting-controls">
-				<span className="bv-setting-controls__title">
+			<div className="setting-tabs__setting-controls">
+				<span className="setting-controls__title">
 					{ __( 'Configure Settings', 'block-visibility' ) }
 				</span>
 				<SaveSettings

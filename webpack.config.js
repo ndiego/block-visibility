@@ -12,7 +12,6 @@ module.exports = {
         'bv-editor' : path.resolve( process.cwd(), 'src/editor.js' ),
         'bv-settings' : path.resolve( process.cwd(), 'src/settings.js' ),
         'bv-editor-styles': path.resolve( process.cwd(), 'src/styles/editor.scss' ),
-        //'bv-style' : path.resolve( process.cwd(), 'src/styles/style.scss' ),
         'bv-setting-styles' : path.resolve( process.cwd(), 'src/styles/settings.scss' ),
     },
 

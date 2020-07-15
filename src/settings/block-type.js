@@ -26,7 +26,7 @@ export default function BlockType( props ) {
 	}
 
 	return (
-		<li key={ blockType.name } className="bv-block-manager__blocks-item">
+		<li key={ blockType.name } className="blocks-category__block">
 			<CheckboxControl
 				checked={ isChecked }
 				onChange={ ( checked ) => onBlockTypeChange( checked ) }

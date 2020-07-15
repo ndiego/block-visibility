@@ -80,10 +80,10 @@ export default function VisibilityInspectorControls( props ) {
 		<InspectorControls>
 			<PanelBody
 				title={ __( 'Visibility', 'block-visibility' ) }
-				className="bv-settings"
+				className="block-visibility-settings"
 				initialOpen={ false }
 			>
-				<div className="bv-settings__controls">
+				<div className="block-visibility-settings__visibility-controls">
 					{ controlsEnabled > 0 && (
 						<>
 							{ hideBlockEnable && <HideBlock { ...props } /> }

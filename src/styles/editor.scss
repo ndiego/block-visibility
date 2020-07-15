@@ -1,17 +1,9 @@
-.bv-settings {
-    
-    .bv-settings__controls {
-        padding-top: 10px;
-        
-        .components-notice {
-            margin: 0;
-        }
-    }
-    
+.block-visibility-settings {
+
     .components-panel__body.is-opened>.components-panel__body-title {
         margin-bottom: 10px;
     }
-    
+
     .components-radio-control__option {
         &:not(:last-child) {
             margin-bottom: 6px;
@@ -20,11 +12,11 @@
             vertical-align: top;
             margin-top: 2px;
         }
-        
+
         .compound-radio-label {
             display: inline-block;
             font-weight: 600;
-            
+
             span {
                 display: block;
                 font-weight: 400;
@@ -32,23 +24,36 @@
             }
         }
     }
-    
-    .bv-settings__user-roles {
-        
-        .bv-settings__user-roles-label {
-            margin-bottom: 6px;
-            display: inline-block;
+
+    .block-visibility-settings__visibility-controls {
+        padding-top: 10px;
+
+        .components-notice {
+            margin: 0;
         }
-        
-        .bv-settings__user-roles-help {
-            font-style: italic;
+
+        /* Specific styles for the Hide Block visibility control */
+        .visibility-controls__hide-block {
+            margin-bottom: 24px;
         }
-        
-        .bv-settings__user-roles-control {
-            .components-base-control {
-                margin-bottom: 16px;
+
+        /* Specific styles for the User Roles visibility control */
+        .visibility-controls__user-roles {
+
+            .user-roles__label {
+                margin-bottom: 6px;
+                display: inline-block;
+            }
+
+            .user-roles__help {
+                font-style: italic;
+            }
+
+            .user-roles__control {
+                .components-base-control {
+                    margin-bottom: 16px;
+                }
             }
         }
-    }    
+    }
 }
-
