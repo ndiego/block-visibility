@@ -30,11 +30,11 @@ function enqueue_editor_assets() {
 	}
 
 	// Scripts.
-	$asset_file = get_asset_file( 'dist/bv-editor' );
+	$asset_file = get_asset_file( 'dist/block-visibility-editor' );
 
 	wp_enqueue_script(
-		'bv-editor-scripts',
-		BLOCKVISIBILITY_PLUGIN_URL . 'dist/bv-editor.js',
+		'block-visibility-editor-scripts',
+		BLOCKVISIBILITY_PLUGIN_URL . 'dist/block-visibility-editor.js',
 		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
 		$asset_file['version'],
 		false // Need false to ensure our filters can target third-party plugins.
@@ -52,17 +52,17 @@ function enqueue_editor_assets() {
 	$stringified_editor_data .= 'const blockVisibilityFullControlMode = ' . wp_json_encode( is_full_control_mode() ) . ';';
 
 	wp_add_inline_script(
-		'bv-editor-scripts',
+		'block-visibility-editor-scripts',
 		$stringified_editor_data,
 		'before'
 	);
 
 	// Styles.
-	$asset_file = get_asset_file( 'dist/bv-editor-styles' );
+	$asset_file = get_asset_file( 'dist/block-visibility-editor-styles' );
 
 	wp_enqueue_style(
-		'bv-editor-styles',
-		BLOCKVISIBILITY_PLUGIN_URL . 'dist/bv-editor-styles.css',
+		'block-visibility-editor-styles',
+		BLOCKVISIBILITY_PLUGIN_URL . 'dist/block-visibility-editor-styles.css',
 		array(),
 		$asset_file['version']
 	);

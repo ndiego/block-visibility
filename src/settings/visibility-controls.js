@@ -113,7 +113,7 @@ export default function VisibilityControls( props ) {
 					/>
 				</div>
 			</div>
-			<div className="settings-panel">
+			<div className="setting-tabs__settings-panel">
 				<div className="settings-panel__header">
 					<span className="settings-panel__header-title">
 						{ __( 'Visibility by User Role', 'block-visibility' ) }

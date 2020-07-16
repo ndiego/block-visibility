@@ -87,7 +87,7 @@ export default function PluginSettings( props ) {
 					onSettingsChange={ onSettingsChange }
 				/>
 			</div>
-			<div className="settings-panel">
+			<div className="setting-tabs__settings-panel">
 				<div className="settings-panel__header">
 					<span className="settings-panel__header-title">
 						{ __( 'Full Control Mode', 'block-visibility' ) }
@@ -130,7 +130,7 @@ export default function PluginSettings( props ) {
 					/>
 				</div>
 			</div>
-			<div className="settings-panel">
+			<div className="setting-tabs__settings-panel">
 				<div className="settings-panel__header">
 					<span className="settings-panel__header-title">
 						{ __( 'Uninstall', 'block-visibility' ) }

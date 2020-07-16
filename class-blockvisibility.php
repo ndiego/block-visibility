@@ -147,13 +147,13 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 		public function block_localization() {
 			if ( function_exists( 'wp_set_script_translations' ) ) {
 				wp_set_script_translations(
-					'bv-editor-scripts',
+					'block-visibility-editor-scripts',
 					'block-visibility',
 					BLOCKVISIBILITY_PLUGIN_DIR . '/languages'
 				);
 
 				wp_set_script_translations(
-					'bv-setting-scripts',
+					'block-visibility-setting-scripts',
 					'block-visibility',
 					BLOCKVISIBILITY_PLUGIN_DIR . '/languages'
 				);

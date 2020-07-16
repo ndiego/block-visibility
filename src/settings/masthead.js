@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Icon, starFilled } from '@wordpress/icons';
+import { Icon } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -47,7 +47,7 @@ export default function Masthead() {
 							target="_blank"
 							rel="noreferrer"
 						>
-							<Icon icon={ starFilled } />
+							<Icon icon={ icons.star } />
 							{ __( 'Review', 'block-visibility' ) }
 						</a>
 						<a

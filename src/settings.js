@@ -100,22 +100,22 @@ class Settings extends Component {
 			{
 				name: 'getting-started',
 				title: __( 'Getting Started', 'block-visibility' ),
-				className: 'bv-settings__getting-started',
+				className: 'setting-tabs__getting-started',
 			},
 			{
 				name: 'visibility-controls',
 				title: __( 'Visibility Controls', 'block-visibility' ),
-				className: 'bv-settings__visibility-controls',
+				className: 'setting-tabs__visibility-controls',
 			},
 			{
 				name: 'block-manager',
 				title: __( 'Block Manager', 'block-visibility' ),
-				className: 'bv-settings__blocks-manager',
+				className: 'setting-tabs__blocks-manager',
 			},
 			{
 				name: 'plugin-settings',
 				title: __( 'Settings', 'block-visibility' ),
-				className: 'bv-settings__plugin-settings',
+				className: 'setting-tabs__plugin-settings',
 			},
 		];
 
@@ -192,5 +192,8 @@ class Settings extends Component {
 
 wp.domReady( () => {
 	registerCoreBlocks();
-	render( <Settings />, document.getElementById( 'block-visibility-settings-container' ) );
+	render(
+		<Settings />,
+		document.getElementById( 'block-visibility-settings-container' )
+	);
 } );

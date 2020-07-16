@@ -9,10 +9,10 @@ module.exports = {
     ...defaultConfig,
 
     entry: {
-        'bv-editor' : path.resolve( process.cwd(), 'src/editor.js' ),
-        'bv-settings' : path.resolve( process.cwd(), 'src/settings.js' ),
-        'bv-editor-styles': path.resolve( process.cwd(), 'src/styles/editor.scss' ),
-        'bv-setting-styles' : path.resolve( process.cwd(), 'src/styles/settings.scss' ),
+        'block-visibility-editor' : path.resolve( process.cwd(), 'src/editor.js' ),
+        'block-visibility-settings' : path.resolve( process.cwd(), 'src/settings.js' ),
+        'block-visibility-editor-styles': path.resolve( process.cwd(), 'src/styles/editor.scss' ),
+        'block-visibility-setting-styles' : path.resolve( process.cwd(), 'src/styles/settings.scss' ),
     },
 
     output: {
