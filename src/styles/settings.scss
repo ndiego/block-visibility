@@ -312,7 +312,50 @@ $mobile: 420px;
 		}
 
 		.getting-started__panels {
-			button {
+
+			.components-panel__body {
+				border: 1px solid #E0E5E9;
+
+				.components-panel__row {
+					display: block;
+				}
+
+				h2 {
+					background-color: #ffffff;
+
+					button {
+						font-size: 15px;
+						font-weight: 500;
+					}
+				}
+
+				p {
+					font-size: 14px;
+
+					&:last-child {
+						margin-bottom: 0;
+					}
+				}
+
+				&.is-opened {
+					h2 {
+						border-bottom: 1px solid #E0E5E9 !important;
+					}
+				}
+			}
+
+			.panels__content-label {
+			    font-weight: 500;
+			    font-size: 15px;
+				margin-top: 15px;
+				padding-top: 20px;
+				border-top: 1px solid #E0E5E9;
+
+				&:first-child {
+					margin-top: 25px;
+					padding-top: 0;
+					border: 0;
+				}
 			}
 		}
 

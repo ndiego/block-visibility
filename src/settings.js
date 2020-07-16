@@ -114,7 +114,7 @@ class Settings extends Component {
 			},
 			{
 				name: 'plugin-settings',
-				title: __( 'Settings', 'block-visibility' ),
+				title: __( 'General Settings', 'block-visibility' ),
 				className: 'setting-tabs__plugin-settings',
 			},
 		];
