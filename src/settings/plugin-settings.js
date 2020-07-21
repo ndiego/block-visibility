@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { ToggleControl } from '@wordpress/components';
+import { ToggleControl, ExternalLink } from '@wordpress/components';
 import {
 	useState,
 	__experimentalCreateInterpolateElement,
@@ -112,7 +112,7 @@ export default function PluginSettings( props ) {
 							{
 								strong: <strong />,
 								a: (
-									<a // eslint-disable-line
+									<ExternalLink // eslint-disable-line
 										href="https://www.blockvisibilitywp.com/documentation/general-settings/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 										target="_blank"
 										rel="noreferrer"

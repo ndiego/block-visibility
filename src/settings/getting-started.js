@@ -44,19 +44,32 @@ export default function GettingStarted() {
 					) }
 				</p>
 			</div>
-			<div className="getting-started__video">video goes here</div>
+			<div className="getting-started__video">
+				<iframe width="1123" height="632" src="https://www.youtube.com/embed/sPC_bvS471I?modestbranding=1&controls=1&rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>
 			<div className="getting-started__details">
 				<h2>{ __( 'How does it work?', 'block-visibility' ) }</h2>
 				<p>
-					{ __(
-						'The Block Visibility plugin is designed exclusively for the Block Editor and does not work in the Classic Editor. So long as you are running the latest version of WordPress and are not utilizing the Classic Editor plugin, you are good to go!',
-						'block-visibility'
+					{ interpolateElement(
+						__(
+							'The Block Visibility plugin is designed exclusively for the <a>block editor</a> and does not work in the classic editor. So long as you are running the latest version of WordPress and are not utilizing the Classic Editor plugin, you are good to go!',
+							'block-visibility'
+						),
+						{
+							a: (
+								<ExternalLink // eslint-disable-line
+									href="https://wordpress.org/support/article/wordpress-editor/"
+									target="_blank"
+									rel="noreferrer"
+								/>
+							),
+						}
 					) }
 				</p>
 				<p>
 					{ interpolateElement(
 						__(
-							'By default, this plugin adds a Visibility panel to the <a>Settings Sidebar</a> of each selected block in the Block Editor. While there are a few minor exceptions, see the FAQs below, this means that visibility control will be enabled for all core WordPress blocks as well as any third-party blocks provided by a plugin or that came with your theme.',
+							'By default, this plugin adds a Visibility panel to the <a>settings sidebar</a> of each selected block in the WordPress editor. While there are a few minor exceptions, see the FAQs below, this means that visibility controls will be enabled for all core WordPress blocks as well as any third-party blocks that you might be using.',
 							'block-visibility'
 						),
 						{
@@ -72,13 +85,13 @@ export default function GettingStarted() {
 				</p>
 				<p>
 					{ __(
-						'On the Visibility panel, you will be able show or hide the selected block based on a number of different controls. The primary option is to simply hide the block from view. This can be useful if you want to disable some content, but you still need to publish other changes to the page or post. You can also restrict who can see certain blocks. For example, maybe you have a special promotion that you only want show subscribers of your website. With this plugin, it couldn’t be easier. If you haven’t already, watch the video above for a quick demo.',
+						'On the Visibility panel, you will be able show or hide the selected block based on a number of different controls. The primary option is to simply hide the block from view. This can be useful if you want to disable some content, but you still need to publish other changes to the page or post. You can also restrict who can see certain blocks. For example, maybe you have a special promotion that you only want show subscribers of your website. If you haven’t already, watch the video above for a quick demo.',
 						'block-visibility'
 					) }
 				</p>
 				<p>
 					{ __(
-						'Block Visibility was designed to be simple to use, but it comes with a number of advanced settings so you can configure the plugin exactly the way you want. Lets examine these in the drop-downs below and answer a few frequently asked questions.',
+						'Block Visibility provides a number of advanced settings so you can configure the plugin exactly the way you want. Lets examine these in the drop-downs below and answer a few frequently asked questions.',
 						'block-visibility'
 					) }
 				</p>
@@ -214,7 +227,7 @@ export default function GettingStarted() {
 				<h2>{ __( 'How can we help?', 'block-visibility' ) }</h2>
 				<p>
 					{ __(
-						"Whether you need more help, have a quick question, or you have a feature request, please create a topic in this plugin's support forum on WordPress.org.",
+						"Whether you need more help, have a quick question, or you would like to request a new feature, please create a topic in this plugin's support forum on WordPress.org.",
 						'block-visibility'
 					) }
 				</p>

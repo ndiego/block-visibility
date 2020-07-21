@@ -38,7 +38,7 @@ export default function Masthead() {
 				</div>
 				<div className="masthead__plugin-meta">
 					<div className="plugin-meta__version">
-						<span>{ 'v' + pluginVariables.version }</span>
+						<span>{ pluginVariables.version }</span>
 					</div>
 					<div className="plugin-meta__plugin-links">
 						<a
