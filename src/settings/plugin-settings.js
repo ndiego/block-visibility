@@ -2,7 +2,11 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { ToggleControl, ExternalLink } from '@wordpress/components';
+import {
+	ToggleControl,
+	ExternalLink,
+	withFilters,
+} from '@wordpress/components';
 import {
 	useState,
 	__experimentalCreateInterpolateElement,
@@ -158,6 +162,15 @@ export default function PluginSettings( props ) {
 					/>
 				</div>
 			</div>
+			<AdditionalPluginSettingsFiltered
+				pluginSettings={ pluginSettings }
+				setPluginSettings= { setPluginSettings }
+				setHasUpdates={ setHasUpdates }
+				{ ...props }
+			/>
 		</div>
 	);
 }
+
+const AdditionalPluginSettings = ( props ) => <></>;
+const AdditionalPluginSettingsFiltered = withFilters( 'blockVisibility.AdditionalPluginSettings' )( AdditionalPluginSettings );
