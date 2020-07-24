@@ -7,7 +7,7 @@ import { has, filter } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { PanelBody, Notice } from '@wordpress/components';
+import { PanelBody, Notice, withFilters } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import { useEntityProp } from '@wordpress/core-data';
 import {
@@ -88,11 +88,16 @@ export default function VisibilityInspectorControls( props ) {
 						<>
 							{ hideBlockEnable && <HideBlock { ...props } /> }
 							{ showAdditionalControls && (
-								<VisibilityByRole
-									visibilityControls={ visibilityControls }
-									{ ...props }
-								/>
-								// More controls here in the future...
+								<>
+									<VisibilityByRole
+										visibilityControls={ visibilityControls }
+										{ ...props }
+									/>
+									<AdditionalInspectorControls
+										visibilityControls={ visibilityControls }
+										{ ...props }
+									/>
+								</>
 							) }
 						</>
 					) }
@@ -120,3 +125,6 @@ export default function VisibilityInspectorControls( props ) {
 		</InspectorControls>
 	);
 }
+
+let AdditionalInspectorControls = ( props ) => <></>;
+AdditionalInspectorControls = withFilters( 'blockVisibility.AdditionalInspectorControls' )( AdditionalInspectorControls );

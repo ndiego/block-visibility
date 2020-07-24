@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
-import { ToggleControl } from '@wordpress/components';
+import { ToggleControl, withFilters } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -160,6 +160,15 @@ export default function VisibilityControls( props ) {
 					) }
 				</div>
 			</div>
+			<AdditionalVisibilityControls
+				visibilityControls={ visibilityControls }
+				setVisibilityControls= { setVisibilityControls }
+				setHasUpdates={ setHasUpdates }
+				{ ...props }
+			/>
 		</div>
 	);
 }
+
+let AdditionalVisibilityControls = ( props ) => <></>;
+AdditionalVisibilityControls = withFilters( 'blockVisibility.AdditionalVisibilityControls' )( AdditionalVisibilityControls );

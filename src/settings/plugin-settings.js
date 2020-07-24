@@ -56,7 +56,7 @@ export default function PluginSettings( props ) {
 
 	// Manually set defaults, this ensures the main settings function properly
 	const removeOnUninstall = pluginSettings?.remove_on_uninstall ?? false; // eslint-disable-line
-	const enabledFullControlMode = pluginSettings?.enable_full_control_mode ?? false; // eslint-disable-line
+	const enableFullControlMode = pluginSettings?.enable_full_control_mode ?? false; // eslint-disable-line
 
 	return (
 		<div className="settings-tab__plugin-settings inner-container">
@@ -124,11 +124,11 @@ export default function PluginSettings( props ) {
 								),
 							}
 						) }
-						checked={ enabledFullControlMode }
+						checked={ enableFullControlMode }
 						onChange={ () =>
 							onPluginSettingChange(
 								'enable_full_control_mode',
-								! enabledFullControlMode
+								! enableFullControlMode
 							)
 						}
 					/>
@@ -162,7 +162,7 @@ export default function PluginSettings( props ) {
 					/>
 				</div>
 			</div>
-			<AdditionalPluginSettingsFiltered
+			<AdditionalPluginSettings
 				pluginSettings={ pluginSettings }
 				setPluginSettings= { setPluginSettings }
 				setHasUpdates={ setHasUpdates }
@@ -172,5 +172,5 @@ export default function PluginSettings( props ) {
 	);
 }
 
-const AdditionalPluginSettings = ( props ) => <></>;
-const AdditionalPluginSettingsFiltered = withFilters( 'blockVisibility.AdditionalPluginSettings' )( AdditionalPluginSettings );
+let AdditionalPluginSettings = ( props ) => <></>;
+AdditionalPluginSettings = withFilters( 'blockVisibility.AdditionalPluginSettings' )( AdditionalPluginSettings );

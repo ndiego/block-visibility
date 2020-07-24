@@ -47,6 +47,19 @@ function register_settings() {
 										),
 									),
 								),
+
+								// Additional Controls
+								'time_date'         => array(
+									'type'       => 'object',
+									'properties' => array(
+										'enable' => array(
+											'type' => 'boolean',
+										),
+										'enable_start_end' => array(
+											'type' => 'boolean',
+										),
+									),
+								),
 							),
 						),
 						'disabled_blocks'     => array(
@@ -64,6 +77,11 @@ function register_settings() {
 								'remove_on_uninstall'      => array(
 									'type' => 'boolean',
 								),
+
+								// Additional Settings
+								'enable_visibility_notes'  => array(
+									'type' => 'boolean',
+								),
 							),
 						),
 					),
@@ -78,11 +96,19 @@ function register_settings() {
 						'enable'            => true,
 						'enable_user_roles' => true,
 					),
+
+					// Additional Controls
+					'time_date' => array(
+						'enable' => true,
+					),
 				),
 				'disabled_blocks'     => array(),
 				'plugin_settings'     => array(
 					'enable_full_control_mode' => false,
 					'remove_on_uninstall'      => false,
+
+					// Additional Settings
+					'enable_visibility_notes'  => true,
 				),
 			),
 		)
@@ -92,4 +118,4 @@ add_action( 'rest_api_init', __NAMESPACE__ . '\register_settings' );
 add_action( 'admin_init', __NAMESPACE__ . '\register_settings' );
 
 // TODO: remove eventually, use to reset plugin settings.
-// delete_option( 'block_visibility_settings' );
+//delete_option( 'block_visibility_settings' );
