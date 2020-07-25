@@ -80,6 +80,8 @@ add_action( 'admin_init', __NAMESPACE__ . '\enqueue_editor_assets', 10000 );
 /**
  * Make sure we are either on a post edit screen, or new post screen.
  *
+ * @since 1.0.0
+ *
  * @return bool Returns true or false.
  */
 function is_edit_or_new_admin_page() {
@@ -93,6 +95,8 @@ function is_edit_or_new_admin_page() {
 
 /**
  * See if we are in full control mode.
+ *
+ * @since 1.0.0
  *
  * @return bool Returns true or false.
  */

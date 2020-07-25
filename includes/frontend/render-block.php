@@ -11,7 +11,8 @@ namespace BlockVisibility\Frontend;
 /**
  * Check if the given block type is disabled via the visibility settings
  *
- * @since   1.0.0
+ * @since 1.0.0
+ *
  * @param array $settings The plugin settings.
  * @param array $block The block info and attributes.
  * @return boolean Is the block disabled or not
@@ -29,7 +30,7 @@ function is_block_type_disabled( $settings, $block ) {
 /**
  * Check if the given block has visibility settings
  *
- * @since   1.0.0
+ * @since 1.0.0
  *
  * @param array $block The block info and attributes.
  * @return boolean Are there visibility settings or not
@@ -45,7 +46,7 @@ function has_visibility_settings( $block ) {
 /**
  * Check if the given block has visibility settings
  *
- * @since   1.0.0
+ * @since 1.0.0
  *
  * @param string $block_content The block frontend output.
  * @param array  $block The block info and attributes.
@@ -91,4 +92,4 @@ require_once BLOCKVISIBILITY_PLUGIN_DIR . 'includes/frontend/visibility-tests/hi
 require_once BLOCKVISIBILITY_PLUGIN_DIR . 'includes/frontend/visibility-tests/visibility-by-role.php';
 
 // Require utlity functions for tests.
-require_once BLOCKVISIBILITY_PLUGIN_DIR . 'includes/utils/get-control-settings.php';
+require_once BLOCKVISIBILITY_PLUGIN_DIR . 'includes/utils/is-control-enabled.php';

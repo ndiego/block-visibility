@@ -71,7 +71,7 @@ export default function VisibilityInspectorControls( props ) {
 
 	const controlsEnabled = filter( visibilityControls, { enable: true } ).length; // eslint-disable-line
 
-	// Check is the hide block control is set, default to "true".
+	// Check if the hide block control is set, default to "true".
 	const hideBlockEnable = visibilityControls?.hide_block?.enable ?? true; // eslint-disable-line
 	const showAdditionalControls =
 		! blockVisibility.hideBlock || ! hideBlockEnable ? true : false;
@@ -90,11 +90,15 @@ export default function VisibilityInspectorControls( props ) {
 							{ showAdditionalControls && (
 								<>
 									<VisibilityByRole
-										visibilityControls={ visibilityControls }
+										visibilityControls={
+											visibilityControls
+										}
 										{ ...props }
 									/>
 									<AdditionalInspectorControls
-										visibilityControls={ visibilityControls }
+										visibilityControls={
+											visibilityControls
+										}
 										{ ...props }
 									/>
 								</>

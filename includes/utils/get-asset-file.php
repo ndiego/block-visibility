@@ -13,6 +13,7 @@ namespace BlockVisibility\Utils;
  * Returns a default if the asset file is not found.
  *
  * @since 1.0.0
+ *
  * @param string $filepath The name of the file without the extension.
  * @return array           The asset file contents.
  */

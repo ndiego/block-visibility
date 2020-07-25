@@ -88,8 +88,8 @@ class Settings extends Component {
 	}
 
 	render() {
-		// TODO: Remove this
-		console.log( this.state.settings );
+		// @// TODO: Remove this
+		//console.log( this.state.settings );
 
 		const isAPILoaded = this.state.isAPILoaded;
 		const isAPISaving = this.state.isAPISaving;

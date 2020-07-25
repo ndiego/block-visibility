@@ -45,7 +45,18 @@ export default function GettingStarted() {
 				</p>
 			</div>
 			<div className="getting-started__video">
-				<iframe width="1123" height="632" src="https://www.youtube.com/embed/sPC_bvS471I?modestbranding=1&controls=1&rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<iframe
+					title={ __(
+						'Block Visibility - Getting Started',
+						'block-visibility'
+					) }
+					width="1123"
+					height="632"
+					src="https://www.youtube.com/embed/sPC_bvS471I?modestbranding=1&controls=1&rel=0"
+					frameBorder="0"
+					allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+					allowFullScreen
+				></iframe>
 			</div>
 			<div className="getting-started__details">
 				<h2>{ __( 'How does it work?', 'block-visibility' ) }</h2>

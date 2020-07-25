@@ -12,6 +12,7 @@ namespace BlockVisibility\Utils;
  * Retrieves all editable user roles on the website
  *
  * @since 1.0.0
+ *
  * @return array User $user_roles
  */
 function get_user_roles() {

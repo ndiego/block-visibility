@@ -162,7 +162,7 @@ export default function VisibilityControls( props ) {
 			</div>
 			<AdditionalVisibilityControls
 				visibilityControls={ visibilityControls }
-				setVisibilityControls= { setVisibilityControls }
+				setVisibilityControls={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }
 				{ ...props }
 			/>

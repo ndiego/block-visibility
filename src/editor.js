@@ -6,7 +6,7 @@ import { assign } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { addFilter } from '@wordpress/hooks';
+import { addFilter, applyFilters } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { hasBlockSupport } from '@wordpress/blocks';
 
@@ -22,9 +22,34 @@ import VisibilityInspectorControls from './editor/inspector-controls';
  * @param {Object}  settings All settings associated with a block type.
  * @return {Object} settings The updated array of settings.
  */
-function blockVisibilityAttribute( settings ) {
+function blockVisibilityAttributes( settings ) {
 	// This is a global variable added to the page via PHP
 	const fullControlMode = blockVisibilityFullControlMode; // eslint-disable-line
+	let visibilityAttributes = {
+		blockVisibility: {
+			type: 'object',
+			properties: {
+				hideBlock: {
+					type: 'boolean',
+				},
+				visibilityByRole: {
+					type: 'string',
+				},
+				restrictedRoles: {
+					type: 'array',
+				},
+			},
+			default: {
+				hideBlock: false,
+				visibilityByRole: 'all',
+				restrictedRoles: [],
+			},
+		},
+	};
+	visibilityAttributes = applyFilters(
+		'blockVisibility.visibilityAttributes',
+		visibilityAttributes
+	);
 
 	// We don't want to enable visibility for blocks that cannot be added via
 	// the inserter of is a child block. This excludes blocks such as reusable
@@ -35,35 +60,24 @@ function blockVisibilityAttribute( settings ) {
 		( hasBlockSupport( settings, 'inserter', true ) &&
 			! settings.hasOwnProperty( 'parent' ) )
 	) {
-		settings.attributes = assign( settings.attributes, {
-			blockVisibility: {
-				type: 'object',
-				properties: {
-					hideBlock: {
-						type: 'boolean',
-					},
-					visibilityByRole: {
-						type: 'string',
-					},
-					restrictedRoles: {
-						type: 'array',
-					},
-				},
-				default: {
-					hideBlock: false,
-					visibilityByRole: 'all',
-					restrictedRoles: [],
-				},
-			},
-		} );
+		settings.attributes = assign(
+			settings.attributes,
+			visibilityAttributes
+		);
 	}
 	return settings;
 }
 
+addFilter(
+	'blocks.registerBlockType',
+	'block-visibility/attributes',
+	blockVisibilityAttributes
+);
+
 /**
  * Filter the block edit object and add visibility controls to selected blocks.
  */
-const blockVisibilityEditorControls = createHigherOrderComponent(
+const blockVisibilityInspectorControls = createHigherOrderComponent(
 	( BlockEdit ) => {
 		return ( props ) => {
 			return (
@@ -74,17 +88,12 @@ const blockVisibilityEditorControls = createHigherOrderComponent(
 			);
 		};
 	},
-	'blockVisibilityEditorControls'
+	'blockVisibilityInspectorControls'
 );
 
 addFilter(
-	'blocks.registerBlockType',
-	'block-visibility/block-visibility-attribute',
-	blockVisibilityAttribute
-);
-addFilter(
 	'editor.BlockEdit',
 	'block-visibility/inspector-controls',
-	blockVisibilityEditorControls,
+	blockVisibilityInspectorControls,
 	100 // We want Visibility to appear rigth above Advanced controls
 );

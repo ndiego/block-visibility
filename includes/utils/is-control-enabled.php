@@ -11,7 +11,8 @@ namespace BlockVisibility\Utils;
 /**
  * Helper function for retrieving the visibility control settings.
  *
- * @since   1.0.0
+ * @since 1.0.0
+ *
  * @param array $settings   The core plugin settings.
  * @param array $control    The main control we are testing.
  * @param array $subcontrol (Optional) The subcontrol we are testing.

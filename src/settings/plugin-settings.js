@@ -164,7 +164,7 @@ export default function PluginSettings( props ) {
 			</div>
 			<AdditionalPluginSettings
 				pluginSettings={ pluginSettings }
-				setPluginSettings= { setPluginSettings }
+				setPluginSettings={ setPluginSettings }
 				setHasUpdates={ setHasUpdates }
 				{ ...props }
 			/>

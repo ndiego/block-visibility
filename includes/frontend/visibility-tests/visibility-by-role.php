@@ -13,7 +13,8 @@ use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
 /**
  * Run test to see if block visibility should be restricted by user role.
  *
- * @since   1.0.0
+ * @since 1.0.0
+ *
  * @param boolean $is_visible The current value of the visibility test.
  * @param array   $settings   The core plugin settings.
  * @param array   $block      The block info and attributes.

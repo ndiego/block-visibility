@@ -17,7 +17,8 @@ use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
  * This should generally be the last test that is run and should override all
  * other tests.
  *
- * @since   1.0.0
+ * @since 1.0.0
+ *
  * @param boolean $is_visible The current value of the visibility test.
  * @param array   $settings   The core plugin settings.
  * @param array   $block      The block info and attributes.
