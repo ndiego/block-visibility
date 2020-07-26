@@ -52,7 +52,7 @@ export default function GettingStarted() {
 					) }
 					width="1123"
 					height="632"
-					src="https://www.youtube.com/embed/sPC_bvS471I?modestbranding=1&controls=1&rel=0"
+					src="https://www.youtube-nocookie.com/embed/DdDwQCE7RNE?modestbranding=1&controls=1&rel=0"
 					frameBorder="0"
 					allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 					allowFullScreen
