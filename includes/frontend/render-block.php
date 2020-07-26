@@ -20,6 +20,10 @@ namespace BlockVisibility\Frontend;
 function is_block_type_disabled( $settings, $block ) {
 	$disabled_blocks = $settings['disabled_blocks'];
 
+	if ( ! $disabled_blocks ) {
+		return false;
+	}
+	
 	if ( in_array( $block['blockName'], $disabled_blocks, true ) ) {
 		return true;
 	}
