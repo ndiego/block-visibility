@@ -57,7 +57,7 @@ export default function Masthead() {
 							rel="noreferrer"
 						>
 							<Icon icon={ icons.help } />
-							{ __( 'Support', 'block-visibility' ) }
+							{ __( 'Plugin Support', 'block-visibility' ) }
 						</a>
 					</div>
 				</div>

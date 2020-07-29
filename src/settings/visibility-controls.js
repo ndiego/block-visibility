@@ -145,7 +145,7 @@ export default function VisibilityControls( props ) {
 						<ToggleControl
 							className="settings-panel__row-subsetting"
 							label={ __(
-								'Enable the ability to restrict block visibility by user role.',
+								'Enable the ability to restrict block visibility by individual user role (Administrator, Editor, Subscriber, etc.)',
 								'block-visibility'
 							) }
 							checked={ visibilityByRoleEnableUseRoles }

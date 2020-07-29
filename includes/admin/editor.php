@@ -74,7 +74,10 @@ function enqueue_editor_assets() {
  * resolved in future releases of WP. Using enqueue_block_editor_assets is the
  * ideal implementation.
  */
-add_action( 'admin_init', __NAMESPACE__ . '\enqueue_editor_assets', 10000 );
+//add_action( 'admin_init', __NAMESPACE__ . '\enqueue_editor_assets', 10000 );
+// TODO check this
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_assets' );
+
 
 
 /**

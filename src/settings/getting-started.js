@@ -39,7 +39,7 @@ export default function GettingStarted() {
 				</div>
 				<p>
 					{ __(
-						"Thank you for choosing Block Visibility. As the name suggests, this plugin allows you to easily control the visibility of blocks in the WordPress editor. To get started, watch the quick video below for an overview of how the plugin works. You'll become a pro in no time!",
+						"Thank you for choosing Block Visibility. As the name suggests, this plugin allows you to easily control the visibility of blocks in the WordPress editor. To get started, watch the video below for an overview of how the plugin works. You'll become a pro in no time!",
 						'block-visibility'
 					) }
 				</p>
@@ -115,7 +115,7 @@ export default function GettingStarted() {
 					<PanelRow>
 						<p>
 							{ __(
-								'Visibility controls form the engine that powers Block Visibility. These are the settings that determine whether a block is hidden on the frontend of your website. We strive to provide as much visibility control as possible, and as development for Block Visibility continues, expect even more functionality in the future. However, we understand that some users do not need every option. It is equally important to have a decluttered and streamlined user interface. Therefore, on the Visibility Controls tab of this settings page, you can enable or disable any control.',
+								'Visibility controls are the settings that determine whether a block is hidden on the frontend of your website. We strive to provide as much visibility control as possible, and as development for Block Visibility continues, expect even more functionality in the future. However, we understand that some users do not need every option. It is equally important to have a decluttered and streamlined user interface. Therefore, on the Visibility Controls tab of this settings page, you can enable or disable any control.',
 								'block-visibility'
 							) }
 						</p>
