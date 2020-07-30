@@ -16,7 +16,7 @@
  * @package block-visibility
  */
 
-namespace BlockVisibility;
+//namespace BlockVisibility;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -120,6 +120,50 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 		public function init() {
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ), 99 );
 			add_action( 'enqueue_block_editor_assets', array( $this, 'block_localization' ) );
+			
+			add_action( 'wp_loaded', array( $this, 'add_attributes_to_registered_blocks' ), 100 );
+		}
+
+		/**
+		 * Adds the `hasCustomCSS` and `customCSS` attributes to all blocks, to avoid `Invalid parameter(s): attributes`
+		 * error in Gutenberg.
+		 *
+		 * https://github.com/WordPress/gutenberg/issues/16850
+		 *
+		 * @hooked wp_loaded, 100
+		 */
+		public function add_attributes_to_registered_blocks() {
+
+			$registered_blocks = WP_Block_Type_Registry::get_instance()->get_all_registered();
+
+			foreach( $registered_blocks as $name => $block ) {
+				$block->attributes['blockVisibility'] = array(
+					'type'    => 'object',
+					'properties' => array(
+						'hideBlock' => array(
+							'type' => 'boolean',
+						),
+						'visibilityByRole' => array(
+							'type' => 'string',
+						),
+						'restrictedRoles' => array(
+							'type' => 'array',
+							'items' => array(
+								'type' => 'string',
+							),
+						),
+					),
+					
+					'default' => array(
+						'hideBlock' => false,
+						'visibilityByRole' => 'all',
+						'restrictedRoles' => [],
+					),
+					
+				);
+			}
+			
+			//echo print_r( $registered_blocks );
 		}
 
 		/**

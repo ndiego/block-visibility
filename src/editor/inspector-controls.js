@@ -60,8 +60,14 @@ export default function VisibilityInspectorControls( props ) {
 
 	const { name, attributes } = props;
 	const { blockVisibility } = attributes;
+	
+	console.log(attributes );
+	
 	const blockDisabled = disabledBlocks.includes( name );
+	// TODO 
 	const isAllowed = has( attributes, 'blockVisibility' );
+	
+	//const isAllowed = true;
 
 	// If the visibility settings have been disabled for the block type or the
 	// block type does not have the blockVisibility attribute registered, abort
@@ -73,8 +79,11 @@ export default function VisibilityInspectorControls( props ) {
 
 	// Check if the hide block control is set, default to "true".
 	const hideBlockEnable = visibilityControls?.hide_block?.enable ?? true; // eslint-disable-line
+	/* TODO
 	const showAdditionalControls =
 		! blockVisibility.hideBlock || ! hideBlockEnable ? true : false;
+	*/	
+	const showAdditionalControls = true;
 
 	return (
 		<InspectorControls>

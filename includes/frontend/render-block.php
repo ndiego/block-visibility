@@ -57,6 +57,15 @@ function has_visibility_settings( $block ) {
  * @return mixed Return either the $block_content or nothing depending on visibility settings.
  */
 function render_with_visibility( $block_content, $block ) {
+	
+	// Needed for server side rendered blocks since they are rendered via REST
+	// API endpoint. This endpoint calls the render function in the admin, whereas
+	// the render function is called directly on the frontend. The function 
+	// is_admin() checks if a backend page was requested. In a REST API Request 
+	// is no backend page, so the function returns false on REST API requests.
+	if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+		return $block_content;
+	}
 
 	// Get the plugin core settings.
 	$settings = get_option( 'block_visibility_settings' );
@@ -67,7 +76,6 @@ function render_with_visibility( $block_content, $block ) {
 		! is_block_type_disabled( $settings, $block ) &&
 		has_visibility_settings( $block )
 	) {
-
 		$visibility_test = true;
 
 		// All our visibility tests are run through this filter and this also
@@ -89,7 +97,6 @@ function render_with_visibility( $block_content, $block ) {
 	return $block_content;
 }
 add_filter( 'render_block', __NAMESPACE__ . '\render_with_visibility', 10, 2 );
-
 
 // Run our tests.
 require_once BLOCKVISIBILITY_PLUGIN_DIR . 'includes/frontend/visibility-tests/hide-block.php';

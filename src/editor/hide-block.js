@@ -20,6 +20,8 @@ export default function HideBlock( props ) {
 	const { attributes, setAttributes } = props;
 	const { blockVisibility } = attributes;
 	const { hideBlock } = blockVisibility;
+	//console.log( attributes );
+	//const hideBlock = blockVisibility?.hideBlock ?? false;
 
 	return (
 		<div className="visibility-controls__hide-block">
