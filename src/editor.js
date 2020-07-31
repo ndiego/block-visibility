@@ -23,7 +23,6 @@ import VisibilityInspectorControls from './editor/inspector-controls';
  * @return {Object} settings The updated array of settings.
  */
 function blockVisibilityAttributes( settings ) {
-	
 	// This is a global variable added to the page via PHP
 	const fullControlMode = blockVisibilityFullControlMode; // eslint-disable-line
 	let visibilityAttributes = {
@@ -39,17 +38,15 @@ function blockVisibilityAttributes( settings ) {
 				restrictedRoles: {
 					type: 'array',
 					items: {
-						type: 'string'
-					}
+						type: 'string',
+					},
 				},
 			},
-			
 			default: {
 				hideBlock: false,
 				visibilityByRole: 'all',
 				restrictedRoles: [],
 			},
-			
 		},
 	};
 	visibilityAttributes = applyFilters(
@@ -71,9 +68,6 @@ function blockVisibilityAttributes( settings ) {
 			visibilityAttributes
 		);
 	}
-	
-	//console.log( settings );
-	
 	return settings;
 }
 

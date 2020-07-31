@@ -30,7 +30,6 @@ function get_user_roles() {
 		return $roles;
 	}
 
-	// Need to add a filter here.
 	$role_types = array(
 		'administrator' => 'core',
 		'editor'        => 'core',
@@ -38,25 +37,6 @@ function get_user_roles() {
 		'contributor'   => 'core',
 		'subscriber'    => 'core',
 	);
-
-	/* TODO: Possible future implementation.
-	$role_types_demo = array(
-		'core' => array(
-			'name' => __( 'WordPress Core', 'block-visibility' ),
-			'roles' => array(
-				'administrator',
-				'editor',
-				'author',
-				'contributor',
-				'subscriber',
-			),
-		),
-		'custom' => array(
-			'name' => __( 'Custom', 'block-visibility' ),
-			'roles' => array(),
-		),
-	);
-	*/
 
 	foreach ( get_editable_roles() as $role_slug => $role_atts ) {
 		$atts = array(

@@ -11,8 +11,6 @@ namespace BlockVisibility;
 /**
  * Register plugin settings.
  *
- * @TODO Add filter here for developers can preset a list of setting defaults
- *
  * @since 1.0.0
  */
 function register_settings() {
@@ -48,11 +46,11 @@ function register_settings() {
 									),
 								),
 
-								// Additional Controls
-								'time_date'         => array(
+								// Additional Controls.
+								'time_date'          => array(
 									'type'       => 'object',
 									'properties' => array(
-										'enable' => array(
+										'enable'           => array(
 											'type' => 'boolean',
 										),
 										'enable_start_end' => array(
@@ -78,7 +76,7 @@ function register_settings() {
 									'type' => 'boolean',
 								),
 
-								// Additional Settings
+								// Additional Settings.
 								'enable_visibility_notes'  => array(
 									'type' => 'boolean',
 								),
@@ -97,8 +95,8 @@ function register_settings() {
 						'enable_user_roles' => true,
 					),
 
-					// Additional Controls
-					'time_date' => array(
+					// Additional Controls.
+					'time_date'          => array(
 						'enable' => true,
 					),
 				),
@@ -107,7 +105,7 @@ function register_settings() {
 					'enable_full_control_mode' => false,
 					'remove_on_uninstall'      => false,
 
-					// Additional Settings
+					// Additional Settings.
 					'enable_visibility_notes'  => true,
 				),
 			),
@@ -118,4 +116,4 @@ add_action( 'rest_api_init', __NAMESPACE__ . '\register_settings' );
 add_action( 'admin_init', __NAMESPACE__ . '\register_settings' );
 
 // TODO: remove eventually, use to reset plugin settings.
-//delete_option( 'block_visibility_settings' );
+// delete_option( 'block_visibility_settings' );

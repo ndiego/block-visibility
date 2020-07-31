@@ -172,5 +172,7 @@ export default function PluginSettings( props ) {
 	);
 }
 
-let AdditionalPluginSettings = ( props ) => <></>;
-AdditionalPluginSettings = withFilters( 'blockVisibility.AdditionalPluginSettings' )( AdditionalPluginSettings );
+let AdditionalPluginSettings = ( props ) => <></>; // eslint-disable-line
+AdditionalPluginSettings = withFilters(
+	'blockVisibility.AdditionalPluginSettings'
+)( AdditionalPluginSettings );

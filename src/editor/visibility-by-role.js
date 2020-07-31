@@ -37,9 +37,6 @@ export default function VisibilityByRole( props ) {
 	const { attributes, setAttributes, visibilityControls } = props;
 	const { blockVisibility } = attributes;
 	const { visibilityByRole } = blockVisibility;
-	
-	//const visibilityByRole = blockVisibility?.blockVisibility ?? 'all';
-	
 
 	// This is a global variable added to the page via PHP
 	const settingsUrl = blockVisibilityVariables.settingsUrl; // eslint-disable-line

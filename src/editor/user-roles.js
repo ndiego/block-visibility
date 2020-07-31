@@ -20,10 +20,6 @@ export default function UserRoles( props ) {
 	const { attributes, setAttributes } = props;
 	const { blockVisibility } = attributes;
 	const { restrictedRoles } = blockVisibility;
-	
-	console.log( attributes );
-
-	//const restrictedRoles = blockVisibility?.restrictedRoles ?? [];
 
 	// This is a global variable added to the page via PHP
 	const roles = blockVisibilityUserRoles; // eslint-disable-line

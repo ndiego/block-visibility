@@ -170,5 +170,7 @@ export default function VisibilityControls( props ) {
 	);
 }
 
-let AdditionalVisibilityControls = ( props ) => <></>;
-AdditionalVisibilityControls = withFilters( 'blockVisibility.AdditionalVisibilityControls' )( AdditionalVisibilityControls );
+let AdditionalVisibilityControls = ( props ) => <></>; // eslint-disable-line
+AdditionalVisibilityControls = withFilters(
+	'blockVisibility.AdditionalVisibilityControls'
+)( AdditionalVisibilityControls );
