@@ -1,5 +1,7 @@
 # Block Visibility
 
+[![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://github.com/ndiego/block-visibility/blob/master/LICENSE.txt)
+
 Control the visibility of any block in WordPress.
 
 **Full readme coming soon...**
@@ -24,16 +26,17 @@ Hide Block
 
 This control allows a block to be hidden on the frontend of your website. The block will still be viewable and editable in the WordPress editor, but no one will be able to see it outside of the editor. If enabled, the **Hide Block** control overrides all other visibility controls.
 
-### Reference links
-https://github.com/preseto/block-context/blob/master/js/src/block-context-attributes.js
-
-https://javascriptforwp.com/extending-wordpress-blocks/
 
 
-#### php
-add_filter( 'render_block', ... )  
-https://developer.wordpress.org/reference/hooks/render_block/
+## Installation
 
+1. Make sure you are running the latest version of WordPress (5.4+) and you are using the Block Editor
+2. Download Block Visibility from the [WordPress plugin directory](https://wordpress.org/plugins/block-visibility/).
 
-#### js
-https://jschof.com/gutenberg-blocks/using-gutenberg-filters-to-extend-blocks/
+## Development
+
+1. Setup a local WordPress environment.
+2. In the `wp-content/plugins` folder, clone the GitHub repository: `https://github.com/ndiego/block-visibility.git`
+3. Navigate to the `wp-content/plugins/block-visibility` folder in the command line.
+4. Run the `npm install` command to install the plugin's dependencies within a `/node_modules/` folder.
+5. Run the `npm run start` command to compile and watch source files for changes while developing.
