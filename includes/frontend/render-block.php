@@ -85,7 +85,7 @@ function render_with_visibility( $block_content, $block ) {
 		// All our visibility tests are run through this filter and this also
 		// gives third-party developers access to override the visibility test.
 		$visibility_test = apply_filters(
-			'blockvisibility_visibility_test',
+			'block_visibility_visibility_test',
 			$visibility_test,
 			$settings,
 			$block
@@ -103,8 +103,8 @@ function render_with_visibility( $block_content, $block ) {
 add_filter( 'render_block', __NAMESPACE__ . '\render_with_visibility', 10, 2 );
 
 // Run our tests.
-require_once BLOCKVISIBILITY_PLUGIN_DIR . 'includes/frontend/visibility-tests/hide-block.php';
-require_once BLOCKVISIBILITY_PLUGIN_DIR . 'includes/frontend/visibility-tests/visibility-by-role.php';
+require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/frontend/visibility-tests/hide-block.php';
+require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/frontend/visibility-tests/visibility-by-role.php';
 
 // Require utlity functions for tests.
-require_once BLOCKVISIBILITY_PLUGIN_DIR . 'includes/utils/is-control-enabled.php';
+require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/utils/is-control-enabled.php';

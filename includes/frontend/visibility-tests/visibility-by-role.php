@@ -80,4 +80,4 @@ function test_visibility_by_role( $is_visible, $settings, $block ) {
 	// If we don't pass any of the above tests, hide the block.
 	return false;
 }
-add_filter( 'blockvisibility_visibility_test', __NAMESPACE__ . '\test_visibility_by_role', 10, 3 );
+add_filter( 'block_visibility_visibility_test', __NAMESPACE__ . '\test_visibility_by_role', 10, 3 );

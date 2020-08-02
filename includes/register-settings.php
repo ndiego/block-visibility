@@ -114,6 +114,3 @@ function register_settings() {
 }
 add_action( 'rest_api_init', __NAMESPACE__ . '\register_settings' );
 add_action( 'admin_init', __NAMESPACE__ . '\register_settings' );
-
-// TODO: remove eventually, use to reset plugin settings.
-// delete_option( 'block_visibility_settings' );

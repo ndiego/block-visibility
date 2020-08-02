@@ -42,4 +42,4 @@ function test_hide_block( $is_visible, $settings, $block ) {
 		return true;
 	}
 }
-add_filter( 'blockvisibility_visibility_test', __NAMESPACE__ . '\test_hide_block', 20, 3 );
+add_filter( 'block_visibility_visibility_test', __NAMESPACE__ . '\test_hide_block', 20, 3 );

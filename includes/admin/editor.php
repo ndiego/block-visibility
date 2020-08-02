@@ -34,15 +34,15 @@ function enqueue_editor_assets() {
 
 	wp_enqueue_script(
 		'block-visibility-editor-scripts',
-		BLOCKVISIBILITY_PLUGIN_URL . 'dist/block-visibility-editor.js',
+		BLOCK_VISIBILITY_PLUGIN_URL . 'dist/block-visibility-editor.js',
 		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
 		$asset_file['version'],
 		false // Need false to ensure our filters can target third-party plugins.
 	);
 
 	$plugin_variables = array(
-		'version'     => BLOCKVISIBILITY_VERSION,
-		'settingsUrl' => BLOCKVISIBILITY_SETTINGS_URL,
+		'version'     => BLOCK_VISIBILITY_VERSION,
+		'settingsUrl' => BLOCK_VISIBILITY_SETTINGS_URL,
 	);
 
 	// Create a global variable to hold all our plugin variables and user roles,
@@ -62,21 +62,12 @@ function enqueue_editor_assets() {
 
 	wp_enqueue_style(
 		'block-visibility-editor-styles',
-		BLOCKVISIBILITY_PLUGIN_URL . 'dist/block-visibility-editor-styles.css',
+		BLOCK_VISIBILITY_PLUGIN_URL . 'dist/block-visibility-editor-styles.css',
 		array(),
 		$asset_file['version']
 	);
 }
-
-/**
- * Need to add at admin_init instead of the normal enqueue_block_editor_assets
- * so that our attributes load for third-party blocks. Hopefully this will be
- * resolved in future releases of WP. Using enqueue_block_editor_assets is the
- * ideal implementation.
- */
-add_action( 'admin_init', __NAMESPACE__ . '\enqueue_editor_assets', 10000 );
-// TODO check this
-//add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_assets' );
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_assets' );
 
 
 

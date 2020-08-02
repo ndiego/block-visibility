@@ -173,6 +173,23 @@ export default function GettingStarted() {
 								'block-visibility'
 							) }
 						</p>
+						<p>
+							{ interpolateElement(
+								__(
+									'Furthermore, while this plugin was designed to be compatible with all blocks, the WordPress ecosystem is ever expanding. If you find a conflict with a certain block, please let us know in the <a>plugin support forum</a> and we will investigate. We are committed to bringing visibility control to every block.',
+									'block-visibility'
+								),
+								{
+									a: (
+										<ExternalLink // eslint-disable-line
+											href={ pluginVariables.supportUrl }
+											target="_blank"
+											rel="noreferrer"
+										/>
+									),
+								}
+							) }
+						</p>
 						<div className="panels__content-label">
 							{ __(
 								'Will more visibility controls be added in the future?',

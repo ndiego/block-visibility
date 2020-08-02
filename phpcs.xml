@@ -52,9 +52,9 @@
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
 			<property name="prefixes" type="array">
+				<element value="block_visibility"/>
 				<element value="BlockVisibility"/>
 			</property>
 		</properties>
 	</rule>
-
 </ruleset>

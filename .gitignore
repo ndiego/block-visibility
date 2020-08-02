@@ -38,13 +38,12 @@ ehthumbs.db
 Thumbs.db
 
 # NPM
-node_modules/
+**/node_modules/**
 
 # Composer
-vendor/
+**/vendor/**
 
 # Package Specific
 dist/*
 !dist/images/
 !dist/assets/
-package-lock.json

@@ -137,6 +137,10 @@ $mobile: 420px;
 		.setting-tabs__loading-settings {
 			text-align: center;
 			margin: 150px 30px;
+
+			.components-spinner {
+				float: none;
+			}
 		}
 
 		.setting-tabs__tab-description {
