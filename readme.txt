@@ -5,7 +5,7 @@ Tags: visibility, hide blocks, block editor, gutenberg
 Requires at least: 5.4
 Tested up to: 5.4
 Requires PHP: 5.6
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,3 +72,6 @@ Since full site editing is still in the development phase, this plugin does not 
 
 = 1.0.0 =
 * Initial Release
+
+= 1.0.1 =
+* Fix PHP warning message that may appear on new installations

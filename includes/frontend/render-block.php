@@ -18,7 +18,9 @@ namespace BlockVisibility\Frontend;
  * @return boolean Is the block disabled or not
  */
 function is_block_type_disabled( $settings, $block ) {
-	$disabled_blocks = $settings['disabled_blocks'];
+	$disabled_blocks = isset( $settings['disabled_blocks'] )
+		? $settings['disabled_blocks']
+		: false;
 
 	if ( ! $disabled_blocks ) {
 		return false;
