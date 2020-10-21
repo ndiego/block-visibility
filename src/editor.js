@@ -14,6 +14,7 @@ import { hasBlockSupport } from '@wordpress/blocks';
  * Internal dependencies
  */
 import VisibilityInspectorControls from './editor/inspector-controls';
+import './editor/block-toolbar/toolbar-controls';
 
 /**
  * Add the visibility setting sttribute to selected blocks.
