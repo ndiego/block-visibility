@@ -9,13 +9,14 @@ import { assign } from 'lodash';
 import { addFilter, applyFilters } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { hasBlockSupport } from '@wordpress/blocks';
+import { registerPlugin } from '@wordpress/plugins';
 
 /**
  * Internal dependencies
  */
 import VisibilityInspectorControls from './editor/inspector-controls';
-import './editor/block-toolbar/toolbar-controls';
-
+import ToolbarMoreOptions from './editor/block-toolbar/toolbar-controls';
+import { hasVisibilityControls } from './editor/utils/has-visibility-controls';
 /**
  * Add the visibility setting sttribute to selected blocks.
  *
@@ -56,7 +57,7 @@ function blockVisibilityAttributes( settings ) {
 	);
 
 	// We don't want to enable visibility for blocks that cannot be added via
-	// the inserter of is a child block. This excludes blocks such as reusable
+	// the inserter or is a child block. This excludes blocks such as reusable
 	// blocks, individual column block, etc. But if we are in Full Control Mode
 	// add settings to every block
 	if (
@@ -101,3 +102,37 @@ addFilter(
 	blockVisibilityInspectorControls,
 	100 // We want Visibility to appear rigth above Advanced controls
 );
+
+/**
+ * Filter each block and add CSS classes based on visibility settings.
+ */
+const withVisibilityContextualIndicator = createHigherOrderComponent( ( BlockListBlock ) => {
+    return ( props ) => {
+		const { name, attributes } = props;
+
+		if ( ! hasVisibilityControls( name, attributes ) ) {
+			return <BlockListBlock { ...props } />;
+		}
+
+		const { blockVisibility } = attributes;
+	    const { hideBlock } = blockVisibility;
+
+		let classes = '';
+		classes = hideBlock ? classes + ' block-visibility__is-hidden' : classes;
+
+        return <BlockListBlock { ...props } className={ classes } />;
+    };
+}, 'withClientIdClassName' );
+
+addFilter(
+	'editor.BlockListBlock',
+	'block-visibility/visibility-contextual-indicator',
+	withVisibilityContextualIndicator
+);
+
+/**
+ * Register all Block Visibility related plugins to the editor.
+ */
+registerPlugin( 'block-visibility-toolbar-options-hide-block', {
+    render: ToolbarOptionsHideBlock,
+} );

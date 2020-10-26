@@ -53,7 +53,7 @@ export default function VisibilityInspectorControls( props ) {
 		: null;
 
 	// Make sure we have the disabled blocks setting, otherwise just abort.
-	// Something is not working properly
+	// Something is not working properly.
 	if ( ! disabledBlocks ) {
 		return null;
 	}
@@ -64,7 +64,7 @@ export default function VisibilityInspectorControls( props ) {
 	const isAllowed = has( attributes, 'blockVisibility' );
 
 	// If the visibility settings have been disabled for the block type or the
-	// block type does not have the blockVisibility attribute registered, abort
+	// block type does not have the blockVisibility attribute registered, abort.
 	if ( blockDisabled || ! isAllowed ) {
 		return null;
 	}
