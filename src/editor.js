@@ -19,6 +19,9 @@ import VisibilityInspectorControls from './editor/inspector-controls';
 import ToolbarOptionsHideBlock from './editor/toolbar-controls';
 import { hasVisibilityControls } from './editor/utils/has-visibility-controls';
 import { isSettingEnabled } from './editor/utils/is-setting-enabled';
+import { isControlEnabled } from './editor/utils/is-control-enabled';
+import { enabledControls } from './editor/utils/enabled-controls';
+
 
 /**
  * Add the visibility setting sttribute to selected blocks.
@@ -112,12 +115,10 @@ addFilter(
 const withVisibilityContextualIndicator = createHigherOrderComponent( ( BlockListBlock ) => {
     return ( props ) => {
 		const { name, attributes } = props;
-
 		const [
 			blockVisibilitySettings,
 			setBlockVisibilitySettings // eslint-disable-line
 		] = useEntityProp( 'root', 'site', 'block_visibility_settings' );
-
 		const enableIndicators = isSettingEnabled(
 			blockVisibilitySettings,
 			'enable_contextual_indicators'
@@ -132,11 +133,18 @@ const withVisibilityContextualIndicator = createHigherOrderComponent( ( BlockLis
 			return <BlockListBlock { ...props } />;
 		}
 
+		const hideEnabled = isControlEnabled( blockVisibilitySettings, 'hide_block', 'enable' );
+		const getEnabledControls = enabledControls( blockVisibilitySettings );
+		console.log( getEnabledControls );
 		const { blockVisibility } = attributes;
 	    const { hideBlock } = blockVisibility;
 
 		let classes = '';
 		classes = hideBlock ? classes + ' block-visibility__is-hidden' : classes;
+
+		// Add filter here for premium settings
+
+		classes = classes ? classes + ' block-visibility__has-visibility' : classes;
 
         return <BlockListBlock { ...props } className={ classes } />;
     };

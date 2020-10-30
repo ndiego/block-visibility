@@ -5,7 +5,7 @@ import { has } from 'lodash';
 
 export function hasVisibilityControls( settings, blockType, attributes ) {
 
-    // Make sure the visibility settings have been retreived, otherwise abort.
+    // Make sure we have visibility settings, otherwise abort.
     if ( ! settings ) {
         return false;
     }

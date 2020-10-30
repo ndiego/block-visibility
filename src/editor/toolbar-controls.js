@@ -20,7 +20,7 @@ import { useEntityProp } from '@wordpress/core-data';
  * Internal dependencies
  */
 import { isSettingEnabled } from './utils/is-setting-enabled';
-import { isVisibilityControlEnabled } from './utils/is-visibility-control-enabled';
+import { isControlEnabled } from './utils/is-control-enabled';
 import { hasVisibilityControls } from './utils/has-visibility-controls';
 import icons from './../icons';
 

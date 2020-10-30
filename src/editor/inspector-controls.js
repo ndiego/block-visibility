@@ -30,7 +30,7 @@ import HideBlock from './components/hide-block';
 import VisibilityByRole from './components/visibility-by-role';
 
 import { isSettingEnabled } from './utils/is-setting-enabled';
-import { isVisibilityControlEnabled } from './utils/is-visibility-control-enabled';
+import { isControlEnabled } from './utils/is-control-enabled';
 import { hasVisibilityControls } from './utils/has-visibility-controls';
 
 /**
@@ -46,24 +46,21 @@ export default function VisibilityInspectorControls( props ) {
 		blockVisibilitySettings,
 		setBlockVisibilitySettings // eslint-disable-line
 	] = useEntityProp( 'root', 'site', 'block_visibility_settings' );
-	// This is a global variable added to the page via PHP
-	const settingsUrl = blockVisibilityVariables.settingsUrl; // eslint-disable-line
-	// Need to wait until the main settings object is loaded.
-	const visibilityControls = blockVisibilitySettings
-		? blockVisibilitySettings.visibility_controls
-		: null;
 
 	const { name, attributes } = props;
-	const { blockVisibility } = attributes;
 
 	if ( ! hasVisibilityControls( blockVisibilitySettings, name, attributes ) ) {
 		return null;
 	}
-
+	// This is a global variable added to the page via PHP
+	const settingsUrl = blockVisibilityVariables.settingsUrl; // eslint-disable-line
+	const visibilityControls = blockVisibilitySettings.visibility_controls;
 	const controlsEnabled = filter( visibilityControls, { enable: true } ).length; // eslint-disable-line
 
 	// Check if the hide block control is set, default to "true".
 	const hideBlockEnable = visibilityControls?.hide_block?.enable ?? true; // eslint-disable-line
+
+	const { blockVisibility } = attributes;
 	const showAdditionalControls =
 		! blockVisibility.hideBlock || ! hideBlockEnable ? true : false;
 
