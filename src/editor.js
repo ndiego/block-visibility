@@ -10,13 +10,16 @@ import { addFilter, applyFilters } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { hasBlockSupport } from '@wordpress/blocks';
 import { registerPlugin } from '@wordpress/plugins';
+import { useEntityProp } from '@wordpress/core-data';
 
 /**
  * Internal dependencies
  */
 import VisibilityInspectorControls from './editor/inspector-controls';
-import ToolbarMoreOptions from './editor/block-toolbar/toolbar-controls';
+import ToolbarOptionsHideBlock from './editor/toolbar-controls';
 import { hasVisibilityControls } from './editor/utils/has-visibility-controls';
+import { isSettingEnabled } from './editor/utils/is-setting-enabled';
+
 /**
  * Add the visibility setting sttribute to selected blocks.
  *
@@ -100,7 +103,7 @@ addFilter(
 	'editor.BlockEdit',
 	'block-visibility/inspector-controls',
 	blockVisibilityInspectorControls,
-	100 // We want Visibility to appear rigth above Advanced controls
+	100 // We want Visibility to appear right above Advanced controls
 );
 
 /**
@@ -110,7 +113,22 @@ const withVisibilityContextualIndicator = createHigherOrderComponent( ( BlockLis
     return ( props ) => {
 		const { name, attributes } = props;
 
-		if ( ! hasVisibilityControls( name, attributes ) ) {
+		const [
+			blockVisibilitySettings,
+			setBlockVisibilitySettings // eslint-disable-line
+		] = useEntityProp( 'root', 'site', 'block_visibility_settings' );
+
+		const enableIndicators = isSettingEnabled(
+			blockVisibilitySettings,
+			'enable_contextual_indicators'
+		);
+		const hasVisibility = hasVisibilityControls(
+			blockVisibilitySettings,
+			name,
+			attributes
+		);
+
+		if ( ! enableIndicators || ! hasVisibility ) {
 			return <BlockListBlock { ...props } />;
 		}
 
@@ -122,7 +140,7 @@ const withVisibilityContextualIndicator = createHigherOrderComponent( ( BlockLis
 
         return <BlockListBlock { ...props } className={ classes } />;
     };
-}, 'withClientIdClassName' );
+}, 'withVisibilityContextualIndicator' );
 
 addFilter(
 	'editor.BlockListBlock',

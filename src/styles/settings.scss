@@ -271,14 +271,18 @@ $mobile: 420px;
 				padding: 20px 20px 10px;
 				border-top: 1px solid #E0E5E9;
 
+				& > div {
+					margin-bottom: 20px;
+				}
+
 				label {
 					font-size: 14px;
 				}
 
 				.settings-panel__row-subsetting {
-					margin: 16px 0 0 50px;
+					margin: 20px 0 0 50px;
 					border-top: 1px solid #E0E5E9;
-					padding-top: 16px;
+					padding-top: 20px;
 				}
 			}
 		}

@@ -3,7 +3,12 @@
  */
 import { has } from 'lodash';
 
-export function hasVisibilityControls( settings, blockType, attributes ) {
+/**
+ * WordPress dependencies
+ */
+
+
+export function isSettingEnabled( settings, control, setting ) {
 
     // Make sure the visibility settings have been retreived, otherwise abort.
     if ( ! settings ) {

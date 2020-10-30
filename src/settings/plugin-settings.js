@@ -55,6 +55,8 @@ export default function PluginSettings( props ) {
 	}
 
 	// Manually set defaults, this ensures the main settings function properly
+	const enableContextualIndicators = pluginSettings?.enable_contextual_indicators ?? true; // eslint-disable-line
+	const enableToolbarControls = pluginSettings?.enable_toolbar_controls ?? true; // eslint-disable-line
 	const removeOnUninstall = pluginSettings?.remove_on_uninstall ?? false; // eslint-disable-line
 	const enableFullControlMode = pluginSettings?.enable_full_control_mode ?? false; // eslint-disable-line
 
@@ -90,6 +92,47 @@ export default function PluginSettings( props ) {
 					hasUpdates={ hasUpdates }
 					onSettingsChange={ onSettingsChange }
 				/>
+			</div>
+			<div className="setting-tabs__settings-panel">
+				<div className="settings-panel__header">
+					<span className="settings-panel__header-title">
+						{ __( 'Block Editor', 'block-visibility' ) }
+					</span>
+					<InformationPopover
+						message={ __(
+							'Settings that impact the Block Editor.',
+							'block-visibility'
+						) }
+					/>
+				</div>
+				<div className="settings-panel__row">
+					<ToggleControl
+						label={ __(
+							'Enable contextual indicators when visibility settings are applied to a block.',
+							'block-visibility'
+						) }
+						checked={ enableContextualIndicators }
+						onChange={ () =>
+							onPluginSettingChange(
+								'enable_contextual_indicators',
+								! enableContextualIndicators
+							)
+						}
+					/>
+					<ToggleControl
+						label={ __(
+							'Enable block toolbar controls for visibility settings.',
+							'block-visibility'
+						) }
+						checked={ enableToolbarControls }
+						onChange={ () =>
+							onPluginSettingChange(
+								'enable_toolbar_controls',
+								! enableToolbarControls
+							)
+						}
+					/>
+				</div>
 			</div>
 			<div className="setting-tabs__settings-panel">
 				<div className="settings-panel__header">

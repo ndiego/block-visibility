@@ -19,8 +19,10 @@ import { useEntityProp } from '@wordpress/core-data';
 /**
  * Internal dependencies
  */
-import { hasVisibilityControls } from './../utils/has-visibility-controls';
-import icons from './../../icons';
+import { isSettingEnabled } from './utils/is-setting-enabled';
+import { isVisibilityControlEnabled } from './utils/is-visibility-control-enabled';
+import { hasVisibilityControls } from './utils/has-visibility-controls';
+import icons from './../icons';
 
 export function ToolbarOptionsHideBlock( props ) {
     const { enableMenuItem, clientId, blockType, blockAttributes } = props;
@@ -30,13 +32,27 @@ export function ToolbarOptionsHideBlock( props ) {
         return null;
     }
 
-    if ( ! hasVisibilityControls( blockType.name, blockAttributes ) ) {
+    const [
+        blockVisibilitySettings,
+        setBlockVisibilitySettings // eslint-disable-line
+    ] = useEntityProp( 'root', 'site', 'block_visibility_settings' );
+
+
+    if ( ! isSettingEnabled( blockVisibilitySettings, 'enable_toolbar_controls' ) ) {
+        return null;
+    }
+    /*
+    if ( ! isVisibilityControlEnabled( blockVisibilitySettings, 'hide_block' ) ) {
+        return null;
+    }
+    */
+    if ( ! hasVisibilityControls( blockVisibilitySettings, blockType.name, blockAttributes ) ) {
         return null;
     }
 
     const { blockVisibility } = blockAttributes;
     const { hideBlock } = blockVisibility;
-    const icon = hideBlock ? icons.visibility : icons.visibilityHidden
+    const icon = hideBlock ? icons.visibilityAlt : icons.visibilityHiddenAlt
     const label =
         hideBlock
             ? __( 'Enable block', 'block-visibility' )

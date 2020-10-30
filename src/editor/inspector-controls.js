@@ -26,8 +26,12 @@ const interpolateElement =
 /**
  * Internal dependencies
  */
-import HideBlock from './hide-block';
-import VisibilityByRole from './visibility-by-role';
+import HideBlock from './components/hide-block';
+import VisibilityByRole from './components/visibility-by-role';
+
+import { isSettingEnabled } from './utils/is-setting-enabled';
+import { isVisibilityControlEnabled } from './utils/is-visibility-control-enabled';
+import { hasVisibilityControls } from './utils/has-visibility-controls';
 
 /**
  * Add the Visibility inspector control to each allowed block in the editor
@@ -45,27 +49,14 @@ export default function VisibilityInspectorControls( props ) {
 	// This is a global variable added to the page via PHP
 	const settingsUrl = blockVisibilityVariables.settingsUrl; // eslint-disable-line
 	// Need to wait until the main settings object is loaded.
-	const disabledBlocks = blockVisibilitySettings
-		? blockVisibilitySettings.disabled_blocks
-		: null;
 	const visibilityControls = blockVisibilitySettings
 		? blockVisibilitySettings.visibility_controls
 		: null;
 
-	// Make sure we have the disabled blocks setting, otherwise just abort.
-	// Something is not working properly.
-	if ( ! disabledBlocks ) {
-		return null;
-	}
-
 	const { name, attributes } = props;
 	const { blockVisibility } = attributes;
-	const blockDisabled = disabledBlocks.includes( name );
-	const isAllowed = has( attributes, 'blockVisibility' );
 
-	// If the visibility settings have been disabled for the block type or the
-	// block type does not have the blockVisibility attribute registered, abort.
-	if ( blockDisabled || ! isAllowed ) {
+	if ( ! hasVisibilityControls( blockVisibilitySettings, name, attributes ) ) {
 		return null;
 	}
 
