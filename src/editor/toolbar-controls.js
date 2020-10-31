@@ -20,8 +20,8 @@ import { useEntityProp } from '@wordpress/core-data';
  * Internal dependencies
  */
 import { isSettingEnabled } from './utils/is-setting-enabled';
-import { isControlEnabled } from './utils/is-control-enabled';
 import { hasVisibilityControls } from './utils/has-visibility-controls';
+import { getEnabledControls } from './utils/get-enabled-controls';
 import icons from './../icons';
 
 export function ToolbarOptionsHideBlock( props ) {
@@ -32,21 +32,24 @@ export function ToolbarOptionsHideBlock( props ) {
         return null;
     }
 
+    // Get plugin settings.
     const [
         blockVisibilitySettings,
         setBlockVisibilitySettings // eslint-disable-line
     ] = useEntityProp( 'root', 'site', 'block_visibility_settings' );
+    const enableToolbarControls = isSettingEnabled(
+        blockVisibilitySettings,
+        'enable_toolbar_controls'
+    );
+    const hasVisibility = hasVisibilityControls(
+        blockVisibilitySettings,
+        blockType.name,
+        blockAttributes
+    );
+    const enabledControls = getEnabledControls( blockVisibilitySettings );
 
-
-    if ( ! isSettingEnabled( blockVisibilitySettings, 'enable_toolbar_controls' ) ) {
-        return null;
-    }
-    /*
-    if ( ! isVisibilityControlEnabled( blockVisibilitySettings, 'hide_block' ) ) {
-        return null;
-    }
-    */
-    if ( ! hasVisibilityControls( blockVisibilitySettings, blockType.name, blockAttributes ) ) {
+    // As of v1.1.0 we only have hide block controls.
+    if ( ! enableToolbarControls || ! hasVisibility || ! enabledControls.includes( 'hide_block' ) ) {
         return null;
     }
 
@@ -70,12 +73,10 @@ export function ToolbarOptionsHideBlock( props ) {
                 __( '"%s" is now hidden.' ),
                 title
             );
-
     const { flashBlock, updateBlockAttributes } = useDispatch(
         'core/block-editor'
     );
     const { createSuccessNotice } = useDispatch( 'core/notices' );
-
     const handler = () => {
         updateBlockAttributes(
             clientId,
@@ -104,13 +105,11 @@ export default withSelect( ( select ) => {
         getBlockAttributes,
         hasMultiSelection,
 	} = select( 'core/block-editor' );
-
     const { getBlockType } = select( 'core/blocks' );
     const clientIds = getSelectedBlockClientIds();
-
     // We only want to enable visibility editing if only one block is selected.
     const enableMenuItem = ! hasMultiSelection();
-
+    // Always retrieve first client id, even if there are multiple.
     const clientId = clientIds.length === 0 ? null : clientIds[0];
     const blockType = getBlockType( getBlockName( clientId ) );
     const blockAttributes = getBlockAttributes( clientId );

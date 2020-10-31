@@ -62,7 +62,7 @@ $icon__hidden: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'>
     }
 }
 
-.block-visibility__is-hidden {
+.block-visibility__has-visibility {
     outline: 2px dashed #aaa;
     opacity: .5;
 
@@ -74,13 +74,24 @@ $icon__hidden: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'>
 
     &:before {
         content: "";
-        background: url( $icon__hidden );
         height: 24px;
         width: 24px;
         position: absolute;
         right: 10px;
         top: 5px;
         z-index: 1000;
+    }
+
+    &.block-visibility__has-roles {
+        &:before {
+            background: url( $icon__visible );
+        }
+    }
+
+    &.block-visibility__is-hidden {
+        &:before {
+            background: url( $icon__hidden );
+        }
     }
 
     &.is-selected,

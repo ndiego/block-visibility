@@ -3,7 +3,7 @@
  */
 import { has, filter } from 'lodash';
 
-export function enabledControls( settings ) {
+export function getEnabledControls( settings ) {
 
     // Make sure we have visibility settings, otherwise abort.
     if ( ! settings ) {
@@ -29,6 +29,7 @@ export function enabledControls( settings ) {
             enabledControls.push( control );
         }
 
+        // Check if the control is set, default to "true".
         if ( visibilityControls[ control ]?.enable ?? true ) {
             enabledControls.push( control );
         }

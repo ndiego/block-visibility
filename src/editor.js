@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { assign } from 'lodash';
+import { has, assign } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -19,9 +19,7 @@ import VisibilityInspectorControls from './editor/inspector-controls';
 import ToolbarOptionsHideBlock from './editor/toolbar-controls';
 import { hasVisibilityControls } from './editor/utils/has-visibility-controls';
 import { isSettingEnabled } from './editor/utils/is-setting-enabled';
-import { isControlEnabled } from './editor/utils/is-control-enabled';
-import { enabledControls } from './editor/utils/enabled-controls';
-
+import { getEnabledControls } from './editor/utils/get-enabled-controls';
 
 /**
  * Add the visibility setting sttribute to selected blocks.
@@ -115,6 +113,7 @@ addFilter(
 const withVisibilityContextualIndicator = createHigherOrderComponent( ( BlockListBlock ) => {
     return ( props ) => {
 		const { name, attributes } = props;
+		// Get plugin settings.
 		const [
 			blockVisibilitySettings,
 			setBlockVisibilitySettings // eslint-disable-line
@@ -128,19 +127,20 @@ const withVisibilityContextualIndicator = createHigherOrderComponent( ( BlockLis
 			name,
 			attributes
 		);
+		const enabledControls = getEnabledControls( blockVisibilitySettings );
 
-		if ( ! enableIndicators || ! hasVisibility ) {
+		if ( ! enableIndicators || ! hasVisibility || enabledControls.length === 0 ) {
 			return <BlockListBlock { ...props } />;
 		}
 
-		const hideEnabled = isControlEnabled( blockVisibilitySettings, 'hide_block', 'enable' );
-		const getEnabledControls = enabledControls( blockVisibilitySettings );
-		console.log( getEnabledControls );
 		const { blockVisibility } = attributes;
-	    const { hideBlock } = blockVisibility;
+	    const { hideBlock, visibilityByRole } = blockVisibility;
+		const isHidden = hideBlock && enabledControls.includes( 'hide_block' );
+		const hasRoles = visibilityByRole && visibilityByRole != 'all' && enabledControls.includes( 'visibility_by_role' );
 
 		let classes = '';
-		classes = hideBlock ? classes + ' block-visibility__is-hidden' : classes;
+		classes = isHidden ? classes + ' block-visibility__is-hidden' : classes;
+		classes = hasRoles ? classes + ' block-visibility__has-roles' : classes;
 
 		// Add filter here for premium settings
 
