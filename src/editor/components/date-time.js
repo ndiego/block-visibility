@@ -8,7 +8,7 @@ import { assign } from 'lodash';
  */
 import { __ } from '@wordpress/i18n';
 import { DateTimePicker, Popover, Button, Notice } from '@wordpress/components';
-import { __experimentalGetSettings, dateI18n, format } from '@wordpress/date';
+import { __experimentalGetSettings, dateI18n, format, isSame } from '@wordpress/date';
 import { withState } from '@wordpress/compose';
 import { useState } from '@wordpress/element';
 import { calendar, cancelCircleFilled, closeSmall } from '@wordpress/icons';
@@ -156,6 +156,8 @@ export default function DateTime( props ) {
 							} )
 						}
 						is12Hour={ is12Hour }
+						// isDayHighlighted does not appear to work, but this does.
+						events={ [ { date: end } ] }
 					/>
 				</Popover>
 			) }
@@ -208,6 +210,8 @@ export default function DateTime( props ) {
 							} )
 						}
 						is12Hour={ is12Hour }
+						// isDayHighlighted does not appear to work, but this does.
+						events={ [ { date: start } ] }
 					/>
 				</Popover>
 			) }
