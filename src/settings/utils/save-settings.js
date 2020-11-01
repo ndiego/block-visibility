@@ -13,7 +13,7 @@ import { Icon } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
-import icons from './../icons';
+import icons from './../../icons';
 
 /**
  * Renders the save settings button and animation

@@ -17,7 +17,13 @@ import { ToggleControl } from '@wordpress/components';
  * @return {string}		 Return the rendered JSX
  */
 export default function HideBlock( props ) {
-	const { attributes, setAttributes } = props;
+	const { attributes, setAttributes, enabledControls } = props;
+	const hideBlockEnabled = enabledControls.includes( 'hide_block' );
+
+	if ( ! hideBlockEnabled ) {
+		return null;
+	}
+
 	const { blockVisibility } = attributes;
 	const { hideBlock } = blockVisibility;
 

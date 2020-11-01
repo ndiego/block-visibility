@@ -25,6 +25,8 @@ const interpolateElement =
  * Internal dependencies
  */
 import UserRoles from './user-roles';
+import { isControlSettingEnabled } from './../utils/setting-utilities';
+import { hideControlSection } from './../utils/hide-control-section';
 
 /**
  * Add the Visibility By User Role control
@@ -34,18 +36,32 @@ import UserRoles from './user-roles';
  * @return {string}		 Return the rendered JSX
  */
 export default function VisibilityByRole( props ) {
-	const { attributes, setAttributes, visibilityControls } = props;
+	const {
+		attributes,
+		setAttributes,
+		enabledControls,
+		settings,
+	} = props;
 	const { blockVisibility } = attributes;
 	const { visibilityByRole } = blockVisibility;
 
-	// This is a global variable added to the page via PHP
-	const settingsUrl = blockVisibilityVariables.settingsUrl; // eslint-disable-line
-	const visibilityByRoleEnable = visibilityControls?.visibility_by_role?.enable ?? true; // eslint-disable-line
-	const visibilityByRoleEnableUseRoles = visibilityControls?.visibility_by_role?.enable_user_roles ?? true; // eslint-disable-line
+	const sectionHidden = hideControlSection(
+		enabledControls,
+		blockVisibility,
+		'visibility_by_role'
+	);
 
-	if ( ! visibilityByRoleEnable ) {
+	if ( sectionHidden ) {
 		return null;
 	}
+
+	// This is a global variable added to the page via PHP
+	const settingsUrl = blockVisibilityVariables.settingsUrl; // eslint-disable-line
+	const visibilityByRoleEnableUseRoles = isControlSettingEnabled(
+		settings,
+		'visibility_by_role',
+		'enable_user_roles'
+	);
 
 	function optionLabel( title, description ) {
 		return (

@@ -24,8 +24,8 @@ const interpolateElement =
 /**
  * Internal dependencies
  */
-import SaveSettings from './save-settings';
-import InformationPopover from './information-popover';
+import SaveSettings from './utils/save-settings';
+import InformationPopover from './utils/information-popover';
 
 /**
  * Renders the plugin Settings tab of the Block Visibility settings page

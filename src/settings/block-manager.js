@@ -15,8 +15,8 @@ import { TextControl } from '@wordpress/components';
  * Internal dependencies
  */
 import BlockCategory from './block-category';
-import SaveSettings from './save-settings';
-import InformationPopover from './information-popover';
+import SaveSettings from './utils/save-settings';
+import InformationPopover from './utils/information-popover';
 import icons from './../icons';
 
 /**

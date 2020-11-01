@@ -45,8 +45,6 @@ function register_settings() {
 										),
 									),
 								),
-
-								// Additional Controls.
 								'time_date'          => array(
 									'type'       => 'object',
 									'properties' => array(
@@ -58,6 +56,7 @@ function register_settings() {
 										),
 									),
 								),
+								// Additional Controls.
 							),
 						),
 						'disabled_blocks'     => array(
@@ -100,11 +99,10 @@ function register_settings() {
 						'enable'            => true,
 						'enable_user_roles' => true,
 					),
-
-					// Additional Controls.
 					'time_date'          => array(
 						'enable' => true,
 					),
+					// Additional Controls.
 				),
 				'disabled_blocks'     => array(),
 				'plugin_settings'     => array(
@@ -114,7 +112,7 @@ function register_settings() {
 					'remove_on_uninstall'          => false,
 
 					// Additional Settings.
-					'enable_visibility_notes'  => true,
+					'enable_visibility_notes'  	   => true,
 				),
 			),
 		)

@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { has, filter } from 'lodash';
+import { filter } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -28,9 +28,8 @@ const interpolateElement =
  */
 import HideBlock from './components/hide-block';
 import VisibilityByRole from './components/visibility-by-role';
-
-import { isSettingEnabled } from './utils/is-setting-enabled';
-import { isControlEnabled } from './utils/is-control-enabled';
+import DateTime from './components/date-time';
+import { getEnabledControls } from './utils/setting-utilities';
 import { hasVisibilityControls } from './utils/has-visibility-controls';
 
 /**
@@ -43,26 +42,23 @@ import { hasVisibilityControls } from './utils/has-visibility-controls';
 export default function VisibilityInspectorControls( props ) {
 	// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
 	const [
-		blockVisibilitySettings,
-		setBlockVisibilitySettings // eslint-disable-line
+		settings,
+		setSettings // eslint-disable-line
 	] = useEntityProp( 'root', 'site', 'block_visibility_settings' );
-
 	const { name, attributes } = props;
+	const hasVisibility = hasVisibilityControls(
+		settings,
+		name,
+		attributes
+	);
 
-	if ( ! hasVisibilityControls( blockVisibilitySettings, name, attributes ) ) {
+	if ( ! hasVisibility ) {
 		return null;
 	}
+
 	// This is a global variable added to the page via PHP
 	const settingsUrl = blockVisibilityVariables.settingsUrl; // eslint-disable-line
-	const visibilityControls = blockVisibilitySettings.visibility_controls;
-	const controlsEnabled = filter( visibilityControls, { enable: true } ).length; // eslint-disable-line
-
-	// Check if the hide block control is set, default to "true".
-	const hideBlockEnable = visibilityControls?.hide_block?.enable ?? true; // eslint-disable-line
-
-	const { blockVisibility } = attributes;
-	const showAdditionalControls =
-		! blockVisibility.hideBlock || ! hideBlockEnable ? true : false;
+	const enabledControls = getEnabledControls( settings );
 
 	return (
 		<InspectorControls>
@@ -72,28 +68,30 @@ export default function VisibilityInspectorControls( props ) {
 				initialOpen={ false }
 			>
 				<div className="block-visibility-settings__visibility-controls">
-					{ controlsEnabled > 0 && (
+					{ enabledControls.length != 0 && (
 						<>
-							{ hideBlockEnable && <HideBlock { ...props } /> }
-							{ showAdditionalControls && (
-								<>
-									<VisibilityByRole
-										visibilityControls={
-											visibilityControls
-										}
-										{ ...props }
-									/>
-									<AdditionalInspectorControls
-										visibilityControls={
-											visibilityControls
-										}
-										{ ...props }
-									/>
-								</>
-							) }
+							<HideBlock
+								enabledControls={ enabledControls }
+								{ ...props }
+							/>
+							<DateTime
+								settings={ settings }
+								enabledControls={ enabledControls }
+								{ ...props }
+							/>
+							<VisibilityByRole
+								settings={ settings }
+								enabledControls={ enabledControls }
+								{ ...props }
+							/>
+							<AdditionalInspectorControls
+								settings={ settings }
+								enabledControls={ enabledControls }
+								{ ...props }
+							/>
 						</>
 					) }
-					{ ! controlsEnabled && (
+					{ enabledControls.length === 0 && (
 						<Notice status="warning" isDismissible={ false }>
 							{ interpolateElement(
 								__(

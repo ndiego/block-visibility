@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { has, assign } from 'lodash';
+import { assign } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -10,16 +10,13 @@ import { addFilter, applyFilters } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { hasBlockSupport } from '@wordpress/blocks';
 import { registerPlugin } from '@wordpress/plugins';
-import { useEntityProp } from '@wordpress/core-data';
 
 /**
  * Internal dependencies
  */
 import VisibilityInspectorControls from './editor/inspector-controls';
 import ToolbarOptionsHideBlock from './editor/toolbar-controls';
-import { hasVisibilityControls } from './editor/utils/has-visibility-controls';
-import { isSettingEnabled } from './editor/utils/is-setting-enabled';
-import { getEnabledControls } from './editor/utils/get-enabled-controls';
+import './editor/contextual-indicators';
 
 /**
  * Add the visibility setting sttribute to selected blocks.
@@ -47,11 +44,19 @@ function blockVisibilityAttributes( settings ) {
 						type: 'string',
 					},
 				},
+				startDateTime: {
+					type: 'string',
+				},
+				endDateTime: {
+					type: 'string',
+				},
 			},
 			default: {
 				hideBlock: false,
 				visibilityByRole: 'all',
 				restrictedRoles: [],
+				startDateTime: '',
+				endDateTime: '',
 			},
 		},
 	};
@@ -108,57 +113,8 @@ addFilter(
 );
 
 /**
- * Filter each block and add CSS classes based on visibility settings.
- */
-const withVisibilityContextualIndicator = createHigherOrderComponent( ( BlockListBlock ) => {
-    return ( props ) => {
-		const { name, attributes } = props;
-		// Get plugin settings.
-		const [
-			blockVisibilitySettings,
-			setBlockVisibilitySettings // eslint-disable-line
-		] = useEntityProp( 'root', 'site', 'block_visibility_settings' );
-		const enableIndicators = isSettingEnabled(
-			blockVisibilitySettings,
-			'enable_contextual_indicators'
-		);
-		const hasVisibility = hasVisibilityControls(
-			blockVisibilitySettings,
-			name,
-			attributes
-		);
-		const enabledControls = getEnabledControls( blockVisibilitySettings );
-
-		if ( ! enableIndicators || ! hasVisibility || enabledControls.length === 0 ) {
-			return <BlockListBlock { ...props } />;
-		}
-
-		const { blockVisibility } = attributes;
-	    const { hideBlock, visibilityByRole } = blockVisibility;
-		const isHidden = hideBlock && enabledControls.includes( 'hide_block' );
-		const hasRoles = visibilityByRole && visibilityByRole != 'all' && enabledControls.includes( 'visibility_by_role' );
-
-		let classes = '';
-		classes = isHidden ? classes + ' block-visibility__is-hidden' : classes;
-		classes = hasRoles ? classes + ' block-visibility__has-roles' : classes;
-
-		// Add filter here for premium settings
-
-		classes = classes ? classes + ' block-visibility__has-visibility' : classes;
-
-        return <BlockListBlock { ...props } className={ classes } />;
-    };
-}, 'withVisibilityContextualIndicator' );
-
-addFilter(
-	'editor.BlockListBlock',
-	'block-visibility/visibility-contextual-indicator',
-	withVisibilityContextualIndicator
-);
-
-/**
  * Register all Block Visibility related plugins to the editor.
  */
 registerPlugin( 'block-visibility-toolbar-options-hide-block', {
-    render: ToolbarOptionsHideBlock,
+	render: ToolbarOptionsHideBlock,
 } );

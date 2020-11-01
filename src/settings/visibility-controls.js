@@ -8,8 +8,8 @@ import { ToggleControl, withFilters } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import SaveSettings from './save-settings';
-import InformationPopover from './information-popover';
+import SaveSettings from './utils/save-settings';
+import InformationPopover from './utils/information-popover';
 
 /**
  * Renders the Visibility Controls tab of the Block Visibility settings page
@@ -45,6 +45,7 @@ export default function VisibilityControls( props ) {
 	const hideBlockEnable = visibilityControls?.hide_block?.enable ?? true; // eslint-disable-line
 	const visibilityByRoleEnable = visibilityControls?.visibility_by_role?.enable ?? true; // eslint-disable-line
 	const visibilityByRoleEnableUseRoles = visibilityControls?.visibility_by_role?.enable_user_roles ?? true; // eslint-disable-line
+	const timeDateEnable = visibilityControls?.time_date?.enable ?? true; // eslint-disable-line
 
 	return (
 		<div className="setting-tabs__visibility-controls inner-container">
@@ -158,6 +159,36 @@ export default function VisibilityControls( props ) {
 							}
 						/>
 					) }
+				</div>
+			</div>
+			<div className="setting-tabs__settings-panel">
+				<div className="settings-panel__header">
+					<span className="settings-panel__header-title">
+						{ __( 'Time & Date', 'block-visibility' ) }
+					</span>
+					<InformationPopover
+						message={ __(
+							'To learn more about the Time & Date control, review the plugin documentation using the link below.',
+							'block-visibility'
+						) }
+						link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					/>
+				</div>
+				<div className="settings-panel__row">
+					<ToggleControl
+						label={ __(
+							'Enable the ability to restrict block visibility based on time and date settings.',
+							'block-visibility'
+						) }
+						checked={ timeDateEnable }
+						onChange={ () =>
+							onVisibilityControlChange(
+								'time_date',
+								'enable',
+								! timeDateEnable
+							)
+						}
+					/>
 				</div>
 			</div>
 			<AdditionalVisibilityControls
