@@ -114,6 +114,8 @@ $icon__time: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><p
         justify-content: space-between;
     }
 
+    /**
+     * Very buggy
     .CalendarDay__today {
         background: #f2f2f2;
         &:hover {
@@ -121,6 +123,7 @@ $icon__time: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><p
             border: 1px double #e4e7e7;
         }
     }
+    */
 }
 
 .block-visibility__has-visibility {
@@ -146,6 +149,12 @@ $icon__time: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><p
     &.block-visibility__has-roles {
         &:before {
             background: url( $icon__user-roles );
+        }
+    }
+
+    &.block-visibility__has-date-time {
+        &:before {
+            background: url( $icon__time );
         }
     }
 

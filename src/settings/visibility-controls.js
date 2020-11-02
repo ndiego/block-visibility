@@ -45,7 +45,7 @@ export default function VisibilityControls( props ) {
 	const hideBlockEnable = visibilityControls?.hide_block?.enable ?? true; // eslint-disable-line
 	const visibilityByRoleEnable = visibilityControls?.visibility_by_role?.enable ?? true; // eslint-disable-line
 	const visibilityByRoleEnableUseRoles = visibilityControls?.visibility_by_role?.enable_user_roles ?? true; // eslint-disable-line
-	const timeDateEnable = visibilityControls?.time_date?.enable ?? true; // eslint-disable-line
+	const dateTimeEnable = visibilityControls?.date_time?.enable ?? true; // eslint-disable-line
 
 	return (
 		<div className="setting-tabs__visibility-controls inner-container">
@@ -164,11 +164,11 @@ export default function VisibilityControls( props ) {
 			<div className="setting-tabs__settings-panel">
 				<div className="settings-panel__header">
 					<span className="settings-panel__header-title">
-						{ __( 'Time & Date', 'block-visibility' ) }
+						{ __( 'Date & Time', 'block-visibility' ) }
 					</span>
 					<InformationPopover
 						message={ __(
-							'To learn more about the Time & Date control, review the plugin documentation using the link below.',
+							'To learn more about the Date & Time control, review the plugin documentation using the link below.',
 							'block-visibility'
 						) }
 						link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
@@ -177,15 +177,15 @@ export default function VisibilityControls( props ) {
 				<div className="settings-panel__row">
 					<ToggleControl
 						label={ __(
-							'Enable the ability to restrict block visibility based on time and date settings.',
+							'Enable the ability to restrict block visibility based on date and time settings.',
 							'block-visibility'
 						) }
-						checked={ timeDateEnable }
+						checked={ dateTimeEnable }
 						onChange={ () =>
 							onVisibilityControlChange(
-								'time_date',
+								'date_time',
 								'enable',
-								! timeDateEnable
+								! dateTimeEnable
 							)
 						}
 					/>

@@ -15,7 +15,7 @@ export function getEnabledControls( settings ) {
 	const controls = [
 		'hide_block',
 		'visibility_by_role',
-		'time_date',
+		'date_time',
 		// Add additional controls here.
 	];
 	const enabledControls = [];

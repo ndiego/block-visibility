@@ -8,11 +8,47 @@ import { useEntityProp } from '@wordpress/core-data';
 /**
  * Internal dependencies
  */
- import { hasVisibilityControls } from './utils/has-visibility-controls';
- import {
- 	isPluginSettingEnabled,
- 	getEnabledControls
- } from './utils/setting-utilities';;
+import { hasVisibilityControls } from './utils/has-visibility-controls';
+import {
+	isPluginSettingEnabled,
+	getEnabledControls
+} from './utils/setting-utilities';
+
+function hasRoles( blockVisibility, enabledControls ) {
+	const { visibilityByRole, restrictedRoles } = blockVisibility;
+
+    if (
+		! enabledControls.includes( 'visibility_by_role' )
+		|| ! visibilityByRole
+		|| visibilityByRole === 'all'
+	) {
+        return false;
+    }
+
+	// If the restriction is set to user-roles, but no user roles are selected.
+	if ( visibilityByRole === 'user-role' && ! restrictedRoles ) {
+		return false;
+	}
+
+	return true;
+}
+
+function hasDateTime( blockVisibility, enabledControls ) {
+	const { startDateTime, endDateTime } = blockVisibility;
+
+    if ( ! enabledControls.includes( 'date_time' )
+		|| ( ! startDateTime && ! endDateTime )
+	) {
+        return false;
+    }
+
+	// If the restriction is set to user-roles, but no user roles are selected.
+	if ( ( startDateTime && endDateTime ) && startDateTime >= endDateTime ) {
+		return false;
+	}
+
+	return true;
+}
 
 /**
  * Filter each block and add CSS classes based on visibility settings.
@@ -43,11 +79,15 @@ const withContextualIndicators = createHigherOrderComponent( ( BlockListBlock ) 
 		const { blockVisibility } = attributes;
 		const { hideBlock, visibilityByRole } = blockVisibility;
 		const isHidden = hideBlock && enabledControls.includes( 'hide_block' );
-		const hasRoles = visibilityByRole && visibilityByRole != 'all' && enabledControls.includes( 'visibility_by_role' );
 
 		let classes = '';
 		classes = isHidden ? classes + ' block-visibility__is-hidden' : classes;
-		classes = hasRoles ? classes + ' block-visibility__has-roles' : classes;
+		classes = hasRoles( blockVisibility, enabledControls )
+			? classes + ' block-visibility__has-roles'
+			: classes;
+		classes = hasDateTime( blockVisibility, enabledControls )
+			? classes + ' block-visibility__has-date-time'
+			: classes;
 
 		// Add filter here for premium settings
 

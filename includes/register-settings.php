@@ -45,17 +45,15 @@ function register_settings() {
 										),
 									),
 								),
-								'time_date'          => array(
+								'date_time'          => array(
 									'type'       => 'object',
 									'properties' => array(
 										'enable'           => array(
 											'type' => 'boolean',
 										),
-										'enable_start_end' => array(
-											'type' => 'boolean',
-										),
 									),
 								),
+
 								// Additional Controls.
 							),
 						),
@@ -99,7 +97,7 @@ function register_settings() {
 						'enable'            => true,
 						'enable_user_roles' => true,
 					),
-					'time_date'          => array(
+					'date_time'          => array(
 						'enable' => true,
 					),
 					// Additional Controls.

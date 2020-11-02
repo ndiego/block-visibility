@@ -61,13 +61,14 @@ export default function DateTime( props ) {
 	const sectionHidden = hideControlSection(
 		enabledControls,
 		blockVisibility,
-		'time_date'
+		'date_time'
 	);
 
 	if ( sectionHidden ) {
 		return null;
 	}
 
+	// Force to null if variables don't exist due to quirk with DateTimePicker
 	const start = startDateTime ? startDateTime : null;
 	const end = endDateTime ? endDateTime : null;
 
@@ -82,12 +83,15 @@ export default function DateTime( props ) {
             .reverse()
             .join( '' ) // Reverse the string and test for "a" not followed by a slash.
     );
-	const resolvedFormat = siteFormat || dateSettings.formats.date;
+
+	// TODO possible remove the following line, not currently using.
+	//const resolvedFormat = siteFormat || dateSettings.formats.date;
 	const startDateLabel = formatDateLabel( start, __( 'Now' ) );
 	const endDateLabel = formatDateLabel( end, __( 'Never' ) );
-
 	const today = new Date( new Date().setHours( 0, 0, 0, 0 ) );
 
+	// If there is no start date/time selected, but there is an end, default the
+	// starting selection in the calendar to the day prior.
 	const startAlt = end ? new Date( end ) : new Date( today );
 	if ( end ) {
 		startAlt.setHours( 0, 0, 0, 0 );
@@ -95,14 +99,17 @@ export default function DateTime( props ) {
 	}
 	const selectedStartDate = start ? start : startAlt;
 
+	// If there is no end date/time selected, but there is a start, default the
+	// starting selection in the calendar to the next day.
 	const endAlt = start ? new Date( start ) : new Date( today );
 	endAlt.setHours( 0, 0, 0, 0 );
 	endAlt.setDate( endAlt.getDate() + 1 );
 	const selectedEndDate = end ? end : endAlt;
 
+	// If the start time is greater or equal to the end time, display a warning.
 	let alert = false;
 	if ( start && end ) {
-		alert = start > end ? true : false;
+		alert = start >= end ? true : false;
 	}
 
 	return (
@@ -198,6 +205,13 @@ export default function DateTime( props ) {
 						<span>
 							{ __( 'End Date/Time', 'block-visibility' ) }
 						</span>
+						<Button
+							icon={ closeSmall }
+							title={ __( 'Close', 'block-visibility' ) }
+							onClick={ () =>
+								setIsEndPickerOpen( ( _isOpen ) => ! _isOpen )
+							}
+						/>
 					</div>
 					<DateTimePicker
 						currentDate={ selectedEndDate }
