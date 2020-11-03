@@ -205,13 +205,6 @@ export default function DateTime( props ) {
 						<span>
 							{ __( 'End Date/Time', 'block-visibility' ) }
 						</span>
-						<Button
-							icon={ closeSmall }
-							title={ __( 'Close', 'block-visibility' ) }
-							onClick={ () =>
-								setIsEndPickerOpen( ( _isOpen ) => ! _isOpen )
-							}
-						/>
 					</div>
 					<DateTimePicker
 						currentDate={ selectedEndDate }

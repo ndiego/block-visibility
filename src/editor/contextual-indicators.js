@@ -26,7 +26,7 @@ function hasRoles( blockVisibility, enabledControls ) {
     }
 
 	// If the restriction is set to user-roles, but no user roles are selected.
-	if ( visibilityByRole === 'user-role' && ! restrictedRoles ) {
+	if ( visibilityByRole === 'user-role' && restrictedRoles.length === 0 ) {
 		return false;
 	}
 
