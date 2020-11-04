@@ -117,6 +117,36 @@ export default function VisibilityControls( props ) {
 			<div className="setting-tabs__settings-panel">
 				<div className="settings-panel__header">
 					<span className="settings-panel__header-title">
+						{ __( 'Date & Time', 'block-visibility' ) }
+					</span>
+					<InformationPopover
+						message={ __(
+							'To learn more about the Date & Time control, review the plugin documentation using the link below.',
+							'block-visibility'
+						) }
+						link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					/>
+				</div>
+				<div className="settings-panel__row">
+					<ToggleControl
+						label={ __(
+							'Enable the ability to restrict block visibility based on date and time settings.',
+							'block-visibility'
+						) }
+						checked={ dateTimeEnable }
+						onChange={ () =>
+							onVisibilityControlChange(
+								'date_time',
+								'enable',
+								! dateTimeEnable
+							)
+						}
+					/>
+				</div>
+			</div>
+			<div className="setting-tabs__settings-panel">
+				<div className="settings-panel__header">
+					<span className="settings-panel__header-title">
 						{ __( 'Visibility by User Role', 'block-visibility' ) }
 					</span>
 					<InformationPopover
@@ -159,36 +189,6 @@ export default function VisibilityControls( props ) {
 							}
 						/>
 					) }
-				</div>
-			</div>
-			<div className="setting-tabs__settings-panel">
-				<div className="settings-panel__header">
-					<span className="settings-panel__header-title">
-						{ __( 'Date & Time', 'block-visibility' ) }
-					</span>
-					<InformationPopover
-						message={ __(
-							'To learn more about the Date & Time control, review the plugin documentation using the link below.',
-							'block-visibility'
-						) }
-						link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
-					/>
-				</div>
-				<div className="settings-panel__row">
-					<ToggleControl
-						label={ __(
-							'Enable the ability to restrict block visibility based on date and time settings.',
-							'block-visibility'
-						) }
-						checked={ dateTimeEnable }
-						onChange={ () =>
-							onVisibilityControlChange(
-								'date_time',
-								'enable',
-								! dateTimeEnable
-							)
-						}
-					/>
 				</div>
 			</div>
 			<AdditionalVisibilityControls

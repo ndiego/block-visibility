@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import { filter } from 'lodash';
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -46,11 +41,7 @@ export default function VisibilityInspectorControls( props ) {
 		setSettings // eslint-disable-line
 	] = useEntityProp( 'root', 'site', 'block_visibility_settings' );
 	const { name, attributes } = props;
-	const hasVisibility = hasVisibilityControls(
-		settings,
-		name,
-		attributes
-	);
+	const hasVisibility = hasVisibilityControls( settings, name, attributes );
 
 	if ( ! hasVisibility ) {
 		return null;
@@ -68,7 +59,7 @@ export default function VisibilityInspectorControls( props ) {
 				initialOpen={ false }
 			>
 				<div className="block-visibility-settings__visibility-controls">
-					{ enabledControls.length != 0 && (
+					{ enabledControls.length !== 0 && (
 						<>
 							<HideBlock
 								enabledControls={ enabledControls }

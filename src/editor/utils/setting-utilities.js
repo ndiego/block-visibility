@@ -8,7 +8,7 @@ import { has } from 'lodash';
  *
  * @since 1.1.0
  * @param {Object} settings All plugin settings
- * @return {array}		    Return array of all enabled visibility controls.
+ * @return {Array}   	    Return array of all enabled visibility controls.
  */
 export function getEnabledControls( settings ) {
 	// We need to manually add the possible control categories here.

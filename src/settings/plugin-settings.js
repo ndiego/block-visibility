@@ -100,9 +100,12 @@ export default function PluginSettings( props ) {
 					</span>
 					<InformationPopover
 						message={ __(
-							'Settings that impact the Block Editor.',
+							'Settings that impact the Block Editor, such as contextual indicators for when a block has visibility controls, as well as additional toolbar options. Click the link below for complete details.',
 							'block-visibility'
 						) }
+						link={
+							'https://www.blockvisibilitywp.com/documentation/general-settings/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals'
+						}
 					/>
 				</div>
 				<div className="settings-panel__row">

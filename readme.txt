@@ -5,15 +5,15 @@ Tags: visibility, hide blocks, block editor, gutenberg
 Requires at least: 5.4
 Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Block-based visibility control for WordPress.
+Block Visibility provides visibility controls and scheduling functionality to all WordPress blocks.
 
 == Description ==
 
-Block Visibility allows you to dynamically control which blocks are visible on your website and who can see them. Built for the new Block Editor, this plugin was designed to work with any WordPress block. This includes blocks natively provided by WordPress as well as third-party blocks, such as those by WooCommerce, Gutenberg Blocks and CoBlocks.
+Block Visibility allows you to dynamically control which blocks are visible on your website and who can see them, which includes the ability to schedule blocks. Built for the new Block Editor, this plugin was designed to work with any WordPress block. This includes blocks natively provided by WordPress as well as third-party blocks, such as those by WooCommerce, Gutenberg Blocks, Genesis (Atomic) Blocks, CoBlocks and more...
 
 = See It In Action =
 https://www.youtube.com/watch?v=DdDwQCE7RNE
@@ -23,6 +23,7 @@ https://www.youtube.com/watch?v=DdDwQCE7RNE
 Visibility controls are the settings that determine whether a block is hidden on the frontend of your website. Current controls include the ability to:
 
 * Show or hide any block
+* Schedule any block using a start and end date/time (New)
 * Configure visibility based on whether a user is logged-in or logged-out
 * Configure visibility based on the role of a user (Administrator, Editor, Subscriber, etc.)
 
@@ -70,8 +71,14 @@ Since full site editing is still in the development phase, this plugin does not 
 
 == Changelog ==
 
-= 1.0.0 =
-* Initial Release
+= 1.1.0 =
+* Added date and time controls for block scheduling
+* Added contextual indicators for visibility setting to the Block Editor
+* Added a toolbar option for quickly hiding blocks
+* Added additional plugin settings to dynamically control all the new features
 
 = 1.0.1 =
 * Fix PHP warning message that may appear on new installations
+
+= 1.0.0 =
+* Initial Release

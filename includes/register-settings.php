@@ -48,7 +48,7 @@ function register_settings() {
 								'date_time'          => array(
 									'type'       => 'object',
 									'properties' => array(
-										'enable'           => array(
+										'enable' => array(
 											'type' => 'boolean',
 										),
 									),
@@ -69,18 +69,18 @@ function register_settings() {
 								'enable_contextual_indicators' => array(
 									'type' => 'boolean',
 								),
-								'enable_toolbar_controls'      => array(
+								'enable_toolbar_controls'  => array(
 									'type' => 'boolean',
 								),
-								'enable_full_control_mode'     => array(
+								'enable_full_control_mode' => array(
 									'type' => 'boolean',
 								),
-								'remove_on_uninstall'          => array(
+								'remove_on_uninstall'      => array(
 									'type' => 'boolean',
 								),
 
 								// Additional Settings.
-								'enable_visibility_notes'      => array(
+								'enable_visibility_notes'  => array(
 									'type' => 'boolean',
 								),
 							),
@@ -106,11 +106,11 @@ function register_settings() {
 				'plugin_settings'     => array(
 					'enable_contextual_indicators' => true,
 					'enable_toolbar_controls'      => true,
-					'enable_full_control_mode' 	   => false,
+					'enable_full_control_mode'     => false,
 					'remove_on_uninstall'          => false,
 
 					// Additional Settings.
-					'enable_visibility_notes'  	   => true,
+					'enable_visibility_notes'      => true,
 				),
 			),
 		)

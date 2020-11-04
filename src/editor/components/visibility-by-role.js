@@ -36,12 +36,7 @@ import { hideControlSection } from './../utils/hide-control-section';
  * @return {string}		 Return the rendered JSX
  */
 export default function VisibilityByRole( props ) {
-	const {
-		attributes,
-		setAttributes,
-		enabledControls,
-		settings,
-	} = props;
+	const { attributes, setAttributes, enabledControls, settings } = props;
 	const { blockVisibility } = attributes;
 	const { visibilityByRole } = blockVisibility;
 

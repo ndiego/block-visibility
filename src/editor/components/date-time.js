@@ -8,20 +8,27 @@ import { assign } from 'lodash';
  */
 import { __ } from '@wordpress/i18n';
 import { DateTimePicker, Popover, Button, Notice } from '@wordpress/components';
-import { __experimentalGetSettings, dateI18n, format, isSame } from '@wordpress/date';
-import { withState } from '@wordpress/compose';
+import { __experimentalGetSettings, format } from '@wordpress/date';
 import { useState } from '@wordpress/element';
-import { calendar, cancelCircleFilled, closeSmall } from '@wordpress/icons';
-import { useEntityProp } from '@wordpress/core-data';
-
+import { calendar, closeSmall } from '@wordpress/icons';
 
 /**
  * Internal dependencies
  */
 import { hideControlSection } from './../utils/hide-control-section';
 
-
-function formatDateLabel( date, fallback ) {
+/**
+ * Format the given date.
+ *
+ * @since 1.1.0
+ * @param {Object} date     The date object to format
+ * @param {string} fallback If there is no date, a fallback string is returned
+ * @return {string}		    The formatted date as a string or the fallback
+ */
+function formatDateLabel(
+	date,
+	fallback = __( 'No time selected', 'block-visibility' )
+) {
 	const dateSettings = __experimentalGetSettings();
 	let label = fallback;
 
@@ -29,7 +36,7 @@ function formatDateLabel( date, fallback ) {
 		label = format(
 			`${ dateSettings.formats.date } ${ dateSettings.formats.time }`,
 			date
-	    )
+		);
 	}
 
 	return label;
@@ -38,20 +45,12 @@ function formatDateLabel( date, fallback ) {
 /**
  * Add the date/time vsibility controls
  *
- * @since 1.0.0
+ * @since 1.1.0
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
 export default function DateTime( props ) {
-	const {
-		attributes,
-		setAttributes,
-		enabledControls,
-		settings,
-	} = props;
-	const [ siteFormat ] = useEntityProp( 'root', 'site', 'date_format' );
-
-	console.log( siteFormat );
+	const { attributes, setAttributes, enabledControls } = props;
 	const [ isPickerOpen, setIsPickerOpen ] = useState( false );
 	const [ isEndPickerOpen, setIsEndPickerOpen ] = useState( false );
 
@@ -72,22 +71,26 @@ export default function DateTime( props ) {
 	const start = startDateTime ? startDateTime : null;
 	const end = endDateTime ? endDateTime : null;
 
-    const dateSettings = __experimentalGetSettings();
-    // To know if the current time format is a 12 hour time, look for "a".
-    // Also make sure this "a" is not escaped by a "/".
-    const is12Hour = /a(?!\\)/i.test(
-        dateSettings.formats.time
-            .toLowerCase() // Test only for the lower case "a".
-            .replace( /\\\\/g, '' ) // Replace "//" with empty strings.
-            .split( '' )
-            .reverse()
-            .join( '' ) // Reverse the string and test for "a" not followed by a slash.
-    );
+	const dateSettings = __experimentalGetSettings();
+	// To know if the current time format is a 12 hour time, look for "a".
+	// Also make sure this "a" is not escaped by a "/".
+	const is12Hour = /a(?!\\)/i.test(
+		dateSettings.formats.time
+			.toLowerCase() // Test only for the lower case "a".
+			.replace( /\\\\/g, '' ) // Replace "//" with empty strings.
+			.split( '' )
+			.reverse()
+			.join( '' ) // Reverse the string and test for "a" not followed by a slash.
+	);
 
-	// TODO possible remove the following line, not currently using.
-	//const resolvedFormat = siteFormat || dateSettings.formats.date;
-	const startDateLabel = formatDateLabel( start, __( 'Now' ) );
-	const endDateLabel = formatDateLabel( end, __( 'Never' ) );
+	const startDateLabel = formatDateLabel(
+		start,
+		__( 'Now', 'block-visibility' )
+	);
+	const endDateLabel = formatDateLabel(
+		end,
+		__( 'Never', 'block-visibility' )
+	);
 	const today = new Date( new Date().setHours( 0, 0, 0, 0 ) );
 
 	// If there is no start date/time selected, but there is an end, default the
@@ -126,11 +129,14 @@ export default function DateTime( props ) {
 				>
 					{ startDateLabel }
 				</Button>
-				{ start &&
+				{ start && (
 					<Button
 						icon={ closeSmall }
 						className="clear-date-time"
-						title={ __( 'Clear start date/time', 'block-visibility' ) }
+						title={ __(
+							'Clear start date/time',
+							'block-visibility'
+						) }
 						onClick={ () =>
 							setAttributes( {
 								blockVisibility: assign(
@@ -140,14 +146,14 @@ export default function DateTime( props ) {
 							} )
 						}
 					/>
-	 			}
+				) }
 			</div>
 			{ isPickerOpen && (
 				<Popover
 					className="block-visibility__date-time-popover"
 					onClose={ setIsPickerOpen.bind( null, false ) }
 				>
-					<div class="date-time-header">
+					<div className="date-time-header">
 						<span>
 							{ __( 'Start Date/Time', 'block-visibility' ) }
 						</span>
@@ -180,11 +186,14 @@ export default function DateTime( props ) {
 				>
 					{ endDateLabel }
 				</Button>
-				{ end &&
+				{ end && (
 					<Button
 						icon={ closeSmall }
 						className="clear-date-time"
-						title={ __( 'Clear end date/time', 'block-visibility' ) }
+						title={ __(
+							'Clear end date/time',
+							'block-visibility'
+						) }
 						onClick={ () =>
 							setAttributes( {
 								blockVisibility: assign(
@@ -194,14 +203,14 @@ export default function DateTime( props ) {
 							} )
 						}
 					/>
-				}
+				) }
 			</div>
 			{ isEndPickerOpen && (
 				<Popover
 					className="block-visibility__date-time-popover"
 					onClose={ setIsEndPickerOpen.bind( null, false ) }
 				>
-					<div class="date-time-header">
+					<div className="date-time-header">
 						<span>
 							{ __( 'End Date/Time', 'block-visibility' ) }
 						</span>
@@ -222,14 +231,14 @@ export default function DateTime( props ) {
 					/>
 				</Popover>
 			) }
-			{ alert &&
+			{ alert && (
 				<Notice status="warning" isDismissible={ false }>
 					{ __(
 						'The start time is after the stop time. Please fix for date/time settings to function properly.',
 						'block-visibility'
 					) }
 				</Notice>
-			}
+			) }
 		</div>
 	);
 }

@@ -33,26 +33,26 @@ function create_datetime( $timestamp = null, $localize = true ) {
 	$tz_offset = get_option( 'gmt_offset', 0 );
 
 	if ( ! empty( $tz_string ) ) {
-		// If site timezone option string exists, use it
+		// If site timezone option string exists, use it.
 		$timezone = $tz_string;
 
-	} elseif ( $tz_offset == 0 ) {
-		// get UTC offset, if it isn’t set then return UTC
+	} elseif ( 0 === $tz_offset ) {
+		// Get UTC offset, if it isn’t set then return UTC.
 		$timezone = 'UTC';
 
 	} else {
 		$timezone = $tz_offset;
 
 		if (
-			substr( $tz_offset, 0, 1 ) != "-"
-			&& substr( $tz_offset, 0, 1 ) != "+"
-			&& substr( $tz_offset, 0, 1 ) != "U"
+			substr( $tz_offset, 0, 1 ) !== '-'
+			&& substr( $tz_offset, 0, 1 ) !== '+'
+			&& substr( $tz_offset, 0, 1 ) !== 'U'
 		) {
-			$timezone = "+" . $tz_offset;
+			$timezone = '+' . $tz_offset;
 		}
 	}
 
-	if ( $timestamp === null ) {
+	if ( null === $timestamp ) {
 		$timestamp = time();
 	}
 
@@ -60,7 +60,7 @@ function create_datetime( $timestamp = null, $localize = true ) {
 		$datetime = new DateTime( $timestamp );
 		$datetime->setTimezone( new DateTimeZone( $timezone ) );
 	} else {
-		$datetime = new DateTime( $timestamp, new DateTimeZone( $timezone )  );
+		$datetime = new DateTime( $timestamp, new DateTimeZone( $timezone ) );
 	}
 	return $datetime;
 }
@@ -109,7 +109,7 @@ function test_date_time( $is_visible, $settings, $block ) {
 		return $is_visible;
 	}
 
-	// Current time based on the date/time settings set in the WP admin
+	// Current time based on the date/time settings set in the WP admin.
 	$current = current_datetime();
 
 	if ( ( $start && $start > $current ) || ( $end && $end < $current ) ) {
