@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:         Block Visibility
- * Plugin URI:          http://www.outermost.co/
+ * Plugin URI:          https://www.blockvisibilitywp.com/
  * Description:         Block Visibility provides visibility controls and scheduling functionality to all WordPress blocks.
  * Version:             1.1.0
  * Requires at least:   5.4
