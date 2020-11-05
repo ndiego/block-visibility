@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Block Visibility plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Block Visibility 1.0.0\n"
+"Project-Id-Version: Block Visibility 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/block-visibility\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-08-03T10:59:58+00:00\n"
+"POT-Creation-Date: 2020-11-05T11:04:25+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: block-visibility\n"
@@ -60,72 +60,150 @@ msgid "Public (Logged-out Users)"
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
-#: src/editor/hide-block.js:27
+#: src/editor/components/hide-block.js:33
+#: src/editor/toolbar-controls.js:75
 msgid "Hide block"
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
-#: src/editor/hide-block.js:37
+#: src/editor/components/hide-block.js:43
 msgid "Hide selected block from everyone."
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
-#: src/editor/user-roles.js:33
+#: src/editor/components/user-roles.js:33
 msgid "Restrict by User Role"
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
-#: src/editor/user-roles.js:36
+#: src/editor/components/user-roles.js:36
 msgid "The block will only be visible to users with one of the selected roles."
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
+#: src/editor/components/visibility-by-role.js:73
 msgid "All"
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
+#: src/editor/components/visibility-by-role.js:74
 msgid "Visible to everyone"
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
+#: src/editor/components/visibility-by-role.js:80
 msgid "Public"
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
+#: src/editor/components/visibility-by-role.js:81
 msgid "Visible to all logged-out users"
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
+#: src/editor/components/visibility-by-role.js:87
 msgid "Private"
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
+#: src/editor/components/visibility-by-role.js:88
 msgid "Visible to all logged-in users"
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
+#: src/editor/components/visibility-by-role.js:94
 msgid "User Role"
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
+#: src/editor/components/visibility-by-role.js:95
 msgid "Restrict visibility to specific user roles"
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
 #: dist/block-visibility-settings.js:6
+#: src/editor/components/visibility-by-role.js:112
 msgid "Visibility by User Role"
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
+#: src/editor/components/visibility-by-role.js:130
 msgid "The User Role option was previously selected, but is now disabled. Choose another option or update the <a>Visibility Control</a> settings."
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
+#: src/editor/components/date-time.js:30
+msgid "No time selected"
+msgstr ""
+
+#: dist/block-visibility-editor.js:1
+#: src/editor/components/date-time.js:88
+msgid "Now"
+msgstr ""
+
+#: dist/block-visibility-editor.js:1
+#: src/editor/components/date-time.js:92
+msgid "Never"
+msgstr ""
+
+#: dist/block-visibility-editor.js:1
+#: src/editor/components/date-time.js:120
+msgid "Start Showing"
+msgstr ""
+
+#: dist/block-visibility-editor.js:1
+#: src/editor/components/date-time.js:124
+msgid "Set a start date/time"
+msgstr ""
+
+#: dist/block-visibility-editor.js:1
+#: src/editor/components/date-time.js:136
+msgid "Clear start date/time"
+msgstr ""
+
+#: dist/block-visibility-editor.js:1
+#: src/editor/components/date-time.js:158
+msgid "Start Date/Time"
+msgstr ""
+
+#: dist/block-visibility-editor.js:1
+#: src/editor/components/date-time.js:177
+msgid "Stop Showing"
+msgstr ""
+
+#: dist/block-visibility-editor.js:1
+#: src/editor/components/date-time.js:181
+msgid "Set an end date/time"
+msgstr ""
+
+#: dist/block-visibility-editor.js:1
+#: src/editor/components/date-time.js:193
+msgid "Clear end date/time"
+msgstr ""
+
+#: dist/block-visibility-editor.js:1
+#: src/editor/components/date-time.js:215
+msgid "End Date/Time"
+msgstr ""
+
+#: dist/block-visibility-editor.js:1
+#: src/editor/components/date-time.js:236
+msgid "The start time is after the stop time. Please fix for date/time settings to function properly."
+msgstr ""
+
+#: dist/block-visibility-editor.js:1
+#: src/editor/inspector-controls.js:57
 msgid "Visibility"
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
+#: src/editor/inspector-controls.js:88
 msgid "Looks like all Visibility Controls have been disabled. To control block visibility again, re-enable some <a>Visibility Controls</a>."
+msgstr ""
+
+#: dist/block-visibility-editor.js:1
+#: src/editor/toolbar-controls.js:74
+msgid "Enable block"
 msgstr ""
 
 #: dist/block-visibility-settings.js:6
@@ -287,22 +365,22 @@ msgid "Get Support"
 msgstr ""
 
 #: dist/block-visibility-settings.js:6
-#: src/settings/save-settings.js:35
+#: src/settings/utils/save-settings.js:35
 msgid "Updating…"
 msgstr ""
 
 #: dist/block-visibility-settings.js:6
-#: src/settings/save-settings.js:36
+#: src/settings/utils/save-settings.js:36
 msgid "Update"
 msgstr ""
 
 #: dist/block-visibility-settings.js:6
-#: src/settings/save-settings.js:46
+#: src/settings/utils/save-settings.js:46
 msgid "Saving"
 msgstr ""
 
 #: dist/block-visibility-settings.js:6
-#: src/settings/save-settings.js:61
+#: src/settings/utils/save-settings.js:61
 msgid "Update failed. Try again or contact support."
 msgstr ""
 
@@ -336,6 +414,18 @@ msgstr ""
 
 #: dist/block-visibility-settings.js:6
 msgid "Enable the ability to hide blocks completely from the frontend of your website."
+msgstr ""
+
+#: dist/block-visibility-settings.js:6
+msgid "Date & Time"
+msgstr ""
+
+#: dist/block-visibility-settings.js:6
+msgid "To learn more about the Date & Time control, review the plugin documentation using the link below."
+msgstr ""
+
+#: dist/block-visibility-settings.js:6
+msgid "Enable the ability to restrict block visibility based on date and time settings."
 msgstr ""
 
 #: dist/block-visibility-settings.js:6
@@ -380,6 +470,22 @@ msgstr ""
 
 #: dist/block-visibility-settings.js:6
 msgid "Configure Settings"
+msgstr ""
+
+#: dist/block-visibility-settings.js:6
+msgid "Block Editor"
+msgstr ""
+
+#: dist/block-visibility-settings.js:6
+msgid "Settings that impact the Block Editor, such as contextual indicators for when a block has visibility controls, as well as additional toolbar options. Click the link below for complete details."
+msgstr ""
+
+#: dist/block-visibility-settings.js:6
+msgid "Enable contextual indicators when visibility settings are applied to a block."
+msgstr ""
+
+#: dist/block-visibility-settings.js:6
+msgid "Enable block toolbar controls for visibility settings."
 msgstr ""
 
 #: dist/block-visibility-settings.js:6
