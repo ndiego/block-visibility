@@ -54,7 +54,15 @@ function register_settings() {
 									),
 								),
 
-								// Additional Controls.
+								// Legacy Controls (remove in future version)
+								'time_date'          => array(
+									'type'       => 'object',
+									'properties' => array(
+										'enable'           => array(
+											'type' => 'boolean',
+										),
+									),
+								),
 							),
 						),
 						'disabled_blocks'     => array(
