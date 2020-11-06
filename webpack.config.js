@@ -1,9 +1,7 @@
 const path = require( 'path' );
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 
-const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const FixStyleOnlyEntriesPlugin = require( 'webpack-fix-style-only-entries' );
-const nodeSassGlobImporter = require( 'node-sass-glob-importer' );
 
 module.exports = {
     ...defaultConfig,
@@ -24,30 +22,13 @@ module.exports = {
         ...defaultConfig.module,
         rules: [
             ...defaultConfig.module.rules,
-            {
-                test: /\.(sa|sc|c)ss$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sassOptions: {
-                                importer: nodeSassGlobImporter(),
-                            }
-                        }
-                    }
-                ],
-            }
+            // Add additional rules as needed.
         ]
     },
 
     plugins: [
         ...defaultConfig.plugins,
-
+        // Add additional plugins as needed.
         new FixStyleOnlyEntriesPlugin(),
-        new MiniCssExtractPlugin( {
-            filename: '[name].css',
-        } ),
     ],
 };
