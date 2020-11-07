@@ -26,7 +26,14 @@ import './editor/contextual-indicators';
  * @return {Object} settings The updated array of settings.
  */
 function blockVisibilityAttributes( settings ) {
-	// This is a global variable added to the page via PHP
+
+	// The freeform (Classic Editor) block is incompatible because it does not
+	// support custom attributes.
+	if ( settings.name === "core/freeform" ) {
+		return settings;
+	}
+
+	// This is a global variable added to the page via PHP.
 	const fullControlMode = blockVisibilityFullControlMode; // eslint-disable-line
 	let visibilityAttributes = {
 		blockVisibility: {

@@ -119,61 +119,105 @@ $icon_date-roles: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/sv
 }
 
 .block-visibility__has-visibility {
-    outline: 2px dashed #aaa;
+    outline: 2px dashed rgba(0, 0, 0, 0.7);
     opacity: .5;
-
-    /*
-    transition: opacity .1s ease-in-out;
-    -moz-transition: opacity .1s ease-in-out;
-    -webkit-transition: opacity .1s ease-in-out;
-    */
-
-    &:before {
-        content: "";
-        height: 24px;
-        width: 24px;
-        position: absolute;
-        right: 8px;
-        top: 4px;
-        z-index: 1000;
-    }
-
-    &.block-visibility__has-roles {
-        &:before {
-            background: url( $icon__user-roles );
-        }
-    }
-
-    &.block-visibility__has-date-time {
-        &:before {
-            background: url( $icon__date );
-        }
-    }
-
-    &.block-visibility__has-date-time {
-        &.block-visibility__has-roles {
-            &:before {
-                background: url( $icon_date-roles );
-                width: 52px;
-            }
-        }
-    }
-
-
-    &.block-visibility__is-hidden {
-        &:before {
-            background: url( $icon__hidden );
-        }
-    }
 
     &.is-selected,
     &.has-child-selected {
         outline: none;
         opacity: 1;
+    }
 
+    &:not( .block-visibility__set-icon-background ) {
         &:before {
-            background: none !important;
+            content: "";
+            height: 24px;
+            width: 24px;
+            position: absolute;
+            right: 8px;
+            top: 4px;
+            z-index: 1000;
         }
+
+        &.block-visibility__has-roles {
+            &:before {
+                background: url( $icon__user-roles );
+            }
+        }
+
+        &.block-visibility__has-date-time {
+            &:before {
+                background: url( $icon__date );
+            }
+        }
+
+        &.block-visibility__has-date-time {
+            &.block-visibility__has-roles {
+                &:before {
+                    background: url( $icon_date-roles );
+                    width: 52px;
+                }
+            }
+        }
+
+
+        &.block-visibility__is-hidden {
+            &:before {
+                background: url( $icon__hidden );
+            }
+        }
+
+        &.is-selected,
+        &.has-child-selected {
+            &:before {
+                background: none !important;
+            }
+        }
+
+        // Block Specific fixes
+
+        // Cover Block (WordPress Core) when there is a solid color set.
+        &.wp-block-cover.has-background-dim:not(.has-background-gradient):before {
+            left: initial;
+            bottom: initial;
+            right: 8px;
+            top: 4px;
+            opacity: 1;
+        }
+    }
+
+    // Alternative styling for blcks that use the pseudo class :before. In these
+    // cases we set a background image instead.
+    &.block-visibility__set-icon-background {
+        background-repeat: no-repeat;
+        background-position: calc(100% - 8px) 4px;
+        background-size: 24px 24px;
+
+        &.block-visibility__has-roles {
+            background-image: url( $icon__user-roles );
+        }
+
+        &.block-visibility__has-date-time {
+            background-image: url( $icon__date );
+        }
+
+        &.block-visibility__has-date-time {
+            &.block-visibility__has-roles {
+                background-image: url( $icon_date-roles );
+                background-size: 52px 24px;
+            }
+        }
+
+        &.block-visibility__is-hidden {
+            background-image: url( $icon__hidden );
+        }
+
+        &.is-selected,
+        &.has-child-selected {
+            background-image: none !important;
+        }
+
+        // Block Specific fixes
     }
 }
 

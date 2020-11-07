@@ -116,6 +116,15 @@ const withContextualIndicators = createHigherOrderComponent(
 
 			// Add filter here for premium settings
 
+			// Some blocks have rendering issues when we set the icons to the
+			// :before pseudo class. For those blocks, use a background image
+			// instead.
+			const backgroundBlocks = [ "core/pullquote" ];
+
+			classes = backgroundBlocks.includes( name )
+				? classes + ' block-visibility__set-icon-background'
+				: classes;
+
 			classes = classes
 				? classes + ' block-visibility__has-visibility'
 				: classes;
