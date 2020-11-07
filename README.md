@@ -17,4 +17,5 @@ To get started with Block Visibility, watch the [Plugin Overview](https://www.yo
 2. In the `wp-content/plugins` folder, clone the GitHub repository: `https://github.com/ndiego/block-visibility.git`
 3. Navigate to the `wp-content/plugins/block-visibility` folder in the command line.
 4. Run the `npm install` command to install the plugin's dependencies within a `/node_modules/` folder.
+5. Run the `composer install` command to install the additional WordPress composer tools within a `/vendor/` folder.
 5. Run the `npm run start` command to compile and watch source files for changes while developing.

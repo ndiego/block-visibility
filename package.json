@@ -1,14 +1,14 @@
 {
 	"name": "block-visibility",
-	"version": "1.1.1",
-	"description": "Block-based visibility control for WordPress.",
+	"version": "1.1.0",
+	"description": "Block Visibility provides visibility controls and scheduling functionality to all WordPress blocks.",
 	"author": "Nick Diego",
 	"license": "GPL-2.0-or-later",
 	"repository": {
 		"type": "git",
 		"url": "git://github.com/ndiego/block-visibility.git"
 	},
-	"homepage": "https://www.nickdiego.com",
+	"homepage": "https://www.blockvisibilitywp.com",
 	"scripts": {
 		"build": "wp-scripts build",
 		"lint:css": "wp-scripts lint-style",
