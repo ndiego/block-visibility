@@ -486,8 +486,10 @@ $mobile: 420px;
 		line-height: 0; /* Correction for button */
 
 		.information-popover__button {
-			height: 24px;
 			color: #c8c8c8;
+			height: 24px;
+			padding-top: 0;
+			padding-bottom: 0;
 
 			&:hover {
 				background-color: transparent !important;
