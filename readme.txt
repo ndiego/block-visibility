@@ -1,7 +1,7 @@
 === Block Visibility ===
 Author URI: https://www.nickdiego.com
 Contributors: ndiego, outermostdesign
-Tags: visibility, hide blocks, block editor, gutenberg
+Tags: visibility, scheduling, schedule blocks, hide blocks, block editor, gutenberg
 Requires at least: 5.4
 Tested up to: 5.5
 Requires PHP: 5.6
@@ -16,6 +16,7 @@ Block Visibility provides visibility controls and scheduling functionality to al
 Block Visibility allows you to dynamically control which blocks are visible on your website and who can see them, which includes the ability to schedule blocks. Built for the new Block Editor, this plugin was designed to work with any WordPress block. This includes blocks natively provided by WordPress as well as third-party blocks, such as those by WooCommerce, Gutenberg Blocks, Genesis (Atomic) Blocks, CoBlocks and more...
 
 = See It In Action =
+The video below provides a good overview of what Block Visibility can do and covers everything in version 1.0. [See what's new in version 1.1](https://www.blockvisibilitywp.com/whats-new-in-version-1-1/).
 https://www.youtube.com/watch?v=DdDwQCE7RNE
 
 = Visibility Controls =
