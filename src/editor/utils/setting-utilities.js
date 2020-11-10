@@ -27,7 +27,7 @@ export function getEnabledControls( settings ) {
 
 	const visibilityControls = settings.visibility_controls;
 
-	controls.forEach( function( control ) {
+	controls.forEach( function ( control ) {
 		const hasControl = has( visibilityControls, control );
 
 		// If the control does not exist, assume true.

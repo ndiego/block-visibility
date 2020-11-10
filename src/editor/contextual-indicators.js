@@ -41,9 +41,9 @@ function hasRoles( blockVisibility, enabledControls ) {
 	// and "hide on restricted" has been set. In this case the block actually
 	// does not have any role-based visibility restrictions.
 	if (
-		visibilityByRole === 'user-role'
-		&& restrictedRoles.length === 0
-		&& hideOnRestrictedRoles
+		visibilityByRole === 'user-role' &&
+		restrictedRoles.length === 0 &&
+		hideOnRestrictedRoles
 	) {
 		return false;
 	}
@@ -129,7 +129,7 @@ const withContextualIndicators = createHigherOrderComponent(
 			// Some blocks have rendering issues when we set the icons to the
 			// :before pseudo class. For those blocks, use a background image
 			// instead.
-			const backgroundBlocks = [ "core/pullquote" ];
+			const backgroundBlocks = [ 'core/pullquote' ];
 
 			classes = backgroundBlocks.includes( name )
 				? classes + ' block-visibility__set-icon-background'

@@ -38,6 +38,7 @@ export default function UserRoles( props ) {
 			</label>
 			<p className="user-roles__help">
 				{ sprintf(
+					// Translators: Whether the block is hidden or visible.
 					__(
 						'The block will be %s to all users with one of the selected roles.',
 						'block-visibility'

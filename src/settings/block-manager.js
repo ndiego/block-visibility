@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { filter, map, without, union, difference, intersection, omitBy } from 'lodash';
+import { filter, map, without, union, difference, intersection } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -103,12 +103,11 @@ function BlockManager( props ) {
 	}
 
 	// Blocks present in the Block Editor that do not accept custom attributes.
-	const incompatibleBlockTypes = [ "core/freeform" ];
+	const incompatibleBlockTypes = [ 'core/freeform' ];
 
 	// Remove all incompatible blocks from the allowed block types.
 	allowedBlockTypes = allowedBlockTypes.filter(
-		( blockType ) =>
-			! incompatibleBlockTypes.includes( blockType.name )
+		( blockType ) => ! incompatibleBlockTypes.includes( blockType.name )
 	);
 
 	// The allowed blocks that match our search criteria
