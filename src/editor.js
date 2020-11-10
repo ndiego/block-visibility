@@ -45,6 +45,9 @@ function blockVisibilityAttributes( settings ) {
 				visibilityByRole: {
 					type: 'string',
 				},
+				hideOnRestrictedRoles: {
+					type: 'boolean',
+				},
 				restrictedRoles: {
 					type: 'array',
 					items: {
@@ -61,6 +64,7 @@ function blockVisibilityAttributes( settings ) {
 			default: {
 				hideBlock: false,
 				visibilityByRole: 'all',
+				hideOnRestrictedRoles: false,
 				restrictedRoles: [],
 				startDateTime: '',
 				endDateTime: '',

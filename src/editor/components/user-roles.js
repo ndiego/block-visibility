@@ -6,8 +6,8 @@ import { map, assign, includes } from 'lodash'; // eslint-disable-line
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
-import { CheckboxControl } from '@wordpress/components';
+import { __, sprintf } from '@wordpress/i18n';
+import { CheckboxControl, ToggleControl } from '@wordpress/components';
 
 /**
  * Add the User Roles control to the main Visibility By User Role control
@@ -19,10 +19,14 @@ import { CheckboxControl } from '@wordpress/components';
 export default function UserRoles( props ) {
 	const { attributes, setAttributes } = props;
 	const { blockVisibility } = attributes;
-	const { restrictedRoles } = blockVisibility;
+	const { restrictedRoles, hideOnRestrictedRoles } = blockVisibility;
 
 	// This is a global variable added to the page via PHP
 	const roles = blockVisibilityUserRoles; // eslint-disable-line
+
+	const label = hideOnRestrictedRoles
+		? __( 'hidden', 'block-visibility' )
+		: __( 'visible', 'block-visibility' );
 
 	return (
 		<>
@@ -33,9 +37,12 @@ export default function UserRoles( props ) {
 				{ __( 'Restrict by User Role', 'block-visibility' ) }
 			</label>
 			<p className="user-roles__help">
-				{ __(
-					'The block will only be visible to users with one of the selected roles.',
-					'block-visibility'
+				{ sprintf(
+					__(
+						'The block will be %s to all users with one of the selected roles.',
+						'block-visibility'
+					),
+					label
 				) }
 			</p>
 			<div
@@ -71,6 +78,22 @@ export default function UserRoles( props ) {
 					);
 				} ) }
 			</div>
+			<ToggleControl
+				label={ __( 'Hide on selected roles', 'block-visibility' ) }
+				checked={ hideOnRestrictedRoles }
+				onChange={ () =>
+					setAttributes( {
+						blockVisibility: assign(
+							{ ...blockVisibility },
+							{ hideOnRestrictedRoles: ! hideOnRestrictedRoles }
+						),
+					} )
+				}
+				help={ __(
+					'Alternatively, hide the block to all users with one of the selected roles.',
+					'block-visibility'
+				) }
+			/>
 		</>
 	);
 }

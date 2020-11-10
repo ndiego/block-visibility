@@ -54,11 +54,11 @@ function register_settings() {
 									),
 								),
 
-								// Legacy Controls (remove in future version)
+								// Legacy Controls, remove in future version.
 								'time_date'          => array(
 									'type'       => 'object',
 									'properties' => array(
-										'enable'           => array(
+										'enable' => array(
 											'type' => 'boolean',
 										),
 									),

@@ -92,9 +92,12 @@ $icon_date-roles: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/sv
                 font-size: 12px;
                 font-style: normal;
                 color: rgb(117, 117, 117);
+                margin-bottom: 18px;
             }
 
             .user-roles__control {
+                margin-bottom: 24px;
+
                 .components-base-control {
                     margin-bottom: 6px;
                 }
@@ -186,8 +189,8 @@ $icon_date-roles: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/sv
         }
     }
 
-    // Alternative styling for blcks that use the pseudo class :before. In these
-    // cases we set a background image instead.
+    // Alternative styling for blocks that use the pseudo class :before. In
+    // these cases we set a background image instead.
     &.block-visibility__set-icon-background {
         background-repeat: no-repeat;
         background-position: calc(100% - 8px) 4px;

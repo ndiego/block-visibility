@@ -54,26 +54,45 @@ function test_visibility_by_role( $is_visible, $settings, $block ) {
 			? $block['attrs']['blockVisibility']['restrictedRoles']
 			: array();
 
+		$hide_on_resticted_roles = isset( $block['attrs']['blockVisibility']['hideOnRestrictedRoles'] )
+			? $block['attrs']['blockVisibility']['hideOnRestrictedRoles']
+			: false;
+
 		// Make sure there are restricted roles set, if not the block should be
-		// hidden.
+		// hidden, unless "hide on restricted" has been set.
 		if ( ! empty( $restricted_roles ) ) {
 
-			if ( in_array( 'public', $restricted_roles, true ) && ! is_user_logged_in() ) {
+			if (
+				in_array( 'public', $restricted_roles, true )
+				&& ! is_user_logged_in()
+				&& ! $hide_on_resticted_roles
+			) {
 				return true;
 			}
 
 			if ( is_user_logged_in() ) {
 
 				// Get the roles of the current user since they are logged-in.
-				$current_user = wp_get_current_user();
-				$user_roles   = $current_user->roles;
+				$current_user       = wp_get_current_user();
+				$user_roles         = $current_user->roles;
+				$num_selected_roles = count(
+					array_intersect( $restricted_roles, $user_roles )
+				);
 
 				// If one of the user's roles is also a restricted role, show
-				// the block.
-				if ( count( array_intersect( $restricted_roles, $user_roles ) ) > 0 ) {
+				// the block, but only if "hide on restricted" is not set.
+				if ( $num_selected_roles > 0 && ! $hide_on_resticted_roles ) {
+					return true;
+				}
+
+				// If the user's roles are not any of the restricted roles, show
+				// the block, but only if "hide on restricted" is set.
+				if ( 0 === $num_selected_roles && $hide_on_resticted_roles ) {
 					return true;
 				}
 			}
+		} elseif ( empty( $restricted_roles ) && $hide_on_resticted_roles ) {
+			return true;
 		}
 	}
 

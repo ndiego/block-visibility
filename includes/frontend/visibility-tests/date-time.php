@@ -116,7 +116,7 @@ function test_date_time( $is_visible, $settings, $block ) {
 		return false;
 	}
 
-	// If we don't pass any of the above tests, hide the block.
+	// Block has passed the date & time test.
 	return true;
 }
 add_filter( 'block_visibility_visibility_test', __NAMESPACE__ . '\test_date_time', 10, 3 );

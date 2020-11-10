@@ -23,7 +23,11 @@ import {
  * @return {boolean}		        Does the block have user role settings
  */
 function hasRoles( blockVisibility, enabledControls ) {
-	const { visibilityByRole, restrictedRoles } = blockVisibility;
+	const {
+		visibilityByRole,
+		restrictedRoles,
+		hideOnRestrictedRoles,
+	} = blockVisibility;
 
 	if (
 		! enabledControls.includes( 'visibility_by_role' ) ||
@@ -33,8 +37,14 @@ function hasRoles( blockVisibility, enabledControls ) {
 		return false;
 	}
 
-	// If the restriction is set to user-roles, but no user roles are selected.
-	if ( visibilityByRole === 'user-role' && restrictedRoles.length === 0 ) {
+	// If the restriction is set to user-roles, but no user roles are selected,
+	// and "hide on restricted" has been set. In this case the block actually
+	// does not have any role-based visibility restrictions.
+	if (
+		visibilityByRole === 'user-role'
+		&& restrictedRoles.length === 0
+		&& hideOnRestrictedRoles
+	) {
 		return false;
 	}
 
