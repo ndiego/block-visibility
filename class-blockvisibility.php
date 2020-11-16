@@ -119,19 +119,22 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 		 * @return void
 		 */
 		public function init() {
+			add_action( 'wp_loaded', array( $this, 'add_attributes_to_registered_blocks' ), 100 );
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ), 99 );
 			add_action( 'enqueue_block_editor_assets', array( $this, 'block_localization' ) );
-
-			add_action( 'wp_loaded', array( $this, 'add_attributes_to_registered_blocks' ), 100 );
 		}
 
 		/**
-		 * Adds the `hasCustomCSS` and `customCSS` attributes to all blocks, to
-		 * avoid `Invalid parameter(s): attributes` error in Gutenberg.
+		 * This is needed to resolve an issue with blocks that use the
+		 * ServerSideRender component. Regustering the attributes only in js
+		 * can cause an error message to appear. Registering the attributes in
+		 * PHP as well, seems to resolve the issue. Ideally, this bug will be
+		 * fixed in the future.
 		 *
 		 * Reference: https://github.com/WordPress/gutenberg/issues/16850
 		 *
-		 * @hooked wp_loaded, 100
+		 * @since 1.0.0
+		 * @return void
 		 */
 		public function add_attributes_to_registered_blocks() {
 
@@ -141,23 +144,34 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 				$block->attributes['blockVisibility'] = array(
 					'type'       => 'object',
 					'properties' => array(
-						'hideBlock'        => array(
+						'hideBlock'             => array(
 							'type' => 'boolean',
 						),
-						'visibilityByRole' => array(
+						'visibilityByRole'      => array(
 							'type' => 'string',
 						),
-						'restrictedRoles'  => array(
+						'hideOnRestrictedRoles' => array(
+							'type' => 'boolean',
+						),
+						'restrictedRoles'       => array(
 							'type'  => 'array',
 							'items' => array(
 								'type' => 'string',
 							),
+						),
+						'startDateTime'         => array(
+							'type' => 'string',
+						),
+						'endDateTime'           => array(
+							'type' => 'string',
 						),
 					),
 					'default'    => array(
 						'hideBlock'        => false,
 						'visibilityByRole' => 'all',
 						'restrictedRoles'  => array(),
+						'startDateTime'    => '',
+						'endDateTime'      => '',
 					),
 				);
 			}
@@ -180,7 +194,7 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 		/**
 		 * Enqueue localization data for our blocks.
 		 *
-		 * @since 2.0.0
+		 * @since 1.0.0
 		 * @return void
 		 */
 		public function block_localization() {

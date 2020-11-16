@@ -76,7 +76,7 @@ Since full site editing is still in the development phase, this plugin does not 
 == Changelog ==
 
 = 1.2.0 =
-* Add the ability to "hide on selected roles" in the Restrict by User Roles visibility control (Thanks to @edwardsh for the feature request)
+* Added the ability to "hide on selected roles" in the Restrict by User Roles visibility control (Thanks to @edwardsh for the feature request!)
 
 = 1.1.0 =
 * Added date and time controls for block scheduling

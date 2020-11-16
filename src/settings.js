@@ -7,7 +7,7 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Component, render } from '@wordpress/element';
+import { useState, useEffect, render } from '@wordpress/element';
 import { registerCoreBlocks } from '@wordpress/block-library';
 import { Spinner, TabPanel } from '@wordpress/components';
 
@@ -25,44 +25,32 @@ import PluginSettings from './settings/plugin-settings';
  *
  * @since 1.0.0
  */
-class Settings extends Component {
-	constructor() {
-		super( ...arguments );
+function Settings() {
+	const [ isAPILoaded, setIsAPILoaded ] = useState( false );
+	const [ isAPISaving, setIsAPISaving ] = useState( false );
+	const [ hasSaveError, setHasSaveError ] = useState( false );
+	const [ settings, setSettings ] = useState( [] );
 
-		this.handleSettingsChange = this.handleSettingsChange.bind( this );
-
-		this.state = {
-			isAPILoaded: false,
-			isAPISaving: false,
-			hasSaveError: false,
-			settings: [],
-		};
-	}
-
-	componentDidMount() {
+	useEffect( () => {
 		// Here we are using the Backbone JavaScript Client
 		// https://developer.wordpress.org/rest-api/using-the-rest-api/backbone-javascript-client/
 		wp.api.loadPromise.then( () => {
-			this.settings = new wp.api.models.Settings();
+			const allSettings = new wp.api.models.Settings();
 
-			if ( this.state.isAPILoaded === false ) {
-				this.settings.fetch().then( ( response ) => {
-					this.setState( {
-						settings: response.block_visibility_settings,
-						isAPILoaded: true,
-					} );
+			if ( isAPILoaded === false ) {
+				allSettings.fetch().then( ( response ) => {
+					setSettings( response.block_visibility_settings );
+					setIsAPILoaded( true );
 				} );
 			}
 		} );
-	}
+	}, [] );
 
-	handleSettingsChange( option, value ) {
-		this.setState( {
-			isAPISaving: true,
-			hasSaveError: false,
-		} );
+	function handleSettingsChange( option, value ) {
+		setIsAPISaving( true );
+		setHasSaveError( false );
 
-		const currentSettings = this.state.settings;
+		const currentSettings = settings;
 
 		const model = new wp.api.models.Settings( {
 			block_visibility_settings: assign(
@@ -73,124 +61,109 @@ class Settings extends Component {
 
 		model.save().then(
 			( response ) => {
-				this.setState( {
-					settings: response.block_visibility_settings,
-					isAPISaving: false,
-				} );
+				setSettings( response.block_visibility_settings );
+				setIsAPISaving( false );
 			},
 			() => {
-				this.setState( {
-					isAPISaving: false,
-					hasSaveError: true,
-				} );
+				setIsAPISaving( false );
+				setHasSaveError( true );
 			}
 		);
 	}
 
-	render() {
-		// @// TODO: Remove this
-		//console.log( this.state.settings );
+	const visibilityControls = settings.visibility_controls;
+	const disabledBlocks = settings.disabled_blocks;
+	const pluginSettings = settings.plugin_settings;
 
-		const isAPILoaded = this.state.isAPILoaded;
-		const isAPISaving = this.state.isAPISaving;
-		const hasSaveError = this.state.hasSaveError;
+	const settingTabs = [
+		{
+			name: 'getting-started',
+			title: __( 'Getting Started', 'block-visibility' ),
+			className: 'setting-tabs__getting-started',
+		},
+		{
+			name: 'visibility-controls',
+			title: __( 'Visibility Controls', 'block-visibility' ),
+			className: 'setting-tabs__visibility-controls',
+		},
+		{
+			name: 'block-manager',
+			title: __( 'Block Manager', 'block-visibility' ),
+			className: 'setting-tabs__blocks-manager',
+		},
+		{
+			name: 'plugin-settings',
+			title: __( 'General Settings', 'block-visibility' ),
+			className: 'setting-tabs__plugin-settings',
+		},
+	];
 
-		const visibilityControls = this.state.settings.visibility_controls;
-		const disabledBlocks = this.state.settings.disabled_blocks;
-		const pluginSettings = this.state.settings.plugin_settings;
+	return (
+		<>
+			<Masthead />
+			<TabPanel
+				className="setting-tabs"
+				activeClass="active-tab"
+				initialTabName="getting-started"
+				tabs={ settingTabs }
+			>
+				{ ( tab ) => {
+					// Don't load tabs if settings have not yet loaded
+					if ( ! isAPILoaded ) {
+						return (
+							<div className="setting-tabs__loading-settings">
+								<Spinner />
+							</div>
+						);
+					}
 
-		const settingTabs = [
-			{
-				name: 'getting-started',
-				title: __( 'Getting Started', 'block-visibility' ),
-				className: 'setting-tabs__getting-started',
-			},
-			{
-				name: 'visibility-controls',
-				title: __( 'Visibility Controls', 'block-visibility' ),
-				className: 'setting-tabs__visibility-controls',
-			},
-			{
-				name: 'block-manager',
-				title: __( 'Block Manager', 'block-visibility' ),
-				className: 'setting-tabs__blocks-manager',
-			},
-			{
-				name: 'plugin-settings',
-				title: __( 'General Settings', 'block-visibility' ),
-				className: 'setting-tabs__plugin-settings',
-			},
-		];
-
-		return (
-			<>
-				<Masthead />
-				<TabPanel
-					className="setting-tabs"
-					activeClass="active-tab"
-					initialTabName="getting-started"
-					tabs={ settingTabs }
-				>
-					{ ( tab ) => {
-						// Don't load tabs if settings have not yet loaded
-						if ( ! isAPILoaded ) {
+					switch ( tab.name ) {
+						case 'getting-started':
 							return (
-								<div className="setting-tabs__loading-settings">
-									<Spinner />
-								</div>
+								<GettingStarted
+									isAPISaving={ isAPISaving }
+									hasSaveError={ hasSaveError }
+								/>
 							);
-						}
-
-						switch ( tab.name ) {
-							case 'getting-started':
-								return (
-									<GettingStarted
-										isAPISaving={ isAPISaving }
-										hasSaveError={ hasSaveError }
-									/>
-								);
-							case 'visibility-controls':
-								return (
-									<VisibilityControls
-										isAPISaving={ isAPISaving }
-										hasSaveError={ hasSaveError }
-										handleSettingsChange={
-											this.handleSettingsChange
-										}
-										visibilityControls={
-											visibilityControls
-										}
-									/>
-								);
-							case 'block-manager':
-								return (
-									<BlockManager
-										isAPISaving={ isAPISaving }
-										hasSaveError={ hasSaveError }
-										handleSettingsChange={
-											this.handleSettingsChange
-										}
-										disabledBlocks={ disabledBlocks }
-										pluginSettings={ pluginSettings }
-									/>
-								);
-							case 'plugin-settings':
-								return (
-									<PluginSettings
-										isAPISaving={ isAPISaving }
-										hasSaveError={ hasSaveError }
-										handleSettingsChange={
-											this.handleSettingsChange
-										}
-										pluginSettings={ pluginSettings }
-									/>
-								);
-						}
-					} }
-				</TabPanel>
-			</>
-		);
-	}
+						case 'visibility-controls':
+							return (
+								<VisibilityControls
+									isAPISaving={ isAPISaving }
+									hasSaveError={ hasSaveError }
+									handleSettingsChange={
+										handleSettingsChange
+									}
+									visibilityControls={ visibilityControls }
+								/>
+							);
+						case 'block-manager':
+							return (
+								<BlockManager
+									isAPISaving={ isAPISaving }
+									hasSaveError={ hasSaveError }
+									handleSettingsChange={
+										handleSettingsChange
+									}
+									disabledBlocks={ disabledBlocks }
+									pluginSettings={ pluginSettings }
+								/>
+							);
+						case 'plugin-settings':
+							return (
+								<PluginSettings
+									isAPISaving={ isAPISaving }
+									hasSaveError={ hasSaveError }
+									handleSettingsChange={
+										handleSettingsChange
+									}
+									pluginSettings={ pluginSettings }
+								/>
+							);
+					}
+				} }
+			</TabPanel>
+		</>
+	);
 }
 
 wp.domReady( () => {
