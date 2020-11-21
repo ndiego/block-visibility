@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { assign } from 'lodash';
+import { assign, findKey } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -98,13 +98,18 @@ function Settings() {
 		},
 	];
 
+	// Switch the default settings tab based on the URL tad query
+	const urlParams = new URLSearchParams( window.location.search );
+	const requestedTab = urlParams.get( 'tab' );
+	const initialTab = findKey( settingTabs, [ 'name', requestedTab ] ) ? requestedTab : 'getting-started';
+
 	return (
 		<>
 			<Masthead />
 			<TabPanel
 				className="setting-tabs"
 				activeClass="active-tab"
-				initialTabName="getting-started"
+				initialTabName={ initialTab }
 				tabs={ settingTabs }
 			>
 				{ ( tab ) => {

@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { has } from 'lodash';
+import { has, includes } from 'lodash';
 
 /**
  * Helper function for determining if a block type has visibility controls.
