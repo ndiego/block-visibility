@@ -118,6 +118,12 @@ function Settings() {
 						return (
 							<div className="setting-tabs__loading-settings">
 								<Spinner />
+								<span class="description">
+									{ __(
+									  'Loading settings…',
+									  'block-visibility'
+									) }
+								</span>
 							</div>
 						);
 					}

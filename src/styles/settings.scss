@@ -137,9 +137,17 @@ $mobile: 420px;
 		.setting-tabs__loading-settings {
 			text-align: center;
 			margin: 150px 30px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 
 			.components-spinner {
 				float: none;
+			}
+
+			.description {
+				color: #777;
+				margin-top: 4px;
 			}
 		}
 
@@ -271,7 +279,7 @@ $mobile: 420px;
 				padding: 20px 20px 10px;
 				border-top: 1px solid #E0E5E9;
 
-				& > div {
+				& > .components-base-control {
 					margin-bottom: 20px;
 				}
 
@@ -280,7 +288,8 @@ $mobile: 420px;
 				}
 
 				.settings-panel__row-subsetting {
-					margin: 20px 0 0 50px;
+					margin-top: 20px;
+					margin-left: 50px;
 					border-top: 1px solid #E0E5E9;
 					padding-top: 20px;
 				}
