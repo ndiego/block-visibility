@@ -13,12 +13,12 @@ import { useDispatch, withSelect } from '@wordpress/data';
 /**
  * Internal dependencies
  */
-import icons from './../utils/icons';
-import { hasVisibilityControls } from './utils/has-visibility-controls';
+import icons from './../../utils/icons';
+import { hasVisibilityControls } from './../utils/has-visibility-controls';
 import {
 	isPluginSettingEnabled,
 	getEnabledControls,
-} from './utils/setting-utilities';
+} from './../utils/setting-utilities';
 
 /**
  * Adds the toolbar control for showing/hiding the selected block.
@@ -27,7 +27,7 @@ import {
  * @param {Object} props All the props passed to this function
  * @return {string}      Return the rendered JSX
  */
-export function ToolbarOptionsHideBlock( props ) {
+function ToolbarOptionsHideBlock( props ) {
 	const { flashBlock, updateBlockAttributes } = useDispatch(
 		'core/block-editor'
 	);

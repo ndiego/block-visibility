@@ -25,8 +25,8 @@ const interpolateElement =
  * Internal dependencies
  */
 import UserRoles from './user-roles';
-import { isControlSettingEnabled } from './../utils/setting-utilities';
 import { hideControlSection } from './../utils/hide-control-section';
+import { isControlSettingEnabled } from './../../utils/setting-utilities';
 
 /**
  * Add the Visibility By User Role control

@@ -26,12 +26,12 @@ const interpolateElement =
 /**
  * Internal dependencies
  */
-import HideBlock from './components/hide-block';
-import VisibilityByRole from './components/visibility-by-role';
-import DateTime from './components/date-time';
-import { getEnabledControls } from './utils/setting-utilities';
-import { hasVisibilityControls } from './utils/has-visibility-controls';
-import useFetch from './../utils/fetch-data';
+import HideBlock from './hide-block';
+import VisibilityByRole from './visibility-by-role';
+import DateTime from './date-time';
+import { getEnabledControls } from './../utils/setting-utilities';
+import { hasVisibilityControls } from './../utils/has-visibility-controls';
+//import useFetch from './../utils/fetch-data';
 
 /**
  * Add the Visibility inspector control to each allowed block in the editor

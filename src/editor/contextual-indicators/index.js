@@ -8,11 +8,11 @@ import { useSelect } from '@wordpress/data';
 /**
  * Internal dependencies
  */
-import { hasVisibilityControls } from './utils/has-visibility-controls';
+import { hasVisibilityControls } from './../utils/has-visibility-controls';
 import {
 	isPluginSettingEnabled,
 	getEnabledControls,
-} from './utils/setting-utilities';
+} from './../utils/setting-utilities';
 
 /**
  * Determine if visibility by user role settings are enabled for the block.
