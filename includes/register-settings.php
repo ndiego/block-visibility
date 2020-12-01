@@ -18,6 +18,10 @@ function register_settings() {
 		'block_visibility',
 		'block_visibility_settings',
 		array(
+			'description'  => __(
+				'Settings for the Block Visibility plugin.',
+				'block-visibility'
+			),
 			'type'         => 'object',
 			'show_in_rest' => array(
 				'schema' => array(
@@ -74,21 +78,30 @@ function register_settings() {
 						'plugin_settings'     => array(
 							'type'       => 'object',
 							'properties' => array(
-								'enable_contextual_indicators' => array(
+								'enable_contextual_indicators'  => array(
 									'type' => 'boolean',
 								),
-								'enable_toolbar_controls'  => array(
+								'enable_toolbar_controls'       => array(
 									'type' => 'boolean',
 								),
-								'enable_full_control_mode' => array(
+								'enable_user_role_restrictions' => array(
 									'type' => 'boolean',
 								),
-								'remove_on_uninstall'      => array(
+								'enabled_user_roles'            => array(
+									'type'  => 'array',
+									'items' => array(
+										'type' => 'string',
+									),
+								),
+								'enable_full_control_mode'      => array(
+									'type' => 'boolean',
+								),
+								'remove_on_uninstall'           => array(
 									'type' => 'boolean',
 								),
 
 								// Additional Settings.
-								'enable_visibility_notes'  => array(
+								'enable_visibility_notes'       => array(
 									'type' => 'boolean',
 								),
 							),
@@ -112,13 +125,15 @@ function register_settings() {
 				),
 				'disabled_blocks'     => array(),
 				'plugin_settings'     => array(
-					'enable_contextual_indicators' => true,
-					'enable_toolbar_controls'      => true,
-					'enable_full_control_mode'     => false,
-					'remove_on_uninstall'          => false,
+					'enable_contextual_indicators'  => true,
+					'enable_toolbar_controls'       => true,
+					'enable_user_role_restrictions' => false,
+					'enabled_user_roles'			=> array(),
+					'enable_full_control_mode'      => false,
+					'remove_on_uninstall'           => false,
 
 					// Additional Settings.
-					'enable_visibility_notes'      => true,
+					'enable_visibility_notes'       => true,
 				),
 			),
 		)

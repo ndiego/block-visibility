@@ -15,9 +15,9 @@ import { TextControl } from '@wordpress/components';
  * Internal dependencies
  */
 import BlockCategory from './block-category';
-import SaveSettings from './utils/save-settings';
-import InformationPopover from './utils/information-popover';
-import icons from './../icons';
+import SaveSettings from './../utils/save-settings';
+import InformationPopover from './../utils/information-popover';
+import icons from './../../utils/icons';
 
 /**
  * Renders the Block Manager tab of the Block Visibility settings page

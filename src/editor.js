@@ -11,12 +11,26 @@ import { createHigherOrderComponent } from '@wordpress/compose';
 import { hasBlockSupport } from '@wordpress/blocks';
 import { registerPlugin } from '@wordpress/plugins';
 
+import { __ } from '@wordpress/i18n';
+import { addEntities } from '@wordpress/core-data';
+
 /**
  * Internal dependencies
  */
 import VisibilityInspectorControls from './editor/inspector-controls';
 import ToolbarOptionsHideBlock from './editor/toolbar-controls';
 import './editor/contextual-indicators';
+
+
+const dispatch = wp.data.dispatch;
+dispatch( 'core' ).addEntities( [
+	{
+		label: __( 'Block Visibility Settings' ),
+		kind: 'block-visibility/v1',
+		name: 'settings',
+		baseURL: '/block-visibility/v1/settings',
+	}
+]);
 
 /**
  * Add the visibility setting sttribute to selected blocks.

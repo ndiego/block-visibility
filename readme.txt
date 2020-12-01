@@ -75,6 +75,9 @@ Since full site editing is still in the development phase, this plugin does not 
 
 == Changelog ==
 
+= 1.3.0 =
+* TODO Add details here...
+
 = 1.2.0 =
 * Added the ability to "hide on selected roles" in the Restrict by User Roles visibility control (Thanks to @edwardsh for the feature request!)
 

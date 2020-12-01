@@ -21,7 +21,7 @@ export function getEnabledControls( settings ) {
 	const enabledControls = [];
 
 	// Make sure we have visibility settings, otherwise abort.
-	if ( ! settings ) {
+	if ( ! settings || 0 === settings.length ) {
 		return enabledControls;
 	}
 

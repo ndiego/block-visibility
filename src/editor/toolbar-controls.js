@@ -7,16 +7,13 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { PluginBlockSettingsMenuItem } from '@wordpress/edit-post';
-
 import { __, sprintf } from '@wordpress/i18n';
 import { useDispatch, withSelect } from '@wordpress/data';
-
-import { useEntityProp } from '@wordpress/core-data';
 
 /**
  * Internal dependencies
  */
-import icons from './../icons';
+import icons from './../utils/icons';
 import { hasVisibilityControls } from './utils/has-visibility-controls';
 import {
 	isPluginSettingEnabled,
@@ -31,16 +28,17 @@ import {
  * @return {string}      Return the rendered JSX
  */
 export function ToolbarOptionsHideBlock( props ) {
-	// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
-	const [
-		settings,
-		setSettings // eslint-disable-line
-	] = useEntityProp( 'root', 'site', 'block_visibility_settings' );
 	const { flashBlock, updateBlockAttributes } = useDispatch(
 		'core/block-editor'
 	);
 	const { createSuccessNotice } = useDispatch( 'core/notices' );
-	const { enableMenuItem, clientId, blockType, blockAttributes } = props;
+	const {
+		enableMenuItem,
+		clientId,
+		blockType,
+		blockAttributes,
+		settings,
+	} = props;
 
 	// Make sure the menu item is enabled and we have recieved a block type.
 	if ( ! enableMenuItem || ! blockType ) {
@@ -108,6 +106,7 @@ export function ToolbarOptionsHideBlock( props ) {
 }
 
 export default withSelect( ( select ) => {
+	const { getEntityRecord } = select( 'core' );
 	const {
 		getBlockName,
 		getSelectedBlockClientIds,
@@ -115,6 +114,8 @@ export default withSelect( ( select ) => {
 		hasMultiSelection,
 	} = select( 'core/block-editor' );
 	const { getBlockType } = select( 'core/blocks' );
+
+	const settings = getEntityRecord( 'block-visibility/v1', 'settings' );
 	const clientIds = getSelectedBlockClientIds();
 	// We only want to enable visibility editing if only one block is selected.
 	const enableMenuItem = ! hasMultiSelection();
@@ -123,5 +124,5 @@ export default withSelect( ( select ) => {
 	const blockType = getBlockType( getBlockName( clientId ) );
 	const blockAttributes = getBlockAttributes( clientId );
 
-	return { enableMenuItem, clientId, blockType, blockAttributes };
+	return { enableMenuItem, clientId, blockType, blockAttributes, settings };
 } )( ToolbarOptionsHideBlock );

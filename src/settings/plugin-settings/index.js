@@ -1,11 +1,18 @@
 /**
+ * External dependencies
+ */
+import { startCase } from 'lodash';
+
+/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
 import {
 	ToggleControl,
 	ExternalLink,
+	Disabled,
 	withFilters,
+	CheckboxControl,
 } from '@wordpress/components';
 import {
 	useState,
@@ -24,8 +31,9 @@ const interpolateElement =
 /**
  * Internal dependencies
  */
-import SaveSettings from './utils/save-settings';
-import InformationPopover from './utils/information-popover';
+import SaveSettings from './../utils/save-settings';
+import InformationPopover from './../utils/information-popover';
+import EnabledUserRoles from './enabled-user-roles';
 
 /**
  * Renders the plugin Settings tab of the Block Visibility settings page
@@ -57,8 +65,25 @@ export default function PluginSettings( props ) {
 	// Manually set defaults, this ensures the main settings function properly
 	const enableContextualIndicators = pluginSettings?.enable_contextual_indicators ?? true; // eslint-disable-line
 	const enableToolbarControls = pluginSettings?.enable_toolbar_controls ?? true; // eslint-disable-line
+	const enableUserRoleRestrictions = pluginSettings?.enable_user_role_restrictions ?? false; // eslint-disable-line
+	const enabledUserRoles = pluginSettings?.enabled_user_roles ?? []; // eslint-disable-line
 	const removeOnUninstall = pluginSettings?.remove_on_uninstall ?? false; // eslint-disable-line
 	const enableFullControlMode = pluginSettings?.enable_full_control_mode ?? false; // eslint-disable-line
+
+	const roles = [ 'editor', 'author', 'contributor' ];
+
+	// TODO perhaps move this logic to its own component.
+	let userRolesElement = (
+		<EnabledUserRoles
+			roles={roles}
+			enabledUserRoles={ enabledUserRoles }
+			onPluginSettingChange={onPluginSettingChange}
+		/>
+	)
+
+	if ( ! enableUserRoleRestrictions ) {
+		userRolesElement = <Disabled>{ userRolesElement }</Disabled>
+	}
 
 	return (
 		<div className="settings-tab__plugin-settings inner-container">
@@ -108,33 +133,71 @@ export default function PluginSettings( props ) {
 						}
 					/>
 				</div>
-				<div className="settings-panel__row">
-					<ToggleControl
-						label={ __(
-							'Enable contextual indicators when visibility settings are applied to a block.',
+				<div className="settings-panel__container">
+					<div className="settings-type__toggle">
+						<ToggleControl
+							label={ __(
+								'Enable contextual indicators when visibility settings are applied to a block.',
+								'block-visibility'
+							) }
+							checked={ enableContextualIndicators }
+							onChange={ () =>
+								onPluginSettingChange(
+									'enable_contextual_indicators',
+									! enableContextualIndicators
+								)
+							}
+						/>
+					</div>
+					<div className="settings-type__toggle">
+						<ToggleControl
+							label={ __(
+								'Enable block toolbar controls for visibility settings.',
+								'block-visibility'
+							) }
+							checked={ enableToolbarControls }
+							onChange={ () =>
+								onPluginSettingChange(
+									'enable_toolbar_controls',
+									! enableToolbarControls
+								)
+							}
+						/>
+					</div>
+				</div>
+			</div>
+			<div className="setting-tabs__settings-panel">
+				<div className="settings-panel__header">
+					<span className="settings-panel__header-title">
+						{ __( 'User Permissions', 'block-visibility' ) }
+					</span>
+					<InformationPopover
+						message={ __(
+							'By default, all users that can edit blocks in Block Editor will be able to use the visibility settings provided by Block Visibility. You can limit permissions by user role with these settings.',
 							'block-visibility'
 						) }
-						checked={ enableContextualIndicators }
-						onChange={ () =>
-							onPluginSettingChange(
-								'enable_contextual_indicators',
-								! enableContextualIndicators
-							)
+						link={
+							'https://www.blockvisibilitywp.com/documentation/general-settings/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals'
 						}
 					/>
-					<ToggleControl
-						label={ __(
-							'Enable block toolbar controls for visibility settings.',
-							'block-visibility'
-						) }
-						checked={ enableToolbarControls }
-						onChange={ () =>
-							onPluginSettingChange(
-								'enable_toolbar_controls',
-								! enableToolbarControls
-							)
-						}
-					/>
+				</div>
+				<div className="settings-panel__container">
+					<div className="settings-type__toggle">
+						<ToggleControl
+							label={ __(
+								'Restrict block visibility controls to selected user roles.',
+								'block-visibility'
+							) }
+							checked={ enableUserRoleRestrictions }
+							onChange={ () =>
+								onPluginSettingChange(
+									'enable_user_role_restrictions',
+									! enableUserRoleRestrictions
+								)
+							}
+						/>
+					</div>
+					{ userRolesElement }
 				</div>
 			</div>
 			<div className="setting-tabs__settings-panel">
@@ -152,32 +215,34 @@ export default function PluginSettings( props ) {
 						}
 					/>
 				</div>
-				<div className="settings-panel__row">
-					<ToggleControl
-						label={ interpolateElement(
-							__(
-								'Enable Full Control Mode to add visibility controls to <strong>every</strong> block. <a>Use with caution</a>.',
-								'block-visibility'
-							),
-							{
-								strong: <strong />,
-								a: (
-									<ExternalLink // eslint-disable-line
-										href="https://www.blockvisibilitywp.com/documentation/general-settings/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
-										target="_blank"
-										rel="noreferrer"
-									/>
+				<div className="settings-panel__container">
+					<div className="settings-type__toggle">
+						<ToggleControl
+							label={ interpolateElement(
+								__(
+									'Enable Full Control Mode to add visibility controls to <strong>every</strong> block. <a>Use with caution</a>.',
+									'block-visibility'
 								),
+								{
+									strong: <strong />,
+									a: (
+										<ExternalLink // eslint-disable-line
+											href="https://www.blockvisibilitywp.com/documentation/general-settings/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+											target="_blank"
+											rel="noreferrer"
+										/>
+									),
+								}
+							) }
+							checked={ enableFullControlMode }
+							onChange={ () =>
+								onPluginSettingChange(
+									'enable_full_control_mode',
+									! enableFullControlMode
+								)
 							}
-						) }
-						checked={ enableFullControlMode }
-						onChange={ () =>
-							onPluginSettingChange(
-								'enable_full_control_mode',
-								! enableFullControlMode
-							)
-						}
-					/>
+						/>
+					</div>
 				</div>
 			</div>
 			<div className="setting-tabs__settings-panel">
@@ -192,20 +257,22 @@ export default function PluginSettings( props ) {
 						) }
 					/>
 				</div>
-				<div className="settings-panel__row">
-					<ToggleControl
-						label={ __(
-							'Remove all plugin settings when Block Visibility is uninstalled.',
-							'block-visibility'
-						) }
-						checked={ removeOnUninstall }
-						onChange={ () =>
-							onPluginSettingChange(
-								'remove_on_uninstall',
-								! removeOnUninstall
-							)
-						}
-					/>
+				<div className="settings-panel__container">
+					<div className="settings-type__toggle">
+						<ToggleControl
+							label={ __(
+								'Remove all plugin settings when Block Visibility is uninstalled.',
+								'block-visibility'
+							) }
+							checked={ removeOnUninstall }
+							onChange={ () =>
+								onPluginSettingChange(
+									'remove_on_uninstall',
+									! removeOnUninstall
+								)
+							}
+						/>
+					</div>
 				</div>
 			</div>
 			<AdditionalPluginSettings

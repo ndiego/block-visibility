@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { includes } from 'lodash';  // eslint-disable-line
+import { includes } from 'lodash';
 
 /**
  * WordPress dependencies

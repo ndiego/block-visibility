@@ -4,11 +4,16 @@
 import { __ } from '@wordpress/i18n';
 import { PanelBody, Notice, withFilters } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEntityProp } from '@wordpress/core-data';
 import {
 	__experimentalCreateInterpolateElement,
 	createInterpolateElement,
 } from '@wordpress/element';
+import { useDispatch, withSelect } from '@wordpress/data';
+import { useEntityProp } from '@wordpress/core-data';
+import { useSelect } from '@wordpress/data';
+
+
+
 
 /**
  * Temporary solution until WP 5.5 is released with createInterpolateElement
@@ -26,6 +31,7 @@ import VisibilityByRole from './components/visibility-by-role';
 import DateTime from './components/date-time';
 import { getEnabledControls } from './utils/setting-utilities';
 import { hasVisibilityControls } from './utils/has-visibility-controls';
+import useFetch from './../utils/fetch-data';
 
 /**
  * Add the Visibility inspector control to each allowed block in the editor
@@ -35,20 +41,27 @@ import { hasVisibilityControls } from './utils/has-visibility-controls';
  * @return {string}		 Return the rendered JSX
  */
 export default function VisibilityInspectorControls( props ) {
-	// Retrieve the block visibility settings: https://github.com/WordPress/gutenberg/issues/20731
-	const [
-		settings,
-		setSettings // eslint-disable-line
-	] = useEntityProp( 'root', 'site', 'block_visibility_settings' );
+	//const{ settings } = useEntityProp( 'block-visibility/v1', 'settings' );
+	//const{ settings } = useEntityProp( 'root', 'site', 'block_visibility_settings' )
+	//const data = useFetch( 'settings' );
+	//const settings = data.settings;
+
+	const settings = useSelect( ( select ) => {
+		const { getEntityRecord } = select( 'core' );
+		return getEntityRecord( 'block-visibility/v1', 'settings' );
+	}, [] );
+
 	const { name, attributes } = props;
+	// TODO: Find a solution to the global variable issue.
+	//const settings = blockVisibilityData.settings; // eslint-disable-line
 	const hasVisibility = hasVisibilityControls( settings, name, attributes );
 
 	if ( ! hasVisibility ) {
 		return null;
 	}
 
-	// This is a global variable added to the page via PHP
-	const settingsUrl = blockVisibilityVariables.settingsUrl; // eslint-disable-line
+	// TODO: Find a solution to the global variable issue.
+	const settingsUrl = blockVisibilityData.pluginVariables.settingsUrl; // eslint-disable-line
 	const enabledControls = getEnabledControls( settings );
 
 	return (

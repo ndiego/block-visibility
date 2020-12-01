@@ -50,6 +50,16 @@ function enqueue_editor_assets() {
 	$stringified_editor_data  = 'const blockVisibilityUserRoles = ' . wp_json_encode( get_user_roles() ) . ';';
 	$stringified_editor_data .= 'const blockVisibilityVariables = ' . wp_json_encode( $plugin_variables ) . ';';
 	$stringified_editor_data .= 'const blockVisibilityFullControlMode = ' . wp_json_encode( is_full_control_mode() ) . ';';
+	$stringified_editor_data .= 'const blockVisibilitySettings = ' . wp_json_encode( get_option( 'block_visibility_settings' ) ) . ';';
+
+	$global_variables = array(
+		'userRoles' 		=> get_user_roles(),
+		'pluginVariables' 	=> $plugin_variables,
+		'isFullControlMode' => is_full_control_mode(),
+	);
+
+	$stringified_global_variable = 'const blockVisibilityData = ' . wp_json_encode( $global_variables ) . ';';
+	$stringified_editor_data .= $stringified_global_variable;
 
 	wp_add_inline_script(
 		'block-visibility-editor-scripts',

@@ -3,7 +3,7 @@
  */
 import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
-import { useEntityProp } from '@wordpress/core-data';
+import { useSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -84,11 +84,14 @@ const withContextualIndicators = createHigherOrderComponent(
 	( BlockListBlock ) => {
 		return ( props ) => {
 			const { name, attributes } = props;
-			// Get plugin settings.
-			const [
-				settings,
-				setSettings // eslint-disable-line
-			] = useEntityProp( 'root', 'site', 'block_visibility_settings' );
+			// TODO: Find a solution to the global variable issue.
+			//const settings = blockVisibilityData.settings; // eslint-disable-line
+
+			const settings = useSelect( ( select ) => {
+				const { getEntityRecord } = select( 'core' );
+				return getEntityRecord( 'block-visibility/v1', 'settings' );
+			}, [] );
+
 			const enableIndicators = isPluginSettingEnabled(
 				settings,
 				'enable_contextual_indicators'

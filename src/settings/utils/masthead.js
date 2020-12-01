@@ -7,7 +7,7 @@ import { Icon } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
-import icons from './../icons';
+import icons from './../../utils/icons';
 
 /**
  * Renders the masthead of the Block Visibility settings pages

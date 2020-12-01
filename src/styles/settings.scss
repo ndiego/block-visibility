@@ -3,6 +3,11 @@ $desktop: 1024px;
 $tablet: 768px;
 $mobile: 420px;
 
+/* To fix rendering quirk in Chrome */
+#wpwrap {
+	background: #f1f1f1;
+}
+
 #block-visibility-settings-container {
 	margin-left: -20px;
 
@@ -66,7 +71,7 @@ $mobile: 420px;
 				span {
 					background: #f1f1f1;
 					border-radius: 4px;
-					border: 1px solid #E0E5E9;
+					box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
 					color: #555D66;
 					padding: 8px 10px;
 					line-height: 1;
@@ -113,7 +118,7 @@ $mobile: 420px;
 
 		.components-tab-panel__tabs {
 			justify-content: center;
-			border-bottom: 1px solid #E0E5E9;
+			box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
 
 			.components-tab-panel__tabs-item {
 				font-size: 15px;
@@ -185,7 +190,7 @@ $mobile: 420px;
 			align-items: center;
 			margin: 30px 0 20px;
 			padding-top: 30px;
-			border-top: 1px solid #E0E5E9;
+			border-top: 1px solid #ccd0d4;
 
 			.setting-controls__title {
 				font-size: 16px;
@@ -247,7 +252,7 @@ $mobile: 420px;
 				}
 
 				input {
-					border: 1px solid #dddddd;
+					border: 1px solid #ccd0d4;
 					padding: 9px 12px;
 				}
 
@@ -260,38 +265,61 @@ $mobile: 420px;
 
 		.setting-tabs__settings-panel {
 			background: #fff;
-			border: 1px solid #E0E5E9;
 			font-size: 15px;
 			margin-bottom: 20px;
 
 			.settings-panel__header {
-				padding: 10px 10px 10px 20px;
+				padding: 16px 16px 16px 24px;
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
+				box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
+				margin-bottom: 1px;
 
 				.settings-panel__header-title {
 					font-weight: 500;
 				}
 			}
 
-			.settings-panel__row {
-				padding: 20px 20px 10px;
-				border-top: 1px solid #E0E5E9;
+			.settings-panel__container {
+				padding: 24px;
+				box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
 
-				& > .components-base-control {
-					margin-bottom: 20px;
+				.settings-type__toggle {
+					margin-bottom: 18px;
+
+					&:last-child {
+						margin-bottom: 0;
+					}
+
+					.components-toggle-control {
+						.components-base-control__field {
+							margin: 4px 0;
+						}
+					}
 				}
 
 				label {
 					font-size: 14px;
 				}
 
-				.settings-panel__row-subsetting {
-					margin-top: 20px;
-					margin-left: 50px;
-					border-top: 1px solid #E0E5E9;
-					padding-top: 20px;
+				.settings-panel__container-subsetting {
+					margin-top: 24px;
+				    margin-left: 48px;
+				}
+
+				.settings-panel__help {
+					font-size: 12px;
+					font-style: normal;
+					color: rgb(117, 117, 117);
+				}
+
+				.components-disabled {
+					opacity: .4;
+
+					.components-form-toggle {
+						opacity: 1;
+					}
 				}
 			}
 		}
@@ -341,7 +369,8 @@ $mobile: 420px;
 		.getting-started__panels {
 
 			.components-panel__body {
-				border: 1px solid #E0E5E9;
+				box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
+				border: 0;
 
 				.components-panel__row {
 					display: block;
@@ -366,7 +395,7 @@ $mobile: 420px;
 
 				&.is-opened {
 					h2 {
-						border-bottom: 1px solid #E0E5E9 !important;
+						border-bottom: 1px solid #ccd0d4 !important;
 					}
 				}
 			}
@@ -376,7 +405,7 @@ $mobile: 420px;
 			    font-size: 15px;
 				margin-top: 15px;
 				padding-top: 20px;
-				border-top: 1px solid #E0E5E9;
+				border-top: 1px solid #ccd0d4;
 
 				&:first-child {
 					margin-top: 25px;
@@ -388,9 +417,8 @@ $mobile: 420px;
 
 		.getting-started__help {
 			background: #FFFFFF;
-			border: 1px solid #E5E5E5;
+			box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
 			box-sizing: border-box;
-			box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.07);
 			padding: 1em 3em 2em;
 			margin: 40px auto 0;
 			text-align: center;
@@ -417,7 +445,7 @@ $mobile: 420px;
 
 		.block-manager__block-category {
 			background: #FFFFFF;
-			border: 1px solid #E2E4E7;
+			box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
 			box-sizing: border-box;
 			padding: 16px;
 
@@ -434,7 +462,7 @@ $mobile: 420px;
 				font-weight: bold;
 				letter-spacing: 0.25px;
 				padding: 4px 10px 16px 0;
-				border-bottom: 1px solid #E2E4E7;
+				border-bottom: 1px solid #ccd0d4;
 
 				.components-base-control__field {
 					display: flex;
@@ -460,7 +488,7 @@ $mobile: 420px;
 			.blocks-category__block {
 				padding: 12px 12px 12px 30px;
 				margin: 0;
-				border-bottom: 1px solid #E2E4E7;
+				border-bottom: 1px solid #ccd0d4;
 
 				&:last-child {
 					border-bottom: none;
@@ -503,6 +531,7 @@ $mobile: 420px;
 			&:hover {
 				background-color: transparent !important;
 				box-shadow: none !important;
+				color: #414141;
 			}
 		}
 

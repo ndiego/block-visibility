@@ -14,7 +14,7 @@ import { has, includes } from 'lodash';
  */
 export function hasVisibilityControls( settings, blockType, attributes ) {
 	// Make sure we have visibility settings, otherwise abort.
-	if ( ! settings ) {
+	if ( ! settings || 0 === settings.length ) {
 		return false;
 	}
 

@@ -3,13 +3,13 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
-import { ToggleControl, withFilters } from '@wordpress/components';
+import { ToggleControl, withFilters, Disabled } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import SaveSettings from './utils/save-settings';
-import InformationPopover from './utils/information-popover';
+import SaveSettings from './../utils/save-settings';
+import InformationPopover from './../utils/information-popover';
 
 /**
  * Renders the Visibility Controls tab of the Block Visibility settings page
@@ -46,6 +46,29 @@ export default function VisibilityControls( props ) {
 	const visibilityByRoleEnable = visibilityControls?.visibility_by_role?.enable ?? true; // eslint-disable-line
 	const visibilityByRoleEnableUseRoles = visibilityControls?.visibility_by_role?.enable_user_roles ?? true; // eslint-disable-line
 	const dateTimeEnable = visibilityControls?.date_time?.enable ?? true; // eslint-disable-line
+
+	// TODO perhaps move this logic to its own component.
+	let enableUserRolesElement = (
+		<ToggleControl
+			className="settings-panel__container-subsetting"
+			label={ __(
+				'Enable the ability to restrict block visibility by individual user role (Administrator, Editor, Subscriber, etc.)',
+				'block-visibility'
+			) }
+			checked={ visibilityByRoleEnableUseRoles }
+			onChange={ () =>
+				onVisibilityControlChange(
+					'visibility_by_role',
+					'enable_user_roles',
+					! visibilityByRoleEnableUseRoles
+				)
+			}
+		/>
+	)
+
+	if ( ! visibilityByRoleEnable ) {
+		enableUserRolesElement = <Disabled>{ enableUserRolesElement }</Disabled>
+	}
 
 	return (
 		<div className="setting-tabs__visibility-controls inner-container">
@@ -97,21 +120,23 @@ export default function VisibilityControls( props ) {
 						link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
-				<div className="settings-panel__row">
-					<ToggleControl
-						label={ __(
-							'Enable the ability to hide blocks completely from the frontend of your website.',
-							'block-visibility'
-						) }
-						checked={ hideBlockEnable }
-						onChange={ () =>
-							onVisibilityControlChange(
-								'hide_block',
-								'enable',
-								! hideBlockEnable
-							)
-						}
-					/>
+				<div className="settings-panel__container">
+					<div className="settings-type__toggle">
+						<ToggleControl
+							label={ __(
+								'Enable the ability to hide blocks completely from the frontend of your website.',
+								'block-visibility'
+							) }
+							checked={ hideBlockEnable }
+							onChange={ () =>
+								onVisibilityControlChange(
+									'hide_block',
+									'enable',
+									! hideBlockEnable
+								)
+							}
+						/>
+					</div>
 				</div>
 			</div>
 			<div className="setting-tabs__settings-panel">
@@ -127,21 +152,23 @@ export default function VisibilityControls( props ) {
 						link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
-				<div className="settings-panel__row">
-					<ToggleControl
-						label={ __(
-							'Enable the ability to restrict block visibility based on date and time settings.',
-							'block-visibility'
-						) }
-						checked={ dateTimeEnable }
-						onChange={ () =>
-							onVisibilityControlChange(
-								'date_time',
-								'enable',
-								! dateTimeEnable
-							)
-						}
-					/>
+				<div className="settings-panel__container">
+					<div className="settings-type__toggle">
+						<ToggleControl
+							label={ __(
+								'Enable the ability to restrict block visibility based on date and time settings.',
+								'block-visibility'
+							) }
+							checked={ dateTimeEnable }
+							onChange={ () =>
+								onVisibilityControlChange(
+									'date_time',
+									'enable',
+									! dateTimeEnable
+								)
+							}
+						/>
+					</div>
 				</div>
 			</div>
 			<div className="setting-tabs__settings-panel">
@@ -157,38 +184,26 @@ export default function VisibilityControls( props ) {
 						link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
-				<div className="settings-panel__row">
-					<ToggleControl
-						label={ __(
-							'Enable the ability to restrict block visibility by whether a user is logged-in or logged-out.',
-							'block-visibility'
-						) }
-						checked={ visibilityByRoleEnable }
-						onChange={ () =>
-							onVisibilityControlChange(
-								'visibility_by_role',
-								'enable',
-								! visibilityByRoleEnable
-							)
-						}
-					/>
-					{ visibilityByRoleEnable && (
+				<div className="settings-panel__container">
+					<div className="settings-type__toggle">
 						<ToggleControl
-							className="settings-panel__row-subsetting"
 							label={ __(
-								'Enable the ability to restrict block visibility by individual user role (Administrator, Editor, Subscriber, etc.)',
+								'Enable the ability to restrict block visibility by whether a user is logged-in or logged-out.',
 								'block-visibility'
 							) }
-							checked={ visibilityByRoleEnableUseRoles }
+							checked={ visibilityByRoleEnable }
 							onChange={ () =>
 								onVisibilityControlChange(
 									'visibility_by_role',
-									'enable_user_roles',
-									! visibilityByRoleEnableUseRoles
+									'enable',
+									! visibilityByRoleEnable
 								)
 							}
 						/>
-					) }
+					</div>
+					<div className="settings-type__toggle">
+						{ enableUserRolesElement }
+					</div>
 				</div>
 			</div>
 			<AdditionalVisibilityControls
