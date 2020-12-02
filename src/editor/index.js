@@ -6,13 +6,13 @@ import { assign } from 'lodash';
 /**
  * WordPress dependencies
  */
+import { __ } from '@wordpress/i18n';
+import { addEntities } from '@wordpress/core-data';
+import { dispatch } from '@wordpress/data';
 import { addFilter, applyFilters } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { hasBlockSupport } from '@wordpress/blocks';
 import { registerPlugin } from '@wordpress/plugins';
-
-import { __ } from '@wordpress/i18n';
-import { addEntities } from '@wordpress/core-data';
 
 /**
  * Internal dependencies
@@ -21,15 +21,25 @@ import VisibilityInspectorControls from './inspector-controls';
 import ToolbarOptionsHideBlock from './toolbar-controls';
 import './contextual-indicators';
 
-const dispatch = wp.data.dispatch;
+/**
+ * Add our custom entities for retreiving external data in the Block Editor.
+ *
+ * @since 1.3.0
+ */
 dispatch( 'core' ).addEntities( [
 	{
-		label: __( 'Block Visibility Settings' ),
+		label: __( 'Block Visibility Settings', 'block-visibility' ),
 		kind: 'block-visibility/v1',
 		name: 'settings',
 		baseURL: '/block-visibility/v1/settings',
-	}
-]);
+	},
+	{
+		label: __( 'Block Visibility Variables', 'block-visibility' ),
+		kind: 'block-visibility/v1',
+		name: 'variables',
+		baseURL: '/block-visibility/v1/variables',
+	},
+] );
 
 /**
  * Add the visibility setting sttribute to selected blocks.
@@ -83,6 +93,8 @@ function blockVisibilityAttributes( settings ) {
 			},
 		},
 	};
+
+	// Filter allows the premium plugin to add Block Visibility attributes.
 	visibilityAttributes = applyFilters(
 		'blockVisibility.visibilityAttributes',
 		visibilityAttributes
@@ -91,7 +103,7 @@ function blockVisibilityAttributes( settings ) {
 	// We don't want to enable visibility for blocks that cannot be added via
 	// the inserter or is a child block. This excludes blocks such as reusable
 	// blocks, individual column block, etc. But if we are in Full Control Mode
-	// add settings to every block
+	// add settings to every block.
 	if (
 		fullControlMode ||
 		( hasBlockSupport( settings, 'inserter', true ) &&
@@ -102,6 +114,7 @@ function blockVisibilityAttributes( settings ) {
 			visibilityAttributes
 		);
 	}
+
 	return settings;
 }
 

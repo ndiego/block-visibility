@@ -12,7 +12,7 @@ import { has, includes } from 'lodash';
  * @param {Object} attributes All the attributes of selected block
  * @return {boolean}		  Whether the block has visibility controls or not
  */
-export function hasVisibilityControls( settings, blockType, attributes ) {
+export default function hasVisibilityControls( settings, blockType, attributes ) {
 	// Make sure we have visibility settings, otherwise abort.
 	if ( ! settings || 0 === settings.length ) {
 		return false;

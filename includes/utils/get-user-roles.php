@@ -15,7 +15,7 @@ namespace BlockVisibility\Utils;
  *
  * @return array User $user_roles
  */
-function get_user_roles() {
+ function get_user_roles() {
 
 	// Initialize the roles array with the default Public role.
 	$roles = array(
@@ -26,9 +26,11 @@ function get_user_roles() {
 		),
 	);
 
-	if ( ! function_exists( 'get_editable_roles' ) ) {
-		return $roles;
-	}
+	global $wp_roles;
+	$all_roles = $wp_roles->roles;
+
+	// Filters the list of editable roles.
+	$editable_roles = apply_filters( 'editable_roles', $all_roles );
 
 	$role_types = array(
 		'administrator' => 'core',
@@ -38,7 +40,7 @@ function get_user_roles() {
 		'subscriber'    => 'core',
 	);
 
-	foreach ( get_editable_roles() as $role_slug => $role_atts ) {
+	foreach ( $editable_roles as $role_slug => $role_atts ) {
 		$atts = array(
 			'name'  => $role_slug,
 			'title' => $role_atts['name'],
@@ -54,4 +56,4 @@ function get_user_roles() {
 	}
 
 	return $roles;
-}
+ }

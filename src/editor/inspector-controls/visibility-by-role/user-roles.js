@@ -17,12 +17,11 @@ import { CheckboxControl, ToggleControl } from '@wordpress/components';
  * @return {string}		 Return the rendered JSX
  */
 export default function UserRoles( props ) {
-	const { attributes, setAttributes } = props;
+	const { attributes, setAttributes, variables } = props;
 	const { blockVisibility } = attributes;
 	const { restrictedRoles, hideOnRestrictedRoles } = blockVisibility;
 
-	// TODO: Find a solution to the global variable issue.
-	const roles = blockVisibilityData.userRoles; // eslint-disable-line
+	const roles = variables?.userRoles ?? []; // eslint-disable-line
 	const label = hideOnRestrictedRoles
 		? __( 'hidden', 'block-visibility' )
 		: __( 'visible', 'block-visibility' );

@@ -8,6 +8,9 @@
 
 namespace BlockVisibility\Admin;
 
+/**
+ * Internal dependencies
+ */
 use function BlockVisibility\Utils\get_asset_file as get_asset_file;
 use function BlockVisibility\Utils\get_user_roles as get_user_roles;
 
@@ -40,30 +43,14 @@ function enqueue_editor_assets() {
 		false // Need false to ensure our filters can target third-party plugins.
 	);
 
-	$plugin_variables = array(
-		'version'     => BLOCK_VISIBILITY_VERSION,
-		'settingsUrl' => BLOCK_VISIBILITY_SETTINGS_URL,
-	);
-
-	// Create a global variable to hold all our plugin variables and user roles,
-	// not ideal, but does the trick for now...
-	$stringified_editor_data  = 'const blockVisibilityUserRoles = ' . wp_json_encode( get_user_roles() ) . ';';
-	$stringified_editor_data .= 'const blockVisibilityVariables = ' . wp_json_encode( $plugin_variables ) . ';';
-	$stringified_editor_data .= 'const blockVisibilityFullControlMode = ' . wp_json_encode( is_full_control_mode() ) . ';';
-	$stringified_editor_data .= 'const blockVisibilitySettings = ' . wp_json_encode( get_option( 'block_visibility_settings' ) ) . ';';
-
-	$global_variables = array(
-		'userRoles' 		=> get_user_roles(),
-		'pluginVariables' 	=> $plugin_variables,
-		'isFullControlMode' => is_full_control_mode(),
-	);
-
-	$stringified_global_variable = 'const blockVisibilityData = ' . wp_json_encode( $global_variables ) . ';';
-	$stringified_editor_data .= $stringified_global_variable;
+	// Create a global variable to indicate whether we are in full control mode
+	// or not. This is needed for the Block Visibility attribute filter since
+	// it will not allow us to fetch this data directly.
+	$is_full_control_mode .= 'const blockVisibilityFullControlMode = ' . wp_json_encode( is_full_control_mode() ) . ';';
 
 	wp_add_inline_script(
 		'block-visibility-editor-scripts',
-		$stringified_editor_data,
+		$is_full_control_mode,
 		'before'
 	);
 

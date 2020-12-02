@@ -8,6 +8,9 @@
 
 namespace BlockVisibility\Admin;
 
+/**
+ * Internal dependencies
+ */
 use function BlockVisibility\Utils\get_asset_file as get_asset_file;
 
 /**

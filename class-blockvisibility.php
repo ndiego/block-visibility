@@ -94,7 +94,11 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 
 			// Needs to be included at all times due to show_in_rest.
 			require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/register-settings.php';
-			require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/settings-api.php';
+			require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/register-routes.php';
+
+			// Utility function that is also used by register-routes.php so
+			// needs to be included at all times.
+			require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/utils/get-user-roles.php';
 
 			// Only include in the admin.
 			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
@@ -104,7 +108,6 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 
 				// Utility functions.
 				require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/utils/get-asset-file.php';
-				require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/utils/get-user-roles.php';
 			}
 
 			// Only include on the frontend.
@@ -217,7 +220,7 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 }
 
 /**
- * The main function for that returns the Block Visibility class
+ * The main function that returns the Block Visibility class
  *
  * @since 1.0.0
  * @return object|BlockVisibility

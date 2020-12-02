@@ -8,12 +8,7 @@ import {
 	__experimentalCreateInterpolateElement,
 	createInterpolateElement,
 } from '@wordpress/element';
-import { useDispatch, withSelect } from '@wordpress/data';
-import { useEntityProp } from '@wordpress/core-data';
 import { useSelect } from '@wordpress/data';
-
-
-
 
 /**
  * Temporary solution until WP 5.5 is released with createInterpolateElement
@@ -30,8 +25,7 @@ import HideBlock from './hide-block';
 import VisibilityByRole from './visibility-by-role';
 import DateTime from './date-time';
 import { getEnabledControls } from './../utils/setting-utilities';
-import { hasVisibilityControls } from './../utils/has-visibility-controls';
-//import useFetch from './../utils/fetch-data';
+import hasVisibilityControls from './../utils/has-visibility-controls';
 
 /**
  * Add the Visibility inspector control to each allowed block in the editor
@@ -41,27 +35,22 @@ import { hasVisibilityControls } from './../utils/has-visibility-controls';
  * @return {string}		 Return the rendered JSX
  */
 export default function VisibilityInspectorControls( props ) {
-	//const{ settings } = useEntityProp( 'block-visibility/v1', 'settings' );
-	//const{ settings } = useEntityProp( 'root', 'site', 'block_visibility_settings' )
-	//const data = useFetch( 'settings' );
-	//const settings = data.settings;
-
 	const settings = useSelect( ( select ) => {
 		const { getEntityRecord } = select( 'core' );
 		return getEntityRecord( 'block-visibility/v1', 'settings' );
 	}, [] );
-
+	const variables = useSelect( ( select ) => {
+		const { getEntityRecord } = select( 'core' );
+		return getEntityRecord( 'block-visibility/v1', 'variables' );
+	}, [] );
 	const { name, attributes } = props;
-	// TODO: Find a solution to the global variable issue.
-	//const settings = blockVisibilityData.settings; // eslint-disable-line
 	const hasVisibility = hasVisibilityControls( settings, name, attributes );
 
 	if ( ! hasVisibility ) {
 		return null;
 	}
 
-	// TODO: Find a solution to the global variable issue.
-	const settingsUrl = blockVisibilityData.pluginVariables.settingsUrl; // eslint-disable-line
+	const settingsUrl = variables?.pluginVariables.settingsUrl ?? ''; // eslint-disable-line
 	const enabledControls = getEnabledControls( settings );
 
 	return (
@@ -80,16 +69,19 @@ export default function VisibilityInspectorControls( props ) {
 							/>
 							<DateTime
 								settings={ settings }
+								variables={ variables }
 								enabledControls={ enabledControls }
 								{ ...props }
 							/>
 							<VisibilityByRole
 								settings={ settings }
+								variables={ variables }
 								enabledControls={ enabledControls }
 								{ ...props }
 							/>
 							<AdditionalInspectorControls
 								settings={ settings }
+								variables={ variables }
 								enabledControls={ enabledControls }
 								{ ...props }
 							/>

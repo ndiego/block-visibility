@@ -8,74 +8,13 @@ import { useSelect } from '@wordpress/data';
 /**
  * Internal dependencies
  */
-import { hasVisibilityControls } from './../utils/has-visibility-controls';
+import hasDateTime from './has-date-time';
+import hasRoles from './has-roles';
+import hasVisibilityControls from './../utils/has-visibility-controls';
 import {
 	isPluginSettingEnabled,
 	getEnabledControls,
 } from './../utils/setting-utilities';
-
-/**
- * Determine if visibility by user role settings are enabled for the block.
- *
- * @since 1.1.0
- * @param {Object}  blockVisibility All visibility attributes for the block
- * @param {Array}   enabledControls Array of all enabled visibility controls
- * @return {boolean}		        Does the block have user role settings
- */
-function hasRoles( blockVisibility, enabledControls ) {
-	const {
-		visibilityByRole,
-		restrictedRoles,
-		hideOnRestrictedRoles,
-	} = blockVisibility;
-
-	if (
-		! enabledControls.includes( 'visibility_by_role' ) ||
-		! visibilityByRole ||
-		visibilityByRole === 'all'
-	) {
-		return false;
-	}
-
-	// If the restriction is set to user-roles, but no user roles are selected,
-	// and "hide on restricted" has been set. In this case the block actually
-	// does not have any role-based visibility restrictions.
-	if (
-		visibilityByRole === 'user-role' &&
-		restrictedRoles.length === 0 &&
-		hideOnRestrictedRoles
-	) {
-		return false;
-	}
-
-	return true;
-}
-
-/**
- * Determine if date time settings are enabled for the block.
- *
- * @since 1.1.0
- * @param {Object}  blockVisibility All visibility attributes for the block
- * @param {Array}   enabledControls Array of all enabled visibility controls
- * @return {boolean}		        Does the block have date time settings
- */
-function hasDateTime( blockVisibility, enabledControls ) {
-	const { startDateTime, endDateTime } = blockVisibility;
-
-	if (
-		! enabledControls.includes( 'date_time' ) ||
-		( ! startDateTime && ! endDateTime )
-	) {
-		return false;
-	}
-
-	// If the restriction is set to user-roles, but no user roles are selected.
-	if ( startDateTime && endDateTime && startDateTime >= endDateTime ) {
-		return false;
-	}
-
-	return true;
-}
 
 /**
  * Filter each block and add CSS classes based on visibility settings.
@@ -83,15 +22,11 @@ function hasDateTime( blockVisibility, enabledControls ) {
 const withContextualIndicators = createHigherOrderComponent(
 	( BlockListBlock ) => {
 		return ( props ) => {
-			const { name, attributes } = props;
-			// TODO: Find a solution to the global variable issue.
-			//const settings = blockVisibilityData.settings; // eslint-disable-line
-
 			const settings = useSelect( ( select ) => {
 				const { getEntityRecord } = select( 'core' );
 				return getEntityRecord( 'block-visibility/v1', 'settings' );
 			}, [] );
-
+			const { name, attributes } = props;
 			const enableIndicators = isPluginSettingEnabled(
 				settings,
 				'enable_contextual_indicators'

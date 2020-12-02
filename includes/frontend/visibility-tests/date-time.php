@@ -8,9 +8,16 @@
 
 namespace BlockVisibility\Frontend\VisibilityTests;
 
-use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
+/**
+ * WordPress dependencies
+ */
 use DateTime;
 use DateTimeZone;
+
+/**
+ * Internal dependencies
+ */
+use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
 
 /**
  * This function takes a date string and converts it into a DateTime object.

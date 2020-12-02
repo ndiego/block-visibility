@@ -25,7 +25,7 @@ import PluginSettings from './plugin-settings';
  *
  * @since 1.0.0
  */
-export default function Settings() {
+function Settings() {
 	const [ isAPILoaded, setIsAPILoaded ] = useState( false );
 	const [ isAPISaving, setIsAPISaving ] = useState( false );
 	const [ hasSaveError, setHasSaveError ] = useState( false );
@@ -176,3 +176,11 @@ export default function Settings() {
 		</>
 	);
 }
+
+wp.domReady( () => {
+	registerCoreBlocks();
+	render(
+		<Settings />,
+		document.getElementById( 'block-visibility-settings-container' )
+	);
+} );

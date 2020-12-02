@@ -36,7 +36,13 @@ import { isControlSettingEnabled } from './../../utils/setting-utilities';
  * @return {string}		 Return the rendered JSX
  */
 export default function VisibilityByRole( props ) {
-	const { attributes, setAttributes, enabledControls, settings } = props;
+	const {
+		attributes,
+		setAttributes,
+		enabledControls,
+		settings,
+		variables,
+	} = props;
 	const { blockVisibility } = attributes;
 	const { visibilityByRole } = blockVisibility;
 
@@ -50,8 +56,7 @@ export default function VisibilityByRole( props ) {
 		return null;
 	}
 
-	// TODO: Find a solution to the global variable issue.
-	const settingsUrl = blockVisibilityData.pluginVariables.settingsUrl; // eslint-disable-line
+	const settingsUrl = variables?.pluginVariables.settingsUrl ?? ''; // eslint-disable-line
 	const visibilityByRoleEnableUseRoles = isControlSettingEnabled(
 		settings,
 		'visibility_by_role',
@@ -122,7 +127,12 @@ export default function VisibilityByRole( props ) {
 				}
 			/>
 			{ visibilityByRole === 'user-role' &&
-				visibilityByRoleEnableUseRoles && <UserRoles { ...props } /> }
+				visibilityByRoleEnableUseRoles &&
+					<UserRoles
+						variables={ variables }
+						{ ...props }
+					/>
+			}
 			{ visibilityByRole === 'user-role' &&
 				! visibilityByRoleEnableUseRoles && (
 					<Notice status="warning" isDismissible={ false }>

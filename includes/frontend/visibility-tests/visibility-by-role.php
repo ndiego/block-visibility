@@ -8,6 +8,9 @@
 
 namespace BlockVisibility\Frontend\VisibilityTests;
 
+/**
+ * Internal dependencies
+ */
 use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
 
 /**
