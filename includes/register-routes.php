@@ -101,10 +101,17 @@ function get_variables( $request ) {
 	);
 
 	$variables = array(
+		'currentUsersRoles' => display_user_roles(),
 		'userRoles' 		=> get_user_roles(),
 		'pluginVariables' 	=> $plugin_variables,
 		'isFullControlMode' => $is_full_control_mode,
 	);
 
 	return new WP_REST_Response( $variables, 200 );
+}
+
+function display_user_roles(){
+    $user_id = get_current_user_id();
+    $user_info = get_userdata( $user_id );
+    return $user_info->roles;
 }

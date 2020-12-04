@@ -8,7 +8,6 @@ import {
 	__experimentalCreateInterpolateElement,
 	createInterpolateElement,
 } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
 
 /**
  * Temporary solution until WP 5.5 is released with createInterpolateElement
@@ -25,7 +24,10 @@ import HideBlock from './hide-block';
 import VisibilityByRole from './visibility-by-role';
 import DateTime from './date-time';
 import { getEnabledControls } from './../utils/setting-utilities';
+import { getCurrentUserRoles } from './../utils/setting-utilities';
 import hasVisibilityControls from './../utils/has-visibility-controls';
+import hasPermission from './../utils/has-permission';
+import { getPluginData } from './../../utils/data';
 
 /**
  * Add the Visibility inspector control to each allowed block in the editor
@@ -35,14 +37,17 @@ import hasVisibilityControls from './../utils/has-visibility-controls';
  * @return {string}		 Return the rendered JSX
  */
 export default function VisibilityInspectorControls( props ) {
-	const settings = useSelect( ( select ) => {
-		const { getEntityRecord } = select( 'core' );
-		return getEntityRecord( 'block-visibility/v1', 'settings' );
-	}, [] );
-	const variables = useSelect( ( select ) => {
-		const { getEntityRecord } = select( 'core' );
-		return getEntityRecord( 'block-visibility/v1', 'variables' );
-	}, [] );
+	const settings = getPluginData( 'settings' );
+	const variables = getPluginData( 'variables' );
+
+	if ( settings === 'fetching' || variables === 'fetching' ){
+		return null;
+	}
+
+	if ( ! hasPermission( settings, variables ) ) {
+		return null;
+	}
+
 	const { name, attributes } = props;
 	const hasVisibility = hasVisibilityControls( settings, name, attributes );
 

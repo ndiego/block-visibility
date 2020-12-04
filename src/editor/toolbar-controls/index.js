@@ -15,10 +15,13 @@ import { useDispatch, withSelect } from '@wordpress/data';
  */
 import icons from './../../utils/icons';
 import hasVisibilityControls from './../utils/has-visibility-controls';
+import hasPermission from './../utils/has-permission';
 import {
 	isPluginSettingEnabled,
 	getEnabledControls,
 } from './../utils/setting-utilities';
+import { getPluginData } from './../../utils/data';
+
 
 /**
  * Adds the toolbar control for showing/hiding the selected block.
@@ -32,12 +35,22 @@ function ToolbarOptionsHideBlock( props ) {
 		'core/block-editor'
 	);
 	const { createSuccessNotice } = useDispatch( 'core/notices' );
+	const settings = getPluginData( 'settings' );
+	const variables = getPluginData( 'variables' );
+
+	if ( settings === 'fetching' || variables === 'fetching' ){
+		return null;
+	}
+
+	if ( ! hasPermission( settings, variables ) ) {
+		return null;
+	}
+
 	const {
 		enableMenuItem,
 		clientId,
 		blockType,
 		blockAttributes,
-		settings,
 	} = props;
 
 	// Make sure the menu item is enabled and we have recieved a block type.
@@ -115,7 +128,6 @@ export default withSelect( ( select ) => {
 	} = select( 'core/block-editor' );
 	const { getBlockType } = select( 'core/blocks' );
 
-	const settings = getEntityRecord( 'block-visibility/v1', 'settings' );
 	const clientIds = getSelectedBlockClientIds();
 	// We only want to enable visibility editing if only one block is selected.
 	const enableMenuItem = ! hasMultiSelection();
@@ -124,5 +136,5 @@ export default withSelect( ( select ) => {
 	const blockType = getBlockType( getBlockName( clientId ) );
 	const blockAttributes = getBlockAttributes( clientId );
 
-	return { enableMenuItem, clientId, blockType, blockAttributes, settings };
+	return { enableMenuItem, clientId, blockType, blockAttributes };
 } )( ToolbarOptionsHideBlock );

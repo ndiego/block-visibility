@@ -55,7 +55,7 @@ export function getEnabledControls( settings ) {
  */
 export function isControlSettingEnabled( settings, control, setting ) {
 	// Make sure the visibility settings have been retreived, otherwise abort.
-	if ( ! settings ) {
+	if ( ! settings || 0 === settings.length ) {
 		return false;
 	}
 
@@ -87,7 +87,7 @@ export function isControlSettingEnabled( settings, control, setting ) {
  */
 export function isPluginSettingEnabled( settings, setting ) {
 	// Make sure we have visibility settings, otherwise abort.
-	if ( ! settings ) {
+	if ( ! settings || 0 === settings.length ) {
 		return false;
 	}
 

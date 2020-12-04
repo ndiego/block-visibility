@@ -15,6 +15,7 @@ import {
 	isPluginSettingEnabled,
 	getEnabledControls,
 } from './../utils/setting-utilities';
+import { getPluginData } from './../../utils/data';
 
 /**
  * Filter each block and add CSS classes based on visibility settings.
@@ -22,10 +23,12 @@ import {
 const withContextualIndicators = createHigherOrderComponent(
 	( BlockListBlock ) => {
 		return ( props ) => {
-			const settings = useSelect( ( select ) => {
-				const { getEntityRecord } = select( 'core' );
-				return getEntityRecord( 'block-visibility/v1', 'settings' );
-			}, [] );
+			const settings = getPluginData( 'settings' );
+
+			if ( settings === 'fetching' ) {
+				return <BlockListBlock { ...props } />;
+			}
+
 			const { name, attributes } = props;
 			const enableIndicators = isPluginSettingEnabled(
 				settings,

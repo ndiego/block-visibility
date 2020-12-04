@@ -51,7 +51,7 @@ export default function EnabledUserRoles( props ) {
 			} ) }
 			<div className="settings-panel__help">
 				{ __(
-					'Choose the user roles that should be allowed to control visibility settings in the Block Editor. Administrators will always have permission.',
+					'Choose which user roles should be allowed to control visibility settings in the Block Editor. Administrators will always have permission.',
 					'block-visibility'
 				) }
 			</div>
