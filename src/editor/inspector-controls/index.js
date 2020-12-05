@@ -24,10 +24,9 @@ import HideBlock from './hide-block';
 import VisibilityByRole from './visibility-by-role';
 import DateTime from './date-time';
 import { getEnabledControls } from './../utils/setting-utilities';
-import { getCurrentUserRoles } from './../utils/setting-utilities';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import hasPermission from './../utils/has-permission';
-import { getPluginData } from './../../utils/data';
+import { usePluginData } from './../../utils/data';
 
 /**
  * Add the Visibility inspector control to each allowed block in the editor
@@ -37,10 +36,10 @@ import { getPluginData } from './../../utils/data';
  * @return {string}		 Return the rendered JSX
  */
 export default function VisibilityInspectorControls( props ) {
-	const settings = getPluginData( 'settings' );
-	const variables = getPluginData( 'variables' );
+	const settings = usePluginData( 'settings' );
+	const variables = usePluginData( 'variables' );
 
-	if ( settings === 'fetching' || variables === 'fetching' ){
+	if ( settings === 'fetching' || variables === 'fetching' ) {
 		return null;
 	}
 

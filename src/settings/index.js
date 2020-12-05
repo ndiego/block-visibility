@@ -101,7 +101,9 @@ function Settings() {
 	// Switch the default settings tab based on the URL tad query
 	const urlParams = new URLSearchParams( window.location.search );
 	const requestedTab = urlParams.get( 'tab' );
-	const initialTab = findKey( settingTabs, [ 'name', requestedTab ] ) ? requestedTab : 'getting-started';
+	const initialTab = findKey( settingTabs, [ 'name', requestedTab ] )
+		? requestedTab
+		: 'getting-started';
 
 	return (
 		<>
@@ -118,10 +120,10 @@ function Settings() {
 						return (
 							<div className="setting-tabs__loading-settings">
 								<Spinner />
-								<span class="description">
+								<span className="description">
 									{ __(
-									  'Loading settings…',
-									  'block-visibility'
+										'Loading settings…',
+										'block-visibility'
 									) }
 								</span>
 							</div>

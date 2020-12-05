@@ -1,4 +1,3 @@
-
 /**
  * External dependencies
  */
@@ -9,7 +8,6 @@ import { startCase } from 'lodash';
  */
 import { __ } from '@wordpress/i18n';
 import { CheckboxControl } from '@wordpress/components';
-
 
 /**
  * Renders the additional permission settings for user roles.
@@ -22,7 +20,7 @@ export default function EnabledUserRoles( props ) {
 	const { roles, enabledUserRoles, onPluginSettingChange } = props;
 
 	return (
-		<div className='settings-panel__container-subsetting'>
+		<div className="settings-panel__container-subsetting">
 			{ roles.map( ( role ) => {
 				const newEnabledUserRoles = [ ...enabledUserRoles ];
 				const isChecked = enabledUserRoles.includes( role );
@@ -56,5 +54,5 @@ export default function EnabledUserRoles( props ) {
 				) }
 			</div>
 		</div>
-	)
+	);
 }

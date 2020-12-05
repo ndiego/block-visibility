@@ -78,30 +78,30 @@ function register_settings() {
 						'plugin_settings'     => array(
 							'type'       => 'object',
 							'properties' => array(
-								'enable_contextual_indicators'  => array(
+								'enable_contextual_indicators' => array(
 									'type' => 'boolean',
 								),
-								'enable_toolbar_controls'       => array(
+								'enable_toolbar_controls'  => array(
 									'type' => 'boolean',
 								),
 								'enable_user_role_restrictions' => array(
 									'type' => 'boolean',
 								),
-								'enabled_user_roles'            => array(
+								'enabled_user_roles'       => array(
 									'type'  => 'array',
 									'items' => array(
 										'type' => 'string',
 									),
 								),
-								'enable_full_control_mode'      => array(
+								'enable_full_control_mode' => array(
 									'type' => 'boolean',
 								),
-								'remove_on_uninstall'           => array(
+								'remove_on_uninstall'      => array(
 									'type' => 'boolean',
 								),
 
 								// Additional Settings.
-								'enable_visibility_notes'       => array(
+								'enable_visibility_notes'  => array(
 									'type' => 'boolean',
 								),
 							),
@@ -128,7 +128,7 @@ function register_settings() {
 					'enable_contextual_indicators'  => true,
 					'enable_toolbar_controls'       => true,
 					'enable_user_role_restrictions' => false,
-					'enabled_user_roles'			=> array(),
+					'enabled_user_roles'            => array(),
 					'enable_full_control_mode'      => false,
 					'remove_on_uninstall'           => false,
 

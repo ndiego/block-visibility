@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { has, includes } from 'lodash';
+import { has } from 'lodash';
 
 /**
  * Helper function for determining if a block type has visibility controls.
@@ -12,7 +12,11 @@ import { has, includes } from 'lodash';
  * @param {Object} attributes All the attributes of selected block
  * @return {boolean}		  Whether the block has visibility controls or not
  */
-export default function hasVisibilityControls( settings, blockType, attributes ) {
+export default function hasVisibilityControls(
+	settings,
+	blockType,
+	attributes
+) {
 	// Make sure we have visibility settings, otherwise abort.
 	if ( ! settings || 0 === settings.length ) {
 		return false;

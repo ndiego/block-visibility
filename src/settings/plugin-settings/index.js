@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import { startCase } from 'lodash';
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -12,7 +7,6 @@ import {
 	ExternalLink,
 	Disabled,
 	withFilters,
-	CheckboxControl,
 } from '@wordpress/components';
 import {
 	useState,
@@ -75,14 +69,14 @@ export default function PluginSettings( props ) {
 	// TODO perhaps move this logic to its own component.
 	let userRolesElement = (
 		<EnabledUserRoles
-			roles={roles}
+			roles={ roles }
 			enabledUserRoles={ enabledUserRoles }
-			onPluginSettingChange={onPluginSettingChange}
+			onPluginSettingChange={ onPluginSettingChange }
 		/>
-	)
+	);
 
 	if ( ! enableUserRoleRestrictions ) {
-		userRolesElement = <Disabled>{ userRolesElement }</Disabled>
+		userRolesElement = <Disabled>{ userRolesElement }</Disabled>;
 	}
 
 	return (

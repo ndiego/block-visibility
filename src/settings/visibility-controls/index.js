@@ -64,10 +64,12 @@ export default function VisibilityControls( props ) {
 				)
 			}
 		/>
-	)
+	);
 
 	if ( ! visibilityByRoleEnable ) {
-		enableUserRolesElement = <Disabled>{ enableUserRolesElement }</Disabled>
+		enableUserRolesElement = (
+			<Disabled>{ enableUserRolesElement }</Disabled>
+		);
 	}
 
 	return (

@@ -3,7 +3,6 @@
  */
 import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
-import { useSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -15,7 +14,7 @@ import {
 	isPluginSettingEnabled,
 	getEnabledControls,
 } from './../utils/setting-utilities';
-import { getPluginData } from './../../utils/data';
+import { usePluginData } from './../../utils/data';
 
 /**
  * Filter each block and add CSS classes based on visibility settings.
@@ -23,7 +22,7 @@ import { getPluginData } from './../../utils/data';
 const withContextualIndicators = createHigherOrderComponent(
 	( BlockListBlock ) => {
 		return ( props ) => {
-			const settings = getPluginData( 'settings' );
+			const settings = usePluginData( 'settings' );
 
 			if ( settings === 'fetching' ) {
 				return <BlockListBlock { ...props } />;

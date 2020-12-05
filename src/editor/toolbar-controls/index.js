@@ -20,8 +20,7 @@ import {
 	isPluginSettingEnabled,
 	getEnabledControls,
 } from './../utils/setting-utilities';
-import { getPluginData } from './../../utils/data';
-
+import { usePluginData } from './../../utils/data';
 
 /**
  * Adds the toolbar control for showing/hiding the selected block.
@@ -35,10 +34,10 @@ function ToolbarOptionsHideBlock( props ) {
 		'core/block-editor'
 	);
 	const { createSuccessNotice } = useDispatch( 'core/notices' );
-	const settings = getPluginData( 'settings' );
-	const variables = getPluginData( 'variables' );
+	const settings = usePluginData( 'settings' );
+	const variables = usePluginData( 'variables' );
 
-	if ( settings === 'fetching' || variables === 'fetching' ){
+	if ( settings === 'fetching' || variables === 'fetching' ) {
 		return null;
 	}
 
@@ -46,12 +45,7 @@ function ToolbarOptionsHideBlock( props ) {
 		return null;
 	}
 
-	const {
-		enableMenuItem,
-		clientId,
-		blockType,
-		blockAttributes,
-	} = props;
+	const { enableMenuItem, clientId, blockType, blockAttributes } = props;
 
 	// Make sure the menu item is enabled and we have recieved a block type.
 	if ( ! enableMenuItem || ! blockType ) {

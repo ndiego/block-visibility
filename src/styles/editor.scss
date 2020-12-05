@@ -160,9 +160,15 @@ $icon_date-roles: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/sv
                     background: url( $icon_date-roles );
                     width: 52px;
                 }
+
+                &.block-visibility__is-hidden {
+                    &:before {
+                        background: url( $icon__hidden );
+                        width: 24px;
+                    }
+                }
             }
         }
-
 
         &.block-visibility__is-hidden {
             &:before {
@@ -208,6 +214,10 @@ $icon_date-roles: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/sv
             &.block-visibility__has-roles {
                 background-image: url( $icon_date-roles );
                 background-size: 52px 24px;
+
+                &.block-visibility__is-hidden {
+                    background-image: url( $icon__hidden );
+                }
             }
         }
 

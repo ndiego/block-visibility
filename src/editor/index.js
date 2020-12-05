@@ -7,7 +7,6 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { addEntities } from '@wordpress/core-data';
 import { dispatch } from '@wordpress/data';
 import { addFilter, applyFilters } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';

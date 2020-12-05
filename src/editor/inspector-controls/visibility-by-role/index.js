@@ -127,12 +127,9 @@ export default function VisibilityByRole( props ) {
 				}
 			/>
 			{ visibilityByRole === 'user-role' &&
-				visibilityByRoleEnableUseRoles &&
-					<UserRoles
-						variables={ variables }
-						{ ...props }
-					/>
-			}
+				visibilityByRoleEnableUseRoles && (
+					<UserRoles variables={ variables } { ...props } />
+				) }
 			{ visibilityByRole === 'user-role' &&
 				! visibilityByRoleEnableUseRoles && (
 					<Notice status="warning" isDismissible={ false }>

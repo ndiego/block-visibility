@@ -30,7 +30,7 @@ define( 'BLOCK_VISIBILITY_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'BLOCK_VISIBILITY_PLUGIN_BASE', plugin_basename( __FILE__ ) );
 define( 'BLOCK_VISIBILITY_REVIEW_URL', 'https://wordpress.org/support/plugin/block-visibility/reviews/?filter=5' );
 define( 'BLOCK_VISIBILITY_SUPPORT_URL', 'https://wordpress.org/support/plugin/block-visibility/' );
-define( 'BLOCK_VISIBILITY_SETTINGS_URL', admin_url( 'options-general.php?page=block-visibility-settings' ) );
+define( 'BLOCK_VISIBILITY_SETTINGS_URL', admin_url( 'options-general.php?page=block-visibility-settings&tab=visibility-controls' ) );
 
 if ( ! class_exists( 'BlockVisibility' ) ) {
 	/**
@@ -96,9 +96,9 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 			require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/register-settings.php';
 			require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/register-routes.php';
 
-			// Utility function that is also used by register-routes.php so
+			// Utility functions that are also used by register-routes.php so
 			// needs to be included at all times.
-			require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/utils/get-user-roles.php';
+			require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/utils/user-functions.php';
 
 			// Only include in the admin.
 			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {

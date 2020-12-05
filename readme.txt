@@ -3,9 +3,9 @@ Author URI: https://www.nickdiego.com
 Contributors: ndiego, outermostdesign
 Tags: visibility, scheduling, schedule blocks, hide blocks, block editor, gutenberg
 Requires at least: 5.4
-Tested up to: 5.5
+Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,20 +75,39 @@ Since full site editing is still in the development phase, this plugin does not 
 
 == Changelog ==
 
-= 1.3.0 =
-* TODO Add details here...
+= 1.3.0 - 2020-12-05 =
+**Added**
 
-= 1.2.0 =
+* User permissions now give website administrators control over who can use visibility settings
+* Custom REST API routes for retrieving plugin data
+
+**Changed**
+
+* By default, visibility controls are now available to all users that have access to the Block Editor
+* Refactored the methods for fetching plugin setting and variable data in the Block Editor
+* Restructured much of the plugin with a more consistent file/folder layout
+
+**Fixed**
+
+* Contextual indicator icon was incorrect when using all visibility controls and the block was disabled
+
+= 1.2.0 - 2020-11-15 =
+**Added**
+
 * Added the ability to "hide on selected roles" in the Restrict by User Roles visibility control (Thanks to @edwardsh for the feature request!)
 
-= 1.1.0 =
-* Added date and time controls for block scheduling
-* Added contextual indicators for visibility setting to the Block Editor
-* Added a toolbar option for quickly hiding blocks
-* Added additional plugin settings to dynamically control all the new features
+= 1.1.0 - 2020-11-05 =
+**Added**
 
-= 1.0.1 =
-* Fix PHP warning message that may appear on new installations
+* Date and time controls for block scheduling
+* Contextual indicators for visibility setting to the Block Editor
+* A toolbar option for quickly hiding blocks
+* Additional plugin settings to dynamically control all the new features
 
-= 1.0.0 =
+= 1.0.1 - 2020-08-11 =
+**Fixed**
+
+* Addressed the PHP warning message that may appear on new installations
+
+= 1.0.0 - 2020-08-03 =
 * Initial Release
