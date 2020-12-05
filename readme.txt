@@ -1,7 +1,7 @@
 === Block Visibility ===
 Author URI: https://www.nickdiego.com
 Contributors: ndiego, outermostdesign
-Tags: visibility, scheduling, schedule blocks, hide blocks, block editor, gutenberg
+Tags: visibility, scheduling, hide, schedule, blocks, schedule blocks, hide blocks, block editor
 Requires at least: 5.4
 Tested up to: 5.6
 Requires PHP: 5.6
