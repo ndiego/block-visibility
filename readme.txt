@@ -2,10 +2,10 @@
 Author URI: https://www.nickdiego.com
 Contributors: ndiego, outermostdesign
 Tags: visibility, scheduling, hide, schedule, blocks, schedule blocks, hide blocks, block editor
-Requires at least: 5.4
+Requires at least: 5.5
 Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,6 +74,15 @@ Yes, and if you have a specific idea of what you would like to see, please submi
 Since full site editing is still in the development phase, this plugin does not currently work with this new functionality. However, Block Visibility was designed with full site editing in mind. There are tons of interesting applications for visibility control and we plan to get the plugin ready for full site implementation in the coming months.
 
 == Changelog ==
+
+= 1.3.0 - 2020-XX-XX =
+**Changed**
+
+* Block Visibility now requires WordPress 5.5+ to take advantage of new core functionality
+
+**Removed**
+
+* Component styling that is not longer needed since the version requirement for the plugin is now WordPress 5.5+
 
 = 1.3.0 - 2020-12-05 =
 **Added**

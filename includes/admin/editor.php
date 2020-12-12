@@ -80,7 +80,7 @@ function is_edit_or_new_admin_page() {
 
 	return (
 		is_admin() &&
-		( 'post.php' === $pagenow || 'post-new.php' === $pagenow )
+		( 'post.php' === $pagenow || 'post-new.php' === $pagenow || 'admin.php' === $pagenow )
 	);
 }
 

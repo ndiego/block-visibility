@@ -17,20 +17,24 @@ import { CheckboxControl } from '@wordpress/components';
  * @return {string}		 Return the rendered JSX
  */
 export default function EnabledUserRoles( props ) {
-	const { roles, enabledUserRoles, onPluginSettingChange } = props;
+	const { settings, setSettings, setHasUpdates } = props;
+	const roles = [ 'editor', 'author', 'contributor' ];
+
+	// Manually set defaults, this ensures the main settings function properly
+	const enabledRoles = settings?.enabled_user_roles ?? []; // eslint-disable-line
 
 	return (
 		<div className="settings-panel__container-subsetting">
 			{ roles.map( ( role ) => {
-				const newEnabledUserRoles = [ ...enabledUserRoles ];
-				const isChecked = enabledUserRoles.includes( role );
+				const newEnabledRoles = [ ...enabledRoles ];
+				const isChecked = enabledRoles.includes( role );
 
 				if ( isChecked ) {
-					const index = newEnabledUserRoles.indexOf( role );
-					index > -1 && newEnabledUserRoles.splice( index, 1 ); // eslint-disable-line
+					const index = newEnabledRoles.indexOf( role );
+					index > -1 && newEnabledRoles.splice( index, 1 ); // eslint-disable-line
 				} else {
-					newEnabledUserRoles.indexOf( role ) === -1 && // eslint-disable-line
-						newEnabledUserRoles.push( role );
+					newEnabledRoles.indexOf( role ) === -1 && // eslint-disable-line
+						newEnabledRoles.push( role );
 				}
 
 				return (
@@ -38,12 +42,13 @@ export default function EnabledUserRoles( props ) {
 						key={ role }
 						checked={ isChecked }
 						label={ <span>{ startCase( role ) + 's' }</span> }
-						onChange={ () =>
-							onPluginSettingChange(
-								'enabled_user_roles',
-								newEnabledUserRoles
-							)
-						}
+						onChange={ () => {
+							setSettings( {
+								...settings,
+								[ 'enabled_user_roles' ]: newEnabledRoles,
+							} );
+							setHasUpdates( true );
+						} }
 					/>
 				);
 			} ) }

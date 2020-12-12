@@ -9,7 +9,7 @@ import { filter, map, without, union, difference, intersection } from 'lodash';
 import { __, _n, sprintf } from '@wordpress/i18n';
 import { withSelect } from '@wordpress/data';
 import { useState } from '@wordpress/element';
-import { TextControl } from '@wordpress/components';
+import { TextControl, Icon } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -150,29 +150,27 @@ function BlockManager( props ) {
 
 	return (
 		<div className="setting-tabs__block-manager inner-container">
-			<div className="setting-tabs__tab-description">
-				<div className="tab-description__header">
-					<h2>{ __( 'Block Manager', 'block-visibility' ) }</h2>
-					<span>
-						<InformationPopover
-							message={ __(
-								'Not every block type may need visibility controls. The Block Manager allows you to decide which blocks do. If you are looking for a block, and do not see it listed, you may need to enable Full Control Mode on the General Settings tab.',
-								'block-visibility'
-							) }
-							subMessage={ __(
-								'To learn more about the Block Manager, review the plugin documentation using the link below.',
-								'block-visibility'
-							) }
-							link="https://www.blockvisibilitywp.com/documentation/block-manager/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
-						/>
-					</span>
+			<div className="setting-tabs__setting-controls">
+				<div className="setting-controls__title">
+					<span>{ __( 'Block Manager', 'block-visibility' ) }</span>
+					<InformationPopover
+						message={ __(
+							'Not every block type may need visibility controls. The Block Manager allows you to restrict visibility controls to specific block types. If you are looking for a block, and do not see it listed, you may need to enable Full Control Mode on the General Settings tab.',
+							'block-visibility'
+						) }
+						subMessage={ __(
+							'To learn more about the Block Manager, review the plugin documentation using the link below.',
+							'block-visibility'
+						) }
+						link="https://www.blockvisibilitywp.com/documentation/block-manager/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					/>
 				</div>
-				<p>
-					{ __(
-						'The settings below allow you restrict visibility controls to specific block types. By default, all block types have visibility enabled, but you may want to limit this functionality depending on your needs.',
-						'block-visibility'
-					) }
-				</p>
+				<SaveSettings
+					isAPISaving={ isAPISaving }
+					hasSaveError={ hasSaveError }
+					hasUpdates={ hasUpdates }
+					onSettingsChange={ onSettingsChange }
+				/>
 			</div>
 			<div className="setting-tabs__setting-controls">
 				<TextControl
@@ -185,14 +183,10 @@ function BlockManager( props ) {
 					value={ search }
 					onChange={ ( searchValue ) => setSearch( searchValue ) }
 				/>
-				<SaveSettings
-					isAPISaving={ isAPISaving }
-					hasSaveError={ hasSaveError }
-					hasUpdates={ hasUpdates }
-					onSettingsChange={ onSettingsChange }
-					notSavingMessage={ visibilityMessage }
-					notSavingIcon={ visibilityIcon }
-				/>
+				<span className="message">
+					<Icon icon={ visibilityIcon } />
+					{ visibilityMessage }
+				</span>
 			</div>
 			<div className="block-manager__category-container">
 				{ categories.map( ( category ) => (

@@ -8,18 +8,7 @@ import {
 	PanelBody,
 	PanelRow,
 } from '@wordpress/components';
-import {
-	__experimentalCreateInterpolateElement,
-	createInterpolateElement,
-} from '@wordpress/element';
-
-/**
- * Temporary solution until WP 5.5 is released with createInterpolateElement
- */
-const interpolateElement =
-	typeof createInterpolateElement === 'function'
-		? createInterpolateElement
-		: __experimentalCreateInterpolateElement;
+import { createInterpolateElement } from '@wordpress/element';
 
 /**
  * Renders the Getting Started tab of the Block Visibility settings page
@@ -61,7 +50,7 @@ export default function GettingStarted() {
 			<div className="getting-started__details">
 				<h2>{ __( 'How does it work?', 'block-visibility' ) }</h2>
 				<p>
-					{ interpolateElement(
+					{ createInterpolateElement(
 						__(
 							'The Block Visibility plugin is designed exclusively for the <a>block editor</a> and does not work in the classic editor. So long as you are running the latest version of WordPress and are not utilizing the Classic Editor plugin, you are good to go!',
 							'block-visibility'
@@ -78,7 +67,7 @@ export default function GettingStarted() {
 					) }
 				</p>
 				<p>
-					{ interpolateElement(
+					{ createInterpolateElement(
 						__(
 							'By default, this plugin adds a Visibility panel to the <a>settings sidebar</a> of each selected block in the WordPress editor. While there are a few minor exceptions, see the FAQs below, this means that visibility controls will be enabled for all core WordPress blocks as well as any third-party blocks that you might be using.',
 							'block-visibility'
@@ -174,7 +163,7 @@ export default function GettingStarted() {
 							) }
 						</p>
 						<p>
-							{ interpolateElement(
+							{ createInterpolateElement(
 								__(
 									'Furthermore, while this plugin was designed to be compatible with all blocks, the WordPress ecosystem is ever expanding. If you find a conflict with a certain block, please let us know in the <a>plugin support forum</a> and we will investigate. We are committed to bringing visibility control to every block.',
 									'block-visibility'
@@ -197,7 +186,7 @@ export default function GettingStarted() {
 							) }
 						</div>
 						<p>
-							{ interpolateElement(
+							{ createInterpolateElement(
 								__(
 									'Yes, and if you have a specific idea of what you would like to see, please submit a feature request in the <a>plugin support forum</a> on WordPress.org.',
 									'block-visibility'
@@ -232,7 +221,7 @@ export default function GettingStarted() {
 							) }
 						</div>
 						<p>
-							{ interpolateElement(
+							{ createInterpolateElement(
 								__(
 									'A premium version of Block Visibility is in the works and will include some specialized controls, such as time-based restrictions. For current information on Block Visibility Premium, please visit <a>blockvisibilitywp.com</a>.',
 									'block-visibility'

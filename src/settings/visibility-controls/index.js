@@ -3,13 +3,16 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
-import { ToggleControl, withFilters, Disabled } from '@wordpress/components';
+import { withFilters, Slot } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
 import SaveSettings from './../utils/save-settings';
 import InformationPopover from './../utils/information-popover';
+import HideBlock from './hide-block';
+import DateTime from './date-time';
+import VisibilityByRole from './visibility-by-role';
 
 /**
  * Renders the Visibility Controls tab of the Block Visibility settings page
@@ -30,78 +33,28 @@ export default function VisibilityControls( props ) {
 		setHasUpdates( false );
 	}
 
-	function onVisibilityControlChange( option, subOption, newSetting ) {
-		setVisibilityControls( {
-			...visibilityControls,
-			[ option ]: {
-				...visibilityControls[ option ],
-				[ subOption ]: newSetting,
-			},
-		} );
-		setHasUpdates( true );
-	}
-
-	// Manually set defaults, this ensures the main settings function properly
-	const hideBlockEnable = visibilityControls?.hide_block?.enable ?? true; // eslint-disable-line
-	const visibilityByRoleEnable = visibilityControls?.visibility_by_role?.enable ?? true; // eslint-disable-line
-	const visibilityByRoleEnableUseRoles = visibilityControls?.visibility_by_role?.enable_user_roles ?? true; // eslint-disable-line
-	const dateTimeEnable = visibilityControls?.date_time?.enable ?? true; // eslint-disable-line
-
-	// TODO perhaps move this logic to its own component.
-	let enableUserRolesElement = (
-		<ToggleControl
-			className="settings-panel__container-subsetting"
-			label={ __(
-				'Enable the ability to restrict block visibility by individual user role (Administrator, Editor, Subscriber, etc.)',
-				'block-visibility'
-			) }
-			checked={ visibilityByRoleEnableUseRoles }
-			onChange={ () =>
-				onVisibilityControlChange(
-					'visibility_by_role',
-					'enable_user_roles',
-					! visibilityByRoleEnableUseRoles
-				)
-			}
-		/>
-	);
-
-	if ( ! visibilityByRoleEnable ) {
-		enableUserRolesElement = (
-			<Disabled>{ enableUserRolesElement }</Disabled>
-		);
-	}
+	// Provides an entry point to slot in additional settings.
+	const AdditionalSettings = withFilters(
+		'blockVisibility.VisibilityControls'
+	)( ( props ) => <></> );
 
 	return (
 		<div className="setting-tabs__visibility-controls inner-container">
-			<div className="setting-tabs__tab-description">
-				<div className="tab-description__header">
-					<h2>{ __( 'Visibility Controls', 'block-visibility' ) }</h2>
-					<span>
-						<InformationPopover
-							message={ __(
-								'When a visibility control is disabled, blocks that relied on the disabled control will become visible again. Likely this is what you intended, but we wanted to provide this warning just in case.',
-								'block-visibility'
-							) }
-							subMessage={ __(
-								'To learn more about Visibility Controls, review the plugin documentation using the link below.',
-								'block-visibility'
-							) }
-							link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
-						/>
-					</span>
-				</div>
-				<p>
-					{ __(
-						'The settings below allow you to configure the visibility controls that power this plugin. Pick and choose which controls you would like to enable and how you would like them to function.',
-						'block-visibility'
-					) }
-				</p>
-			</div>
 			<div className="setting-tabs__setting-controls">
-				<span className="setting-controls__title">
-					{ __( 'Configure Controls', 'block-visibility' ) }
-				</span>
+				<div className="setting-controls__title">
+					<span>{ __( 'Visibility Controls', 'block-visibility' ) }</span>
+					<InformationPopover
+						message={ __(
+							'The settings below allow you to configure the visibility controls that power this plugin. Pick and choose which controls you would like to enable and how you would like them to function. When a visibility control is disabled, blocks that relied on the disabled control will become visible again. Likely this is what you intended, but we wanted to provide this warning just in case.',
+							'block-visibility'
+						) }
+						subMessage={ __(
+							'To learn more about Visibility Controls, review the plugin documentation using the link below.',
+							'block-visibility'
+						) }
+						link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					/>
+				</div>
 				<SaveSettings
 					isAPISaving={ isAPISaving }
 					hasSaveError={ hasSaveError }
@@ -109,116 +62,27 @@ export default function VisibilityControls( props ) {
 					onSettingsChange={ onSettingsChange }
 				/>
 			</div>
-			<div className="setting-tabs__settings-panel">
-				<div className="settings-panel__header">
-					<span className="settings-panel__header-title">
-						{ __( 'Hide Block', 'block-visibility' ) }
-					</span>
-					<InformationPopover
-						message={ __(
-							'To learn more about the Hide Block control, review the plugin documentation using the link below.',
-							'block-visibility'
-						) }
-						link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
-					/>
-				</div>
-				<div className="settings-panel__container">
-					<div className="settings-type__toggle">
-						<ToggleControl
-							label={ __(
-								'Enable the ability to hide blocks completely from the frontend of your website.',
-								'block-visibility'
-							) }
-							checked={ hideBlockEnable }
-							onChange={ () =>
-								onVisibilityControlChange(
-									'hide_block',
-									'enable',
-									! hideBlockEnable
-								)
-							}
-						/>
-					</div>
-				</div>
-			</div>
-			<div className="setting-tabs__settings-panel">
-				<div className="settings-panel__header">
-					<span className="settings-panel__header-title">
-						{ __( 'Date & Time', 'block-visibility' ) }
-					</span>
-					<InformationPopover
-						message={ __(
-							'To learn more about the Date & Time control, review the plugin documentation using the link below.',
-							'block-visibility'
-						) }
-						link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
-					/>
-				</div>
-				<div className="settings-panel__container">
-					<div className="settings-type__toggle">
-						<ToggleControl
-							label={ __(
-								'Enable the ability to restrict block visibility based on date and time settings.',
-								'block-visibility'
-							) }
-							checked={ dateTimeEnable }
-							onChange={ () =>
-								onVisibilityControlChange(
-									'date_time',
-									'enable',
-									! dateTimeEnable
-								)
-							}
-						/>
-					</div>
-				</div>
-			</div>
-			<div className="setting-tabs__settings-panel">
-				<div className="settings-panel__header">
-					<span className="settings-panel__header-title">
-						{ __( 'Visibility by User Role', 'block-visibility' ) }
-					</span>
-					<InformationPopover
-						message={ __(
-							'To learn more about the Visibility by User Role control, review the plugin documentation using the link below.',
-							'block-visibility'
-						) }
-						link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
-					/>
-				</div>
-				<div className="settings-panel__container">
-					<div className="settings-type__toggle">
-						<ToggleControl
-							label={ __(
-								'Enable the ability to restrict block visibility by whether a user is logged-in or logged-out.',
-								'block-visibility'
-							) }
-							checked={ visibilityByRoleEnable }
-							onChange={ () =>
-								onVisibilityControlChange(
-									'visibility_by_role',
-									'enable',
-									! visibilityByRoleEnable
-								)
-							}
-						/>
-					</div>
-					<div className="settings-type__toggle">
-						{ enableUserRolesElement }
-					</div>
-				</div>
-			</div>
-			<AdditionalVisibilityControls
-				visibilityControls={ visibilityControls }
-				setVisibilityControls={ setVisibilityControls }
+			<HideBlock
+				settings={ visibilityControls }
+				setSettings={ setVisibilityControls }
+				setHasUpdates={ setHasUpdates }
+			/>
+			<DateTime
+				settings={ visibilityControls }
+				setSettings={ setVisibilityControls }
+				setHasUpdates={ setHasUpdates }
+			/>
+			<VisibilityByRole
+				settings={ visibilityControls }
+				setSettings={ setVisibilityControls }
+				setHasUpdates={ setHasUpdates }
+			/>
+			<AdditionalSettings
+				settings={ visibilityControls }
+				setSettings={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }
 				{ ...props }
 			/>
 		</div>
 	);
 }
-
-let AdditionalVisibilityControls = ( props ) => <></>; // eslint-disable-line
-AdditionalVisibilityControls = withFilters(
-	'blockVisibility.AdditionalVisibilityControls'
-)( AdditionalVisibilityControls );

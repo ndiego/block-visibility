@@ -28,18 +28,12 @@ export default function Masthead() {
 						<span className="screen-reader-text">
 							{ __( 'Block Visibility', 'block-visibility' ) }
 						</span>
+						<span className="plugin-meta__version">
+							{ pluginVariables.version }
+						</span>
 					</h1>
-					<p>
-						{ __(
-							'Block-based visibility control for the WordPress editor. Allows you to dynamically control which blocks are visible on your website and who can see them. Compatible with all blocks.',
-							'block-visibility'
-						) }
-					</p>
 				</div>
 				<div className="masthead__plugin-meta">
-					<div className="plugin-meta__version">
-						<span>{ pluginVariables.version }</span>
-					</div>
 					<div className="plugin-meta__plugin-links">
 						<a
 							href={ pluginVariables.reviewUrl }

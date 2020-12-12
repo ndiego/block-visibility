@@ -2,20 +2,9 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { PanelBody, Notice, withFilters } from '@wordpress/components';
+import { PanelBody, Notice, withFilters, Slot } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
-import {
-	__experimentalCreateInterpolateElement,
-	createInterpolateElement,
-} from '@wordpress/element';
-
-/**
- * Temporary solution until WP 5.5 is released with createInterpolateElement
- */
-const interpolateElement =
-	typeof createInterpolateElement === 'function'
-		? createInterpolateElement
-		: __experimentalCreateInterpolateElement;
+import { createInterpolateElement } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -57,8 +46,23 @@ export default function VisibilityInspectorControls( props ) {
 	const settingsUrl = variables?.pluginVariables.settingsUrl ?? ''; // eslint-disable-line
 	const enabledControls = getEnabledControls( settings );
 
+	// Provides an entry point to slot in additional settings.
+	const AdditionalControls = withFilters(
+		'blockVisibility.InspectorControls'
+	)( ( props ) => <></> );
+
 	return (
+		// Note that the core InspectorControls component is already making use
+		// of SlotFill, and is "inside" of a <SlotFillProvider> component.
+		// Therefore we can freely use SlofFill without needing to add the
+		// provider ourselves.
 		<InspectorControls>
+			<AdditionalControls
+				settings={ settings }
+				variables={ variables }
+				enabledControls={ enabledControls }
+				{ ...props }
+			/>
 			<PanelBody
 				title={ __( 'Visibility', 'block-visibility' ) }
 				className="block-visibility-settings"
@@ -67,6 +71,7 @@ export default function VisibilityInspectorControls( props ) {
 				<div className="block-visibility-settings__visibility-controls">
 					{ enabledControls.length !== 0 && (
 						<>
+							<Slot name="newSlot"/>
 							<HideBlock
 								enabledControls={ enabledControls }
 								{ ...props }
@@ -93,7 +98,7 @@ export default function VisibilityInspectorControls( props ) {
 					) }
 					{ enabledControls.length === 0 && (
 						<Notice status="warning" isDismissible={ false }>
-							{ interpolateElement(
+							{ createInterpolateElement(
 								__(
 									'Looks like all Visibility Controls have been disabled. To control block visibility again, re-enable some <a>Visibility Controls</a>.',
 									'block-visibility'
@@ -112,10 +117,11 @@ export default function VisibilityInspectorControls( props ) {
 					) }
 				</div>
 			</PanelBody>
+
 		</InspectorControls>
 	);
 }
-
+// <InspectorControls.Slot
 let AdditionalInspectorControls = ( props ) => <></>; // eslint-disable-line
 AdditionalInspectorControls = withFilters(
 	'blockVisibility.AdditionalInspectorControls'

@@ -9,7 +9,7 @@ import { assign, findKey } from 'lodash';
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect, render } from '@wordpress/element';
 import { registerCoreBlocks } from '@wordpress/block-library';
-import { Spinner, TabPanel } from '@wordpress/components';
+import { Spinner, TabPanel, SlotFillProvider, Slot, withFilters } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -82,6 +82,11 @@ function Settings() {
 			className: 'setting-tabs__getting-started',
 		},
 		{
+			name: 'plugin-settings',
+			title: __( 'General Settings', 'block-visibility' ),
+			className: 'setting-tabs__plugin-settings',
+		},
+		{
 			name: 'visibility-controls',
 			title: __( 'Visibility Controls', 'block-visibility' ),
 			className: 'setting-tabs__visibility-controls',
@@ -91,11 +96,6 @@ function Settings() {
 			title: __( 'Block Manager', 'block-visibility' ),
 			className: 'setting-tabs__blocks-manager',
 		},
-		{
-			name: 'plugin-settings',
-			title: __( 'General Settings', 'block-visibility' ),
-			className: 'setting-tabs__plugin-settings',
-		},
 	];
 
 	// Switch the default settings tab based on the URL tad query
@@ -103,11 +103,18 @@ function Settings() {
 	const requestedTab = urlParams.get( 'tab' );
 	const initialTab = findKey( settingTabs, [ 'name', requestedTab ] )
 		? requestedTab
-		: 'getting-started';
+		: 'plugin-settings';
+
+	// Provides an entry point to slot in additional settings.
+	const AdditionalSettings = withFilters(
+		'blockVisibility.MainSettings'
+	)( ( props ) => <></> );
 
 	return (
-		<>
+		<SlotFillProvider>
+			<AdditionalSettings/>
 			<Masthead />
+			<Slot name="belowMasthead"/>
 			<TabPanel
 				className="setting-tabs"
 				activeClass="active-tab"
@@ -175,7 +182,7 @@ function Settings() {
 					}
 				} }
 			</TabPanel>
-		</>
+		</SlotFillProvider>
 	);
 }
 
