@@ -19,205 +19,239 @@
 /**
  * Exit if accessed directly
  */
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+// Plugin version.
+if ( ! defined( 'BV_VERSION' ) ) {
+	define( 'BV_VERSION', '1.4.0' );
 }
 
-define( 'BLOCK_VISIBILITY_VERSION', '1.4.0' );
-define( 'BLOCK_VISIBILITY_PLUGIN_FILE', __FILE__ );
-define( 'BLOCK_VISIBILITY_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'BLOCK_VISIBILITY_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'BLOCK_VISIBILITY_PLUGIN_BASE', plugin_basename( __FILE__ ) );
-define( 'BLOCK_VISIBILITY_REVIEW_URL', 'https://wordpress.org/support/plugin/block-visibility/reviews/?filter=5' );
-define( 'BLOCK_VISIBILITY_SUPPORT_URL', 'https://wordpress.org/support/plugin/block-visibility/' );
-define( 'BLOCK_VISIBILITY_SETTINGS_URL', admin_url( 'options-general.php?page=block-visibility-settings&tab=visibility-controls' ) );
+// Plugin folder path.
+if ( ! defined( 'BV_PLUGIN_DIR' ) ) {
+	define( 'BV_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+}
 
-if ( ! class_exists( 'BlockVisibility' ) ) {
+// Plugin folder url.
+if ( ! defined( 'BV_PLUGIN_URL' ) ) {
+	define( 'BV_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+}
+
+// Plugin Base File.
+if ( ! defined( 'BV_PLUGIN_BASE' ) ) {
+	define( 'BV_PLUGIN_BASE', plugin_basename( __FILE__ ) );
+}
+
+// Plugin settings page url.
+if ( ! defined( 'BV_SUPPORT_URL' ) ) {
+	define( 'BV_SUPPORT_URL', 'https://wordpress.org/support/plugin/block-visibility/' );
+}
+
+// Plugin settings page url.
+if ( ! defined( 'BV_SETTINGS_URL' ) ) {
+	define( 'BV_SETTINGS_URL', admin_url( 'options-general.php?page=block-visibility-settings' ) );
+}
+
+/**
+ * WordPress dependencies
+ */
+//use WP_Block_Type_Registry;
+
+if ( ! class_exists( 'BlockVisibility' ) ) :
+
+/**
+ * Main Block Visibility Class.
+ *
+ * @since 1.0.0
+ */
+final class BlockVisibility {
 	/**
-	 * Main Block Visibility Class.
+	 * Initialise the plugin.
+	 */
+	private function __construct() {
+
+		// Load the rest of the plugin.
+		$this->includes();
+		$this->actions();
+	}
+
+	/**
+	 * Cloning instances of the class is forbidden.
 	 *
 	 * @since 1.0.0
+	 * @return void
 	 */
-	final class BlockVisibility {
-		/**
-		 * Return singleton instance of the Block Visibility plugin.
-		 *
-		 * @since 1.0.0
-		 * @return self
-		 */
-		public static function factory() {
-			static $instance = false;
+	public function __clone() {
+		_doing_it_wrong(
+			__FUNCTION__,
+			esc_html__( 'Something went wrong.', 'block-visibility' ),
+			'1.0'
+		);
+	}
 
-			if ( ! $instance ) {
-				$instance = new self();
-				$instance->init();
-				$instance->includes();
-			}
-			return $instance;
+	/**
+	 * Unserializing instances of the class is forbidden.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function __wakeup() {
+		_doing_it_wrong(
+			__FUNCTION__,
+			esc_html__( 'Something went wrong.', 'block-visibility' ),
+			'1.0'
+		);
+	}
+
+	/**
+	 * Include required files.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function includes() {
+
+		// Needs to be included at all times due to show_in_rest.
+		require_once BV_PLUGIN_DIR . 'includes/register-settings.php';
+		require_once BV_PLUGIN_DIR . 'includes/register-routes.php';
+
+		// Utility functions that are also used by register-routes.php so
+		// needs to be included at all times.
+		require_once BV_PLUGIN_DIR . 'includes/utils/user-functions.php';
+
+		// Only include in the admin.
+		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
+			require_once BV_PLUGIN_DIR . 'includes/admin/editor.php';
+			require_once BV_PLUGIN_DIR . 'includes/admin/settings.php';
+			require_once BV_PLUGIN_DIR . 'includes/admin/plugin-action-links.php';
+
+			// Utility functions.
+			require_once BV_PLUGIN_DIR . 'includes/utils/get-asset-file.php';
 		}
 
-		/**
-		 * Cloning instances of the class is forbidden.
-		 *
-		 * @since 1.0.0
-		 * @return void
-		 */
-		public function __clone() {
-			_doing_it_wrong(
-				__FUNCTION__,
-				esc_html__( 'Something went wrong.', 'block-visibility' ),
-				'1.0'
-			);
-		}
-
-		/**
-		 * Unserializing instances of the class is forbidden.
-		 *
-		 * @since 1.0.0
-		 * @return void
-		 */
-		public function __wakeup() {
-			_doing_it_wrong(
-				__FUNCTION__,
-				esc_html__( 'Something went wrong.', 'block-visibility' ),
-				'1.0'
-			);
-		}
-
-		/**
-		 * Include required files.
-		 *
-		 * @since 1.0.0
-		 * @return void
-		 */
-		public function includes() {
-
-			// Needs to be included at all times due to show_in_rest.
-			require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/register-settings.php';
-			require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/register-routes.php';
-
-			// Utility functions that are also used by register-routes.php so
-			// needs to be included at all times.
-			require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/utils/user-functions.php';
-
-			// Only include in the admin.
-			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
-				require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/admin/editor.php';
-				require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/admin/settings.php';
-				require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/admin/plugin-action-links.php';
-
-				// Utility functions.
-				require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/utils/get-asset-file.php';
-			}
-
-			// Only include on the frontend.
-			if ( ! is_admin() ) {
-				require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/frontend/render-block.php';
-			}
-		}
-
-		/**
-		 * Load required actions.
-		 *
-		 * @since 1.0.0
-		 * @return void
-		 */
-		public function init() {
-			add_action( 'wp_loaded', array( $this, 'add_attributes_to_registered_blocks' ), 100 );
-			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ), 99 );
-			add_action( 'enqueue_block_editor_assets', array( $this, 'block_localization' ) );
-		}
-
-		/**
-		 * This is needed to resolve an issue with blocks that use the
-		 * ServerSideRender component. Regustering the attributes only in js
-		 * can cause an error message to appear. Registering the attributes in
-		 * PHP as well, seems to resolve the issue. Ideally, this bug will be
-		 * fixed in the future.
-		 *
-		 * Reference: https://github.com/WordPress/gutenberg/issues/16850
-		 *
-		 * @since 1.0.0
-		 * @return void
-		 */
-		public function add_attributes_to_registered_blocks() {
-
-			$registered_blocks = WP_Block_Type_Registry::get_instance()->get_all_registered();
-
-			foreach ( $registered_blocks as $name => $block ) {
-				$block->attributes['blockVisibility'] = array(
-					'type'       => 'object',
-					'properties' => array(
-						'hideBlock'             => array(
-							'type' => 'boolean',
-						),
-						'visibilityByRole'      => array(
-							'type' => 'string',
-						),
-						'hideOnRestrictedRoles' => array(
-							'type' => 'boolean',
-						),
-						'restrictedRoles'       => array(
-							'type'  => 'array',
-							'items' => array(
-								'type' => 'string',
-							),
-						),
-						'startDateTime'         => array(
-							'type' => 'string',
-						),
-						'endDateTime'           => array(
-							'type' => 'string',
-						),
-					),
-					'default'    => array(
-						'hideBlock'        => false,
-						'visibilityByRole' => 'all',
-						'restrictedRoles'  => array(),
-						'startDateTime'    => '',
-						'endDateTime'      => '',
-					),
-				);
-			}
-		}
-
-		/**
-		 * Loads the plugin language files.
-		 *
-		 * @since 1.0.0
-		 * @return void
-		 */
-		public function load_textdomain() {
-			load_plugin_textdomain(
-				'block-visibility',
-				false,
-				basename( BLOCK_VISIBILITY_PLUGIN_DIR ) . '/languages'
-			);
-		}
-
-		/**
-		 * Enqueue localization data for our blocks.
-		 *
-		 * @since 1.0.0
-		 * @return void
-		 */
-		public function block_localization() {
-			if ( function_exists( 'wp_set_script_translations' ) ) {
-				wp_set_script_translations(
-					'block-visibility-editor-scripts',
-					'block-visibility',
-					BLOCK_VISIBILITY_PLUGIN_DIR . '/languages'
-				);
-
-				wp_set_script_translations(
-					'block-visibility-setting-scripts',
-					'block-visibility',
-					BLOCK_VISIBILITY_PLUGIN_DIR . '/languages'
-				);
-			}
+		// Only include on the frontend.
+		if ( ! is_admin() ) {
+			require_once BV_PLUGIN_DIR . 'includes/frontend/render-block.php';
 		}
 	}
+
+	/**
+	 * Load required actions.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function actions() {
+		add_action( 'wp_loaded', array( $this, 'add_attributes_to_registered_blocks' ), 100 );
+		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ), 99 );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'block_localization' ) );
+	}
+
+	/**
+	 * This is needed to resolve an issue with blocks that use the
+	 * ServerSideRender component. Regustering the attributes only in js
+	 * can cause an error message to appear. Registering the attributes in
+	 * PHP as well, seems to resolve the issue. Ideally, this bug will be
+	 * fixed in the future.
+	 *
+	 * Reference: https://github.com/WordPress/gutenberg/issues/16850
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function add_attributes_to_registered_blocks() {
+
+		$registered_blocks = WP_Block_Type_Registry::get_instance()->get_all_registered();
+
+		foreach ( $registered_blocks as $name => $block ) {
+			$block->attributes['blockVisibility'] = array(
+				'type'       => 'object',
+				'properties' => array(
+					'hideBlock'             => array(
+						'type' => 'boolean',
+					),
+					'visibilityByRole'      => array(
+						'type' => 'string',
+					),
+					'hideOnRestrictedRoles' => array(
+						'type' => 'boolean',
+					),
+					'restrictedRoles'       => array(
+						'type'  => 'array',
+						'items' => array(
+							'type' => 'string',
+						),
+					),
+					'startDateTime'         => array(
+						'type' => 'string',
+					),
+					'endDateTime'           => array(
+						'type' => 'string',
+					),
+				),
+				'default'    => array(
+					'hideBlock'        => false,
+					'visibilityByRole' => 'all',
+					'restrictedRoles'  => array(),
+					'startDateTime'    => '',
+					'endDateTime'      => '',
+				),
+			);
+		}
+	}
+
+	/**
+	 * Loads the plugin language files.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function load_textdomain() {
+		load_plugin_textdomain(
+			'block-visibility',
+			false,
+			basename( BV_PLUGIN_DIR ) . '/languages'
+		);
+	}
+
+	/**
+	 * Enqueue localization data for our blocks.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function block_localization() {
+		if ( function_exists( 'wp_set_script_translations' ) ) {
+			wp_set_script_translations(
+				'block-visibility-editor-scripts',
+				'block-visibility',
+				BV_PLUGIN_DIR . '/languages'
+			);
+
+			wp_set_script_translations(
+				'block-visibility-setting-scripts',
+				'block-visibility',
+				BV_PLUGIN_DIR . '/languages'
+			);
+		}
+	}
+
+	/**
+	 * Return singleton instance of the Block Visibility plugin.
+	 *
+	 * @since 1.0.0
+	 * @return self
+	 */
+	public static function instance() {
+		static $instance = false;
+
+		if ( ! $instance ) {
+			$instance = new self();
+		}
+		return $instance;
+	}
 }
+
+endif; // End if class_exists check.
 
 /**
  * The main function that returns the Block Visibility class
@@ -225,13 +259,9 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
  * @since 1.0.0
  * @return object|BlockVisibility
  */
-function block_visibility_load_plugin() {
-	return BlockVisibility::factory();
+function block_visibility() {
+	return BlockVisibility::instance();
 }
 
-// Get the plugin running. Load on plugins_loaded action to avoid issue on multisite.
-if ( function_exists( 'is_multisite' ) && is_multisite() ) {
-	add_action( 'plugins_loaded', 'block_visibility_load_plugin', 90 );
-} else {
-	block_visibility_load_plugin();
-}
+// Get the plugin running.
+add_action( 'plugins_loaded', 'block_visibility' );

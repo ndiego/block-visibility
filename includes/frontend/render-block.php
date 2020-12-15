@@ -9,6 +9,11 @@
 namespace BlockVisibility\Frontend;
 
 /**
+ * Exit if accessed directly
+ */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
  * Check if the given block type is disabled via the visibility settings
  *
  * @since 1.0.0
@@ -105,9 +110,9 @@ function render_with_visibility( $block_content, $block ) {
 add_filter( 'render_block', __NAMESPACE__ . '\render_with_visibility', 10, 2 );
 
 // Run our tests.
-require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/frontend/visibility-tests/hide-block.php';
-require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/frontend/visibility-tests/visibility-by-role.php';
-require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/frontend/visibility-tests/date-time.php';
+require_once BV_PLUGIN_DIR . 'includes/frontend/visibility-tests/hide-block.php';
+require_once BV_PLUGIN_DIR . 'includes/frontend/visibility-tests/visibility-by-role.php';
+require_once BV_PLUGIN_DIR . 'includes/frontend/visibility-tests/date-time.php';
 
 // Require utlity functions for tests.
-require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/utils/is-control-enabled.php';
+require_once BV_PLUGIN_DIR . 'includes/utils/is-control-enabled.php';

@@ -9,6 +9,11 @@
 namespace BlockVisibility\RestRoutes;
 
 /**
+ * Exit if accessed directly
+ */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
  * WordPress dependencies
  */
 use WP_REST_Server;
@@ -90,10 +95,9 @@ function get_variables() {
 	}
 
 	$plugin_variables = array(
-		'version'     => BLOCK_VISIBILITY_VERSION,
-		'settingsUrl' => BLOCK_VISIBILITY_SETTINGS_URL,
-		'reviewUrl'   => BLOCK_VISIBILITY_REVIEW_URL,
-		'supportUrl'  => BLOCK_VISIBILITY_SUPPORT_URL,
+		'version'     => BV_VERSION,
+		'settingsUrl' => BV_SETTINGS_URL,
+		'supportUrl'  => BV_SUPPORT_URL,
 	);
 
 	$variables = array(

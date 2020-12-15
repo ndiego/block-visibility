@@ -9,6 +9,11 @@
 namespace BlockVisibility\Frontend\VisibilityTests;
 
 /**
+ * Exit if accessed directly
+ */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
  * WordPress dependencies
  */
 use DateTime;

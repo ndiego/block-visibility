@@ -9,6 +9,11 @@
 namespace BlockVisibility\Admin;
 
 /**
+ * Exit if accessed directly
+ */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
  * Internal dependencies
  */
 use function BlockVisibility\Utils\get_asset_file as get_asset_file;
@@ -58,7 +63,7 @@ function enqueue_settings_assets() {
 
 	wp_enqueue_script(
 		'block-visibility-setting-scripts',
-		BLOCK_VISIBILITY_PLUGIN_URL . 'dist/block-visibility-settings.js',
+		BV_PLUGIN_URL . 'dist/block-visibility-settings.js',
 		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
 		$asset_file['version'],
 		true
@@ -69,15 +74,14 @@ function enqueue_settings_assets() {
 
 	wp_enqueue_style(
 		'block-visibility-setting-styles',
-		BLOCK_VISIBILITY_PLUGIN_URL . 'dist/block-visibility-setting-styles.css',
+		BV_PLUGIN_URL . 'dist/block-visibility-setting-styles.css',
 		array( 'wp-edit-blocks' ),
 		$asset_file['version']
 	);
 
 	$plugin_variables = array(
-		'version'    => BLOCK_VISIBILITY_VERSION,
-		'reviewUrl'  => BLOCK_VISIBILITY_REVIEW_URL,
-		'supportUrl' => BLOCK_VISIBILITY_SUPPORT_URL,
+		'version'    => BV_VERSION,
+		'supportUrl' => BV_SUPPORT_URL,
 	);
 
 	// Create a global variable to hold all our plugin variables, not ideal,

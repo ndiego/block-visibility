@@ -9,6 +9,11 @@
 namespace BlockVisibility;
 
 /**
+ * Exit if accessed directly
+ */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
  * Register plugin settings.
  *
  * @since 1.0.0

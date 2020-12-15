@@ -9,6 +9,11 @@
 namespace BlockVisibility\Frontend\VisibilityTests;
 
 /**
+ * Exit if accessed directly
+ */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
  * Internal dependencies
  */
 use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;

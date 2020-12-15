@@ -9,6 +9,11 @@
 namespace BlockVisibility\Admin;
 
 /**
+ * Exit if accessed directly
+ */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
  * Internal dependencies
  */
 use function BlockVisibility\Utils\get_asset_file as get_asset_file;
@@ -37,7 +42,7 @@ function enqueue_editor_assets() {
 
 	wp_enqueue_script(
 		'block-visibility-editor-scripts',
-		BLOCK_VISIBILITY_PLUGIN_URL . 'dist/block-visibility-editor.js',
+		BV_PLUGIN_URL . 'dist/block-visibility-editor.js',
 		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
 		$asset_file['version'],
 		false // Need false to ensure our filters can target third-party plugins.
@@ -59,7 +64,7 @@ function enqueue_editor_assets() {
 
 	wp_enqueue_style(
 		'block-visibility-editor-styles',
-		BLOCK_VISIBILITY_PLUGIN_URL . 'dist/block-visibility-editor-styles.css',
+		BV_PLUGIN_URL . 'dist/block-visibility-editor-styles.css',
 		array(),
 		$asset_file['version']
 	);

@@ -36,7 +36,7 @@ export default function Masthead() {
 				<div className="masthead__plugin-meta">
 					<div className="plugin-meta__plugin-links">
 						<a
-							href={ pluginVariables.reviewUrl }
+							href={ pluginVariables.supportUrl + 'reviews/?filter=5' }
 							className="plugin-links__review"
 							target="_blank"
 							rel="noreferrer"

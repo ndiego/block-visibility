@@ -9,6 +9,11 @@
 namespace BlockVisibility\Utils;
 
 /**
+ * Exit if accessed directly
+ */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
  * Helper function for retrieving the visibility control settings.
  *
  * @since 1.0.0
