@@ -4,7 +4,7 @@
 import { __ } from '@wordpress/i18n';
 import { Icon } from '@wordpress/icons';
 import { withFilters, Slot } from '@wordpress/components';
-import { doAction } from '@wordpress/hooks';
+import { doAction, applyFilters } from '@wordpress/hooks';
 /**
  * Internal dependencies
  */
@@ -32,31 +32,36 @@ export default function Masthead() {
 
 	console.log( variables );
 
-	// Provides an entry point to slot in additional settings.
-	const Links = withFilters(
-		'blockVisibility.MastheadLinks'
-	)( ( props ) =>
-		<>
+	const links = {
+		review: {
+			title: __( 'Review', 'block-visibility' ),
+			url: pluginVariables.supportUrl + 'reviews/?filter=5',
+			icon: 'star',
+		},
+		support: {
+			title: __( 'Support', 'block-visibility' ),
+			url: pluginVariables.supportUrl,
+			icon: 'help',
+		},
+	};
+
+	applyFilters( 'blockVisibility.MastheadLinks', links );
+
+	const linkMarkup = Object.keys( links ).map( ( link ) => {
+		const rel = links[ link ].rel ?? 'noreferrer';
+
+		return (
 			<a
-				href={ pluginVariables.supportUrl + 'reviews/?filter=5' }
-				className="plugin-links__review"
+				href={ links[ link ].url }
+				className={ 'plugin-links__' + link }
 				target="_blank"
-				rel="noreferrer"
+				rel={ rel }
 			>
-				<Icon icon={ icons.star } />
-				{ __( 'Review', 'block-visibility' ) }
+				<Icon icon={ icons[ links[ link ].icon ] } />
+				{ links[ link ].title }
 			</a>
-			<a
-				href={ pluginVariables.supportUrl }
-				className="plugin-links__support"
-				target="_blank"
-				rel="noreferrer"
-			>
-				<Icon icon={ icons.help } />
-				{ __( 'Support', 'block-visibility' ) }
-			</a>
-		</>
-	 );
+		);
+	} );
 
 	return (
 		<div className="masthead">
@@ -77,7 +82,7 @@ export default function Masthead() {
 				</div>
 				<div className="masthead__plugin-meta">
 					<div className="plugin-meta__plugin-links">
-						<Links/>						
+						{ linkMarkup }
 					</div>
 				</div>
 			</div>
