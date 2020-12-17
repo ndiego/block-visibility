@@ -14,26 +14,25 @@ import { Icon, info } from '@wordpress/icons';
  * @return {string}		 Return the rendered JSX
  */
 export default function InformationPopover( props ) {
-	const [ popoverVisible, setPopoverVisible ] = useState( false );
+	const [ isVisible, setIsVisible ] = useState( false );
 	const { message, subMessage, link, position } = props;
-	const popoverPosition = position ?? 'bottom center';
+	const popoverPosition = position ?? 'middle left';
 
 	return (
 		<div className="information-popover">
 			<Button
 				className="information-popover__button"
-				onClick={ () => setPopoverVisible( ! popoverVisible ) }
+				onClick={ () => setIsVisible( ! isVisible ) }
 			>
 				<Icon icon={ info } />
 			</Button>
-			{ popoverVisible && (
+			{ isVisible && (
 				<Popover
 					className="information-popover__popover"
 					position={ popoverPosition }
 					focusOnMount="container"
-					onFocusOutside={ () =>
-						setPopoverVisible( ! popoverVisible )
-					}
+					noArrow={ false }
+					onClose={ () => setIsVisible( ! isVisible ) }
 				>
 					<p>{ message }</p>
 					{ subMessage && <p>{ subMessage }</p> }

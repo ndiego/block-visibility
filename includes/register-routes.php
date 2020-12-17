@@ -105,6 +105,7 @@ function get_variables() {
 		'userRoles'         => get_user_roles(),
 		'pluginVariables'   => $plugin_variables,
 		'isFullControlMode' => $is_full_control_mode,
+		'isPro'		        => defined( 'BVP_VERSION' ), // If the Pro version constant is set, then Block Visibility Pro is active.
 	);
 
 	return new WP_REST_Response( $variables, 200 );

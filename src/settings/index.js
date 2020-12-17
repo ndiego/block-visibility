@@ -14,11 +14,13 @@ import { Spinner, TabPanel, SlotFillProvider, Slot, withFilters } from '@wordpre
 /**
  * Internal dependencies
  */
-import Masthead from './utils/masthead';
+import Masthead from './masthead';
 import GettingStarted from './getting-started';
 import VisibilityControls from './visibility-controls';
 import BlockManager from './block-manager';
 import PluginSettings from './plugin-settings';
+
+import { useFetch } from './../utils/data';
 
 /**
  * Renders the Block Visibility settings page
@@ -26,24 +28,30 @@ import PluginSettings from './plugin-settings';
  * @since 1.0.0
  */
 function Settings() {
-	const [ isAPILoaded, setIsAPILoaded ] = useState( false );
 	const [ isAPISaving, setIsAPISaving ] = useState( false );
 	const [ hasSaveError, setHasSaveError ] = useState( false );
+	const [ status, setStatus ] = useState( 'idle' );
 	const [ settings, setSettings ] = useState( [] );
 
 	useEffect( () => {
-		// Here we are using the Backbone JavaScript Client
-		// https://developer.wordpress.org/rest-api/using-the-rest-api/backbone-javascript-client/
-		wp.api.loadPromise.then( () => {
-			const allSettings = new wp.api.models.Settings();
 
-			if ( isAPILoaded === false ) {
-				allSettings.fetch().then( ( response ) => {
-					setSettings( response.block_visibility_settings );
-					setIsAPILoaded( true );
-				} );
+		async function fetchSettings() {
+            setStatus( 'fetching' );
+
+            const response = await fetch(
+				'/wp-json/block-visibility/v1/settings',
+				{ method: 'GET' },
+			);
+            if ( response.ok ) {
+                const data = await response.json();
+                setSettings( data );
+                setStatus( 'fetched' );
+            } else {
+				setStatus( 'error' );
 			}
-		} );
+        }
+
+        fetchSettings();
 	}, [] );
 
 	function handleSettingsChange( option, value ) {
@@ -123,7 +131,7 @@ function Settings() {
 			>
 				{ ( tab ) => {
 					// Don't load tabs if settings have not yet loaded
-					if ( ! isAPILoaded ) {
+					if ( status != 'fetched' ) {
 						return (
 							<div className="setting-tabs__loading-settings">
 								<Spinner />
