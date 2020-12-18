@@ -12,25 +12,16 @@ import icons from './../utils/icons';
 import { useFetch } from './../utils/data';
 
 /**
- * Renders the masthead of the Block Visibility settings pages
+ * Renders the masthead of the Block Visibility settings pages.
  *
  * @since 1.0.0
+ * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
-export default function Masthead() {
-	// This is a global variable added to the page via PHP
-	//const pluginVariables = blockVisibilityVariables; // eslint-disable-line
+export default function Masthead( props ) {
+	const { isPro, pluginVariables } = props.variables;
 
-	const variables = useFetch( 'variables' );
-
-	if ( variables.status != 'fetched' ) {
-		return null;
-	}
-
-	const { isPro, pluginVariables } = variables.data;
-
-	console.log( variables );
-
+    // Default header links.
 	const links = {
 		review: {
 			title: __( 'Review', 'block-visibility' ),
@@ -72,7 +63,7 @@ export default function Masthead() {
 							{ __( 'Block Visibility', 'block-visibility' ) }
 						</span>
 						{ isPro && (
-							<span>Pro</span>
+							<span className="pro-badge">Pro</span>
 						) }
 					</h1>
 				</div>

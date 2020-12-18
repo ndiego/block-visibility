@@ -16,6 +16,28 @@ $mobile: 420px;
 #block-visibility-settings-container {
 	margin-left: -20px;
 
+	.notice {
+		display: block;
+		margin-top: 15px;
+	}
+
+	.loading-settings {
+		text-align: center;
+		margin: 35vh 30px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.components-spinner {
+			float: none;
+		}
+
+		.description {
+			color: #777;
+			margin-top: 4px;
+		}
+	}
+
 	.masthead {
 		background-color: #fff;
 		padding: 10px 30px;
@@ -50,7 +72,7 @@ $mobile: 420px;
 			.branding__logo {
 				svg {
 					width: 200px;
-					fill: #23282d;
+					fill: #45428f;
 
 					.transparent {
 						opacity: .6;
@@ -58,17 +80,18 @@ $mobile: 420px;
 				}
 			}
 
-			.plugin-meta__version {
-				background: #f1f1f1;
+			.pro-badge {
+				color: #fff;
+				text-transform: uppercase;
+				font-size: 8px;
+				height: 8px;
 				border-radius: 4px;
-				box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
-				color: #555D66;
 				padding: 4px 6px;
 				line-height: 1;
-				font-size: 12px;
-				display: inline-block;
-				margin-left: 10px;
-				font-weight: 500;
+				font-weight: 800;
+				letter-spacing: 1px;
+				margin-left: 8px;
+				background: #45428f;
 			}
 		}
 
@@ -179,23 +202,6 @@ $mobile: 420px;
 			.inner-container {
 				margin: 0 auto;
 				max-width: 1024px;
-			}
-		}
-
-		.setting-tabs__loading-settings {
-			text-align: center;
-			margin: 150px 30px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-
-			.components-spinner {
-				float: none;
-			}
-
-			.description {
-				color: #777;
-				margin-top: 4px;
 			}
 		}
 

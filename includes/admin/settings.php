@@ -79,21 +79,6 @@ function enqueue_settings_assets() {
 		$asset_file['version']
 	);
 
-	$plugin_variables = array(
-		'version'    => BV_VERSION,
-		'supportUrl' => BV_SUPPORT_URL,
-	);
-
-	// Create a global variable to hold all our plugin variables, not ideal,
-	// but does the trick for now...
-	$stringified_plugin_variables = 'const blockVisibilityVariables = ' . wp_json_encode( $plugin_variables ) . ';';
-
-	wp_add_inline_script(
-		'block-visibility-setting-scripts',
-		$stringified_plugin_variables,
-		'after'
-	);
-
 	// Get all the registed block categories.
 	$block_categories = array();
 

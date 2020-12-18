@@ -14,11 +14,11 @@ import { createInterpolateElement } from '@wordpress/element';
  * Renders the Getting Started tab of the Block Visibility settings page
  *
  * @since 1.0.0
+ * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
-export default function GettingStarted() {
-	// This is a global variable added to the page via PHP
-	const pluginVariables = blockVisibilityVariables; // eslint-disable-line
+export default function GettingStarted( props ) {
+	const { pluginVariables } = props.variables;
 
 	return (
 		<div className="setting-tabs__getting-started inner-container">

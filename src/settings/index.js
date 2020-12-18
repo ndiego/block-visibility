@@ -32,28 +32,57 @@ function Settings() {
 	const [ isAPISaving, setIsAPISaving ] = useState( false );
 	const [ hasSaveError, setHasSaveError ] = useState( false );
 	const [ status, setStatus ] = useState( 'idle' );
-	const [ settings, setSettings ] = useState( [] );
+	const [ settings, setSettings ] = useState( null );
+	const [ variables, setVariables ] = useState( null );
 
 	useEffect( () => {
 
-		async function fetchSettings() {
-            setStatus( 'fetching' );
+		async function fetchData( route, setData ) {
+			setStatus( 'fetching' );
 
-            const response = await fetch(
-				'/wp-json/block-visibility/v1/settings',
+			const response = await fetch(
+				`/wp-json/block-visibility/v1/${ route }`,
 				{ method: 'GET' },
 			);
-            if ( response.ok ) {
-                const data = await response.json();
-                setSettings( data );
-                setStatus( 'fetched' );
-            } else {
+			if ( response.ok ) {
+				const data = await response.json();
+				setData( data );
+				setStatus( 'fetched' );
+			} else {
 				setStatus( 'error' );
 			}
-        }
+		}
 
-        fetchSettings();
+        fetchData( 'settings', setSettings );
+		fetchData( 'variables', setVariables );
 	}, [] );
+
+	// Display loading/error message while settings are being fetched.
+	if ( ! settings || ! variables || status !== 'fetched' ) {
+		return (
+			<>
+				{ status === 'error' && (
+					<div className="notice notice-error">
+						<p>
+							{ __(
+								'Something went wrong when trying to load the Block Visibility settings. Try refreshing the page. If the error persists, please contact support.',
+								'block-visibility'
+							) }
+						</p>
+					</div>
+				) }
+				<div className="loading-settings">
+					<Spinner />
+					<span className="description">
+						{ __(
+							'Loading settings…',
+							'block-visibility'
+						) }
+					</span>
+				</div>
+			</>
+		);
+	}
 
 	function handleSettingsChange( option, value ) {
 		setIsAPISaving( true );
@@ -122,7 +151,9 @@ function Settings() {
 	return (
 		<SlotFillProvider>
 			<AdditionalSettings/>
-			<Masthead />
+			<Masthead
+				variables={ variables }
+			/>
 			<Slot name="belowMasthead"/>
 			<TabPanel
 				className="setting-tabs"
@@ -131,27 +162,11 @@ function Settings() {
 				tabs={ settingTabs }
 			>
 				{ ( tab ) => {
-					// Don't load tabs if settings have not yet loaded
-					if ( status != 'fetched' ) {
-						return (
-							<div className="setting-tabs__loading-settings">
-								<Spinner />
-								<span className="description">
-									{ __(
-										'Loading settings…',
-										'block-visibility'
-									) }
-								</span>
-							</div>
-						);
-					}
-
 					switch ( tab.name ) {
 						case 'getting-started':
 							return (
 								<GettingStarted
-									isAPISaving={ isAPISaving }
-									hasSaveError={ hasSaveError }
+									variables={ variables }
 								/>
 							);
 						case 'visibility-controls':
@@ -191,7 +206,9 @@ function Settings() {
 					}
 				} }
 			</TabPanel>
-			<Footer/>
+			<Footer
+				variables={ variables }
+			/>
 		</SlotFillProvider>
 	);
 }

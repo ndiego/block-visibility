@@ -12,21 +12,16 @@ import icons from './../utils/icons';
 import { useFetch } from './../utils/data';
 
 /**
- * Renders the footer of the Block Visibility settings pages
+ * Renders the footer of the Block Visibility settings pages.
  *
- * @since 1.0.0
+ * @since 1.4.0
+ * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
-export default function Footer() {
+export default function Footer( props ) {
+    const { pluginVariables } = props.variables;
 
-    const variables = useFetch( 'variables' );
-
-    if ( variables.status != 'fetched' ) {
-        return null;
-    }
-
-    const { isPro, pluginVariables } = variables.data;
-
+    // Default footer links.
     const links = {
         plugin: {
             title: __( 'Block Visibility', 'block-visibility' ) + ' ' + pluginVariables.version,
