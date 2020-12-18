@@ -3,13 +3,12 @@
  */
 import { __ } from '@wordpress/i18n';
 import { Icon } from '@wordpress/icons';
-import { withFilters, Slot } from '@wordpress/components';
-import { doAction, applyFilters } from '@wordpress/hooks';
+import { Slot } from '@wordpress/components';
+import { applyFilters } from '@wordpress/hooks';
 /**
  * Internal dependencies
  */
 import icons from './../utils/icons';
-
 import { useFetch } from './../utils/data';
 
 /**
@@ -71,9 +70,6 @@ export default function Masthead() {
 						<span className="branding__logo">{ icons.logo }</span>
 						<span className="screen-reader-text">
 							{ __( 'Block Visibility', 'block-visibility' ) }
-						</span>
-						<span className="plugin-meta__version">
-							{ variables.data.pluginVariables.version }
 						</span>
 						{ isPro && (
 							<span>Pro</span>

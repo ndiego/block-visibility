@@ -116,6 +116,33 @@ $mobile: 420px;
 		}
 	}
 
+	.footer {
+		padding: 10px 30px;
+		box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
+		margin-top: 20px;
+		text-align: center;
+
+		.inner-container {
+			margin: 0 auto;
+			max-width: 1024px;
+
+			@media ( max-width: $desktop ) {
+				display: block;
+			}
+		}
+
+		a {
+			color: #555d66;
+			display: inline-block;
+			margin: 5px 8px;
+			text-decoration: none;
+
+			&:hover {
+				color: #0073aa;
+			}
+		}
+	}
+
 	/* General styles for all setting tabs */
 	.setting-tabs {
 

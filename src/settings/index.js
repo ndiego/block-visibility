@@ -15,6 +15,7 @@ import { Spinner, TabPanel, SlotFillProvider, Slot, withFilters } from '@wordpre
  * Internal dependencies
  */
 import Masthead from './masthead';
+import Footer from './footer';
 import GettingStarted from './getting-started';
 import VisibilityControls from './visibility-controls';
 import BlockManager from './block-manager';
@@ -190,6 +191,7 @@ function Settings() {
 					}
 				} }
 			</TabPanel>
+			<Footer/>
 		</SlotFillProvider>
 	);
 }
