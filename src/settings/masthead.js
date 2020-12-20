@@ -21,7 +21,7 @@ import { useFetch } from './../utils/data';
 export default function Masthead( props ) {
 	const { isPro, pluginVariables } = props.variables;
 
-    // Default header links.
+	// Default header links.
 	const links = {
 		review: {
 			title: __( 'Review', 'block-visibility' ),

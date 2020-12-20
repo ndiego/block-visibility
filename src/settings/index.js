@@ -29,9 +29,11 @@ import { useFetch } from './../utils/data';
  * @since 1.0.0
  */
 function Settings() {
-	const [ isAPISaving, setIsAPISaving ] = useState( false );
-	const [ hasSaveError, setHasSaveError ] = useState( false );
+	const [ isAPISaving, setIsAPISaving ] = useState( false );  //DELETE
+	const [ hasSaveError, setHasSaveError ] = useState( false );  //DELETE
+
 	const [ status, setStatus ] = useState( 'idle' );
+	const [ saveStatus, setSaveStatus ] = useState( 'idle' );
 	const [ settings, setSettings ] = useState( null );
 	const [ variables, setVariables ] = useState( null );
 
@@ -53,7 +55,7 @@ function Settings() {
 			}
 		}
 
-        fetchData( 'settings', setSettings );
+		fetchData( 'settings', setSettings );
 		fetchData( 'variables', setVariables );
 	}, [] );
 
@@ -83,6 +85,30 @@ function Settings() {
 			</>
 		);
 	}
+	/*
+	async function handleSettingsChange( option, value ) {
+
+		const currentSettings = settings;
+		const newSettings = assign(
+			{ ...currentSettings },
+			{ [ option ]: value }
+		);
+
+		const response = await fetch(
+			'/wp-json/block-visibility/v1/settings',
+			{
+				method: 'POST',
+				body: newSettings,
+			},
+		);
+		if ( response.ok ) {
+			const data = await response.json();
+			setData( data );
+			setStatus( 'fetched' );
+		} else {
+			setStatus( 'error' );
+		}
+	}*/
 
 	function handleSettingsChange( option, value ) {
 		setIsAPISaving( true );
