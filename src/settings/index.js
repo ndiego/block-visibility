@@ -37,6 +37,8 @@ function Settings() {
 	const [ settings, setSettings ] = useState( null );
 	const [ variables, setVariables ] = useState( null );
 
+	console.log( settings );
+
 	useEffect( () => {
 
 		async function fetchData( route, setData ) {
@@ -85,32 +87,44 @@ function Settings() {
 			</>
 		);
 	}
-	/*
+
 	async function handleSettingsChange( option, value ) {
+		setSaveStatus( 'saving' );
 
 		const currentSettings = settings;
+
 		const newSettings = assign(
 			{ ...currentSettings },
 			{ [ option ]: value }
 		);
 
+		console.log( newSettings );
+		console.log( wpApiSettings.nonce );
+
 		const response = await fetch(
 			'/wp-json/block-visibility/v1/settings',
 			{
 				method: 'POST',
-				body: newSettings,
+				body: JSON.stringify( newSettings ),
+				headers : {
+				   'Content-Type': 'application/json',
+				   'X-WP-Nonce': wpApiSettings.nonce,
+				}
 			},
 		);
+		console.log( response );
 		if ( response.ok ) {
-			const data = await response.json();
-			setData( data );
-			setStatus( 'fetched' );
-		} else {
-			setStatus( 'error' );
-		}
-	}*/
 
-	function handleSettingsChange( option, value ) {
+			const data = await response.json();
+			console.log( data );
+			setSettings( data );
+			setSaveStatus( 'saved' );
+		} else {
+			setSaveStatus( 'error' );
+		}
+	}
+
+	function handleSettingsChanges( option, value ) {
 		setIsAPISaving( true );
 		setHasSaveError( false );
 

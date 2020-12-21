@@ -144,5 +144,6 @@ function register_settings() {
 		)
 	);
 }
+//delete_option( 'block_visibility_settings' );
 add_action( 'rest_api_init', __NAMESPACE__ . '\register_settings' );
 add_action( 'admin_init', __NAMESPACE__ . '\register_settings' );
