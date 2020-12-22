@@ -19,43 +19,44 @@
 defined( 'ABSPATH' ) || exit;
 
 // Plugin version.
-if ( ! defined( 'BV_VERSION' ) ) {
-	define( 'BV_VERSION', '1.4.0' );
+if ( ! defined( 'BLOCK_VISIBILITY_VERSION' ) ) {
+	define( 'BLOCK_VISIBILITY_VERSION', '1.4.0' );
 }
 
 // Plugin folder path.
-if ( ! defined( 'BV_PLUGIN_DIR' ) ) {
-	define( 'BV_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+if ( ! defined( 'BLOCK_VISIBILITY_PLUGIN_DIR' ) ) {
+	define( 'BLOCK_VISIBILITY_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 }
 
 // Plugin folder url.
-if ( ! defined( 'BV_PLUGIN_URL' ) ) {
-	define( 'BV_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+if ( ! defined( 'BLOCK_VISIBILITY_PLUGIN_URL' ) ) {
+	define( 'BLOCK_VISIBILITY_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 }
 
 // Plugin Base File.
-if ( ! defined( 'BV_PLUGIN_BASE' ) ) {
-	define( 'BV_PLUGIN_BASE', plugin_basename( __FILE__ ) );
+if ( ! defined( 'BLOCK_VISIBILITY_PLUGIN_BASE' ) ) {
+	define( 'BLOCK_VISIBILITY_PLUGIN_BASE', plugin_basename( __FILE__ ) );
 }
 
 // Plugin settings page url.
-if ( ! defined( 'BV_SUPPORT_URL' ) ) {
-	define( 'BV_SUPPORT_URL', 'https://wordpress.org/support/plugin/block-visibility/' );
+if ( ! defined( 'BLOCK_VISIBILITY_SUPPORT_URL' ) ) {
+	define( 'BLOCK_VISIBILITY_SUPPORT_URL', 'https://wordpress.org/support/plugin/block-visibility/' );
 }
 
 // Plugin settings page url.
-if ( ! defined( 'BV_SETTINGS_URL' ) ) {
-	define( 'BV_SETTINGS_URL', admin_url( 'options-general.php?page=block-visibility-settings' ) );
+if ( ! defined( 'BLOCK_VISIBILITY_SETTINGS_URL' ) ) {
+	define( 'BLOCK_VISIBILITY_SETTINGS_URL', admin_url( 'options-general.php?page=block-visibility-settings' ) );
 }
 
-if ( ! class_exists( 'BlockVisibility' ) ) {
+if ( ! class_exists( 'Block_Visibility' ) ) {
 
 	/**
 	 * Main Block Visibility Class.
 	 *
 	 * @since 1.0.0
 	 */
-	final class BlockVisibility {
+	final class Block_Visibility {
+
 		/**
 		 * Initialise the plugin.
 		 */
@@ -103,26 +104,26 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 		public function includes() {
 
 			// Needs to be included at all times due to show_in_rest.
-			require_once BV_PLUGIN_DIR . 'includes/register-settings.php';
-			require_once BV_PLUGIN_DIR . 'includes/rest-api/register-routes.php';
+			require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/register-settings.php';
+			require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/rest-api/register-routes.php';
 
 			// Utility functions that are also used by register-routes.php so
 			// needs to be included at all times.
-			require_once BV_PLUGIN_DIR . 'includes/utils/user-functions.php';
+			require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/utils/user-functions.php';
 
 			// Only include in the admin.
 			if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
-				require_once BV_PLUGIN_DIR . 'includes/admin/editor.php';
-				require_once BV_PLUGIN_DIR . 'includes/admin/settings.php';
-				require_once BV_PLUGIN_DIR . 'includes/admin/plugin-action-links.php';
+				require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/admin/editor.php';
+				require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/admin/settings.php';
+				require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/admin/plugin-action-links.php';
 
 				// Utility functions.
-				require_once BV_PLUGIN_DIR . 'includes/utils/get-asset-file.php';
+				require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/utils/get-asset-file.php';
 			}
 
 			// Only include on the frontend.
 			if ( ! is_admin() ) {
-				require_once BV_PLUGIN_DIR . 'includes/frontend/render-block.php';
+				require_once BLOCK_VISIBILITY_PLUGIN_DIR . 'includes/frontend/render-block.php';
 			}
 		}
 
@@ -201,7 +202,7 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 			load_plugin_textdomain(
 				'block-visibility',
 				false,
-				basename( BV_PLUGIN_DIR ) . '/languages'
+				basename( BLOCK_VISIBILITY_PLUGIN_DIR ) . '/languages'
 			);
 		}
 
@@ -216,13 +217,13 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
 				wp_set_script_translations(
 					'block-visibility-editor-scripts',
 					'block-visibility',
-					BV_PLUGIN_DIR . '/languages'
+					BLOCK_VISIBILITY_PLUGIN_DIR . '/languages'
 				);
 
 				wp_set_script_translations(
 					'block-visibility-setting-scripts',
 					'block-visibility',
-					BV_PLUGIN_DIR . '/languages'
+					BLOCK_VISIBILITY_PLUGIN_DIR . '/languages'
 				);
 			}
 		}
@@ -248,11 +249,11 @@ if ( ! class_exists( 'BlockVisibility' ) ) {
  * The main function that returns the Block Visibility class
  *
  * @since 1.0.0
- * @return object|BlockVisibility
+ * @return object|Block_Visibility
  */
-function block_visibility() {
-	return BlockVisibility::instance();
+function block_visibility_load_plugin() {
+	return Block_Visibility::instance();
 }
 
 // Get the plugin running.
-add_action( 'plugins_loaded', 'block_visibility' );
+add_action( 'plugins_loaded', 'block_visibility_load_plugin' );

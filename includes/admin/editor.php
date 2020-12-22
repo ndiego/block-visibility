@@ -39,7 +39,7 @@ function enqueue_editor_assets() {
 
 	wp_enqueue_script(
 		'block-visibility-editor-scripts',
-		BV_PLUGIN_URL . 'dist/block-visibility-editor.js',
+		BLOCK_VISIBILITY_PLUGIN_URL . 'dist/block-visibility-editor.js',
 		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
 		$asset_file['version'],
 		false // Need false to ensure our filters can target third-party plugins.
@@ -61,7 +61,7 @@ function enqueue_editor_assets() {
 
 	wp_enqueue_style(
 		'block-visibility-editor-styles',
-		BV_PLUGIN_URL . 'dist/block-visibility-editor-styles.css',
+		BLOCK_VISIBILITY_PLUGIN_URL . 'dist/block-visibility-editor-styles.css',
 		array(),
 		$asset_file['version']
 	);

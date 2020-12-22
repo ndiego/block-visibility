@@ -22,7 +22,7 @@ use function BlockVisibility\Utils\get_current_user_role as get_current_user_rol
  * @package WooCommerce\RestApi
  * @extends WC_REST_Controller
  */
-class BV_REST_Variables_Controller extends WP_REST_Controller {
+class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 
 	/**
 	 * Endpoint namespace.
@@ -73,9 +73,9 @@ class BV_REST_Variables_Controller extends WP_REST_Controller {
 		}
 
 		$plugin_variables = array(
-			'version'     => BV_VERSION,
-			'settingsUrl' => BV_SETTINGS_URL,
-			'supportUrl'  => BV_SUPPORT_URL,
+			'version'     => BLOCK_VISIBILITY_VERSION,
+			'settingsUrl' => BLOCK_VISIBILITY_SETTINGS_URL,
+			'supportUrl'  => BLOCK_VISIBILITY_SUPPORT_URL,
 		);
 
 		$variables = array(

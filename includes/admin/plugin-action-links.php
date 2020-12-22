@@ -22,11 +22,11 @@ defined( 'ABSPATH' ) || exit;
 function add_plugin_action_links( $plugin_links, $plugin_file ) {
 
 	// If we are not on the correct plugin, abort.
-	if ( BV_PLUGIN_BASE !== $plugin_file ) {
+	if ( BLOCK_VISIBILITY_PLUGIN_BASE !== $plugin_file ) {
 		return $plugin_links;
 	}
 
-	$settings_link  = '<a href="' . BV_SETTINGS_URL . '" aria-label="' . esc_attr( __( 'Navigate to the Block Visibility settings.', 'block-visibility' ) ) . '">';
+	$settings_link  = '<a href="' . BLOCK_VISIBILITY_SETTINGS_URL . '" aria-label="' . esc_attr( __( 'Navigate to the Block Visibility settings.', 'block-visibility' ) ) . '">';
 	$settings_link .= __( 'Settings', 'block-visibility' );
 	$settings_link .= '</a>';
 
@@ -48,15 +48,15 @@ add_filter( 'plugin_action_links', __NAMESPACE__ . '\add_plugin_action_links', 1
 function add_plugin_row_meta( $plugin_meta, $plugin_file ) {
 
 	// If we are not on the correct plugin, abort.
-	if ( BV_PLUGIN_BASE !== $plugin_file ) {
+	if ( BLOCK_VISIBILITY_PLUGIN_BASE !== $plugin_file ) {
 		return $plugin_meta;
 	}
 
-	$getting_started  = '<a href="' . BV_SETTINGS_URL . '&tab=getting-started" aria-label="' . esc_attr( __( 'Navigate to the Block Visibility Getting Started page.', 'block-visibility' ) ) . '">';
+	$getting_started  = '<a href="' . BLOCK_VISIBILITY_SETTINGS_URL . '&tab=getting-started" aria-label="' . esc_attr( __( 'Navigate to the Block Visibility Getting Started page.', 'block-visibility' ) ) . '">';
 	$getting_started .= __( 'Getting Started', 'block-visibility' );
 	$getting_started .= '</a>';
 
-	$review_link  = '<a href="' . esc_url( BV_SUPPORT_URL ) . 'reviews/?filter=5" aria-label="' . esc_attr( __( 'Review Block Visibility on WordPress.org', 'block-visibility' ) ) . '" target="_blank">';
+	$review_link  = '<a href="' . esc_url( BLOCK_VISIBILITY_SUPPORT_URL ) . 'reviews/?filter=5" aria-label="' . esc_attr( __( 'Review Block Visibility on WordPress.org', 'block-visibility' ) ) . '" target="_blank">';
 	$review_link .= __( 'Leave a Review', 'block-visibility' );
 	$review_link .= '</a>';
 

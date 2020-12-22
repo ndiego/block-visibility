@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
  * @package WooCommerce\RestApi
  * @extends WC_REST_Controller
  */
-class BV_REST_Settings_Controller extends WP_REST_Controller {
+class Block_Visibility_REST_Settings_Controller extends WP_REST_Controller {
 
 	/**
 	 * Endpoint namespace.

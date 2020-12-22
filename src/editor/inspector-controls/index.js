@@ -15,7 +15,7 @@ import DateTime from './date-time';
 import { getEnabledControls } from './../utils/setting-utilities';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import hasPermission from './../utils/has-permission';
-import { usePluginData } from './../../utils/data';
+import usePluginData from './../utils/use-plugin-data';
 
 /**
  * Add the Visibility inspector control to each allowed block in the editor
