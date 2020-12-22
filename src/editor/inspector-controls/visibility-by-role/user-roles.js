@@ -93,7 +93,7 @@ export default function UserRoles( props ) {
 					'block-visibility'
 				) }
 			/>
-			<Slot name="userRolesEnd"/>
+			<Slot name="userRolesEnd" />
 		</>
 	);
 }

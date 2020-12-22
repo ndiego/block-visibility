@@ -8,10 +8,7 @@
 
 namespace BlockVisibility\Frontend;
 
-/**
- * Exit if accessed directly
- */
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Check if the given block type is disabled via the visibility settings

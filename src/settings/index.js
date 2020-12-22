@@ -9,7 +9,13 @@ import { assign, findKey } from 'lodash';
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect, render } from '@wordpress/element';
 import { registerCoreBlocks } from '@wordpress/block-library';
-import { Spinner, TabPanel, SlotFillProvider, Slot, withFilters } from '@wordpress/components';
+import {
+	Spinner,
+	TabPanel,
+	SlotFillProvider,
+	Slot,
+	withFilters,
+} from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -21,26 +27,19 @@ import VisibilityControls from './visibility-controls';
 import BlockManager from './block-manager';
 import PluginSettings from './plugin-settings';
 
-import { useFetch } from './../utils/data';
-
 /**
  * Renders the Block Visibility settings page
  *
  * @since 1.0.0
  */
 function Settings() {
-	const [ isAPISaving, setIsAPISaving ] = useState( false );  //DELETE
-	const [ hasSaveError, setHasSaveError ] = useState( false );  //DELETE
-
 	const [ status, setStatus ] = useState( 'idle' );
-	const [ saveStatus, setSaveStatus ] = useState( 'idle' );
+	const [ saveStatus, setSaveStatus ] = useState( 'saved' );
 	const [ settings, setSettings ] = useState( null );
 	const [ variables, setVariables ] = useState( null );
 
-	console.log( settings );
-
 	useEffect( () => {
-
+		// Generic fetch function to retrieve settings and variables on render.
 		async function fetchData( route, setData ) {
 			setStatus( 'fetching' );
 
@@ -48,6 +47,7 @@ function Settings() {
 				`/wp-json/block-visibility/v1/${ route }`,
 				{ method: 'GET' },
 			);
+
 			if ( response.ok ) {
 				const data = await response.json();
 				setData( data );
@@ -60,6 +60,37 @@ function Settings() {
 		fetchData( 'settings', setSettings );
 		fetchData( 'variables', setVariables );
 	}, [] );
+
+	// Handle all setting changes, and save to the database.
+	// TODO: Move this function to its own file.
+	async function handleSettingsChange( option, value ) {
+		setSaveStatus( 'saving' );
+
+		const newSettings = assign(
+			{ ...settings },
+			{ [ option ]: value }
+		);
+
+		const response = await fetch(
+			'/wp-json/block-visibility/v1/settings',
+			{
+				method: 'POST',
+				body: JSON.stringify( newSettings ),
+				headers : {
+				   'Content-Type': 'application/json',
+				   'X-WP-Nonce': wpApiSettings.nonce, // Set in enqueue scripts
+				}
+			},
+		);
+
+		if ( response.ok ) {
+			const data = await response.json();
+			setSettings( data );
+			setSaveStatus( 'saved' );
+		} else {
+			setSaveStatus( 'error' );
+		}
+	}
 
 	// Display loading/error message while settings are being fetched.
 	if ( ! settings || ! variables || status !== 'fetched' ) {
@@ -87,71 +118,6 @@ function Settings() {
 			</>
 		);
 	}
-
-	async function handleSettingsChange( option, value ) {
-		setSaveStatus( 'saving' );
-
-		const currentSettings = settings;
-
-		const newSettings = assign(
-			{ ...currentSettings },
-			{ [ option ]: value }
-		);
-
-		console.log( newSettings );
-		console.log( wpApiSettings.nonce );
-
-		const response = await fetch(
-			'/wp-json/block-visibility/v1/settings',
-			{
-				method: 'POST',
-				body: JSON.stringify( newSettings ),
-				headers : {
-				   'Content-Type': 'application/json',
-				   'X-WP-Nonce': wpApiSettings.nonce,
-				}
-			},
-		);
-		console.log( response );
-		if ( response.ok ) {
-
-			const data = await response.json();
-			console.log( data );
-			setSettings( data );
-			setSaveStatus( 'saved' );
-		} else {
-			setSaveStatus( 'error' );
-		}
-	}
-
-	function handleSettingsChanges( option, value ) {
-		setIsAPISaving( true );
-		setHasSaveError( false );
-
-		const currentSettings = settings;
-
-		const model = new wp.api.models.Settings( {
-			block_visibility_settings: assign(
-				{ ...currentSettings },
-				{ [ option ]: value }
-			),
-		} );
-
-		model.save().then(
-			( response ) => {
-				setSettings( response.block_visibility_settings );
-				setIsAPISaving( false );
-			},
-			() => {
-				setIsAPISaving( false );
-				setHasSaveError( true );
-			}
-		);
-	}
-
-	const visibilityControls = settings.visibility_controls;
-	const disabledBlocks = settings.disabled_blocks;
-	const pluginSettings = settings.plugin_settings;
 
 	const settingTabs = [
 		{
@@ -212,35 +178,34 @@ function Settings() {
 						case 'visibility-controls':
 							return (
 								<VisibilityControls
-									isAPISaving={ isAPISaving }
-									hasSaveError={ hasSaveError }
+									saveStatus={ saveStatus }
 									handleSettingsChange={
 										handleSettingsChange
 									}
-									visibilityControls={ visibilityControls }
+									visibilityControls={
+										settings.visibility_controls
+									}
 								/>
 							);
 						case 'block-manager':
 							return (
 								<BlockManager
-									isAPISaving={ isAPISaving }
-									hasSaveError={ hasSaveError }
+									saveStatus={ saveStatus }
 									handleSettingsChange={
 										handleSettingsChange
 									}
-									disabledBlocks={ disabledBlocks }
-									pluginSettings={ pluginSettings }
+									disabledBlocks={ settings.disabled_blocks }
+									pluginSettings={ settings.plugin_settings }
 								/>
 							);
 						case 'plugin-settings':
 							return (
 								<PluginSettings
-									isAPISaving={ isAPISaving }
-									hasSaveError={ hasSaveError }
+									saveStatus={ saveStatus }
 									handleSettingsChange={
 										handleSettingsChange
 									}
-									pluginSettings={ pluginSettings }
+									pluginSettings={ settings.plugin_settings }
 								/>
 							);
 					}

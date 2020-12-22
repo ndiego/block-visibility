@@ -35,8 +35,7 @@ function BlockManager( props ) {
 
 	const {
 		handleSettingsChange,
-		isAPISaving,
-		hasSaveError,
+		saveStatus,
 		blockTypes,
 		categories,
 		hasBlockSupport,
@@ -166,8 +165,7 @@ function BlockManager( props ) {
 					/>
 				</div>
 				<SaveSettings
-					isAPISaving={ isAPISaving }
-					hasSaveError={ hasSaveError }
+					saveStatus={ saveStatus }
 					hasUpdates={ hasUpdates }
 					onSettingsChange={ onSettingsChange }
 				/>

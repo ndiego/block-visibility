@@ -8,10 +8,7 @@
 
 namespace BlockVisibility\Admin;
 
-/**
- * Exit if accessed directly
- */
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Internal dependencies
@@ -79,11 +76,15 @@ function enqueue_settings_assets() {
 		$asset_file['version']
 	);
 
-
-	wp_localize_script( 'wp-api', 'wpApiSettings', array(
-	    'root' => esc_url_raw( rest_url() ),
-	    'nonce' => wp_create_nonce( 'wp_rest' )
-	) );
+	// @TODO convert to wp_add_inline_script.
+	wp_localize_script(
+		'wp-api',
+		'wpApiSettings',
+		array(
+			'root'  => esc_url_raw( rest_url() ),
+			'nonce' => wp_create_nonce( 'wp_rest' ),
+		)
+	);
 
 	// Get all the registed block categories.
 	$block_categories = array();

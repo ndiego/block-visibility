@@ -2,14 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Icon } from '@wordpress/icons';
-import { Slot } from '@wordpress/components';
 import { applyFilters } from '@wordpress/hooks';
-/**
- * Internal dependencies
- */
-import icons from './../utils/icons';
-import { useFetch } from './../utils/data';
 
 /**
  * Renders the footer of the Block Visibility settings pages.
@@ -66,9 +59,7 @@ export default function Footer( props ) {
 
 	return (
 		<div className="footer">
-			<div className="inner-container">
-				{ linkMarkup }
-			</div>
+			<div className="inner-container">{ linkMarkup }</div>
 		</div>
 	);
 }

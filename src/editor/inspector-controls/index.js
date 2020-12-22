@@ -71,7 +71,7 @@ export default function VisibilityInspectorControls( props ) {
 				<div className="block-visibility-settings__visibility-controls">
 					{ enabledControls.length !== 0 && (
 						<>
-							<Slot name="newSlot"/>
+							<Slot name="newSlot" />
 							<HideBlock
 								enabledControls={ enabledControls }
 								{ ...props }
@@ -117,11 +117,10 @@ export default function VisibilityInspectorControls( props ) {
 					) }
 				</div>
 			</PanelBody>
-
 		</InspectorControls>
 	);
 }
-// <InspectorControls.Slot
+
 let AdditionalInspectorControls = ( props ) => <></>; // eslint-disable-line
 AdditionalInspectorControls = withFilters(
 	'blockVisibility.AdditionalInspectorControls'

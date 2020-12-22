@@ -33,7 +33,7 @@ export default function PluginSettings( props ) {
 		props.pluginSettings
 	);
 	const [ hasUpdates, setHasUpdates ] = useState( false );
-	const { handleSettingsChange, isAPISaving, hasSaveError } = props;
+	const { handleSettingsChange, isAPISaving, hasSaveError, saveStatus } = props;
 
 	function onSettingsChange() {
 		handleSettingsChange( 'plugin_settings', pluginSettings );
@@ -61,6 +61,7 @@ export default function PluginSettings( props ) {
 				<SaveSettings
 					isAPISaving={ isAPISaving }
 					hasSaveError={ hasSaveError }
+					saveStatus={ saveStatus }
 					hasUpdates={ hasUpdates }
 					onSettingsChange={ onSettingsChange }
 				/>

@@ -3,13 +3,12 @@
  */
 import { __ } from '@wordpress/i18n';
 import { Icon } from '@wordpress/icons';
-import { Slot } from '@wordpress/components';
 import { applyFilters } from '@wordpress/hooks';
+
 /**
  * Internal dependencies
  */
 import icons from './../utils/icons';
-import { useFetch } from './../utils/data';
 
 /**
  * Renders the masthead of the Block Visibility settings pages.
@@ -42,6 +41,7 @@ export default function Masthead( props ) {
 
 		return (
 			<a
+				key={ link }
 				href={ links[ link ].url }
 				className={ 'plugin-links__' + link }
 				target="_blank"
@@ -62,9 +62,7 @@ export default function Masthead( props ) {
 						<span className="screen-reader-text">
 							{ __( 'Block Visibility', 'block-visibility' ) }
 						</span>
-						{ isPro && (
-							<span className="pro-badge">Pro</span>
-						) }
+						{ isPro && ( <span className="pro-badge">Pro</span> ) }
 					</h1>
 				</div>
 				<div className="masthead__plugin-meta">

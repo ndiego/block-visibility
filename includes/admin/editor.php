@@ -8,10 +8,7 @@
 
 namespace BlockVisibility\Admin;
 
-/**
- * Exit if accessed directly
- */
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Internal dependencies

@@ -54,6 +54,7 @@
 			<property name="prefixes" type="array">
 				<element value="block_visibility"/>
 				<element value="BlockVisibility"/>
+				<element value="BV"/>
 			</property>
 		</properties>
 	</rule>

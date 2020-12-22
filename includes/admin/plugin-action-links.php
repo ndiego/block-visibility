@@ -8,10 +8,7 @@
 
 namespace BlockVisibility\Admin;
 
-/**
- * Exit if accessed directly
- */
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Adds link to Settings page in plugin action links.
@@ -25,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function add_plugin_action_links( $plugin_links, $plugin_file ) {
 
 	// If we are not on the correct plugin, abort.
-	if ( $plugin_file != BV_PLUGIN_BASE ) {
+	if ( BV_PLUGIN_BASE !== $plugin_file ) {
 		return $plugin_links;
 	}
 
@@ -51,7 +48,7 @@ add_filter( 'plugin_action_links', __NAMESPACE__ . '\add_plugin_action_links', 1
 function add_plugin_row_meta( $plugin_meta, $plugin_file ) {
 
 	// If we are not on the correct plugin, abort.
-	if ( $plugin_file != BV_PLUGIN_BASE ) {
+	if ( BV_PLUGIN_BASE !== $plugin_file ) {
 		return $plugin_meta;
 	}
 
@@ -65,7 +62,7 @@ function add_plugin_row_meta( $plugin_meta, $plugin_file ) {
 
 	$row_meta = array(
 		'getting_started' => $getting_started,
-		'review' 		  => $review_link,
+		'review'          => $review_link,
 	);
 
 	$plugin_meta = array_merge( $plugin_meta, $row_meta );

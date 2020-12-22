@@ -8,8 +8,7 @@
 
 namespace BlockVisibility\Utils;
 
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Loads the asset file for the given script or style.

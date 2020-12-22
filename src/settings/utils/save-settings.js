@@ -23,14 +23,14 @@ import icons from './../../utils/icons';
  * @return {string}		 Return the rendered JSX
  */
 export default function SaveSettings( props ) {
-	const { isAPISaving, hasSaveError, hasUpdates, onSettingsChange } = props;
-	const updateButton = isAPISaving
+	const { saveStatus, hasUpdates, onSettingsChange } = props;
+	const updateButton = saveStatus === 'saving'
 		? __( 'Updating…', 'block-visibility' )
 		: __( 'Update', 'block-visibility' );
 	return (
 		<div className="setting-controls__save-settings">
 			{ [
-				isAPISaving && (
+				saveStatus === 'saving' && (
 					<Animate type="loading">
 						{ ( { className: animateClassName } ) => (
 							<span
@@ -44,7 +44,7 @@ export default function SaveSettings( props ) {
 						) }
 					</Animate>
 				),
-				hasSaveError && (
+				saveStatus === 'error' && (
 					<span className="message update-failed">
 						{ __(
 							'Update failed. Try again or contact support.',
@@ -55,10 +55,10 @@ export default function SaveSettings( props ) {
 			] }
 			<Button
 				className={ classnames( 'save-settings__save-button', {
-					'is-busy': isAPISaving,
+					'is-busy': saveStatus === 'saving',
 				} ) }
 				onClick={ onSettingsChange }
-				disabled={ ! hasUpdates && ! hasSaveError }
+				disabled={ ! hasUpdates && saveStatus !== 'error' }
 				isPrimary
 			>
 				{ updateButton }

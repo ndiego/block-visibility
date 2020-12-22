@@ -26,7 +26,7 @@ export default function VisibilityControls( props ) {
 		props.visibilityControls
 	);
 	const [ hasUpdates, setHasUpdates ] = useState( false );
-	const { handleSettingsChange, isAPISaving, hasSaveError } = props;
+	const { handleSettingsChange, saveStatus } = props;
 
 	function onSettingsChange() {
 		handleSettingsChange( 'visibility_controls', visibilityControls );
@@ -56,8 +56,7 @@ export default function VisibilityControls( props ) {
 					/>
 				</div>
 				<SaveSettings
-					isAPISaving={ isAPISaving }
-					hasSaveError={ hasSaveError }
+					saveStatus={ saveStatus }
 					hasUpdates={ hasUpdates }
 					onSettingsChange={ onSettingsChange }
 				/>
