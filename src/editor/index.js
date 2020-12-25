@@ -9,7 +9,6 @@ import { assign } from 'lodash';
 import { __ } from '@wordpress/i18n';
 import { dispatch } from '@wordpress/data';
 import { addFilter, applyFilters } from '@wordpress/hooks';
-import { createHigherOrderComponent } from '@wordpress/compose';
 import { hasBlockSupport } from '@wordpress/blocks';
 import { registerPlugin } from '@wordpress/plugins';
 
@@ -126,19 +125,14 @@ addFilter(
 /**
  * Filter the block edit object and add visibility controls to selected blocks.
  */
-const blockVisibilityInspectorControls = createHigherOrderComponent(
-	( BlockEdit ) => {
-		return ( props ) => {
-			return (
-				<>
-					<BlockEdit { ...props } />
-					<VisibilityInspectorControls { ...props } />
-				</>
-			);
-		};
-	},
-	'blockVisibilityInspectorControls'
-);
+function blockVisibilityInspectorControls( BlockEdit ) {
+	return ( props ) => (
+		<>
+			<BlockEdit { ...props } />
+			<VisibilityInspectorControls { ...props } />
+		</>
+	);
+}
 
 addFilter(
 	'editor.BlockEdit',
