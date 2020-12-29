@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
  * @return array           The asset file contents.
  */
 function get_asset_file( $filepath ) {
-	$asset_path = BLOCK_VISIBILITY_PLUGIN_DIR . $filepath . '.asset.php';
+	$asset_path = BLOCK_VISIBILITY_ABSPATH . $filepath . '.asset.php';
 
 	return file_exists( $asset_path )
 		? include $asset_path

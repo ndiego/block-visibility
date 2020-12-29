@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
 function add_plugin_action_links( $plugin_links, $plugin_file ) {
 
 	// If we are not on the correct plugin, abort.
-	if ( BLOCK_VISIBILITY_PLUGIN_BASE !== $plugin_file ) {
+	if ( BLOCK_VISIBILITY_PLUGIN_BASENAME !== $plugin_file ) {
 		return $plugin_links;
 	}
 
@@ -48,7 +48,7 @@ add_filter( 'plugin_action_links', __NAMESPACE__ . '\add_plugin_action_links', 1
 function add_plugin_row_meta( $plugin_meta, $plugin_file ) {
 
 	// If we are not on the correct plugin, abort.
-	if ( BLOCK_VISIBILITY_PLUGIN_BASE !== $plugin_file ) {
+	if ( BLOCK_VISIBILITY_PLUGIN_BASENAME !== $plugin_file ) {
 		return $plugin_meta;
 	}
 

@@ -75,10 +75,24 @@ Since full site editing is still in the development phase, this plugin does not 
 
 == Changelog ==
 
-= 1.3.0 - 2020-XX-XX =
+= 1.4.0 - 2020-XX-XX =
+
+**Upgrade Warning**
+
+For the long-term maintainability of the Block Visibility plugin, changes to the underlying file structure were needed in version 1.4.0. Therefore, when you upgrade from version 1.3.0 or lower, the plugin will deactivate and you will receive an error message. But don't worry, simply re-activate Block Visibility and you are good to go.
+
+This is an unfortunate issue that will occur only once. We apologize for any inconvenience that this causes, but trust that this change better positions the plugin for many exciting enhancements in the future!
+
+**Added**
+
+* Hooks and slots to support the upcoming Pro add-on
+
 **Changed**
 
+* The base plugin file is now simply `block-visibility.php` and the setup class has been moved
 * Block Visibility now requires WordPress 5.5+ to take advantage of new core functionality
+* Redesigned the Block Visibility settings page
+* Refactored the methods for fetching plugin setting and variable data on the Block Visibility settings page
 
 **Removed**
 
@@ -120,3 +134,9 @@ Since full site editing is still in the development phase, this plugin does not 
 
 = 1.0.0 - 2020-08-03 =
 * Initial Release
+
+== Upgrade Notice ==
+
+= 1.4.0 =
+
+Version 1.4.0 includes a necessary file structure change that will deactivate the plugin when upgrading and throw an error message. But don't worry, simply re-activate Block Visibility and you are good to go. We apologize for this inconvenience and it will not happen again.
