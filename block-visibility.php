@@ -23,7 +23,7 @@ if ( ! defined( 'BLOCK_VISIBILITY_PLUGIN_FILE' ) ) {
 }
 
 if ( ! class_exists( 'Block_Visibility' ) ) {
-    include_once dirname( BLOCK_VISIBILITY_PLUGIN_FILE ) . '/includes/class-block-visibility.php';
+	include_once dirname( BLOCK_VISIBILITY_PLUGIN_FILE ) . '/includes/class-block-visibility.php';
 }
 
 /**

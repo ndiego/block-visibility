@@ -44,7 +44,7 @@ export default function Masthead( props ) {
 				key={ link }
 				href={ links[ link ].url }
 				className={ 'plugin-links__' + link }
-				target="_blank"
+				target="_blank" // eslint-disable-line
 				rel={ rel }
 			>
 				<Icon icon={ icons[ links[ link ].icon ] } />
@@ -62,7 +62,7 @@ export default function Masthead( props ) {
 						<span className="screen-reader-text">
 							{ __( 'Block Visibility', 'block-visibility' ) }
 						</span>
-						{ isPro && ( <span className="pro-badge">Pro</span> ) }
+						{ isPro && <span className="pro-badge">Pro</span> }
 					</h1>
 				</div>
 				<div className="masthead__plugin-meta">

@@ -34,15 +34,17 @@ export default function VisibilityControls( props ) {
 	}
 
 	// Provides an entry point to slot in additional settings.
-	const AdditionalSettings = withFilters(
+	const AdditionalControls = withFilters(
 		'blockVisibility.VisibilityControls'
-	)( ( props ) => <></> );
+	)( ( props ) => <></> ); // eslint-disable-line
 
 	return (
 		<div className="setting-tabs__visibility-controls inner-container">
 			<div className="setting-tabs__setting-controls">
 				<div className="setting-controls__title">
-					<span>{ __( 'Visibility Controls', 'block-visibility' ) }</span>
+					<span>
+						{ __( 'Visibility Controls', 'block-visibility' ) }
+					</span>
 					<InformationPopover
 						message={ __(
 							'The settings below allow you to configure the visibility controls that power this plugin. Pick and choose which controls you would like to enable and how you would like them to function. When a visibility control is disabled, blocks that relied on the disabled control will become visible again. Likely this is what you intended, but we wanted to provide this warning just in case.',
@@ -61,11 +63,13 @@ export default function VisibilityControls( props ) {
 					onSettingsChange={ onSettingsChange }
 				/>
 			</div>
+			<Slot name="VisibilityControlsTop" />
 			<HideBlock
 				settings={ visibilityControls }
 				setSettings={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }
 			/>
+			<Slot name="VisibilityControlsMiddle" />
 			<DateTime
 				settings={ visibilityControls }
 				setSettings={ setVisibilityControls }
@@ -76,7 +80,8 @@ export default function VisibilityControls( props ) {
 				setSettings={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }
 			/>
-			<AdditionalSettings
+			<Slot name="VisibilityControlsBottom" />
+			<AdditionalControls
 				settings={ visibilityControls }
 				setSettings={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }

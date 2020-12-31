@@ -7,7 +7,7 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { RadioControl, Notice } from '@wordpress/components';
+import { RadioControl, Notice, Slot } from '@wordpress/components';
 import { createInterpolateElement } from '@wordpress/element';
 
 /**
@@ -139,6 +139,7 @@ export default function VisibilityByRole( props ) {
 						) }
 					</Notice>
 				) }
+			<Slot name="VisibilityByRoleControls" />
 		</div>
 	);
 }

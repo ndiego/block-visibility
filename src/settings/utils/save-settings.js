@@ -24,9 +24,10 @@ import icons from './../../utils/icons';
  */
 export default function SaveSettings( props ) {
 	const { saveStatus, hasUpdates, onSettingsChange } = props;
-	const updateButton = saveStatus === 'saving'
-		? __( 'Updating…', 'block-visibility' )
-		: __( 'Update', 'block-visibility' );
+	const updateButton =
+		saveStatus === 'saving'
+			? __( 'Updating…', 'block-visibility' )
+			: __( 'Update', 'block-visibility' );
 	return (
 		<div className="setting-controls__save-settings">
 			{ [
@@ -34,9 +35,10 @@ export default function SaveSettings( props ) {
 					<Animate type="loading">
 						{ ( { className: animateClassName } ) => (
 							<span
-								className={
-									classnames( 'message', animateClassName )
-								}
+								className={ classnames(
+									'message',
+									animateClassName
+								) }
 							>
 								<Icon icon={ icons.cloud } />
 								{ __( 'Saving', 'block-visibility' ) }

@@ -7,7 +7,13 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { DateTimePicker, Popover, Button, Notice } from '@wordpress/components';
+import {
+	DateTimePicker,
+	Popover,
+	Button,
+	Notice,
+	Slot,
+} from '@wordpress/components';
 import { __experimentalGetSettings, format } from '@wordpress/date';
 import { useState } from '@wordpress/element';
 import { calendar, closeSmall } from '@wordpress/icons';
@@ -239,6 +245,7 @@ export default function DateTime( props ) {
 					) }
 				</Notice>
 			) }
+			<Slot name="DateTimeControls" />
 		</div>
 	);
 }

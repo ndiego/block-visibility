@@ -35,9 +35,9 @@ export default function VisibilityByRole( props ) {
 				onChange={ () => {
 					setSettings( {
 						...settings,
-						[ 'visibility_by_role' ]: {
-							...settings[ 'visibility_by_role' ],
-							[ 'enable_user_roles' ]: ! enableUserRoles,
+						visibility_by_role: {
+							...settings.visibility_by_role,
+							enable_user_roles: ! enableUserRoles,
 						},
 					} );
 					setHasUpdates( true );
@@ -77,9 +77,9 @@ export default function VisibilityByRole( props ) {
 						onChange={ () => {
 							setSettings( {
 								...settings,
-								[ 'visibility_by_role' ]: {
-									...settings[ 'visibility_by_role' ],
-									[ 'enable' ]: ! enable,
+								visibility_by_role: {
+									...settings.visibility_by_role,
+									enable: ! enable,
 								},
 							} );
 							setHasUpdates( true );
@@ -87,7 +87,7 @@ export default function VisibilityByRole( props ) {
 					/>
 				</div>
 				{ enableUserRolesElement }
-				<Slot name="VisibilityByRoleControls"/>
+				<Slot name="VisibilityByRoleControls" />
 			</div>
 		</div>
 	);

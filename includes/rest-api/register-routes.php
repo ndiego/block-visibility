@@ -30,5 +30,5 @@ add_action( 'rest_api_init', __NAMESPACE__ . '\register_routes' );
 /**
  * Include our custom REST API controllers.
  */
-include_once BLOCK_VISIBILITY_ABSPATH . 'includes/rest-api/controllers/class-block-visibility-rest-settings-controller.php';
-include_once BLOCK_VISIBILITY_ABSPATH . 'includes/rest-api/controllers/class-block-visibility-rest-variables-controller.php';
+require_once BLOCK_VISIBILITY_ABSPATH . 'includes/rest-api/controllers/class-block-visibility-rest-settings-controller.php';
+require_once BLOCK_VISIBILITY_ABSPATH . 'includes/rest-api/controllers/class-block-visibility-rest-variables-controller.php';

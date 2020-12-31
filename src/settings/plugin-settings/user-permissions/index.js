@@ -62,15 +62,15 @@ export default function UserPermissions( props ) {
 						onChange={ () => {
 							setSettings( {
 								...settings,
-								[ 'enable_user_role_restrictions' ]: ! enable,
+								enable_user_role_restrictions: ! enable,
 							} );
 							setHasUpdates( true );
 						} }
 					/>
 				</div>
 				{ userRolesElement }
-				<Slot name="UserPermissionSettings"/>
+				<Slot name="UserPermissionSettings" />
 			</div>
 		</div>
-	)
+	);
 }

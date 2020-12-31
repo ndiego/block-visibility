@@ -46,7 +46,7 @@ export default function FullControlMode( props ) {
 						onChange={ () => {
 							setSettings( {
 								...settings,
-								[ 'remove_on_uninstall' ]: ! removeOnUninstall,
+								remove_on_uninstall: ! removeOnUninstall,
 							} );
 							setHasUpdates( true );
 						} }

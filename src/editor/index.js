@@ -123,7 +123,10 @@ addFilter(
 );
 
 /**
- * Filter the block edit object and add visibility controls to selected blocks.
+ * Filter the BlockEdit object and add visibility controls to selected blocks.
+ *
+ * @since 1.0.0
+ * @param {Object} BlockEdit
  */
 function blockVisibilityInspectorControls( BlockEdit ) {
 	return ( props ) => (

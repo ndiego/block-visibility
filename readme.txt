@@ -71,11 +71,11 @@ Yup, this plugin is not theme specific. You just need to be running the latest v
 Yes, and if you have a specific idea of what you would like to see, please submit a feature request in the plugin support forum on WordPress.org.
 
 = Does this plugin work with the upcoming full site editing functionality? =
-Since full site editing is still in the development phase, this plugin does not currently work with this new functionality. However, Block Visibility was designed with full site editing in mind. There are tons of interesting applications for visibility control and we plan to get the plugin ready for full site implementation in the coming months.
+As of version 1.4.0, Block Visibility is supported in the Site Editor, which is provided by Full Site Editing. Note that you will currently need the Gutenberg plugin and a Full Site Editing theme to make use of this functionality. Full Site Editing is still very much in development and you may find bugs or compatibility issues when using this plugin in the Site Editor. If you do, please let us know in the plugin support forum. We are committed to ensuring 100% compatibility by the time Full Site Editing is included in WordPress core.
 
 == Changelog ==
 
-= 1.4.0 - 2020-XX-XX =
+= 1.4.0 - 2021-01-01 =
 
 **Upgrade Warning**
 
@@ -85,12 +85,13 @@ This is an unfortunate issue that will occur only once. We apologize for any inc
 
 **Added**
 
+* Preliminary compatibility with Full Site Editing (Requires the Gutenberg plugin and a theme that is Full Site Editing compatible)
 * Hooks and slots to support the upcoming Pro add-on
 
 **Changed**
 
-* The base plugin file is now simply `block-visibility.php` and the setup class has been moved
 * Block Visibility now requires WordPress 5.5+ to take advantage of new core functionality
+* The base plugin file is now simply `block-visibility.php` and the setup class has been moved
 * Redesigned the Block Visibility settings page
 * Refactored the methods for fetching plugin setting and variable data on the Block Visibility settings page
 

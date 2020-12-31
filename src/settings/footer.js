@@ -17,9 +17,9 @@ export default function Footer( props ) {
 	// Default footer links.
 	const links = {
 		plugin: {
-			title: __( 'Block Visibility', 'block-visibility' ) + ' ' + pluginVariables.version,
-			url: 'https://www.blockvisibilitywp.com/?utm_source=block_visibility&utm_medium=plugin&utm_campaign=settings_page',
-			rel: 'external'
+			title: __( 'Block Visibility', 'block-visibility' ) + ' ' + pluginVariables.version, // eslint-disable-line
+			url: 'https://www.blockvisibilitywp.com/?utm_source=block_visibility&utm_medium=plugin&utm_campaign=settings_page', // eslint-disable-line
+			rel: 'external',
 		},
 		repo: {
 			title: __( 'GitHub', 'block-visibility' ),
@@ -31,8 +31,8 @@ export default function Footer( props ) {
 		},
 		docs: {
 			title: __( 'Documentation', 'block-visibility' ),
-			url: 'https://www.blockvisibilitywp.com/documentation/?utm_source=block_visibility&utm_medium=plugin&utm_campaign=settings_page',
-			rel: 'external'
+			url: 'https://www.blockvisibilitywp.com/documentation/?utm_source=block_visibility&utm_medium=plugin&utm_campaign=settings_page', // eslint-disable-line
+			rel: 'external',
 		},
 		support: {
 			title: __( 'Support', 'block-visibility' ),
@@ -47,9 +47,10 @@ export default function Footer( props ) {
 
 		return (
 			<a
+				key={ link }
 				href={ links[ link ].url }
 				className={ 'footer-links__' + link }
-				target="_blank"
+				target="_blank" // eslint-disable-line
 				rel={ rel }
 			>
 				{ links[ link ].title }

@@ -209,9 +209,20 @@ export default function GettingStarted( props ) {
 							) }
 						</div>
 						<p>
-							{ __(
-								'Since full site editing is still in the development phase, this plugin does not currently work with this new functionality. However, Block Visibility was designed with full site editing in mind. There are tons of interesting applications for visibility control and we plan to get the plugin ready for full site implementation in the coming months.',
-								'block-visibility'
+							{ createInterpolateElement(
+								__(
+									'As of version 1.4.0, Block Visibility is supported in the Site Editor, which is provided by Full Site Editing. Note that you will currently need the Gutenberg plugin and a Full Site Editing theme to make use of this functionality. Full Site Editing is still very much in development and you may find bugs or compatibility issues when using this plugin in the Site Editor. If you do, please let us know in the <a>plugin support forum</a> on WordPress.org. We are committed to ensuring 100% compatibility by the time Full Site Editing is included in WordPress core.',
+									'block-visibility'
+								),
+								{
+									a: (
+										<ExternalLink // eslint-disable-line
+											href={ pluginVariables.supportUrl }
+											target="_blank"
+											rel="noreferrer"
+										/>
+									),
+								}
 							) }
 						</p>
 						<div className="panels__content-label">

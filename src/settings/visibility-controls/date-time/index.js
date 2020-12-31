@@ -47,9 +47,9 @@ export default function DateTime( props ) {
 						onChange={ () => {
 							setSettings( {
 								...settings,
-								[ 'date_time' ]: {
-									...settings[ 'date_time' ],
-									[ 'enable' ]: ! enable,
+								date_time: {
+									...settings.date_time,
+									enable: ! enable,
 								},
 							} );
 							setHasUpdates( true );

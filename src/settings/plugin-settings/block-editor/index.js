@@ -50,7 +50,7 @@ export default function BlockEditor( props ) {
 						onChange={ () => {
 							setSettings( {
 								...settings,
-								[ 'enable_contextual_indicators' ]: ! enableContextualIndicators,
+								enable_contextual_indicators: ! enableContextualIndicators,
 							} );
 							setHasUpdates( true );
 						} }
@@ -66,13 +66,13 @@ export default function BlockEditor( props ) {
 						onChange={ () => {
 							setSettings( {
 								...settings,
-								[ 'enable_toolbar_controls' ]: ! enableToolbarControls,
+								enable_toolbar_controls: ! enableToolbarControls,
 							} );
 							setHasUpdates( true );
 						} }
 					/>
 				</div>
-				<Slot name="BlockEditorSettings"/>
+				<Slot name="BlockEditorSettings" />
 			</div>
 		</div>
 	);

@@ -49,7 +49,7 @@ export default function VisibilityInspectorControls( props ) {
 	// Provides an entry point to slot in additional settings.
 	const AdditionalControls = withFilters(
 		'blockVisibility.InspectorControls'
-	)( ( props ) => <></> );
+	)( ( props ) => <></> ); // eslint-disable-line
 
 	return (
 		// Note that the core InspectorControls component is already making use
@@ -57,12 +57,6 @@ export default function VisibilityInspectorControls( props ) {
 		// Therefore we can freely use SlofFill without needing to add the
 		// provider ourselves.
 		<InspectorControls>
-			<AdditionalControls
-				settings={ settings }
-				variables={ variables }
-				enabledControls={ enabledControls }
-				{ ...props }
-			/>
 			<PanelBody
 				title={ __( 'Visibility', 'block-visibility' ) }
 				className="block-visibility-settings"
@@ -71,11 +65,12 @@ export default function VisibilityInspectorControls( props ) {
 				<div className="block-visibility-settings__visibility-controls">
 					{ enabledControls.length !== 0 && (
 						<>
-							<Slot name="newSlot" />
+							<Slot name="InspectorControlsTop" />
 							<HideBlock
 								enabledControls={ enabledControls }
 								{ ...props }
 							/>
+							<Slot name="InspectorControlsMiddle" />
 							<DateTime
 								settings={ settings }
 								variables={ variables }
@@ -88,12 +83,7 @@ export default function VisibilityInspectorControls( props ) {
 								enabledControls={ enabledControls }
 								{ ...props }
 							/>
-							<AdditionalInspectorControls
-								settings={ settings }
-								variables={ variables }
-								enabledControls={ enabledControls }
-								{ ...props }
-							/>
+							<Slot name="InspectorControlsBottom" />
 						</>
 					) }
 					{ enabledControls.length === 0 && (
@@ -117,11 +107,12 @@ export default function VisibilityInspectorControls( props ) {
 					) }
 				</div>
 			</PanelBody>
+			<AdditionalControls
+				settings={ settings }
+				variables={ variables }
+				enabledControls={ enabledControls }
+				{ ...props }
+			/>
 		</InspectorControls>
 	);
 }
-
-let AdditionalInspectorControls = ( props ) => <></>; // eslint-disable-line
-AdditionalInspectorControls = withFilters(
-	'blockVisibility.AdditionalInspectorControls'
-)( AdditionalInspectorControls );

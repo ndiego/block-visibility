@@ -13,7 +13,6 @@ import {
 	Spinner,
 	TabPanel,
 	SlotFillProvider,
-	Slot,
 	withFilters,
 } from '@wordpress/components';
 
@@ -43,9 +42,9 @@ function Settings() {
 		async function fetchData( route, setData ) {
 			setStatus( 'fetching' );
 
-			const response = await fetch(
+			const response = await fetch( // eslint-disable-line
 				`/wp-json/block-visibility/v1/${ route }`,
-				{ method: 'GET' },
+				{ method: 'GET' }
 			);
 
 			if ( response.ok ) {
@@ -66,22 +65,16 @@ function Settings() {
 	async function handleSettingsChange( option, value ) {
 		setSaveStatus( 'saving' );
 
-		const newSettings = assign(
-			{ ...settings },
-			{ [ option ]: value }
-		);
+		const newSettings = assign( { ...settings }, { [ option ]: value } );
 
-		const response = await fetch(
-			'/wp-json/block-visibility/v1/settings',
-			{
-				method: 'POST',
-				body: JSON.stringify( newSettings ),
-				headers : {
-				   'Content-Type': 'application/json',
-				   'X-WP-Nonce': wpApiSettings.nonce, // Set in enqueue scripts
-				}
+		const response = await fetch( '/wp-json/block-visibility/v1/settings', { // eslint-disable-line
+			method: 'POST',
+			body: JSON.stringify( newSettings ),
+			headers: {
+				'Content-Type': 'application/json',
+				'X-WP-Nonce': wpApiSettings.nonce, // eslint-disable-line
 			},
-		);
+		} );
 
 		if ( response.ok ) {
 			const data = await response.json();
@@ -109,10 +102,7 @@ function Settings() {
 				<div className="loading-settings">
 					<Spinner />
 					<span className="description">
-						{ __(
-							'Loading settings…',
-							'block-visibility'
-						) }
+						{ __( 'Loading settings…', 'block-visibility' ) }
 					</span>
 				</div>
 			</>
@@ -152,15 +142,12 @@ function Settings() {
 	// Provides an entry point to slot in additional settings.
 	const AdditionalSettings = withFilters(
 		'blockVisibility.MainSettings'
-	)( ( props ) => <></> );
+	)( ( props ) => <></> ); // eslint-disable-line
 
 	return (
 		<SlotFillProvider>
-			<AdditionalSettings/>
-			<Masthead
-				variables={ variables }
-			/>
-			<Slot name="belowMasthead"/>
+			<AdditionalSettings />
+			<Masthead variables={ variables } />
 			<TabPanel
 				className="setting-tabs"
 				activeClass="active-tab"
@@ -170,11 +157,7 @@ function Settings() {
 				{ ( tab ) => {
 					switch ( tab.name ) {
 						case 'getting-started':
-							return (
-								<GettingStarted
-									variables={ variables }
-								/>
-							);
+							return <GettingStarted variables={ variables } />;
 						case 'visibility-controls':
 							return (
 								<VisibilityControls
@@ -211,9 +194,7 @@ function Settings() {
 					}
 				} }
 			</TabPanel>
-			<Footer
-				variables={ variables }
-			/>
+			<Footer variables={ variables } />
 		</SlotFillProvider>
 	);
 }

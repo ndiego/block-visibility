@@ -47,9 +47,9 @@ export default function HideBlock( props ) {
 						onChange={ () => {
 							setSettings( {
 								...settings,
-								[ 'hide_block' ]: {
-									...settings[ 'hide_block' ],
-									[ 'enable' ]: ! enable,
+								hide_block: {
+									...settings.hide_block,
+									enable: ! enable,
 								},
 							} );
 							setHasUpdates( true );

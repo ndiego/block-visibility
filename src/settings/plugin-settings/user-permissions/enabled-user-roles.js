@@ -45,7 +45,7 @@ export default function EnabledUserRoles( props ) {
 						onChange={ () => {
 							setSettings( {
 								...settings,
-								[ 'enabled_user_roles' ]: newEnabledRoles,
+								enabled_user_roles: newEnabledRoles,
 							} );
 							setHasUpdates( true );
 						} }
