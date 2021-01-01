@@ -8,6 +8,8 @@
 
 namespace BlockVisibility;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Register plugin settings.
  *

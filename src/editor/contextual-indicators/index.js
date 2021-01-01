@@ -10,11 +10,11 @@ import { createHigherOrderComponent } from '@wordpress/compose';
 import hasDateTime from './has-date-time';
 import hasRoles from './has-roles';
 import hasVisibilityControls from './../utils/has-visibility-controls';
+import usePluginData from './../utils/use-plugin-data';
 import {
 	isPluginSettingEnabled,
 	getEnabledControls,
 } from './../utils/setting-utilities';
-import { usePluginData } from './../../utils/data';
 
 /**
  * Filter each block and add CSS classes based on visibility settings.

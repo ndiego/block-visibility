@@ -8,6 +8,8 @@
 
 namespace BlockVisibility\Admin;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Internal dependencies
  */
@@ -74,20 +76,14 @@ function enqueue_settings_assets() {
 		$asset_file['version']
 	);
 
-	$plugin_variables = array(
-		'version'    => BLOCK_VISIBILITY_VERSION,
-		'reviewUrl'  => BLOCK_VISIBILITY_REVIEW_URL,
-		'supportUrl' => BLOCK_VISIBILITY_SUPPORT_URL,
-	);
-
-	// Create a global variable to hold all our plugin variables, not ideal,
-	// but does the trick for now...
-	$stringified_plugin_variables = 'const blockVisibilityVariables = ' . wp_json_encode( $plugin_variables ) . ';';
-
-	wp_add_inline_script(
-		'block-visibility-setting-scripts',
-		$stringified_plugin_variables,
-		'after'
+	// @TODO convert to wp_add_inline_script.
+	wp_localize_script(
+		'wp-api',
+		'wpApiSettings',
+		array(
+			'root'  => esc_url_raw( rest_url() ),
+			'nonce' => wp_create_nonce( 'wp_rest' ),
+		)
 	);
 
 	// Get all the registed block categories.

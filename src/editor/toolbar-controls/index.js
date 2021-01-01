@@ -16,11 +16,11 @@ import { useDispatch, withSelect } from '@wordpress/data';
 import icons from './../../utils/icons';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import hasPermission from './../utils/has-permission';
+import usePluginData from './../utils/use-plugin-data';
 import {
 	isPluginSettingEnabled,
 	getEnabledControls,
 } from './../utils/setting-utilities';
-import { usePluginData } from './../../utils/data';
 
 /**
  * Adds the toolbar control for showing/hiding the selected block.

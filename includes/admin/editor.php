@@ -8,6 +8,8 @@
 
 namespace BlockVisibility\Admin;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Internal dependencies
  */
@@ -23,12 +25,9 @@ function enqueue_editor_assets() {
 
 	/**
 	 * Since we are using admin_init, we need to make sure the js is only loaded
-	 * on post edit, or new post screens.
-	 *
-	 * This will need to be adapted if we want to allow vsibility settings
-	 * within full-site editing and whatnot.
+	 * on pages with the Block Editor, this includes FSE pagess.
 	 */
-	if ( ! is_edit_or_new_admin_page() ) {
+	if ( ! is_block_editor_page() ) {
 		return;
 	}
 
@@ -69,18 +68,18 @@ add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_asse
 
 
 /**
- * Make sure we are either on a post edit screen, or new post screen.
+ * Make sure we are on a page with the Block Editor, this include FSE pages.
  *
  * @since 1.0.0
  *
  * @return bool Returns true or false.
  */
-function is_edit_or_new_admin_page() {
+function is_block_editor_page() {
 	global $pagenow;
 
 	return (
 		is_admin() &&
-		( 'post.php' === $pagenow || 'post-new.php' === $pagenow )
+		( 'post.php' === $pagenow || 'post-new.php' === $pagenow || 'admin.php' === $pagenow )
 	);
 }
 

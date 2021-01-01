@@ -7,7 +7,7 @@ import { map, assign, includes } from 'lodash'; // eslint-disable-line
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
-import { CheckboxControl, ToggleControl } from '@wordpress/components';
+import { CheckboxControl, ToggleControl, Slot } from '@wordpress/components';
 
 /**
  * Add the User Roles control to the main Visibility By User Role control
@@ -93,6 +93,7 @@ export default function UserRoles( props ) {
 					'block-visibility'
 				) }
 			/>
+			<Slot name="userRolesEnd" />
 		</>
 	);
 }

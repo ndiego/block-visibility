@@ -8,6 +8,8 @@
 
 namespace BlockVisibility\Utils;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Helper function for retrieving the visibility control settings.
  *

@@ -8,6 +8,8 @@
 
 namespace BlockVisibility\Utils;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Retrieves all editable user roles on the website.
  *

@@ -1,19 +1,46 @@
 // Media query variables
 $desktop: 1024px;
 $tablet: 768px;
-$mobile: 420px;
+$mobile: 426px;
 
 /* To fix rendering quirk in Chrome */
 #wpwrap {
 	background: #f1f1f1;
 }
 
+/* Hide WP notices on the settings page */
+.notice {
+	display: none;
+}
+
 #block-visibility-settings-container {
 	margin-left: -20px;
 
+	.notice {
+		display: block;
+		margin-top: 15px;
+	}
+
+	.loading-settings {
+		text-align: center;
+		margin: 35vh 30px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.components-spinner {
+			float: none;
+		}
+
+		.description {
+			color: #777;
+			margin-top: 4px;
+		}
+	}
+
 	.masthead {
 		background-color: #fff;
-		padding: 30px;
+		padding: 10px 30px;
 
 		.inner-container {
 			margin: 0 auto;
@@ -21,17 +48,16 @@ $mobile: 420px;
 			display: flex;
 			justify-content: space-between;
 
-			@media ( max-width: $desktop ) {
-				display: block;
+			@media ( max-width: $mobile ) {
+				flex-direction: column;
+				margin: 5px auto;
 			}
 		}
 
 		.masthead__branding {
 			h1 {
 				font-weight: 400;
-				margin: 0 0 20px;
-				display: flex;
-				justify-content: space-between;
+				margin: 0;
 			}
 
 			p {
@@ -44,77 +70,119 @@ $mobile: 420px;
 
 			.branding__logo {
 				svg {
-					fill: #23282d;
+					width: 200px;
+					fill: #45428f;
 
 					.transparent {
 						opacity: .6;
 					}
 				}
 			}
+
+			.pro-badge {
+				color: #fff;
+				text-transform: uppercase;
+				font-size: 8px;
+				height: 8px;
+				border-radius: 4px;
+				padding: 4px 6px;
+				line-height: 1;
+				font-weight: 800;
+				letter-spacing: 1px;
+				margin-left: 8px;
+				background: #45428f;
+			}
+
+			@media ( max-width: $mobile ) {
+				text-align: center;
+			}
 		}
 
-		.masthead__plugin-meta {
-			width: 30%;
-			display: flex;
-			flex-direction: column;
-			justify-content: flex-start;
-			text-align: right;
+		.masthead__plugin-links {
+			font-size: 15px;
+		    font-weight: 500;
+		    width: 50%;
+		    display: flex;
+		    justify-content: flex-end;
+		    align-items: center;
 
-			@media ( max-width: $desktop ) {
-				width: 100%;
-				flex-direction: row;
-				justify-content: space-between;
-				margin-top: 20px;
-			}
+			a {
+				color: #23282d;
+				cursor: pointer;
+				display: inline-block;
+				margin-left: 16px;
+				text-decoration: none;
 
-			.plugin-meta__version {
-				span {
-					background: #f1f1f1;
-					border-radius: 4px;
-					box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
-					color: #555D66;
-					padding: 8px 10px;
-					line-height: 1;
-					font-size: 12px;
-					display: inline-block;
-					margin-bottom: 4px;
-					font-weight: 500;
+				svg {
+					width: 20px;
+					fill: currentColor;
+					vertical-align: middle;
+					margin: 0px 6px 4px 0;
 				}
-			}
 
-			.plugin-meta__plugin-links {
-				font-size: 15px;
-				font-weight: 500;
-				margin-top: auto;
-				align-self: flex-end;
-
-				a {
-					color: #23282d;
-					cursor: pointer;
-					display: inline-block;
-					margin-left: 16px;
-					text-decoration: none;
+				&:hover {
+					color: #007cba;
 
 					svg {
-						fill: currentColor;
-						vertical-align: middle;
-						margin: 0px 6px 4px 0;
-					}
-
-					&:hover {
-						color: #007cba;
-
-						svg {
-							fill: #007cba;
-						}
+						fill: #007cba;
 					}
 				}
+			}
+
+			@media ( max-width: $mobile ) {
+				justify-content: center;
+				margin-top: 10px;
+				width: 100%;
+
+				a {
+					margin: 0 8px;
+				}
+			}
+		}
+	}
+
+	.footer {
+		padding: 10px 30px;
+		box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
+		margin-top: 20px;
+		text-align: center;
+
+		.inner-container {
+			margin: 0 auto;
+			max-width: 1024px;
+
+			@media ( max-width: $desktop ) {
+				display: block;
+			}
+		}
+
+		a {
+			color: #555d66;
+			display: inline-block;
+			margin: 5px 8px;
+			text-decoration: none;
+
+			&:hover {
+				color: #0073aa;
 			}
 		}
 	}
 
 	/* General styles for all setting tabs */
 	.setting-tabs {
+
+		.message {
+			color: #777;
+			display: flex;
+
+			svg {
+				fill: #777;
+				vertical-align: middle;
+				margin: 0px 6px;
+				width: 20px;
+				height: 20px;
+			}
+		}
 
 		.components-tab-panel__tabs {
 			justify-content: center;
@@ -136,32 +204,16 @@ $mobile: 420px;
 			.inner-container {
 				margin: 0 auto;
 				max-width: 1024px;
-			}
-		}
 
-		.setting-tabs__loading-settings {
-			text-align: center;
-			margin: 150px 30px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-
-			.components-spinner {
-				float: none;
-			}
-
-			.description {
-				color: #777;
-				margin-top: 4px;
+				&.narrow {
+					max-width: 840px;
+				}
 			}
 		}
 
 		.setting-tabs__tab-description {
-			max-width: 660px;
-			margin: 0 auto;
-
 			h2 {
-				font-size: 20px;
+				font-size: 30px;
 				font-weight: 400;
 				margin: 0 0 20px;
 			}
@@ -172,15 +224,6 @@ $mobile: 420px;
 				line-height: 1.4;
 				margin: 0;
 			}
-
-			.tab-description__header {
-				display: flex;
-				justify-content: space-between;
-
-				.information-popover__button {
-					color: #777;
-				}
-			}
 		}
 
 		.setting-tabs__setting-controls {
@@ -188,38 +231,33 @@ $mobile: 420px;
 			flex-wrap: wrap;
 			justify-content: space-between;
 			align-items: center;
-			margin: 30px 0 20px;
-			padding-top: 30px;
-			border-top: 1px solid #ccd0d4;
+			margin-bottom: 20px;
 
 			.setting-controls__title {
-				font-size: 16px;
+				display: flex;
+				align-items: center;
+				font-size: 18px;
 				font-weight: 500;
+
+				.information-popover__button {
+					color: #999;
+					margin-left: 6px;
+				}
 			}
 
 			.setting-controls__save-settings {
 				display: flex;
 				align-items: center;
 
-				.save-settings__messages {
-					color: #777;
-					display: inline-block;
+				.message {
 					margin-top: 5px;
 					margin-right: 24px;
-
-					svg {
-						fill: #777;
-						vertical-align: middle;
-						margin: 0px 6px 4px 0;
-						width: 20px;
-						height: 20px;
-					}
 
 					@media ( max-width: $tablet ) {
 						display: none;
 					}
 
-					.messages__update-failed {
+					.update-failed {
 						color: #b52727;
 					}
 				}
@@ -327,12 +365,6 @@ $mobile: 420px;
 
 	/* Specific styles for the Getting Started tab */
 	.setting-tabs__getting-started {
-		&>div {
-			max-width: 660px;
-			margin-left: auto;
-			margin-right: auto;
-		}
-
 		h2 {
 			font-size: 20px;
 			font-weight: 400;
@@ -345,7 +377,6 @@ $mobile: 420px;
 		}
 
 		.getting-started__video {
-			max-width: 1024px;
 			background: lightgrey;
 			margin: 40px 0;
 			text-align: center;
@@ -360,10 +391,6 @@ $mobile: 420px;
 				width: 100%;
 				height: 100%;
 			}
-		}
-
-		.getting-started__details {
-
 		}
 
 		.getting-started__panels {
@@ -524,9 +551,12 @@ $mobile: 420px;
 
 		.information-popover__button {
 			color: #c8c8c8;
-			height: 24px;
-			padding-top: 0;
-			padding-bottom: 0;
+		    padding: 0;
+		    height: 18px;
+
+			svg {
+				width: 22px;
+			}
 
 			&:hover {
 				background-color: transparent !important;
@@ -557,47 +587,6 @@ $mobile: 420px;
 				margin-top: 12px;
 				padding-top: 12px;
 				border-top: 1px solid #d0d0d0;
-			}
-		}
-	}
-
-
-	/* Style correction for WordPress 5.4, this is not needed for newer versions of Gutenberg */
-	.components-tab-panel__tabs {
-		display: flex;
-		align-items: stretch;
-
-		.components-button {
-			background: transparent;
-			border: none;
-			box-shadow: none;
-			border-radius: 0;
-			cursor: pointer;
-			height: 48px;
-			padding: 3px 16px;
-			margin-left: 0;
-			font-size: 15px;
-			font-weight: 500;
-			transition: box-shadow .1s linear;
-			box-sizing: border-box;
-			color: #1e1e1e;
-
-			&:focus, &:hover {
-				color: #007cba;
-			}
-
-			.active-tab,
-			&:focus:not(:disabled) {
-				background-color: transparent;
-				color: #1e1e1e;
-				box-shadow: inset 0 -2px #007cba !important;
-				outline: none;
-			}
-
-			&:not(:disabled):not([aria-disabled=true]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link):hover {
-				background-color: transparent;
-				color: #007cba;
-				box-shadow: none;
 			}
 		}
 	}

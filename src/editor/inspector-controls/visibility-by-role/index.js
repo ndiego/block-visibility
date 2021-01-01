@@ -7,19 +7,8 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { RadioControl, Notice } from '@wordpress/components';
-import {
-	__experimentalCreateInterpolateElement,
-	createInterpolateElement,
-} from '@wordpress/element';
-
-/**
- * Temporary solution until WP 5.5 is released with createInterpolateElement
- */
-const interpolateElement =
-	typeof createInterpolateElement === 'function'
-		? createInterpolateElement
-		: __experimentalCreateInterpolateElement;
+import { RadioControl, Notice, Slot } from '@wordpress/components';
+import { createInterpolateElement } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -133,7 +122,7 @@ export default function VisibilityByRole( props ) {
 			{ visibilityByRole === 'user-role' &&
 				! visibilityByRoleEnableUseRoles && (
 					<Notice status="warning" isDismissible={ false }>
-						{ interpolateElement(
+						{ createInterpolateElement(
 							__(
 								'The User Role option was previously selected, but is now disabled. Choose another option or update the <a>Visibility Control</a> settings.',
 								'block-visibility'
@@ -150,6 +139,7 @@ export default function VisibilityByRole( props ) {
 						) }
 					</Notice>
 				) }
+			<Slot name="VisibilityByRoleControls" />
 		</div>
 	);
 }

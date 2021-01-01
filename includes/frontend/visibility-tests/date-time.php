@@ -8,6 +8,8 @@
 
 namespace BlockVisibility\Frontend\VisibilityTests;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * WordPress dependencies
  */

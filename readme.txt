@@ -2,10 +2,10 @@
 Author URI: https://www.nickdiego.com
 Contributors: ndiego, outermostdesign
 Tags: visibility, scheduling, hide, schedule, blocks, schedule blocks, hide blocks, block editor
-Requires at least: 5.4
+Requires at least: 5.5
 Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,10 +41,11 @@ Advanced plugin settings allow you to choose which block types have visibility e
 2. Schedule any block using start and end date/time settings.
 3. Control who can see each block with user role restrictions.
 4. Designed to work with all blocks, including WooCommerce as seen here.
-5. The Getting Started page of the plugin settings.
-6. Choose which visibility controls you would like to use on your site.
-7. Disable or enable visibility on certain block types with the Block Manager.
-8. Additional plugin settings to enable/disable certain functionality including Full Control Mode.
+5. An overview of the plugin settings.
+6. General plugin settings to enable/disable certain functionality including user permissions and Full Control Mode.
+7. Choose which visibility controls you would like to use on your site.
+8. Disable or enable visibility on certain block types with the Block Manager.
+9. The Getting Started page provides useful information to help you get up and running with Block Visibility.
 
 == Installation ==
 
@@ -71,9 +72,33 @@ Yup, this plugin is not theme specific. You just need to be running the latest v
 Yes, and if you have a specific idea of what you would like to see, please submit a feature request in the plugin support forum on WordPress.org.
 
 = Does this plugin work with the upcoming full site editing functionality? =
-Since full site editing is still in the development phase, this plugin does not currently work with this new functionality. However, Block Visibility was designed with full site editing in mind. There are tons of interesting applications for visibility control and we plan to get the plugin ready for full site implementation in the coming months.
+As of version 1.4.0, Block Visibility is supported in the Site Editor, which is provided by Full Site Editing. Note that you will currently need the Gutenberg plugin and a Full Site Editing theme to make use of this functionality. Full Site Editing is still very much in development and you may find bugs or compatibility issues when using this plugin in the Site Editor. If you do, please let us know in the plugin support forum. We are committed to ensuring 100% compatibility by the time Full Site Editing is included in WordPress core.
 
 == Changelog ==
+
+= 1.4.0 - 2021-01-01 =
+
+**Upgrade Warning**
+
+For the long-term maintainability of the Block Visibility plugin, changes to the underlying file structure were needed in version 1.4.0. Therefore, when you upgrade from version 1.3.0 or lower, the plugin will deactivate and you will receive an error message. But don't worry, simply re-activate Block Visibility and you are good to go.
+
+This is an unfortunate issue that will occur only once. We apologize for any inconvenience that this causes, but trust that this change better positions the plugin for many exciting enhancements in the future!
+
+**Added**
+
+* Preliminary compatibility with Full Site Editing (Requires the Gutenberg plugin and a theme that is Full Site Editing compatible)
+* Hooks and slots to support the upcoming Pro add-on
+
+**Changed**
+
+* Block Visibility now requires WordPress 5.5+ to take advantage of new core functionality
+* The base plugin file is now simply `block-visibility.php` and the setup class has been moved
+* Redesigned the Block Visibility settings page
+* Refactored the methods for fetching plugin setting and variable data on the Block Visibility settings page
+
+**Removed**
+
+* Component styling that is not longer needed since the version requirement for the plugin is now WordPress 5.5+
 
 = 1.3.0 - 2020-12-05 =
 **Added**
@@ -111,3 +136,9 @@ Since full site editing is still in the development phase, this plugin does not 
 
 = 1.0.0 - 2020-08-03 =
 * Initial Release
+
+== Upgrade Notice ==
+
+= 1.4.0 =
+
+Version 1.4.0 includes a necessary file structure change that will deactivate the plugin when upgrading and throw an error message. But don't worry, simply re-activate Block Visibility and you are good to go. We apologize for this inconvenience and it will not happen again.
