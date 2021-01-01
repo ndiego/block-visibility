@@ -41,10 +41,11 @@ Advanced plugin settings allow you to choose which block types have visibility e
 2. Schedule any block using start and end date/time settings.
 3. Control who can see each block with user role restrictions.
 4. Designed to work with all blocks, including WooCommerce as seen here.
-5. The Getting Started page of the plugin settings.
-6. Choose which visibility controls you would like to use on your site.
-7. Disable or enable visibility on certain block types with the Block Manager.
-8. Additional plugin settings to enable/disable certain functionality including Full Control Mode.
+5. An overview of the plugin settings.
+6. General plugin settings to enable/disable certain functionality including user permissions and Full Control Mode.
+7. Choose which visibility controls you would like to use on your site.
+8. Disable or enable visibility on certain block types with the Block Manager.
+9. The Getting Started page provides useful information to help you get up and running with Block Visibility.
 
 == Installation ==
 

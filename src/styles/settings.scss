@@ -1,7 +1,7 @@
 // Media query variables
 $desktop: 1024px;
 $tablet: 768px;
-$mobile: 420px;
+$mobile: 426px;
 
 /* To fix rendering quirk in Chrome */
 #wpwrap {
@@ -48,8 +48,9 @@ $mobile: 420px;
 			display: flex;
 			justify-content: space-between;
 
-			@media ( max-width: $desktop ) {
-				display: block;
+			@media ( max-width: $mobile ) {
+				flex-direction: column;
+				margin: 5px auto;
 			}
 		}
 
@@ -57,8 +58,6 @@ $mobile: 420px;
 			h1 {
 				font-weight: 400;
 				margin: 0;
-				display: flex;
-				justify-content: space-between;
 			}
 
 			p {
@@ -93,47 +92,50 @@ $mobile: 420px;
 				margin-left: 8px;
 				background: #45428f;
 			}
+
+			@media ( max-width: $mobile ) {
+				text-align: center;
+			}
 		}
 
-		.masthead__plugin-meta {
-			width: 30%;
+		.masthead__plugin-links {
+			font-size: 15px;
+		    font-weight: 500;
+		    width: 50%;
 		    display: flex;
-		    flex-direction: column;
-		    justify-content: center;
-		    text-align: right;
+		    justify-content: flex-end;
+		    align-items: center;
 
-			@media ( max-width: $desktop ) {
-				width: 100%;
-				flex-direction: row;
-				justify-content: space-between;
-				margin-top: 20px;
-			}
+			a {
+				color: #23282d;
+				cursor: pointer;
+				display: inline-block;
+				margin-left: 16px;
+				text-decoration: none;
 
-			.plugin-meta__plugin-links {
-				font-size: 15px;
-				font-weight: 500;
+				svg {
+					width: 20px;
+					fill: currentColor;
+					vertical-align: middle;
+					margin: 0px 6px 4px 0;
+				}
 
-				a {
-					color: #23282d;
-					cursor: pointer;
-					display: inline-block;
-					margin-left: 16px;
-					text-decoration: none;
+				&:hover {
+					color: #007cba;
 
 					svg {
-						width: 20px;
-						fill: currentColor;
-						vertical-align: middle;
-						margin: 0px 6px 4px 0;
+						fill: #007cba;
 					}
+				}
+			}
 
-					&:hover {
-						color: #007cba;
+			@media ( max-width: $mobile ) {
+				justify-content: center;
+				margin-top: 10px;
+				width: 100%;
 
-						svg {
-							fill: #007cba;
-						}
-					}
+				a {
+					margin: 0 8px;
 				}
 			}
 		}
@@ -202,15 +204,16 @@ $mobile: 420px;
 			.inner-container {
 				margin: 0 auto;
 				max-width: 1024px;
+
+				&.narrow {
+					max-width: 840px;
+				}
 			}
 		}
 
 		.setting-tabs__tab-description {
-			max-width: 660px;
-			margin: 0 auto;
-
 			h2 {
-				font-size: 20px;
+				font-size: 30px;
 				font-weight: 400;
 				margin: 0 0 20px;
 			}
@@ -220,15 +223,6 @@ $mobile: 420px;
 				font-size: 15px;
 				line-height: 1.4;
 				margin: 0;
-			}
-
-			.tab-description__header {
-				display: flex;
-				justify-content: space-between;
-
-				.information-popover__button {
-					color: #777;
-				}
 			}
 		}
 
@@ -371,12 +365,6 @@ $mobile: 420px;
 
 	/* Specific styles for the Getting Started tab */
 	.setting-tabs__getting-started {
-		&>div {
-			max-width: 660px;
-			margin-left: auto;
-			margin-right: auto;
-		}
-
 		h2 {
 			font-size: 20px;
 			font-weight: 400;
@@ -389,7 +377,6 @@ $mobile: 420px;
 		}
 
 		.getting-started__video {
-			max-width: 1024px;
 			background: lightgrey;
 			margin: 40px 0;
 			text-align: center;
@@ -404,10 +391,6 @@ $mobile: 420px;
 				width: 100%;
 				height: 100%;
 			}
-		}
-
-		.getting-started__details {
-
 		}
 
 		.getting-started__panels {

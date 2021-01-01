@@ -65,10 +65,8 @@ export default function Masthead( props ) {
 						{ isPro && <span className="pro-badge">Pro</span> }
 					</h1>
 				</div>
-				<div className="masthead__plugin-meta">
-					<div className="plugin-meta__plugin-links">
-						{ linkMarkup }
-					</div>
+				<div className="masthead__plugin-links">
+					{ linkMarkup }
 				</div>
 			</div>
 		</div>

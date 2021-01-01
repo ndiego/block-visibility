@@ -21,7 +21,7 @@ export default function GettingStarted( props ) {
 	const { pluginVariables } = props.variables;
 
 	return (
-		<div className="setting-tabs__getting-started inner-container">
+		<div className="setting-tabs__getting-started inner-container narrow">
 			<div className="setting-tabs__tab-description">
 				<div className="tab-description__header">
 					<h2>{ __( 'Welcome', 'block-visibility' ) }</h2>
