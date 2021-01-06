@@ -96,11 +96,11 @@ class Block_Visibility_REST_Settings_Controller extends WP_REST_Controller {
 			if ( $new_settings ) {
 				return new WP_REST_Response( $new_settings, 200 );
 			} else {
-				return new WP_Error( '404', __( 'Something went wrong, the settings could not be updated.', 'block-visibility' ) );
+				return new WP_Error( '404', __( 'Something went wrong, the settings could not be updated.', 'block-visibility' ), array( 'status' => 404 ) );
 			}
 		}
 
-		return new WP_Error( 'cant-create', __( 'Something went wrong, the settings could not be updated.', 'block-visibility' ), array( 'status' => 500 ) );
+		return new WP_Error( '500', __( 'Something went wrong, the settings could not be updated.', 'block-visibility' ), array( 'status' => 500 ) );
 	}
 
 	/**

@@ -339,8 +339,10 @@ $mobile: 426px;
 					}
 				}
 
-				label {
+				label,
+				.settings-label {
 					font-size: 14px;
+					margin-bottom: 8px;
 				}
 
 				.settings-panel__container-subsetting {
