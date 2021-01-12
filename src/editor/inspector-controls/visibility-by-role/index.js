@@ -101,20 +101,25 @@ export default function VisibilityByRole( props ) {
 	}
 
 	return (
-		<div className="visibility-controls__user-roles">
-			<RadioControl
-				label={ __( 'Visibility by User Role', 'block-visibility' ) }
-				selected={ visibilityByRole }
-				options={ options }
-				onChange={ ( value ) =>
-					setAttributes( {
-						blockVisibility: assign(
-							{ ...blockVisibility },
-							{ visibilityByRole: value }
-						),
-					} )
-				}
-			/>
+		<div className="visibility-control__group visibility-by-user-role">
+			<div className="visibility-control visibility-by-role">
+				<RadioControl
+					label={ __(
+						'Visibility by User Role',
+						'block-visibility'
+					) }
+					selected={ visibilityByRole }
+					options={ options }
+					onChange={ ( value ) =>
+						setAttributes( {
+							blockVisibility: assign(
+								{ ...blockVisibility },
+								{ visibilityByRole: value }
+							),
+						} )
+					}
+				/>
+			</div>
 			{ visibilityByRole === 'user-role' &&
 				visibilityByRoleEnableUseRoles && (
 					<UserRoles variables={ variables } { ...props } />

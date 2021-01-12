@@ -9,7 +9,37 @@ $icon__date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><p
 $icon_date-roles: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><path d='M19.6896577,7.34929083 C19.0008071,7.12262735 18.2647241,7 17.5,7 C16.4279118,7 15.412115,7.24101205 14.503835,7.6718108 C13.7673955,7.24462863 12.9120921,7 12,7 C9.24,7 7,9.24 7,12 C7,14.4664368 8.78883318,16.5176088 11.1390287,16.9260451 C11.5933818,17.9121373 12.2702864,18.7745488 13.1053647,19.4489015 C12.7414672,19.4827144 12.3727623,19.5 12,19.5 C7,19.5 2.73,16.39 1,12 C2.73,7.61 7,4.5 12,4.5 C14.9375381,4.5 17.6231056,5.5734638 19.6896577,7.34929083 L19.6896577,7.34929083 Z'></path><path d='M12.5503909,9.05011412 C11.2835588,10.3168759 10.5,12.066933 10.5,14 C10.5,14.2073481 10.5090153,14.4125906 10.5266752,14.6153568 C9.6144694,14.1014656 9,13.1241023 9,12 C9,11.1910854 9.31819549,10.4581577 9.83655875,9.91924473 C10.3819456,9.35223691 11.1489146,9 12,9 C12.1880653,9 12.3720234,9.01719911 12.5503909,9.05011412 L12.5503909,9.05011412 Z'></path><path d='M16.732,14.56875 C16.588,14.45625 16.5,14.3 16.5,14.125 C16.5,14.08125 16.524,14.05 16.532,14.00625 L16.524,14.00625 L17.3,11 L18.076,14.00625 L20.5,16 L16.9,14.675 L16.916,14.6625 C16.852,14.6375 16.788,14.60625 16.732,14.56875 L16.732,14.56875 Z'></path><path d='M17.5,19.5 C20.5375661,19.5 23,17.0375661 23,14 C23,10.9624339 20.5375661,8.5 17.5,8.5 C14.4624339,8.5 12,10.9624339 12,14 C12,17.0375661 14.4624339,19.5 17.5,19.5 Z M17.5,18 C15.290861,18 13.5,16.209139 13.5,14 C13.5,11.790861 15.290861,10 17.5,10 C19.709139,10 21.5,11.790861 21.5,14 C21.5,16.209139 19.709139,18 17.5,18 Z'></path><path d='M38.3230099,16.7114756 C38.2750719,16.9669907 38.25,17.2305674 38.25,17.5 L38.25,19.3711011 C34.0202254,18.7421185 30.5242426,15.8678757 29,12 C30.73,7.61 35,4.5 40,4.5 C45,4.5 49.27,7.61 51,12 C50.535229,13.17939 49.8871339,14.2663962 49.0908107,15.2255348 C48.6034444,14.4577131 47.8765876,13.8568689 47.0153344,13.5280964 C47.3232835,13.0069945 47.5,12.3991344 47.5,11.75 C47.5,9.81700338 45.9329966,8.25 44,8.25 C43.7846716,8.25 43.5738849,8.26944511 43.3693,8.30667513 C42.480312,7.49514249 41.2976279,7 40,7 C37.24,7 35,9.24 35,12 C35,14.1718406 36.3870297,16.0216922 38.3230099,16.7114756 L38.3230099,16.7114756 Z'></path><path d='M40.9846656,13.5280964 C40.2574549,13.8056999 39.6260619,14.2772769 39.1537524,14.8795618 C37.9073687,14.5152953 37,13.3659902 37,12 C37,11.1910854 37.3181955,10.4581577 37.8365587,9.91924473 C38.3819456,9.35223691 39.1489146,9 40,9 C40.5215378,9 41.0114888,9.13226964 41.4382205,9.36517645 C40.8561111,9.99020155 40.5,10.8285137 40.5,11.75 C40.5,12.3991344 40.6767165,13.0069945 40.9846656,13.5280964 L40.9846656,13.5280964 Z'></path><path d='M44,13.75 C42.8954305,13.75 42,12.8545695 42,11.75 C42,10.6454305 42.8954305,9.75 44,9.75 C45.1045695,9.75 46,10.6454305 46,11.75 C46,12.8545695 45.1045695,13.75 44,13.75 Z'></path><path d='M48.25,19.5 L39.75,19.5 L39.75,17.5 C39.75,15.9812169 40.9812169,14.75 42.5,14.75 L45.5,14.75 C47.0187831,14.75 48.25,15.9812169 48.25,17.5 L48.25,19.5 Z'></path></svg>";
 
 
-.block-visibility-settings {
+.visibility-controls__container {
+
+    .visibility-control__group {
+        margin-bottom: 24px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .visibility-control {
+        margin-bottom: 16px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .settings-label {
+        margin-bottom: 8px;
+    }
+
+    .help {
+        font-size: 12px;
+        font-style: normal;
+        color: rgb(117, 117, 117);
+    }
+
+    .toggle-with-subsettings {
+        margin-bottom: 14px;
+    }
 
     .components-panel__body.is-opened>.components-panel__body-title {
         margin-bottom: 10px;
@@ -39,8 +69,16 @@ $icon_date-roles: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/sv
         }
     }
 
-    .block-visibility-settings__visibility-controls {
+    .block-visibility-controls {
         padding-top: 10px;
+
+        &>div {
+            margin-bottom: 24px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
 
         .components-notice {
             margin: 0;
@@ -48,33 +86,47 @@ $icon_date-roles: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/sv
 
         /* Specific styles for the Hide Block visibility control */
         .visibility-controls__hide-block {
-            margin-bottom: 24px;
+
         }
 
+        /* Specific styles for the Date Time visibility control */
         .visibility-controls__date-time {
-            margin-bottom: 24px;
 
-            .date-time-field {
-                display: flex;
-                justify-content: space-between;
+            &>div {
+                margin-bottom: 24px;
+            }
+            .date-time-field__container {
                 margin-bottom: 8px;
-                padding: 8px 0;
 
-                .components-button {
-                    padding: 0;
+                &:last-child {
+                    margin-bottom: 0;
+                }
 
-                    &.is-link {
-                        text-decoration: none;
+                .date-time-field {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 4px;
 
-                        svg {
-                            margin-right: 4px;
+                    .components-button {
+                        padding: 0;
+
+                        &:first-child {
+                            margin-left: -2px;
                         }
-                    }
 
-                    &.clear-date-time {
-                        width: 24px;
-                        min-width: 24px;
-                        height: 24px;
+                        &.is-link {
+                            text-decoration: none;
+
+                            svg {
+                                margin-right: 4px;
+                            }
+                        }
+
+                        &.clear-date-time {
+                            width: 24px;
+                            min-width: 24px;
+                            height: 24px;
+                        }
                     }
                 }
             }

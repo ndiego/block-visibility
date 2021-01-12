@@ -55,7 +55,7 @@ function blockVisibilityAttributes( settings ) {
 
 	// This is a global variable added to the page via PHP.
 	const fullControlMode = blockVisibilityFullControlMode; // eslint-disable-line
-	let visibilityAttributes = {
+	let attributes = {
 		blockVisibility: {
 			type: 'object',
 			properties: {
@@ -74,6 +74,21 @@ function blockVisibilityAttributes( settings ) {
 						type: 'string',
 					},
 				},
+				scheduling: {
+					type: 'object',
+					properties: {
+						enable: {
+							type: 'boolean',
+						},
+						start: {
+							type: 'string',
+						},
+						end: {
+							type: 'string',
+						},
+					},
+				},
+				// Depracated attributes
 				startDateTime: {
 					type: 'string',
 				},
@@ -86,16 +101,19 @@ function blockVisibilityAttributes( settings ) {
 				visibilityByRole: 'all',
 				hideOnRestrictedRoles: false,
 				restrictedRoles: [],
-				startDateTime: '',
-				endDateTime: '',
+				blockScheduling: {
+					enable: false,
+					start: '',
+					end: '',
+				}
 			},
 		},
 	};
 
 	// Filter allows the premium plugin to add Block Visibility attributes.
-	visibilityAttributes = applyFilters(
-		'blockVisibility.visibilityAttributes',
-		visibilityAttributes
+	attributes = applyFilters(
+		'blockVisibility.attributes',
+		attributes
 	);
 
 	// We don't want to enable visibility for blocks that cannot be added via
@@ -109,7 +127,7 @@ function blockVisibilityAttributes( settings ) {
 	) {
 		settings.attributes = assign(
 			settings.attributes,
-			visibilityAttributes
+			attributes
 		);
 	}
 

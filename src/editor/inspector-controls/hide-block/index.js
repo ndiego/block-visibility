@@ -28,23 +28,25 @@ export default function HideBlock( props ) {
 	const { hideBlock } = blockVisibility;
 
 	return (
-		<div className="visibility-controls__hide-block">
-			<ToggleControl
-				label={ __( 'Hide block', 'block-visibility' ) }
-				checked={ hideBlock }
-				onChange={ () =>
-					setAttributes( {
-						blockVisibility: assign(
-							{ ...blockVisibility },
-							{ hideBlock: ! hideBlock }
-						),
-					} )
-				}
-				help={ __(
-					'Hide selected block from everyone.',
-					'block-visibility'
-				) }
-			/>
+		<div className="visibility-control__group hide-block">
+			<div className="visibility-control">
+				<ToggleControl
+					label={ __( 'Hide block', 'block-visibility' ) }
+					checked={ hideBlock }
+					onChange={ () =>
+						setAttributes( {
+							blockVisibility: assign(
+								{ ...blockVisibility },
+								{ hideBlock: ! hideBlock }
+							),
+						} )
+					}
+					help={ __(
+						'Hide selected block from everyone.',
+						'block-visibility'
+					) }
+				/>
+			</div>
 		</div>
 	);
 }

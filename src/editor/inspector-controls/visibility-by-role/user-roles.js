@@ -28,6 +28,7 @@ export default function UserRoles( props ) {
 
 	return (
 		<>
+		<div className="visibility-control restricted-roles">
 			<label
 				htmlFor="block-visibility-control__user-roles"
 				className="user-roles__label"
@@ -77,6 +78,8 @@ export default function UserRoles( props ) {
 					);
 				} ) }
 			</div>
+		</div>
+		<div className="visibility-control hide-on-restricted-roles">
 			<ToggleControl
 				label={ __( 'Hide on selected roles', 'block-visibility' ) }
 				checked={ hideOnRestrictedRoles }
@@ -94,6 +97,7 @@ export default function UserRoles( props ) {
 				) }
 			/>
 			<Slot name="userRolesEnd" />
+		</div>
 		</>
 	);
 }

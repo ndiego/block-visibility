@@ -13,6 +13,7 @@ import {
 	Button,
 	Notice,
 	Slot,
+	ToggleControl,
 } from '@wordpress/components';
 import { __experimentalGetSettings, format } from '@wordpress/date';
 import { useState } from '@wordpress/element';
@@ -21,7 +22,10 @@ import { calendar, closeSmall } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
+import { isControlSettingEnabled } from './../../utils/setting-utilities';
 import { hideControlSection } from './../utils/hide-control-section';
+import CalendarPopover from './calendar-popover';
+import DateTimeField from './date-time-field';
 
 /**
  * Format the given date.
@@ -56,12 +60,12 @@ function formatDateLabel(
  * @return {string}		 Return the rendered JSX
  */
 export default function DateTime( props ) {
-	const { attributes, setAttributes, enabledControls } = props;
+	const { settings, attributes, setAttributes, enabledControls } = props;
+	const { blockVisibility } = attributes;
 	const [ isPickerOpen, setIsPickerOpen ] = useState( false );
 	const [ isEndPickerOpen, setIsEndPickerOpen ] = useState( false );
 
-	const { blockVisibility } = attributes;
-	const { startDateTime, endDateTime } = blockVisibility;
+	console.log(  blockVisibility );
 
 	const sectionHidden = hideControlSection(
 		enabledControls,
@@ -73,21 +77,16 @@ export default function DateTime( props ) {
 		return null;
 	}
 
-	// Force to null if variables don't exist due to quirk with DateTimePicker
-	const start = startDateTime ? startDateTime : null;
-	const end = endDateTime ? endDateTime : null;
-
-	const dateSettings = __experimentalGetSettings();
-	// To know if the current time format is a 12 hour time, look for "a".
-	// Also make sure this "a" is not escaped by a "/".
-	const is12Hour = /a(?!\\)/i.test(
-		dateSettings.formats.time
-			.toLowerCase() // Test only for the lower case "a".
-			.replace( /\\\\/g, '' ) // Replace "//" with empty strings.
-			.split( '' )
-			.reverse()
-			.join( '' ) // Reverse the string and test for "a" not followed by a slash.
+	const enableScheduling = isControlSettingEnabled(
+		settings,
+		'date_time',
+		'enable_scheduling'
 	);
+
+	// Run get functions to clean up depracated attributes
+	const start = getStart( blockVisibility, setAttributes );
+	const end = getEnd( blockVisibility, setAttributes );
+	const enable = blockVisibility?.scheduling?.enable ?? false;
 
 	const startDateLabel = formatDateLabel(
 		start,
@@ -122,130 +121,161 @@ export default function DateTime( props ) {
 	}
 
 	return (
-		<div className="visibility-controls__date-time">
-			<div>{ __( 'Start Showing', 'block-visibility' ) }</div>
-			<div className="date-time-field">
-				<Button
-					icon={ calendar }
-					title={ __( 'Set a start date/time', 'block-visibility' ) }
-					onClick={ () =>
-						setIsPickerOpen( ( _isOpen ) => ! _isOpen )
+		<div className="visibility-control__group date-time">
+			{ enableScheduling && (
+				<div className="visibility-control scheduling">
+				<ToggleControl
+					className="toggle-with-subsettings"
+					label={ __( 'Enable block scheduling', 'block-visibility' ) }
+					checked={ enable }
+					onChange={ () =>
+						setAttributes( {
+							blockVisibility: assign(
+								{ ...blockVisibility },
+								{ scheduling: assign(
+									{ ...blockVisibility.scheduling },
+									{ enable: ! enable }
+								) },
+							),
+						} )
 					}
-					isLink
-				>
-					{ startDateLabel }
-				</Button>
-				{ start && (
-					<Button
-						icon={ closeSmall }
-						className="clear-date-time"
-						title={ __(
-							'Clear start date/time',
-							'block-visibility'
-						) }
-						onClick={ () =>
-							setAttributes( {
-								blockVisibility: assign(
-									{ ...blockVisibility },
-									{ startDateTime: '' }
-								),
-							} )
-						}
-					/>
-				) }
-			</div>
-			{ isPickerOpen && (
-				<Popover
-					className="block-visibility__date-time-popover"
-					onClose={ setIsPickerOpen.bind( null, false ) }
-				>
-					<div className="date-time-header">
-						<span>
-							{ __( 'Start Date/Time', 'block-visibility' ) }
-						</span>
-					</div>
-					<DateTimePicker
-						currentDate={ selectedStartDate }
-						onChange={ ( date ) =>
-							setAttributes( {
-								blockVisibility: assign(
-									{ ...blockVisibility },
-									{ startDateTime: date }
-								),
-							} )
-						}
-						is12Hour={ is12Hour }
-						// isDayHighlighted does not appear to work, but this does.
-						events={ [ { date: end } ] }
-					/>
-				</Popover>
-			) }
-			<div>{ __( 'Stop Showing', 'block-visibility' ) }</div>
-			<div className="date-time-field">
-				<Button
-					icon={ calendar }
-					title={ __( 'Set an end date/time', 'block-visibility' ) }
-					onClick={ () =>
-						setIsEndPickerOpen( ( _isOpen ) => ! _isOpen )
-					}
-					isLink
-				>
-					{ endDateLabel }
-				</Button>
-				{ end && (
-					<Button
-						icon={ closeSmall }
-						className="clear-date-time"
-						title={ __(
-							'Clear end date/time',
-							'block-visibility'
-						) }
-						onClick={ () =>
-							setAttributes( {
-								blockVisibility: assign(
-									{ ...blockVisibility },
-									{ endDateTime: '' }
-								),
-							} )
-						}
-					/>
-				) }
-			</div>
-			{ isEndPickerOpen && (
-				<Popover
-					className="block-visibility__date-time-popover"
-					onClose={ setIsEndPickerOpen.bind( null, false ) }
-				>
-					<div className="date-time-header">
-						<span>
-							{ __( 'End Date/Time', 'block-visibility' ) }
-						</span>
-					</div>
-					<DateTimePicker
-						currentDate={ selectedEndDate }
-						onChange={ ( date ) =>
-							setAttributes( {
-								blockVisibility: assign(
-									{ ...blockVisibility },
-									{ endDateTime: date }
-								),
-							} )
-						}
-						is12Hour={ is12Hour }
-						// isDayHighlighted does not appear to work, but this does.
-						events={ [ { date: start } ] }
-					/>
-				</Popover>
-			) }
-			{ alert && (
-				<Notice status="warning" isDismissible={ false }>
-					{ __(
-						'The start time is after the stop time. Please fix for date/time settings to function properly.',
-						'block-visibility'
+					help={ enable && __(
+						'Schedule the block to only display between a start and end date/time.',
+						'block-visibility-pro'
 					) }
-				</Notice>
+				/>
+				{ enable && (
+					<div className="scheduling__date-time-fields">
+						<DateTimeField
+							label={ startDateLabel }
+							title={ __(
+								'Choose a start date/time',
+								'block-visibility'
+							) }
+							hasDateTime={ start }
+							onOpenPopover={ setIsPickerOpen }
+							onClearDateTime={ () =>
+								setAttributes( {
+									blockVisibility: assign(
+										{ ...blockVisibility },
+										{ startDateTime: '' }
+									),
+								} )
+							}
+							help={ __( 'Starting date/time', 'block-visibility' ) }
+						/>
+						{ isPickerOpen && (
+							<CalendarPopover
+								label={ __(
+									'Start Date/Time',
+									'block-visibility'
+								) }
+								currentDate={ selectedStartDate }
+								onDateChange={ ( date ) =>
+									setAttributes( {
+										blockVisibility: assign(
+											{ ...blockVisibility },
+											{ startDateTime: date }
+										),
+									} )
+								}
+								isOpen={ setIsPickerOpen }
+								highlightedDate={ end }
+							/>
+						) }
+						<DateTimeField
+							label={ endDateLabel }
+							title={ __(
+								'Choose an end date/time',
+								'block-visibility'
+							) }
+							hasDateTime={ end }
+							onOpenPopover={ setIsEndPickerOpen }
+							onClearDateTime={ () =>
+								setAttributes( {
+									blockVisibility: assign(
+										{ ...blockVisibility },
+										{ endDateTime: '' }
+									),
+								} )
+							}
+							help={ __( 'Ending date/time', 'block-visibility' ) }
+						/>
+						{ isEndPickerOpen && (
+							<CalendarPopover
+								label={ __( 'End Date/Time', 'block-visibility' ) }
+								currentDate={ selectedEndDate }
+								onDateChange={ ( date ) =>
+									setAttributes( {
+										blockVisibility: assign(
+											{ ...blockVisibility },
+											{ endDateTime: date }
+										),
+									} )
+								}
+								isOpen={ setIsEndPickerOpen }
+								highlightedDate={ start }
+							/>
+						) }
+						{ alert && (
+							<Notice status="warning" isDismissible={ false }>
+								{ __(
+									'The start time is after the stop time. Please fix for date/time settings to function properly.',
+									'block-visibility'
+								) }
+							</Notice>
+						) }
+					</div>
+				) }
+				</div>
 			) }
 			<Slot name="DateTimeControls" />
 		</div>
 	);
+}
+
+function getStart( blockVisibility, setAttributes ) {
+	const depStart = blockVisibility?.startDateTime ?? null;
+	const newStart = blockVisibility?.scheduling?.start ?? null;
+
+	if ( depStart ) {
+		setAttributes( {
+			blockVisibility: assign(
+				{ ...blockVisibility },
+				{ startDateTime: null },
+				{ scheduling: assign(
+	                { ...blockVisibility.scheduling },
+					{ enable: true },
+	                { start: depStart },
+	            ) },
+			),
+		} );
+
+		return depStart;
+	} else {
+		return newStart;
+	}
+}
+
+function getEnd( blockVisibility, setAttributes ) {
+	const depEnd = blockVisibility?.endDateTime ?? null;
+	const newEnd = blockVisibility?.scheduling?.end ?? null;
+
+	if ( depEnd ) {
+		setAttributes( {
+			blockVisibility: assign(
+				{ ...blockVisibility },
+				{ endDateTime: null },
+				{ scheduling: assign(
+	                { ...blockVisibility.scheduling },
+					{ enable: true },
+	                { end: depEnd },
+	            ) },
+			),
+		} );
+
+		return depEnd;
+	} else {
+		return newEnd;
+	}
 }

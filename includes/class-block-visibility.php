@@ -163,40 +163,62 @@ final class Block_Visibility {
 
 		$registered_blocks = WP_Block_Type_Registry::get_instance()->get_all_registered();
 
-		foreach ( $registered_blocks as $name => $block ) {
-			$block->attributes['blockVisibility'] = array(
-				'type'       => 'object',
-				'properties' => array(
-					'hideBlock'             => array(
-						'type' => 'boolean',
-					),
-					'visibilityByRole'      => array(
+		$attributes = array(
+			'type'       => 'object',
+			'properties' => array(
+				'hideBlock'             => array(
+					'type' => 'boolean',
+				),
+				'visibilityByRole'      => array(
+					'type' => 'string',
+				),
+				'hideOnRestrictedRoles' => array(
+					'type' => 'boolean',
+				),
+				'restrictedRoles'       => array(
+					'type'  => 'array',
+					'items' => array(
 						'type' => 'string',
 					),
-					'hideOnRestrictedRoles' => array(
-						'type' => 'boolean',
-					),
-					'restrictedRoles'       => array(
-						'type'  => 'array',
-						'items' => array(
+				),
+				'scheduling'		=> array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable' => array(
+							'type' => 'boolean',
+						),
+						'start'  => array(
+							'type' => 'string',
+						),
+						'end'    => array(
 							'type' => 'string',
 						),
 					),
-					'startDateTime'         => array(
-						'type' => 'string',
-					),
-					'endDateTime'           => array(
-						'type' => 'string',
-					),
 				),
-				'default'    => array(
-					'hideBlock'        => false,
-					'visibilityByRole' => 'all',
-					'restrictedRoles'  => array(),
-					'startDateTime'    => '',
-					'endDateTime'      => '',
+				// Depracated attributes
+				'startDateTime'         => array(
+					'type' => 'string',
 				),
-			);
+				'endDateTime'           => array(
+					'type' => 'string',
+				),
+			),
+			'default'    => array(
+				'hideBlock'        => false,
+				'visibilityByRole' => 'all',
+				'restrictedRoles'  => array(),
+				'blockScheduling'  => array(
+					'enable' => false,
+					'start'  => '',
+					'end'    => '',
+				),
+			),
+		);
+
+		apply_filters( 'block_visibility_attributes', $attributes );
+
+		foreach ( $registered_blocks as $name => $block ) {
+			$block->attributes['blockVisibility'] = $attributes;
 		}
 	}
 
