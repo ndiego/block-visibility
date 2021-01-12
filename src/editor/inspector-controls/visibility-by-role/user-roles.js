@@ -29,13 +29,10 @@ export default function UserRoles( props ) {
 	return (
 		<>
 		<div className="visibility-control restricted-roles">
-			<label
-				htmlFor="block-visibility-control__user-roles"
-				className="user-roles__label"
-			>
+			<div className="visibility-control__label">
 				{ __( 'Restrict by User Role', 'block-visibility' ) }
-			</label>
-			<p className="user-roles__help">
+			</div>
+			<div className="visibility-control__help">
 				{ sprintf(
 					// Translators: Whether the block is hidden or visible.
 					__(
@@ -44,11 +41,8 @@ export default function UserRoles( props ) {
 					),
 					label
 				) }
-			</p>
-			<div
-				id="block-visibility-control__user-roles"
-				className="user-roles__control"
-			>
+			</div>
+			<div className="user-roles__container">
 				{ roles.map( ( role ) => {
 					const newRestrictedRoles = [ ...restrictedRoles ];
 					const isChecked = restrictedRoles.includes( role.name );
@@ -64,6 +58,7 @@ export default function UserRoles( props ) {
 					return (
 						<CheckboxControl
 							key={ role }
+							className="user-role"
 							checked={ isChecked }
 							label={ <span>{ role.title }</span> }
 							onChange={ () =>

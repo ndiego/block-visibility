@@ -10,6 +10,7 @@ $icon_date-roles: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/sv
 
 
 .visibility-controls__container {
+    padding-top: 10px;
 
     .visibility-control__group {
         margin-bottom: 24px;
@@ -22,9 +23,24 @@ $icon_date-roles: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/sv
     .visibility-control {
         margin-bottom: 16px;
 
+        &.is-open {
+            margin-bottom: 24px;
+        }
+
         &:last-child {
             margin-bottom: 0;
         }
+    }
+
+    .visibility-control__label {
+        margin-bottom: 8px;
+    }
+
+    .visibility-control__help {
+        font-size: 12px;
+        font-style: normal;
+        color: rgb(117, 117, 117);
+        margin-bottom: 12px;
     }
 
     .settings-label {
@@ -35,10 +51,6 @@ $icon_date-roles: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/sv
         font-size: 12px;
         font-style: normal;
         color: rgb(117, 117, 117);
-    }
-
-    .toggle-with-subsettings {
-        margin-bottom: 14px;
     }
 
     .components-panel__body.is-opened>.components-panel__body-title {
@@ -68,6 +80,16 @@ $icon_date-roles: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/sv
             }
         }
     }
+
+    /* Specific styles for the User Roles visibility control */
+    .user-roles__container {
+        margin-bottom: 24px;
+
+        .user-role {
+            margin-bottom: 10px;
+        }
+    }
+
 
     .block-visibility-controls {
         padding-top: 10px;
@@ -128,30 +150,6 @@ $icon_date-roles: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/sv
                             height: 24px;
                         }
                     }
-                }
-            }
-        }
-
-        /* Specific styles for the User Roles visibility control */
-        .visibility-controls__user-roles {
-
-            .user-roles__label {
-                margin-bottom: 6px;
-                display: inline-block;
-            }
-
-            .user-roles__help {
-                font-size: 12px;
-                font-style: normal;
-                color: rgb(117, 117, 117);
-                margin-bottom: 18px;
-            }
-
-            .user-roles__control {
-                margin-bottom: 24px;
-
-                .components-base-control {
-                    margin-bottom: 6px;
                 }
             }
         }

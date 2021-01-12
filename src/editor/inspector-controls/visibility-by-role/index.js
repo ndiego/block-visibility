@@ -52,7 +52,7 @@ export default function VisibilityByRole( props ) {
 		'enable_user_roles'
 	);
 
-	function optionLabel( title, description ) {
+	const optionLabel = ( title, description ) => {
 		return (
 			<div className="compound-radio-label">
 				{ title }
