@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import classnames from 'classnames';
+
+/**
  * WordPress dependencies
  */
 import { addFilter } from '@wordpress/hooks';
@@ -53,33 +58,26 @@ const withContextualIndicators = createHigherOrderComponent(
 			const isHidden =
 				hideBlock && enabledControls.includes( 'hide_block' );
 
-			let classes = '';
-			classes = isHidden
-				? classes + 'block-visibility__is-hidden'
-				: classes;
-			classes = hasRoles( blockVisibility, enabledControls )
-				? classes + ' block-visibility__has-roles'
-				: classes;
-			classes = hasDateTime( blockVisibility, enabledControls )
-				? classes + ' block-visibility__has-date-time'
-				: classes;
-
-			// Add filter here for premium settings
-
 			// Some blocks have rendering issues when we set the icons to the
 			// :before pseudo class. For those blocks, use a background image
 			// instead.
 			const backgroundBlocks = [ 'core/pullquote' ];
 
-			classes = backgroundBlocks.includes( name )
-				? classes + ' block-visibility__set-icon-background'
-				: classes;
+			let classes = classnames( {
+				'block-visibility__is-hidden': isHidden,
+				'block-visibility__has-roles': hasRoles( blockVisibility, enabledControls ),
+				'block-visibility__has-date-time': hasDateTime( blockVisibility, enabledControls ),
+				'block-visibility__set-icon-background': backgroundBlocks.includes( name )
+			} );
 
-			classes = classes
-				? classes + ' block-visibility__has-visibility'
-				: classes;
+			if ( classes ) {
+				classes = classes + ' block-visibility__has-visibility';
+			}
 
-			return <BlockListBlock { ...props } className={ classes } />;
+			return <BlockListBlock
+				{ ...props }
+				className={ classes }
+			/>;
 		};
 	},
 	'withVisibilityContextualIndicator'

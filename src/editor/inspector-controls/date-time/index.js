@@ -18,10 +18,8 @@ import Scheduling from './scheduling';
  * @return {string}		 Return the rendered JSX
  */
 export default function DateTime( props ) {
-	const { settings, attributes, setAttributes, enabledControls } = props;
+	const { settings, attributes, enabledControls } = props;
 	const { blockVisibility } = attributes;
-
-	console.log(  blockVisibility );
 
 	const sectionHidden = hideControlSection(
 		enabledControls,
@@ -41,9 +39,7 @@ export default function DateTime( props ) {
 
 	return (
 		<div className="visibility-control__group date-time">
-			{ enableScheduling && (
-				<Scheduling { ...props } />
-			) }
+			{ enableScheduling && <Scheduling { ...props } /> }
 			<Slot name="DateTimeControls" />
 		</div>
 	);

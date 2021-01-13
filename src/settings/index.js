@@ -196,9 +196,7 @@ function Settings() {
 								/>
 							);
 						default:
-							return (
-								<Slot name="SettingsTabs" />
-							)
+							return <Slot name="SettingsTabs" />;
 					}
 				} }
 			</TabPanel>

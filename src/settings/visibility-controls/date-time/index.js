@@ -25,10 +25,7 @@ export default function DateTime( props ) {
 
 	let schedulingControl = (
 		<ToggleControl
-			label={ __(
-				'Enable block scheduling.',
-				'block-visibility'
-			) }
+			label={ __( 'Enable block scheduling.', 'block-visibility' ) }
 			checked={ enableScheduling }
 			onChange={ () => {
 				setSettings( {
@@ -44,9 +41,7 @@ export default function DateTime( props ) {
 	);
 
 	if ( ! enable ) {
-		schedulingControl = (
-			<Disabled>{ schedulingControl }</Disabled>
-		);
+		schedulingControl = <Disabled>{ schedulingControl }</Disabled>;
 	}
 
 	return (

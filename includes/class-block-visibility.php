@@ -181,7 +181,7 @@ final class Block_Visibility {
 						'type' => 'string',
 					),
 				),
-				'scheduling'		=> array(
+				'scheduling'            => array(
 					'type'       => 'object',
 					'properties' => array(
 						'enable' => array(
@@ -195,7 +195,7 @@ final class Block_Visibility {
 						),
 					),
 				),
-				// Depracated attributes
+				// Depracated attributes.
 				'startDateTime'         => array(
 					'type' => 'string',
 				),

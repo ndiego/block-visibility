@@ -59,7 +59,7 @@ export default function VisibilityByRole( props ) {
 				<span>{ description }</span>
 			</div>
 		);
-	}
+	};
 
 	const options = [
 		{
@@ -104,6 +104,7 @@ export default function VisibilityByRole( props ) {
 		<div className="visibility-control__group visibility-by-user-role">
 			<div className="visibility-control visibility-by-role">
 				<RadioControl
+					className="compound-radio-control"
 					label={ __(
 						'Visibility by User Role',
 						'block-visibility'

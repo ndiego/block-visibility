@@ -105,16 +105,13 @@ function blockVisibilityAttributes( settings ) {
 					enable: false,
 					start: '',
 					end: '',
-				}
+				},
 			},
 		},
 	};
 
 	// Filter allows the premium plugin to add Block Visibility attributes.
-	attributes = applyFilters(
-		'blockVisibility.attributes',
-		attributes
-	);
+	attributes = applyFilters( 'blockVisibility.attributes', attributes );
 
 	// We don't want to enable visibility for blocks that cannot be added via
 	// the inserter or is a child block. This excludes blocks such as reusable
@@ -125,10 +122,7 @@ function blockVisibilityAttributes( settings ) {
 		( hasBlockSupport( settings, 'inserter', true ) &&
 			! settings.hasOwnProperty( 'parent' ) )
 	) {
-		settings.attributes = assign(
-			settings.attributes,
-			attributes
-		);
+		settings.attributes = assign( settings.attributes, attributes );
 	}
 
 	return settings;

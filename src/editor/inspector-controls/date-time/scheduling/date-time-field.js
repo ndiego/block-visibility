@@ -1,21 +1,8 @@
 /**
- * External dependencies
- */
-import { assign } from 'lodash';
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import {
-	DateTimePicker,
-	Popover,
-	Button,
-	Notice,
-	Slot,
-} from '@wordpress/components';
-import { __experimentalGetSettings, format } from '@wordpress/date';
-import { useState } from '@wordpress/element';
+import { Button } from '@wordpress/components';
 import { calendar, closeSmall } from '@wordpress/icons';
 
 /**
@@ -26,40 +13,26 @@ import { calendar, closeSmall } from '@wordpress/icons';
  * @return {string}		 Return the rendered JSX
  */
 export default function DateTimeField( props ) {
-	const {
-		label,
-		title,
-		hasDateTime,
-		onOpenPopover,
-		onClearDateTime,
-		help
-	} = props;
+	const { label, title, hasDateTime, onOpenPopover, onClearDateTime } = props;
 
-    return (
-		<div className="date-time-field__container">
-			<div className="date-time-field">
+	return (
+		<div className="date-time-field">
+			<Button
+				icon={ calendar }
+				title={ title }
+				onClick={ () => onOpenPopover( ( _isOpen ) => ! _isOpen ) }
+				isLink
+			>
+				{ label }
+			</Button>
+			{ hasDateTime && (
 				<Button
-					icon={ calendar }
-					title={ title }
-					onClick={ () => onOpenPopover( ( _isOpen ) => ! _isOpen ) }
-					isLink
-				>
-					{ label }
-				</Button>
-				{ hasDateTime && (
-					<Button
-						icon={ closeSmall }
-						className="clear-date-time"
-						title={ __( 'Clear date/time', 'block-visibility' ) }
-						onClick={ () => onClearDateTime() }
-					/>
-				) }
-			</div>
-			{ help && (
-				<div className="help">
-					{ help }
-				</div>
+					icon={ closeSmall }
+					className="clear-date-time"
+					title={ __( 'Clear date/time', 'block-visibility' ) }
+					onClick={ () => onClearDateTime() }
+				/>
 			) }
 		</div>
-    );
+	);
 }

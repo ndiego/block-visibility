@@ -25,6 +25,10 @@ $icon_date-roles: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/sv
 
         &.is-open {
             margin-bottom: 24px;
+
+            &>.components-base-control {
+                margin-bottom: 12px;
+            }
         }
 
         &:last-child {
@@ -43,40 +47,62 @@ $icon_date-roles: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/sv
         margin-bottom: 12px;
     }
 
-    .settings-label {
+    /* Specific styling for radion controls with help text */
+    .compound-radio-control {
+        .components-radio-control__option {
+            margin-top: 4px;
+
+            &:not(:last-child) {
+                margin-bottom: 6px;
+            }
+
+            input {
+                vertical-align: top;
+                margin-top: 2px;
+                margin-right: 8px;
+            }
+
+            .compound-radio-label {
+                display: inline-block;
+                font-weight: 600;
+
+                span {
+                    display: block;
+                    font-weight: 400;
+                    max-width: 200px;
+                    font-size: 12px;
+                    font-style: normal;
+                    color: rgb(117, 117, 117);
+                }
+            }
+        }
+    }
+
+    /* Specific styles for the Date Time visibility control */
+    .date-time-field {
+        display: flex;
+        justify-content: space-between;
         margin-bottom: 8px;
-    }
 
-    .help {
-        font-size: 12px;
-        font-style: normal;
-        color: rgb(117, 117, 117);
-    }
+        .components-button {
+            padding: 0;
 
-    .components-panel__body.is-opened>.components-panel__body-title {
-        margin-bottom: 10px;
-    }
+            &:first-child {
+                margin-left: -2px;
+            }
 
-    .components-radio-control__option {
-        &:not(:last-child) {
-            margin-bottom: 6px;
-        }
-        input {
-            vertical-align: top;
-            margin-top: 2px;
-        }
+            &.is-link {
+                text-decoration: none;
 
-        .compound-radio-label {
-            display: inline-block;
-            font-weight: 600;
+                svg {
+                    margin-right: 4px;
+                }
+            }
 
-            span {
-                display: block;
-                font-weight: 400;
-                max-width: 200px;
-                font-size: 12px;
-                font-style: normal;
-                color: rgb(117, 117, 117);
+            &.clear-date-time {
+                width: 24px;
+                min-width: 24px;
+                height: 24px;
             }
         }
     }
@@ -89,73 +115,9 @@ $icon_date-roles: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/sv
             margin-bottom: 10px;
         }
     }
-
-
-    .block-visibility-controls {
-        padding-top: 10px;
-
-        &>div {
-            margin-bottom: 24px;
-
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
-
-        .components-notice {
-            margin: 0;
-        }
-
-        /* Specific styles for the Hide Block visibility control */
-        .visibility-controls__hide-block {
-
-        }
-
-        /* Specific styles for the Date Time visibility control */
-        .visibility-controls__date-time {
-
-            &>div {
-                margin-bottom: 24px;
-            }
-            .date-time-field__container {
-                margin-bottom: 8px;
-
-                &:last-child {
-                    margin-bottom: 0;
-                }
-
-                .date-time-field {
-                    display: flex;
-                    justify-content: space-between;
-                    margin-bottom: 4px;
-
-                    .components-button {
-                        padding: 0;
-
-                        &:first-child {
-                            margin-left: -2px;
-                        }
-
-                        &.is-link {
-                            text-decoration: none;
-
-                            svg {
-                                margin-right: 4px;
-                            }
-                        }
-
-                        &.clear-date-time {
-                            width: 24px;
-                            min-width: 24px;
-                            height: 24px;
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
 
+/* Date/Time calendar popover styles */
 .block-visibility__date-time-popover {
     & > div {
         padding: 12px;
@@ -171,6 +133,7 @@ $icon_date-roles: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/sv
     }
 }
 
+/* Contextual indicator styles */
 .block-visibility__has-visibility {
     outline: 2px dashed rgba(0, 0, 0, 0.7);
     opacity: .5;

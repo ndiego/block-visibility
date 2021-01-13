@@ -8,94 +8,82 @@ import classnames from 'classnames';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import {
-	DateTimePicker,
-	Popover,
-	Button,
-	Notice,
-	ToggleControl,
-} from '@wordpress/components';
-import { __experimentalGetSettings, format } from '@wordpress/date';
+import { Notice, ToggleControl } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-import { calendar, closeSmall } from '@wordpress/icons';
 
 /**
  * Internal dependencies
  */
 import CalendarPopover from './calendar-popover';
 import DateTimeField from './date-time-field';
+import formatDateLabel from './format-date-label';
 
-
-
-function getStart( blockVisibility, setAttributes ) {
-	const depStart = blockVisibility?.startDateTime ?? null;
+/**
+ * Helper function for getting the start date. Function checks if the depracated
+ * startDateTime attribute is set and handle accordingly.
+ *
+ * @since 1.4.0
+ * @param {Object} blockVisibility All the block attributes
+ * @param {Function} setAttributes Sets the block attributes
+ * @return {string}		           Returns the start date
+ */
+function getStartDate( blockVisibility, setAttributes ) {
+	const depracatedStart = blockVisibility?.startDateTime ?? null;
 	const newStart = blockVisibility?.scheduling?.start ?? null;
 
-	if ( depStart ) {
+	if ( depracatedStart ) {
 		setAttributes( {
 			blockVisibility: assign(
 				{ ...blockVisibility },
 				{ startDateTime: null },
-				{ scheduling: assign(
-	                { ...blockVisibility.scheduling },
-					{ enable: true },
-	                { start: depStart },
-	            ) },
+				{
+					scheduling: assign(
+						{ ...blockVisibility.scheduling },
+						{ enable: true },
+						{ start: depracatedStart }
+					),
+				}
 			),
 		} );
 
-		return depStart;
-	} else {
-		return newStart;
+		return depracatedStart;
 	}
+
+	return newStart;
 }
 
-function getEnd( blockVisibility, setAttributes ) {
-	const depEnd = blockVisibility?.endDateTime ?? null;
+/**
+ * Helper function for getting the end date. Function checks if the depracated
+ * endDateTime attribute is set and handle accordingly.
+ *
+ * @since 1.4.0
+ * @param {Object} blockVisibility All the block attributes
+ * @param {Function} setAttributes Sets the block attributes
+ * @return {string}		           Returns the end date
+ */
+function getEndDate( blockVisibility, setAttributes ) {
+	const depracatedEnd = blockVisibility?.endDateTime ?? null;
 	const newEnd = blockVisibility?.scheduling?.end ?? null;
 
-	if ( depEnd ) {
+	if ( depracatedEnd ) {
 		setAttributes( {
 			blockVisibility: assign(
 				{ ...blockVisibility },
 				{ endDateTime: null },
-				{ scheduling: assign(
-	                { ...blockVisibility.scheduling },
-					{ enable: true },
-	                { end: depEnd },
-	            ) },
+				{
+					scheduling: assign(
+						{ ...blockVisibility.scheduling },
+						{ enable: true },
+						{ end: depracatedEnd }
+					),
+				}
 			),
 		} );
 
-		return depEnd;
-	} else {
-		return newEnd;
-	}
-}
-
-/**
- * Format the given date.
- *
- * @since 1.1.0
- * @param {Object} date     The date object to format
- * @param {string} fallback If there is no date, a fallback string is returned
- * @return {string}		    The formatted date as a string or the fallback
- */
-function formatDateLabel(
-	date,
-	fallback = __( 'No time selected', 'block-visibility' )
-) {
-	const dateSettings = __experimentalGetSettings();
-	let label = fallback;
-
-	if ( date ) {
-		label = format(
-			`${ dateSettings.formats.date } ${ dateSettings.formats.time }`,
-			date
-		);
+		return depracatedEnd;
 	}
 
-	return label;
+	return newEnd;
 }
 
 /**
@@ -106,17 +94,17 @@ function formatDateLabel(
  * @return {string}		 Return the rendered JSX
  */
 export default function Scheduling( props ) {
-    const { attributes, setAttributes, enabledControls } = props;
-    const { blockVisibility } = attributes;
-    const [ isPickerOpen, setIsPickerOpen ] = useState( false );
-    const [ isEndPickerOpen, setIsEndPickerOpen ] = useState( false );
+	const { attributes, setAttributes } = props;
+	const { blockVisibility } = attributes;
+	const [ isPickerOpen, setIsPickerOpen ] = useState( false );
+	const [ isEndPickerOpen, setIsEndPickerOpen ] = useState( false );
 
-    const enable = blockVisibility?.scheduling?.enable ?? false;
+	const enable = blockVisibility?.scheduling?.enable ?? false;
 	const today = new Date( new Date().setHours( 0, 0, 0, 0 ) );
 
-    // Run get functions to clean up depracated attributes
-	const start = getStart( blockVisibility, setAttributes );
-	const end = getEnd( blockVisibility, setAttributes );
+	// Run get functions to clean up depracated attributes
+	const start = getStartDate( blockVisibility, setAttributes );
+	const end = getEndDate( blockVisibility, setAttributes );
 
 	const startDateLabel = formatDateLabel(
 		start,
@@ -129,34 +117,34 @@ export default function Scheduling( props ) {
 
 	// If there is no start date/time selected, but there is an end, default the
 	// starting selection in the calendar to the day prior.
-    const selectedStart = ( start, end, today ) => {
-        if ( start ) {
-            return start;
-        }
+	const selectedStart = ( _start, _end, _today ) => {
+		if ( _start ) {
+			return _start;
+		}
 
-        const startAlt = end ? new Date( end ) : new Date( today );
+		const startAlt = _end ? new Date( _end ) : new Date( _today );
 
-    	if ( end ) {
-    		startAlt.setHours( 0, 0, 0, 0 );
-    		startAlt.setDate( startAlt.getDate() - 1 );
-    	}
+		if ( _end ) {
+			startAlt.setHours( 0, 0, 0, 0 );
+			startAlt.setDate( startAlt.getDate() - 1 );
+		}
 
-        return startAlt;
-    }
+		return startAlt;
+	};
 
 	// If there is no end date/time selected, but there is a start, default the
 	// starting selection in the calendar to the next day.
-    const selectedEnd = ( start, end, today ) => {
-        if ( end ) {
-            return end;
-        }
+	const selectedEnd = ( _start, _end, _today ) => {
+		if ( _end ) {
+			return _end;
+		}
 
-        const endAlt = start ? new Date( start ) : new Date( today );
-    	endAlt.setHours( 0, 0, 0, 0 );
-    	endAlt.setDate( endAlt.getDate() + 1 );
+		const endAlt = _start ? new Date( _start ) : new Date( _today );
+		endAlt.setHours( 0, 0, 0, 0 );
+		endAlt.setDate( endAlt.getDate() + 1 );
 
-    	return endAlt;
-    }
+		return endAlt;
+	};
 
 	// If the start time is greater or equal to the end time, display a warning.
 	let alert = false;
@@ -164,88 +152,102 @@ export default function Scheduling( props ) {
 		alert = start >= end ? true : false;
 	}
 
-    const setAttribute = ( attribute, value ) => {
-        setAttributes( {
-            blockVisibility: assign(
-                { ...blockVisibility },
-                { scheduling: assign(
-                    { ...blockVisibility.scheduling },
-                    { [ attribute ]: value }
-                ) },
-            ),
-        } )
-    }
+	const setAttribute = ( attribute, value ) =>
+		setAttributes( {
+			blockVisibility: assign(
+				{ ...blockVisibility },
+				{
+					scheduling: assign(
+						{ ...blockVisibility.scheduling },
+						{ [ attribute ]: value }
+					),
+				}
+			),
+		} );
 
-    return (
-        <div className={ classnames(
-            'visibility-control',
-            'scheduling',
-            enable && 'is-open'
-        ) }>
-        <ToggleControl
-            label={ __( 'Enable block scheduling', 'block-visibility' ) }
-            checked={ enable }
-            onChange={ () => setAttribute( 'enable', ! enable ) }
-            help={ enable && __(
-                'Schedule the block to only display between a start and end date/time.',
-                'block-visibility-pro'
-            ) }
-        />
-        { enable && (
-            <div className="scheduling__date-time-fields">
-                <DateTimeField
-                    label={ startDateLabel }
-                    title={ __(
-                        'Choose a start date/time',
-                        'block-visibility'
-                    ) }
-                    hasDateTime={ start }
-                    onOpenPopover={ setIsPickerOpen }
-                    onClearDateTime={ () => setAttribute( 'start', '' ) }
-                    help={ __( 'Starting date/time', 'block-visibility' ) }
-                />
-                { isPickerOpen && (
-                    <CalendarPopover
-                        label={ __(
-                            'Start Date/Time',
-                            'block-visibility'
-                        ) }
-                        currentDate={ selectedStart( start, end, today ) }
-                        onDateChange={ ( date ) => setAttribute( 'start', date ) }
-                        isOpen={ setIsPickerOpen }
-                        highlightedDate={ end }
-                    />
-                ) }
-                <DateTimeField
-                    label={ endDateLabel }
-                    title={ __(
-                        'Choose an end date/time',
-                        'block-visibility'
-                    ) }
-                    hasDateTime={ end }
-                    onOpenPopover={ setIsEndPickerOpen }
-                    onClearDateTime={ () => setAttribute( 'end', '' ) }
-                    help={ __( 'Ending date/time', 'block-visibility' ) }
-                />
-                { isEndPickerOpen && (
-                    <CalendarPopover
-                        label={ __( 'End Date/Time', 'block-visibility' ) }
-                        currentDate={ selectedEnd( start, end, today ) }
-                        onDateChange={ ( date ) => setAttribute( 'end', date ) }
-                        isOpen={ setIsEndPickerOpen }
-                        highlightedDate={ start }
-                    />
-                ) }
-                { alert && (
-                    <Notice status="warning" isDismissible={ false }>
-                        { __(
-                            'The start time is after the stop time. Please fix for date/time settings to function properly.',
-                            'block-visibility'
-                        ) }
-                    </Notice>
-                ) }
-            </div>
-        ) }
-        </div>
-    );
+	return (
+		<div
+			className={ classnames(
+				'visibility-control',
+				'scheduling',
+				enable && 'is-open'
+			) }
+		>
+			<ToggleControl
+				label={ __( 'Enable block scheduling', 'block-visibility' ) }
+				checked={ enable }
+				onChange={ () => setAttribute( 'enable', ! enable ) }
+				help={
+					enable &&
+					__(
+						'Schedule the block to only be visible between a start and end date/time.',
+						'block-visibility'
+					)
+				}
+			/>
+			{ enable && (
+				<div className="scheduling__date-time-fields">
+					<div className="visibility-control__label">
+						{ __( 'Start showing', 'block-visibility' ) }
+					</div>
+					<DateTimeField
+						label={ startDateLabel }
+						title={ __(
+							'Choose a start date/time',
+							'block-visibility'
+						) }
+						hasDateTime={ start }
+						onOpenPopover={ setIsPickerOpen }
+						onClearDateTime={ () => setAttribute( 'start', '' ) }
+					/>
+					{ isPickerOpen && (
+						<CalendarPopover
+							label={ __(
+								'Start Date/Time',
+								'block-visibility'
+							) }
+							currentDate={ selectedStart( start, end, today ) }
+							onDateChange={ ( date ) =>
+								setAttribute( 'start', date )
+							}
+							isOpen={ setIsPickerOpen }
+							highlightedDate={ end }
+						/>
+					) }
+					<div className="visibility-control__label">
+						{ __( 'Stop showing', 'block-visibility' ) }
+					</div>
+					<DateTimeField
+						label={ endDateLabel }
+						title={ __(
+							'Choose an end date/time',
+							'block-visibility'
+						) }
+						hasDateTime={ end }
+						onOpenPopover={ setIsEndPickerOpen }
+						onClearDateTime={ () => setAttribute( 'end', '' ) }
+					/>
+					{ isEndPickerOpen && (
+						<CalendarPopover
+							label={ __( 'End Date/Time', 'block-visibility' ) }
+							currentDate={ selectedEnd( start, end, today ) }
+							onDateChange={ ( date ) =>
+								setAttribute( 'end', date )
+							}
+							isOpen={ setIsEndPickerOpen }
+							highlightedDate={ start }
+						/>
+					) }
+					{ alert && (
+						<Notice status="warning" isDismissible={ false }>
+							{ __(
+								'The start time is after the stop time. Please fix for date/time settings to function properly.',
+								'block-visibility'
+							) }
+						</Notice>
+					) }
+				</div>
+			) }
+		</div>
+	);
 }
