@@ -86,6 +86,11 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 			'isPro'             => defined( 'BVP_VERSION' ), // If the Pro version constant is set, then Block Visibility Pro is active.
 		);
 
+		$variables = apply_filters(
+			'block_visibility_rest_variables',
+			$variables
+		);
+
 		return new WP_REST_Response( $variables, 200 );
 	}
 
@@ -100,7 +105,7 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 			return $this->schema;
 		}
 
-		$this->schema = array(
+		$schema = array(
 			'$schema'    => 'http://json-schema.org/draft-04/schema#',
 			'title'      => 'variables',
 			'type'       => 'object',
@@ -130,6 +135,11 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 					'type' => 'boolean',
 				),
 			),
+		);
+
+		$this->schema = apply_filters(
+			'block_visibility_rest_variables_schema',
+			$schema
 		);
 
 		return $this->schema;

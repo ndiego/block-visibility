@@ -125,7 +125,7 @@ class Block_Visibility_REST_Settings_Controller extends WP_REST_Controller {
 			return $this->schema;
 		}
 
-		$this->schema = array(
+		$schema = array(
 			'$schema'    => 'http://json-schema.org/draft-04/schema#',
 			'title'      => 'settings',
 			'type'       => 'object',
@@ -210,6 +210,11 @@ class Block_Visibility_REST_Settings_Controller extends WP_REST_Controller {
 					),
 				),
 			),
+		);
+
+		$this->schema = apply_filters(
+			'block_visibility_rest_settings_schema',
+			$schema
 		);
 
 		return $this->schema;

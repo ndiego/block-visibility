@@ -63,9 +63,14 @@ function enqueue_editor_assets() {
 		$asset_file['version']
 	);
 }
-add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_assets' );
 
-
+/**
+ * Need to add at admin_init instead of the normal enqueue_block_editor_assets
+ * so that our attributes load for third-party blocks. Hopefully this will be
+ * resolved in future releases of WP. Using enqueue_block_editor_assets is the
+ * ideal implementation. The primary culprit is Jetpack blocks.
+ */
+add_action( 'admin_init', __NAMESPACE__ . '\enqueue_editor_assets', 10000 );
 
 /**
  * Make sure we are on a page with the Block Editor, this include FSE pages.

@@ -55,6 +55,8 @@ function blockVisibilityAttributes( settings ) {
 
 	// This is a global variable added to the page via PHP.
 	const fullControlMode = blockVisibilityFullControlMode; // eslint-disable-line
+
+	// Add the block visibility attributes.
 	let attributes = {
 		blockVisibility: {
 			type: 'object',
@@ -94,17 +96,6 @@ function blockVisibilityAttributes( settings ) {
 				},
 				endDateTime: {
 					type: 'string',
-				},
-			},
-			default: {
-				hideBlock: false,
-				visibilityByRole: 'all',
-				hideOnRestrictedRoles: false,
-				restrictedRoles: [],
-				blockScheduling: {
-					enable: false,
-					start: '',
-					end: '',
 				},
 			},
 		},

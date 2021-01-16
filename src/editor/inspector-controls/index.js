@@ -48,7 +48,7 @@ export default function VisibilityInspectorControls( props ) {
 
 	// Provides an entry point to slot in additional settings.
 	const AdditionalControls = withFilters(
-		'blockVisibility.InspectorControls'
+		'blockVisibility.addInspectorControls'
 	)( ( props ) => <></> ); // eslint-disable-line
 
 	return (

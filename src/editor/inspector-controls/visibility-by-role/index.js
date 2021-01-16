@@ -18,6 +18,32 @@ import { hideControlSection } from './../utils/hide-control-section';
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
 
 /**
+ * Helper function for getting the visibilityByRole value. Function checks if
+ * the depracated "all" value is set and changes this to 'public'.
+ *
+ * @since 1.4.1
+ * @param {Object} blockVisibility All the block attributes
+ * @param {Function} setAttributes Sets the block attributes
+ * @return {string}		           Returns the start date
+ */
+function getVisibilityByRole( blockVisibility, setAttributes ) {
+	const visibilityByRole = blockVisibility?.visibilityByRole ?? 'public';
+
+	if ( visibilityByRole === 'all' ) {
+		setAttributes( {
+			blockVisibility: assign(
+				{ ...blockVisibility },
+				{ visibilityByRole: 'public' }
+			),
+		} );
+
+		return 'public';
+	}
+
+	return visibilityByRole;
+}
+
+/**
  * Add the Visibility By User Role control
  *
  * @since 1.0.0
@@ -33,7 +59,6 @@ export default function VisibilityByRole( props ) {
 		variables,
 	} = props;
 	const { blockVisibility } = attributes;
-	const { visibilityByRole } = blockVisibility;
 
 	const sectionHidden = hideControlSection(
 		enabledControls,
@@ -45,8 +70,14 @@ export default function VisibilityByRole( props ) {
 		return null;
 	}
 
+	// Run the get function to clean up depracated visibilityByRole values
+	const visibilityByRole = getVisibilityByRole(
+		blockVisibility,
+		setAttributes
+	);
+
 	const settingsUrl = variables?.pluginVariables.settingsUrl ?? ''; // eslint-disable-line
-	const visibilityByRoleEnableUseRoles = isControlSettingEnabled(
+	const enableUserRoles = isControlSettingEnabled(
 		settings,
 		'visibility_by_role',
 		'enable_user_roles'
@@ -64,39 +95,36 @@ export default function VisibilityByRole( props ) {
 	const options = [
 		{
 			label: optionLabel(
-				__( 'All', 'block-visibility' ),
-				__( 'Visible to everyone', 'block-visibility' )
+				__( 'Public', 'block-visibility' ),
+				__( 'Visible to everyone.', 'block-visibility' )
 			),
-			value: 'all',
+			value: 'public',
 		},
 		{
 			label: optionLabel(
-				__( 'Public', 'block-visibility' ),
-				__( 'Visible to all logged-out users', 'block-visibility' )
+				__( 'Logged-out', 'block-visibility' ),
+				__( 'Only visible to logged-out users.', 'block-visibility' )
 			),
 			value: 'logged-out',
 		},
 		{
 			label: optionLabel(
-				__( 'Private', 'block-visibility' ),
-				__( 'Visible to all logged-in users', 'block-visibility' )
+				__( 'Logged-in', 'block-visibility' ),
+				__( 'Only visible to logged-in users.', 'block-visibility' )
 			),
 			value: 'logged-in',
 		},
 		{
 			label: optionLabel(
 				__( 'User Role', 'block-visibility' ),
-				__(
-					'Restrict visibility to specific user roles',
-					'block-visibility'
-				)
+				__( 'Only visible to specific user roles.', 'block-visibility' )
 			),
 			value: 'user-role',
 		},
 	];
 
 	// If the User Roles option is not enabled in plugin settings, remove it.
-	if ( ! visibilityByRoleEnableUseRoles ) {
+	if ( ! enableUserRoles ) {
 		options.pop();
 	}
 
@@ -121,30 +149,28 @@ export default function VisibilityByRole( props ) {
 					}
 				/>
 			</div>
-			{ visibilityByRole === 'user-role' &&
-				visibilityByRoleEnableUseRoles && (
-					<UserRoles variables={ variables } { ...props } />
-				) }
-			{ visibilityByRole === 'user-role' &&
-				! visibilityByRoleEnableUseRoles && (
-					<Notice status="warning" isDismissible={ false }>
-						{ createInterpolateElement(
-							__(
-								'The User Role option was previously selected, but is now disabled. Choose another option or update the <a>Visibility Control</a> settings.',
-								'block-visibility'
+			{ visibilityByRole === 'user-role' && enableUserRoles && (
+				<UserRoles variables={ variables } { ...props } />
+			) }
+			{ visibilityByRole === 'user-role' && ! enableUserRoles && (
+				<Notice status="warning" isDismissible={ false }>
+					{ createInterpolateElement(
+						__(
+							'The User Role option was previously selected, but is now disabled. Choose another option or update the <a>Visibility Control</a> settings.',
+							'block-visibility'
+						),
+						{
+							a: (
+								<a // eslint-disable-line
+									href={ settingsUrl }
+									target="_blank"
+									rel="noreferrer"
+								/>
 							),
-							{
-								a: (
-									<a // eslint-disable-line
-										href={ settingsUrl }
-										target="_blank"
-										rel="noreferrer"
-									/>
-								),
-							}
-						) }
-					</Notice>
-				) }
+						}
+					) }
+				</Notice>
+			) }
 			<Slot name="VisibilityByRoleControls" />
 		</div>
 	);

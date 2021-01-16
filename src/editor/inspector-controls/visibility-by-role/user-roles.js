@@ -30,7 +30,7 @@ export default function UserRoles( props ) {
 		<>
 			<div className="visibility-control restricted-roles">
 				<div className="visibility-control__label">
-					{ __( 'Restrict by User Role', 'block-visibility' ) }
+					{ __( 'Restricted User Roles', 'block-visibility' ) }
 				</div>
 				<div className="visibility-control__help">
 					{ sprintf(
@@ -60,7 +60,7 @@ export default function UserRoles( props ) {
 								key={ role }
 								className="user-role"
 								checked={ isChecked }
-								label={ <span>{ role.title }</span> }
+								label={ role.title }
 								onChange={ () =>
 									setAttributes( {
 										blockVisibility: assign(

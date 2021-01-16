@@ -22,7 +22,7 @@ import formatDateLabel from './format-date-label';
  * Helper function for getting the start date. Function checks if the depracated
  * startDateTime attribute is set and handle accordingly.
  *
- * @since 1.4.0
+ * @since 1.4.1
  * @param {Object} blockVisibility All the block attributes
  * @param {Function} setAttributes Sets the block attributes
  * @return {string}		           Returns the start date
@@ -56,7 +56,7 @@ function getStartDate( blockVisibility, setAttributes ) {
  * Helper function for getting the end date. Function checks if the depracated
  * endDateTime attribute is set and handle accordingly.
  *
- * @since 1.4.0
+ * @since 1.4.1
  * @param {Object} blockVisibility All the block attributes
  * @param {Function} setAttributes Sets the block attributes
  * @return {string}		           Returns the end date

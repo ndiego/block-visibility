@@ -82,7 +82,7 @@ final class Block_Visibility {
 	 * @return void
 	 */
 	public function actions() {
-		add_action( 'wp_loaded', array( $this, 'add_attributes_to_registered_blocks' ), 100 );
+		add_action( 'wp_loaded', array( $this, 'add_attributes_to_registered_blocks' ), 999 );
 		add_action( 'init', array( $this, 'load_textdomain' ) );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'block_localization' ) );
 	}
@@ -203,19 +203,12 @@ final class Block_Visibility {
 					'type' => 'string',
 				),
 			),
-			'default'    => array(
-				'hideBlock'        => false,
-				'visibilityByRole' => 'all',
-				'restrictedRoles'  => array(),
-				'blockScheduling'  => array(
-					'enable' => false,
-					'start'  => '',
-					'end'    => '',
-				),
-			),
 		);
 
-		apply_filters( 'block_visibility_attributes', $attributes );
+		$attributes = apply_filters(
+			'block_visibility_attributes',
+			$attributes
+		);
 
 		foreach ( $registered_blocks as $name => $block ) {
 			$block->attributes['blockVisibility'] = $attributes;

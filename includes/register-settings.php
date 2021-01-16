@@ -87,7 +87,7 @@ function register_settings() {
 		),
 	);
 
-	apply_filters( 'block_visibility_settings', $settings );
+	$settings = apply_filters( 'block_visibility_settings', $settings );
 
 	$defaults = array(
 		'visibility_controls' => array(
@@ -114,7 +114,7 @@ function register_settings() {
 		),
 	);
 
-	apply_filters( 'block_visibility_setting_defaults', $defaults );
+	$defaults = apply_filters( 'block_visibility_setting_defaults', $defaults );
 
 	register_setting(
 		'block_visibility',

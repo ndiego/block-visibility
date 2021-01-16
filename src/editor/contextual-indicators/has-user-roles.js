@@ -1,4 +1,9 @@
 /**
+ * WordPress dependencies
+ */
+import { applyFilters } from '@wordpress/hooks';
+
+/**
  * Determine if visibility by user role settings are enabled for the block.
  *
  * @since 1.1.0
@@ -13,12 +18,14 @@ export default function hasRoles( blockVisibility, enabledControls ) {
 		hideOnRestrictedRoles,
 	} = blockVisibility;
 
+	let indicatorTest = true;
+
 	if (
 		! enabledControls.includes( 'visibility_by_role' ) ||
 		! visibilityByRole ||
 		visibilityByRole === 'all'
 	) {
-		return false;
+		indicatorTest = false;
 	}
 
 	// If the restriction is set to user-roles, but no user roles are selected,
@@ -29,8 +36,13 @@ export default function hasRoles( blockVisibility, enabledControls ) {
 		restrictedRoles.length === 0 &&
 		hideOnRestrictedRoles
 	) {
-		return false;
+		indicatorTest = false;
 	}
 
-	return true;
+	indicatorTest = applyFilters(
+		'blockVisibility.hasUserRoles',
+		indicatorTest
+	);
+
+	return indicatorTest;
 }

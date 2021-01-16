@@ -19,20 +19,10 @@ defined( 'ABSPATH' ) || exit;
  */
 function get_user_roles() {
 
-	// Initialize the roles array with the default Public role.
-	$roles = array(
-		array(
-			'name'  => 'public',
-			'title' => __( 'Public (Logged-out Users)', 'block-visibility' ),
-			'type'  => 'public',
-		),
-	);
+	$roles = array();
 
 	global $wp_roles;
 	$all_roles = $wp_roles->roles;
-
-	// Filters the list of editable roles.
-	$editable_roles = apply_filters( 'block_visibility_editable_roles', $all_roles );
 
 	$role_types = array(
 		'administrator' => 'core',
@@ -42,7 +32,7 @@ function get_user_roles() {
 		'subscriber'    => 'core',
 	);
 
-	foreach ( $editable_roles as $role_slug => $role_atts ) {
+	foreach ( $all_roles as $role_slug => $role_atts ) {
 		$atts = array(
 			'name'  => $role_slug,
 			'title' => $role_atts['name'],
@@ -56,6 +46,16 @@ function get_user_roles() {
 
 		$roles[] = $atts;
 	}
+
+	// Add the logged-out role to the end.
+	$roles[] = array(
+		'name'  => 'logged-out',
+		'title' => __( 'None (Logged-out users)', 'block-visibility' ),
+		'type'  => 'core', // Not really a core role, but a proxy for when a user has no roles.
+	);
+
+	// Filters the list of roles.
+	$roles = apply_filters( 'block_visibility_user_roles', $roles );
 
 	return $roles;
 }

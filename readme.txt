@@ -76,6 +76,12 @@ As of version 1.4.0, Block Visibility is supported in the Site Editor, which is 
 
 == Changelog ==
 
+= 1.4.1 - 2021-01-XX =
+
+**Removed**
+
+* Attribute defaults in an effort to declutter block markup when only a few settings are enabled
+
 = 1.4.0 - 2021-01-01 =
 
 **Upgrade Warning**

@@ -1,4 +1,9 @@
 /**
+ * WordPress dependencies
+ */
+import { applyFilters } from '@wordpress/hooks';
+
+/**
  * Determine if date time settings are enabled for the block.
  *
  * @since 1.1.0
@@ -7,19 +12,29 @@
  * @return {boolean}		        Does the block have date time settings
  */
 export default function hasDateTime( blockVisibility, enabledControls ) {
-	const { startDateTime, endDateTime } = blockVisibility;
+	const enable = blockVisibility?.scheduling?.enable ?? false;
+	const start = blockVisibility?.scheduling?.start ?? '';
+	const end = blockVisibility?.scheduling?.end ?? '';
+
+	let indicatorTest = true;
 
 	if (
 		! enabledControls.includes( 'date_time' ) ||
-		( ! startDateTime && ! endDateTime )
+		! enable ||
+		( ! start && ! end )
 	) {
-		return false;
+		indicatorTest = false;
 	}
 
 	// If the restriction is set to user-roles, but no user roles are selected.
-	if ( startDateTime && endDateTime && startDateTime >= endDateTime ) {
-		return false;
+	if ( start && end && start >= end ) {
+		indicatorTest = false;
 	}
 
-	return true;
+	indicatorTest = applyFilters(
+		'blockVisibility.hasDateTime',
+		indicatorTest
+	);
+
+	return indicatorTest;
 }
