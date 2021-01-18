@@ -138,7 +138,7 @@ Nope. Visibility is controlled on the server, so if a block should be hidden bas
 * Refactored the scheduling controls.
 * Updated the Visibility by Role labels to be more consistent with standard WordPress labeling and nomenclature.
 
-** Deprecated **
+**Deprecated**
 
 * The `startDateTime` and `endDateTime` properties of the `blockVisibility` attribute have been deprecated. All new blocks will use the new `scheduling` property.
 
