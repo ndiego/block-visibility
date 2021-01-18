@@ -211,7 +211,7 @@ export default function GettingStarted( props ) {
 						<p>
 							{ createInterpolateElement(
 								__(
-									'As of version 1.4.0, Block Visibility is supported in the Site Editor, which is provided by Full Site Editing. Note that you will currently need the Gutenberg plugin and a Full Site Editing theme to make use of this functionality. Full Site Editing is still very much in development and you may find bugs or compatibility issues when using this plugin in the Site Editor. If you do, please let us know in the <a>plugin support forum</a> on WordPress.org. We are committed to ensuring 100% compatibility by the time Full Site Editing is included in WordPress core.',
+									'As of version 1.4.0, Block Visibility is supported in the Site Editor, which is provided by Full Site Editing. Note that you will currently need the Gutenberg plugin and a Full Site Editing theme to make use of this functionality. Full Site Editing is still very much in development and you may find bugs or compatibility issues when using this plugin in the Site Editor. If you do, please let us know in the <a>plugin support forum</a> on WordPress.org. We are committed to ensuring 100 percent compatibility by the time Full Site Editing is included in WordPress core.',
 									'block-visibility'
 								),
 								{

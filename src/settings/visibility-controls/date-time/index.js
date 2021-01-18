@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { ToggleControl, Slot } from '@wordpress/components';
+import { ToggleControl, Disabled, Slot } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -21,6 +21,28 @@ export default function DateTime( props ) {
 
 	// Manually set defaults, this ensures the main settings function properly
 	const enable = settings?.date_time?.enable ?? true; // eslint-disable-line
+	const enableScheduling = settings?.date_time?.enable_scheduling ?? true; // eslint-disable-line
+
+	let schedulingControl = (
+		<ToggleControl
+			label={ __( 'Enable block scheduling.', 'block-visibility' ) }
+			checked={ enableScheduling }
+			onChange={ () => {
+				setSettings( {
+					...settings,
+					date_time: {
+						...settings.date_time,
+						enable_scheduling: ! enableScheduling,
+					},
+				} );
+				setHasUpdates( true );
+			} }
+		/>
+	);
+
+	if ( ! enable ) {
+		schedulingControl = <Disabled>{ schedulingControl }</Disabled>;
+	}
 
 	return (
 		<div className="setting-tabs__settings-panel">
@@ -30,7 +52,7 @@ export default function DateTime( props ) {
 				</span>
 				<InformationPopover
 					message={ __(
-						'To learn more about the Date & Time control, review the plugin documentation using the link below.',
+						'To learn more about the Date & Time controls, review the plugin documentation using the link below.',
 						'block-visibility'
 					) }
 					link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
@@ -40,7 +62,7 @@ export default function DateTime( props ) {
 				<div className="settings-type__toggle">
 					<ToggleControl
 						label={ __(
-							'Enable the ability to restrict block visibility based on date and time settings.',
+							'Enable date and time visibility controls.',
 							'block-visibility'
 						) }
 						checked={ enable }
@@ -54,6 +76,16 @@ export default function DateTime( props ) {
 							} );
 							setHasUpdates( true );
 						} }
+					/>
+				</div>
+				<div className="settings-type__toggle subsetting first has-info-popover">
+					{ schedulingControl }
+					<InformationPopover
+						message={ __(
+							'Block scheduling allows you to restrict block visibility based on a start and end date/time.',
+							'block-visibility'
+						) }
+						link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
 				<Slot name="DateTimeControls" />

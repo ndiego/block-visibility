@@ -48,7 +48,7 @@ export default function VisibilityInspectorControls( props ) {
 
 	// Provides an entry point to slot in additional settings.
 	const AdditionalControls = withFilters(
-		'blockVisibility.InspectorControls'
+		'blockVisibility.addInspectorControls'
 	)( ( props ) => <></> ); // eslint-disable-line
 
 	return (
@@ -59,10 +59,10 @@ export default function VisibilityInspectorControls( props ) {
 		<InspectorControls>
 			<PanelBody
 				title={ __( 'Visibility', 'block-visibility' ) }
-				className="block-visibility-settings"
+				className="block-visibility"
 				initialOpen={ false }
 			>
-				<div className="block-visibility-settings__visibility-controls">
+				<div className="visibility-controls__container">
 					{ enabledControls.length !== 0 && (
 						<>
 							<Slot name="InspectorControlsTop" />

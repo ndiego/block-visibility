@@ -57,6 +57,7 @@ $mobile: 426px;
 		.masthead__branding {
 			h1 {
 				font-weight: 400;
+				display: flex;
 				margin: 0;
 			}
 
@@ -232,6 +233,7 @@ $mobile: 426px;
 			justify-content: space-between;
 			align-items: center;
 			margin-bottom: 20px;
+			min-height: 36px;
 
 			.setting-controls__title {
 				display: flex;
@@ -320,11 +322,26 @@ $mobile: 426px;
 			}
 
 			.settings-panel__container {
-				padding: 24px;
+				padding: 24px 16px 24px 24px;
 				box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
 
 				.settings-type__toggle {
 					margin-bottom: 18px;
+
+					&.has-info-popover {
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+					}
+
+					&.subsetting {
+						margin-bottom: 12px;
+						margin-left: 48px;
+					}
+
+					&.first {
+						margin-top: 24px;
+					}
 
 					&:last-child {
 						margin-bottom: 0;
@@ -335,15 +352,16 @@ $mobile: 426px;
 							margin: 4px 0;
 						}
 					}
+
+					label {
+						margin-bottom: 0;
+					}
 				}
 
-				label {
+				label,
+				.settings-label {
 					font-size: 14px;
-				}
-
-				.settings-panel__container-subsetting {
-					margin-top: 24px;
-				    margin-left: 48px;
+					margin-bottom: 8px;
 				}
 
 				.settings-panel__help {

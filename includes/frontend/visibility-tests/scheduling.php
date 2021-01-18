@@ -75,16 +75,67 @@ function create_datetime( $timestamp = null, $localize = true ) {
 }
 
 /**
+ * Helper function for getting the start date. Function checks if the depracated
+ * startDateTime attribute is set and handles accordingly.
+ *
+ * @since 1.4.1
+ *
+ * @param array   $attributes The block visibility attributes.
+ * @param boolean $enable     Is scheduling enabled.
+ * @return string             Return the correct start date.
+ */
+function get_start( $attributes, $enable ) {
+	$depracated_start = isset( $attributes['startDateTime'] )
+		? $attributes['startDateTime']
+		: null;
+	$new_start        = isset( $attributes['scheduling']['start'] )
+		? $attributes['scheduling']['start']
+		: null;
+
+	if ( isset( $enable ) ) {
+		return $new_start;
+	}
+
+	return $depracated_start;
+}
+
+/**
+ * Helper function for getting the end date. Function checks if the depracated
+ * endDateTime attribute is set and handles accordingly.
+ *
+ * @since 1.4.1
+ *
+ * @param array   $attributes The block visibility attributes.
+ * @param boolean $enable     Is scheduling enabled.
+ * @return string             Return the correct end date.
+ */
+function get_end( $attributes, $enable ) {
+	$depracated_end = isset( $attributes['endDateTime'] )
+		? $attributes['endDateTime']
+		: null;
+	$new_end        = isset( $attributes['scheduling']['end'] )
+		? $attributes['scheduling']['end']
+		: null;
+
+	// If the enable setting exists then use the new start attribute.
+	if ( isset( $enable ) ) {
+		return $new_end;
+	}
+
+	return $depracated_end;
+}
+
+/**
  * Run test to see if block visibility should be restricted by date and time.
  *
  * @since 1.1.0
  *
  * @param boolean $is_visible The current value of the visibility test.
  * @param array   $settings   The core plugin settings.
- * @param array   $block      The block info and attributes.
+ * @param array   $attributes The block visibility attributes.
  * @return boolean            Return true is the block should be visible, false if not.
  */
-function test_date_time( $is_visible, $settings, $block ) {
+function scheduling_test( $is_visible, $settings, $attributes ) {
 
 	// The test is already false, so skip this test, the block should be hidden.
 	if ( ! $is_visible ) {
@@ -93,29 +144,38 @@ function test_date_time( $is_visible, $settings, $block ) {
 
 	// If this functionality has been disabled, skip test.
 	if ( ! is_control_enabled( $settings, 'date_time' ) ) {
-		return $is_visible;
+		return true;
 	}
 
-	$attributes = $block['attrs']['blockVisibility'];
-
-	$start = isset( $attributes['startDateTime'] )
-		? $attributes['startDateTime']
+	$enable = isset( $attributes['scheduling']['enable'] )
+		? $attributes['scheduling']['enable']
 		: null;
+	$start  = get_start( $attributes, $enable );
+	$end    = get_end( $attributes, $enable );
+
+	// The new enable setting does not exist and there are no depracated
+	// scheduling settings, so skip the est.
+	if ( ! isset( $enable ) && ! $start && ! $end ) {
+		return true;
+	}
+
+	// Enable setting exists and is not enabled, so skip the test.
+	if ( isset( $enable ) && ! $enable ) {
+		return true;
+	}
+
+	// Enable setting exists and is enabled, but there is no saved start or end
+	// date, skip the test.
+	if ( isset( $enable ) && $enable && ! $start && ! $end ) {
+		return true;
+	}
+
 	$start = $start ? create_datetime( $start, false ) : null;
-
-	$end = isset( $attributes['endDateTime'] )
-		? $attributes['endDateTime']
-		: null;
-	$end = $end ? create_datetime( $end, false ) : null;
-
-	// If there is no start and no end date, skip test.
-	if ( ! $start && ! $end ) {
-		return $is_visible;
-	}
+	$end   = $end ? create_datetime( $end, false ) : null;
 
 	// If the start date is before the end date, skip test.
 	if ( ( $start && $end ) && $start > $end ) {
-		return $is_visible;
+		return true;
 	}
 
 	// Current time based on the date/time settings set in the WP admin.
@@ -128,4 +188,4 @@ function test_date_time( $is_visible, $settings, $block ) {
 	// Block has passed the date & time test.
 	return true;
 }
-add_filter( 'block_visibility_visibility_test', __NAMESPACE__ . '\test_date_time', 10, 3 );
+add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\scheduling_test', 10, 3 );

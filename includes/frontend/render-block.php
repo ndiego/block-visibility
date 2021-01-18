@@ -76,26 +76,29 @@ function render_with_visibility( $block_content, $block ) {
 	}
 
 	// Get the plugin core settings.
-	$settings = get_option( 'block_visibility_settings' );
+	$settings   = get_option( 'block_visibility_settings' );
+	$attributes = isset( $block['attrs']['blockVisibility'] )
+		? $block['attrs']['blockVisibility']
+		: null;
 
 	// Make sure we are allowed to control visibility for this block type and
 	// ensure the block actually has visibility settings set.
 	if (
 		! is_block_type_disabled( $settings, $block ) &&
-		has_visibility_settings( $block )
+		isset( $attributes )
 	) {
-		$visibility_test = true;
+		$is_visible = true;
 
 		// All our visibility tests are run through this filter and this also
-		// gives third-party developers access to override the visibility test.
-		$visibility_test = apply_filters(
-			'block_visibility_visibility_test',
-			$visibility_test,
+		// gives third-party developers access to override a block's visibility.
+		$is_visible = apply_filters(
+			'block_visibility_is_block_visible',
+			$is_visible,
 			$settings,
-			$block
+			$attributes
 		);
 
-		if ( $visibility_test ) {
+		if ( $is_visible ) {
 			return $block_content;
 		} else {
 			return null;
@@ -109,7 +112,7 @@ add_filter( 'render_block', __NAMESPACE__ . '\render_with_visibility', 10, 2 );
 // Run our tests.
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/hide-block.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/visibility-by-role.php';
-require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/date-time.php';
+require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/scheduling.php';
 
 // Require utlity functions for tests.
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/utils/is-control-enabled.php';

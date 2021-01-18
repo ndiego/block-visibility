@@ -16,7 +16,7 @@ import { registerPlugin } from '@wordpress/plugins';
  * Internal dependencies
  */
 import VisibilityInspectorControls from './inspector-controls';
-import ToolbarOptionsHideBlock from './toolbar-controls';
+import ToolbarControls from './toolbar-controls';
 import './contextual-indicators';
 
 /**
@@ -55,7 +55,9 @@ function blockVisibilityAttributes( settings ) {
 
 	// This is a global variable added to the page via PHP.
 	const fullControlMode = blockVisibilityFullControlMode; // eslint-disable-line
-	let visibilityAttributes = {
+
+	// Add the block visibility attributes.
+	let attributes = {
 		blockVisibility: {
 			type: 'object',
 			properties: {
@@ -74,6 +76,21 @@ function blockVisibilityAttributes( settings ) {
 						type: 'string',
 					},
 				},
+				scheduling: {
+					type: 'object',
+					properties: {
+						enable: {
+							type: 'boolean',
+						},
+						start: {
+							type: 'string',
+						},
+						end: {
+							type: 'string',
+						},
+					},
+				},
+				// Depracated attributes
 				startDateTime: {
 					type: 'string',
 				},
@@ -81,22 +98,11 @@ function blockVisibilityAttributes( settings ) {
 					type: 'string',
 				},
 			},
-			default: {
-				hideBlock: false,
-				visibilityByRole: 'all',
-				hideOnRestrictedRoles: false,
-				restrictedRoles: [],
-				startDateTime: '',
-				endDateTime: '',
-			},
 		},
 	};
 
 	// Filter allows the premium plugin to add Block Visibility attributes.
-	visibilityAttributes = applyFilters(
-		'blockVisibility.visibilityAttributes',
-		visibilityAttributes
-	);
+	attributes = applyFilters( 'blockVisibility.attributes', attributes );
 
 	// We don't want to enable visibility for blocks that cannot be added via
 	// the inserter or is a child block. This excludes blocks such as reusable
@@ -107,10 +113,10 @@ function blockVisibilityAttributes( settings ) {
 		( hasBlockSupport( settings, 'inserter', true ) &&
 			! settings.hasOwnProperty( 'parent' ) )
 	) {
-		settings.attributes = assign(
-			settings.attributes,
-			visibilityAttributes
-		);
+		settings.attributes = assign( settings.attributes, attributes );
+		settings.supports = assign( settings.supports, {
+			blockVisibility: true,
+		} );
 	}
 
 	return settings;
@@ -148,5 +154,5 @@ addFilter(
  * Register all Block Visibility related plugins to the editor.
  */
 registerPlugin( 'block-visibility-toolbar-options-hide-block', {
-	render: ToolbarOptionsHideBlock,
+	render: ToolbarControls,
 } );

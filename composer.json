@@ -1,6 +1,6 @@
 {
 	"name": "nick-diego/block-visibility",
-	"description": "Block-based visibility control for WordPress.",
+	"description": "Provides visibility controls and scheduling functionality to all WordPress blocks.",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",
 	"require": {
@@ -13,7 +13,7 @@
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "^3.5",
-		"dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
 		"phpcompatibility/phpcompatibility-wp": "^2.1",
 		"wp-coding-standards/wpcs": "^2.1"
 	},

@@ -12,9 +12,11 @@ import { registerCoreBlocks } from '@wordpress/block-library';
 import {
 	Spinner,
 	TabPanel,
+	Slot,
 	SlotFillProvider,
 	withFilters,
 } from '@wordpress/components';
+import { applyFilters } from '@wordpress/hooks';
 
 /**
  * Internal dependencies
@@ -132,6 +134,8 @@ function Settings() {
 		},
 	];
 
+	applyFilters( 'blockVisibility.SettingTabs', settingTabs );
+
 	// Switch the default settings tab based on the URL tad query
 	const urlParams = new URLSearchParams( window.location.search );
 	const requestedTab = urlParams.get( 'tab' );
@@ -191,6 +195,8 @@ function Settings() {
 									pluginSettings={ settings.plugin_settings }
 								/>
 							);
+						default:
+							return <Slot name="SettingsTabs" />;
 					}
 				} }
 			</TabPanel>

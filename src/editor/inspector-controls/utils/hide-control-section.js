@@ -12,7 +12,7 @@ export function hideControlSection(
 	blockVisibility,
 	control
 ) {
-	const { hideBlock } = blockVisibility;
+	const hideBlock = blockVisibility?.hideBlock ?? false;
 	const blockHidden = enabledControls.includes( 'hide_block' ) && hideBlock;
 	const sectionEnabled = enabledControls.includes( control );
 	// Hide if block is already completely hidden or the section is not enabled.

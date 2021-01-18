@@ -21,7 +21,7 @@ final class Block_Visibility {
 	 * @since 1.4.0
 	 * @var string
 	 */
-	public $version = '1.4.0';
+	public $version = '1.4.1';
 
 	/**
 	 * Return singleton instance of the Block Visibility plugin.
@@ -82,7 +82,7 @@ final class Block_Visibility {
 	 * @return void
 	 */
 	public function actions() {
-		add_action( 'wp_loaded', array( $this, 'add_attributes_to_registered_blocks' ), 100 );
+		add_action( 'wp_loaded', array( $this, 'add_attributes_to_registered_blocks' ), 999 );
 		add_action( 'init', array( $this, 'load_textdomain' ) );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'block_localization' ) );
 	}
@@ -163,40 +163,55 @@ final class Block_Visibility {
 
 		$registered_blocks = WP_Block_Type_Registry::get_instance()->get_all_registered();
 
-		foreach ( $registered_blocks as $name => $block ) {
-			$block->attributes['blockVisibility'] = array(
-				'type'       => 'object',
-				'properties' => array(
-					'hideBlock'             => array(
-						'type' => 'boolean',
-					),
-					'visibilityByRole'      => array(
+		$attributes = array(
+			'type'       => 'object',
+			'properties' => array(
+				'hideBlock'             => array(
+					'type' => 'boolean',
+				),
+				'visibilityByRole'      => array(
+					'type' => 'string',
+				),
+				'hideOnRestrictedRoles' => array(
+					'type' => 'boolean',
+				),
+				'restrictedRoles'       => array(
+					'type'  => 'array',
+					'items' => array(
 						'type' => 'string',
 					),
-					'hideOnRestrictedRoles' => array(
-						'type' => 'boolean',
-					),
-					'restrictedRoles'       => array(
-						'type'  => 'array',
-						'items' => array(
+				),
+				'scheduling'            => array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable' => array(
+							'type' => 'boolean',
+						),
+						'start'  => array(
+							'type' => 'string',
+						),
+						'end'    => array(
 							'type' => 'string',
 						),
 					),
-					'startDateTime'         => array(
-						'type' => 'string',
-					),
-					'endDateTime'           => array(
-						'type' => 'string',
-					),
 				),
-				'default'    => array(
-					'hideBlock'        => false,
-					'visibilityByRole' => 'all',
-					'restrictedRoles'  => array(),
-					'startDateTime'    => '',
-					'endDateTime'      => '',
+				// Depracated attributes.
+				'startDateTime'         => array(
+					'type' => 'string',
 				),
-			);
+				'endDateTime'           => array(
+					'type' => 'string',
+				),
+			),
+		);
+
+		$attributes = apply_filters(
+			'block_visibility_attributes',
+			$attributes
+		);
+
+		foreach ( $registered_blocks as $name => $block ) {
+			$block->attributes['blockVisibility'] = $attributes;
 		}
 	}
 

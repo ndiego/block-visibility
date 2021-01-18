@@ -24,26 +24,23 @@ export default function VisibilityByRole( props ) {
 	const enableUserRoles = settings?.visibility_by_role?.enable_user_roles ?? true; // eslint-disable-line
 
 	let enableUserRolesElement = (
-		<div className="settings-type__toggle">
-			<ToggleControl
-				className="settings-panel__container-subsetting"
-				label={ __(
-					'Enable the ability to restrict block visibility by individual user role (Administrator, Editor, Subscriber, etc.)',
-					'block-visibility'
-				) }
-				checked={ enableUserRoles }
-				onChange={ () => {
-					setSettings( {
-						...settings,
-						visibility_by_role: {
-							...settings.visibility_by_role,
-							enable_user_roles: ! enableUserRoles,
-						},
-					} );
-					setHasUpdates( true );
-				} }
-			/>
-		</div>
+		<ToggleControl
+			label={ __(
+				'Enable the ability to restrict block visibility by individual user role (Administrator, Editor, Subscriber, etc.)',
+				'block-visibility'
+			) }
+			checked={ enableUserRoles }
+			onChange={ () => {
+				setSettings( {
+					...settings,
+					visibility_by_role: {
+						...settings.visibility_by_role,
+						enable_user_roles: ! enableUserRoles,
+					},
+				} );
+				setHasUpdates( true );
+			} }
+		/>
 	);
 
 	if ( ! enable ) {
@@ -86,7 +83,9 @@ export default function VisibilityByRole( props ) {
 						} }
 					/>
 				</div>
-				{ enableUserRolesElement }
+				<div className="settings-type__toggle subsetting first">
+					{ enableUserRolesElement }
+				</div>
 				<Slot name="VisibilityByRoleControls" />
 			</div>
 		</div>
