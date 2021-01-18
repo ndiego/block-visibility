@@ -1,6 +1,6 @@
 {
 	"name": "nick-diego/block-visibility",
-	"description": "Block-based visibility control for WordPress.",
+	"description": "Provides visibility controls and scheduling functionality to all WordPress blocks.",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",
 	"require": {

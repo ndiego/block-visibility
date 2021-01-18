@@ -16,7 +16,7 @@ import { registerPlugin } from '@wordpress/plugins';
  * Internal dependencies
  */
 import VisibilityInspectorControls from './inspector-controls';
-import ToolbarOptionsHideBlock from './toolbar-controls';
+import ToolbarControls from './toolbar-controls';
 import './contextual-indicators';
 
 /**
@@ -114,6 +114,9 @@ function blockVisibilityAttributes( settings ) {
 			! settings.hasOwnProperty( 'parent' ) )
 	) {
 		settings.attributes = assign( settings.attributes, attributes );
+		settings.supports = assign( settings.supports, {
+			blockVisibility: true,
+		} );
 	}
 
 	return settings;
@@ -151,5 +154,5 @@ addFilter(
  * Register all Block Visibility related plugins to the editor.
  */
 registerPlugin( 'block-visibility-toolbar-options-hide-block', {
-	render: ToolbarOptionsHideBlock,
+	render: ToolbarControls,
 } );

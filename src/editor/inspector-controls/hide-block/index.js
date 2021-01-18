@@ -25,7 +25,7 @@ export default function HideBlock( props ) {
 	}
 
 	const { blockVisibility } = attributes;
-	const { hideBlock } = blockVisibility;
+	const hideBlock = blockVisibility?.hideBlock ?? false;
 
 	return (
 		<div className="visibility-control__group hide-block">

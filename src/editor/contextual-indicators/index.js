@@ -12,7 +12,7 @@ import { addFilter } from '@wordpress/hooks';
  * Internal dependencies
  */
 import hasDateTime from './has-date-time';
-import hasRoles from './has-user-roles';
+import hasUserRoles from './has-user-roles';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import usePluginData from './../utils/use-plugin-data';
 import {
@@ -55,7 +55,7 @@ function withContextualIndicators( BlockListBlock ) {
 		}
 
 		const { blockVisibility } = attributes;
-		const { hideBlock } = blockVisibility;
+		const hideBlock = blockVisibility?.hideBlock ?? false;
 		const isHidden = hideBlock && enabledControls.includes( 'hide_block' );
 
 		// Some blocks have rendering issues when we set the icons to the
@@ -65,7 +65,7 @@ function withContextualIndicators( BlockListBlock ) {
 
 		let classes = classnames( {
 			'block-visibility__is-hidden': isHidden,
-			'block-visibility__has-roles': hasRoles(
+			'block-visibility__has-roles': hasUserRoles(
 				blockVisibility,
 				enabledControls
 			),

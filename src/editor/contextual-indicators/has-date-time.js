@@ -16,19 +16,30 @@ export default function hasDateTime( blockVisibility, enabledControls ) {
 	const start = blockVisibility?.scheduling?.start ?? '';
 	const end = blockVisibility?.scheduling?.end ?? '';
 
+	// Check to see if there are any deprecated settings.
+	const deprecatedStart = blockVisibility?.startDateTime ?? '';
+	const deprecatedEnd = blockVisibility?.endDateTime ?? '';
+
 	let indicatorTest = true;
 
 	if (
 		! enabledControls.includes( 'date_time' ) ||
-		! enable ||
-		( ! start && ! end )
+		( ! enable && ! deprecatedStart && ! deprecatedEnd ) ||
+		( enable && ! start && ! end )
 	) {
 		indicatorTest = false;
 	}
 
-	// If the restriction is set to user-roles, but no user roles are selected.
-	if ( start && end && start >= end ) {
-		indicatorTest = false;
+	if ( ! enable )  {
+		if ( deprecatedStart && deprecatedEnd && deprecatedStart >= deprecatedEnd ) {
+			indicatorTest = false;
+		}
+	}
+
+	if ( enable ) {
+		if ( start && end && start >= end ) {
+			indicatorTest = false;
+		}
 	}
 
 	indicatorTest = applyFilters(

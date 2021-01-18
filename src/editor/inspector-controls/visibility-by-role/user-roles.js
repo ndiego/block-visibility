@@ -19,7 +19,9 @@ import { CheckboxControl, ToggleControl, Slot } from '@wordpress/components';
 export default function UserRoles( props ) {
 	const { attributes, setAttributes, variables } = props;
 	const { blockVisibility } = attributes;
-	const { restrictedRoles, hideOnRestrictedRoles } = blockVisibility;
+	const restrictedRoles = blockVisibility?.restrictedRoles ?? [];
+	const hideOnRestrictedRoles =
+		blockVisibility?.hideOnRestrictedRoles ?? false;
 
 	const roles = variables?.userRoles ?? []; // eslint-disable-line
 	const label = hideOnRestrictedRoles

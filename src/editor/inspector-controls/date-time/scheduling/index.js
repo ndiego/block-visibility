@@ -24,12 +24,13 @@ import formatDateLabel from './format-date-label';
  *
  * @since 1.4.1
  * @param {Object} blockVisibility All the block attributes
+ * @param {Object} scheduling      The block scheduling attribute
  * @param {Function} setAttributes Sets the block attributes
  * @return {string}		           Returns the start date
  */
-function getStartDate( blockVisibility, setAttributes ) {
+function getStartDate( blockVisibility, scheduling, setAttributes ) {
 	const depracatedStart = blockVisibility?.startDateTime ?? null;
-	const newStart = blockVisibility?.scheduling?.start ?? null;
+	const newStart = scheduling?.start ?? null;
 
 	if ( depracatedStart ) {
 		setAttributes( {
@@ -38,7 +39,7 @@ function getStartDate( blockVisibility, setAttributes ) {
 				{ startDateTime: null },
 				{
 					scheduling: assign(
-						{ ...blockVisibility.scheduling },
+						{ ...scheduling },
 						{ enable: true },
 						{ start: depracatedStart }
 					),
@@ -58,12 +59,13 @@ function getStartDate( blockVisibility, setAttributes ) {
  *
  * @since 1.4.1
  * @param {Object} blockVisibility All the block attributes
+ * @param {Object} scheduling      The block scheduling attribute
  * @param {Function} setAttributes Sets the block attributes
  * @return {string}		           Returns the end date
  */
-function getEndDate( blockVisibility, setAttributes ) {
+function getEndDate( blockVisibility, scheduling, setAttributes ) {
 	const depracatedEnd = blockVisibility?.endDateTime ?? null;
-	const newEnd = blockVisibility?.scheduling?.end ?? null;
+	const newEnd = scheduling?.end ?? null;
 
 	if ( depracatedEnd ) {
 		setAttributes( {
@@ -72,7 +74,7 @@ function getEndDate( blockVisibility, setAttributes ) {
 				{ endDateTime: null },
 				{
 					scheduling: assign(
-						{ ...blockVisibility.scheduling },
+						{ ...scheduling },
 						{ enable: true },
 						{ end: depracatedEnd }
 					),
@@ -99,12 +101,17 @@ export default function Scheduling( props ) {
 	const [ isPickerOpen, setIsPickerOpen ] = useState( false );
 	const [ isEndPickerOpen, setIsEndPickerOpen ] = useState( false );
 
-	const enable = blockVisibility?.scheduling?.enable ?? false;
+	const scheduling = blockVisibility?.scheduling ?? {
+		enable: false,
+		start: '',
+		end: '',
+	};
+	const enable = scheduling.enable;
 	const today = new Date( new Date().setHours( 0, 0, 0, 0 ) );
 
 	// Run get functions to clean up depracated attributes
-	const start = getStartDate( blockVisibility, setAttributes );
-	const end = getEndDate( blockVisibility, setAttributes );
+	const start = getStartDate( blockVisibility, scheduling, setAttributes );
+	const end = getEndDate( blockVisibility, scheduling, setAttributes );
 
 	const startDateLabel = formatDateLabel(
 		start,
@@ -158,7 +165,7 @@ export default function Scheduling( props ) {
 				{ ...blockVisibility },
 				{
 					scheduling: assign(
-						{ ...blockVisibility.scheduling },
+						{ ...scheduling },
 						{ [ attribute ]: value }
 					),
 				}

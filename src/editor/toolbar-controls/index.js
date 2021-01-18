@@ -29,7 +29,7 @@ import {
  * @param {Object} props All the props passed to this function
  * @return {string}      Return the rendered JSX
  */
-function ToolbarOptionsHideBlock( props ) {
+function ToolbarControls( props ) {
 	const { flashBlock, updateBlockAttributes } = useDispatch(
 		'core/block-editor'
 	);
@@ -58,7 +58,7 @@ function ToolbarOptionsHideBlock( props ) {
 	);
 	const hasVisibility = hasVisibilityControls(
 		settings,
-		blockType.name,
+		blockType,
 		blockAttributes
 	);
 	const enabledControls = getEnabledControls( settings );
@@ -73,7 +73,7 @@ function ToolbarOptionsHideBlock( props ) {
 	}
 
 	const { blockVisibility } = blockAttributes;
-	const { hideBlock } = blockVisibility;
+	const hideBlock = blockVisibility?.hideBlock ?? false;
 	const icon = hideBlock ? icons.visibilityAlt : icons.visibilityHiddenAlt;
 	const label = hideBlock
 		? __( 'Enable block', 'block-visibility' )
@@ -82,16 +82,17 @@ function ToolbarOptionsHideBlock( props ) {
 	/* eslint-disable */
 	const notice = hideBlock
 		? sprintf(
-			// Translators: Name of the block being copied, e.g. "Paragraph".
+			// Translators: Name of the block being made visible, e.g. "Paragraph".
 			__( '"%s" is now visible.' ),
 			title
 		)
 		: sprintf(
-			// Translators: Name of the block being cut, e.g. "Paragraph".
+			// Translators: Name of the block being hidden, e.g. "Paragraph".
 			__( '"%s" is now hidden.' ),
 			title
 		);
 	/* eslint-disable */
+
 	const handler = () => {
 		updateBlockAttributes( clientId, {
 			blockVisibility: assign(
@@ -122,13 +123,16 @@ export default withSelect( ( select ) => {
 	} = select( 'core/block-editor' );
 	const { getBlockType } = select( 'core/blocks' );
 
-	const clientIds = getSelectedBlockClientIds();
 	// We only want to enable visibility editing if only one block is selected.
 	const enableMenuItem = ! hasMultiSelection();
+
 	// Always retrieve first client id, even if there are multiple.
+	const clientIds = getSelectedBlockClientIds();
 	const clientId = clientIds.length === 0 ? null : clientIds[ 0 ];
+
+	// Get block type and all set attributes.
 	const blockType = getBlockType( getBlockName( clientId ) );
 	const blockAttributes = getBlockAttributes( clientId );
 
 	return { enableMenuItem, clientId, blockType, blockAttributes };
-} )( ToolbarOptionsHideBlock );
+} )( ToolbarControls );

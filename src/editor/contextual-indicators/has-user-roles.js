@@ -11,19 +11,19 @@ import { applyFilters } from '@wordpress/hooks';
  * @param {Array}   enabledControls Array of all enabled visibility controls
  * @return {boolean}		        Does the block have user role settings
  */
-export default function hasRoles( blockVisibility, enabledControls ) {
-	const {
-		visibilityByRole,
-		restrictedRoles,
-		hideOnRestrictedRoles,
-	} = blockVisibility;
+export default function hasUserRoles( blockVisibility, enabledControls ) {
+	const visibilityByRole = blockVisibility?.visibilityByRole ?? 'public';
+	const restrictedRoles = blockVisibility?.restrictedRoles ?? [];
+	const hideOnRestrictedRoles =
+		blockVisibility?.hideOnRestrictedRoles ?? false;
 
 	let indicatorTest = true;
 
 	if (
 		! enabledControls.includes( 'visibility_by_role' ) ||
 		! visibilityByRole ||
-		visibilityByRole === 'all'
+		visibilityByRole === 'public' ||
+		visibilityByRole === 'all' // Depractated option, but check regardless.
 	) {
 		indicatorTest = false;
 	}
