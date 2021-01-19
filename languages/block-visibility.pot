@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Block Visibility plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Block Visibility 1.4.0\n"
+"Project-Id-Version: Block Visibility 1.4.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/block-visibility\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-01-01T20:24:10+00:00\n"
+"POT-Creation-Date: 2021-01-18T22:46:32+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: block-visibility\n"
@@ -26,7 +26,7 @@ msgid "https://www.blockvisibilitywp.com/"
 msgstr ""
 
 #. Description of the plugin
-msgid "Block Visibility provides visibility controls and scheduling functionality to all WordPress blocks."
+msgid "Provides visibility controls and scheduling functionality to all WordPress blocks."
 msgstr ""
 
 #. Author of the plugin
@@ -51,7 +51,7 @@ msgstr ""
 
 #: includes/admin/plugin-action-links.php:56
 #: dist/block-visibility-settings.js:3
-#: src/settings/index.js:115
+#: src/settings/index.js:117
 msgid "Getting Started"
 msgstr ""
 
@@ -71,7 +71,7 @@ msgstr ""
 msgid "Unserializing instances of the class is forbidden."
 msgstr ""
 
-#: includes/register-settings.php:23
+#: includes/register-settings.php:123
 msgid "Settings for the Block Visibility plugin."
 msgstr ""
 
@@ -84,19 +84,16 @@ msgstr ""
 msgid "Something went wrong, the settings could not be updated."
 msgstr ""
 
-#: includes/utils/user-functions.php:26
-msgid "Public (Logged-out Users)"
+#: includes/utils/user-functions.php:53
+msgid "None (Logged-out users)"
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
 #: dist/block-visibility-editor.js:2
-#: src/editor/inspector-controls/hide-block/index.js:33
-#: src/editor/toolbar-controls/index.js:80
 msgid "Hide block"
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
-#: src/editor/inspector-controls/hide-block/index.js:43
 msgid "Hide selected block from everyone."
 msgstr ""
 
@@ -109,7 +106,7 @@ msgid "visible"
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
-msgid "Restrict by User Role"
+msgid "Restricted User Roles"
 msgstr ""
 
 #. Translators: Whether the block is hidden or visible.
@@ -127,27 +124,27 @@ msgid "Alternatively, hide the block to all users with one of the selected roles
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
-msgid "All"
-msgstr ""
-
-#: dist/block-visibility-editor.js:2
-msgid "Visible to everyone"
-msgstr ""
-
-#: dist/block-visibility-editor.js:2
 msgid "Public"
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
-msgid "Visible to all logged-out users"
+msgid "Visible to everyone."
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
-msgid "Private"
+msgid "Logged-out"
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
-msgid "Visible to all logged-in users"
+msgid "Only visible to logged-out users."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Logged-in"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Only visible to logged-in users."
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
@@ -155,7 +152,7 @@ msgid "User Role"
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
-msgid "Restrict visibility to specific user roles"
+msgid "Only visible to specific user roles."
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
@@ -168,62 +165,56 @@ msgid "The User Role option was previously selected, but is now disabled. Choose
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
-#: src/editor/inspector-controls/date-time/index.js:36
+#: src/editor/inspector-controls/date-time/scheduling/date-time-field.js:32
+msgid "Clear date/time"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+#: src/editor/inspector-controls/date-time/scheduling/format-date-label.js:17
 msgid "No time selected"
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
-#: src/editor/inspector-controls/date-time/index.js:94
 msgid "Now"
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
-#: src/editor/inspector-controls/date-time/index.js:98
 msgid "Never"
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
-#: src/editor/inspector-controls/date-time/index.js:126
-msgid "Start Showing"
+msgid "Enable block scheduling"
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
-#: src/editor/inspector-controls/date-time/index.js:130
-msgid "Set a start date/time"
+msgid "Schedule the block to only be visible between a start and end date/time."
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
-#: src/editor/inspector-controls/date-time/index.js:142
-msgid "Clear start date/time"
+msgid "Start showing"
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
-#: src/editor/inspector-controls/date-time/index.js:164
+msgid "Choose a start date/time"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
 msgid "Start Date/Time"
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
-#: src/editor/inspector-controls/date-time/index.js:183
-msgid "Stop Showing"
+msgid "Stop showing"
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
-#: src/editor/inspector-controls/date-time/index.js:187
-msgid "Set an end date/time"
+msgid "Choose an end date/time"
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
-#: src/editor/inspector-controls/date-time/index.js:199
-msgid "Clear end date/time"
-msgstr ""
-
-#: dist/block-visibility-editor.js:2
-#: src/editor/inspector-controls/date-time/index.js:221
 msgid "End Date/Time"
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
-#: src/editor/inspector-controls/date-time/index.js:242
 msgid "The start time is after the stop time. Please fix for date/time settings to function properly."
 msgstr ""
 
@@ -236,11 +227,10 @@ msgid "Looks like all Visibility Controls have been disabled. To control block v
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
-#: src/editor/toolbar-controls/index.js:79
 msgid "Enable block"
 msgstr ""
 
-#. Translators: Name of the block being cut, e.g. "Paragraph".
+#. Translators: Name of the block being hidden, e.g. "Paragraph".
 #: dist/block-visibility-editor.js:4
 #: src/editor/index.js:29
 msgid "Block Visibility Settings"
@@ -310,7 +300,7 @@ msgstr ""
 #: dist/block-visibility-settings.js:1
 #: dist/block-visibility-settings.js:3
 #: src/settings/getting-started/index.js:101
-#: src/settings/index.js:125
+#: src/settings/index.js:127
 #: src/settings/visibility-controls/index.js:46
 msgid "Visibility Controls"
 msgstr ""
@@ -324,7 +314,7 @@ msgstr ""
 #: dist/block-visibility-settings.js:1
 #: dist/block-visibility-settings.js:3
 #: src/settings/getting-started/index.js:114
-#: src/settings/index.js:130
+#: src/settings/index.js:132
 msgid "Block Manager"
 msgstr ""
 
@@ -336,7 +326,7 @@ msgstr ""
 #: dist/block-visibility-settings.js:1
 #: dist/block-visibility-settings.js:3
 #: src/settings/getting-started/index.js:127
-#: src/settings/index.js:120
+#: src/settings/index.js:122
 #: src/settings/plugin-settings/index.js:52
 msgid "General Settings"
 msgstr ""
@@ -388,7 +378,7 @@ msgstr ""
 
 #: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:213
-msgid "As of version 1.4.0, Block Visibility is supported in the Site Editor, which is provided by Full Site Editing. Note that you will currently need the Gutenberg plugin and a Full Site Editing theme to make use of this functionality. Full Site Editing is still very much in development and you may find bugs or compatibility issues when using this plugin in the Site Editor. If you do, please let us know in the <a>plugin support forum</a> on WordPress.org. We are committed to ensuring 100% compatibility by the time Full Site Editing is included in WordPress core."
+msgid "As of version 1.4.0, Block Visibility is supported in the Site Editor, which is provided by Full Site Editing. Note that you will currently need the Gutenberg plugin and a Full Site Editing theme to make use of this functionality. Full Site Editing is still very much in development and you may find bugs or compatibility issues when using this plugin in the Site Editor. If you do, please let us know in the <a>plugin support forum</a> on WordPress.org. We are committed to ensuring 100 percent compatibility by the time Full Site Editing is included in WordPress core."
 msgstr ""
 
 #: dist/block-visibility-settings.js:1
@@ -453,15 +443,23 @@ msgid "Enable the ability to hide blocks completely from the frontend of your we
 msgstr ""
 
 #: dist/block-visibility-settings.js:1
+msgid "Enable block scheduling."
+msgstr ""
+
+#: dist/block-visibility-settings.js:1
 msgid "Date & Time"
 msgstr ""
 
 #: dist/block-visibility-settings.js:1
-msgid "To learn more about the Date & Time control, review the plugin documentation using the link below."
+msgid "To learn more about the Date & Time controls, review the plugin documentation using the link below."
 msgstr ""
 
 #: dist/block-visibility-settings.js:1
-msgid "Enable the ability to restrict block visibility based on date and time settings."
+msgid "Enable date and time visibility controls."
+msgstr ""
+
+#: dist/block-visibility-settings.js:1
+msgid "Block scheduling allows you to restrict block visibility based on a start and end date/time."
 msgstr ""
 
 #: dist/block-visibility-settings.js:1
@@ -478,7 +476,7 @@ msgstr ""
 
 #: dist/block-visibility-settings.js:1
 #: src/settings/visibility-controls/index.js:49
-msgid "The settings below allow you to configure the visibility controls that power this plugin. Pick and choose which controls you would like to enable and how you would like them to function. When a visibility control is disabled, blocks that relied on the disabled control will become visible again. Likely this is what you intended, but we wanted to provide this warning just in case."
+msgid "The settings below allow you to configure the visibility controls that power this plugin. Pick and choose which controls you would like to enable and how you would like them to function. When a visibility control is disabled, blocks that relied on the disabled control will become visible again."
 msgstr ""
 
 #: dist/block-visibility-settings.js:1
@@ -564,11 +562,11 @@ msgid "The settings below allow you to configure general functionality of the Bl
 msgstr ""
 
 #: dist/block-visibility-settings.js:3
-#: src/settings/index.js:95
+#: src/settings/index.js:97
 msgid "Something went wrong when trying to load the Block Visibility settings. Try refreshing the page. If the error persists, please contact support."
 msgstr ""
 
 #: dist/block-visibility-settings.js:3
-#: src/settings/index.js:105
+#: src/settings/index.js:107
 msgid "Loading settings…"
 msgstr ""

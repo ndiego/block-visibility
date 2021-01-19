@@ -15,7 +15,7 @@ To get started with Block Visibility, watch the [Plugin Overview](https://www.yo
 
 ## Installation
 
-1. Make sure you are running the latest version of WordPress (5.4+) and you are using the Block Editor
+1. Make sure you are running the latest version of WordPress (5.5+) and you are using the Block Editor
 2. Download Block Visibility from the [WordPress plugin directory](https://wordpress.org/plugins/block-visibility/).
 
 ## Development
