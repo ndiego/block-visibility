@@ -5,7 +5,7 @@ Tags: visibility, scheduling, hide, schedule, blocks, schedule blocks, hide bloc
 Requires at least: 5.5
 Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -124,6 +124,13 @@ Nope. Visibility is controlled on the server, so if a block should be hidden bas
 
 
 == Changelog ==
+
+= 1.4.2 - 2021-01-19 =
+
+**Fixed**
+
+* Error that occurred when the plugin was deleted.
+* Contextual indicator border not displaying on placeholder blocks (e.g. the Shortcode Block)
 
 = 1.4.1 - 2021-01-18 =
 
