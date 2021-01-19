@@ -140,6 +140,12 @@ $icon__color: #000000;
     outline: 2px dashed rgba(0, 0, 0, 0.7);
     opacity: .5;
 
+    // Fix for the blocks that are placeholders, like the shortcodes block
+    &.components-placeholder {
+        outline: 2px dashed rgba(0, 0, 0, 0.7);
+        opacity: .5;
+    }
+
     &.is-selected,
     &.has-child-selected {
         outline: none;

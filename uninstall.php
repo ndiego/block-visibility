@@ -16,7 +16,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 // Load main plugin file.
-require_once 'class-blockvisibility.php';
+require_once 'block-visibility.php';
 
 global $wpdb;
 
