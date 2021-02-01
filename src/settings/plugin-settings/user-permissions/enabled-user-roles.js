@@ -24,7 +24,7 @@ export default function EnabledUserRoles( props ) {
 	const enabledRoles = settings?.enabled_user_roles ?? []; // eslint-disable-line
 
 	return (
-		<div className="settings-panel__container-subsetting">
+		<div className="subsetting">
 			{ roles.map( ( role ) => {
 				const newEnabledRoles = [ ...enabledRoles ];
 				const isChecked = enabledRoles.includes( role );
