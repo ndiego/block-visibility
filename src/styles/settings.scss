@@ -334,11 +334,6 @@ $mobile: 426px;
 						justify-content: space-between;
 					}
 
-					&.subsetting {
-						margin-bottom: 12px;
-						margin-left: 48px;
-					}
-
 					&.first {
 						margin-top: 24px;
 					}
@@ -356,6 +351,11 @@ $mobile: 426px;
 					label {
 						margin-bottom: 0;
 					}
+				}
+
+				.subsetting {
+					margin-bottom: 12px;
+					margin-left: 30px;
 				}
 
 				label,
