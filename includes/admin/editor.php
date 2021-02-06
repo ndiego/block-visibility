@@ -23,14 +23,6 @@ use function BlockVisibility\Utils\get_user_roles as get_user_roles;
  */
 function enqueue_editor_assets() {
 
-	/**
-	 * Since we are using admin_init, we need to make sure the js is only loaded
-	 * on pages with the Block Editor, this includes FSE pagess.
-	 */
-	if ( ! is_block_editor_page() ) {
-		return;
-	}
-
 	// Scripts.
 	$asset_file = get_asset_file( 'dist/block-visibility-editor' );
 
@@ -45,7 +37,7 @@ function enqueue_editor_assets() {
 	// Create a global variable to indicate whether we are in full control mode
 	// or not. This is needed for the Block Visibility attribute filter since
 	// it will not allow us to fetch this data directly.
-	$is_full_control_mode .= 'const blockVisibilityFullControlMode = ' . wp_json_encode( is_full_control_mode() ) . ';';
+	$is_full_control_mode = 'const blockVisibilityFullControlMode = ' . is_full_control_mode() . ';';
 
 	wp_add_inline_script(
 		'block-visibility-editor-scripts',
@@ -73,20 +65,30 @@ function enqueue_editor_assets() {
 add_action( 'admin_init', __NAMESPACE__ . '\enqueue_editor_assets', 10000 );
 
 /**
- * Make sure we are on a page with the Block Editor, this include FSE pages.
+ * Dequeue our editor assets on pages without the Block Editor.
  *
- * @since 1.0.0
+ * Since we are forced to use admin_init to enqueue our editor assets, this
+ * causes the files to be loaded on admin pages without the Block Editor, which
+ * can cause conflicts with other plugins, notably ACF. This fixes that.
  *
- * @return bool Returns true or false.
+ * We have to do this at admin_enqueue_scripts because get_current_screen() is
+ * not available yet at admin_init.
+ *
+ * @since 1.4.2
  */
-function is_block_editor_page() {
-	global $pagenow;
+function dequeue_editor_assets_on_pages_without_block_editor() {
 
-	return (
-		is_admin() &&
-		( 'post.php' === $pagenow || 'post-new.php' === $pagenow || 'admin.php' === $pagenow )
-	);
+	$current_screen = get_current_screen();
+
+	if (
+		! method_exists( $current_screen, 'is_block_editor' ) ||
+		! $current_screen->is_block_editor()
+	) {
+		wp_dequeue_script( 'block-visibility-editor-scripts' );
+		wp_dequeue_style( 'block-visibility-editor-styles' );
+	}
 }
+add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\dequeue_editor_assets_on_pages_without_block_editor' );
 
 /**
  * See if we are in full control mode.
@@ -97,10 +99,13 @@ function is_block_editor_page() {
  */
 function is_full_control_mode() {
 	$settings = get_option( 'block_visibility_settings' );
+	$enabled  = false;
 
 	if ( isset( $settings['plugin_settings']['enable_full_control_mode'] ) ) {
-		return $settings['plugin_settings']['enable_full_control_mode'];
-	} else {
-		return false;
+		if ( $settings['plugin_settings']['enable_full_control_mode'] ) {
+			 $enabled = true;
+		}
 	}
+
+	return wp_json_encode( $enabled );
 }
