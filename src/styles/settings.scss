@@ -16,6 +16,11 @@ $mobile: 426px;
 #block-visibility-settings-container {
 	margin-left: -20px;
 
+	hr {
+		margin: 24px 0;
+		border-top: 1px solid #eee;
+	}
+
 	.notice {
 		display: block;
 		margin-top: 15px;
@@ -376,6 +381,44 @@ $mobile: 426px;
 					.components-form-toggle {
 						opacity: 1;
 					}
+				}
+			}
+		}
+	}
+
+	.breakpoints-container {
+		margin-bottom: 30px;
+
+		.breakpoint {
+			margin-bottom: 12px;
+
+			.settings-panel__help {
+				margin-top: 8px;
+			}
+
+			.breakpoint-inputs {
+				display: flex;
+				align-items: center;
+
+				&>div:last-child {
+					margin-left: 30px;
+				}
+
+				&>span {
+					margin-left: 5px;
+					font-size: 14px;
+				}
+
+				.components-base-control__field {
+					margin-bottom: 0;
+
+					label {
+						margin-bottom: 0 !important;
+					}
+				}
+
+				.components-text-control__input {
+					max-width: 100px;
 				}
 			}
 		}

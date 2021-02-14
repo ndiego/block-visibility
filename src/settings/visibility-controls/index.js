@@ -13,6 +13,7 @@ import InformationPopover from './../utils/information-popover';
 import HideBlock from './hide-block';
 import DateTime from './date-time';
 import VisibilityByRole from './visibility-by-role';
+import ScreenSize from './screen-size';
 
 /**
  * Renders the Visibility Controls tab of the Block Visibility settings page
@@ -76,6 +77,11 @@ export default function VisibilityControls( props ) {
 				setHasUpdates={ setHasUpdates }
 			/>
 			<VisibilityByRole
+				settings={ visibilityControls }
+				setSettings={ setVisibilityControls }
+				setHasUpdates={ setHasUpdates }
+			/>
+			<ScreenSize
 				settings={ visibilityControls }
 				setSettings={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }

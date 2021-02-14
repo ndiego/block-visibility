@@ -51,6 +51,66 @@ function register_settings() {
 						),
 					),
 				),
+				'screen_size'        => array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable'              => array(
+							'type' => 'boolean',
+						),
+						'breakpoints'         => array(
+							'type'       => 'object',
+							'properties' => array(
+								'extra_large' => array(
+									'type'       => 'object',
+									'properties' => array(
+										'enable' => array(
+											'type' => 'boolean',
+										),
+										'value'  => array(
+											'type' => 'number',
+										),
+									),
+								),
+								'large' => array(
+									'type'       => 'object',
+									'properties' => array(
+										'enable' => array(
+											'type' => 'boolean',
+										),
+										'value'  => array(
+											'type' => 'number',
+										),
+									),
+								),
+								'medium'  => array(
+									'type'       => 'object',
+									'properties' => array(
+										'enable' => array(
+											'type' => 'boolean',
+										),
+										'value'  => array(
+											'type' => 'number',
+										),
+									),
+								),
+								'small'  => array(
+									'type'       => 'object',
+									'properties' => array(
+										'enable' => array(
+											'type' => 'boolean',
+										),
+										'value'  => array(
+											'type' => 'number',
+										),
+									),
+								),
+							),
+						),
+						'enable_frontend_css' => array(
+							'type' => 'boolean',
+						),
+					),
+				),
 			),
 		),
 		'disabled_blocks'     => array(
@@ -101,6 +161,28 @@ function register_settings() {
 			'date_time'          => array(
 				'enable'            => true,
 				'enable_scheduling' => true,
+			),
+			'screen_size'        => array(
+				'enable'              => true,
+				'breakpoints'         => array(
+					'extra_large' => array(
+						'enable' => true,
+						'value'  => 1200,
+					),
+					'large' => array(
+						'enable' => true,
+						'value'  => 992,
+					),
+					'medium' => array(
+						'enable' => true,
+						'value'  => 768,
+					),
+					'small' => array(
+						'enable' => true,
+						'value'  => 576,
+					),
+				),
+				'enable_frontend_css' => true,
 			),
 		),
 		'disabled_blocks'     => array(),

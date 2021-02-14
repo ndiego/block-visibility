@@ -160,6 +160,66 @@ class Block_Visibility_REST_Settings_Controller extends WP_REST_Controller {
 								),
 							),
 						),
+						'screen_size'        => array(
+							'type'       => 'object',
+							'properties' => array(
+								'enable'              => array(
+									'type' => 'boolean',
+								),
+								'breakpoints'         => array(
+									'type'       => 'object',
+									'properties' => array(
+										'extra_large' => array(
+											'type'       => 'object',
+											'properties' => array(
+												'enable' => array(
+													'type' => 'boolean',
+												),
+												'value'  => array(
+													'type' => 'number',
+												),
+											),
+										),
+										'large' => array(
+											'type'       => 'object',
+											'properties' => array(
+												'enable' => array(
+													'type' => 'boolean',
+												),
+												'value'  => array(
+													'type' => 'number',
+												),
+											),
+										),
+										'medium'  => array(
+											'type'       => 'object',
+											'properties' => array(
+												'enable' => array(
+													'type' => 'boolean',
+												),
+												'value'  => array(
+													'type' => 'number',
+												),
+											),
+										),
+										'small'  => array(
+											'type'       => 'object',
+											'properties' => array(
+												'enable' => array(
+													'type' => 'boolean',
+												),
+												'value'  => array(
+													'type' => 'number',
+												),
+											),
+										),
+									),
+								),
+								'enable_frontend_css' => array(
+									'type' => 'boolean',
+								),
+							),
+						),
 
 						// Legacy Controls, remove in future version.
 						'time_date'          => array(

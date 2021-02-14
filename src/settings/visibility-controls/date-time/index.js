@@ -50,19 +50,12 @@ export default function DateTime( props ) {
 				<span className="settings-panel__header-title">
 					{ __( 'Date & Time', 'block-visibility' ) }
 				</span>
-				<InformationPopover
-					message={ __(
-						'To learn more about the Date & Time controls, review the plugin documentation using the link below.',
-						'block-visibility'
-					) }
-					link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
-				/>
 			</div>
 			<div className="settings-panel__container">
-				<div className="settings-type__toggle">
+				<div className="settings-type__toggle has-info-popover">
 					<ToggleControl
 						label={ __(
-							'Enable date and time visibility controls.',
+							'Enable the Date & Time controls.',
 							'block-visibility'
 						) }
 						checked={ enable }
@@ -77,8 +70,16 @@ export default function DateTime( props ) {
 							setHasUpdates( true );
 						} }
 					/>
+					<InformationPopover
+						message={ __(
+							'To learn more about the Date & Time controls, review the plugin documentation using the link below.',
+							'block-visibility'
+						) }
+						link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					/>
 				</div>
-				<div className="settings-type__toggle subsetting first has-info-popover">
+				<hr />
+				<div className="settings-type__toggle first has-info-popover">
 					{ schedulingControl }
 					<InformationPopover
 						message={ __(
