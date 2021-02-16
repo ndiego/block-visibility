@@ -21,6 +21,11 @@ $mobile: 426px;
 		border-top: 1px solid #eee;
 	}
 
+	.flex {
+		display: flex;
+		justify-content: space-between;
+	}
+
 	.notice {
 		display: block;
 		margin-top: 15px;

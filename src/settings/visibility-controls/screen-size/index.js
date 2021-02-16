@@ -37,7 +37,7 @@ export default function ScreenSize( props ) {
 			enable: true,
 			breakpoints: {
 				extra_large: {
-					enable: true,
+					enable: false,
 					value: 1200,
 				},
 				large: {
@@ -49,7 +49,7 @@ export default function ScreenSize( props ) {
 					value: 768,
 				},
 				small: {
-					enable: true,
+					enable: false,
 					value: 576,
 				},
 			},
@@ -134,15 +134,22 @@ export default function ScreenSize( props ) {
 					/>
 				</div>
 				<hr />
+				<div class="flex">
 				<div className='breakpoints-container'>
 					{ Object.entries( breakpoints ).map( ( [ breakpoint, labels ] ) => {
 						const breakpointEnabled = screenSize.breakpoints[ breakpoint ].enable;
 						const breakpointValue = screenSize.breakpoints[ breakpoint ].value;
 
+						const isOptional = breakpoint === 'extra_large' || breakpoint === 'small';
+
 						return(
 							<div className='breakpoint'>
 								<div className='settings-label'>
 									{ labels.title }
+									{ isOptional && ' ' + __(
+										'(Optional)',
+										'block-visibility'
+									) }
 								</div>
 								<div className='breakpoint-inputs'>
 									<TextControl
@@ -162,20 +169,22 @@ export default function ScreenSize( props ) {
 										} }
 									/>
 									<span>px</span>
-									<ToggleControl
-										label={ __(
-											'Enable breakpoint',
-											'block-visibility'
-										) }
-										checked={ breakpointEnabled }
-										onChange={ () => {
-											onBreakpointChange(
-												breakpoint,
-												'enable',
-												! breakpointEnabled
-											);
-										} }
-									/>
+									{ isOptional && (
+										<ToggleControl
+											label={ __(
+												'Enable breakpoint',
+												'block-visibility'
+											) }
+											checked={ breakpointEnabled }
+											onChange={ () => {
+												onBreakpointChange(
+													breakpoint,
+													'enable',
+													! breakpointEnabled
+												);
+											} }
+										/>
+									) }
 								</div>
 								<div className="settings-panel__help">
 									{ labels.description }
@@ -185,24 +194,156 @@ export default function ScreenSize( props ) {
 					} ) }
 				</div>
 				<div>
+				<ToggleControl
+					label={ __(
+						'Enable large desktop control',
+						'block-visibility'
+					) }
+					help={ 'Allows users to hide blocks on large desktop screen sizes, 1200px and up.' }
+					checked={ false }
+					onChange={ () => {
+						console.log( 'test' );
+					} }
+				/>
+				<ToggleControl
+					label={ __(
+						'Enable desktop control',
+						'block-visibility'
+					) }
+					help={ 'Allows users to hide blocks on desktop and tablet (landscape) screen sizes, between 992px and 1200px.' }
+					checked={ true }
+					onChange={ () => {
+						console.log( 'test' );
+					} }
+				/>
+				<ToggleControl
+					label={ __(
+						'Enable tablet control',
+						'block-visibility'
+					) }
+					help={ 'Allows users to hide blocks on tablet (portrait) screen sizes, between 768px and 992px.' }
+					checked={ true }
+					onChange={ () => {
+						console.log( 'test' );
+					} }
+				/>
+				<ToggleControl
+					label={ __(
+						'Enable mobile (landscape) control',
+						'block-visibility'
+					) }
+					help={ 'Allows users to hide blocks on mobile (landscape) screen sizes, between 576px and 768px.' }
+					checked={ true }
+					onChange={ () => {
+						console.log( 'test' );
+					} }
+				/>
+				<ToggleControl
+					label={ __(
+						'Enable mobile (portrait) control',
+						'block-visibility'
+					) }
+					help={ 'Allows users to hide blocks on mobile (portrait) screen sizes, up to 562px.' }
+					checked={ false }
+					onChange={ () => {
+						console.log( 'test' );
+					} }
+				/>
+				</div>
+				</div>
+				<div>
 					<pre>{`
-@media (min-width: {$device_size_desktop_min}px) {
-	.conblock-hide-desktop {
+// Extra large devices (large desktops, ${ screenSize.breakpoints.extra_large.value }px and up)
+@media ( min-width: ${ screenSize.breakpoints.extra_large.value }px ) {
+	.block-visibility-hide-screen-extra-large {
 		display: none !important;
 	}
 }
-@media (min-width: {$device_size_tablet_min}px) and (max-width: {$device_size_tablet_max}px) {
-	.conblock-hide-tablet {
+
+// Large devices (desktops, ${ screenSize.breakpoints.large.value }px and up)
+@media ( min-width: ${ screenSize.breakpoints.large.value }px ) and (max-width: ${ screenSize.breakpoints.extra_large.value - 0.02 }px ) {
+	.block-visibility-hide-screen-large {
 		display: none !important;
 	}
 }
-@media(max-width: {$device_size_mobile_max}px) {
-	.conblock-hide-mobile {
+
+// Medium devices (tablets, ${ screenSize.breakpoints.medium.value }px and up)
+@media ( min-width: ${ screenSize.breakpoints.medium.value }px ) and ( max-width: ${ screenSize.breakpoints.large.value - 0.02 }px ) {
+	.block-visibility-hide-screen-medium {
+		display: none !important;
+	}
+}
+
+// Small devices (landscape phones, ${ screenSize.breakpoints.small.value }px and up)
+@media ( min-width: ${ screenSize.breakpoints.small.value }px) and ( max-width: ${ screenSize.breakpoints.medium.value - 0.02 }px ) {
+	.block-visibility-hide-screen-small {
+		display: none !important;
+	}
+}
+
+// Extra small devices (portrait phones, less than ${ screenSize.breakpoints.small.value }px)
+@media ( max-width: ${ screenSize.breakpoints.small.value - 0.02 }px ) {
+	.block-visibility-hide-screen-extra-small {
 		display: none !important;
 	}
 }
 					`}</pre>
 				</div>
+				<ToggleControl
+					label={ __(
+						'Hide on extra large screens',
+						'block-visibility'
+					) }
+					help={ 'Large desktops' }
+					checked={ false }
+					onChange={ () => {
+						console.log( 'test' );
+					} }
+				/>
+				<ToggleControl
+					label={ __(
+						'Hide on large screens',
+						'block-visibility'
+					) }
+					help={ 'Desktop and tablet (landscape) screen sizes' }
+					checked={ false }
+					onChange={ () => {
+						console.log( 'test' );
+					} }
+				/>
+				<ToggleControl
+					label={ __(
+						'Hide on medium screens',
+						'block-visibility'
+					) }
+					help={ 'Tablet (portrait) screen sizes' }
+					checked={ false }
+					onChange={ () => {
+						console.log( 'test' );
+					} }
+				/>
+				<ToggleControl
+					label={ __(
+						'Hide on small screens',
+						'block-visibility'
+					) }
+					help={ 'Mobile (landscape) screen sizes' }
+					checked={ false }
+					onChange={ () => {
+						console.log( 'test' );
+					} }
+				/>
+				<ToggleControl
+					label={ __(
+						'Hide on extra small devices',
+						'block-visibility'
+					) }
+					help={ 'Mobile (portrait) screen sizes' }
+					checked={ false }
+					onChange={ () => {
+						console.log( 'test' );
+					} }
+				/>
 				<div className="settings-type__toggle has-info-popover">
 					<ToggleControl
 						label={ __(
