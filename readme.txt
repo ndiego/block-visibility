@@ -125,6 +125,16 @@ Nope. Visibility is controlled on the server, so if a block should be hidden bas
 
 == Changelog ==
 
+= 1.5.0 - 2021-02-XX =
+
+**Added**
+
+* Screen Size controls allow you to show or hide blocks based on the width of the screen (breakpoints).
+
+**Changed**
+
+* Minor adjustments to settings layout and styles.
+
 = 1.4.3 - 2021-02-06 =
 
 **Fixed**

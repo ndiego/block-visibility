@@ -184,6 +184,25 @@ export default function ScreenSize( props ) {
 						);
 					} ) }
 				</div>
+				<div>
+					<pre>{`
+@media (min-width: {$device_size_desktop_min}px) {
+	.conblock-hide-desktop {
+		display: none !important;
+	}
+}
+@media (min-width: {$device_size_tablet_min}px) and (max-width: {$device_size_tablet_max}px) {
+	.conblock-hide-tablet {
+		display: none !important;
+	}
+}
+@media(max-width: {$device_size_mobile_max}px) {
+	.conblock-hide-mobile {
+		display: none !important;
+	}
+}
+					`}</pre>
+				</div>
 				<div className="settings-type__toggle has-info-popover">
 					<ToggleControl
 						label={ __(
