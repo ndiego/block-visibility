@@ -130,13 +130,12 @@ export default function VisibilityByRole( props ) {
 
 	return (
 		<div className="visibility-control__group visibility-by-user-role">
+			<h3 className="visibility-control__group-heading">
+				{ __( 'Visibility by User Role', 'block-visibility' ) }
+			</h3>
 			<div className="visibility-control visibility-by-role">
 				<RadioControl
 					className="compound-radio-control"
-					label={ __(
-						'Visibility by User Role',
-						'block-visibility'
-					) }
 					selected={ visibilityByRole }
 					options={ options }
 					onChange={ ( value ) =>

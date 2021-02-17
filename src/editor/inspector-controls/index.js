@@ -12,6 +12,7 @@ import { createInterpolateElement } from '@wordpress/element';
 import HideBlock from './hide-block';
 import VisibilityByRole from './visibility-by-role';
 import DateTime from './date-time';
+import ScreenSize from './screen-size';
 import { getEnabledControls } from './../utils/setting-utilities';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import hasPermission from './../utils/has-permission';
@@ -83,6 +84,11 @@ export default function VisibilityInspectorControls( props ) {
 								enabledControls={ enabledControls }
 								{ ...props }
 							/>
+							<ScreenSize
+								settings={ settings }
+								enabledControls={ enabledControls }
+								{ ...props }
+							/>
 							<Slot name="InspectorControlsBottom" />
 						</>
 					) }
@@ -103,6 +109,37 @@ export default function VisibilityInspectorControls( props ) {
 									),
 								}
 							) }
+						</Notice>
+					) }
+
+					{ variables.currentUsersRoles.includes(
+						'administrator'
+					) && (
+						<Notice status="notice" isDismissible={ false }>
+							{ createInterpolateElement(
+								__(
+									'Customize and restrict the visibility controls in the <a>plugin settings</a>.',
+									'block-visibility'
+								),
+								{
+									a: (
+										<a // eslint-disable-line
+											href={
+												settingsUrl +
+												'&tab=visibility-controls'
+											}
+											target="_blank"
+											rel="noreferrer"
+										/>
+									),
+								}
+							) }
+							<span className="visibility-control__help">
+								{ __(
+									'Notice only visible to Administrators.',
+									'block-visibility'
+								) }
+							</span>
 						</Notice>
 					) }
 				</div>

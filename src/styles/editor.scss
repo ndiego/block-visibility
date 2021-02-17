@@ -12,11 +12,16 @@ $icon__date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><p
     padding-top: 10px;
 
     .visibility-control__group {
-        margin-bottom: 24px;
+        margin-bottom: 30px;
 
         &:last-child {
             margin-bottom: 0;
         }
+    }
+
+    .visibility-control__group-heading {
+        font-weight: 500;
+        margin-bottom: 16px;
     }
 
     .visibility-control {
@@ -49,7 +54,6 @@ $icon__date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><p
     /* Specific styling for radion controls with help text */
     .compound-radio-control {
         .components-radio-control__option {
-            margin-top: 4px;
 
             &:not(:last-child) {
                 margin-bottom: 10px;
@@ -63,7 +67,6 @@ $icon__date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><p
 
             .compound-radio-label {
                 display: inline-block;
-                font-weight: 600;
 
                 span {
                     display: block;
@@ -113,6 +116,19 @@ $icon__date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><p
 
         .user-role {
             margin-bottom: 10px;
+        }
+    }
+
+    .components-notice {
+        margin: 10px 0;
+
+        .components-notice__content {
+            margin: 2px 0;
+
+            .visibility-control__help {
+                display: inline-block;
+                margin: 4px 0 0;
+            }
         }
     }
 }
@@ -268,4 +284,9 @@ $icon__color: #000000;
 // Bit of a hack and applies to all celendar components, should be removed at some point.
 .CalendarDay__today {
     background: #f5f5f5;
+}
+
+// Fixes the missing background color of notices.
+.components-notice.is-notice {
+    background: #e8f5f9;
 }

@@ -135,6 +135,10 @@ Nope. Visibility is controlled on the server, so if a block should be hidden bas
 
 * Minor adjustments to settings layout and styles.
 
+**Removed**
+
+* Removed legacy visibility controls in REST API settings class.
+
 = 1.4.3 - 2021-02-06 =
 
 **Fixed**
