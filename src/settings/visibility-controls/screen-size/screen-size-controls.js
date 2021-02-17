@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { ToggleControl } from '@wordpress/components';
 
 /**
@@ -19,44 +19,6 @@ export default function ScreenSizeControls( props ) {
 		screenSize,
 		enableAdvancedControls,
 	} = props;
-
-	const controls = {
-		extra_large: {
-			title: __( 'Extra Large', 'block-visibility' ),
-			description: __(
-				'Set the breakpoint for desktop screen sizes and larger.',
-				'block-visibility'
-			),
-		},
-		large: {
-			title: __( 'Large', 'block-visibility' ),
-			description: __(
-				'Set the breakpoint for desktop and tablet (landscape) screen sizes.',
-				'block-visibility'
-			),
-		},
-		medium: {
-			title: __( 'Medium', 'block-visibility' ),
-			description: __(
-				'Set the breakpoint for tablet (portrait) screen sizes.',
-				'block-visibility'
-			),
-		},
-		small: {
-			title: __( 'Small', 'block-visibility' ),
-			description: __(
-				'Set the breakpoint for mobile screen sizes.',
-				'block-visibility'
-			),
-		},
-		extra_small: {
-			title: __( 'Extra Small', 'block-visibility' ),
-			description: __(
-				'Set the breakpoint for mobile screen sizes.',
-				'block-visibility'
-			),
-		},
-	};
 
 	function onControlChange( control, value ) {
 		setSettings( {
@@ -83,9 +45,12 @@ export default function ScreenSizeControls( props ) {
 						'Enable large desktop control',
 						'block-visibility'
 					) }
-					help={ __(
-						'Allows users to hide blocks on large desktop screen sizes, 1200px and up.',
-						'block-visibility'
+					help={ sprintf(
+						__(
+							'Allows users to hide blocks on extra large screen sizes, %s and up.',
+							'block-visibility'
+						),
+						screenSize.breakpoints.extra_large
 					) }
 					checked={ screenSize.controls.extra_large }
 					onChange={ () =>
@@ -98,10 +63,23 @@ export default function ScreenSizeControls( props ) {
 			) }
 			<ToggleControl
 				label={ __( 'Enable desktop control', 'block-visibility' ) }
-				help={ __(
-					'Allows users to hide blocks on desktop and tablet (landscape) screen sizes, between 992px and 1200px.',
-					'block-visibility'
-				) }
+				help={ [
+					! enableAdvancedControls && sprintf(
+						__(
+							'Allows users to hide blocks on large screen sizes, %s and up.',
+							'block-visibility'
+						),
+						screenSize.breakpoints.large
+					),
+					enableAdvancedControls && sprintf(
+						__(
+							'Allows users to hide blocks on large screen sizes, between %s and %s.',
+							'block-visibility'
+						),
+						screenSize.breakpoints.large,
+						screenSize.breakpoints.extra_large
+					),
+				] }
 				checked={ screenSize.controls.large }
 				onChange={ () =>
 					onControlChange( 'large', ! screenSize.controls.large )
@@ -109,9 +87,13 @@ export default function ScreenSizeControls( props ) {
 			/>
 			<ToggleControl
 				label={ __( 'Enable tablet control', 'block-visibility' ) }
-				help={ __(
-					'Allows users to hide blocks on tablet (portrait) screen sizes, between 768px and 992px.',
-					'block-visibility'
+				help={ sprintf(
+					__(
+						'Allows users to hide blocks on medium screen sizes, between %s and %s.',
+						'block-visibility'
+					),
+					screenSize.breakpoints.medium,
+					screenSize.breakpoints.large
 				) }
 				checked={ screenSize.controls.medium }
 				onChange={ () =>
@@ -119,14 +101,33 @@ export default function ScreenSizeControls( props ) {
 				}
 			/>
 			<ToggleControl
-				label={ __(
-					'Enable mobile (landscape) control',
-					'block-visibility'
-				) }
-				help={ __(
-					'Allows users to hide blocks on mobile (landscape) screen sizes, between 576px and 768px.',
-					'block-visibility'
-				) }
+				label={ [
+					! enableAdvancedControls && __(
+						'Enable mobile control',
+						'block-visibility'
+					),
+					enableAdvancedControls && __(
+						'Enable mobile (landscape) control',
+						'block-visibility'
+					),
+				] }
+				help={ [
+					! enableAdvancedControls && sprintf(
+						__(
+							'Allows users to hide blocks on small screen sizes, up to %s.',
+							'block-visibility'
+						),
+						screenSize.breakpoints.medium
+					),
+					enableAdvancedControls && sprintf(
+						__(
+							'Allows users to hide blocks on small screen sizes, between %s and %s.',
+							'block-visibility'
+						),
+						screenSize.breakpoints.small,
+						screenSize.breakpoints.medium
+					),
+				] }
 				checked={ screenSize.controls.small }
 				onChange={ () =>
 					onControlChange( 'small', ! screenSize.controls.small )
@@ -138,9 +139,12 @@ export default function ScreenSizeControls( props ) {
 						'Enable mobile (portrait) control',
 						'block-visibility'
 					) }
-					help={ __(
-						'Allows users to hide blocks on mobile (portrait) screen sizes, up to 562px.',
-						'block-visibility'
+					help={ sprintf(
+						__(
+							'Allows users to hide blocks on extra small screen sizes, up to %s.',
+							'block-visibility'
+						),
+						screenSize.breakpoints.small
 					) }
 					checked={ screenSize.controls.extra_small }
 					onChange={ () =>

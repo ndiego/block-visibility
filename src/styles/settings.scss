@@ -386,21 +386,26 @@ $mobile: 426px;
 		}
 	}
 
+	/* Specific styles for Screen Size visibility controls */
 	.breakpoint-control-container {
 		display: flex;
 		justify-content: space-between;
+		margin-right: 8px;
 
 		.settings-label {
-			font-weight: 600;
+			font-weight: 500;
 			margin-bottom: 20px !important;
+		}
+
+		@media ( max-width: $tablet ) {
+			display: block;
 		}
 	}
 
 	.breakpoint-css-preview {
-		margin: 20px 8px 30px 0;
+		margin: 10px 8px 30px 0;
 
 		pre {
-			background: #f1f1f1;
 			border: 1px solid #ccd0d4;
 			color: #555;
 			font-size: .9em;
@@ -410,8 +415,8 @@ $mobile: 426px;
 	}
 
 	.breakpoints-container {
-		width: 30%;
-		margin-right: 50px;
+		max-width: 100%;
+		margin-right: 10%;
 
 		.breakpoint {
 			margin-bottom: 18px;
@@ -419,6 +424,36 @@ $mobile: 426px;
 			.settings-panel__help {
 				margin-top: 8px;
 			}
+		}
+
+		@media ( max-width: $tablet ) {
+			margin-right: 0;
+			margin-bottom: 30px
+		}
+	}
+
+	.controls-container {
+		width: 60%;
+
+		.components-base-control {
+			margin-bottom: 18px;
+
+			&:first-child {
+				margin-top: 2px;
+			}
+			
+			label {
+				margin-bottom: 0 !important;
+			}
+
+			.components-base-control__help {
+				margin-top: -4px;
+			}
+		}
+
+		@media ( max-width: $tablet ) {
+			width: 100%;
+			margin-bottom: 30px
 		}
 	}
 

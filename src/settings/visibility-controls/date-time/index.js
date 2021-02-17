@@ -72,6 +72,10 @@ export default function DateTime( props ) {
 					/>
 					<InformationPopover
 						message={ __(
+							'Date & Time controls allow you hide blocks based on time and date settings, which includes the ability to schedule the visibility of blocks.',
+							'block-visibility'
+						) }
+						subMessage={ __(
 							'To learn more about the Date & Time controls, review the plugin documentation using the link below.',
 							'block-visibility'
 						) }

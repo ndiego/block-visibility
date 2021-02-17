@@ -50,7 +50,7 @@ export default function HideBlock( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							'The Hide Block control allows you easily hide blocks completely from the frontend of your website.',
+							'The Hide Block control allows you easily hide blocks completely from the frontend of your website. It is the simplest, yet most powerful, control and overrides all others when enabled on the block.',
 							'block-visibility'
 						) }
 						subMessage={ __(
