@@ -118,7 +118,7 @@ export default function VisibilityInspectorControls( props ) {
 						<Notice status="notice" isDismissible={ false }>
 							{ createInterpolateElement(
 								__(
-									'Customize and restrict the visibility controls in the <a>plugin settings</a>.',
+									'Customize and restrict visibility controls in the <a>plugin settings</a>.',
 									'block-visibility'
 								),
 								{

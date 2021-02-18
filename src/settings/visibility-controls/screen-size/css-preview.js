@@ -30,56 +30,56 @@ export default function CSSPreview( props ) {
 	/* eslint-disable */
 	const defaultCSS = `// Large devices (desktops, ${ screenSize.breakpoints.large } and up)
 @media ( min-width: ${ screenSize.breakpoints.large } ) {
-	.block-visibility-hide-screen-large {
+	.block-visibility-hide-large-screen {
 		display: none !important;
 	}
 }
 
 // Medium devices (tablets, ${ screenSize.breakpoints.medium } and up)
 @media ( min-width: ${ screenSize.breakpoints.medium } ) and ( max-width: ${ setMaxWidth( screenSize.breakpoints.large ) } ) {
-	.block-visibility-hide-screen-medium {
+	.block-visibility-hide-medium-screen {
 		display: none !important;
 	}
 }
 
 // Small devices (mobile devices, less than ${ setMaxWidth( screenSize.breakpoints.medium ) })
 @media ( max-width: ${ setMaxWidth( screenSize.breakpoints.medium ) } ) {
-	.block-visibility-hide-screen-small {
+	.block-visibility-hide-small-screen {
 		display: none !important;
 	}
 }`;
 
 	const advancedCSS = `// Extra large devices (large desktops, ${ screenSize.breakpoints.extra_large } and up)
 @media ( min-width: ${ screenSize.breakpoints.extra_large } ) {
-	.block-visibility-hide-screen-extra-large {
+	.block-visibility-hide-extra-large-screen {
 		display: none !important;
 	}
 }
 
 // Large devices (desktops, ${ screenSize.breakpoints.large } and up)
 @media ( min-width: ${ screenSize.breakpoints.large } ) and (max-width: ${ setMaxWidth( screenSize.breakpoints.extra_large ) } ) {
-	.block-visibility-hide-screen-large {
+	.block-visibility-hide-large-screen {
 		display: none !important;
 	}
 }
 
 // Medium devices (tablets, ${ screenSize.breakpoints.medium } and up)
 @media ( min-width: ${ screenSize.breakpoints.medium } ) and ( max-width: ${ setMaxWidth( screenSize.breakpoints.large ) } ) {
-	.block-visibility-hide-screen-medium {
+	.block-visibility-hide-medium-screen {
 		display: none !important;
 	}
 }
 
 // Small devices (landscape phones, ${ screenSize.breakpoints.small } and up)
 @media ( min-width: ${ screenSize.breakpoints.small } ) and ( max-width: ${ setMaxWidth( screenSize.breakpoints.medium ) } ) {
-	.block-visibility-hide-screen-small {
+	.block-visibility-hide-small-screen {
 		display: none !important;
 	}
 }
 
 // Extra small devices (portrait phones, less than ${ setMaxWidth( screenSize.breakpoints.small ) })
 @media ( max-width: ${ setMaxWidth( screenSize.breakpoints.small ) } ) {
-	.block-visibility-hide-screen-extra-small {
+	.block-visibility-hide-extra-small-screen {
 		display: none !important;
 	}
 }`;

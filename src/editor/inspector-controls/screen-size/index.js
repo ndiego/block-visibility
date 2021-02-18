@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { assign } from 'lodash';
+
+/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -18,7 +23,7 @@ import { hideControlSection } from './../utils/hide-control-section';
  * @return {string}		 Return the rendered JSX
  */
 export default function ScreenSize( props ) {
-	const { settings, attributes, enabledControls } = props;
+	const { settings, attributes, setAttributes, enabledControls } = props;
 	const { blockVisibility } = attributes;
 
 	const sectionHidden = hideControlSection(
@@ -38,6 +43,28 @@ export default function ScreenSize( props ) {
 		true // Default to false if there are no saved settings.
 	);
 
+	const screenSize = blockVisibility?.screenSize ?? {
+		extraLarge: false,
+		large: false,
+		medium: false,
+		small: false,
+		extraSmall: false,
+	};
+
+	const setAttribute = ( attribute, value ) =>
+		setAttributes( {
+			blockVisibility: assign(
+				{ ...blockVisibility },
+				{
+					screenSize: assign(
+						{ ...screenSize },
+						{ [ attribute ]: value }
+					),
+				}
+			),
+		} );
+
+
 	return (
 		<div className="visibility-control__group screen-time">
 			<h3 className="visibility-control__group-heading">
@@ -50,26 +77,26 @@ export default function ScreenSize( props ) {
 						'block-visibility'
 					) }
 					help={ 'Large desktops and displays' }
-					checked={ false }
+					checked={ screenSize.extraLarge }
 					onChange={ () => {
-						console.log( 'test' );
+						setAttribute( 'extraLarge', ! screenSize.extraLarge );
 					} }
 				/>
 			) }
 			<ToggleControl
 				label={ __( 'Hide on large screens', 'block-visibility' ) }
 				help={ 'Desktops and tablets (landscape)' }
-				checked={ false }
+				checked={ screenSize.large }
 				onChange={ () => {
-					console.log( 'test' );
+					setAttribute( 'large', ! screenSize.large );
 				} }
 			/>
 			<ToggleControl
 				label={ __( 'Hide on medium screens', 'block-visibility' ) }
 				help={ 'Tablets (portrait mode)' }
-				checked={ false }
+				checked={ screenSize.medium }
 				onChange={ () => {
-					console.log( 'test' );
+					setAttribute( 'medium', ! screenSize.medium );
 				} }
 			/>
 			<ToggleControl
@@ -78,9 +105,9 @@ export default function ScreenSize( props ) {
 					! enableAdvancedControls && 'Mobile devices',
 					enableAdvancedControls && 'Mobile devices (landscape mode)',
 				] }
-				checked={ false }
+				checked={ screenSize.small }
 				onChange={ () => {
-					console.log( 'test' );
+					setAttribute( 'small', ! screenSize.small );
 				} }
 			/>
 			{ enableAdvancedControls && (
@@ -90,9 +117,9 @@ export default function ScreenSize( props ) {
 						'block-visibility'
 					) }
 					help={ 'Mobile devices (portrait mode)' }
-					checked={ false }
+					checked={ screenSize.extraSmall }
 					onChange={ () => {
-						console.log( 'test' );
+						setAttribute( 'extraSmall', ! screenSize.extraSmall );
 					} }
 				/>
 			) }

@@ -195,6 +195,26 @@ final class Block_Visibility {
 						),
 					),
 				),
+				'screenSize'            => array(
+					'type'       => 'object',
+					'properties' => array(
+						'extraLarge' => array(
+							'type' => 'boolean',
+						),
+						'large'      => array(
+							'type' => 'boolean',
+						),
+						'medium'     => array(
+							'type' => 'boolean',
+						),
+						'small'      => array(
+							'type' => 'boolean',
+						),
+						'extraSmall' => array(
+							'type' => 'boolean',
+						),
+					),
+				),
 				// Depracated attributes.
 				'startDateTime'         => array(
 					'type' => 'string',
