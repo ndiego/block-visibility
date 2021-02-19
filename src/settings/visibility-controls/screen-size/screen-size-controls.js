@@ -46,6 +46,7 @@ export default function ScreenSizeControls( props ) {
 						'block-visibility'
 					) }
 					help={ sprintf(
+						// translators: %s: extra large breakpoint
 						__(
 							'Allows users to hide blocks on extra large screen sizes, %s and up.',
 							'block-visibility'
@@ -64,21 +65,25 @@ export default function ScreenSizeControls( props ) {
 			<ToggleControl
 				label={ __( 'Enable desktop control', 'block-visibility' ) }
 				help={ [
-					! enableAdvancedControls && sprintf(
-						__(
-							'Allows users to hide blocks on large screen sizes, %s and up.',
-							'block-visibility'
+					! enableAdvancedControls &&
+						sprintf(
+							// translators: %s large breakpoint
+							__(
+								'Allows users to hide blocks on large screen sizes, %s and up.',
+								'block-visibility'
+							),
+							screenSize.breakpoints.large
 						),
-						screenSize.breakpoints.large
-					),
-					enableAdvancedControls && sprintf(
-						__(
-							'Allows users to hide blocks on large screen sizes, between %s and %s.',
-							'block-visibility'
+					enableAdvancedControls &&
+						sprintf(
+							// translators: %1$s: large breakpoint %2$s: extra large breakpoint
+							__(
+								'Allows users to hide blocks on large screen sizes, between %1$s and %2$s.',
+								'block-visibility'
+							),
+							screenSize.breakpoints.large,
+							screenSize.breakpoints.extra_large
 						),
-						screenSize.breakpoints.large,
-						screenSize.breakpoints.extra_large
-					),
 				] }
 				checked={ screenSize.controls.large }
 				onChange={ () =>
@@ -88,8 +93,9 @@ export default function ScreenSizeControls( props ) {
 			<ToggleControl
 				label={ __( 'Enable tablet control', 'block-visibility' ) }
 				help={ sprintf(
+					// translators: %1$s: medium breakpoint %2$s: large breakpoint
 					__(
-						'Allows users to hide blocks on medium screen sizes, between %s and %s.',
+						'Allows users to hide blocks on medium screen sizes, between %1$s and %2$s.',
 						'block-visibility'
 					),
 					screenSize.breakpoints.medium,
@@ -102,31 +108,34 @@ export default function ScreenSizeControls( props ) {
 			/>
 			<ToggleControl
 				label={ [
-					! enableAdvancedControls && __(
-						'Enable mobile control',
-						'block-visibility'
-					),
-					enableAdvancedControls && __(
-						'Enable mobile (landscape) control',
-						'block-visibility'
-					),
+					! enableAdvancedControls &&
+						__( 'Enable mobile control', 'block-visibility' ),
+					enableAdvancedControls &&
+						__(
+							'Enable mobile (landscape) control',
+							'block-visibility'
+						),
 				] }
 				help={ [
-					! enableAdvancedControls && sprintf(
-						__(
-							'Allows users to hide blocks on small screen sizes, up to %s.',
-							'block-visibility'
+					! enableAdvancedControls &&
+						sprintf(
+							// translators: %s: medium breakpoint
+							__(
+								'Allows users to hide blocks on small screen sizes, less than %s.',
+								'block-visibility'
+							),
+							screenSize.breakpoints.medium
 						),
-						screenSize.breakpoints.medium
-					),
-					enableAdvancedControls && sprintf(
-						__(
-							'Allows users to hide blocks on small screen sizes, between %s and %s.',
-							'block-visibility'
+					enableAdvancedControls &&
+						sprintf(
+							// translators: %1$s: small breakpoint %2$s: medium breakpoint
+							__(
+								'Allows users to hide blocks on small screen sizes, between %1$s and %2$s.',
+								'block-visibility'
+							),
+							screenSize.breakpoints.small,
+							screenSize.breakpoints.medium
 						),
-						screenSize.breakpoints.small,
-						screenSize.breakpoints.medium
-					),
 				] }
 				checked={ screenSize.controls.small }
 				onChange={ () =>
@@ -140,8 +149,9 @@ export default function ScreenSizeControls( props ) {
 						'block-visibility'
 					) }
 					help={ sprintf(
+						// translators: %s: small breakpoint
 						__(
-							'Allows users to hide blocks on extra small screen sizes, up to %s.',
+							'Allows users to hide blocks on extra small screen sizes, less than %s.',
 							'block-visibility'
 						),
 						screenSize.breakpoints.small

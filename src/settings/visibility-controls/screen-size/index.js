@@ -8,7 +8,7 @@ import { ToggleControl, Disabled, Slot } from '@wordpress/components';
  * Internal dependencies
  */
 import InformationPopover from './../../utils/information-popover';
-import CSSPreview from './css-preview';
+import PreviewStyles from './preview-styles';
 import Breakpoints from './breakpoints';
 import ScreenSizeControls from './screen-size-controls';
 
@@ -48,8 +48,6 @@ export default function ScreenSize( props ) {
 		screenSize = settings.screen_size;
 	}
 
-	console.log( screenSize );
-
 	let screenSizeControls = (
 		<>
 			<div className="breakpoint-control-container">
@@ -72,11 +70,9 @@ export default function ScreenSize( props ) {
 					}
 				/>
 			</div>
-			<CSSPreview
+			<PreviewStyles
 				screenSize={ screenSize }
-				enableAdvancedControls={
-					screenSize.enable_advanced_controls
-				}
+				enableAdvancedControls={ screenSize.enable_advanced_controls }
 			/>
 			<div className="settings-type__toggle has-info-popover">
 				<ToggleControl
@@ -128,7 +124,7 @@ export default function ScreenSize( props ) {
 				/>
 				<InformationPopover
 					message={ __(
-						'By default, the CSS needed for the Screen Size controls is loaded on the frontend of your website. You can disable this functionality using this setting. If disabled, you will need to add the CSS manually to your theme in order for the Screen Size controls to work properly. This CSS code is available via the "Preview Frontend CSS" button on this page.',
+						'By default, the CSS needed for the Screen Size controls is loaded on the frontend of your website. If disabled, you will need to add the CSS manually to your theme in order for the Screen Size controls to work properly. This CSS code is available via the "Preview Frontend CSS" button on this page.',
 						'block-visibility'
 					) }
 					link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
@@ -138,9 +134,7 @@ export default function ScreenSize( props ) {
 	);
 
 	if ( ! screenSize.enable ) {
-		screenSizeControls = (
-			<Disabled>{ screenSizeControls }</Disabled>
-		);
+		screenSizeControls = <Disabled>{ screenSizeControls }</Disabled>;
 	}
 
 	return (

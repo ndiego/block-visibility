@@ -13,6 +13,7 @@ import { addFilter } from '@wordpress/hooks';
  */
 import hasDateTime from './has-date-time';
 import hasUserRoles from './has-user-roles';
+import hasScreenSize from './has-screen-size';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import usePluginData from './../utils/use-plugin-data';
 import {
@@ -72,6 +73,11 @@ function withContextualIndicators( BlockListBlock ) {
 			'block-visibility__has-date-time': hasDateTime(
 				blockVisibility,
 				enabledControls
+			),
+			'block-visibility__has-screen-size': hasScreenSize(
+				blockVisibility,
+				enabledControls,
+				settings
 			),
 			'block-visibility__set-icon-background': backgroundBlocks.includes(
 				name

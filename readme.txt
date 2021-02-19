@@ -129,7 +129,8 @@ Nope. Visibility is controlled on the server, so if a block should be hidden bas
 
 **Added**
 
-* Screen Size controls allow you to show or hide blocks based on the width of the screen (breakpoints).
+* **Screen Size** controls allow you to show or hide blocks based on the width of the screen (breakpoints).
+* Added universal function for retrieving plugin settings.
 
 **Changed**
 
@@ -138,6 +139,10 @@ Nope. Visibility is controlled on the server, so if a block should be hidden bas
 **Removed**
 
 * Removed legacy visibility controls in REST API settings class.
+
+**Fixed**
+
+* Fixed error where scheduling controls were still active on the frontend when disabled in the plugin settings.
 
 = 1.4.3 - 2021-02-06 =
 

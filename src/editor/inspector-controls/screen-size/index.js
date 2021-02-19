@@ -40,10 +40,11 @@ export default function ScreenSize( props ) {
 		settings,
 		'screen_size',
 		'enable_advanced_controls',
-		true // Default to false if there are no saved settings.
+		false // Default to false if there are no saved settings.
 	);
 
-	const screenSize = blockVisibility?.screenSize ?? {
+	// Set default attributes if needed.
+	const screenSize = blockVisibility?.hideOnScreenSize ?? {
 		extraLarge: false,
 		large: false,
 		medium: false,
@@ -51,12 +52,21 @@ export default function ScreenSize( props ) {
 		extraSmall: false,
 	};
 
+	// Get the screen size control settings.
+	const controls = settings?.visibility_controls?.screen_size?.controls ?? {
+		extraLarge: true,
+		large: true,
+		medium: true,
+		small: true,
+		extraSmall: true,
+	};
+
 	const setAttribute = ( attribute, value ) =>
 		setAttributes( {
 			blockVisibility: assign(
 				{ ...blockVisibility },
 				{
-					screenSize: assign(
+					hideOnScreenSize: assign(
 						{ ...screenSize },
 						{ [ attribute ]: value }
 					),
@@ -64,59 +74,59 @@ export default function ScreenSize( props ) {
 			),
 		} );
 
-
 	return (
-		<div className="visibility-control__group screen-time">
+		<div className="visibility-control__group screen-size">
 			<h3 className="visibility-control__group-heading">
 				{ __( 'Screen Size', 'block-visibility' ) }
 			</h3>
-			{ enableAdvancedControls && (
+			{ enableAdvancedControls && controls.extra_large && (
 				<ToggleControl
 					label={ __(
-						'Hide on extra large screens',
+						'Hide on large desktop',
 						'block-visibility'
 					) }
-					help={ 'Large desktops and displays' }
 					checked={ screenSize.extraLarge }
 					onChange={ () => {
 						setAttribute( 'extraLarge', ! screenSize.extraLarge );
 					} }
 				/>
 			) }
-			<ToggleControl
-				label={ __( 'Hide on large screens', 'block-visibility' ) }
-				help={ 'Desktops and tablets (landscape)' }
-				checked={ screenSize.large }
-				onChange={ () => {
-					setAttribute( 'large', ! screenSize.large );
-				} }
-			/>
-			<ToggleControl
-				label={ __( 'Hide on medium screens', 'block-visibility' ) }
-				help={ 'Tablets (portrait mode)' }
-				checked={ screenSize.medium }
-				onChange={ () => {
-					setAttribute( 'medium', ! screenSize.medium );
-				} }
-			/>
-			<ToggleControl
-				label={ __( 'Hide on small screens', 'block-visibility' ) }
-				help={ [
-					! enableAdvancedControls && 'Mobile devices',
-					enableAdvancedControls && 'Mobile devices (landscape mode)',
-				] }
-				checked={ screenSize.small }
-				onChange={ () => {
-					setAttribute( 'small', ! screenSize.small );
-				} }
-			/>
-			{ enableAdvancedControls && (
+			{ controls.large && (
+				<ToggleControl
+					label={ __( 'Hide on desktop', 'block-visibility' ) }
+					checked={ screenSize.large }
+					onChange={ () => {
+						setAttribute( 'large', ! screenSize.large );
+					} }
+				/>
+			) }
+			{ controls.medium && (
+				<ToggleControl
+					label={ __( 'Hide on tablet', 'block-visibility' ) }
+					checked={ screenSize.medium }
+					onChange={ () => {
+						setAttribute( 'medium', ! screenSize.medium );
+					} }
+				/>
+			) }
+			{ controls.small && (
+				<ToggleControl
+					label={ [
+						! enableAdvancedControls && 'Hide on mobile',
+						enableAdvancedControls && 'Hide on mobile (landscape)',
+					] }
+					checked={ screenSize.small }
+					onChange={ () => {
+						setAttribute( 'small', ! screenSize.small );
+					} }
+				/>
+			) }
+			{ enableAdvancedControls && controls.extra_small && (
 				<ToggleControl
 					label={ __(
-						'Hide on extra small screens',
+						'Hide on mobile (portrait)',
 						'block-visibility'
 					) }
-					help={ 'Mobile devices (portrait mode)' }
 					checked={ screenSize.extraSmall }
 					onChange={ () => {
 						setAttribute( 'extraSmall', ! screenSize.extraSmall );
