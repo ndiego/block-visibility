@@ -50,7 +50,7 @@ export default function ScreenSize( props ) {
 
 	let screenSizeControls = (
 		<>
-			<div className="breakpoint-control-container">
+			<div className="breakpoint-control-container subsetting">
 				<Breakpoints
 					settings={ settings }
 					setSettings={ setSettings }
@@ -74,7 +74,7 @@ export default function ScreenSize( props ) {
 				screenSize={ screenSize }
 				enableAdvancedControls={ screenSize.enable_advanced_controls }
 			/>
-			<div className="settings-type__toggle has-info-popover">
+			<div className="settings-type__toggle has-info-popover subsetting">
 				<ToggleControl
 					label={ __(
 						'Enable advanced screen size controls',
@@ -104,7 +104,7 @@ export default function ScreenSize( props ) {
 					link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 				/>
 			</div>
-			<div className="settings-type__toggle has-info-popover">
+			<div className="settings-type__toggle has-info-popover subsetting">
 				<ToggleControl
 					label={ __(
 						'Load screen size CSS on the frontend of this website.',

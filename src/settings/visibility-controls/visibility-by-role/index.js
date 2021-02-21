@@ -24,32 +24,23 @@ export default function VisibilityByRole( props ) {
 	const enableUserRoles = settings?.visibility_by_role?.enable_user_roles ?? true; // eslint-disable-line
 
 	let enableUserRolesElement = (
-		<div className="settings-type__toggle first has-info-popover">
-			<ToggleControl
-				label={ __(
-					'Enable individual user role restrictions (Administrator, Editor, Subscriber, etc.)',
-					'block-visibility'
-				) }
-				checked={ enableUserRoles }
-				onChange={ () => {
-					setSettings( {
-						...settings,
-						visibility_by_role: {
-							...settings.visibility_by_role,
-							enable_user_roles: ! enableUserRoles,
-						},
-					} );
-					setHasUpdates( true );
-				} }
-			/>
-			<InformationPopover
-				message={ __(
-					'Restrict visibility by any user role, not just users that are logged-in or logged-out. This includes roles that are added by third-party plugins.',
-					'block-visibility'
-				) }
-				link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
-			/>
-		</div>
+		<ToggleControl
+			label={ __(
+				'Enable individual user role restrictions (Administrator, Editor, Subscriber, etc.)',
+				'block-visibility'
+			) }
+			checked={ enableUserRoles }
+			onChange={ () => {
+				setSettings( {
+					...settings,
+					visibility_by_role: {
+						...settings.visibility_by_role,
+						enable_user_roles: ! enableUserRoles,
+					},
+				} );
+				setHasUpdates( true );
+			} }
+		/>
 	);
 
 	if ( ! enable ) {
@@ -97,7 +88,16 @@ export default function VisibilityByRole( props ) {
 					/>
 				</div>
 				<hr />
-				{ enableUserRolesElement }
+				<div className="settings-type__toggle first has-info-popover subsetting">
+					{ enableUserRolesElement }
+					<InformationPopover
+						message={ __(
+							'Restrict visibility by any user role, not just users that are logged-in or logged-out. This includes roles that are added by third-party plugins.',
+							'block-visibility'
+						) }
+						link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					/>
+				</div>
 				<Slot name="VisibilityByRoleControls" />
 			</div>
 		</div>

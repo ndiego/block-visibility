@@ -24,7 +24,7 @@ export default function PreviewStyles( props ) {
 	const advancedStyles = getAdvancedStyles( screenSize );
 
 	return (
-		<div className="breakpoint-css-preview">
+		<div className="breakpoint-css-preview subsetting">
 			<Button onClick={ () => setPreview( ! preview ) } isSecondary>
 				{ [
 					! preview &&

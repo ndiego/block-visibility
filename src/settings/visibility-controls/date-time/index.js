@@ -83,7 +83,7 @@ export default function DateTime( props ) {
 					/>
 				</div>
 				<hr />
-				<div className="settings-type__toggle first has-info-popover">
+				<div className="settings-type__toggle first has-info-popover subsetting">
 					{ schedulingControl }
 					<InformationPopover
 						message={ __(
