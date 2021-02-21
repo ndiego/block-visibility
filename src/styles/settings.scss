@@ -390,11 +390,12 @@ $mobile: 426px;
 	.breakpoint-control-container {
 		display: flex;
 		justify-content: space-between;
-		margin-right: 8px;
 
 		.settings-label {
 			font-weight: 500;
 			margin-bottom: 20px !important;
+			display: flex;
+			justify-content: space-between;
 		}
 
 		@media ( max-width: $tablet ) {

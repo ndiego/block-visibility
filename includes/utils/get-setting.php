@@ -15,12 +15,12 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.5.0
  *
- * @param array $settings      The core plugin settings.
+ * @param array  $settings      The core plugin settings.
  * @param string $category     The category the setting is in (visibility_controls or plugin_settings).
  * @param string $sub_category (Optional, set to null if not needed) The sub-category the setting is in.
  * @param string $setting      The setting or setting group if you are retrieving a sub-setting.
  * @param string $sub_setting  (Optional, set to null if not needed) The sub-setting to be retrieved.
- * @param mixed $default       The default setting value, if the setting cannot be found.
+ * @param mixed  $default       The default setting value, if the setting cannot be found.
  * @return boolean             Is the control (or subcontrol) enabled?
  */
 function get_setting( $settings, $category, $sub_category, $setting, $sub_setting, $default ) {

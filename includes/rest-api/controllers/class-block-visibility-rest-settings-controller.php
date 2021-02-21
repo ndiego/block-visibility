@@ -183,7 +183,7 @@ class Block_Visibility_REST_Settings_Controller extends WP_REST_Controller {
 										),
 									),
 								),
-								'controls'              => array(
+								'controls'                 => array(
 									'type'       => 'object',
 									'properties' => array(
 										'extra_large' => array(

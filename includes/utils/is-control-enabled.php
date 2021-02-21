@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  *
- * @param array $settings    The core plugin settings.
+ * @param array  $settings    The core plugin settings.
  * @param string $control    The main control we are testing.
  * @param string $subcontrol (Optional) The subcontrol we are testing.
  * @param string $default    (Optional) Default value of subcontrol.
@@ -25,7 +25,7 @@ function is_control_enabled(
 	$settings,
 	$control,
 	$subcontrol = 'enable',
- 	$default = true
+	$default = true
 ) {
 
 	if ( isset( $settings['visibility_controls'] ) ) {
@@ -35,7 +35,7 @@ function is_control_enabled(
 		return $default;
 	}
 
-	// If the settings don't exist, again, we want to return the default
+	// If the settings don't exist, again, we want to return the default.
 	if ( isset( $visibility_controls[ $control ][ $subcontrol ] ) ) {
 		return $visibility_controls[ $control ][ $subcontrol ];
 	} else {

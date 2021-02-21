@@ -74,7 +74,7 @@ function register_settings() {
 								),
 							),
 						),
-						'controls'              => array(
+						'controls'                 => array(
 							'type'       => 'object',
 							'properties' => array(
 								'extra_large' => array(
