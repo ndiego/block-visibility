@@ -54,7 +54,7 @@ export default function Breakpoints( props ) {
 	};
 
 	function onBreakpointChange( breakpoint, value ) {
-		setSettings( {knowledge-base
+		setSettings( {
 			...settings,
 			screen_size: {
 				...screenSize,

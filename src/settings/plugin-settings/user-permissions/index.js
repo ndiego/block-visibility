@@ -74,4 +74,3 @@ export default function UserPermissions( props ) {
 		</div>
 	);
 }
-knowledge-base
