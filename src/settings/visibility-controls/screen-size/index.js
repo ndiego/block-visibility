@@ -74,67 +74,54 @@ export default function ScreenSize( props ) {
 				screenSize={ screenSize }
 				enableAdvancedControls={ screenSize.enable_advanced_controls }
 			/>
-			<div className="settings-type__toggle has-info-popover subsetting">
-				<ToggleControl
-					label={ __(
-						'Enable advanced screen size controls',
-						'block-visibility'
-					) }
-					checked={ screenSize.enable_advanced_controls }
-					onChange={ () => {
-						setSettings( {
-							...settings,
-							screen_size: {
-								...screenSize,
-								enable_advanced_controls: ! screenSize.enable_advanced_controls,
-							},
-						} );
-						setHasUpdates( true );
-					} }
-				/>
-				<InformationPopover
-					message={ __(
-						'By default, the Screen Size controls include two breakpoints and three controls for users to hide blocks. There are certain situations where you may need more control over when a block should be visible, for example in the case of very large or small screens. Enabling advanced controls provides these options.',
-						'block-visibility'
-					) }
-					subMessage={ __(
-						'Note that once enabled, any block that is only using the advanced controls to hide at extra large, or extra small, breakpoints will become visible again if this setting is ever disabled in the future.',
-						'block-visibility'
-					) }
-					link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
-				/>
-			</div>
-			<div className="settings-type__toggle has-info-popover subsetting">
-				<ToggleControl
-					label={ __(
-						'Load screen size CSS on the frontend of this website.',
-						'block-visibility'
-					) }
-					checked={ screenSize.enable_frontend_css }
-					onChange={ () => {
-						setSettings( {
-							...settings,
-							screen_size: {
-								...screenSize,
-								enable_frontend_css: ! screenSize.enable_frontend_css,
-							},
-						} );
-						setHasUpdates( true );
-					} }
-				/>
-				<InformationPopover
-					message={ __(
-						'By default, the CSS needed for the Screen Size controls is loaded on the frontend of your website. If disabled, you will need to add the CSS manually to your theme in order for the Screen Size controls to work properly. This CSS code is available via the "Preview Frontend CSS" button on this page.',
-						'block-visibility'
-					) }
-					link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
-				/>
-			</div>
 		</>
+	);
+
+	let enableAdvancedControls = (
+		<ToggleControl
+			label={ __(
+				'Enable advanced screen size controls',
+				'block-visibility'
+			) }
+			checked={ screenSize.enable_advanced_controls }
+			onChange={ () => {
+				setSettings( {
+					...settings,
+					screen_size: {
+						...screenSize,
+						enable_advanced_controls: ! screenSize.enable_advanced_controls,
+					},
+				} );
+				setHasUpdates( true );
+			} }
+		/>
+	);
+
+	let enableFrontendCSS = (
+		<ToggleControl
+			label={ __(
+				'Load screen size CSS on the frontend of this website.',
+				'block-visibility'
+			) }
+			checked={ screenSize.enable_frontend_css }
+			onChange={ () => {
+				setSettings( {
+					...settings,
+					screen_size: {
+						...screenSize,
+						enable_frontend_css: ! screenSize.enable_frontend_css,
+					},
+				} );
+				setHasUpdates( true );
+			} }
+		/>
 	);
 
 	if ( ! screenSize.enable ) {
 		screenSizeControls = <Disabled>{ screenSizeControls }</Disabled>;
+		enableAdvancedControls =
+			<Disabled>{ enableAdvancedControls }</Disabled>;
+		enableFrontendCSS = <Disabled>{ enableFrontendCSS }</Disabled>;
 	}
 
 	return (
@@ -172,11 +159,35 @@ export default function ScreenSize( props ) {
 							'To learn more about the Screen Size controls, review the plugin documentation using the link below.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
 				<hr />
 				{ screenSizeControls }
+				<div className="settings-type__toggle has-info-popover subsetting">
+					{ enableAdvancedControls }
+					<InformationPopover
+						message={ __(
+							'By default, the Screen Size controls include two breakpoints and three controls for users to hide blocks. There are certain situations where you may need more control over when a block should be visible, for example in the case of very large or small screens. Enabling advanced controls provides these options.',
+							'block-visibility'
+						) }
+						subMessage={ __(
+							'Note that once enabled, any block that is only using the advanced controls to hide at extra large, or extra small, breakpoints will become visible again if this setting is ever disabled in the future.',
+							'block-visibility'
+						) }
+						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					/>
+				</div>
+				<div className="settings-type__toggle has-info-popover subsetting">
+					{ enableFrontendCSS }
+					<InformationPopover
+						message={ __(
+							'By default, the CSS needed for the Screen Size controls is loaded on the frontend of your website. If disabled, you will need to add the CSS manually to your theme in order for the Screen Size controls to work properly. This CSS code is available via the "Preview Frontend CSS" button on this page.',
+							'block-visibility'
+						) }
+						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					/>
+				</div>
 				<Slot name="ScreenSizeControls" />
 			</div>
 		</div>

@@ -84,7 +84,7 @@ export default function VisibilityByRole( props ) {
 							'To learn more about Visibility by User Role controls, review the plugin documentation using the link below.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
 				<hr />
@@ -95,7 +95,7 @@ export default function VisibilityByRole( props ) {
 							'Restrict visibility by any user role, not just users that are logged-in or logged-out. This includes roles that are added by third-party plugins.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
 				<Slot name="VisibilityByRoleControls" />
