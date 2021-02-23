@@ -58,8 +58,8 @@ export default function Masthead( props ) {
 			<div className="inner-container">
 				<div className="masthead__branding">
 					<h1>
-						<span className="branding__logo">{ icons.logo }</span>
-						<span className="screen-reader-text">
+						{ icons.logo }
+						<span>
 							{ __( 'Block Visibility', 'block-visibility' ) }
 						</span>
 						{ isPro && <span className="pro-badge">Pro</span> }

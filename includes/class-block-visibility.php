@@ -21,7 +21,7 @@ final class Block_Visibility {
 	 * @since 1.4.0
 	 * @var string
 	 */
-	public $version = '1.4.3';
+	public $version = '1.5.0';
 
 	/**
 	 * Return singleton instance of the Block Visibility plugin.
@@ -103,19 +103,20 @@ final class Block_Visibility {
 		// needs to be included at all times.
 		include_once BLOCK_VISIBILITY_ABSPATH . 'includes/utils/user-functions.php';
 
+		// General utility functions.
+		include_once BLOCK_VISIBILITY_ABSPATH . 'includes/utils/get-asset-file.php';
+
 		// Only include in the admin.
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 			include_once BLOCK_VISIBILITY_ABSPATH . 'includes/admin/editor.php';
 			include_once BLOCK_VISIBILITY_ABSPATH . 'includes/admin/settings.php';
 			include_once BLOCK_VISIBILITY_ABSPATH . 'includes/admin/plugin-action-links.php';
-
-			// Utility functions.
-			include_once BLOCK_VISIBILITY_ABSPATH . 'includes/utils/get-asset-file.php';
 		}
 
 		// Only include on the frontend.
 		if ( ! is_admin() ) {
 			include_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/render-block.php';
+			include_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/styles.php';
 		}
 	}
 
@@ -192,6 +193,26 @@ final class Block_Visibility {
 						),
 						'end'    => array(
 							'type' => 'string',
+						),
+					),
+				),
+				'hideOnScreenSize'      => array(
+					'type'       => 'object',
+					'properties' => array(
+						'extraLarge' => array(
+							'type' => 'boolean',
+						),
+						'large'      => array(
+							'type' => 'boolean',
+						),
+						'medium'     => array(
+							'type' => 'boolean',
+						),
+						'small'      => array(
+							'type' => 'boolean',
+						),
+						'extraSmall' => array(
+							'type' => 'boolean',
 						),
 					),
 				),

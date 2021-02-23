@@ -30,8 +30,12 @@ export default function hasDateTime( blockVisibility, enabledControls ) {
 		indicatorTest = false;
 	}
 
-	if ( ! enable )  {
-		if ( deprecatedStart && deprecatedEnd && deprecatedStart >= deprecatedEnd ) {
+	if ( ! enable ) {
+		if (
+			deprecatedStart &&
+			deprecatedEnd &&
+			deprecatedStart >= deprecatedEnd
+		) {
 			indicatorTest = false;
 		}
 	}

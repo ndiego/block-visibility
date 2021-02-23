@@ -51,6 +51,57 @@ function register_settings() {
 						),
 					),
 				),
+				'screen_size'        => array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable'                   => array(
+							'type' => 'boolean',
+						),
+						'breakpoints'              => array(
+							'type'       => 'object',
+							'properties' => array(
+								'extra_large' => array(
+									'type' => 'string',
+								),
+								'large'       => array(
+									'type' => 'string',
+								),
+								'medium'      => array(
+									'type' => 'string',
+								),
+								'small'       => array(
+									'type' => 'string',
+								),
+							),
+						),
+						'controls'                 => array(
+							'type'       => 'object',
+							'properties' => array(
+								'extra_large' => array(
+									'type' => 'boolean',
+								),
+								'large'       => array(
+									'type' => 'boolean',
+								),
+								'medium'      => array(
+									'type' => 'boolean',
+								),
+								'small'       => array(
+									'type' => 'boolean',
+								),
+								'extra_small' => array(
+									'type' => 'boolean',
+								),
+							),
+						),
+						'enable_advanced_controls' => array(
+							'type' => 'boolean',
+						),
+						'enable_frontend_css'      => array(
+							'type' => 'boolean',
+						),
+					),
+				),
 			),
 		),
 		'disabled_blocks'     => array(
@@ -101,6 +152,24 @@ function register_settings() {
 			'date_time'          => array(
 				'enable'            => true,
 				'enable_scheduling' => true,
+			),
+			'screen_size'        => array(
+				'enable'                   => true,
+				'breakpoints'              => array(
+					'extra_large' => '1200px',
+					'large'       => '992px',
+					'medium'      => '768px',
+					'small'       => '576px',
+				),
+				'controls'                 => array(
+					'extra_large' => true,
+					'large'       => true,
+					'medium'      => true,
+					'small'       => true,
+					'extra_small' => true,
+				),
+				'enable_advanced_controls' => false,
+				'enable_frontend_css'      => true,
 			),
 		),
 		'disabled_blocks'     => array(),

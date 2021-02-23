@@ -76,16 +76,6 @@ function enqueue_settings_assets() {
 		$asset_file['version']
 	);
 
-	// @TODO convert to wp_add_inline_script.
-	wp_localize_script(
-		'wp-api',
-		'wpApiSettings',
-		array(
-			'root'  => esc_url_raw( rest_url() ),
-			'nonce' => wp_create_nonce( 'wp_rest' ),
-		)
-	);
-
 	// Get all the registed block categories.
 	$block_categories = array();
 

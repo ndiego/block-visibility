@@ -5,7 +5,7 @@ Tags: visibility, scheduling, hide, schedule, blocks, schedule blocks, hide bloc
 Requires at least: 5.5
 Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 1.4.3
+Stable tag: 1.5.0
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ Provides visibility controls and scheduling functionality to all WordPress block
 
 == Description ==
 
-Block Visibility allows you to dynamically control which blocks are visible on your website and who can see them, which includes the ability to schedule blocks.
+Block Visibility allows you to dynamically control which blocks are visible on your website and who can see them, which includes the ability to schedule blocks and conditionally display blocks based on screen size.
 
 Built for the new Block (Gutenberg) Editor, this plugin was designed to work with **any** WordPress block. This includes blocks natively provided by WordPress as well as third-party blocks.
 
@@ -23,6 +23,7 @@ Visibility controls determine whether a block should be visible to users on the 
 
 * **Hide** blocks from all users
 * **Schedule** block visibility using a start and end date/time
+* Conditionally display blocks based on **screen size** (Desktop, Tablet, Mobile, and more)
 * Only show blocks to **logged-in** users
 * Only show blocks to **logged-out** users
 * Only show blocks to users with **specific roles** (Administrator, Subscriber, Customer, Member etc.)
@@ -34,6 +35,7 @@ Block Visibility is a lightweight plugin that is designed to do one thing, and o
 * Use as a content management tool. Hide new blocks while you are working on them but still keep the page published.
 * Temporarily hide seasonal content on your website rather than having to delete it.
 * Schedule promotional content and/or event information to display at a set time.
+* Show or hide specific content on desktops, tablets or mobile devices.
 * Restrict content so it's only visible to your customers or members.
 * Display messaging to logged-out users encouraging them to subscribe to your blog.
 * Conditionally display elements in the upcoming Full Site Editor.
@@ -45,10 +47,11 @@ For an **unbiased review**, the plugin was featured on [WordPress Tavern](https:
 Tailor Block Visibility to your needs, or those of your clients, with powerful plugin settings.
 
 * Disable any visibility control
+* Configure up to 4 different breakpoints to optimize the screen size controls
 * Restrict visibility controls to specific block types
 * Set permissions so only certain users have access to visibility controls
 * Disable contextual indicators and other plugin utilities
-* Enable Full Control Mode
+* Enable Full Control Mode 🚀(See the FAQs)
 * Remove all plugin settings on uninstall
 
 === Plays nice with others  ===
@@ -120,10 +123,29 @@ As of version 1.4.0, Block Visibility is supported in the Site Editor, which is 
 No. Block Visibility was design specifically for the WordPress Block (Gutenberg) Editor, and therefore does no work on pages that are controlled by the Elementor editor.
 
 = Is block visibility controlled using CSS? =
-Nope. Visibility is controlled on the server, so if a block should be hidden based on the set controls, it will not even be rendered. This ensures the plugin does not load any additional resources on the frontend of your site, thereby optimizing performance. Additional features in the future may necessitate the use of CSS, but this functionality will be optional.
-
+Visibility is controlled primarily on the server, so if a block should be hidden based on the set controls, it will not even be rendered. This ensures the plugin does not load any additional resources on the frontend of your site, thereby optimizing performance. The **one exception** to this is the Screen Size controls. Visibility by screen size requires the use of CSS, which is loaded to the frontend of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary yourself. Visit the plugin [documentation]() to learn more.
 
 == Changelog ==
+
+= 1.5.0 - 2021-02-22 =
+
+**Added**
+
+* **Screen Size** controls allow you to show or hide blocks based on the width of the screen (Desktop, Tablet, Mobile and more).
+* Added universal function for retrieving plugin settings.
+
+**Changed**
+
+* Minor adjustments to settings layout and styles.
+* All documentation links have been updated to reflect website changes.
+
+**Removed**
+
+* Removed legacy visibility controls in REST API settings class.
+
+**Fixed**
+
+* Fixed error where scheduling controls were still active on the frontend when disabled in the plugin settings.
 
 = 1.4.3 - 2021-02-06 =
 

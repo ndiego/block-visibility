@@ -1,6 +1,7 @@
 /**
  * WordPress dependencies
  */
+import { __ } from '@wordpress/i18n';
 import { Slot } from '@wordpress/components';
 
 /**
@@ -39,6 +40,9 @@ export default function DateTime( props ) {
 
 	return (
 		<div className="visibility-control__group date-time">
+			<h3 className="visibility-control__group-heading">
+				{ __( 'Date & Time', 'block-visibility' ) }
+			</h3>
 			{ enableScheduling && <Scheduling { ...props } /> }
 			<Slot name="DateTimeControls" />
 		</div>

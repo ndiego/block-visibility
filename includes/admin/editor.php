@@ -103,7 +103,7 @@ function is_full_control_mode() {
 
 	if ( isset( $settings['plugin_settings']['enable_full_control_mode'] ) ) {
 		if ( $settings['plugin_settings']['enable_full_control_mode'] ) {
-			 $enabled = true;
+			$enabled = true;
 		}
 	}
 

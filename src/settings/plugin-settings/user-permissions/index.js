@@ -47,7 +47,7 @@ export default function UserPermissions( props ) {
 						'block-visibility'
 					) }
 					link={
-						'https://www.blockvisibilitywp.com/documentation/general-settings/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals'
+						'https://www.blockvisibilitywp.com/knowledge-base/general-settings/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals'
 					}
 				/>
 			</div>

@@ -160,12 +160,53 @@ class Block_Visibility_REST_Settings_Controller extends WP_REST_Controller {
 								),
 							),
 						),
-
-						// Legacy Controls, remove in future version.
-						'time_date'          => array(
+						'screen_size'        => array(
 							'type'       => 'object',
 							'properties' => array(
-								'enable' => array(
+								'enable'                   => array(
+									'type' => 'boolean',
+								),
+								'breakpoints'              => array(
+									'type'       => 'object',
+									'properties' => array(
+										'extra_large' => array(
+											'type' => 'string',
+										),
+										'large'       => array(
+											'type' => 'string',
+										),
+										'medium'      => array(
+											'type' => 'string',
+										),
+										'small'       => array(
+											'type' => 'string',
+										),
+									),
+								),
+								'controls'                 => array(
+									'type'       => 'object',
+									'properties' => array(
+										'extra_large' => array(
+											'type' => 'boolean',
+										),
+										'large'       => array(
+											'type' => 'boolean',
+										),
+										'medium'      => array(
+											'type' => 'boolean',
+										),
+										'small'       => array(
+											'type' => 'boolean',
+										),
+										'extra_small' => array(
+											'type' => 'boolean',
+										),
+									),
+								),
+								'enable_advanced_controls' => array(
+									'type' => 'boolean',
+								),
+								'enable_frontend_css'      => array(
 									'type' => 'boolean',
 								),
 							),
@@ -200,11 +241,6 @@ class Block_Visibility_REST_Settings_Controller extends WP_REST_Controller {
 							'type' => 'boolean',
 						),
 						'remove_on_uninstall'           => array(
-							'type' => 'boolean',
-						),
-
-						// Additional Settings.
-						'enable_visibility_notes'       => array(
 							'type' => 'boolean',
 						),
 					),

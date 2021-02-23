@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { assign } from 'lodash';
+import classnames from 'classnames';
 
 /**
  * WordPress dependencies
@@ -90,6 +91,26 @@ function blockVisibilityAttributes( settings ) {
 						},
 					},
 				},
+				hideOnScreenSize: {
+					type: 'object',
+					properties: {
+						extraLarge: {
+							type: 'boolean',
+						},
+						large: {
+							type: 'boolean',
+						},
+						medium: {
+							type: 'boolean',
+						},
+						small: {
+							type: 'boolean',
+						},
+						extraSmall: {
+							type: 'boolean',
+						},
+					},
+				},
 				// Depracated attributes
 				startDateTime: {
 					type: 'string',
@@ -148,6 +169,72 @@ addFilter(
 	'block-visibility/inspector-controls',
 	blockVisibilityInspectorControls,
 	100 // We want Visibility to appear right above Advanced controls
+);
+
+/**
+ * Override props assigned to save component to inject atttributes
+ *
+ * @param {Object} extraProps Additional props applied to save element.
+ * @param {Object} blockType  Block type.
+ * @param {Object} attributes Current block attributes.
+ * @return {Object} Filtered props applied to save element.
+ */
+function applyVisibilityClasses( extraProps, blockType, attributes ) {
+	const { blockVisibility } = attributes;
+
+	if ( ! blockVisibility ) {
+		return extraProps;
+	}
+
+	// Conditionally add the screen size control classes.
+	const hideExtraLarge = blockVisibility?.hideOnScreenSize?.extraLarge ?? false;
+	const hideLarge = blockVisibility?.hideOnScreenSize?.large ?? false;
+	const hideMedium = blockVisibility?.hideOnScreenSize?.medium ?? false;
+	const hideSmall = blockVisibility?.hideOnScreenSize?.small ?? false;
+	const hideExtraSmall = blockVisibility?.hideOnScreenSize?.extraSmall ?? false;
+
+	if ( hideExtraLarge ) {
+		extraProps.className = classnames(
+			extraProps.className,
+			'block-visibility-hide-extra-large-screen'
+		);
+	}
+
+	if ( hideLarge ) {
+		extraProps.className = classnames(
+			extraProps.className,
+			'block-visibility-hide-large-screen'
+		);
+	}
+
+	if ( hideMedium ) {
+		extraProps.className = classnames(
+			extraProps.className,
+			'block-visibility-hide-medium-screen'
+		);
+	}
+
+	if ( hideSmall ) {
+		extraProps.className = classnames(
+			extraProps.className,
+			'block-visibility-hide-small-screen'
+		);
+	}
+
+	if ( hideExtraSmall ) {
+		extraProps.className = classnames(
+			extraProps.className,
+			'block-visibility-hide-extra-small-screen'
+		);
+	}
+
+	return extraProps;
+}
+
+addFilter(
+	'blocks.getSaveContent.extraProps',
+	'block-visibility/applyVisibilityClasses',
+	applyVisibilityClasses
 );
 
 /**
