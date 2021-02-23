@@ -137,6 +137,7 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 **Changed**
 
 * Minor adjustments to settings layout and styles.
+* All documentation links have been updated to reflect website changes.
 
 **Removed**
 

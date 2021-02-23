@@ -118,8 +118,8 @@ function get_default_styles( $settings ) {
 
 	if ( $medium_enabled ) {
 		$prev_styles = $styles ? $styles . $spacer : $styles;
-		$styles      = $prev_styles . '/* Medium screens (tablets, between {$medium} and {$large}) */
-@media ( min-width: {$medium} ) and ( max-width: ' . set_max_width( $large ) . ' ) {
+		$styles      = $prev_styles . "/* Medium screens (tablets, between {$medium} and {$large}) */
+@media ( min-width: {$medium} ) and ( max-width: " . set_max_width( $large ) . ' ) {
 	.block-visibility-hide-medium-screen {
 		display: none !important;
 	}
@@ -128,8 +128,8 @@ function get_default_styles( $settings ) {
 
 	if ( $small_enabled ) {
 		$prev_styles = $styles ? $styles . $spacer : $styles;
-		$styles      = $prev_styles . '/* Small screens (mobile devices, less than {$medium}) */
-@media ( max-width: ' . set_max_width( $medium ) . ' ) {
+		$styles      = $prev_styles . "/* Small screens (mobile devices, less than {$medium}) */
+@media ( max-width: " . set_max_width( $medium ) . ' ) {
 	.block-visibility-hide-small-screen {
 		display: none !important;
 	}
@@ -173,18 +173,18 @@ function get_advanced_styles( $settings ) {
 	$styles = '';
 
 	if ( $extra_large_enabled ) {
-		$styles = '/* Extra large screens (large desktops, {$extra_large} and up) */
+		$styles = "/* Extra large screens (large desktops, {$extra_large} and up) */
 @media ( min-width: {$extra_large} ) {
 	.block-visibility-hide-extra-large-screen {
 		display: none !important;
 	}
-}';
+}";
 	}
 
 	if ( $large_enabled ) {
 		$prev_styles = $styles ? $styles . $spacer : $styles;
-		$styles      = $prev_styles . '/* Large screens (desktops, between {$large} and {$extra_large}) */
-@media ( min-width: {$large} ) and (max-width: ' . set_max_width( $extra_large ) . ' ) {
+		$styles      = $prev_styles . "/* Large screens (desktops, between {$large} and {$extra_large}) */
+@media ( min-width: {$large} ) and (max-width: " . set_max_width( $extra_large ) . ' ) {
 	.block-visibility-hide-large-screen {
 		display: none !important;
 	}
@@ -193,8 +193,8 @@ function get_advanced_styles( $settings ) {
 
 	if ( $medium_enabled ) {
 		$prev_styles = $styles ? $styles . $spacer : $styles;
-		$styles      = $prev_styles . '/* Medium screens (tablets, between {$medium} and {$large}) */
-@media ( min-width: {$medium} ) and ( max-width: ' . set_max_width( $large ) . ' ) {
+		$styles      = $prev_styles . "/* Medium screens (tablets, between {$medium} and {$large}) */
+@media ( min-width: {$medium} ) and ( max-width: " . set_max_width( $large ) . ' ) {
 .block-visibility-hide-medium-screen {
 	display: none !important;
 }
@@ -203,8 +203,8 @@ function get_advanced_styles( $settings ) {
 
 	if ( $small_enabled ) {
 		$prev_styles = $styles ? $styles . $spacer : $styles;
-		$styles      = $prev_styles . '/* Small screens (landscape mobile devices, between {$small} and {$medium}) */
-@media ( min-width: {$small} ) and ( max-width: ' . set_max_width( $medium ) . ' ) {
+		$styles      = $prev_styles . "/* Small screens (landscape mobile devices, between {$small} and {$medium}) */
+@media ( min-width: {$small} ) and ( max-width: " . set_max_width( $medium ) . ' ) {
 	.block-visibility-hide-small-screen {
 		display: none !important;
 	}
@@ -213,8 +213,8 @@ function get_advanced_styles( $settings ) {
 
 	if ( $extra_small_enabled ) {
 		$prev_styles = $styles ? $styles . $spacer : $styles;
-		$styles      = $prev_styles . '/* Extra small screens (portrait mobile devices, less than {$small}) */
-@media ( max-width: ' . set_max_width( $small ) . ' ) {
+		$styles      = $prev_styles . "/* Extra small screens (portrait mobile devices, less than {$small}) */
+@media ( max-width: " . set_max_width( $small ) . ' ) {
 	.block-visibility-hide-extra-small-screen {
 		display: none !important;
 	}

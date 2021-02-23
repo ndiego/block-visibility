@@ -61,28 +61,24 @@ $mobile: 426px;
 
 		.masthead__branding {
 			h1 {
+				color: #222;
+				font-size: 20px;
 				font-weight: 400;
 				display: flex;
+				align-items: center;
 				margin: 0;
-			}
 
-			p {
-				color: #32373C;
-				font-size: 15px;
-				line-height: 1.4;
-				max-width: 660px;
-				margin: 20px 0 0;
-			}
-
-			.branding__logo {
-				svg {
-					width: 200px;
-					fill: #45428f;
-
-					.transparent {
-						opacity: .6;
-					}
+				@media ( max-width: $mobile ) {
+					justify-content: center;
 				}
+			}
+
+			svg {
+				fill: #222;
+				height: 30px;
+				width: 46px;
+				margin-right: 7px;
+				margin-top: 2px;
 			}
 
 			.pro-badge {
@@ -95,8 +91,8 @@ $mobile: 426px;
 				line-height: 1;
 				font-weight: 800;
 				letter-spacing: 1px;
-				margin-left: 8px;
-				background: #45428f;
+				margin-left: 10px;
+				background: #222;
 			}
 
 			@media ( max-width: $mobile ) {
