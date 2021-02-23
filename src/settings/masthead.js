@@ -58,7 +58,7 @@ export default function Masthead( props ) {
 			<div className="inner-container">
 				<div className="masthead__branding">
 					<h1>
-						{ icons.logoNEW }
+						{ icons.logo }
 						<span>
 							{ __( 'Block Visibility', 'block-visibility' ) }
 						</span>
