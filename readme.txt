@@ -123,7 +123,7 @@ As of version 1.4.0, Block Visibility is supported in the Site Editor, which is 
 No. Block Visibility was design specifically for the WordPress Block (Gutenberg) Editor, and therefore does no work on pages that are controlled by the Elementor editor.
 
 = Is block visibility controlled using CSS? =
-Visibility is controlled primarily on the server, so if a block should be hidden based on the set controls, it will not even be rendered. This ensures the plugin does not load any additional resources on the frontend of your site, thereby optimizing performance. The **one exception** to this is the Screen Size controls. Visibility by screen size requires the use of CSS, which is loaded to the frontend of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary yourself. Visit the plugin [documentation]() to learn more.
+Visibility is controlled primarily on the server, so if a block should be hidden based on the set controls, it will not even be rendered. This ensures the plugin does not load any additional resources on the frontend of your site, thereby optimizing performance. The **one exception** to this is the Screen Size controls. Visibility by screen size requires the use of CSS, which is loaded to the frontend of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary yourself. Visit the plugin [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/) to learn more.
 
 == Changelog ==
 
