@@ -13,7 +13,10 @@ import HideBlock from './hide-block';
 import VisibilityByRole from './visibility-by-role';
 import DateTime from './date-time';
 import ScreenSize from './screen-size';
-import { getEnabledControls } from './../utils/setting-utilities';
+import {
+	getEnabledControls,
+	isPluginSettingEnabled,
+} from './../utils/setting-utilities';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import hasPermission from './../utils/has-permission';
 import usePluginData from './../utils/use-plugin-data';
@@ -46,6 +49,10 @@ export default function VisibilityInspectorControls( props ) {
 
 	const settingsUrl = variables?.pluginVariables.settingsUrl ?? ''; // eslint-disable-line
 	const enabledControls = getEnabledControls( settings );
+	const enableEditorNotices = isPluginSettingEnabled(
+		settings,
+		'enable_editor_notices'
+	);
 
 	// Provides an entry point to slot in additional settings.
 	const AdditionalControls = withFilters(
@@ -112,36 +119,35 @@ export default function VisibilityInspectorControls( props ) {
 						</Notice>
 					) }
 
-					{ variables.currentUsersRoles.includes(
-						'administrator'
-					) && (
-						<Notice status="notice" isDismissible={ false }>
-							{ createInterpolateElement(
-								__(
-									'Customize and restrict visibility controls in the <a>plugin settings</a>.',
-									'block-visibility'
-								),
-								{
-									a: (
-										<a // eslint-disable-line
-											href={
-												settingsUrl +
-												'&tab=visibility-controls'
-											}
-											target="_blank"
-											rel="noreferrer"
-										/>
+					{ variables.currentUsersRoles.includes( 'administrator' ) &&
+						enableEditorNotices && (
+							<Notice status="notice" isDismissible={ false }>
+								{ createInterpolateElement(
+									__(
+										'Customize and restrict visibility controls in the <a>plugin settings</a>.',
+										'block-visibility'
 									),
-								}
-							) }
-							<span className="visibility-control__help">
-								{ __(
-									'Notice only visible to Administrators.',
-									'block-visibility'
+									{
+										a: (
+											<a // eslint-disable-line
+												href={
+													settingsUrl +
+													'&tab=visibility-controls'
+												}
+												target="_blank"
+												rel="noreferrer"
+											/>
+										),
+									}
 								) }
-							</span>
-						</Notice>
-					) }
+								<span className="visibility-control__help">
+									{ __(
+										'Notice only visible to Administrators.',
+										'block-visibility'
+									) }
+								</span>
+							</Notice>
+						) }
 				</div>
 			</PanelBody>
 			<AdditionalControls

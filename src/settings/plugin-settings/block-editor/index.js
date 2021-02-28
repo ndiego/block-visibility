@@ -22,6 +22,7 @@ export default function BlockEditor( props ) {
 	// Manually set defaults, this ensures the main settings function properly
 	const enableContextualIndicators = settings?.enable_contextual_indicators ?? true; // eslint-disable-line
 	const enableToolbarControls = settings?.enable_toolbar_controls ?? true; // eslint-disable-line
+	const enableEditorNotices = settings?.enable_editor_notices ?? true; // eslint-disable-line
 
 	return (
 		<div className="setting-tabs__settings-panel">
@@ -70,6 +71,28 @@ export default function BlockEditor( props ) {
 							} );
 							setHasUpdates( true );
 						} }
+					/>
+				</div>
+				<div className="settings-type__toggle has-info-popover">
+					<ToggleControl
+						label={ __(
+							'Enable plugin notices in the editor.',
+							'block-visibility'
+						) }
+						checked={ enableEditorNotices }
+						onChange={ () => {
+							setSettings( {
+								...settings,
+								enable_editor_notices: ! enableEditorNotices,
+							} );
+							setHasUpdates( true );
+						} }
+					/>
+					<InformationPopover
+						message={ __(
+							'Block Visibility provides various notices in the editor to provide helpful warnings, tips, and links. This setting allows you to disable those notices for a more steamlined user interface.',
+							'block-visibility'
+						) }
 					/>
 				</div>
 				<Slot name="BlockEditorSettings" />

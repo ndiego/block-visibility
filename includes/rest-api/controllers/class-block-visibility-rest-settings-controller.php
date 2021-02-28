@@ -228,6 +228,9 @@ class Block_Visibility_REST_Settings_Controller extends WP_REST_Controller {
 						'enable_toolbar_controls'       => array(
 							'type' => 'boolean',
 						),
+						'enable_editor_notices'         => array(
+							'type' => 'boolean',
+						),
 						'enable_user_role_restrictions' => array(
 							'type' => 'boolean',
 						),

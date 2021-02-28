@@ -81,10 +81,7 @@ export default function ScreenSize( props ) {
 			</h3>
 			{ enableAdvancedControls && controls.extra_large && (
 				<ToggleControl
-					label={ __(
-						'Hide on large desktop',
-						'block-visibility'
-					) }
+					label={ __( 'Hide on large desktop', 'block-visibility' ) }
 					checked={ screenSize.extraLarge }
 					onChange={ () => {
 						setAttribute( 'extraLarge', ! screenSize.extraLarge );

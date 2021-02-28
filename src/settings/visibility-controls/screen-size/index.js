@@ -119,8 +119,9 @@ export default function ScreenSize( props ) {
 
 	if ( ! screenSize.enable ) {
 		screenSizeControls = <Disabled>{ screenSizeControls }</Disabled>;
-		enableAdvancedControls =
-			<Disabled>{ enableAdvancedControls }</Disabled>;
+		enableAdvancedControls = (
+			<Disabled>{ enableAdvancedControls }</Disabled>
+		);
 		enableFrontendCSS = <Disabled>{ enableFrontendCSS }</Disabled>;
 	}
 

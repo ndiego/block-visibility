@@ -31,7 +31,7 @@ export default function Footer( props ) {
 		},
 		docs: {
 			title: __( 'Documentation', 'block-visibility' ),
-			url: 'https://www.blockvisibilitywp.com/documentation/?utm_source=block_visibility&utm_medium=plugin&utm_campaign=settings_page', // eslint-disable-line
+			url: 'https://www.blockvisibilitywp.com/knowledge-base/?utm_source=block_visibility&utm_medium=plugin&utm_campaign=settings_page', // eslint-disable-line
 			rel: 'external',
 		},
 		support: {

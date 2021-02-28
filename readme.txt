@@ -1,11 +1,11 @@
 === Block Visibility ===
 Author URI: https://www.nickdiego.com
 Contributors: ndiego, outermostdesign
-Tags: visibility, scheduling, hide, schedule, blocks, schedule blocks, hide blocks, block editor
+Tags: visibility, scheduling, hide, schedule, blocks, schedule blocks, hide blocks, block editor, conditional blocks
 Requires at least: 5.5
 Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -123,9 +123,16 @@ As of version 1.4.0, Block Visibility is supported in the Site Editor, which is 
 No. Block Visibility was design specifically for the WordPress Block (Gutenberg) Editor, and therefore does no work on pages that are controlled by the Elementor editor.
 
 = Is block visibility controlled using CSS? =
-Visibility is controlled primarily on the server, so if a block should be hidden based on the set controls, it will not even be rendered. This ensures the plugin does not load any additional resources on the frontend of your site, thereby optimizing performance. The **one exception** to this is the Screen Size controls. Visibility by screen size requires the use of CSS, which is loaded to the frontend of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary yourself. Visit the plugin [documentation]() to learn more.
+Visibility is controlled primarily on the server, so if a block should be hidden based on the set controls, it will not even be rendered. This ensures the plugin does not load any additional resources on the frontend of your site, thereby optimizing performance. The **one exception** to this is the Screen Size controls. Visibility by screen size requires the use of CSS, which is loaded to the frontend of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary yourself. Visit the plugin [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/) to learn more.
 
 == Changelog ==
+
+= 1.5.1 - 2021-02-28 =
+
+**Fixed**
+
+* Fixed error where plugin settings were not being fetched from the REST api as expected. This issue impacted websites that had WordPress installed in a subdirectory. (Thanks @elenasaygo for discovering this issue and opening a support ticket!)
+* Fixed logic in the `get_current_user_role()` so no errors are thrown when WordPress installed in a subdirectory.
 
 = 1.5.0 - 2021-02-22 =
 

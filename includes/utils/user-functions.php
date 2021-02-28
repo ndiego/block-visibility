@@ -68,7 +68,15 @@ function get_user_roles() {
  * @return array The roles of the current user.
  */
 function get_current_user_role() {
-	$user_id   = get_current_user_id();
-	$user_info = get_userdata( $user_id );
-	return $user_info->roles;
+	$user_id = get_current_user_id();
+
+	if ( $user_id ) {
+		$user_info = get_userdata( $user_id );
+
+		if ( $user_info ) {
+			return $user_info->roles;
+		}
+	}
+
+	return null;
 }

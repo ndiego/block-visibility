@@ -187,11 +187,13 @@ function applyVisibilityClasses( extraProps, blockType, attributes ) {
 	}
 
 	// Conditionally add the screen size control classes.
-	const hideExtraLarge = blockVisibility?.hideOnScreenSize?.extraLarge ?? false;
+	const hideExtraLarge =
+		blockVisibility?.hideOnScreenSize?.extraLarge ?? false;
 	const hideLarge = blockVisibility?.hideOnScreenSize?.large ?? false;
 	const hideMedium = blockVisibility?.hideOnScreenSize?.medium ?? false;
 	const hideSmall = blockVisibility?.hideOnScreenSize?.small ?? false;
-	const hideExtraSmall = blockVisibility?.hideOnScreenSize?.extraSmall ?? false;
+	const hideExtraSmall =
+		blockVisibility?.hideOnScreenSize?.extraSmall ?? false;
 
 	if ( hideExtraLarge ) {
 		extraProps.className = classnames(

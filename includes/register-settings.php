@@ -119,6 +119,9 @@ function register_settings() {
 				'enable_toolbar_controls'       => array(
 					'type' => 'boolean',
 				),
+				'enable_editor_notices'         => array(
+					'type' => 'boolean',
+				),
 				'enable_user_role_restrictions' => array(
 					'type' => 'boolean',
 				),
@@ -176,6 +179,7 @@ function register_settings() {
 		'plugin_settings'     => array(
 			'enable_contextual_indicators'  => true,
 			'enable_toolbar_controls'       => true,
+			'enable_editor_notices'         => true,
 			'enable_user_role_restrictions' => false,
 			'enabled_user_roles'            => array(),
 			'enable_full_control_mode'      => false,
