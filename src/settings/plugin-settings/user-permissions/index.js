@@ -41,18 +41,9 @@ export default function UserPermissions( props ) {
 				<span className="settings-panel__header-title">
 					{ __( 'User Permissions', 'block-visibility' ) }
 				</span>
-				<InformationPopover
-					message={ __(
-						'By default, all users that can edit blocks in Block Editor will be able to use the visibility settings provided by Block Visibility. You can limit permissions by user role with these settings.',
-						'block-visibility'
-					) }
-					link={
-						'https://www.blockvisibilitywp.com/knowledge-base/general-settings/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals'
-					}
-				/>
 			</div>
 			<div className="settings-panel__container">
-				<div className="settings-type__toggle">
+				<div className="settings-type__toggle has-info-popover">
 					<ToggleControl
 						label={ __(
 							'Restrict block visibility controls to selected user roles.',
@@ -66,6 +57,15 @@ export default function UserPermissions( props ) {
 							} );
 							setHasUpdates( true );
 						} }
+					/>
+					<InformationPopover
+						message={ __(
+							'By default, all users that can edit blocks in Block Editor will be able to use the visibility settings provided by Block Visibility. You can limit permissions by user role with these settings.',
+							'block-visibility'
+						) }
+						link={
+							'https://www.blockvisibilitywp.com/knowledge-base/general-settings/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals'
+						}
 					/>
 				</div>
 				{ userRolesElement }

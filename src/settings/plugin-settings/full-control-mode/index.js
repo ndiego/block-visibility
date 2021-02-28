@@ -29,18 +29,9 @@ export default function FullControlMode( props ) {
 				<span className="settings-panel__header-title">
 					{ __( 'Full Control Mode', 'block-visibility' ) }
 				</span>
-				<InformationPopover
-					message={ __(
-						"By default, not all blocks are provided with visibility controls. These include child blocks and blocks that may exist in WordPress, but cannot actually be added directly to the editor. Most of the time, you will not need Full Control Mode, but it's there in case you do. Use with caution. Click the link below for complete details.",
-						'block-visibility'
-					) }
-					link={
-						'https://www.blockvisibilitywp.com/knowledge-base/general-settings/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals'
-					}
-				/>
 			</div>
 			<div className="settings-panel__container">
-				<div className="settings-type__toggle">
+				<div className="settings-type__toggle has-info-popover">
 					<ToggleControl
 						label={ createInterpolateElement(
 							__(
@@ -66,6 +57,15 @@ export default function FullControlMode( props ) {
 							} );
 							setHasUpdates( true );
 						} }
+					/>
+					<InformationPopover
+						message={ __(
+							"By default, not all blocks are provided with visibility controls. These include child blocks and blocks that may exist in WordPress, but cannot actually be added directly to the editor. Most of the time, you will not need Full Control Mode, but it's there in case you do. Use with caution. Click the link below for complete details.",
+							'block-visibility'
+						) }
+						link={
+							'https://www.blockvisibilitywp.com/knowledge-base/general-settings/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals'
+						}
 					/>
 				</div>
 			</div>

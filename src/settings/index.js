@@ -44,10 +44,9 @@ function Settings() {
 		async function fetchData( route, setData ) {
 			setStatus( 'fetching' );
 
-			const response = await fetch( // eslint-disable-line
-				`/wp-json/block-visibility/v1/${ route }`,
-				{ method: 'GET' }
-			);
+			// blockVisibilityHomeUrl is provided by wp_add_inline_script.
+			const fetchUrl = `${ blockVisibilityHomeUrl }/wp-json/block-visibility/v1/${ route }`; // eslint-disable-line
+			const response = await fetch( fetchUrl, { method: 'GET' } ); // eslint-disable-line
 
 			if ( response.ok ) {
 				const data = await response.json();
@@ -68,8 +67,9 @@ function Settings() {
 		setSaveStatus( 'saving' );
 
 		const newSettings = assign( { ...settings }, { [ option ]: value } );
+		const fetchUrl = `${ blockVisibilityHomeUrl }/wp-json/block-visibility/v1/settings`; // eslint-disable-line
 
-		const response = await fetch( '/wp-json/block-visibility/v1/settings', { // eslint-disable-line
+		const response = await fetch( fetchUrl, { // eslint-disable-line
 			method: 'POST',
 			body: JSON.stringify( newSettings ),
 			headers: {

@@ -15,9 +15,8 @@ import { applyFilters } from '@wordpress/hooks';
 export default function hasScreenSize(
 	blockVisibility,
 	enabledControls,
-	settings,
+	settings
 ) {
-
 	// Set default attributes if needed.
 	const screenSize = blockVisibility?.hideOnScreenSize ?? {
 		extraLarge: false,
@@ -38,11 +37,11 @@ export default function hasScreenSize(
 
 	// @TODO: Refactor in future to identify the specific active restrictions.
 	const hasSizeRestrictions = [
-		( screenSize.extraLarge && controls.extraLarge ) ? true : false,
-		( screenSize.large && controls.large ) ? true : false,
-		( screenSize.medium && controls.medium ) ? true : false,
-		( screenSize.small && controls.small ) ? true : false,
-		( screenSize.extraSmall && controls.extraSmall ) ? true : false,
+		screenSize.extraLarge && controls.extraLarge ? true : false,
+		screenSize.large && controls.large ? true : false,
+		screenSize.medium && controls.medium ? true : false,
+		screenSize.small && controls.small ? true : false,
+		screenSize.extraSmall && controls.extraSmall ? true : false,
 	];
 
 	let indicatorTest = true;
