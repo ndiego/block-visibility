@@ -28,20 +28,20 @@ export default function hasScreenSize(
 
 	// Get the screen size control settings.
 	const controls = settings?.visibility_controls?.screen_size?.controls ?? {
-		extraLarge: true,
+		extra_large: true,
 		large: true,
 		medium: true,
 		small: true,
-		extraSmall: true,
+		extra_small: true,
 	};
 
 	// @TODO: Refactor in future to identify the specific active restrictions.
 	const hasSizeRestrictions = [
-		screenSize.extraLarge && controls.extraLarge ? true : false,
+		screenSize.extraLarge && controls.extra_large ? true : false,
 		screenSize.large && controls.large ? true : false,
 		screenSize.medium && controls.medium ? true : false,
 		screenSize.small && controls.small ? true : false,
-		screenSize.extraSmall && controls.extraSmall ? true : false,
+		screenSize.extraSmall && controls.extra_small ? true : false,
 	];
 
 	let indicatorTest = true;
