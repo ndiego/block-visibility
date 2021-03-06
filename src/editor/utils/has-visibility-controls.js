@@ -18,7 +18,7 @@ export default function hasVisibilityControls( settings, blockType ) {
 	}
 
 	const disabledBlocks = settings.disabled_blocks;
-	const blockDisabled = disabledBlocks.includes( blockType.name );
+	const blockDisabled = disabledBlocks.includes( blockType );
 	const blockSupported = getBlockSupport(
 		blockType,
 		'blockVisibility',
