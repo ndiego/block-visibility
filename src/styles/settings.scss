@@ -103,7 +103,6 @@ $mobile: 426px;
 		.masthead__plugin-links {
 			font-size: 15px;
 		    font-weight: 500;
-		    width: 50%;
 		    display: flex;
 		    justify-content: flex-end;
 		    align-items: center;
@@ -141,12 +140,23 @@ $mobile: 426px;
 				}
 			}
 		}
+
+		.masthead__notice {
+			a {
+				display: inline;
+				margin: 0;
+				color: #0073aa;
+			}
+
+			a:hover {
+				color: #00a0d2;
+			}
+		}
 	}
 
 	.footer {
 		padding: 10px 30px;
 		box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
-		margin-top: 20px;
 		text-align: center;
 
 		.inner-container {

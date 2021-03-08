@@ -21,22 +21,22 @@ export default function Footer( props ) {
 			url: 'https://www.blockvisibilitywp.com/?utm_source=block_visibility&utm_medium=plugin&utm_campaign=settings_page', // eslint-disable-line
 			rel: 'external',
 		},
-		repo: {
-			title: __( 'GitHub', 'block-visibility' ),
-			url: 'https://github.com/ndiego/block-visibility',
-		},
-		review: {
-			title: __( 'Review', 'block-visibility' ),
-			url: pluginVariables.supportUrl + 'reviews/?filter=5',
-		},
 		docs: {
-			title: __( 'Documentation', 'block-visibility' ),
+			title: __( 'Knowledge Base', 'block-visibility' ),
 			url: 'https://www.blockvisibilitywp.com/knowledge-base/?utm_source=block_visibility&utm_medium=plugin&utm_campaign=settings_page', // eslint-disable-line
 			rel: 'external',
 		},
 		support: {
 			title: __( 'Support', 'block-visibility' ),
 			url: pluginVariables.supportUrl,
+		},
+		repo: {
+			title: __( 'GitHub', 'block-visibility' ),
+			url: 'https://github.com/ndiego/block-visibility',
+		},
+		twitter: {
+			title: __( 'Twitter', 'block-visibility' ),
+			url: 'https://twitter.com/BlockVisibility',
 		},
 	};
 

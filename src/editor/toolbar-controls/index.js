@@ -56,11 +56,7 @@ function ToolbarControls( props ) {
 		settings,
 		'enable_toolbar_controls'
 	);
-	const hasVisibility = hasVisibilityControls(
-		settings,
-		blockType,
-		blockAttributes
-	);
+	const hasVisibility = hasVisibilityControls( settings, blockType.name );
 	const enabledControls = getEnabledControls( settings );
 
 	// As of v1.1.0 we only have hide block controls.

@@ -40,11 +40,7 @@ function withContextualIndicators( BlockListBlock ) {
 			settings,
 			'enable_contextual_indicators'
 		);
-		const hasVisibility = hasVisibilityControls(
-			settings,
-			name,
-			attributes
-		);
+		const hasVisibility = hasVisibilityControls( settings, name );
 		const enabledControls = getEnabledControls( settings );
 
 		if (
