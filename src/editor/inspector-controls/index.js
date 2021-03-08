@@ -40,9 +40,7 @@ export default function VisibilityInspectorControls( props ) {
 		return null;
 	}
 
-	const { name, attributes } = props;
-	//console.log( settings );
-	const hasVisibility = hasVisibilityControls( settings, name );
+	const hasVisibility = hasVisibilityControls( settings, props.name );
 
 	if ( ! hasVisibility ) {
 		return null;

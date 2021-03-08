@@ -125,3 +125,22 @@ function enqueue_settings_assets() {
 
 }
 add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_settings_assets' );
+
+/**
+ * Add review notice in the admin footer on the plugin settings page.
+ *
+ * @since 1.5.2
+ */
+function custom_admin_footer() {
+	return sprintf(
+		// translators: %1$s star rating.
+		__( 'Thank you for using Block Visibility. Please rate the plugin %1$s on %2$sWordPress.org%3$s to help us spread the word.', 'block-visibility' ),
+		'<a href="https://wordpress.org/support/plugin/block-visibility/reviews/?filter=5#new-post" target="_blank" rel="noopener noreferrer">★★★★★</a>',
+		'<a href="https://wordpress.org/support/plugin/block-visibility/reviews/?filter=5#new-post" target="_blank" rel="noopener">',
+		'</a>'
+	);
+}
+// @codingStandardsIgnoreLine
+if ( isset( $_GET['page'] ) && 'block-visibility-settings' === $_GET['page'] ) {
+	add_filter( 'admin_footer_text', __NAMESPACE__ . '\custom_admin_footer' );
+}
