@@ -41,7 +41,7 @@ function hide_block_test( $is_visible, $settings, $attributes ) {
 		return true;
 	}
 
-	if ( $attributes['hideBlock'] ) {
+	if ( isset( $attributes['hideBlock'] ) && $attributes['hideBlock'] ) {
 		return false;
 	} else {
 		return true;
