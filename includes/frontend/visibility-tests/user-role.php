@@ -49,7 +49,7 @@ function user_role_test( $is_visible, $settings, $attributes ) {
 		$user_role_atts = $attributes;
 	}
 
-	// There are no date time settings, skip tests.
+	// There are no user role settings, skip tests.
 	if ( ! $user_role_atts ) {
 		return true;
 	}

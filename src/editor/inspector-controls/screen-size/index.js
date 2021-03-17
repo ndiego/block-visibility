@@ -23,12 +23,7 @@ import { isControlSettingEnabled } from './../../utils/setting-utilities';
  * @return {string}		 Return the rendered JSX
  */
 export default function ScreenSize( props ) {
-	const {
-		settings,
-		enabledControls,
-		controlSetAtts,
-		setControlAtts,
-	} = props;
+	const { settings, enabledControls, controlSetAtts, setControlAtts } = props;
 	const controlEnabled = enabledControls.includes( 'screen_size' );
 	const controlToggledOn =
 		controlSetAtts?.controls.hasOwnProperty( 'screenSize' ) ?? false;

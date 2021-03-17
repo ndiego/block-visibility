@@ -27,6 +27,10 @@ import { moreHorizontalMobile, check } from '@wordpress/icons';
 import UserRole from './user-role';
 import DateTime from './date-time';
 import ScreenSize from './screen-size';
+import {
+	NoticeControlsDisabled,
+	NoticeBlockControlsDisabled
+} from './utils/notices';
 
 /**
  * Render a control set
@@ -45,7 +49,9 @@ export default function ControlSet( props ) {
 		blockAtts,
 		controlSetAtts,
 	} = props;
-
+	const settingsUrl = variables?.pluginVariables.settingsUrl ?? ''; // eslint-disable-line
+	const noControls = enabledControls.length === 1 && enabledControls.includes( 'hide_block' );
+	console.log( noControls );
 	const controls = [
 		{
 			slug: 'dateTime',
@@ -55,7 +61,7 @@ export default function ControlSet( props ) {
 		},
 		{
 			slug: 'userRole',
-			name: 'User Roles',
+			name: 'User Role',
 			active: controlSetAtts?.controls.hasOwnProperty( 'userRole' ),
 			enable: enabledControls.includes( 'visibility_by_role' ),
 		},
@@ -103,44 +109,50 @@ export default function ControlSet( props ) {
 				<FlexBlock>
 					<h3>{ __( 'Controls', 'block-visibility' ) }</h3>
 				</FlexBlock>
-				<FlexItem>
-					<Button
-						label={ __(
-							'Configure Visibility Controls',
-							'block-visibility'
-						) }
-						icon={ moreHorizontalMobile }
-						className="control-ellipsis"
-						onClick={ () => setPopoverOpen( ( open ) => ! open ) }
-					/>
-					{ popoverOpen && (
-						<Popover
-							className="block-visibility__control-popover"
-							focusOnMount="container"
-							onClose={ () => setPopoverOpen( false ) }
-						>
-							<MenuGroup label="Enabled Controls">
-								{ controls.map( ( control ) => {
-									if ( ! control.enable ) {
-										return null;
-									}
+				{ ! noControls && (
+					<FlexItem>
+						<Button
+							label={ __(
+								'Configure Visibility Controls',
+								'block-visibility'
+							) }
+							icon={ moreHorizontalMobile }
+							className="control-ellipsis"
+							onClick={ () =>
+								setPopoverOpen( ( open ) => ! open )
+							}
+						/>
+						{ popoverOpen && (
+							<Popover
+								className="block-visibility__control-popover"
+								focusOnMount="container"
+								onClose={ () => setPopoverOpen( false ) }
+							>
+								<MenuGroup label="Enabled Controls">
+									{ controls.map( ( control ) => {
+										if ( ! control.enable ) {
+											return null;
+										}
 
-									return (
-										<MenuItem
-											key={ control.slug }
-											icon={ control.active ? check : '' }
-											onClick={ () =>
-												toggleControls( control )
-											}
-										>
-											{ control.name }
-										</MenuItem>
-									);
-								} ) }
-							</MenuGroup>
-						</Popover>
-					) }
-				</FlexItem>
+										return (
+											<MenuItem
+												key={ control.slug }
+												icon={
+													control.active ? check : ''
+												}
+												onClick={ () =>
+													toggleControls( control )
+												}
+											>
+												{ control.name }
+											</MenuItem>
+										);
+									} ) }
+								</MenuGroup>
+							</Popover>
+						) }
+					</FlexItem>
+				) }
 			</Flex>
 			<DateTime
 				settings={ settings }
@@ -165,31 +177,11 @@ export default function ControlSet( props ) {
 				controlSetAtts={ controlSetAtts }
 				{ ...props }
 			/>
-			{ /* TODO fix this!!! */ }
-			{ isEmpty( controlSetAtts.controls ) && (
-				<Notice status="notice" isDismissible={ false }>
-					{ createInterpolateElement(
-						__(
-							'Add some controls… <a>plugin settings</a>.',
-							'block-visibility'
-						),
-						{
-							a: (
-								<a // eslint-disable-line
-									href="example.com"
-									target="_blank"
-									rel="noreferrer"
-								/>
-							),
-						}
-					) }
-					<span className="visibility-control__help">
-						{ __(
-							'Notice only visible to Administrators.',
-							'block-visibility'
-						) }
-					</span>
-				</Notice>
+			{ noControls && (
+				<NoticeControlsDisabled settingsUrl={ settingsUrl } />
+			) }
+			{ ! noControls && isEmpty( controlSetAtts.controls ) && (
+				<NoticeBlockControlsDisabled settingsUrl={ settingsUrl } />
 			) }
 		</div>
 	);

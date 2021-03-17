@@ -2,7 +2,6 @@
  * External dependencies
  */
 import { assign } from 'lodash';
-import classnames from 'classnames';
 
 /**
  * WordPress dependencies
@@ -150,13 +149,7 @@ export default function Schedule( props ) {
 	}
 
 	return (
-		<div
-			className={ classnames(
-				'visibility-control',
-				'scheduling',
-				enable && 'is-open'
-			) }
-		>
+		<div className="visibility-control scheduling">
 			<ToggleControl
 				label={ __( 'Enable block scheduling', 'block-visibility' ) }
 				checked={ enable }

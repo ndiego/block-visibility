@@ -21,6 +21,10 @@ import {
 import HideBlock from './hide-block';
 import ControlSet from './control-set';
 import {
+	NoticeControlsDisabled,
+	NoticeCustomizeControls 
+} from './utils/notices';
+import {
 	getEnabledControls,
 	isPluginSettingEnabled,
 } from './../utils/setting-utilities';
@@ -59,12 +63,10 @@ export default function VisibilityInspectorControls( props ) {
 			];
 			controlSets = getDeprecatedAtts( blockAtts, defaultSet );
 
-			setBlockAtts(
-				assign( { ...blockAtts }, { controlSets: controlSets } )
-			);
+			setBlockAtts( assign( { ...blockAtts }, { controlSets } ) );
 		}
 	}, [] );
-
+	console.log( blockAtts );
 	const settings = usePluginData( 'settings' );
 	const variables = usePluginData( 'variables' );
 
@@ -140,52 +142,11 @@ export default function VisibilityInspectorControls( props ) {
 						</>
 					) }
 					{ enabledControls.length === 0 && (
-						<Notice status="warning" isDismissible={ false }>
-							{ createInterpolateElement(
-								__(
-									'Looks like all Visibility Controls have been disabled. To control block visibility again, re-enable some <a>Visibility Controls</a>.',
-									'block-visibility'
-								),
-								{
-									a: (
-										<a // eslint-disable-line
-											href={ settingsUrl }
-											target="_blank"
-											rel="noreferrer"
-										/>
-									),
-								}
-							) }
-						</Notice>
+						<NoticeControlsDisabled settingsUrl={ settingsUrl } />
 					) }
 					{ variables.currentUsersRoles.includes( 'administrator' ) &&
 						enableEditorNotices && (
-							<Notice status="notice" isDismissible={ false }>
-								{ createInterpolateElement(
-									__(
-										'Customize and restrict visibility controls in the <a>plugin settings</a>.',
-										'block-visibility'
-									),
-									{
-										a: (
-											<a // eslint-disable-line
-												href={
-													settingsUrl +
-													'&tab=visibility-controls'
-												}
-												target="_blank"
-												rel="noreferrer"
-											/>
-										),
-									}
-								) }
-								<span className="visibility-control__help">
-									{ __(
-										'Notice only visible to Administrators.',
-										'block-visibility'
-									) }
-								</span>
-							</Notice>
+							<NoticeCustomizeControls settingsUrl={ settingsUrl } />
 						) }
 				</div>
 			</PanelBody>

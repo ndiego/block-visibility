@@ -12,7 +12,7 @@ import { addFilter } from '@wordpress/hooks';
  * Internal dependencies
  */
 import hasDateTime from './has-date-time';
-import hasUserRoles from './has-user-roles';
+import hasUserRole from './has-user-role';
 import hasScreenSize from './has-screen-size';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import usePluginData from './../utils/use-plugin-data';
@@ -60,7 +60,10 @@ function withContextualIndicators( BlockListBlock ) {
 
 		if ( hasControlSets ) {
 			// The control set array is empty or the default set has no applied controls.
-			if ( blockVisibility.controlSets.length !== 0 && blockVisibility.controlSets[ 0 ]?.controls ) {
+			if (
+				blockVisibility.controlSets.length !== 0 &&
+				blockVisibility.controlSets[ 0 ]?.controls
+			) {
 				testAtts = blockVisibility.controlSets[ 0 ].controls;
 			} else {
 				testAtts = {};
@@ -74,7 +77,7 @@ function withContextualIndicators( BlockListBlock ) {
 
 		let classes = classnames( {
 			'block-visibility__is-hidden': isHidden,
-			'block-visibility__has-roles': hasUserRoles(
+			'block-visibility__has-roles': hasUserRole(
 				testAtts,
 				hasControlSets,
 				enabledControls

@@ -35,7 +35,7 @@ use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
  * @param boolean $localize  Should we localize the time string, or just append the timezone.
  * @return Object            Return the DateTime object for the timestamp and timezone.
  */
-function create_datetime( $timestamp = null, $localize = true ) {
+function create_date_time( $timestamp = null, $localize = true ) {
 
 	// The timezone settings from the WordPress general settings.
 	$tz_string = get_option( 'timezone_string' );
@@ -72,31 +72,6 @@ function create_datetime( $timestamp = null, $localize = true ) {
 		$datetime = new DateTime( $timestamp, new DateTimeZone( $timezone ) );
 	}
 	return $datetime;
-}
-
-/**
- * Helper function for getting the start date. Function checks if the depracated
- * startDateTime attribute is set and handles accordingly.
- *
- * @since 1.4.1
- *
- * @param array   $attributes The block visibility attributes.
- * @param boolean $enable     Is scheduling enabled.
- * @return string             Return the correct start date.
- */
-function get_start( $attributes, $enable ) {
-	$depracated_start = isset( $attributes['startDateTime'] )
-		? $attributes['startDateTime']
-		: null;
-	$new_start        = isset( $attributes['scheduling']['start'] )
-		? $attributes['scheduling']['start']
-		: null;
-
-	if ( isset( $enable ) ) {
-		return $new_start;
-	}
-
-	return $depracated_start;
 }
 
 /**
@@ -166,9 +141,6 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 			? $attributes['scheduling']
 			: null;
 	}
-	//echo print_r( $attributes['controlSets'][0]['controls']['dateTime']['schedules'] );
-	//echo print_r( $schedule_atts );
-	//echo print_r( $attributes );
 
 	// There are no date time settings, skip tests.
 	if ( ! $schedule_atts ) {
@@ -179,8 +151,20 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 		? $schedule_atts['enable']
 		: true;
 
-	$start  = get_date_time( $attributes, $schedule_atts, $enable, 'startDateTime', 'start' );
-	$end    = get_date_time( $attributes, $schedule_atts, $enable, 'endDateTime', 'end' );
+	$start  = get_date_time(
+		$attributes,
+		$schedule_atts,
+		$enable,
+		'startDateTime',
+		'start'
+	);
+	$end    = get_date_time(
+		$attributes,
+		$schedule_atts,
+		$enable,
+		'endDateTime',
+		'end'
+	);
 
 	// The new enable setting does not exist and there are no depracated
 	// scheduling settings, so skip the est.
@@ -199,8 +183,8 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 		return true;
 	}
 
-	$start = $start ? create_datetime( $start, false ) : null;
-	$end   = $end ? create_datetime( $end, false ) : null;
+	$start = $start ? create_date_time( $start, false ) : null;
+	$end   = $end ? create_date_time( $end, false ) : null;
 
 	// If the start date is before the end date, skip test.
 	if ( ( $start && $end ) && $start > $end ) {
