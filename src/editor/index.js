@@ -65,6 +65,99 @@ function blockVisibilityAttributes( settings ) {
 				hideBlock: {
 					type: 'boolean',
 				},
+				controlSets: {
+					type: 'array',
+					items: {
+						type: 'object',
+						properties: {
+							id: {
+								type: 'number',
+							},
+							name: {
+								type: 'string',
+							},
+							enable: {
+								type: 'boolean',
+							},
+							controls: {
+								dateTime: {
+									type: 'object',
+									properties: {
+										schedules: {
+											type: 'array',
+											items: {
+												type: 'object',
+												properties: {
+													id: {
+														type: 'number',
+													},
+													enable: {
+														type: 'boolean',
+													},
+													start: {
+														type: 'string',
+													},
+													end: {
+														type: 'string',
+													},
+												},
+											},
+										},
+									},
+								},
+								userRoles: {
+									type: 'object',
+									properties: {
+										enable: {
+											type: 'boolean',
+										},
+										visibilityByRole: {
+											type: 'string',
+										},
+										hideOnRestrictedRoles: {
+											type: 'boolean',
+										},
+										restrictedRoles: {
+											type: 'array',
+											items: {
+												type: 'string',
+											},
+										},
+									},
+								},
+								screenSize: {
+									type: 'object',
+									properties: {
+										enable: {
+											type: 'boolean',
+										},
+										hideOnScreenSize: {
+											type: 'object',
+											properties: {
+												extraLarge: {
+													type: 'boolean',
+												},
+												large: {
+													type: 'boolean',
+												},
+												medium: {
+													type: 'boolean',
+												},
+												small: {
+													type: 'boolean',
+												},
+												extraSmall: {
+													type: 'boolean',
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				// Depracated attributes
 				visibilityByRole: {
 					type: 'string',
 				},
@@ -111,7 +204,6 @@ function blockVisibilityAttributes( settings ) {
 						},
 					},
 				},
-				// Depracated attributes
 				startDateTime: {
 					type: 'string',
 				},
@@ -181,19 +273,32 @@ addFilter(
  */
 function applyVisibilityClasses( extraProps, blockType, attributes ) {
 	const { blockVisibility } = attributes;
+	const hasControlSets = blockVisibility?.controlSets ?? false;
+	let testAtts = blockVisibility;
 
-	if ( ! blockVisibility ) {
+	if ( hasControlSets ) {
+		// The control set array is empty or the default set has no applied controls.
+		if (
+			blockVisibility.controlSets.length !== 0 &&
+			blockVisibility.controlSets[ 0 ]?.controls
+		) {
+			testAtts =
+				blockVisibility.controlSets[ 0 ].controls?.screenSize ?? null;
+		} else {
+			testAtts = null;
+		}
+	}
+
+	if ( ! testAtts ) {
 		return extraProps;
 	}
 
 	// Conditionally add the screen size control classes.
-	const hideExtraLarge =
-		blockVisibility?.hideOnScreenSize?.extraLarge ?? false;
-	const hideLarge = blockVisibility?.hideOnScreenSize?.large ?? false;
-	const hideMedium = blockVisibility?.hideOnScreenSize?.medium ?? false;
-	const hideSmall = blockVisibility?.hideOnScreenSize?.small ?? false;
-	const hideExtraSmall =
-		blockVisibility?.hideOnScreenSize?.extraSmall ?? false;
+	const hideExtraLarge = testAtts?.hideOnScreenSize?.extraLarge ?? false;
+	const hideLarge = testAtts?.hideOnScreenSize?.large ?? false;
+	const hideMedium = testAtts?.hideOnScreenSize?.medium ?? false;
+	const hideSmall = testAtts?.hideOnScreenSize?.small ?? false;
+	const hideExtraSmall = testAtts?.hideOnScreenSize?.extraSmall ?? false;
 
 	if ( hideExtraLarge ) {
 		extraProps.className = classnames(

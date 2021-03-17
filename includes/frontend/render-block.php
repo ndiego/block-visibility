@@ -111,8 +111,8 @@ add_filter( 'render_block', __NAMESPACE__ . '\render_with_visibility', 10, 2 );
 
 // Run our tests.
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/hide-block.php';
-require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/visibility-by-role.php';
-require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/scheduling.php';
+require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/user-role.php';
+require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/date-time.php';
 
 // Require utlity functions for tests.
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/utils/is-control-enabled.php';

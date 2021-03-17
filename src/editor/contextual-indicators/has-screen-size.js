@@ -7,18 +7,26 @@ import { applyFilters } from '@wordpress/hooks';
  * Determine if screen size settings are enabled for the block.
  *
  * @since 1.1.0
- * @param {Object}  blockVisibility All visibility attributes for the block
+ * @param {Object}  testAtts        All visibility attributes for the block
+ * @param {boolean} hasControlSets  Whether or not the block has a control set
  * @param {Array}   enabledControls Array of all enabled visibility controls
  * @param {Object}  settings        All available plugin settings
  * @return {boolean}		        Does the block have date time settings
  */
 export default function hasScreenSize(
-	blockVisibility,
+	testAtts,
+	hasControlSets,
 	enabledControls,
 	settings
 ) {
+	if ( hasControlSets && ! testAtts.hasOwnProperty( 'screenSize' ) ) {
+		return false;
+	}
+
+	const controlAtts = hasControlSets ? testAtts.screenSize : testAtts;
+
 	// Set default attributes if needed.
-	const screenSize = blockVisibility?.hideOnScreenSize ?? {
+	const screenSize = controlAtts?.hideOnScreenSize ?? {
 		extraLarge: false,
 		large: false,
 		medium: false,

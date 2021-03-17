@@ -25,7 +25,7 @@ use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
  * @param array   $attributes The block visibility attributes.
  * @return boolean            Return true is the block should be visible, false if not.
  */
-function visibility_by_role_test( $is_visible, $settings, $attributes ) {
+function user_role_test( $is_visible, $settings, $attributes ) {
 
 	// The test is already false, so skip this test, the block should be hidden.
 	if ( ! $is_visible ) {
@@ -37,8 +37,25 @@ function visibility_by_role_test( $is_visible, $settings, $attributes ) {
 		return true;
 	}
 
-	$visibility_by_role = isset( $attributes['visibilityByRole'] )
-		? $attributes['visibilityByRole']
+	$has_control_sets = isset( $attributes['controlSets'] );
+
+	if ( $has_control_sets ) {
+		// Just retrieve the first set and schedule, need to update in future.
+		$user_role_atts =
+			isset( $attributes['controlSets'][0]['controls']['userRole'] )
+				? $attributes['controlSets'][0]['controls']['userRole']
+				: null;
+	} else {
+		$user_role_atts = $attributes;
+	}
+
+	// There are no date time settings, skip tests.
+	if ( ! $user_role_atts ) {
+		return true;
+	}
+
+	$visibility_by_role = isset( $user_role_atts['visibilityByRole'] )
+		? $user_role_atts['visibilityByRole']
 		: null;
 
 	// Run through our visibility by role tests.
@@ -59,13 +76,14 @@ function visibility_by_role_test( $is_visible, $settings, $attributes ) {
 			return true;
 		}
 
-		$restricted_roles = isset( $attributes['restrictedRoles'] )
-			? $attributes['restrictedRoles']
+		$restricted_roles = isset( $user_role_atts['restrictedRoles'] )
+			? $user_role_atts['restrictedRoles']
 			: array();
 
-		$hide_on_resticted_roles = isset( $attributes['hideOnRestrictedRoles'] )
-			? $attributes['hideOnRestrictedRoles']
-			: false;
+		$hide_on_resticted_roles =
+			isset( $user_role_atts['hideOnRestrictedRoles'] )
+				? $user_role_atts['hideOnRestrictedRoles']
+				: false;
 
 		// Make sure there are restricted roles set, if not the block should be
 		// hidden, unless "hide on restricted" has been set.
@@ -111,4 +129,4 @@ function visibility_by_role_test( $is_visible, $settings, $attributes ) {
 	// If we don't pass any of the above tests, hide the block.
 	return false;
 }
-add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\visibility_by_role_test', 10, 3 );
+add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\user_role_test', 10, 3 );

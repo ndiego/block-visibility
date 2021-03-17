@@ -142,6 +142,17 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 == Changelog ==
 
+= 1.6.0 - 2021-03-17 =
+
+**Added**
+
+* New UI allows users to toggle on and off the available visibility controls at the block level, making for a cleaner interface.
+
+**Removed**
+
+* Removed verbose attribute specification in the main plugin class for compatibility with blocks rendered server-side. This is no longer needed.
+* `hide-control-section.js` and corresponding function are no longer needed.
+
 = 1.5.3 - 2021-03-10 =
 
 **Fixed**

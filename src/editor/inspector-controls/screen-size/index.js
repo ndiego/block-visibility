@@ -13,28 +13,32 @@ import { ToggleControl, Slot } from '@wordpress/components';
  * Internal dependencies
  */
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
-import { hideControlSection } from './../utils/hide-control-section';
 
 /**
  * Add the screen size vsibility controls
+ * (Could use refactoring)
  *
  * @since 1.5.0
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
 export default function ScreenSize( props ) {
-	const { settings, attributes, setAttributes, enabledControls } = props;
-	const { blockVisibility } = attributes;
-
-	const sectionHidden = hideControlSection(
+	const {
+		settings,
 		enabledControls,
-		blockVisibility,
-		'screen_size'
-	);
+		controlSetAtts,
+		setControlAtts,
+	} = props;
+	const controlEnabled = enabledControls.includes( 'screen_size' );
+	const controlToggledOn =
+		controlSetAtts?.controls.hasOwnProperty( 'screenSize' ) ?? false;
 
-	if ( sectionHidden ) {
+	if ( ! controlEnabled || ! controlToggledOn ) {
 		return null;
 	}
+
+	const screenSize = controlSetAtts?.controls?.screenSize ?? {};
+	const hideOnScreenSize = screenSize?.hideOnScreenSize ?? {};
 
 	const enableAdvancedControls = isControlSettingEnabled(
 		settings,
@@ -42,15 +46,6 @@ export default function ScreenSize( props ) {
 		'enable_advanced_controls',
 		false // Default to false if there are no saved settings.
 	);
-
-	// Set default attributes if needed.
-	const screenSize = blockVisibility?.hideOnScreenSize ?? {
-		extraLarge: false,
-		large: false,
-		medium: false,
-		small: false,
-		extraSmall: false,
-	};
 
 	// Get the screen size control settings.
 	const controls = settings?.visibility_controls?.screen_size?.controls ?? {
@@ -62,47 +57,55 @@ export default function ScreenSize( props ) {
 	};
 
 	const setAttribute = ( attribute, value ) =>
-		setAttributes( {
-			blockVisibility: assign(
-				{ ...blockVisibility },
+		setControlAtts(
+			'screenSize',
+			assign(
+				{ ...screenSize },
 				{
 					hideOnScreenSize: assign(
-						{ ...screenSize },
+						{ ...hideOnScreenSize },
 						{ [ attribute ]: value }
 					),
 				}
-			),
-		} );
+			)
+		);
+
+	// Set default attributes if needed.
+	const extraLarge = hideOnScreenSize?.extraLarge ?? false;
+	const large = hideOnScreenSize?.large ?? false;
+	const medium = hideOnScreenSize?.medium ?? false;
+	const small = hideOnScreenSize?.small ?? false;
+	const extraSmall = hideOnScreenSize?.extraSmall ?? false;
 
 	return (
-		<div className="visibility-control__group screen-size">
+		<div className="visibility-control__group screen-size-control">
 			<h3 className="visibility-control__group-heading">
 				{ __( 'Screen Size', 'block-visibility' ) }
 			</h3>
 			{ enableAdvancedControls && controls.extra_large && (
 				<ToggleControl
 					label={ __( 'Hide on large desktop', 'block-visibility' ) }
-					checked={ screenSize.extraLarge }
+					checked={ extraLarge }
 					onChange={ () => {
-						setAttribute( 'extraLarge', ! screenSize.extraLarge );
+						setAttribute( 'extraLarge', ! extraLarge );
 					} }
 				/>
 			) }
 			{ controls.large && (
 				<ToggleControl
 					label={ __( 'Hide on desktop', 'block-visibility' ) }
-					checked={ screenSize.large }
+					checked={ large }
 					onChange={ () => {
-						setAttribute( 'large', ! screenSize.large );
+						setAttribute( 'large', ! large );
 					} }
 				/>
 			) }
 			{ controls.medium && (
 				<ToggleControl
 					label={ __( 'Hide on tablet', 'block-visibility' ) }
-					checked={ screenSize.medium }
+					checked={ medium }
 					onChange={ () => {
-						setAttribute( 'medium', ! screenSize.medium );
+						setAttribute( 'medium', ! medium );
 					} }
 				/>
 			) }
@@ -112,9 +115,9 @@ export default function ScreenSize( props ) {
 						! enableAdvancedControls && 'Hide on mobile',
 						enableAdvancedControls && 'Hide on mobile (landscape)',
 					] }
-					checked={ screenSize.small }
+					checked={ small }
 					onChange={ () => {
-						setAttribute( 'small', ! screenSize.small );
+						setAttribute( 'small', ! small );
 					} }
 				/>
 			) }
@@ -124,9 +127,9 @@ export default function ScreenSize( props ) {
 						'Hide on mobile (portrait)',
 						'block-visibility'
 					) }
-					checked={ screenSize.extraSmall }
+					checked={ extraSmall }
 					onChange={ () => {
-						setAttribute( 'extraSmall', ! screenSize.extraSmall );
+						setAttribute( 'extraSmall', ! extraSmall );
 					} }
 				/>
 			) }

@@ -1,18 +1,25 @@
 /**
+ * External dependencies
+ */
+import { assign } from 'lodash';
+
+/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
 import { PanelBody, Notice, withFilters, Slot } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
-import { createInterpolateElement } from '@wordpress/element';
+import {
+	createInterpolateElement,
+	useState,
+	useEffect,
+} from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
 import HideBlock from './hide-block';
-import VisibilityByRole from './visibility-by-role';
-import DateTime from './date-time';
-import ScreenSize from './screen-size';
+import ControlSet from './control-set';
 import {
 	getEnabledControls,
 	isPluginSettingEnabled,
@@ -29,10 +36,39 @@ import usePluginData from './../utils/use-plugin-data';
  * @return {string}		 Return the rendered JSX
  */
 export default function VisibilityInspectorControls( props ) {
+	const { attributes, name } = props;
+	const blockVisibility = attributes?.blockVisibility;
+	const [ blockAtts, setBlockAtts ] = useState( blockVisibility );
+
+	useEffect( () => {
+		let controlSets = blockAtts?.controlSets ?? [];
+
+		// Create the default control set and populate with any previous attributes.
+		if ( controlSets.length === 0 ) {
+			const defaultSet = [
+				{
+					id: 0,
+					name: __( 'Control Set', 'block-visibility' ),
+					enable: true,
+					controls: {
+						dateTime: {},
+						userRole: {},
+						screenSize: {},
+					},
+				},
+			];
+			controlSets = getDeprecatedAtts( blockAtts, defaultSet );
+
+			setBlockAtts(
+				assign( { ...blockAtts }, { controlSets: controlSets } )
+			);
+		}
+	}, [] );
+
 	const settings = usePluginData( 'settings' );
 	const variables = usePluginData( 'variables' );
 
-	if ( settings === 'fetching' || variables === 'fetching' ) {
+	if ( settings === 'fetching' || variables === 'fetching' || ! blockAtts ) {
 		return null;
 	}
 
@@ -40,7 +76,7 @@ export default function VisibilityInspectorControls( props ) {
 		return null;
 	}
 
-	const hasVisibility = hasVisibilityControls( settings, props.name );
+	const hasVisibility = hasVisibilityControls( settings, name );
 
 	if ( ! hasVisibility ) {
 		return null;
@@ -57,6 +93,12 @@ export default function VisibilityInspectorControls( props ) {
 	const AdditionalControls = withFilters(
 		'blockVisibility.addInspectorControls'
 	)( ( props ) => <></> ); // eslint-disable-line
+
+	// Need to reset due to error when switching from code editor to visual editor.
+	const controlSets = blockAtts?.controlSets ?? [];
+
+	const hideBlock = blockVisibility?.hideBlock ?? false;
+	const blockHidden = enabledControls.includes( 'hide_block' ) && hideBlock;
 
 	return (
 		// Note that the core InspectorControls component is already making use
@@ -75,26 +117,25 @@ export default function VisibilityInspectorControls( props ) {
 							<Slot name="InspectorControlsTop" />
 							<HideBlock
 								enabledControls={ enabledControls }
+								blockAtts={ blockAtts }
+								setBlockAtts={ setBlockAtts }
 								{ ...props }
 							/>
 							<Slot name="InspectorControlsMiddle" />
-							<DateTime
-								settings={ settings }
-								variables={ variables }
-								enabledControls={ enabledControls }
-								{ ...props }
-							/>
-							<VisibilityByRole
-								settings={ settings }
-								variables={ variables }
-								enabledControls={ enabledControls }
-								{ ...props }
-							/>
-							<ScreenSize
-								settings={ settings }
-								enabledControls={ enabledControls }
-								{ ...props }
-							/>
+							{ ! blockHidden &&
+								controlSets.map( ( controlSet ) => {
+									return (
+										<ControlSet
+											key={ controlSet.id }
+											settings={ settings }
+											variables={ variables }
+											enabledControls={ enabledControls }
+											controlSetAtts={ controlSet }
+											blockAtts={ blockAtts }
+											{ ...props }
+										/>
+									);
+								} ) }
 							<Slot name="InspectorControlsBottom" />
 						</>
 					) }
@@ -117,7 +158,6 @@ export default function VisibilityInspectorControls( props ) {
 							) }
 						</Notice>
 					) }
-
 					{ variables.currentUsersRoles.includes( 'administrator' ) &&
 						enableEditorNotices && (
 							<Notice status="notice" isDismissible={ false }>
@@ -157,4 +197,76 @@ export default function VisibilityInspectorControls( props ) {
 			/>
 		</InspectorControls>
 	);
+}
+
+/**
+ * Converts visibility attributes pre v1.6 to a control set. Also handles some
+ * deprecation logic from previous versions.
+ *
+ * @since 1.6.0
+ * @param {Object} blockAtts   All the current attributes
+ * @param {Object} controlSets The new control set
+ * @return {Object}		       Return the updated control set with the old attributes applied
+ */
+function getDeprecatedAtts( blockAtts, controlSets ) {
+	if (
+		blockAtts?.scheduling ||
+		blockAtts?.startDateTime ||
+		blockAtts?.endDateTime
+	) {
+		controlSets[ 0 ].controls.dateTime.schedules = [ { id: 0 } ];
+	}
+
+	if ( blockAtts?.scheduling ) {
+		if ( blockAtts?.scheduling?.enable ) {
+			controlSets[ 0 ].controls.dateTime.schedules[ 0 ].enable =
+				blockAtts.scheduling.enable;
+		}
+
+		if ( blockAtts?.scheduling?.start ) {
+			controlSets[ 0 ].controls.dateTime.schedules[ 0 ].start =
+				blockAtts.scheduling.start;
+		}
+
+		if ( blockAtts?.scheduling?.end ) {
+			controlSets[ 0 ].controls.dateTime.schedules[ 0 ].end =
+				blockAtts.scheduling.end;
+		}
+	}
+
+	if ( blockAtts?.startDateTime ) {
+		controlSets[ 0 ].controls.dateTime.schedules[ 0 ].end =
+			blockAtts.startDateTime;
+	}
+
+	if ( blockAtts?.endDateTime ) {
+		controlSets[ 0 ].controls.dateTime.schedules[ 0 ].end =
+			blockAtts.endDateTime;
+	}
+
+	if ( blockAtts?.hideOnScreenSize ) {
+		controlSets[ 0 ].controls.screenSize.hideOnScreenSize =
+			blockAtts.hideOnScreenSize;
+	}
+
+	if ( blockAtts?.visibilityByRole ) {
+		if ( blockAtts?.visibilityByRole === 'all' ) {
+			controlSets[ 0 ].controls.userRole.visibilityByRole = 'public';
+		} else {
+			controlSets[ 0 ].controls.userRole.visibilityByRole =
+				blockAtts.visibilityByRole;
+		}
+	}
+
+	if ( blockAtts?.hideOnRestrictedRoles ) {
+		controlSets[ 0 ].controls.userRole.hideOnRestrictedRoles =
+			blockAtts.hideOnRestrictedRoles;
+	}
+
+	if ( blockAtts?.restrictedRoles ) {
+		controlSets[ 0 ].controls.userRole.restrictedRoles =
+			blockAtts.restrictedRoles;
+	}
+
+	return controlSets;
 }

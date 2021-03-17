@@ -91,7 +91,12 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
     }
 
     /* Specific styles for the Date Time visibility control */
-    .date-time {
+    .hide-block-control {
+        margin-bottom: 20px;
+    }
+
+    /* Specific styles for the Date Time visibility control */
+    .date-time-control {
         .date-time-field {
             display: flex;
             justify-content: space-between;
@@ -123,7 +128,7 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
     }
 
     /* Specific styles for the User Roles visibility control */
-    .visibility-by-user-role {
+    .user-role-control {
         .user-roles__container {
             margin-bottom: 24px;
 
@@ -134,7 +139,7 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
     }
 
     /* Specific styles for the Screen Size visibility control */
-    .screen-size {
+    .screen-size-control {
         .components-base-control {
             margin-bottom: 18px;
         }
@@ -361,4 +366,34 @@ $icon__color: #000000;
 .components-notice.is-notice {
     background: #e8f5f9;
     border-color: #007cba;
+}
+
+
+.block-visibility__control-popover {
+    &>div {
+        min-width: 180px;
+        padding: 12px 8px;
+    }
+
+    .components-menu-group__label {
+        padding: 0 12px;
+    }
+}
+
+.block-visibility__control-set {
+    margin-bottom: 20px;
+}
+
+div.block-visibility__control-set-header {
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 30px;
+
+    h3 {
+        font-weight: 500;
+        color: #757575;
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: .5px;
+        margin-bottom: 0;
+    }
 }

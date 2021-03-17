@@ -7,18 +7,36 @@ import { applyFilters } from '@wordpress/hooks';
  * Determine if date time settings are enabled for the block.
  *
  * @since 1.1.0
- * @param {Object}  blockVisibility All visibility attributes for the block
+ * @param {Object}  testAtts        All visibility attributes for the block
+ * @param {boolean} hasControlSets  Whether or not the block has a control set
  * @param {Array}   enabledControls Array of all enabled visibility controls
  * @return {boolean}		        Does the block have date time settings
  */
-export default function hasDateTime( blockVisibility, enabledControls ) {
-	const enable = blockVisibility?.scheduling?.enable ?? false;
-	const start = blockVisibility?.scheduling?.start ?? '';
-	const end = blockVisibility?.scheduling?.end ?? '';
+export default function hasDateTime(
+	testAtts,
+	hasControlSets,
+	enabledControls
+) {
+	if ( hasControlSets && ! testAtts.hasOwnProperty( 'dateTime' ) ) {
+		return false;
+	}
+
+	let controlAtts = {};
+
+	if ( hasControlSets ) {
+		const schedules = testAtts.dateTime?.schedules ?? [];
+		controlAtts = schedules[ 0 ] ?? {};
+	} else {
+		controlAtts = testAtts?.scheduling ?? {};
+	}
+
+	const enable = controlAtts?.enable ?? false;
+	const start = controlAtts?.start ?? '';
+	const end = controlAtts?.end ?? '';
 
 	// Check to see if there are any deprecated settings.
-	const deprecatedStart = blockVisibility?.startDateTime ?? '';
-	const deprecatedEnd = blockVisibility?.endDateTime ?? '';
+	const deprecatedStart = testAtts?.startDateTime ?? '';
+	const deprecatedEnd = testAtts?.endDateTime ?? '';
 
 	let indicatorTest = true;
 

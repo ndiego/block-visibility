@@ -17,13 +17,10 @@ import { CheckboxControl, ToggleControl, Slot } from '@wordpress/components';
  * @return {string}		 Return the rendered JSX
  */
 export default function UserRoles( props ) {
-	const { attributes, setAttributes, variables } = props;
-	const { blockVisibility } = attributes;
-	const restrictedRoles = blockVisibility?.restrictedRoles ?? [];
-	const hideOnRestrictedRoles =
-		blockVisibility?.hideOnRestrictedRoles ?? false;
-
-	const roles = variables?.userRoles ?? []; // eslint-disable-line
+	const { variables, userRole, setControlAtts } = props;
+	const restrictedRoles = userRole?.restrictedRoles ?? [];
+	const hideOnRestrictedRoles = userRole?.hideOnRestrictedRoles ?? false;
+	const roles = variables?.userRoles ?? [];
 	const label = hideOnRestrictedRoles
 		? __( 'hidden', 'block-visibility' )
 		: __( 'visible', 'block-visibility' );
@@ -64,14 +61,15 @@ export default function UserRoles( props ) {
 								checked={ isChecked }
 								label={ role.title }
 								onChange={ () =>
-									setAttributes( {
-										blockVisibility: assign(
-											{ ...blockVisibility },
+									setControlAtts(
+										'userRole',
+										assign(
+											{ ...userRole },
 											{
 												restrictedRoles: newRestrictedRoles,
 											}
-										),
-									} )
+										)
+									)
 								}
 							/>
 						);
@@ -83,14 +81,15 @@ export default function UserRoles( props ) {
 					label={ __( 'Hide on selected roles', 'block-visibility' ) }
 					checked={ hideOnRestrictedRoles }
 					onChange={ () =>
-						setAttributes( {
-							blockVisibility: assign(
-								{ ...blockVisibility },
+						setControlAtts(
+							'userRole',
+							assign(
+								{ ...userRole },
 								{
 									hideOnRestrictedRoles: ! hideOnRestrictedRoles,
 								}
-							),
-						} )
+							)
+						)
 					}
 					help={ __(
 						'Alternatively, hide the block to all users with one of the selected roles.',
