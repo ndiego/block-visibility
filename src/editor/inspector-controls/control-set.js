@@ -27,10 +27,7 @@ import { moreHorizontalMobile, check } from '@wordpress/icons';
 import UserRole from './user-role';
 import DateTime from './date-time';
 import ScreenSize from './screen-size';
-import {
-	NoticeControlsDisabled,
-	NoticeBlockControlsDisabled
-} from './utils/notices';
+import { NoticeBlockControlsDisabled } from './utils/notices';
 
 /**
  * Render a control set
@@ -51,7 +48,11 @@ export default function ControlSet( props ) {
 	} = props;
 	const settingsUrl = variables?.pluginVariables.settingsUrl ?? ''; // eslint-disable-line
 	const noControls = enabledControls.length === 1 && enabledControls.includes( 'hide_block' );
-	console.log( noControls );
+
+	if ( noControls ) {
+		return null;
+	}
+
 	const controls = [
 		{
 			slug: 'dateTime',
@@ -109,50 +110,48 @@ export default function ControlSet( props ) {
 				<FlexBlock>
 					<h3>{ __( 'Controls', 'block-visibility' ) }</h3>
 				</FlexBlock>
-				{ ! noControls && (
-					<FlexItem>
-						<Button
-							label={ __(
-								'Configure Visibility Controls',
-								'block-visibility'
-							) }
-							icon={ moreHorizontalMobile }
-							className="control-ellipsis"
-							onClick={ () =>
-								setPopoverOpen( ( open ) => ! open )
-							}
-						/>
-						{ popoverOpen && (
-							<Popover
-								className="block-visibility__control-popover"
-								focusOnMount="container"
-								onClose={ () => setPopoverOpen( false ) }
-							>
-								<MenuGroup label="Enabled Controls">
-									{ controls.map( ( control ) => {
-										if ( ! control.enable ) {
-											return null;
-										}
-
-										return (
-											<MenuItem
-												key={ control.slug }
-												icon={
-													control.active ? check : ''
-												}
-												onClick={ () =>
-													toggleControls( control )
-												}
-											>
-												{ control.name }
-											</MenuItem>
-										);
-									} ) }
-								</MenuGroup>
-							</Popover>
+				<FlexItem>
+					<Button
+						label={ __(
+							'Configure Visibility Controls',
+							'block-visibility'
 						) }
-					</FlexItem>
-				) }
+						icon={ moreHorizontalMobile }
+						className="control-ellipsis"
+						onClick={ () =>
+							setPopoverOpen( ( open ) => ! open )
+						}
+					/>
+					{ popoverOpen && (
+						<Popover
+							className="block-visibility__control-popover"
+							focusOnMount="container"
+							onClose={ () => setPopoverOpen( false ) }
+						>
+							<MenuGroup label="Enabled Controls">
+								{ controls.map( ( control ) => {
+									if ( ! control.enable ) {
+										return null;
+									}
+
+									return (
+										<MenuItem
+											key={ control.slug }
+											icon={
+												control.active ? check : ''
+											}
+											onClick={ () =>
+												toggleControls( control )
+											}
+										>
+											{ control.name }
+										</MenuItem>
+									);
+								} ) }
+							</MenuGroup>
+						</Popover>
+					) }
+				</FlexItem>
 			</Flex>
 			<DateTime
 				settings={ settings }
@@ -177,9 +176,6 @@ export default function ControlSet( props ) {
 				controlSetAtts={ controlSetAtts }
 				{ ...props }
 			/>
-			{ noControls && (
-				<NoticeControlsDisabled settingsUrl={ settingsUrl } />
-			) }
 			{ ! noControls && isEmpty( controlSetAtts.controls ) && (
 				<NoticeBlockControlsDisabled settingsUrl={ settingsUrl } />
 			) }
