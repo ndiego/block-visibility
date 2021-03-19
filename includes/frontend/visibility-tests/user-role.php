@@ -89,17 +89,23 @@ function user_role_test( $is_visible, $settings, $attributes ) {
 		// hidden, unless "hide on restricted" has been set.
 		if ( ! empty( $restricted_roles ) ) {
 
-			if (
-				(
-					in_array( 'logged-out', $restricted_roles, true )
-					|| in_array( 'public', $restricted_roles, true ) // Depractated role option, but check regardless.
-				)
-				&& ! is_user_logged_in()
-				&& ! $hide_on_resticted_roles
-			) {
-				return true;
+			// If user is logged out.
+			if ( ! is_user_logged_in() ) {
+				$in_restricted_roles =
+					in_array( 'logged-out', $restricted_roles, true ) ||
+					in_array( 'public', $restricted_roles, true ); // Depractated role option, but check regardless.
+
+				if ( ! $hide_on_resticted_roles && $in_restricted_roles ) {
+					return true;
+				} else if (
+					$hide_on_resticted_roles &&
+					! $in_restricted_roles
+				) {
+					return true;
+				}
 			}
 
+			// If user is logged in.
 			if ( is_user_logged_in() ) {
 
 				// Get the roles of the current user since they are logged-in.

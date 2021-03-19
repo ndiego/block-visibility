@@ -81,7 +81,7 @@ function create_date_time( $timestamp = null, $localize = true ) {
  * @since 1.6.0
  *
  * @param array   $attributes    The block visibility attributes.
- * @param array   $schedule_atts The schedule specific attributes
+ * @param array   $schedule_atts The schedule specific attributes.
  * @param boolean $enable        Is scheduling enabled.
  * @param string  $old           The old date time attribute.
  * @param string  $new           The new date time attribute.
@@ -96,7 +96,7 @@ function get_date_time( $attributes, $schedule_atts, $enable, $old, $new ) {
 		: null;
 
 	// If the enable setting exists then use the new start attribute.
-	if ( isset( $enable ) ) {
+	if ( isset( $schedule_atts[ 'enable' ] ) ) {
 		return $new_date_time;
 	}
 
@@ -143,14 +143,17 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 	}
 
 	// There are no date time settings, skip tests.
-	if ( ! $schedule_atts ) {
+	if (
+		! $schedule_atts &&
+		! isset( $attributes['startDateTime'] ) &&
+		! isset( $attributes['endDateTime'] )
+	) {
 		return true;
 	}
 
 	$enable = isset( $schedule_atts['enable'] )
 		? $schedule_atts['enable']
 		: true;
-
 	$start  = get_date_time(
 		$attributes,
 		$schedule_atts,

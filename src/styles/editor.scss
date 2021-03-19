@@ -404,12 +404,6 @@ $icon__color: #000000;
     background: #f5f5f5;
 }
 
-// Fixes the missing background color of notices.
-.components-notice.is-notice {
-    background: #e8f5f9;
-    border-color: #007cba;
-}
-
 .control-set__notice {
     li.tip {
         padding-left: 5px;

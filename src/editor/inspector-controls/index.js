@@ -7,13 +7,9 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { PanelBody, Notice, withFilters, Slot } from '@wordpress/components';
+import { PanelBody, withFilters, Slot } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
-import {
-	createInterpolateElement,
-	useState,
-	useEffect,
-} from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -164,6 +160,16 @@ function getDeprecatedAtts( blockAtts, controlSets ) {
 		controlSets[ 0 ].controls.dateTime.schedules = [ { id: 0 } ];
 	}
 
+	if ( blockAtts?.startDateTime ) {
+		controlSets[ 0 ].controls.dateTime.schedules[ 0 ].start =
+			blockAtts.startDateTime;
+	}
+
+	if ( blockAtts?.endDateTime ) {
+		controlSets[ 0 ].controls.dateTime.schedules[ 0 ].end =
+			blockAtts.endDateTime;
+	}
+
 	if ( blockAtts?.scheduling ) {
 		if ( blockAtts?.scheduling?.enable ) {
 			controlSets[ 0 ].controls.dateTime.schedules[ 0 ].enable =
@@ -179,16 +185,6 @@ function getDeprecatedAtts( blockAtts, controlSets ) {
 			controlSets[ 0 ].controls.dateTime.schedules[ 0 ].end =
 				blockAtts.scheduling.end;
 		}
-	}
-
-	if ( blockAtts?.startDateTime ) {
-		controlSets[ 0 ].controls.dateTime.schedules[ 0 ].end =
-			blockAtts.startDateTime;
-	}
-
-	if ( blockAtts?.endDateTime ) {
-		controlSets[ 0 ].controls.dateTime.schedules[ 0 ].end =
-			blockAtts.endDateTime;
 	}
 
 	if ( blockAtts?.hideOnScreenSize ) {

@@ -14,13 +14,12 @@ import {
 	FlexBlock,
 	MenuGroup,
 	MenuItem,
-	Notice,
 	Popover,
 	Slot,
 	withFilters,
 } from '@wordpress/components';
 import { applyFilters } from '@wordpress/hooks';
-import { createInterpolateElement, useState } from '@wordpress/element';
+import { useState } from '@wordpress/element';
 import { moreHorizontalMobile, check } from '@wordpress/icons';
 
 /**
@@ -31,9 +30,8 @@ import DateTime from './date-time';
 import ScreenSize from './screen-size';
 import {
 	NoticeBlockControlsDisabled,
-	DotTipControlSetTips
+	DotTipControlSetTips,
 } from './utils/notices';
-import { isPluginSettingEnabled } from './../utils/setting-utilities';
 
 /**
  * Render a control set
@@ -53,17 +51,15 @@ export default function ControlSet( props ) {
 		controlSetAtts,
 	} = props;
 	const settingsUrl = variables?.pluginVariables.settingsUrl ?? ''; // eslint-disable-line
-	const noControls = enabledControls.length === 1 && enabledControls.includes( 'hide_block' );
-	const enableEditorNotices = isPluginSettingEnabled(
-		settings,
-		'enable_editor_notices'
-	);
+	const noControls =
+		enabledControls.length === 1 &&
+		enabledControls.includes( 'hide_block' );
 
 	if ( noControls ) {
 		return null;
 	}
 
- 	let controls = [
+	let controls = [
 		{
 			slug: 'dateTime',
 			name: 'Date & Time',
@@ -141,9 +137,7 @@ export default function ControlSet( props ) {
 						) }
 						icon={ moreHorizontalMobile }
 						className="control-ellipsis"
-						onClick={ () =>
-							setPopoverOpen( ( open ) => ! open )
-						}
+						onClick={ () => setPopoverOpen( ( open ) => ! open ) }
 					/>
 					<DotTipControlSetTips { ...props } />
 					{ popoverOpen && (
@@ -161,9 +155,7 @@ export default function ControlSet( props ) {
 									return (
 										<MenuItem
 											key={ control.slug }
-											icon={
-												control.active ? check : ''
-											}
+											icon={ control.active ? check : '' }
 											onClick={ () =>
 												toggleControls( control )
 											}

@@ -5,7 +5,7 @@ Tags: visibility, schedule blocks, hide blocks, conditional blocks, restrict blo
 Requires at least: 5.5
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 1.5.3
+Stable tag: 1.6.0
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,7 +142,7 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 == Changelog ==
 
-= 1.6.0 - 2021-03-17 =
+= 1.6.0 - 2021-03-19 =
 
 **Added**
 
