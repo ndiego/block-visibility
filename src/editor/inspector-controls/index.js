@@ -56,7 +56,7 @@ export default function VisibilityInspectorControls( props ) {
 			setBlockAtts( assign( { ...blockAtts }, { controlSets } ) );
 		}
 	}, [] );
-	console.log( blockAtts );
+
 	const settings = usePluginData( 'settings' );
 	const variables = usePluginData( 'variables' );
 

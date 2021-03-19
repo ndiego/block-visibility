@@ -97,7 +97,7 @@ function user_role_test( $is_visible, $settings, $attributes ) {
 
 				if ( ! $hide_on_resticted_roles && $in_restricted_roles ) {
 					return true;
-				} else if (
+				} elseif (
 					$hide_on_resticted_roles &&
 					! $in_restricted_roles
 				) {
