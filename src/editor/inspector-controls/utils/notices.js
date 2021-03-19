@@ -60,46 +60,6 @@ export function NoticeBlockControlsDisabled() {
 }
 
 /**
- * Helper function for printing a notice that alerts admin users on how to
- * customize the control settings.
- *
- * @since 1.6.0
- * @param {string} settingsUrl The url to the plugin settings
- * @return {string}		 Return the rendered JSX
- */
-export function NoticeCustomizeControls( settingsUrl ) {
-    return (
-        <Notice status="notice" isDismissible={ false }>
-            { createInterpolateElement(
-                __(
-                    'Customize and restrict visibility controls in the <a>plugin settings</a>.',
-                    'block-visibility'
-                ),
-                {
-                    a: (
-                        <a // eslint-disable-line
-                            href={
-                                settingsUrl +
-                                '&tab=visibility-controls'
-                            }
-                            target="_blank"
-                            rel="noreferrer"
-                        />
-                    ),
-                }
-            ) }
-            <span className="visibility-control__help">
-                { __(
-                    'Notice only visible to Administrators.',
-                    'block-visibility'
-                ) }
-            </span>
-        </Notice>
-    );
-}
-
-
-/**
  * Helper function for printing a "Dot Tip" for control set tips.
  *
  * @since 1.5.0

@@ -20,14 +20,8 @@ import {
  */
 import HideBlock from './hide-block';
 import ControlSet from './control-set';
-import {
-	NoticeControlsDisabled,
-	NoticeCustomizeControls
-} from './utils/notices';
-import {
-	getEnabledControls,
-	isPluginSettingEnabled,
-} from './../utils/setting-utilities';
+import { NoticeControlsDisabled } from './utils/notices';
+import { getEnabledControls } from './../utils/setting-utilities';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import hasPermission from './../utils/has-permission';
 import usePluginData from './../utils/use-plugin-data';
@@ -86,10 +80,6 @@ export default function VisibilityInspectorControls( props ) {
 
 	const settingsUrl = variables?.pluginVariables.settingsUrl ?? ''; // eslint-disable-line
 	const enabledControls = getEnabledControls( settings );
-	const enableEditorNotices = isPluginSettingEnabled(
-		settings,
-		'enable_editor_notices'
-	);
 
 	// Provides an entry point to slot in additional settings.
 	const AdditionalInspectorControls = withFilters(
@@ -144,10 +134,6 @@ export default function VisibilityInspectorControls( props ) {
 					{ enabledControls.length === 0 && (
 						<NoticeControlsDisabled settingsUrl={ settingsUrl } />
 					) }
-					{ variables.currentUsersRoles.includes( 'administrator' ) &&
-						enableEditorNotices && (
-							<NoticeCustomizeControls settingsUrl={ settingsUrl } />
-						) }
 				</div>
 			</PanelBody>
 			<AdditionalInspectorControls
