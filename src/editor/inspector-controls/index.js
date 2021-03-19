@@ -22,7 +22,7 @@ import HideBlock from './hide-block';
 import ControlSet from './control-set';
 import {
 	NoticeControlsDisabled,
-	NoticeCustomizeControls 
+	NoticeCustomizeControls
 } from './utils/notices';
 import {
 	getEnabledControls,
@@ -92,7 +92,7 @@ export default function VisibilityInspectorControls( props ) {
 	);
 
 	// Provides an entry point to slot in additional settings.
-	const AdditionalControls = withFilters(
+	const AdditionalInspectorControls = withFilters(
 		'blockVisibility.addInspectorControls'
 	)( ( props ) => <></> ); // eslint-disable-line
 
@@ -150,7 +150,7 @@ export default function VisibilityInspectorControls( props ) {
 						) }
 				</div>
 			</PanelBody>
-			<AdditionalControls
+			<AdditionalInspectorControls
 				settings={ settings }
 				variables={ variables }
 				enabledControls={ enabledControls }

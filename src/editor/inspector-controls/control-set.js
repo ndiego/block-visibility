@@ -8,16 +8,18 @@ import { assign, isEmpty } from 'lodash';
  */
 import { __ } from '@wordpress/i18n';
 import {
-	Notice,
-	Slot,
+	Button,
 	Flex,
 	FlexItem,
 	FlexBlock,
-	Button,
-	Popover,
 	MenuGroup,
 	MenuItem,
+	Notice,
+	Popover,
+	Slot,
+	withFilters,
 } from '@wordpress/components';
+import { applyFilters } from '@wordpress/hooks';
 import { createInterpolateElement, useState } from '@wordpress/element';
 import { moreHorizontalMobile, check } from '@wordpress/icons';
 
@@ -27,7 +29,11 @@ import { moreHorizontalMobile, check } from '@wordpress/icons';
 import UserRole from './user-role';
 import DateTime from './date-time';
 import ScreenSize from './screen-size';
-import { NoticeBlockControlsDisabled } from './utils/notices';
+import {
+	NoticeBlockControlsDisabled,
+	DotTipControlSetTips
+} from './utils/notices';
+import { isPluginSettingEnabled } from './../utils/setting-utilities';
 
 /**
  * Render a control set
@@ -48,12 +54,16 @@ export default function ControlSet( props ) {
 	} = props;
 	const settingsUrl = variables?.pluginVariables.settingsUrl ?? ''; // eslint-disable-line
 	const noControls = enabledControls.length === 1 && enabledControls.includes( 'hide_block' );
+	const enableEditorNotices = isPluginSettingEnabled(
+		settings,
+		'enable_editor_notices'
+	);
 
 	if ( noControls ) {
 		return null;
 	}
 
-	const controls = [
+ 	let controls = [
 		{
 			slug: 'dateTime',
 			name: 'Date & Time',
@@ -73,6 +83,14 @@ export default function ControlSet( props ) {
 			enable: enabledControls.includes( 'screen_size' ),
 		},
 	];
+
+	// Filter allows the pro plugin to add new visibility controls.
+	controls = applyFilters(
+		'blockVisibility.visibilityControls',
+		controls,
+		controlSetAtts,
+		enabledControls
+	);
 
 	function toggleControls( control ) {
 		if ( control.active ) {
@@ -104,6 +122,11 @@ export default function ControlSet( props ) {
 		} );
 	}
 
+	// Provides an entry point to slot in additional settings.
+	const AdditionalControlSetControls = withFilters(
+		'blockVisibility.addControlSetControls'
+	)( ( props ) => <></> ); // eslint-disable-line
+
 	return (
 		<div className="block-visibility__control-set">
 			<Flex className="block-visibility__control-set-header">
@@ -122,6 +145,7 @@ export default function ControlSet( props ) {
 							setPopoverOpen( ( open ) => ! open )
 						}
 					/>
+					<DotTipControlSetTips { ...props } />
 					{ popoverOpen && (
 						<Popover
 							className="block-visibility__control-popover"
@@ -153,6 +177,7 @@ export default function ControlSet( props ) {
 					) }
 				</FlexItem>
 			</Flex>
+			<Slot name="ControlSetControlsTop" />
 			<DateTime
 				settings={ settings }
 				variables={ variables }
@@ -170,6 +195,14 @@ export default function ControlSet( props ) {
 				{ ...props }
 			/>
 			<ScreenSize
+				settings={ settings }
+				enabledControls={ enabledControls }
+				setControlAtts={ setControlAtts }
+				controlSetAtts={ controlSetAtts }
+				{ ...props }
+			/>
+			<Slot name="ControlSetControlsBottom" />
+			<AdditionalControlSetControls
 				settings={ settings }
 				enabledControls={ enabledControls }
 				setControlAtts={ setControlAtts }

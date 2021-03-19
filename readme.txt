@@ -22,7 +22,7 @@ Built for the new Block (Gutenberg) Editor, this plugin was designed to work wit
 Visibility controls determine whether a block should be visible to users on the frontend of your website based on a range of conditions. Current controls include:
 
 * **Hide** blocks from all users
-* **Schedule** block visibility using a start and end date/time
+* **Schedule** content block visibility using a start and end date/time
 * Conditionally display blocks based on **screen size** (Desktop, Tablet, Mobile, and more)
 * Only show blocks to **logged-in** users
 * Only show blocks to **logged-out** users
@@ -94,7 +94,7 @@ Stay up-to-date on Block Visibility using the links below. The plugin is also be
 == Screenshots ==
 
 1. Quickly and easily hide show or hide blocks on your website.
-2. Schedule any Gutenberg block using start and end date/time settings. The plugin provides complete block scheduling and work with all Gutenberg blocks, including WooCommerce as seen here.
+2. Schedule content, i.e. any Gutenberg block, using start and end date/time settings. The plugin provides complete block scheduling and work with all Gutenberg blocks, including WooCommerce as seen here.
 3. Show or hide block on mobile devices, tables, desktops and more.
 4. Control who can see each Gutenberg block with user role restrictions.
 5. General plugin settings to enable/disable certain functionality including user permissions and Full Control Mode.
@@ -116,7 +116,7 @@ Stay up-to-date on Block Visibility using the links below. The plugin is also be
 = Who should use Block Visibility? =
 Block Visibility is a powerful, yet simple, plugin that gives marketing agencies, bloggers, eCommerce websites, and small businesses owners the power to conditionally show or hide blocks on their websites. The need to hide Gutenberg blocks varies. Whether you need to restrict content to certain users like members, or launch a promotional campaign at a specific time with block scheduling, the applications are endless.
 
-If you need content control, i.e. block control, on your WordPress website, then you need Block Visibility.
+If you need content control, i.e. Gutenberg block control, on your WordPress website, then you need Block Visibility.
 
 = Do conditional visibility controls really work with any block? (i.e. What is Full Control Mode?) =
 Yes! However, not all block types are enabled by default. Controls are only provided to blocks that can be added directly to a page/post by the block inserter. Therefore, some specialized blocks, such as child blocks, are not included by default. An example being the individual Column block that is part of the larger Columns block.
@@ -147,6 +147,12 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 **Added**
 
 * New UI allows users to toggle on and off the available visibility controls at the block level, making for a cleaner interface.
+* New "control sets" attribute structure which improves the scalability of the plugin and allows nearly unlimited new features/functionality in the future.
+
+**Changed**
+
+* Updated all visibility frontend tests to respect new "control sets" attribute structure while maintaining backwards compatibility.
+* Updated all editor conditional indicators to respect new "control sets" attribute structure while maintaining backwards compatibility.
 
 **Removed**
 

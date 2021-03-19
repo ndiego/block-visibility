@@ -409,3 +409,15 @@ $icon__color: #000000;
     background: #e8f5f9;
     border-color: #007cba;
 }
+
+.control-set__notice {
+    li.tip {
+        padding-left: 5px;
+        margin-bottom: 10px;
+
+        &::marker {
+            font-weight: bold;
+            font-size: 14px;
+        }
+    }
+}

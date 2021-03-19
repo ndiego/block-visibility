@@ -7,7 +7,13 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Notice, ToggleControl, Disabled } from '@wordpress/components';
+import {
+	Disabled,
+	Notice,
+	Slot,
+	ToggleControl,
+	withFilters,
+} from '@wordpress/components';
 import { useState } from '@wordpress/element';
 
 /**
@@ -93,6 +99,11 @@ export default function Schedule( props ) {
 		);
 	};
 
+	// Provides an entry point to slot in additional settings.
+	const AdditionalScheduleControls = withFilters(
+		'blockVisibility.addScheduleControls'
+	)( ( props ) => <></> ); // eslint-disable-line
+
 	let dateTimeFields = (
 		<div className="scheduling__date-time-fields">
 			<div className="visibility-control__label">
@@ -150,6 +161,7 @@ export default function Schedule( props ) {
 
 	return (
 		<div className="visibility-control scheduling">
+			<Slot name="ScheduleControlsTop" />
 			<ToggleControl
 				label={ __( 'Enable block scheduling', 'block-visibility' ) }
 				checked={ enable }
@@ -160,6 +172,8 @@ export default function Schedule( props ) {
 				) }
 			/>
 			{ dateTimeFields }
+			<Slot name="ScheduleControlsBottom" />
+			<AdditionalScheduleControls { ...props } />
 		</div>
 	);
 }

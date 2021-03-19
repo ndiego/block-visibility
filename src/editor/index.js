@@ -214,7 +214,7 @@ function blockVisibilityAttributes( settings ) {
 		},
 	};
 
-	// Filter allows the premium plugin to add Block Visibility attributes.
+	// Filter allows the pro plugin to add Block Visibility attributes.
 	attributes = applyFilters( 'blockVisibility.attributes', attributes );
 
 	// We don't want to enable visibility for blocks that cannot be added via

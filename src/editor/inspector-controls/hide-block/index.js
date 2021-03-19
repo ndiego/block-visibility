@@ -46,6 +46,7 @@ export default function HideBlock( props ) {
 								{ hideBlock: ! hideBlock }
 							),
 						} );
+						// We also need to update the attribute class.
 						setBlockAtts(
 							assign(
 								{ ...blockAtts },
