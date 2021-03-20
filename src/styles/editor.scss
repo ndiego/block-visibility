@@ -28,6 +28,25 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
         }
     }
 
+    .components-button.control-tips {
+        vertical-align: middle;
+        height: 18px;
+        width: 18px !important;
+        padding: 0 !important;
+        min-width: 18px;
+        margin-left: 5px;
+        margin-top: -4px;
+
+        &:not( :hover ) {
+            color: #c8c8c8;
+        }
+
+        svg {
+            width: 18px;
+            height: 18px;
+        }
+    }
+
     .visibility-control__group {
         margin-bottom: 30px;
 
@@ -192,6 +211,34 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
     &>div {
         min-width: 180px;
         padding: 12px 8px;
+    }
+
+    &.tips>div {
+        min-width: 400px;
+        padding: 24px;
+
+        h3 {
+            margin-top: 0;
+        }
+
+        ol {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        li.tip {
+            padding-left: 5px;
+            margin-bottom: 10px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            &::marker {
+                font-weight: bold;
+                font-size: 14px;
+            }
+        }
     }
 
     .components-menu-group__label {
@@ -402,16 +449,4 @@ $icon__color: #000000;
 // Bit of a hack and applies to all celendar components, should be removed at some point.
 .CalendarDay__today {
     background: #f5f5f5;
-}
-
-.control-set__notice {
-    li.tip {
-        padding-left: 5px;
-        margin-bottom: 10px;
-
-        &::marker {
-            font-weight: bold;
-            font-size: 14px;
-        }
-    }
 }

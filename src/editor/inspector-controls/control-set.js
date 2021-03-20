@@ -20,7 +20,7 @@ import {
 } from '@wordpress/components';
 import { applyFilters } from '@wordpress/hooks';
 import { useState } from '@wordpress/element';
-import { moreHorizontalMobile, check } from '@wordpress/icons';
+import { moreHorizontalMobile, check, info } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -30,8 +30,8 @@ import DateTime from './date-time';
 import ScreenSize from './screen-size';
 import {
 	NoticeBlockControlsDisabled,
-	DotTipControlSetTips,
-} from './utils/notices';
+	TipControlSet,
+} from './utils/notices-tips';
 
 /**
  * Render a control set
@@ -42,6 +42,7 @@ import {
  */
 export default function ControlSet( props ) {
 	const [ popoverOpen, setPopoverOpen ] = useState( false );
+	const [ tipsPopoverOpen, setTipsPopoverOpen ] = useState( false );
 	const {
 		setAttributes,
 		settings,
@@ -127,7 +128,27 @@ export default function ControlSet( props ) {
 		<div className="block-visibility__control-set">
 			<Flex className="block-visibility__control-set-header">
 				<FlexBlock>
-					<h3>{ __( 'Controls', 'block-visibility' ) }</h3>
+					<h3>
+						{ __( 'Controls', 'block-visibility' ) }
+						<Button
+							label={ __( 'Quick Tips', 'block-visibility' ) }
+							icon={ info }
+							className="control-tips"
+							onClick={ () =>
+								setTipsPopoverOpen( ( open ) => ! open )
+							}
+							isSmall
+						/>
+						{ tipsPopoverOpen && (
+							<Popover
+								className="block-visibility__control-popover tips"
+								focusOnMount="container"
+								onClose={ () => setTipsPopoverOpen( false ) }
+							>
+								<TipControlSet { ...props } />
+							</Popover>
+						) }
+					</h3>
 				</FlexBlock>
 				<FlexItem>
 					<Button
@@ -139,7 +160,6 @@ export default function ControlSet( props ) {
 						className="control-ellipsis"
 						onClick={ () => setPopoverOpen( ( open ) => ! open ) }
 					/>
-					<DotTipControlSetTips { ...props } />
 					{ popoverOpen && (
 						<Popover
 							className="block-visibility__control-popover"

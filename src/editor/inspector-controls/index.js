@@ -16,7 +16,7 @@ import { useState, useEffect } from '@wordpress/element';
  */
 import HideBlock from './hide-block';
 import ControlSet from './control-set';
-import { NoticeControlsDisabled } from './utils/notices';
+import { NoticeControlsDisabled } from './utils/notices-tips';
 import { getEnabledControls } from './../utils/setting-utilities';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import hasPermission from './../utils/has-permission';

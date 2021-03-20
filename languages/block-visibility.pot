@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-03-19T12:07:25+00:00\n"
+"POT-Creation-Date: 2021-03-20T16:36:38+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: block-visibility\n"
@@ -102,208 +102,209 @@ msgstr ""
 msgid "Block Visibility Variables"
 msgstr ""
 
-#: dist/block-visibility-editor.js:7544
+#: dist/block-visibility-editor.js:7546
 #: dist/block-visibility-settings.js:9388
 #: src/settings/visibility-controls/screen-size/screen-size-controls.js:45
 msgid "Controls"
 msgstr ""
 
-#: dist/block-visibility-editor.js:7545
+#: dist/block-visibility-editor.js:7547
+#: dist/block-visibility-editor.js:8913
+msgid "Quick Tips"
+msgstr ""
+
+#: dist/block-visibility-editor.js:7563
 msgid "Configure Visibility Controls"
 msgstr ""
 
-#: dist/block-visibility-editor.js:7667
+#: dist/block-visibility-editor.js:7685
 #: dist/block-visibility-settings.js:8610
 msgid "Date & Time"
 msgstr ""
 
-#: dist/block-visibility-editor.js:7795
+#: dist/block-visibility-editor.js:7813
 #: src/editor/inspector-controls/date-time/scheduling/date-time-field.js:32
 msgid "Clear date/time"
 msgstr ""
 
-#: dist/block-visibility-editor.js:7833
+#: dist/block-visibility-editor.js:7851
 #: src/editor/inspector-controls/date-time/scheduling/format-date-label.js:17
 msgid "No time selected"
 msgstr ""
 
-#: dist/block-visibility-editor.js:7988
+#: dist/block-visibility-editor.js:8006
 msgid "Now"
 msgstr ""
 
-#: dist/block-visibility-editor.js:7989
+#: dist/block-visibility-editor.js:8007
 msgid "Never"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8044
+#: dist/block-visibility-editor.js:8062
 msgid "Start showing"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8046
+#: dist/block-visibility-editor.js:8064
 msgid "Choose a start date/time"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8053
+#: dist/block-visibility-editor.js:8071
 msgid "Start Date/Time"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8062
+#: dist/block-visibility-editor.js:8080
 msgid "Stop showing"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8064
+#: dist/block-visibility-editor.js:8082
 msgid "Choose an end date/time"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8071
+#: dist/block-visibility-editor.js:8089
 msgid "End Date/Time"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8081
+#: dist/block-visibility-editor.js:8099
 msgid "The start time is after the stop time. Please fix for date/time settings to function properly."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8092
+#: dist/block-visibility-editor.js:8110
 msgid "Enable block scheduling"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8097
+#: dist/block-visibility-editor.js:8115
 msgid "Schedule the block to only be visible between a start and end date/time."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8171
-#: dist/block-visibility-editor.js:9026
+#: dist/block-visibility-editor.js:8189
+#: dist/block-visibility-editor.js:9035
 msgid "Hide block"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8184
+#: dist/block-visibility-editor.js:8202
 msgid "Hide selected block from everyone."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8283
+#: dist/block-visibility-editor.js:8301
 msgid "Control Set"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8332
+#: dist/block-visibility-editor.js:8349
 msgid "Visibility"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8526
+#: dist/block-visibility-editor.js:8543
 #: dist/block-visibility-settings.js:9106
 msgid "Screen Size"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8527
+#: dist/block-visibility-editor.js:8544
 msgid "Hide on large desktop"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8533
+#: dist/block-visibility-editor.js:8550
 msgid "Hide on desktop"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8539
+#: dist/block-visibility-editor.js:8556
 msgid "Hide on tablet"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8551
+#: dist/block-visibility-editor.js:8568
 msgid "Hide on mobile (portrait)"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8648
+#: dist/block-visibility-editor.js:8665
 msgid "Public"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8648
+#: dist/block-visibility-editor.js:8665
 msgid "Visible to everyone."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8651
+#: dist/block-visibility-editor.js:8668
 msgid "Logged-out"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8651
+#: dist/block-visibility-editor.js:8668
 msgid "Only visible to logged-out users."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8654
+#: dist/block-visibility-editor.js:8671
 msgid "Logged-in"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8654
+#: dist/block-visibility-editor.js:8671
 msgid "Only visible to logged-in users."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8657
+#: dist/block-visibility-editor.js:8674
 msgid "User Roles"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8657
+#: dist/block-visibility-editor.js:8674
 msgid "Only visible to specific user roles."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8669
+#: dist/block-visibility-editor.js:8686
 #: dist/block-visibility-settings.js:9517
 msgid "User Role"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8687
+#: dist/block-visibility-editor.js:8704
 msgid "The User Role option was previously selected, but is now disabled. Choose another option or update the <a>Visibility Control</a> settings."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8759
+#: dist/block-visibility-editor.js:8776
 msgid "hidden"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8759
+#: dist/block-visibility-editor.js:8776
 msgid "visible"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8764
+#: dist/block-visibility-editor.js:8781
 msgid "Restricted User Roles"
 msgstr ""
 
 #. Translators: Whether the block is hidden or visible.
-#: dist/block-visibility-editor.js:8767
+#: dist/block-visibility-editor.js:8784
 msgid "The block will be %s to all users with one of the selected roles."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8797
+#: dist/block-visibility-editor.js:8814
 msgid "Hide on selected roles"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8804
+#: dist/block-visibility-editor.js:8821
 msgid "Alternatively, hide the block to all users with one of the selected roles."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8860
+#: dist/block-visibility-editor.js:8874
 msgid "Looks like all Visibility Controls have been disabled. To control block visibility again, re-enable some <a>Visibility Controls</a>."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8881
+#: dist/block-visibility-editor.js:8895
 msgid "All visibility controls have been disabled for this block. Add controls using the ellipsis icon above."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8904
-msgid "Quick tips to get you started!"
+#: dist/block-visibility-editor.js:8915
+msgid "Block Visibility provides various controls that allow you to restrict the visibility of the selected block. Click the ellipsis icon on the right to toggle the controls that you would like to use. A few controls have been added for you by default."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8906
-msgid "Block Visibility provides various controls that allow you to restrict the visibility of the selected block. Click the ellipsis icon above to toggle the controls that you would like to use. A few controls have been added for you by default."
-msgstr ""
-
-#: dist/block-visibility-editor.js:8908
+#: dist/block-visibility-editor.js:8917
 msgid "In order for the selected block to be visible, all enabled control conditions must be satisfied. Don't need a specific control? Simply toggle it off."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8910
+#: dist/block-visibility-editor.js:8919
 msgid "If a visibility control is toggled off and then re-enabled, the control's conditions will reset to their default values."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8912
-msgid "As a website administrator, you can customize and restrict the available visibility controls in the <a>plugins settings</a>. You can also disable plugin notices, like this one."
+#: dist/block-visibility-editor.js:8921
+msgid "As a website administrator, you can customize and restrict the available visibility controls in the <a>plugins settings</a>."
 msgstr ""
 
-#: dist/block-visibility-editor.js:9026
+#: dist/block-visibility-editor.js:9035
 msgid "Enable block"
 msgstr ""
 
