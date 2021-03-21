@@ -142,13 +142,12 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 == Changelog ==
 
-= 1.6.0 - 2021-03-19 =
+= 1.6.0 - 2021-03-21 =
 
 **Added**
 
 * New UI allows users to toggle on and off the available visibility controls at the block level, making for a cleaner interface.
 * New "control sets" attribute structure which improves the scalability of the plugin and allows nearly unlimited new features/functionality in the future.
-* Added a new dismissible one-time "Quick tips" popup for new users in the editor, which highlights the new control UI.
 
 **Changed**
 

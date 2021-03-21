@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-03-20T16:36:38+00:00\n"
+"POT-Creation-Date: 2021-03-21T16:24:41+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: block-visibility\n"
@@ -17,8 +17,7 @@ msgstr ""
 #. Plugin Name of the plugin
 #: includes/admin/settings.php:26
 #: includes/admin/settings.php:27
-#: dist/block-visibility-settings.js:7208
-#: dist/block-visibility-settings.js:7767
+#: dist/block-visibility-settings.js:1
 msgid "Block Visibility"
 msgstr ""
 
@@ -51,7 +50,7 @@ msgid "Navigate to the Block Visibility Getting Started page."
 msgstr ""
 
 #: includes/admin/plugin-action-links.php:56
-#: dist/block-visibility-settings.js:7607
+#: dist/block-visibility-settings.js:10
 #: src/settings/index.js:117
 msgid "Getting Started"
 msgstr ""
@@ -94,759 +93,763 @@ msgstr ""
 msgid "None (Logged-out users)"
 msgstr ""
 
-#: dist/block-visibility-editor.js:7107
-msgid "Block Visibility Settings"
-msgstr ""
-
-#: dist/block-visibility-editor.js:7112
-msgid "Block Visibility Variables"
-msgstr ""
-
-#: dist/block-visibility-editor.js:7546
-#: dist/block-visibility-settings.js:9388
-#: src/settings/visibility-controls/screen-size/screen-size-controls.js:45
-msgid "Controls"
-msgstr ""
-
-#: dist/block-visibility-editor.js:7547
-#: dist/block-visibility-editor.js:8913
-msgid "Quick Tips"
-msgstr ""
-
-#: dist/block-visibility-editor.js:7563
-msgid "Configure Visibility Controls"
-msgstr ""
-
-#: dist/block-visibility-editor.js:7685
-#: dist/block-visibility-settings.js:8610
-msgid "Date & Time"
-msgstr ""
-
-#: dist/block-visibility-editor.js:7813
-#: src/editor/inspector-controls/date-time/scheduling/date-time-field.js:32
-msgid "Clear date/time"
-msgstr ""
-
-#: dist/block-visibility-editor.js:7851
-#: src/editor/inspector-controls/date-time/scheduling/format-date-label.js:17
-msgid "No time selected"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8006
-msgid "Now"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8007
-msgid "Never"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8062
-msgid "Start showing"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8064
-msgid "Choose a start date/time"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8071
-msgid "Start Date/Time"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8080
-msgid "Stop showing"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8082
-msgid "Choose an end date/time"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8089
-msgid "End Date/Time"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8099
-msgid "The start time is after the stop time. Please fix for date/time settings to function properly."
-msgstr ""
-
-#: dist/block-visibility-editor.js:8110
-msgid "Enable block scheduling"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8115
-msgid "Schedule the block to only be visible between a start and end date/time."
-msgstr ""
-
-#: dist/block-visibility-editor.js:8189
-#: dist/block-visibility-editor.js:9035
+#: dist/block-visibility-editor.js:1
+#: dist/block-visibility-editor.js:2
 msgid "Hide block"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8202
+#: dist/block-visibility-editor.js:1
 msgid "Hide selected block from everyone."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8301
-msgid "Control Set"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8349
-msgid "Visibility"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8543
-#: dist/block-visibility-settings.js:9106
-msgid "Screen Size"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8544
-msgid "Hide on large desktop"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8550
-msgid "Hide on desktop"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8556
-msgid "Hide on tablet"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8568
-msgid "Hide on mobile (portrait)"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8665
-msgid "Public"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8665
-msgid "Visible to everyone."
-msgstr ""
-
-#: dist/block-visibility-editor.js:8668
-msgid "Logged-out"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8668
-msgid "Only visible to logged-out users."
-msgstr ""
-
-#: dist/block-visibility-editor.js:8671
-msgid "Logged-in"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8671
-msgid "Only visible to logged-in users."
-msgstr ""
-
-#: dist/block-visibility-editor.js:8674
-msgid "User Roles"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8674
-msgid "Only visible to specific user roles."
-msgstr ""
-
-#: dist/block-visibility-editor.js:8686
-#: dist/block-visibility-settings.js:9517
-msgid "User Role"
-msgstr ""
-
-#: dist/block-visibility-editor.js:8704
-msgid "The User Role option was previously selected, but is now disabled. Choose another option or update the <a>Visibility Control</a> settings."
-msgstr ""
-
-#: dist/block-visibility-editor.js:8776
+#: dist/block-visibility-editor.js:1
 msgid "hidden"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8776
+#: dist/block-visibility-editor.js:1
 msgid "visible"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8781
+#: dist/block-visibility-editor.js:1
 msgid "Restricted User Roles"
 msgstr ""
 
 #. Translators: Whether the block is hidden or visible.
-#: dist/block-visibility-editor.js:8784
+#: dist/block-visibility-editor.js:2
 msgid "The block will be %s to all users with one of the selected roles."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8814
+#. Translators: Whether the block is hidden or visible.
+#: dist/block-visibility-editor.js:2
 msgid "Hide on selected roles"
 msgstr ""
 
-#: dist/block-visibility-editor.js:8821
+#: dist/block-visibility-editor.js:2
 msgid "Alternatively, hide the block to all users with one of the selected roles."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8874
+#: dist/block-visibility-editor.js:2
+msgid "Public"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Visible to everyone."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Logged-out"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Only visible to logged-out users."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Logged-in"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Only visible to logged-in users."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "User Roles"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Only visible to specific user roles."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+#: dist/block-visibility-settings.js:1
+msgid "User Role"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "The User Role option was previously selected, but is now disabled. Choose another option or update the <a>Visibility Control</a> settings."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+#: src/editor/inspector-controls/date-time/scheduling/date-time-field.js:32
+msgid "Clear date/time"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+#: src/editor/inspector-controls/date-time/scheduling/format-date-label.js:17
+msgid "No time selected"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Now"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Never"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Start showing"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Choose a start date/time"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Start Date/Time"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Stop showing"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Choose an end date/time"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "End Date/Time"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "The start time is after the stop time. Please fix for date/time settings to function properly."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Enable block scheduling"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Schedule the block to only be visible between a start and end date/time."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+#: dist/block-visibility-settings.js:1
+msgid "Date & Time"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+#: dist/block-visibility-settings.js:8
+msgid "Screen Size"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Hide on large desktop"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Hide on desktop"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Hide on tablet"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Hide on mobile (portrait)"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
 msgid "Looks like all Visibility Controls have been disabled. To control block visibility again, re-enable some <a>Visibility Controls</a>."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8895
+#: dist/block-visibility-editor.js:2
 msgid "All visibility controls have been disabled for this block. Add controls using the ellipsis icon above."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8915
+#: dist/block-visibility-editor.js:2
+msgid "Quick Tips"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
 msgid "Block Visibility provides various controls that allow you to restrict the visibility of the selected block. Click the ellipsis icon on the right to toggle the controls that you would like to use. A few controls have been added for you by default."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8917
+#: dist/block-visibility-editor.js:2
 msgid "In order for the selected block to be visible, all enabled control conditions must be satisfied. Don't need a specific control? Simply toggle it off."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8919
+#: dist/block-visibility-editor.js:2
 msgid "If a visibility control is toggled off and then re-enabled, the control's conditions will reset to their default values."
 msgstr ""
 
-#: dist/block-visibility-editor.js:8921
+#: dist/block-visibility-editor.js:2
 msgid "As a website administrator, you can customize and restrict the available visibility controls in the <a>plugins settings</a>."
 msgstr ""
 
-#: dist/block-visibility-editor.js:9035
+#: dist/block-visibility-editor.js:2
+#: dist/block-visibility-settings.js:1
+#: src/settings/visibility-controls/screen-size/screen-size-controls.js:45
+msgid "Controls"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Configure Visibility Controls"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Control Set"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Visibility"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
 msgid "Enable block"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7102
-msgid "Visibility is enabled for all blocks"
+#. Translators: Name of the block being hidden, e.g. "Paragraph".
+#: dist/block-visibility-editor.js:4
+msgid "Block Visibility Settings"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7117
-#: dist/block-visibility-settings.js:7328
-#: dist/block-visibility-settings.js:7619
-#: src/settings/getting-started/index.js:114
-#: src/settings/index.js:132
-msgid "Block Manager"
+#: dist/block-visibility-editor.js:4
+msgid "Block Visibility Variables"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7118
-msgid "Not every block type may need visibility controls. The Block Manager allows you to restrict visibility controls to specific block types. If you are looking for a block, and do not see it listed, you may need to enable Full Control Mode on the General Settings tab."
+#: dist/block-visibility-settings.js:1
+msgid "Review"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7119
-msgid "To learn more about the Block Manager, review the plugin documentation using the link below."
-msgstr ""
-
-#: dist/block-visibility-settings.js:7130
-msgid "Search for a block"
-msgstr ""
-
-#: dist/block-visibility-settings.js:7215
-msgid "Knowledge Base"
-msgstr ""
-
-#: dist/block-visibility-settings.js:7221
-#: dist/block-visibility-settings.js:7740
+#: dist/block-visibility-settings.js:1
 msgid "Support"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7225
+#: dist/block-visibility-settings.js:1
+msgid "Thank you for using Block Visibility."
+msgstr ""
+
+#: dist/block-visibility-settings.js:1
+msgid "Should you need any assistance, simply open a ticket in the <a>support forum</a> on WordPress.org and you will recieve a followup within one business day."
+msgstr ""
+
+#: dist/block-visibility-settings.js:1
+msgid "User reviews are very important for open source projects, and Block Visibility is no different. If you enjoy the plugin, please consider leaving a <a>review ★★★★★</a> on WordPress.org. Your feedback is greatly appreciated."
+msgstr ""
+
+#: dist/block-visibility-settings.js:1
+msgid "Knowledge Base"
+msgstr ""
+
+#: dist/block-visibility-settings.js:1
 msgid "GitHub"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7229
+#: dist/block-visibility-settings.js:1
 msgid "Twitter"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7296
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:27
 msgid "Welcome"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7296
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:30
 msgid "Thank you for choosing Block Visibility. As the name suggests, this plugin allows you to easily control the visibility of blocks in the WordPress editor. To get started, watch the video below for an overview of how the plugin works. You'll become a pro in no time!"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7299
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:38
 msgid "Block Visibility - Getting Started"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7308
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:51
 msgid "How does it work?"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7308
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:54
 msgid "The Block Visibility plugin is designed exclusively for the <a>block editor</a> and does not work in the classic editor. So long as you are running the latest version of WordPress and are not utilizing the Classic Editor plugin, you are good to go!"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7315
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:71
 msgid "By default, this plugin adds a Visibility panel to the <a>settings sidebar</a> of each selected block in the WordPress editor. While there are a few minor exceptions, see the FAQs below, this means that visibility controls will be enabled for all core WordPress blocks as well as any third-party blocks that you might be using."
 msgstr ""
 
-#: dist/block-visibility-settings.js:7322
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:87
 msgid "On the Visibility panel, you will be able show or hide the selected block based on a number of different controls. The primary option is to simply hide the block from view. This can be useful if you want to disable some content, but you still need to publish other changes to the page or post. You can also restrict who can see certain blocks. For example, maybe you have a special promotion that you only want show subscribers of your website. If you haven’t already, watch the video above for a quick demo."
 msgstr ""
 
-#: dist/block-visibility-settings.js:7322
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:93
 msgid "Block Visibility provides a number of advanced settings so you can configure the plugin exactly the way you want. Lets examine these in the drop-downs below and answer a few frequently asked questions."
 msgstr ""
 
-#: dist/block-visibility-settings.js:7325
-#: dist/block-visibility-settings.js:7615
-#: dist/block-visibility-settings.js:8808
+#: dist/block-visibility-settings.js:1
+#: dist/block-visibility-settings.js:8
+#: dist/block-visibility-settings.js:10
 #: src/settings/getting-started/index.js:101
 #: src/settings/index.js:127
 #: src/settings/visibility-controls/index.js:47
 msgid "Visibility Controls"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7327
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:106
 msgid "Visibility controls are the settings that determine whether a block is hidden on the frontend of your website. We strive to provide as much visibility control as possible, and as development for Block Visibility continues, expect even more functionality in the future. However, we understand that some users do not need every option. It is equally important to have a decluttered and streamlined user interface. Therefore, on the Visibility Controls tab of this settings page, you can enable or disable any control."
 msgstr ""
 
-#: dist/block-visibility-settings.js:7330
+#. translators: %s: The total number of visible block types
+#: dist/block-visibility-settings.js:1
+#: dist/block-visibility-settings.js:10
+#: src/settings/getting-started/index.js:114
+#: src/settings/index.js:132
+msgid "Block Manager"
+msgstr ""
+
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:119
 msgid "By default, this plugin adds visibility controls to all blocks in the WordPress editor. Similar to visibility controls, we understand that not all users may want this functionality. You might decide to restrict visibility controls to only a handful of block types. On the Block Manager tab of this settings page, you can do just that. Simply disable the block types that should not have visibility controls and the settings will no longer be available in the WordPress editor."
 msgstr ""
 
-#: dist/block-visibility-settings.js:7331
-#: dist/block-visibility-settings.js:7611
-#: dist/block-visibility-settings.js:8080
+#: dist/block-visibility-settings.js:1
+#: dist/block-visibility-settings.js:10
 #: src/settings/getting-started/index.js:127
 #: src/settings/index.js:122
 #: src/settings/plugin-settings/index.js:52
 msgid "General Settings"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7333
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:132
 msgid "The General Settings tab contains a collection of miscellaneous plugin options including Full Control Mode and uninstall settings. As development of Block Visibility continues, expect more settings to be developed."
 msgstr ""
 
-#: dist/block-visibility-settings.js:7334
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:140
 msgid "Frequently Asked Questions"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7338
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:148
 msgid "Does this plugin really work for every block?"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7338
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:154
 msgid "Yes! However, not all block types are enabled by default. Visibility controls are only provided to blocks that can be added directly to a page/post by the block inserter. Therefore, some specialized blocks, such as child blocks, are not included by default. An example being the individual Column block that is part of the larger Columns block."
 msgstr ""
 
-#: dist/block-visibility-settings.js:7338
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:160
 msgid "That said, you can enable Full Control Mode in the plugin settings. This removes all restrictions and adds visibility controls to every block. You probably will not need Full Control Mode, but it is there if you do."
 msgstr ""
 
-#: dist/block-visibility-settings.js:7338
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:167
 msgid "Furthermore, while this plugin was designed to be compatible with all blocks, the WordPress ecosystem is ever expanding. If you find a conflict with a certain block, please let us know in the <a>plugin support forum</a> and we will investigate. We are committed to bringing visibility control to every block."
 msgstr ""
 
-#: dist/block-visibility-settings.js:7347
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:183
 msgid "Will more visibility controls be added in the future?"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7347
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:190
 msgid "Yes, and if you have a specific idea of what you would like to see, please submit a feature request in the <a>plugin support forum</a> on WordPress.org."
 msgstr ""
 
-#: dist/block-visibility-settings.js:7356
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:206
 msgid "Does this plugin work with the upcoming full site editing functionality?"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7356
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:213
 msgid "As of version 1.4.0, Block Visibility is supported in the Site Editor, which is provided by Full Site Editing. Note that you will currently need the Gutenberg plugin and a Full Site Editing theme to make use of this functionality. Full Site Editing is still very much in development and you may find bugs or compatibility issues when using this plugin in the Site Editor. If you do, please let us know in the <a>plugin support forum</a> on WordPress.org. We are committed to ensuring 100 percent compatibility by the time Full Site Editing is included in WordPress core."
 msgstr ""
 
-#: dist/block-visibility-settings.js:7365
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:229
 msgid "Is there a pro/premium version of Block Visibility?"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7365
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:236
 msgid "A premium version of Block Visibility is in the works and will include some specialized controls, such as time-based restrictions. For current information on Block Visibility Premium, please visit <a>blockvisibilitywp.com</a>."
 msgstr ""
 
-#: dist/block-visibility-settings.js:7374
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:255
 msgid "How can we help?"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7374
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:257
 msgid "Whether you need more help, have a quick question, or you would like to request a new feature, please create a topic in this plugin's support forum on WordPress.org."
 msgstr ""
 
-#: dist/block-visibility-settings.js:7378
+#: dist/block-visibility-settings.js:1
 #: src/settings/getting-started/index.js:267
 msgid "Get Support"
 msgstr ""
 
-#: dist/block-visibility-settings.js:7598
-#: src/settings/index.js:97
-msgid "Something went wrong when trying to load the Block Visibility settings. Try refreshing the page. If the error persists, please contact support."
-msgstr ""
-
-#: dist/block-visibility-settings.js:7602
-#: src/settings/index.js:107
-msgid "Loading settings…"
-msgstr ""
-
-#: dist/block-visibility-settings.js:7735
-msgid "Review"
-msgstr ""
-
-#: dist/block-visibility-settings.js:7776
-msgid "Thank you for using Block Visibility."
-msgstr ""
-
-#: dist/block-visibility-settings.js:7776
-msgid "Should you need any assistance, simply open a ticket in the <a>support forum</a> on WordPress.org and you will recieve a followup within one business day."
-msgstr ""
-
-#: dist/block-visibility-settings.js:7783
-msgid "User reviews are very important for open source projects, and Block Visibility is no different. If you enjoy the plugin, please consider leaving a <a>review ★★★★★</a> on WordPress.org. Your feedback is greatly appreciated."
-msgstr ""
-
-#: dist/block-visibility-settings.js:7858
-msgid "Block Editor"
-msgstr ""
-
-#: dist/block-visibility-settings.js:7859
-msgid "Settings that impact the Block Editor, such as contextual indicators for when a block has visibility controls, as well as additional toolbar options. Click the link below for complete details."
-msgstr ""
-
-#: dist/block-visibility-settings.js:7866
-msgid "Enable contextual indicators when visibility settings are applied to a block."
-msgstr ""
-
-#: dist/block-visibility-settings.js:7877
-msgid "Enable block toolbar controls for visibility settings."
-msgstr ""
-
-#: dist/block-visibility-settings.js:7888
-msgid "Enable plugin notices in the editor."
-msgstr ""
-
-#: dist/block-visibility-settings.js:7897
-msgid "Block Visibility provides various notices in the editor to provide helpful warnings, tips, and links. This setting allows you to disable those notices for a more steamlined user interface."
-msgstr ""
-
-#: dist/block-visibility-settings.js:7965
-msgid "Full Control Mode"
-msgstr ""
-
-#: dist/block-visibility-settings.js:7970
-msgid "Enable Full Control Mode to add visibility controls to <strong>every</strong> block. <a>Use with caution</a>."
-msgstr ""
-
-#: dist/block-visibility-settings.js:7987
-msgid "By default, not all blocks are provided with visibility controls. These include child blocks and blocks that may exist in WordPress, but cannot actually be added directly to the editor. Most of the time, you will not need Full Control Mode, but it's there in case you do. Use with caution. Click the link below for complete details."
-msgstr ""
-
-#: dist/block-visibility-settings.js:8081
-#: src/settings/plugin-settings/index.js:55
-msgid "The settings below allow you to configure general functionality of the Block Visibility plugin. To learn more about General Settings, review the plugin documentation using the link below."
-msgstr ""
-
-#: dist/block-visibility-settings.js:8179
-msgid "Uninstall"
-msgstr ""
-
-#: dist/block-visibility-settings.js:8180
-msgid "Settings that impact what happens when the Block Visibility plugin is uninstalled."
-msgstr ""
-
-#: dist/block-visibility-settings.js:8186
-msgid "Remove all plugin settings when Block Visibility is uninstalled."
-msgstr ""
-
-#: dist/block-visibility-settings.js:8285
-msgid "Choose which user roles should be allowed to control visibility settings in the Block Editor. Administrators will always have permission."
-msgstr ""
-
-#: dist/block-visibility-settings.js:8361
-msgid "User Permissions"
-msgstr ""
-
-#: dist/block-visibility-settings.js:8366
-msgid "Restrict block visibility controls to selected user roles."
-msgstr ""
-
-#: dist/block-visibility-settings.js:8375
-msgid "By default, all users that can edit blocks in Block Editor will be able to use the visibility settings provided by Block Visibility. You can limit permissions by user role with these settings."
-msgstr ""
-
-#: dist/block-visibility-settings.js:8451
-msgid "Learn More"
-msgstr ""
-
-#: dist/block-visibility-settings.js:8506
+#: dist/block-visibility-settings.js:1
 #: src/settings/utils/save-settings.js:29
 msgid "Updating…"
 msgstr ""
 
-#: dist/block-visibility-settings.js:8506
+#: dist/block-visibility-settings.js:1
 #: src/settings/utils/save-settings.js:30
 msgid "Update"
 msgstr ""
 
-#: dist/block-visibility-settings.js:8517
+#: dist/block-visibility-settings.js:1
 #: src/settings/utils/save-settings.js:44
 msgid "Saving"
 msgstr ""
 
-#: dist/block-visibility-settings.js:8520
+#: dist/block-visibility-settings.js:1
 #: src/settings/utils/save-settings.js:51
 msgid "Update failed. Try again or contact support."
 msgstr ""
 
-#: dist/block-visibility-settings.js:8588
-msgid "Enable block scheduling."
+#: dist/block-visibility-settings.js:1
+msgid "Learn More"
 msgstr ""
 
-#: dist/block-visibility-settings.js:8615
-msgid "Enable the Date & Time controls."
-msgstr ""
-
-#: dist/block-visibility-settings.js:8626
-msgid "Date & Time controls allow you hide blocks based on time and date settings, which includes the ability to schedule the visibility of blocks."
-msgstr ""
-
-#: dist/block-visibility-settings.js:8627
-msgid "To learn more about the Date & Time controls, review the plugin documentation using the link below."
-msgstr ""
-
-#: dist/block-visibility-settings.js:8632
-msgid "Block scheduling allows you to restrict block visibility based on a start and end date/time."
-msgstr ""
-
-#: dist/block-visibility-settings.js:8700
+#: dist/block-visibility-settings.js:1
 msgid "Hide Block"
 msgstr ""
 
-#: dist/block-visibility-settings.js:8705
+#: dist/block-visibility-settings.js:1
 msgid "Enable the Hide Block control."
 msgstr ""
 
-#: dist/block-visibility-settings.js:8716
+#: dist/block-visibility-settings.js:1
 msgid "The Hide Block control allows you easily hide blocks completely from the frontend of your website. It is the simplest, yet most powerful, control and overrides all others when enabled on the block."
 msgstr ""
 
-#: dist/block-visibility-settings.js:8717
+#: dist/block-visibility-settings.js:1
 msgid "To learn more about the Hide Block control, review the plugin documentation using the link below."
 msgstr ""
 
-#: dist/block-visibility-settings.js:8809
-#: src/settings/visibility-controls/index.js:50
-msgid "The settings below allow you to configure the visibility controls that power this plugin. Pick and choose which controls you would like to enable and how you would like them to function. When a visibility control is disabled, blocks that relied on the disabled control will become visible again."
+#: dist/block-visibility-settings.js:1
+msgid "Enable block scheduling."
 msgstr ""
 
-#: dist/block-visibility-settings.js:8810
-#: src/settings/visibility-controls/index.js:54
-msgid "To learn more about Visibility Controls, review the plugin documentation using the link below."
+#: dist/block-visibility-settings.js:1
+msgid "Enable the Date & Time controls."
 msgstr ""
 
-#: dist/block-visibility-settings.js:8902
-#: src/settings/visibility-controls/screen-size/breakpoints.js:30
-msgid "Extra Large"
+#: dist/block-visibility-settings.js:1
+msgid "Date & Time controls allow you hide blocks based on time and date settings, which includes the ability to schedule the visibility of blocks."
 msgstr ""
 
-#: dist/block-visibility-settings.js:8906
-#: src/settings/visibility-controls/screen-size/breakpoints.js:34
-msgid "Large"
+#: dist/block-visibility-settings.js:1
+msgid "To learn more about the Date & Time controls, review the plugin documentation using the link below."
 msgstr ""
 
-#: dist/block-visibility-settings.js:8907
-#: src/settings/visibility-controls/screen-size/breakpoints.js:35
-msgid "Desktop and tablet (landscape) screen sizes."
+#: dist/block-visibility-settings.js:1
+msgid "Block scheduling allows you to restrict block visibility based on a start and end date/time."
 msgstr ""
 
-#: dist/block-visibility-settings.js:8910
-#: src/settings/visibility-controls/screen-size/breakpoints.js:41
-msgid "Medium"
+#: dist/block-visibility-settings.js:1
+msgid "Enable individual user role restrictions (Administrator, Editor, Subscriber, etc.)"
 msgstr ""
 
-#: dist/block-visibility-settings.js:8911
-#: src/settings/visibility-controls/screen-size/breakpoints.js:42
-msgid "Tablet (portrait) screen sizes."
+#: dist/block-visibility-settings.js:1
+msgid "Enable the User Role controls."
 msgstr ""
 
-#: dist/block-visibility-settings.js:8914
-#: src/settings/visibility-controls/screen-size/breakpoints.js:48
-msgid "Small"
+#: dist/block-visibility-settings.js:1
+msgid "User Role controls allow you to hide blocks based on whether a user is logged-in, logged-out, and more."
 msgstr ""
 
-#: dist/block-visibility-settings.js:8915
-#: src/settings/visibility-controls/screen-size/breakpoints.js:49
-msgid "Mobile (landscape) screen sizes."
+#: dist/block-visibility-settings.js:1
+msgid "To learn more about User Role controls, review the plugin documentation using the link below."
 msgstr ""
 
-#: dist/block-visibility-settings.js:8932
-#: src/settings/visibility-controls/screen-size/breakpoints.js:73
-msgid "Breakpoints"
+#: dist/block-visibility-settings.js:1
+msgid "Restrict visibility by any user role, not just users that are logged-in or logged-out. This includes roles that are added by third-party plugins."
 msgstr ""
 
-#: dist/block-visibility-settings.js:8933
-#: src/settings/visibility-controls/screen-size/breakpoints.js:75
-msgid "The plugin sets a series of breakpoints which enable screen size control out of the box. However for best results, you can configure the breakpoints to correspond with the media breakpoints of your current theme."
-msgstr ""
-
-#: dist/block-visibility-settings.js:8934
-#: src/settings/visibility-controls/screen-size/breakpoints.js:79
-msgid "The default breakpoints are Large (992px) and Medium (768px). Advanced screen size controls add Extra Large (1200px) and Small (576px)."
-msgstr ""
-
-#: dist/block-visibility-settings.js:9070
-msgid "Enable advanced screen size controls"
-msgstr ""
-
-#: dist/block-visibility-settings.js:9082
-msgid "Load screen size CSS on the frontend of this website."
-msgstr ""
-
-#: dist/block-visibility-settings.js:9111
-msgid "Enable the Screen Size controls."
-msgstr ""
-
-#: dist/block-visibility-settings.js:9122
-msgid "Screen Size controls allow you hide blocks based on the current width of the browser window, or in other words, the screen size of a user's device."
-msgstr ""
-
-#: dist/block-visibility-settings.js:9123
-msgid "To learn more about the Screen Size controls, review the plugin documentation using the link below."
-msgstr ""
-
-#: dist/block-visibility-settings.js:9128
-msgid "By default, the Screen Size controls include two breakpoints and three controls for users to hide blocks. There are certain situations where you may need more control over when a block should be visible, for example in the case of very large or small screens. Enabling advanced controls provides these options."
-msgstr ""
-
-#: dist/block-visibility-settings.js:9129
-msgid "Note that once enabled, any block that is only using the advanced controls to hide at extra large, or extra small, breakpoints will become visible again if this setting is ever disabled in the future."
-msgstr ""
-
-#: dist/block-visibility-settings.js:9134
-msgid "By default, the CSS needed for the Screen Size controls is loaded on the frontend of your website. If disabled, you will need to add the CSS manually to your theme in order for the Screen Size controls to work properly. This CSS code is available via the \"Preview Frontend CSS\" button on this page."
-msgstr ""
-
-#: dist/block-visibility-settings.js:9202
+#: dist/block-visibility-settings.js:1
 #: src/settings/visibility-controls/screen-size/preview-styles.js:31
 msgid "Preview Frontend CSS"
 msgstr ""
 
-#: dist/block-visibility-settings.js:9202
+#: dist/block-visibility-settings.js:1
 #: src/settings/visibility-controls/screen-size/preview-styles.js:32
 msgid "Hide Preview"
 msgstr ""
 
-#: dist/block-visibility-settings.js:9389
+#: dist/block-visibility-settings.js:1
+#: src/settings/visibility-controls/screen-size/breakpoints.js:30
+msgid "Extra Large"
+msgstr ""
+
+#: dist/block-visibility-settings.js:1
+#: src/settings/visibility-controls/screen-size/breakpoints.js:34
+msgid "Large"
+msgstr ""
+
+#: dist/block-visibility-settings.js:1
+#: src/settings/visibility-controls/screen-size/breakpoints.js:35
+msgid "Desktop and tablet (landscape) screen sizes."
+msgstr ""
+
+#: dist/block-visibility-settings.js:1
+#: src/settings/visibility-controls/screen-size/breakpoints.js:41
+msgid "Medium"
+msgstr ""
+
+#: dist/block-visibility-settings.js:1
+#: src/settings/visibility-controls/screen-size/breakpoints.js:42
+msgid "Tablet (portrait) screen sizes."
+msgstr ""
+
+#: dist/block-visibility-settings.js:1
+#: src/settings/visibility-controls/screen-size/breakpoints.js:48
+msgid "Small"
+msgstr ""
+
+#: dist/block-visibility-settings.js:1
+#: src/settings/visibility-controls/screen-size/breakpoints.js:49
+msgid "Mobile (landscape) screen sizes."
+msgstr ""
+
+#: dist/block-visibility-settings.js:1
+#: src/settings/visibility-controls/screen-size/breakpoints.js:73
+msgid "Breakpoints"
+msgstr ""
+
+#: dist/block-visibility-settings.js:1
+#: src/settings/visibility-controls/screen-size/breakpoints.js:75
+msgid "The plugin sets a series of breakpoints which enable screen size control out of the box. However for best results, you can configure the breakpoints to correspond with the media breakpoints of your current theme."
+msgstr ""
+
+#: dist/block-visibility-settings.js:1
+#: src/settings/visibility-controls/screen-size/breakpoints.js:79
+msgid "The default breakpoints are Large (992px) and Medium (768px). Advanced screen size controls add Extra Large (1200px) and Small (576px)."
+msgstr ""
+
+#: dist/block-visibility-settings.js:1
 #: src/settings/visibility-controls/screen-size/screen-size-controls.js:47
 msgid "The settings below allow you to retrict which controls are available to users in the Block/Site Editor. Disabling controls will remove the corresponding CSS from the frontend of your website."
 msgstr ""
 
-#: dist/block-visibility-settings.js:9390
+#: dist/block-visibility-settings.js:1
 #: src/settings/visibility-controls/screen-size/screen-size-controls.js:51
 msgid "The default controls are Desktop, Tablet, and Mobile. Advanced screen size controls add Large Desktop and Mobile (portrait)."
 msgstr ""
 
-#: dist/block-visibility-settings.js:9393
+#: dist/block-visibility-settings.js:1
 #: src/settings/visibility-controls/screen-size/screen-size-controls.js:60
 msgid "Enable large desktop control"
 msgstr ""
 
 #. translators: %s: extra large breakpoint
-#: dist/block-visibility-settings.js:9395
+#: dist/block-visibility-settings.js:2
 #: src/settings/visibility-controls/screen-size/screen-size-controls.js:66
 msgid "Allows users to hide blocks on extra large screen sizes, %s and up."
 msgstr ""
 
-#: dist/block-visibility-settings.js:9401
+#. translators: %s: extra large breakpoint
+#: dist/block-visibility-settings.js:2
 #: src/settings/visibility-controls/screen-size/screen-size-controls.js:82
 msgid "Enable desktop control"
 msgstr ""
 
 #. translators: %s large breakpoint
-#: dist/block-visibility-settings.js:9403
+#: dist/block-visibility-settings.js:3
 #: src/settings/visibility-controls/screen-size/screen-size-controls.js:87
 msgid "Allows users to hide blocks on large screen sizes, %s and up."
 msgstr ""
 
 #. translators: %1$s: large breakpoint %2$s: extra large breakpoint
-#: dist/block-visibility-settings.js:9404
+#: dist/block-visibility-settings.js:4
 #: src/settings/visibility-controls/screen-size/screen-size-controls.js:96
 msgid "Allows users to hide blocks on large screen sizes, between %1$s and %2$s."
 msgstr ""
 
-#: dist/block-visibility-settings.js:9410
+#. translators: %1$s: large breakpoint %2$s: extra large breakpoint
+#: dist/block-visibility-settings.js:4
 #: src/settings/visibility-controls/screen-size/screen-size-controls.js:110
 msgid "Enable tablet control"
 msgstr ""
 
 #. translators: %1$s: medium breakpoint %2$s: large breakpoint
-#: dist/block-visibility-settings.js:9412
+#: dist/block-visibility-settings.js:5
 #: src/settings/visibility-controls/screen-size/screen-size-controls.js:113
 msgid "Allows users to hide blocks on medium screen sizes, between %1$s and %2$s."
 msgstr ""
 
-#: dist/block-visibility-settings.js:9418
+#. translators: %1$s: medium breakpoint %2$s: large breakpoint
+#: dist/block-visibility-settings.js:5
 #: src/settings/visibility-controls/screen-size/screen-size-controls.js:128
 msgid "Enable mobile control"
 msgstr ""
 
-#: dist/block-visibility-settings.js:9418
+#: dist/block-visibility-settings.js:5
 #: src/settings/visibility-controls/screen-size/screen-size-controls.js:130
 msgid "Enable mobile (landscape) control"
 msgstr ""
 
 #. translators: %s: medium breakpoint
-#: dist/block-visibility-settings.js:9420
+#: dist/block-visibility-settings.js:6
 #: src/settings/visibility-controls/screen-size/screen-size-controls.js:139
 msgid "Allows users to hide blocks on small screen sizes, less than %s."
 msgstr ""
 
 #. translators: %1$s: small breakpoint %2$s: medium breakpoint
-#: dist/block-visibility-settings.js:9421
+#: dist/block-visibility-settings.js:7
 #: src/settings/visibility-controls/screen-size/screen-size-controls.js:148
 msgid "Allows users to hide blocks on small screen sizes, between %1$s and %2$s."
 msgstr ""
 
-#: dist/block-visibility-settings.js:9427
+#. translators: %1$s: small breakpoint %2$s: medium breakpoint
+#: dist/block-visibility-settings.js:7
 #: src/settings/visibility-controls/screen-size/screen-size-controls.js:163
 msgid "Enable mobile (portrait) control"
 msgstr ""
 
 #. translators: %s: small breakpoint
-#: dist/block-visibility-settings.js:9429
+#: dist/block-visibility-settings.js:8
 #: src/settings/visibility-controls/screen-size/screen-size-controls.js:169
 msgid "Allows users to hide blocks on extra small screen sizes, less than %s."
 msgstr ""
 
-#: dist/block-visibility-settings.js:9495
-msgid "Enable individual user role restrictions (Administrator, Editor, Subscriber, etc.)"
+#. translators: %s: small breakpoint
+#: dist/block-visibility-settings.js:8
+msgid "Enable advanced screen size controls"
 msgstr ""
 
-#: dist/block-visibility-settings.js:9522
-msgid "Enable the User Role controls."
+#: dist/block-visibility-settings.js:8
+msgid "Load screen size CSS on the frontend of this website."
 msgstr ""
 
-#: dist/block-visibility-settings.js:9533
-msgid "User Role controls allow you to hide blocks based on whether a user is logged-in, logged-out, and more."
+#: dist/block-visibility-settings.js:8
+msgid "Enable the Screen Size controls."
 msgstr ""
 
-#: dist/block-visibility-settings.js:9534
-msgid "To learn more about User Role controls, review the plugin documentation using the link below."
+#: dist/block-visibility-settings.js:8
+msgid "Screen Size controls allow you hide blocks based on the current width of the browser window, or in other words, the screen size of a user's device."
 msgstr ""
 
-#: dist/block-visibility-settings.js:9539
-msgid "Restrict visibility by any user role, not just users that are logged-in or logged-out. This includes roles that are added by third-party plugins."
+#: dist/block-visibility-settings.js:8
+msgid "To learn more about the Screen Size controls, review the plugin documentation using the link below."
+msgstr ""
+
+#: dist/block-visibility-settings.js:8
+msgid "By default, the Screen Size controls include two breakpoints and three controls for users to hide blocks. There are certain situations where you may need more control over when a block should be visible, for example in the case of very large or small screens. Enabling advanced controls provides these options."
+msgstr ""
+
+#: dist/block-visibility-settings.js:8
+msgid "Note that once enabled, any block that is only using the advanced controls to hide at extra large, or extra small, breakpoints will become visible again if this setting is ever disabled in the future."
+msgstr ""
+
+#: dist/block-visibility-settings.js:8
+msgid "By default, the CSS needed for the Screen Size controls is loaded on the frontend of your website. If disabled, you will need to add the CSS manually to your theme in order for the Screen Size controls to work properly. This CSS code is available via the \"Preview Frontend CSS\" button on this page."
+msgstr ""
+
+#: dist/block-visibility-settings.js:8
+#: src/settings/visibility-controls/index.js:50
+msgid "The settings below allow you to configure the visibility controls that power this plugin. Pick and choose which controls you would like to enable and how you would like them to function. When a visibility control is disabled, blocks that relied on the disabled control will become visible again."
+msgstr ""
+
+#: dist/block-visibility-settings.js:8
+#: src/settings/visibility-controls/index.js:54
+msgid "To learn more about Visibility Controls, review the plugin documentation using the link below."
+msgstr ""
+
+#: dist/block-visibility-settings.js:8
+msgid "Visibility is enabled for all blocks"
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "Not every block type may need visibility controls. The Block Manager allows you to restrict visibility controls to specific block types. If you are looking for a block, and do not see it listed, you may need to enable Full Control Mode on the General Settings tab."
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "To learn more about the Block Manager, review the plugin documentation using the link below."
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "Search for a block"
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "Block Editor"
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "Settings that impact the Block Editor, such as contextual indicators for when a block has visibility controls, as well as additional toolbar options. Click the link below for complete details."
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "Enable contextual indicators when visibility settings are applied to a block."
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "Enable block toolbar controls for visibility settings."
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "Enable plugin notices in the editor."
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "Block Visibility provides various notices in the editor to provide helpful warnings, tips, and links. This setting allows you to disable those notices for a more steamlined user interface."
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "Choose which user roles should be allowed to control visibility settings in the Block Editor. Administrators will always have permission."
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "User Permissions"
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "Restrict block visibility controls to selected user roles."
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "By default, all users that can edit blocks in Block Editor will be able to use the visibility settings provided by Block Visibility. You can limit permissions by user role with these settings."
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "Full Control Mode"
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "Enable Full Control Mode to add visibility controls to <strong>every</strong> block. <a>Use with caution</a>."
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "By default, not all blocks are provided with visibility controls. These include child blocks and blocks that may exist in WordPress, but cannot actually be added directly to the editor. Most of the time, you will not need Full Control Mode, but it's there in case you do. Use with caution. Click the link below for complete details."
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "Uninstall"
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "Settings that impact what happens when the Block Visibility plugin is uninstalled."
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+msgid "Remove all plugin settings when Block Visibility is uninstalled."
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+#: src/settings/plugin-settings/index.js:55
+msgid "The settings below allow you to configure general functionality of the Block Visibility plugin. To learn more about General Settings, review the plugin documentation using the link below."
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+#: src/settings/index.js:97
+msgid "Something went wrong when trying to load the Block Visibility settings. Try refreshing the page. If the error persists, please contact support."
+msgstr ""
+
+#: dist/block-visibility-settings.js:10
+#: src/settings/index.js:107
+msgid "Loading settings…"
 msgstr ""
