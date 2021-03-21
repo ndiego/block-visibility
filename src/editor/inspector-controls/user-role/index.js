@@ -14,67 +14,33 @@ import { createInterpolateElement } from '@wordpress/element';
  * Internal dependencies
  */
 import UserRoles from './user-roles';
-import { hideControlSection } from './../utils/hide-control-section';
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
 
 /**
- * Helper function for getting the visibilityByRole value. Function checks if
- * the depracated "all" value is set and changes this to 'public'.
+ * Add the User Role control
  *
- * @since 1.4.1
- * @param {Object} blockVisibility All the block attributes
- * @param {Function} setAttributes Sets the block attributes
- * @return {string}		           Returns the start date
- */
-function getVisibilityByRole( blockVisibility, setAttributes ) {
-	const visibilityByRole = blockVisibility?.visibilityByRole ?? 'public';
-
-	if ( visibilityByRole === 'all' ) {
-		setAttributes( {
-			blockVisibility: assign(
-				{ ...blockVisibility },
-				{ visibilityByRole: 'public' }
-			),
-		} );
-
-		return 'public';
-	}
-
-	return visibilityByRole;
-}
-
-/**
- * Add the Visibility By User Role control
- *
- * @since 1.0.0
+ * @since 1.6.0
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
-export default function VisibilityByRole( props ) {
+export default function UserRole( props ) {
 	const {
-		attributes,
-		setAttributes,
-		enabledControls,
 		settings,
 		variables,
-	} = props;
-	const { blockVisibility } = attributes;
-
-	const sectionHidden = hideControlSection(
 		enabledControls,
-		blockVisibility,
-		'visibility_by_role'
-	);
+		setControlAtts,
+		controlSetAtts,
+	} = props;
+	const controlEnabled = enabledControls.includes( 'visibility_by_role' );
+	const controlToggledOn =
+		controlSetAtts?.controls.hasOwnProperty( 'userRole' ) ?? false;
 
-	if ( sectionHidden ) {
+	if ( ! controlEnabled || ! controlToggledOn ) {
 		return null;
 	}
 
-	// Run the get function to clean up depracated visibilityByRole values
-	const visibilityByRole = getVisibilityByRole(
-		blockVisibility,
-		setAttributes
-	);
+	const userRole = controlSetAtts?.controls?.userRole ?? {};
+	const visibilityByRole = userRole?.visibilityByRole ?? 'public';
 
 	const settingsUrl = variables?.pluginVariables.settingsUrl ?? ''; // eslint-disable-line
 	const enableUserRoles = isControlSettingEnabled(
@@ -116,7 +82,7 @@ export default function VisibilityByRole( props ) {
 		},
 		{
 			label: optionLabel(
-				__( 'User Role', 'block-visibility' ),
+				__( 'User Roles', 'block-visibility' ),
 				__( 'Only visible to specific user roles.', 'block-visibility' )
 			),
 			value: 'user-role',
@@ -129,9 +95,9 @@ export default function VisibilityByRole( props ) {
 	}
 
 	return (
-		<div className="visibility-control__group visibility-by-user-role">
+		<div className="visibility-control__group user-role-control">
 			<h3 className="visibility-control__group-heading">
-				{ __( 'Visibility by User Role', 'block-visibility' ) }
+				{ __( 'User Role', 'block-visibility' ) }
 			</h3>
 			<div className="visibility-control visibility-by-role">
 				<RadioControl
@@ -139,17 +105,23 @@ export default function VisibilityByRole( props ) {
 					selected={ visibilityByRole }
 					options={ options }
 					onChange={ ( value ) =>
-						setAttributes( {
-							blockVisibility: assign(
-								{ ...blockVisibility },
+						setControlAtts(
+							'userRole',
+							assign(
+								{ ...userRole },
 								{ visibilityByRole: value }
-							),
-						} )
+							)
+						)
 					}
 				/>
 			</div>
 			{ visibilityByRole === 'user-role' && enableUserRoles && (
-				<UserRoles variables={ variables } { ...props } />
+				<UserRoles
+					variables={ variables }
+					userRole={ userRole }
+					setControlAtts={ setControlAtts }
+					{ ...props }
+				/>
 			) }
 			{ visibilityByRole === 'user-role' && ! enableUserRoles && (
 				<Notice status="warning" isDismissible={ false }>

@@ -8,7 +8,6 @@ import { Slot } from '@wordpress/components';
  * Internal dependencies
  */
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
-import { hideControlSection } from './../utils/hide-control-section';
 import Scheduling from './scheduling';
 
 /**
@@ -19,18 +18,16 @@ import Scheduling from './scheduling';
  * @return {string}		 Return the rendered JSX
  */
 export default function DateTime( props ) {
-	const { settings, attributes, enabledControls } = props;
-	const { blockVisibility } = attributes;
+	const { settings, enabledControls, controlSetAtts } = props;
+	const controlEnabled = enabledControls.includes( 'date_time' );
+	const controlToggledOn =
+		controlSetAtts?.controls.hasOwnProperty( 'dateTime' ) ?? false;
 
-	const sectionHidden = hideControlSection(
-		enabledControls,
-		blockVisibility,
-		'date_time'
-	);
-
-	if ( sectionHidden ) {
+	if ( ! controlEnabled || ! controlToggledOn ) {
 		return null;
 	}
+
+	const dateTime = controlSetAtts?.controls?.dateTime ?? {};
 
 	const enableScheduling = isControlSettingEnabled(
 		settings,
@@ -39,11 +36,13 @@ export default function DateTime( props ) {
 	);
 
 	return (
-		<div className="visibility-control__group date-time">
+		<div className="visibility-control__group date-time-control">
 			<h3 className="visibility-control__group-heading">
 				{ __( 'Date & Time', 'block-visibility' ) }
 			</h3>
-			{ enableScheduling && <Scheduling { ...props } /> }
+			{ enableScheduling && (
+				<Scheduling dateTime={ dateTime } { ...props } />
+			) }
 			<Slot name="DateTimeControls" />
 		</div>
 	);

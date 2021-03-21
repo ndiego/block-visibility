@@ -5,7 +5,7 @@ Tags: visibility, schedule blocks, hide blocks, conditional blocks, restrict blo
 Requires at least: 5.5
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 1.5.3
+Stable tag: 1.6.0
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,7 +22,7 @@ Built for the new Block (Gutenberg) Editor, this plugin was designed to work wit
 Visibility controls determine whether a block should be visible to users on the frontend of your website based on a range of conditions. Current controls include:
 
 * **Hide** blocks from all users
-* **Schedule** block visibility using a start and end date/time
+* **Schedule** content block visibility using a start and end date/time
 * Conditionally display blocks based on **screen size** (Desktop, Tablet, Mobile, and more)
 * Only show blocks to **logged-in** users
 * Only show blocks to **logged-out** users
@@ -94,7 +94,7 @@ Stay up-to-date on Block Visibility using the links below. The plugin is also be
 == Screenshots ==
 
 1. Quickly and easily hide show or hide blocks on your website.
-2. Schedule any Gutenberg block using start and end date/time settings. The plugin provides complete block scheduling and work with all Gutenberg blocks, including WooCommerce as seen here.
+2. Schedule content, i.e. any Gutenberg block, using start and end date/time settings. The plugin provides complete block scheduling and work with all Gutenberg blocks, including WooCommerce as seen here.
 3. Show or hide block on mobile devices, tables, desktops and more.
 4. Control who can see each Gutenberg block with user role restrictions.
 5. General plugin settings to enable/disable certain functionality including user permissions and Full Control Mode.
@@ -116,7 +116,7 @@ Stay up-to-date on Block Visibility using the links below. The plugin is also be
 = Who should use Block Visibility? =
 Block Visibility is a powerful, yet simple, plugin that gives marketing agencies, bloggers, eCommerce websites, and small businesses owners the power to conditionally show or hide blocks on their websites. The need to hide Gutenberg blocks varies. Whether you need to restrict content to certain users like members, or launch a promotional campaign at a specific time with block scheduling, the applications are endless.
 
-If you need content control, i.e. block control, on your WordPress website, then you need Block Visibility.
+If you need content control, i.e. Gutenberg block control, on your WordPress website, then you need Block Visibility.
 
 = Do conditional visibility controls really work with any block? (i.e. What is Full Control Mode?) =
 Yes! However, not all block types are enabled by default. Controls are only provided to blocks that can be added directly to a page/post by the block inserter. Therefore, some specialized blocks, such as child blocks, are not included by default. An example being the individual Column block that is part of the larger Columns block.
@@ -141,6 +141,24 @@ No. Block Visibility was design specifically for the WordPress Block (Gutenberg)
 Visibility is controlled primarily on the server, so if a block should be hidden based on the set block controls, it will not even be rendered. This ensures the plugin does not load any additional resources on the frontend of your site, thereby optimizing performance. The **one exception** to this is the Screen Size block controls. Visibility by screen size requires the use of CSS, which is loaded to the frontend of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary yourself. Visit the plugin [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) to learn more.
 
 == Changelog ==
+
+= 1.6.0 - 2021-03-21 =
+
+**Added**
+
+* New UI allows users to toggle on and off the available visibility controls at the block level, making for a cleaner interface.
+* New "control sets" attribute structure which improves the scalability of the plugin and allows nearly unlimited new features/functionality in the future.
+
+**Changed**
+
+* Updated all visibility frontend tests to respect new "control sets" attribute structure while maintaining backwards compatibility.
+* Updated all editor conditional indicators to respect new "control sets" attribute structure while maintaining backwards compatibility.
+
+**Removed**
+
+* Removed the obtrusive "Customize controls" admin notice in the editor in favor of a dismissible one-time "Quick tips" popup for new users.
+* Removed verbose attribute specification in the main plugin class for compatibility with blocks rendered server-side. This is no longer needed.
+* `hide-control-section.js` and corresponding function are no longer needed.
 
 = 1.5.3 - 2021-03-10 =
 

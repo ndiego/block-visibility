@@ -35,7 +35,7 @@ use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
  * @param boolean $localize  Should we localize the time string, or just append the timezone.
  * @return Object            Return the DateTime object for the timestamp and timezone.
  */
-function create_datetime( $timestamp = null, $localize = true ) {
+function create_date_time( $timestamp = null, $localize = true ) {
 
 	// The timezone settings from the WordPress general settings.
 	$tz_string = get_option( 'timezone_string' );
@@ -75,54 +75,31 @@ function create_datetime( $timestamp = null, $localize = true ) {
 }
 
 /**
- * Helper function for getting the start date. Function checks if the depracated
- * startDateTime attribute is set and handles accordingly.
- *
- * @since 1.4.1
- *
- * @param array   $attributes The block visibility attributes.
- * @param boolean $enable     Is scheduling enabled.
- * @return string             Return the correct start date.
- */
-function get_start( $attributes, $enable ) {
-	$depracated_start = isset( $attributes['startDateTime'] )
-		? $attributes['startDateTime']
-		: null;
-	$new_start        = isset( $attributes['scheduling']['start'] )
-		? $attributes['scheduling']['start']
-		: null;
-
-	if ( isset( $enable ) ) {
-		return $new_start;
-	}
-
-	return $depracated_start;
-}
-
-/**
  * Helper function for getting the end date. Function checks if the depracated
  * endDateTime attribute is set and handles accordingly.
  *
- * @since 1.4.1
+ * @since 1.6.0
  *
- * @param array   $attributes The block visibility attributes.
- * @param boolean $enable     Is scheduling enabled.
- * @return string             Return the correct end date.
+ * @param array  $attributes    The block visibility attributes.
+ * @param array  $schedule_atts The schedule specific attributes.
+ * @param string $old           The old date time attribute.
+ * @param string $new           The new date time attribute.
+ * @return string                Return the correct end date.
  */
-function get_end( $attributes, $enable ) {
-	$depracated_end = isset( $attributes['endDateTime'] )
-		? $attributes['endDateTime']
+function get_date_time( $attributes, $schedule_atts, $old, $new ) {
+	$depracated_date_time = isset( $attributes[ $old ] )
+		? $attributes[ $old ]
 		: null;
-	$new_end        = isset( $attributes['scheduling']['end'] )
-		? $attributes['scheduling']['end']
+	$new_date_time        = isset( $schedule_atts[ $new ] )
+		? $schedule_atts[ $new ]
 		: null;
 
 	// If the enable setting exists then use the new start attribute.
-	if ( isset( $enable ) ) {
-		return $new_end;
+	if ( isset( $schedule_atts['enable'] ) ) {
+		return $new_date_time;
 	}
 
-	return $depracated_end;
+	return $depracated_date_time;
 }
 
 /**
@@ -135,7 +112,7 @@ function get_end( $attributes, $enable ) {
  * @param array   $attributes The block visibility attributes.
  * @return boolean            Return true is the block should be visible, false if not.
  */
-function scheduling_test( $is_visible, $settings, $attributes ) {
+function date_time_test( $is_visible, $settings, $attributes ) {
 
 	// The test is already false, so skip this test, the block should be hidden.
 	if ( ! $is_visible ) {
@@ -150,11 +127,44 @@ function scheduling_test( $is_visible, $settings, $attributes ) {
 		return true;
 	}
 
-	$enable = isset( $attributes['scheduling']['enable'] )
-		? $attributes['scheduling']['enable']
-		: null;
-	$start  = get_start( $attributes, $enable );
-	$end    = get_end( $attributes, $enable );
+	$has_control_sets = isset( $attributes['controlSets'] );
+
+	if ( $has_control_sets ) {
+		// Just retrieve the first set and schedule, need to update in future.
+		$schedule_atts =
+			isset( $attributes['controlSets'][0]['controls']['dateTime']['schedules'][0] )
+				? $attributes['controlSets'][0]['controls']['dateTime']['schedules'][0]
+				: null;
+	} else {
+		$schedule_atts = isset( $attributes['scheduling'] )
+			? $attributes['scheduling']
+			: null;
+	}
+
+	// There are no date time settings, skip tests.
+	if (
+		! $schedule_atts &&
+		! isset( $attributes['startDateTime'] ) &&
+		! isset( $attributes['endDateTime'] )
+	) {
+		return true;
+	}
+
+	$enable = isset( $schedule_atts['enable'] )
+		? $schedule_atts['enable']
+		: true;
+	$start  = get_date_time(
+		$attributes,
+		$schedule_atts,
+		'startDateTime',
+		'start'
+	);
+	$end    = get_date_time(
+		$attributes,
+		$schedule_atts,
+		'endDateTime',
+		'end'
+	);
 
 	// The new enable setting does not exist and there are no depracated
 	// scheduling settings, so skip the est.
@@ -173,8 +183,8 @@ function scheduling_test( $is_visible, $settings, $attributes ) {
 		return true;
 	}
 
-	$start = $start ? create_datetime( $start, false ) : null;
-	$end   = $end ? create_datetime( $end, false ) : null;
+	$start = $start ? create_date_time( $start, false ) : null;
+	$end   = $end ? create_date_time( $end, false ) : null;
 
 	// If the start date is before the end date, skip test.
 	if ( ( $start && $end ) && $start > $end ) {
@@ -191,4 +201,4 @@ function scheduling_test( $is_visible, $settings, $attributes ) {
 	// Block has passed the date & time test.
 	return true;
 }
-add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\scheduling_test', 10, 3 );
+add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\date_time_test', 10, 3 );

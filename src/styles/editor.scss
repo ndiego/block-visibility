@@ -20,6 +20,33 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
 .visibility-controls__container {
     padding-top: 10px;
 
+    .components-disabled {
+        opacity: .4;
+
+        * {
+            opacity: 1 !important;
+        }
+    }
+
+    .components-button.control-tips {
+        vertical-align: middle;
+        height: 18px;
+        width: 18px !important;
+        padding: 0 !important;
+        min-width: 18px;
+        margin-left: 5px;
+        margin-top: -4px;
+
+        &:not( :hover ) {
+            color: #c8c8c8;
+        }
+
+        svg {
+            width: 18px;
+            height: 18px;
+        }
+    }
+
     .visibility-control__group {
         margin-bottom: 30px;
 
@@ -91,7 +118,16 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
     }
 
     /* Specific styles for the Date Time visibility control */
-    .date-time {
+    .hide-block-control {
+        margin-bottom: 20px;
+    }
+
+    /* Specific styles for the Date Time visibility control */
+    .date-time-control {
+        .components-base-control {
+            margin-bottom: 20px;
+        }
+
         .date-time-field {
             display: flex;
             justify-content: space-between;
@@ -123,7 +159,7 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
     }
 
     /* Specific styles for the User Roles visibility control */
-    .visibility-by-user-role {
+    .user-role-control {
         .user-roles__container {
             margin-bottom: 24px;
 
@@ -134,7 +170,7 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
     }
 
     /* Specific styles for the Screen Size visibility control */
-    .screen-size {
+    .screen-size-control {
         .components-base-control {
             margin-bottom: 18px;
         }
@@ -167,6 +203,64 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
 
         display: flex;
         justify-content: space-between;
+    }
+}
+
+/* Control set styles */
+.block-visibility__control-popover {
+    &>div {
+        min-width: 180px;
+        padding: 12px 8px;
+    }
+
+    &.tips>div {
+        min-width: 400px;
+        padding: 24px;
+
+        h3 {
+            margin-top: 0;
+        }
+
+        ol {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        li.tip {
+            padding-left: 5px;
+            margin-bottom: 10px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            &::marker {
+                font-weight: bold;
+                font-size: 14px;
+            }
+        }
+    }
+
+    .components-menu-group__label {
+        padding: 0 12px;
+    }
+}
+
+.block-visibility__control-set {
+    margin-bottom: 30px;
+
+    .block-visibility__control-set-header {
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 30px;
+
+        h3 {
+            font-weight: 500;
+            color: #757575;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: .5px;
+            margin: 8px 0;
+        }
     }
 }
 
@@ -355,10 +449,4 @@ $icon__color: #000000;
 // Bit of a hack and applies to all celendar components, should be removed at some point.
 .CalendarDay__today {
     background: #f5f5f5;
-}
-
-// Fixes the missing background color of notices.
-.components-notice.is-notice {
-    background: #e8f5f9;
-    border-color: #007cba;
 }

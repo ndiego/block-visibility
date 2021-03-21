@@ -21,7 +21,7 @@ final class Block_Visibility {
 	 * @since 1.4.0
 	 * @var string
 	 */
-	public $version = '1.5.3';
+	public $version = '1.6.0';
 
 	/**
 	 * Return singleton instance of the Block Visibility plugin.
@@ -164,75 +164,8 @@ final class Block_Visibility {
 
 		$registered_blocks = WP_Block_Type_Registry::get_instance()->get_all_registered();
 
-		$attributes = array(
-			'type'       => 'object',
-			'properties' => array(
-				'hideBlock'             => array(
-					'type' => 'boolean',
-				),
-				'visibilityByRole'      => array(
-					'type' => 'string',
-				),
-				'hideOnRestrictedRoles' => array(
-					'type' => 'boolean',
-				),
-				'restrictedRoles'       => array(
-					'type'  => 'array',
-					'items' => array(
-						'type' => 'string',
-					),
-				),
-				'scheduling'            => array(
-					'type'       => 'object',
-					'properties' => array(
-						'enable' => array(
-							'type' => 'boolean',
-						),
-						'start'  => array(
-							'type' => 'string',
-						),
-						'end'    => array(
-							'type' => 'string',
-						),
-					),
-				),
-				'hideOnScreenSize'      => array(
-					'type'       => 'object',
-					'properties' => array(
-						'extraLarge' => array(
-							'type' => 'boolean',
-						),
-						'large'      => array(
-							'type' => 'boolean',
-						),
-						'medium'     => array(
-							'type' => 'boolean',
-						),
-						'small'      => array(
-							'type' => 'boolean',
-						),
-						'extraSmall' => array(
-							'type' => 'boolean',
-						),
-					),
-				),
-				// Depracated attributes.
-				'startDateTime'         => array(
-					'type' => 'string',
-				),
-				'endDateTime'           => array(
-					'type' => 'string',
-				),
-			),
-		);
-
-		$attributes = apply_filters(
-			'block_visibility_attributes',
-			$attributes
-		);
-
 		foreach ( $registered_blocks as $name => $block ) {
-			$block->attributes['blockVisibility'] = $attributes;
+			$block->attributes['blockVisibility'] = array( 'type' => 'object' );
 		}
 	}
 

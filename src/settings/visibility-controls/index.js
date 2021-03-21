@@ -12,7 +12,7 @@ import SaveSettings from './../utils/save-settings';
 import InformationPopover from './../utils/information-popover';
 import HideBlock from './hide-block';
 import DateTime from './date-time';
-import VisibilityByRole from './visibility-by-role';
+import UserRole from './user-role';
 import ScreenSize from './screen-size';
 
 /**
@@ -76,7 +76,7 @@ export default function VisibilityControls( props ) {
 				setSettings={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }
 			/>
-			<VisibilityByRole
+			<UserRole
 				settings={ visibilityControls }
 				setSettings={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }

@@ -12,7 +12,7 @@ import { addFilter } from '@wordpress/hooks';
  * Internal dependencies
  */
 import hasDateTime from './has-date-time';
-import hasUserRoles from './has-user-roles';
+import hasUserRole from './has-user-role';
 import hasScreenSize from './has-screen-size';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import usePluginData from './../utils/use-plugin-data';
@@ -55,6 +55,21 @@ function withContextualIndicators( BlockListBlock ) {
 		const hideBlock = blockVisibility?.hideBlock ?? false;
 		const isHidden = hideBlock && enabledControls.includes( 'hide_block' );
 
+		const hasControlSets = blockVisibility?.controlSets ?? false;
+		let testAtts = blockVisibility ?? {};
+
+		if ( hasControlSets ) {
+			// The control set array is empty or the default set has no applied controls.
+			if (
+				blockVisibility.controlSets.length !== 0 &&
+				blockVisibility.controlSets[ 0 ]?.controls
+			) {
+				testAtts = blockVisibility.controlSets[ 0 ].controls;
+			} else {
+				testAtts = {};
+			}
+		}
+
 		// Some blocks have rendering issues when we set the icons to the
 		// :before pseudo class. For those blocks, use a background image
 		// instead.
@@ -62,16 +77,19 @@ function withContextualIndicators( BlockListBlock ) {
 
 		let classes = classnames( {
 			'block-visibility__is-hidden': isHidden,
-			'block-visibility__has-roles': hasUserRoles(
-				blockVisibility,
+			'block-visibility__has-roles': hasUserRole(
+				testAtts,
+				hasControlSets,
 				enabledControls
 			),
 			'block-visibility__has-date-time': hasDateTime(
-				blockVisibility,
+				testAtts,
+				hasControlSets,
 				enabledControls
 			),
 			'block-visibility__has-screen-size': hasScreenSize(
-				blockVisibility,
+				testAtts,
+				hasControlSets,
 				enabledControls,
 				settings
 			),
