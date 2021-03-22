@@ -82,9 +82,12 @@ final class Block_Visibility {
 	 * @return void
 	 */
 	public function actions() {
-		add_action( 'wp_loaded', array( $this, 'add_attributes_to_registered_blocks' ), 999 );
 		add_action( 'init', array( $this, 'load_textdomain' ) );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'block_localization' ) );
+
+		// Specific fixes/work arounds for server-side blocks.
+		add_action( 'wp_loaded', array( $this, 'add_attributes_to_registered_blocks' ), 999 );
+		add_filter( 'rest_pre_dispatch', array( $this, 'conditionally_remove_attributes' ), 10, 3 );
 	}
 
 	/**
@@ -167,6 +170,36 @@ final class Block_Visibility {
 		foreach ( $registered_blocks as $name => $block ) {
 			$block->attributes['blockVisibility'] = array( 'type' => 'object' );
 		}
+	}
+
+	/**
+	 * Fix REST API issue with blocks rendered server-side. Without this,
+	 * server-side blocks will lot load in the block editor when visibility
+	 * controls have been added.
+	 *
+	 * Reference: https://github.com/phpbits/block-options/blob/f741344033a2c9455828d039881616f77ef109fe/includes/class-editorskit-post-meta.php#L82-L112
+	 *
+	 * @since 1.7.0
+	 *
+	 * @param mixed  $result  Response to replace the requested version with.
+	 * @param object $server  Server instance.
+	 * @param object $request Request used to generate the response.
+	 *
+	 * @return array Returns updated results.
+	 */
+	public function conditionally_remove_attributes( $result, $server, $request ) {
+
+		if ( strpos( $request->get_route(), '/wp/v2/block-renderer' ) !== false ) {
+
+			if ( isset( $request['attributes'] ) && isset( $request['attributes']['blockVisibility'] ) ) {
+
+				$attributes = $request['attributes'];
+				unset( $attributes['blockVisibility'] );
+				$request['attributes'] = $attributes;
+			}
+		}
+
+		return $result;
 	}
 
 	/**

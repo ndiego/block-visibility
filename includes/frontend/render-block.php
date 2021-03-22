@@ -62,19 +62,6 @@ function has_visibility_settings( $block ) {
  */
 function render_with_visibility( $block_content, $block ) {
 
-	/**
-	 * Needed for server side rendered blocks since they are rendered via REST
-	 * API endpoint. This endpoint calls the render function in the admin, whereas
-	 * the render function is called directly on the frontend. The function
-	 * is_admin() checks if a backend page was requested. In a REST API Request
-	 * is no backend page, so the function returns false on REST API requests.
-	 *
-	 * Reference: wp-includes/rest-api.php line 302
-	 */
-	if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
-		return $block_content;
-	}
-
 	// Get the plugin core settings.
 	$settings   = get_option( 'block_visibility_settings' );
 	$attributes = isset( $block['attrs']['blockVisibility'] )
