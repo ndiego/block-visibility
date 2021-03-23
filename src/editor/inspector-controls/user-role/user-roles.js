@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { map, assign, includes } from 'lodash'; // eslint-disable-line
+import Select from 'react-select';
 
 /**
  * WordPress dependencies
@@ -25,6 +26,39 @@ export default function UserRoles( props ) {
 		? __( 'hidden', 'block-visibility' )
 		: __( 'visible', 'block-visibility' );
 
+		const options = [
+	  { value: 'chocolate', label: 'Chocolate' },
+	  { value: 'strawberry', label: 'Strawberry' },
+	  { value: 'vanilla', label: 'Vanilla' }
+	]
+
+	const selectedRoles = roles.filter(
+		( role ) => restrictedRoles.includes( role.value )
+	);
+
+	// A very loose test to see if some previously saved restricted roles are no longer "available" roles on the website.
+	const missingRoles = restrictedRoles.length > selectedRoles.length;
+
+	const handleOnChange = ( roles ) => {
+		let newRoles = [];
+
+		if ( roles.length != 0 ) {
+			roles.forEach( ( role ) => {
+				newRoles.push( role.value );
+			} );
+		}
+
+		setControlAtts(
+			'userRole',
+			assign(
+				{ ...userRole },
+				{
+					restrictedRoles: newRoles,
+				}
+			)
+		)
+	}
+
 	return (
 		<>
 			<div className="visibility-control restricted-roles">
@@ -41,40 +75,14 @@ export default function UserRoles( props ) {
 						label
 					) }
 				</div>
-				<div className="user-roles__container">
-					{ roles.map( ( role ) => {
-						const newRestrictedRoles = [ ...restrictedRoles ];
-						const isChecked = restrictedRoles.includes( role.name );
-
-						if ( isChecked ) {
-							const index = newRestrictedRoles.indexOf( role.name ); // eslint-disable-line
-							index > -1 && newRestrictedRoles.splice( index, 1 ); // eslint-disable-line
-						} else {
-							newRestrictedRoles.indexOf( role.name ) === -1 && // eslint-disable-line
-								newRestrictedRoles.push( role.name );
-						}
-
-						return (
-							<CheckboxControl
-								key={ role }
-								className="user-role"
-								checked={ isChecked }
-								label={ role.title }
-								onChange={ () =>
-									setControlAtts(
-										'userRole',
-										assign(
-											{ ...userRole },
-											{
-												restrictedRoles: newRestrictedRoles,
-											}
-										)
-									)
-								}
-							/>
-						);
-					} ) }
-				</div>
+				 <Select
+				 	className="block-visibility__react-select"
+					classNamePrefix="react-select"
+				 	options={ roles }
+					value={ selectedRoles }
+					onChange={ ( value ) => handleOnChange( value ) }
+					isMulti
+				/>
 			</div>
 			<div className="visibility-control hide-on-restricted-roles">
 				<ToggleControl

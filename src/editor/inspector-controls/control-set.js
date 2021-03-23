@@ -20,7 +20,7 @@ import {
 } from '@wordpress/components';
 import { applyFilters } from '@wordpress/hooks';
 import { useState } from '@wordpress/element';
-import { moreHorizontalMobile, check, info } from '@wordpress/icons';
+import { Icon, moreHorizontalMobile, check, info } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -32,6 +32,7 @@ import {
 	NoticeBlockControlsDisabled,
 	TipControlSet,
 } from './utils/notices-tips';
+import icons from './../../utils/icons';
 
 /**
  * Render a control set
@@ -63,21 +64,28 @@ export default function ControlSet( props ) {
 	let controls = [
 		{
 			slug: 'dateTime',
-			name: 'Date & Time',
+			name: __( 'Date & Time', 'block-visibility' ),
 			active: controlSetAtts?.controls.hasOwnProperty( 'dateTime' ),
 			enable: enabledControls.includes( 'date_time' ),
 		},
 		{
 			slug: 'userRole',
-			name: 'User Role',
+			name: __( 'User Role', 'block-visibility' ),
 			active: controlSetAtts?.controls.hasOwnProperty( 'userRole' ),
 			enable: enabledControls.includes( 'visibility_by_role' ),
 		},
 		{
 			slug: 'screenSize',
-			name: 'Screen Size',
+			name: __( 'Screen Size', 'block-visibility' ),
 			active: controlSetAtts?.controls.hasOwnProperty( 'screenSize' ),
 			enable: enabledControls.includes( 'screen_size' ),
+		},
+		{
+			slug: 'wpFusion',
+			name: __( 'WP Fusion', 'block-visibility' ),
+			icon: icons.wpFusion,
+			active: true,
+			enable: true,
 		},
 	];
 
@@ -181,6 +189,12 @@ export default function ControlSet( props ) {
 											}
 										>
 											{ control.name }
+											{ control.icon && (
+												<Icon
+													className="control-branding-icon"
+													icon={ control.icon }
+												/>
+											) }
 										</MenuItem>
 									);
 								} ) }

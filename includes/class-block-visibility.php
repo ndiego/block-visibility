@@ -42,7 +42,6 @@ final class Block_Visibility {
 	 * Cloning instances of the class is forbidden.
 	 *
 	 * @since 1.0.0
-	 * @return void
 	 */
 	public function __clone() {
 		_doing_it_wrong(
@@ -56,7 +55,6 @@ final class Block_Visibility {
 	 * Unserializing instances of the class is forbidden.
 	 *
 	 * @since 1.0.0
-	 * @return void
 	 */
 	public function __wakeup() {
 		_doing_it_wrong(
@@ -79,7 +77,6 @@ final class Block_Visibility {
 	 * Load required actions.
 	 *
 	 * @since 1.0.0
-	 * @return void
 	 */
 	public function actions() {
 		add_action( 'init', array( $this, 'load_textdomain' ) );
@@ -94,7 +91,6 @@ final class Block_Visibility {
 	 * Include required files.
 	 *
 	 * @since 1.0.0
-	 * @return void
 	 */
 	public function includes() {
 
@@ -124,7 +120,7 @@ final class Block_Visibility {
 	}
 
 	/**
-	 * Define the contants for the Block Visibility base (BVB) plugin.
+	 * Define the contants for the Block Visibility plugin.
 	 *
 	 * @since 1.4.0
 	 */
@@ -141,6 +137,7 @@ final class Block_Visibility {
 	 * Define constant if not already set.
 	 *
 	 * @since 1.4.0
+	 *
 	 * @param string      $name  Constant name.
 	 * @param string|bool $value Constant value.
 	 */
@@ -161,7 +158,6 @@ final class Block_Visibility {
 	 * Reference: https://github.com/WordPress/gutenberg/issues/16850
 	 *
 	 * @since 1.0.0
-	 * @return void
 	 */
 	public function add_attributes_to_registered_blocks() {
 
@@ -174,7 +170,7 @@ final class Block_Visibility {
 
 	/**
 	 * Fix REST API issue with blocks rendered server-side. Without this,
-	 * server-side blocks will lot load in the block editor when visibility
+	 * server-side blocks will not load in the block editor when visibility
 	 * controls have been added.
 	 *
 	 * Reference: https://github.com/phpbits/block-options/blob/f741344033a2c9455828d039881616f77ef109fe/includes/class-editorskit-post-meta.php#L82-L112
@@ -206,7 +202,6 @@ final class Block_Visibility {
 	 * Loads the plugin language files.
 	 *
 	 * @since 1.0.0
-	 * @return void
 	 */
 	public function load_textdomain() {
 		load_plugin_textdomain(
@@ -220,7 +215,6 @@ final class Block_Visibility {
 	 * Enqueue localization data for our blocks.
 	 *
 	 * @since 1.0.0
-	 * @return void
 	 */
 	public function block_localization() {
 		if ( function_exists( 'wp_set_script_translations' ) ) {

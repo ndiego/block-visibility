@@ -142,6 +142,20 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 == Changelog ==
 
+= 1.7.0 - TBD =
+
+**Added**
+
+* Added `react-select` for all multi-select fields.
+
+**Changed**
+
+* The "Restricted User Roles" setting now uses `react-select` for a cleaner user interface.
+
+**Fixed**
+
+* Blocks that should have been hidden by enabled visibility controls were appearing in REST API requests. This allowed sophisticated users to "see" content that was not intended for them via a public endpoint, i.e. `wp-json/wp/v2/...`. This is now fixed, thank you @tkraftner for reporting this.
+
 = 1.6.0 - 2021-03-21 =
 
 **Added**
