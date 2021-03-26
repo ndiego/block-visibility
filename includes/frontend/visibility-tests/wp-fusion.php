@@ -61,7 +61,7 @@ function wp_fusion_test( $is_visible, $settings, $attributes ) {
 
     $visibility_by_role = isset( $user_role_atts['visibilityByRole'] )
         ? $user_role_atts['visibilityByRole']
-        : null;
+        : 'public';
 
     // The block is to be shown only to logged-out users, so the WP Fusion
     // control does not apply, skip tests.
@@ -69,7 +69,6 @@ function wp_fusion_test( $is_visible, $settings, $attributes ) {
         return true;
     }
 
-    //$visibility      = $element->get_settings( 'wpf_visibility' );
     $tags_any = isset( $wp_fusion_atts['tagsAny'] )
 		? $wp_fusion_atts['tagsAny']
 		: null;
@@ -90,80 +89,52 @@ function wp_fusion_test( $is_visible, $settings, $attributes ) {
         return true;
     }
 
-    // ???
-    $can_access = true;
-
+    // Tags can only be applied to logged-in users.
     if ( is_user_logged_in() ) {
 
         $user_tags = wp_fusion()->user->get_tags();
 
-        if ( 'everyone' == $visibility || 'loggedin' == $visibility ) {
-
-            // See if user has required tags
-
-            if ( ! empty( $widget_tags ) ) {
+        // Only check the (any) and (all) tags when visibility_by_role is set
+        // to logged-in or user-role.
+        if (
+            'logged-in' === $visibility_by_role ||
+            'user-role' == $visibility_by_role
+        ) {
+            if ( ! empty( $tags_any ) ) {
 
                 // Required tags (any)
-
-                $result = array_intersect( $widget_tags, $user_tags );
+                $result = array_intersect( $tags_any, $user_tags );
 
                 if ( empty( $result ) ) {
-                    $can_access = false;
+                    return false;
                 }
             }
 
-            if ( true == $can_access && ! empty( $widget_tags_all ) ) {
+            if ( ! empty( $widget_tags_all ) ) {
 
                 // Required tags (all)
+                $result = array_intersect( $tags_all, $user_tags );
 
-                $result = array_intersect( $widget_tags_all, $user_tags );
-
-                if ( count( $result ) != count( $widget_tags_all ) ) {
-                    $can_access = false;
+                // ??? The user must have all the seleted tags but could also have more. The Elementor code had a strict !=
+                if ( count( $result ) < count( $tags_all ) ) {
+                    return false;
                 }
             }
-
-            if ( true == $can_access && ! empty( $widget_tags_not ) ) {
-
-                // Required tags (not)
-
-                $result = array_intersect( $widget_tags_not, $user_tags );
-
-                if ( ! empty( $result ) ) {
-                    $can_access = false;
-                }
-            }
-        } elseif ( 'loggedout' == $visibility ) {
-
-            // The user is logged in but the widget is set to logged-out only
-            $can_access = false;
-
         }
-    } else {
 
-        // Tags can only be applies to logged-in users, so if not logged-in, skip test.
-        return true;
+        // Check the (not) tags on all visibility_by_role settings.
+        if ( ! empty( $tags_not ) ) {
+
+            // Required tags (not)
+            $result = array_intersect( $tags_not, $user_tags );
+
+            if ( ! empty( $result ) ) {
+                return false;
+            }
+        }
     }
 
-    /*
-    $can_access = apply_filters( 'wpf_elementor_can_access', $can_access, $element );
-
-    global $post;
-
-    if ( ! empty( $post ) ) {
-        $post_id = $post->ID;
-    } else {
-        $post_id = 0;
-    }
-
-    $can_access = apply_filters( 'wpf_user_can_access', $can_access, wpf_get_current_user_id(), $post_id );
-
-    if ( $can_access ) {
-        return true;
-    } else {
-        return false;
-    }
-    */
+    return true;
 }
 
 // Run all integration tests at "15" priority, which is after the main controls,

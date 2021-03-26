@@ -86,7 +86,7 @@ export default function ControlSet( props ) {
 			name: __( 'WP Fusion', 'block-visibility' ),
 			icon: icons.wpFusion,
 			active: controlSetAtts?.controls.hasOwnProperty( 'wpFusion' ),
-			enable: true,
+			enable: enabledControls.includes( 'wp_fusion' ),
 		},
 	];
 

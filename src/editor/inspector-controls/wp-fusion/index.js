@@ -31,8 +31,7 @@ export default function WPFusion( props ) {
 
     console.log( controlSetAtts );
 
-	//const controlEnabled = enabledControls.includes( 'wp_fusion' );
-    const controlEnabled = true;
+	const controlEnabled = enabledControls.includes( 'wp_fusion' );
 	const controlToggledOn =
 		controlSetAtts?.controls.hasOwnProperty( 'wpFusion' ) ?? false;
 

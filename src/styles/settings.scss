@@ -368,10 +368,22 @@ $mobile: 426px;
 					margin-left: 20px;
 				}
 
-				label,
-				.settings-label {
+				label {
 					font-size: 14px;
 					margin-bottom: 8px;
+				}
+
+				.settings-label {
+					font-size: 15px;
+					font-weight: 500;
+					display: flex;
+					align-items: center;
+					margin-bottom: 20px;
+
+					&>svg {
+						width: 20px;
+						margin-left: 8px;
+					}
 				}
 
 				.settings-panel__help {
@@ -397,9 +409,6 @@ $mobile: 426px;
 		justify-content: space-between;
 
 		.settings-label {
-			font-weight: 500;
-			margin-bottom: 20px !important;
-			display: flex;
 			justify-content: space-between;
 		}
 

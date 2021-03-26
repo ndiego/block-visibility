@@ -3,11 +3,13 @@
  */
 import { __ } from '@wordpress/i18n';
 import { ToggleControl } from '@wordpress/components';
+import { Icon } from '@wordpress/icons';
 
 /**
  * Internal dependencies
  */
 import InformationPopover from './../../utils/information-popover';
+import icons from './../../../utils/icons';
 
 /**
  * Renders the hide block control settings.
@@ -30,19 +32,9 @@ export default function Integrations( props ) {
 				</span>
 			</div>
 			<div className="settings-panel__container">
-				<div className="settings-label">
+				<div className="settings-label integration">
 					<span>{ __( 'WP Fusion', 'block-visibility' ) }</span>
-					<InformationPopover
-						message={ __(
-							'The plugin sets a series of breakpoints which enable screen size control out of the box. However for best results, you can configure the breakpoints to correspond with the media breakpoints of your current theme.',
-							'block-visibility'
-						) }
-						subMessage={ __(
-							'The default breakpoints are Large (992px) and Medium (768px). Advanced screen size controls add Extra Large (1200px) and Small (576px).',
-							'block-visibility'
-						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
-					/>
+					<Icon icon={ icons.wpFusion } />
 				</div>
 				<div className="settings-type__toggle has-info-popover">
 					<ToggleControl

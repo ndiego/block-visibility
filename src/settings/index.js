@@ -43,7 +43,7 @@ function Settings() {
 		// Generic fetch function to retrieve settings and variables on render.
 		async function fetchData( route, setData ) {
 			setStatus( 'fetching' );
-			
+
 			// blockVisibilityHomeUrl is provided by wp_add_inline_script.
 			const fetchUrl = `${ blockVisibilityRestUrl }block-visibility/v1/${ route }`; // eslint-disable-line
 			const response = await fetch( fetchUrl, { method: 'GET' } ); // eslint-disable-line
@@ -67,7 +67,7 @@ function Settings() {
 		setSaveStatus( 'saving' );
 
 		const newSettings = assign( { ...settings }, { [ option ]: value } );
-		const fetchUrl = `${ blockVisibilityHomeUrl }/wp-json/block-visibility/v1/settings`; // eslint-disable-line
+		const fetchUrl = `${ blockVisibilityRestUrl }block-visibility/v1/settings`; // eslint-disable-line
 
 		const response = await fetch( fetchUrl, { // eslint-disable-line
 			method: 'POST',
