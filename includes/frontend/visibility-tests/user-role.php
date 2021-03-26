@@ -1,6 +1,6 @@
 <?php
 /**
- * Adds a filter to the visibility test for "visibility by user role" setting.
+ * Adds a filter to the visibility test for the User Role control.
  *
  * @package block-visibility
  * @since   1.0.0

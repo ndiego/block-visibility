@@ -1,6 +1,6 @@
 <?php
 /**
- * Adds a filter to the visibility test for the "hide block" setting.
+ * Adds a filter to the visibility test for the Hide Block control.
  *
  * @package block-visibility
  * @since   1.0.0

@@ -28,6 +28,7 @@ import { Icon, moreHorizontalMobile, check, info } from '@wordpress/icons';
 import UserRole from './user-role';
 import DateTime from './date-time';
 import ScreenSize from './screen-size';
+import WPFusion from './wp-fusion';
 import {
 	NoticeBlockControlsDisabled,
 	TipControlSet,
@@ -84,7 +85,7 @@ export default function ControlSet( props ) {
 			slug: 'wpFusion',
 			name: __( 'WP Fusion', 'block-visibility' ),
 			icon: icons.wpFusion,
-			active: true,
+			active: controlSetAtts?.controls.hasOwnProperty( 'wpFusion' ),
 			enable: true,
 		},
 	];
@@ -174,7 +175,12 @@ export default function ControlSet( props ) {
 							focusOnMount="container"
 							onClose={ () => setPopoverOpen( false ) }
 						>
-							<MenuGroup label="Enabled Controls">
+							<MenuGroup
+								label={ __(
+									'Enabled Controls',
+									'block-visibility'
+								) }
+							>
 								{ controls.map( ( control ) => {
 									if ( ! control.enable ) {
 										return null;
@@ -212,6 +218,7 @@ export default function ControlSet( props ) {
 				controlSetAtts={ controlSetAtts }
 				{ ...props }
 			/>
+			<div className="logic-operator"><span>AND</span></div>
 			<UserRole
 				settings={ settings }
 				variables={ variables }
@@ -220,6 +227,16 @@ export default function ControlSet( props ) {
 				controlSetAtts={ controlSetAtts }
 				{ ...props }
 			/>
+			<div className="logic-operator"><span>AND</span></div>
+			<WPFusion
+				settings={ settings }
+				variables={ variables }
+				enabledControls={ enabledControls }
+				setControlAtts={ setControlAtts }
+				controlSetAtts={ controlSetAtts }
+				{ ...props }
+			/>
+			<div className="logic-operator"><span>AND</span></div>
 			<ScreenSize
 				settings={ settings }
 				enabledControls={ enabledControls }

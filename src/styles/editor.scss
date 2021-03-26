@@ -26,6 +26,10 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
         * {
             opacity: 1 !important;
         }
+
+        .visibility-control {
+            margin-bottom: 18px !important;
+        }
     }
 
     .components-button.control-tips {
@@ -47,6 +51,27 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
         }
     }
 
+    .logic-operator {
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        padding: 12px 50px 20px;
+
+        &:before,
+        &:after {
+            content: "";
+            flex: 1 1;
+            border-bottom: 1px solid #e0e0e0;
+            margin: auto;
+        }
+
+        span {
+            padding: 0 8px;
+            color: #cccccc;
+            font-size: 90%;
+        }
+    }
+
     .visibility-control__group {
         margin-bottom: 30px;
 
@@ -58,10 +83,20 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
     .visibility-control__group-heading {
         font-weight: 500;
         margin-bottom: 16px;
+
+        &.has-icon {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            svg {
+                width: 16px;
+            }
+        }
     }
 
     .visibility-control {
-        margin-bottom: 16px;
+        margin-bottom: 18px;
 
         &.is-open {
             margin-bottom: 24px;
@@ -118,11 +153,6 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
     }
 
     /* Specific styles for the Date Time visibility control */
-    .hide-block-control {
-        margin-bottom: 20px;
-    }
-
-    /* Specific styles for the Date Time visibility control */
     .date-time-control {
         .components-base-control {
             margin-bottom: 20px;
@@ -155,13 +185,6 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
                     height: 24px;
                 }
             }
-        }
-    }
-
-    /* Specific styles for the User Roles visibility control */
-    .user-role-control {
-        .restricted-roles {
-            margin-bottom: 24px;
         }
     }
 
@@ -271,6 +294,22 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
             font-size: 12px;
             letter-spacing: .5px;
             margin: 8px 0;
+        }
+    }
+
+    .visibility-control__group {
+        &:not(:last-child) {
+            margin-bottom: 15px;
+            /*
+            &:after {
+                content: "AND";
+                color: #c8c8c8;
+                text-align: center;
+                width: 100%;
+                display: block;
+                margin-top: 25px;
+            }
+            */
         }
     }
 }
@@ -464,6 +503,8 @@ $icon__color: #000000;
 
 // Custom styling to make react-select components look more like WordPress.
 .block-visibility__react-select {
+    margin: 10px 0;
+
     .react-select__control {
         border-radius: 2px;
         border: 1px solid #757575;
@@ -491,7 +532,7 @@ $icon__color: #000000;
             margin-left: 5px;
             margin-right: 5px;
         }
-        
+
         div:last-child {
             margin: 0 2px;
             padding-bottom: 0;

@@ -154,7 +154,9 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 **Fixed**
 
-* Blocks that should have been hidden by enabled visibility controls were appearing in REST API requests. This allowed sophisticated users to "see" content that was not intended for them via a public endpoint, i.e. `wp-json/wp/v2/...`. This is now fixed, thank you @tkraftner for reporting this.
+* Fixed issue where blocks that should have been hidden by enabled visibility controls were appearing in REST API requests. This allowed sophisticated users to "see" content that was not intended for them via a public endpoint, i.e. `wp-json/wp/v2/...`. This is now fixed. Thanks @tkraftner for reporting this.
+* Fixed issue where the REST API url was not being fetched correctly in the plugin settings for WP installations that had prefixed, or "relocated", the REST API. Thanks Mike for reporting this issue.
+* Fix minor error due to missing attribute schema.
 
 = 1.6.0 - 2021-03-21 =
 
@@ -178,7 +180,7 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 **Fixed**
 
-* Fixed PHP error triggered by missing hideBlock attribute setting. (Thanks @muppix for discovering this issue and opening a support ticket!)
+* Fixed PHP error triggered by missing hideBlock attribute setting. Thanks @muppix for discovering this issue and opening a support ticket!
 
 = 1.5.2 - 2021-03-06 =
 
@@ -196,7 +198,7 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 **Fixed**
 
-* Fixed error where plugin settings were not being fetched from the REST api as expected. This issue impacted websites that had WordPress installed in a subdirectory. (Thanks @elenasaygo for discovering this issue and opening a support ticket!)
+* Fixed error where plugin settings were not being fetched from the REST api as expected. This issue impacted websites that had WordPress installed in a subdirectory. Thanks @elenasaygo for discovering this issue and opening a support ticket!
 * Fixed logic in the `get_current_user_role()` so no errors are thrown when WordPress installed in a subdirectory.
 
 = 1.5.0 - 2021-02-22 =
@@ -300,7 +302,7 @@ This is an unfortunate issue that will occur only once. We apologize for any inc
 = 1.2.0 - 2020-11-15 =
 **Added**
 
-* Added the ability to "hide on selected roles" in the Restrict by User Roles visibility control (Thanks to @edwardsh for the feature request!)
+* Added the ability to "hide on selected roles" in the Restrict by User Roles visibility control Thanks to @edwardsh for the feature request!
 
 = 1.1.0 - 2020-11-05 =
 **Added**

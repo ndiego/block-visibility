@@ -43,9 +43,9 @@ function Settings() {
 		// Generic fetch function to retrieve settings and variables on render.
 		async function fetchData( route, setData ) {
 			setStatus( 'fetching' );
-
+			
 			// blockVisibilityHomeUrl is provided by wp_add_inline_script.
-			const fetchUrl = `${ blockVisibilityHomeUrl }/wp-json/block-visibility/v1/${ route }`; // eslint-disable-line
+			const fetchUrl = `${ blockVisibilityRestUrl }block-visibility/v1/${ route }`; // eslint-disable-line
 			const response = await fetch( fetchUrl, { method: 'GET' } ); // eslint-disable-line
 
 			if ( response.ok ) {

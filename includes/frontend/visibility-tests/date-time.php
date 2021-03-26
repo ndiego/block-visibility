@@ -1,6 +1,6 @@
 <?php
 /**
- * Adds a filter to the visibility test for "date and time" setting.
+ * Adds a filter to the visibility test for Date & Time control.
  *
  * @package block-visibility
  * @since   1.1.0

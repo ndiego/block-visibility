@@ -23,8 +23,8 @@ export default function UserRoles( props ) {
 	const hideOnRestrictedRoles = userRole?.hideOnRestrictedRoles ?? false;
 	const roles = variables?.userRoles ?? [];
 	const label = hideOnRestrictedRoles
-		? __( 'hidden', 'block-visibility' )
-		: __( 'visible', 'block-visibility' );
+		? __( 'Hide from all', 'block-visibility' )
+		: __( 'Only visible to', 'block-visibility' );
 
 		const options = [
 	  { value: 'chocolate', label: 'Chocolate' },
@@ -65,16 +65,6 @@ export default function UserRoles( props ) {
 				<div className="visibility-control__label">
 					{ __( 'Restricted User Roles', 'block-visibility' ) }
 				</div>
-				<div className="visibility-control__help">
-					{ sprintf(
-						// Translators: Whether the block is hidden or visible.
-						__(
-							'The block will be %s to all users with one of the selected roles.',
-							'block-visibility'
-						),
-						label
-					) }
-				</div>
 				 <Select
 				 	className="block-visibility__react-select"
 					classNamePrefix="react-select"
@@ -83,6 +73,16 @@ export default function UserRoles( props ) {
 					onChange={ ( value ) => handleOnChange( value ) }
 					isMulti
 				/>
+				<div className="visibility-control__help">
+					{ sprintf(
+						// Translators: Whether the block is hidden or visible.
+						__(
+							'%s users with at least one of the selected roles.',
+							'block-visibility'
+						),
+						label
+					) }
+				</div>
 			</div>
 			<div className="visibility-control hide-on-restricted-roles">
 				<ToggleControl

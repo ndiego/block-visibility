@@ -102,6 +102,15 @@ function register_settings() {
 						),
 					),
 				),
+				// Third-party Integrations
+				'wp_fusion'         => array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable' => array(
+							'type' => 'boolean',
+						),
+					),
+				),
 			),
 		),
 		'disabled_blocks'     => array(
