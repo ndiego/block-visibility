@@ -13,6 +13,7 @@ import { ToggleControl, Slot } from '@wordpress/components';
  * Internal dependencies
  */
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
+import ControlSeparator from './../utils/control-separator';
 
 /**
  * Add the screen size vsibility controls
@@ -73,62 +74,71 @@ export default function ScreenSize( props ) {
 	const extraSmall = hideOnScreenSize?.extraSmall ?? false;
 
 	return (
-		<div className="visibility-control__group screen-size-control">
-			<h3 className="visibility-control__group-heading">
-				{ __( 'Screen Size', 'block-visibility' ) }
-			</h3>
-			{ enableAdvancedControls && controls.extra_large && (
-				<ToggleControl
-					label={ __( 'Hide on large desktop', 'block-visibility' ) }
-					checked={ extraLarge }
-					onChange={ () => {
-						setAttribute( 'extraLarge', ! extraLarge );
-					} }
-				/>
-			) }
-			{ controls.large && (
-				<ToggleControl
-					label={ __( 'Hide on desktop', 'block-visibility' ) }
-					checked={ large }
-					onChange={ () => {
-						setAttribute( 'large', ! large );
-					} }
-				/>
-			) }
-			{ controls.medium && (
-				<ToggleControl
-					label={ __( 'Hide on tablet', 'block-visibility' ) }
-					checked={ medium }
-					onChange={ () => {
-						setAttribute( 'medium', ! medium );
-					} }
-				/>
-			) }
-			{ controls.small && (
-				<ToggleControl
-					label={ [
-						! enableAdvancedControls && 'Hide on mobile',
-						enableAdvancedControls && 'Hide on mobile (landscape)',
-					] }
-					checked={ small }
-					onChange={ () => {
-						setAttribute( 'small', ! small );
-					} }
-				/>
-			) }
-			{ enableAdvancedControls && controls.extra_small && (
-				<ToggleControl
-					label={ __(
-						'Hide on mobile (portrait)',
-						'block-visibility'
-					) }
-					checked={ extraSmall }
-					onChange={ () => {
-						setAttribute( 'extraSmall', ! extraSmall );
-					} }
-				/>
-			) }
-			<Slot name="ScreenSizeControls" />
-		</div>
+        <>
+    		<div className="visibility-control__group screen-size-control">
+    			<h3 className="visibility-control__group-heading">
+    				{ __( 'Screen Size', 'block-visibility' ) }
+    			</h3>
+    			{ enableAdvancedControls && controls.extra_large && (
+    				<ToggleControl
+    					label={ __(
+                            'Hide on large desktop',
+                            'block-visibility'
+                        ) }
+    					checked={ extraLarge }
+    					onChange={ () => {
+    						setAttribute( 'extraLarge', ! extraLarge );
+    					} }
+    				/>
+    			) }
+    			{ controls.large && (
+    				<ToggleControl
+    					label={ __( 'Hide on desktop', 'block-visibility' ) }
+    					checked={ large }
+    					onChange={ () => {
+    						setAttribute( 'large', ! large );
+    					} }
+    				/>
+    			) }
+    			{ controls.medium && (
+    				<ToggleControl
+    					label={ __( 'Hide on tablet', 'block-visibility' ) }
+    					checked={ medium }
+    					onChange={ () => {
+    						setAttribute( 'medium', ! medium );
+    					} }
+    				/>
+    			) }
+    			{ controls.small && (
+    				<ToggleControl
+    					label={ [
+    						! enableAdvancedControls && 'Hide on mobile',
+    						enableAdvancedControls && 'Hide on mobile (landscape)',
+    					] }
+    					checked={ small }
+    					onChange={ () => {
+    						setAttribute( 'small', ! small );
+    					} }
+    				/>
+    			) }
+    			{ enableAdvancedControls && controls.extra_small && (
+    				<ToggleControl
+    					label={ __(
+    						'Hide on mobile (portrait)',
+    						'block-visibility'
+    					) }
+    					checked={ extraSmall }
+    					onChange={ () => {
+    						setAttribute( 'extraSmall', ! extraSmall );
+    					} }
+    				/>
+    			) }
+    			<Slot name="ScreenSizeControls" />
+    		</div>
+            <ControlSeparator
+                controlSetAtts={ controlSetAtts }
+                control="screenSize"
+            />
+        </>
 	);
 }

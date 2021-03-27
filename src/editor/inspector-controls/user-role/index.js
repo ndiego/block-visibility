@@ -14,6 +14,7 @@ import { createInterpolateElement } from '@wordpress/element';
  * Internal dependencies
  */
 import UserRoles from './user-roles';
+import ControlSeparator from './../utils/control-separator';
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
 
 /**
@@ -95,54 +96,60 @@ export default function UserRole( props ) {
 	}
 
 	return (
-		<div className="visibility-control__group user-role-control">
-			<h3 className="visibility-control__group-heading">
-				{ __( 'User Role', 'block-visibility' ) }
-			</h3>
-			<div className="visibility-control visibility-by-role">
-				<RadioControl
-					className="compound-radio-control"
-					selected={ visibilityByRole }
-					options={ options }
-					onChange={ ( value ) =>
-						setControlAtts(
-							'userRole',
-							assign(
-								{ ...userRole },
-								{ visibilityByRole: value }
+		<>
+			<div className="visibility-control__group user-role-control">
+				<h3 className="visibility-control__group-heading">
+					{ __( 'User Role', 'block-visibility' ) }
+				</h3>
+				<div className="visibility-control visibility-by-role">
+					<RadioControl
+						className="compound-radio-control"
+						selected={ visibilityByRole }
+						options={ options }
+						onChange={ ( value ) =>
+							setControlAtts(
+								'userRole',
+								assign(
+									{ ...userRole },
+									{ visibilityByRole: value }
+								)
 							)
-						)
-					}
-				/>
-			</div>
-			{ visibilityByRole === 'user-role' && enableUserRoles && (
-				<UserRoles
-					variables={ variables }
-					userRole={ userRole }
-					setControlAtts={ setControlAtts }
-					{ ...props }
-				/>
-			) }
-			{ visibilityByRole === 'user-role' && ! enableUserRoles && (
-				<Notice status="warning" isDismissible={ false }>
-					{ createInterpolateElement(
-						__(
-							'The User Role option was previously selected, but is now disabled. Choose another option or update the <a>Visibility Control</a> settings.',
-							'block-visibility'
-						),
-						{
-							a: (
-								<a // eslint-disable-line
-									href={ settingsUrl }
-									target="_blank"
-									rel="noreferrer"
-								/>
-							),
 						}
-					) }
-				</Notice>
-			) }
-			<Slot name="VisibilityByRoleControls" />
-		</div>
+					/>
+				</div>
+				{ visibilityByRole === 'user-role' && enableUserRoles && (
+					<UserRoles
+						variables={ variables }
+						userRole={ userRole }
+						setControlAtts={ setControlAtts }
+						{ ...props }
+					/>
+				) }
+				{ visibilityByRole === 'user-role' && ! enableUserRoles && (
+					<Notice status="warning" isDismissible={ false }>
+						{ createInterpolateElement(
+							__(
+								'The User Role option was previously selected, but is now disabled. Choose another option or update the <a>Visibility Control</a> settings.',
+								'block-visibility'
+							),
+							{
+								a: (
+									<a // eslint-disable-line
+										href={ settingsUrl }
+										target="_blank"
+										rel="noreferrer"
+									/>
+								),
+							}
+						) }
+					</Notice>
+				) }
+				<Slot name="VisibilityByRoleControls" />
+			</div>
+			<ControlSeparator
+				controlSetAtts={ controlSetAtts }
+				control="userRole"
+			/>
+		</>
 	);
 }

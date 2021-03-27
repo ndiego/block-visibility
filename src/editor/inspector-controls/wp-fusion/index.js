@@ -8,8 +8,16 @@ import Select from 'react-select';
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
-import { ToggleControl, Slot, Disabled, Notice } from '@wordpress/components';
+import {
+    Button,
+    Disabled,
+    Notice,
+    Popover,
+    Slot,
+    ToggleControl,
+} from '@wordpress/components';
 import { Icon, info } from '@wordpress/icons';
+import { useState } from '@wordpress/element';
 import { createInterpolateElement } from '@wordpress/element';
 
 /**
@@ -17,6 +25,7 @@ import { createInterpolateElement } from '@wordpress/element';
  */
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
 import icons from './../../../utils/icons';
+import ControlSeparator from './../utils/control-separator';
 
 /**
  * Add the screen size vsibility controls
@@ -27,10 +36,8 @@ import icons from './../../../utils/icons';
  * @return {string}		 Return the rendered JSX
  */
 export default function WPFusion( props ) {
+    const [ tipsPopoverOpen, setTipsPopoverOpen ] = useState( false );
 	const { settings, variables, enabledControls, controlSetAtts, setControlAtts } = props;
-
-    console.log( controlSetAtts );
-
 	const controlEnabled = enabledControls.includes( 'wp_fusion' );
 	const controlToggledOn =
 		controlSetAtts?.controls.hasOwnProperty( 'wpFusion' ) ?? false;
@@ -44,10 +51,9 @@ export default function WPFusion( props ) {
         controlSetAtts?.controls?.userRole?.visibilityByRole ?? 'public';
     const hideAnyAll = userRoles === 'public' || userRoles === 'logged-out';
 
-    console.log( hasUserRoles );
-
     const availableTags = variables?.integrations?.wpFusion?.tags ?? [];
 
+    // Concert array of tag value to array of tag objects with values and labels.
     const convertTags = ( tags ) => {
         const selectedTags = availableTags.filter(
             ( tag ) => tags.includes( tag.value )
@@ -68,7 +74,7 @@ export default function WPFusion( props ) {
 				newTags.push( tag.value );
 			} );
 		}
-        console.log( newTags );
+
         setControlAtts(
             'wpFusion',
             assign(
@@ -114,7 +120,7 @@ export default function WPFusion( props ) {
                 <div className="visibility-control__help">
                     { createInterpolateElement(
                         __(
-                            'Only visible to logged-in users with <strong>all</strong> selected tags.',
+                            'Only visible to logged-in users with <strong>all</strong> of the selected tags.',
                             'block-visibility'
                         ),
                         {
@@ -157,28 +163,51 @@ export default function WPFusion( props ) {
     }
 
 	return (
-		<div className="visibility-control__group wp-fusion-control">
-			<h3 className="visibility-control__group-heading has-icon">
-				<span>{ __( 'WP Fusion', 'block-visibility' ) }</span>
-                <Icon icon={ icons.wpFusion } />
-			</h3>
-            <div className="visibility-control__help">
-                { __(
-                    'Configure block visibility based on WP Fusion tags. The available fields depend on the User Role control settings.',
-                    'block-visibility'
+        <>
+    		<div className="visibility-control__group wp-fusion-control">
+    			<h3 className="visibility-control__group-heading has-icon">
+    				<span>
+                        { __( 'WP Fusion', 'block-visibility' ) }
+                        <Button
+                            label={ __( 'Wp Fusion Tips', 'block-visibility' ) }
+                            icon={ info }
+                            className="control-tips"
+                            onClick={ () =>
+                                setTipsPopoverOpen( ( open ) => ! open )
+                            }
+                            isSmall
+                        />
+                        { tipsPopoverOpen && (
+                            <Popover
+                                className="block-visibility__control-popover tips"
+                                focusOnMount="container"
+                                onClose={ () => setTipsPopoverOpen( false ) }
+                            >
+                                { __(
+                                    'Configure block visibility based on WP Fusion tags. The available fields depend on the User Role control settings.',
+                                    'block-visibility'
+                                ) }
+                            </Popover>
+                        ) }
+                    </span>
+                    <Icon icon={ icons.wpFusion } />
+    			</h3>
+                { anyAllFields }
+                { notField }
+    			<Slot name="WPFusionControls" />
+                { ! hasUserRoles && (
+                    <Notice status="warning" isDismissible={ false }>
+                        { __(
+                            'The WP Fusion control works best in coordination with the User Role control, which has been disabled. To re-enable, click the ellipsis icon above.',
+                            'block-visibility'
+                        ) }
+                    </Notice>
                 ) }
-            </div>
-            { anyAllFields }
-            { notField }
-			<Slot name="WPFusionControls" />
-            { ! hasUserRoles && (
-                <Notice status="warning" isDismissible={ false }>
-                    { __(
-                        'The WP Fusion control works best in coordination with the User Role control. To re-enable, click the ellipsis icon above.',
-                        'block-visibility'
-                    ) }
-                </Notice>
-            ) }
-		</div>
+    		</div>
+            <ControlSeparator
+                controlSetAtts={ controlSetAtts }
+                control="wpFusion"
+            />
+        </>
 	);
 }

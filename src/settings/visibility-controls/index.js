@@ -28,7 +28,7 @@ export default function VisibilityControls( props ) {
 		props.visibilityControls
 	);
 	const [ hasUpdates, setHasUpdates ] = useState( false );
-	const { handleSettingsChange, saveStatus } = props;
+	const { variables, handleSettingsChange, saveStatus } = props;
 
 	function onSettingsChange() {
 		handleSettingsChange( 'visibility_controls', visibilityControls );
@@ -89,6 +89,7 @@ export default function VisibilityControls( props ) {
 			<Slot name="VisibilityControlsMiddle" />
 			<Integrations
 				settings={ visibilityControls }
+				variables={ variables }
 				setSettings={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }
 			/>

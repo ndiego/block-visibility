@@ -9,6 +9,7 @@ import { Slot } from '@wordpress/components';
  */
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
 import Scheduling from './scheduling';
+import ControlSeparator from './../utils/control-separator';
 
 /**
  * Add the date/time vsibility controls
@@ -36,14 +37,20 @@ export default function DateTime( props ) {
 	);
 
 	return (
-		<div className="visibility-control__group date-time-control">
-			<h3 className="visibility-control__group-heading">
-				{ __( 'Date & Time', 'block-visibility' ) }
-			</h3>
-			{ enableScheduling && (
-				<Scheduling dateTime={ dateTime } { ...props } />
-			) }
-			<Slot name="DateTimeControls" />
-		</div>
+		<>
+			<div className="visibility-control__group date-time-control">
+				<h3 className="visibility-control__group-heading">
+					{ __( 'Date & Time', 'block-visibility' ) }
+				</h3>
+				{ enableScheduling && (
+					<Scheduling dateTime={ dateTime } { ...props } />
+				) }
+				<Slot name="DateTimeControls" />
+			</div>
+			<ControlSeparator
+				controlSetAtts={ controlSetAtts }
+				control="dateTime"
+			/>
+		</>
 	);
 }

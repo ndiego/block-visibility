@@ -100,6 +100,7 @@ add_filter( 'render_block', __NAMESPACE__ . '\render_with_visibility', 10, 2 );
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/hide-block.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/user-role.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/date-time.php';
+require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/query-string.php';
 
 // run our integraiton tests.
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/wp-fusion.php';

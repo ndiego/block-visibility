@@ -165,6 +165,7 @@ function Settings() {
 						case 'visibility-controls':
 							return (
 								<VisibilityControls
+									variables={ variables }
 									saveStatus={ saveStatus }
 									handleSettingsChange={
 										handleSettingsChange

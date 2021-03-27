@@ -51,7 +51,7 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
         }
     }
 
-    .logic-operator {
+    .control-separator {
         text-align: center;
         display: flex;
         flex-direction: row;
@@ -89,7 +89,7 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
             align-items: center;
             justify-content: space-between;
 
-            svg {
+            &>svg {
                 width: 16px;
             }
         }
@@ -115,11 +115,21 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
         margin-bottom: 8px;
     }
 
+    .components-base-control__help {
+        strong {
+            font-weight: 700;
+        }
+    }
+
     .visibility-control__help {
         font-size: 12px;
         font-style: normal;
         color: rgb(117, 117, 117);
         margin-bottom: 12px;
+
+        strong {
+            font-weight: 700;
+        }
     }
 
     /* Specific styling for radion controls with help text */
@@ -205,6 +215,13 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
                 display: inline-block;
                 margin: 4px 0 0;
             }
+        }
+    }
+
+    /* Specific styles for the Query String visibility control */
+    .query-string-control {
+        textarea {
+            white-space: nowrap;
         }
     }
 }

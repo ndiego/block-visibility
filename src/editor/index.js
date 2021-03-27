@@ -155,6 +155,23 @@ function blockVisibilityAttributes( settings ) {
 											},
 										},
 									},
+									queryString: {
+										type: 'object',
+										properties: {
+											enable: {
+												type: 'boolean',
+											},
+											queryStringAny: {
+												type: 'string',
+											},
+											queryStringAll: {
+												type: 'string',
+											},
+											queryStringNot: {
+												type: 'string',
+											},
+										},
+									},
 									// Integrations
 									wpFusion: {
 										type: 'object',
@@ -165,19 +182,19 @@ function blockVisibilityAttributes( settings ) {
 											tagsAny: {
 												type: 'array',
 												items: {
-													type: 'string',
+													type: [ 'number', 'string' ],
 												},
 											},
 											tagsAll: {
 												type: 'array',
 												items: {
-													type: 'string',
+													type: [ 'number', 'string' ],
 												},
 											},
 											tagsNot: {
 												type: 'array',
 												items: {
-													type: 'string',
+													type: [ 'number', 'string' ],
 												},
 											},
 										},

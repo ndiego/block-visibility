@@ -36,11 +36,9 @@ function wp_fusion_test( $is_visible, $settings, $attributes ) {
  	}
 
     // If this control has been disabled, skip test.
-    /*
-    if ( ! is_control_enabled( $settings, 'hide_block' ) ) {
+    if ( ! is_control_enabled( $settings, 'wp_fusion' ) ) {
         return true;
     }
-    */
 
     $has_control_sets = isset( $attributes['controlSets'] );
 

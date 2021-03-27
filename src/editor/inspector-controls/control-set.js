@@ -28,6 +28,7 @@ import { Icon, moreHorizontalMobile, check, info } from '@wordpress/icons';
 import UserRole from './user-role';
 import DateTime from './date-time';
 import ScreenSize from './screen-size';
+import QueryString from './query-string';
 import WPFusion from './wp-fusion';
 import {
 	NoticeBlockControlsDisabled,
@@ -80,6 +81,12 @@ export default function ControlSet( props ) {
 			name: __( 'Screen Size', 'block-visibility' ),
 			active: controlSetAtts?.controls.hasOwnProperty( 'screenSize' ),
 			enable: enabledControls.includes( 'screen_size' ),
+		},
+		{
+			slug: 'queryString',
+			name: __( 'Query String', 'block-visibility' ),
+			active: controlSetAtts?.controls.hasOwnProperty( 'queryString' ),
+			enable: enabledControls.includes( 'query_string' ),
 		},
 		{
 			slug: 'wpFusion',
@@ -218,7 +225,6 @@ export default function ControlSet( props ) {
 				controlSetAtts={ controlSetAtts }
 				{ ...props }
 			/>
-			<div className="logic-operator"><span>AND</span></div>
 			<UserRole
 				settings={ settings }
 				variables={ variables }
@@ -227,18 +233,24 @@ export default function ControlSet( props ) {
 				controlSetAtts={ controlSetAtts }
 				{ ...props }
 			/>
-			<div className="logic-operator"><span>AND</span></div>
-			<WPFusion
+			<ScreenSize
 				settings={ settings }
-				variables={ variables }
 				enabledControls={ enabledControls }
 				setControlAtts={ setControlAtts }
 				controlSetAtts={ controlSetAtts }
 				{ ...props }
 			/>
-			<div className="logic-operator"><span>AND</span></div>
-			<ScreenSize
+			<QueryString
 				settings={ settings }
+				enabledControls={ enabledControls }
+				setControlAtts={ setControlAtts }
+				controlSetAtts={ controlSetAtts }
+				{ ...props }
+			/>
+			<Slot name="ControlSetControlsMiddle" />
+			<WPFusion
+				settings={ settings }
+				variables={ variables }
 				enabledControls={ enabledControls }
 				setControlAtts={ setControlAtts }
 				controlSetAtts={ controlSetAtts }

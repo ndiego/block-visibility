@@ -17,7 +17,11 @@ export function getEnabledControls( settings ) {
 		'visibility_by_role',
 		'date_time',
 		'screen_size',
+		'query_string',
 		// Add additional controls here.
+
+		// integrations
+		'wp_fusion',
 	];
 	const enabledControls = [];
 
