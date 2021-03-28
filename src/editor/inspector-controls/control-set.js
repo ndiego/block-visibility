@@ -54,13 +54,18 @@ export default function ControlSet( props ) {
 		blockAtts,
 		controlSetAtts,
 	} = props;
-	const settingsUrl = variables?.pluginVariables.settingsUrl ?? ''; // eslint-disable-line
+	const settingsUrl = variables?.pluginVariables?.settingsUrl ?? '';
 	const noControls =
 		enabledControls.length === 1 &&
 		enabledControls.includes( 'hide_block' );
 
 	if ( noControls ) {
 		return null;
+	}
+
+	const isPluginActive = ( plugin ) => {
+		const isActive = variables?.integrations[ plugin ]?.active ?? false;
+		return isActive;
 	}
 
 	let controls = [
@@ -93,7 +98,8 @@ export default function ControlSet( props ) {
 			name: __( 'WP Fusion', 'block-visibility' ),
 			icon: icons.wpFusion,
 			active: controlSetAtts?.controls.hasOwnProperty( 'wpFusion' ),
-			enable: enabledControls.includes( 'wp_fusion' ),
+			enable: enabledControls.includes( 'wp_fusion' )
+				&& isPluginActive( 'wpFusion' ),
 		},
 	];
 

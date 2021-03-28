@@ -161,7 +161,7 @@ function BlockManager( props ) {
 							'To learn more about the Block Manager, review the plugin documentation using the link below.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/documentation/block-manager/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link="https://www.blockvisibilitywp.com/documentation/block-manager/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
 				<SaveSettings

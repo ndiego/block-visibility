@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Notice } from '@wordpress/components';
+import { Notice, ExternalLink, Flex, FlexBlock, FlexItem } from '@wordpress/components';
 import { createInterpolateElement } from '@wordpress/element';
 
 /**
@@ -61,7 +61,7 @@ export function NoticeBlockControlsDisabled() {
 /**
  * Helper function for printing control set tips.
  *
- * @since 1.5.0
+ * @since 1.6.0
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
@@ -119,6 +119,201 @@ export function TipControlSet( props ) {
 					</li>
 				) }
 			</ol>
+		</>
+	);
+}
+
+/**
+ * Helper function for printing the Query String control tips.
+ *
+ * @since 1.7.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
+export function TipQueryString( props ) {
+	return (
+		<>
+            <h3>{ __( 'Query String', 'block-visibility' ) }</h3>
+            <p>
+                { __(
+                    'Configure block visibility based on URL query strings.',
+                    'block-visibility'
+                ) }
+            </p>
+            <div className="usage">
+                <h4>
+                    { __(
+                        'Usage',
+                        'block-visibility'
+                    ) }
+                </h4>
+                <p>
+                    { __(
+                        'In order for the Query String control to work properly, only add one query string per line in each textbox. The following three formats are accepted.',
+                        'block-visibility'
+                    ) }
+                </p>
+                <Flex>
+                    <FlexItem>
+                        <code>param=value</code>
+                    </FlexItem>
+                    <FlexBlock>
+                    { __(
+                        'Query parameter with a specific value.',
+                        'block-visibility'
+                    ) }
+                    </FlexBlock>
+                </Flex>
+                <Flex>
+                    <FlexItem>
+                        <code>param=*</code>
+                    </FlexItem>
+                    <FlexBlock>
+                    { __(
+                        'Query parameter with a wildcard value. (i.e. the value could be anything)',
+                        'block-visibility'
+                    ) }
+                    </FlexBlock>
+                </Flex>
+                <Flex>
+                    <FlexItem>
+                        <code>param</code>
+                    </FlexItem>
+                    <FlexBlock>
+                    { __(
+                        'Query parameter with no value. Operates the same as a wildcard value.',
+                        'block-visibility'
+                    ) }
+                    </FlexBlock>
+                </Flex>
+            </div>
+            <h4>
+                { __(
+                    'Required Queries (Any)',
+                    'block-visibility'
+                ) }
+            </h4>
+            <p>
+                { __(
+                    'The block will only be shown if if the URL has at least one of the provided query strings.',
+                    'block-visibility'
+                ) }
+            </p>
+            <h4>
+                { __(
+                    'Required Queries (All)',
+                    'block-visibility'
+                ) }
+            </h4>
+            <p>
+                { __(
+                    'The block will only be shown if the URL, at a minimum, has all of the provided query strings. It could have more.',
+                    'block-visibility'
+                ) }
+            </p>
+            <h4>
+                { __(
+                    'Required Queries (Not)',
+                    'block-visibility'
+                ) }
+            </h4>
+            <p>
+                { __(
+                    'The block will be hidden whenever at least one of the provided query strings is present in the URL. The "Not" queries take precedent over all other queries.',
+                    'block-visibility'
+                ) }
+            </p>
+            <p className="learn-more">
+                { createInterpolateElement(
+                    __(
+                        'To learn more, visit the plugin <a>Knowledge Base</a>.',
+                        'block-visibility'
+                    ),
+                    {
+                        a: (
+                            <ExternalLink // eslint-disable-line
+                                href={ 'https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/query-string/?bv_query=learn_more' }
+                                target="_blank"
+                                rel="noreferrer"
+                            />
+                        ),
+                    }
+                ) }
+            </p>
+		</>
+	);
+}
+
+/**
+ * Helper function for printing the WP Fusion control tips.
+ *
+ * @since 1.7.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
+export function TipWPFusion( props ) {
+	return (
+		<>
+            <h3>{ __( 'WP Fusion', 'block-visibility' ) }</h3>
+            <p>
+                { __(
+                    'Configure block visibility based on WP Fusion tags. Note that the available fields depend on the User Role control settings. If the User Role control is disabled, only the Required Tags (Not) field will be available.',
+                    'block-visibility'
+                ) }
+            </p>
+            <h4>
+                { __(
+                    'Required Tags (Any)',
+                    'block-visibility'
+                ) }
+            </h4>
+            <p>
+                { __(
+                    'The block will only be shown if the user is logged-in and has at least one of the selected tags. This field is disabled if the User Role control is set to Public, Logged-out or is disabled.',
+                    'block-visibility'
+                ) }
+            </p>
+            <h4>
+                { __(
+                    'Required Tags (All)',
+                    'block-visibility'
+                ) }
+            </h4>
+            <p>
+                { __(
+                    'The block will only be shown if the user is logged-in and, at a minimum, has all of the selected tags. They could have more. This field is disabled if the User Role control is set to Public, Logged-out, or is disabled.',
+                    'block-visibility'
+                ) }
+            </p>
+            <h4>
+                { __(
+                    'Required Tags (Not)',
+                    'block-visibility'
+                ) }
+            </h4>
+            <p>
+                { __(
+                    'The block will be hidden from logged-in users if they have at least-one of the selected tags. If the User Role control is set to Public, or is disabled, the block will still display to logged-out users. This field is disabled if the User Role control is set to Logged-out.',
+                    'block-visibility'
+                ) }
+            </p>
+            <p class="learn-more">
+                { createInterpolateElement(
+                    __(
+                        'To learn more, visit the plugin <a>Knowledge Base</a>.',
+                        'block-visibility'
+                    ),
+                    {
+                        a: (
+                            <ExternalLink // eslint-disable-line
+                                href={ 'https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/wp-fusion/?bv_query=learn_more' }
+                                target="_blank"
+                                rel="noreferrer"
+                            />
+                        ),
+                    }
+                ) }
+            </p>
 		</>
 	);
 }

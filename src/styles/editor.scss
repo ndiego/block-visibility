@@ -55,7 +55,7 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
         text-align: center;
         display: flex;
         flex-direction: row;
-        padding: 12px 50px 20px;
+        padding: 10px 50px 20px;
 
         &:before,
         &:after {
@@ -63,6 +63,11 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
             flex: 1 1;
             border-bottom: 1px solid #e0e0e0;
             margin: auto;
+        }
+
+        // Corrects for third-party integration if they are deactivated.
+        &:last-child {
+            display: none;
         }
 
         span {
@@ -220,6 +225,10 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
 
     /* Specific styles for the Query String visibility control */
     .query-string-control {
+        .visibility-control__help {
+            margin-bottom: 18px;
+        }
+
         textarea {
             white-space: nowrap;
         }
@@ -252,9 +261,29 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
     &.tips>div {
         min-width: 400px;
         padding: 24px;
+        cursor: default;
 
         h3 {
             margin-top: 0;
+        }
+
+        h4 {
+            margin-bottom: .75em;
+        }
+
+        p {
+            margin-top: 0;
+
+            &.learn-more {
+                border-top: 1px solid #e0e0e0;
+                padding-top: 1.25em;
+                margin-top: 2em;
+                margin-bottom: 0;
+            }
+        }
+
+        code {
+            margin-right: 8px;
         }
 
         ol {
@@ -273,6 +302,20 @@ $icon__screen-roles-date: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org
             &::marker {
                 font-weight: bold;
                 font-size: 14px;
+            }
+        }
+
+        .usage {
+            .components-flex {
+                margin-bottom: 1em;
+            }
+
+            .components-flex__item {
+                min-width: auto;
+
+                &:first-child {
+                    min-width: 100px;
+                }
             }
         }
     }

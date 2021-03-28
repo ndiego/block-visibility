@@ -18,12 +18,12 @@ export default function Footer( props ) {
 	const links = {
 		plugin: {
 			title: __( 'Block Visibility', 'block-visibility' ) + ' ' + pluginVariables.version, // eslint-disable-line
-			url: 'https://www.blockvisibilitywp.com/?utm_source=block_visibility&utm_medium=plugin&utm_campaign=settings_page', // eslint-disable-line
+			url: 'https://www.blockvisibilitywp.com/?bv_query=settings&utm_source=block_visibility&utm_medium=plugin&utm_campaign=settings_page', // eslint-disable-line
 			rel: 'external',
 		},
 		docs: {
 			title: __( 'Knowledge Base', 'block-visibility' ),
-			url: 'https://www.blockvisibilitywp.com/knowledge-base/?utm_source=block_visibility&utm_medium=plugin&utm_campaign=settings_page', // eslint-disable-line
+			url: 'https://www.blockvisibilitywp.com/knowledge-base/?bv_query=settings&utm_source=block_visibility&utm_medium=plugin&utm_campaign=settings_page', // eslint-disable-line
 			rel: 'external',
 		},
 		support: {

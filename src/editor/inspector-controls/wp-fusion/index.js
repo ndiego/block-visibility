@@ -26,6 +26,7 @@ import { createInterpolateElement } from '@wordpress/element';
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
 import icons from './../../../utils/icons';
 import ControlSeparator from './../utils/control-separator';
+import { TipWPFusion } from './../utils/notices-tips';
 
 /**
  * Add the screen size vsibility controls
@@ -38,13 +39,18 @@ import ControlSeparator from './../utils/control-separator';
 export default function WPFusion( props ) {
     const [ tipsPopoverOpen, setTipsPopoverOpen ] = useState( false );
 	const { settings, variables, enabledControls, controlSetAtts, setControlAtts } = props;
+
+    const pluginActive = variables?.integrations?.wpFusion?.active ?? false;
 	const controlEnabled = enabledControls.includes( 'wp_fusion' );
 	const controlToggledOn =
 		controlSetAtts?.controls.hasOwnProperty( 'wpFusion' ) ?? false;
 
-	if ( ! controlEnabled || ! controlToggledOn ) {
+        console.log( variables );
+
+	if ( ! controlEnabled || ! controlToggledOn || ! pluginActive ) {
 		return null;
 	}
+    
     const hasUserRoles =
 		controlSetAtts?.controls.hasOwnProperty( 'userRole' ) ?? false;
     const userRoles =
@@ -183,10 +189,7 @@ export default function WPFusion( props ) {
                                 focusOnMount="container"
                                 onClose={ () => setTipsPopoverOpen( false ) }
                             >
-                                { __(
-                                    'Configure block visibility based on WP Fusion tags. The available fields depend on the User Role control settings.',
-                                    'block-visibility'
-                                ) }
+                                <TipWPFusion />
                             </Popover>
                         ) }
                     </span>

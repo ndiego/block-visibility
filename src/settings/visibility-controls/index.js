@@ -14,6 +14,7 @@ import HideBlock from './hide-block';
 import DateTime from './date-time';
 import UserRole from './user-role';
 import ScreenSize from './screen-size';
+import QueryString from './query-string';
 import Integrations from './integrations';
 
 /**
@@ -82,6 +83,11 @@ export default function VisibilityControls( props ) {
 				setHasUpdates={ setHasUpdates }
 			/>
 			<ScreenSize
+				settings={ visibilityControls }
+				setSettings={ setVisibilityControls }
+				setHasUpdates={ setHasUpdates }
+			/>
+			<QueryString
 				settings={ visibilityControls }
 				setSettings={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }

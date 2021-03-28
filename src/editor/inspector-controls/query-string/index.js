@@ -18,6 +18,7 @@ import { info } from '@wordpress/icons';
  */
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
 import ControlSeparator from './../utils/control-separator';
+import { TipQueryString } from './../utils/notices-tips';
 
 /**
  * Add the screen size vsibility controls
@@ -74,10 +75,16 @@ export default function QueryString( props ) {
                             focusOnMount="container"
                             onClose={ () => setTipsPopoverOpen( false ) }
                         >
-                            Some Text
+                            <TipQueryString />
                         </Popover>
                     ) }
     			</h3>
+                <div className="visibility-control__help">
+                    { __(
+                        'Enter one URL query string per line.',
+                        'block-visibility'
+                    ) }
+                </div>
                 <TextareaControl
                     label="Required Queries (Any)"
                     help={ __(

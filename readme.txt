@@ -1,5 +1,5 @@
 === Block Visibility — Conditional Visibility Controls for all Blocks ===
-Author URI: https://www.nickdiego.com
+Author URI: https://www.nickdiego.com/?bv_query=readme
 Contributors: ndiego, outermostdesign
 Tags: visibility, schedule blocks, hide blocks, conditional blocks, restrict blocks
 Requires at least: 5.5
@@ -27,6 +27,12 @@ Visibility controls determine whether a block should be visible to users on the 
 * Only show blocks to **logged-in** users
 * Only show blocks to **logged-out** users
 * Only show blocks to users with **specific roles** (Administrator, Subscriber, Customer, Member etc.)
+* Show or hide dynamic blocks based on **URL query strings**. Great for marketing campaigns!
+
+==== Third-Party Integrations ====
+
+* **WP Fusion:** Combine Block Visibility with the power of [WP Fusion](https://wordpress.org/plugins/wp-fusion-lite/) to conditionally show or hide content based on data from your favorite CRM or marketing automation platform.
+* More to come...
 
 Have an idea for additional block logic? Let us know in the plugin support forum.
 
@@ -73,6 +79,7 @@ Block Visibility is designed to work with **any** block and has been tested with
 * Getwid
 * EditorsKit
 * Genesis Blocks
+* WP Fusion
 
 Find an issue? Let us know in the plugin support forum and we will investigate ASAP. Excellent compatibility with the greater WordPress block ecosystem is our top priority.
 
@@ -86,8 +93,8 @@ https://www.youtube.com/watch?v=DdDwQCE7RNE
 
 Stay up-to-date on Block Visibility using the links below. The plugin is also being developed transparently on GitHub, so give it a star and follow along!
 
-* [Plugin Website](https://www.blockvisibilitywp.com/?utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
-* [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
+* [Plugin Website](https://www.blockvisibilitywp.com/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
+* [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
 * [Follow on Twitter](https://twitter.com/BlockVisibility)
 * [View on GitHub](https://github.com/ndiego/block-visibility)
 
@@ -138,18 +145,21 @@ As of version 1.4.0, Block Visibility is supported in the Site Editor, which is 
 No. Block Visibility was design specifically for the WordPress Block (Gutenberg) Editor, and therefore does no work on pages that are controlled by the Elementor editor. There are other visibility logic plugins in the WordPress.org repository designed specifically for Elementor.
 
 = Is block visibility controlled using CSS? =
-Visibility is controlled primarily on the server, so if a block should be hidden based on the set block controls, it will not even be rendered. This ensures the plugin does not load any additional resources on the frontend of your site, thereby optimizing performance. The **one exception** to this is the Screen Size block controls. Visibility by screen size requires the use of CSS, which is loaded to the frontend of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary yourself. Visit the plugin [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) to learn more.
+Visibility is controlled primarily on the server, so if a block should be hidden based on the set block controls, it will not even be rendered. This ensures the plugin does not load any additional resources on the frontend of your site, thereby optimizing performance. The **one exception** to this is the Screen Size block controls. Visibility by screen size requires the use of CSS, which is loaded to the frontend of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary yourself. Visit the plugin [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) to learn more.
 
 == Changelog ==
 
-= 1.7.0 - TBD =
+= 1.7.0 - 2021-03-29 =
 
 **Added**
 
-* Added `react-select` for all multi-select fields.
+* Added the WP Fusion control, the first third-party integration for Block Visibility! 🎉
+* Added the Query String control, significantly increasing the marketing capabilities of Block Visibility! 🎉
+* Added `react-select` as a project dependency for all multi-select fields.
 
 **Changed**
 
+* Updated control set UI when multiple controls are enabled to emphasize that all control conditions need to be satisfied for the block to be visible.
 * The "Restricted User Roles" setting now uses `react-select` for a cleaner user interface.
 
 **Fixed**
