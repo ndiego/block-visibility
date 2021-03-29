@@ -250,7 +250,7 @@ export function TipWPFusion() {
 			<h4>{ __( 'Required Tags (Any)', 'block-visibility' ) }</h4>
 			<p>
 				{ __(
-					'The block will only be shown if the user is logged-in and has at least one of the selected tags. This field is disabled if the User Role control is set to Public, Logged-out or is disabled.',
+					'The block will only be shown if the user is logged-in and has at least one of the selected tags. This field is disabled if the User Role control is set to Public, Logged-out, or is disabled.',
 					'block-visibility'
 				) }
 			</p>

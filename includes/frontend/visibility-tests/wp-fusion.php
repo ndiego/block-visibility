@@ -61,7 +61,7 @@ function wp_fusion_test( $is_visible, $settings, $attributes ) {
 		? $user_role_atts['visibilityByRole']
 		: 'public';
 
-	// The block is to be shown only to logged-out users, so the WP Fusion
+	// If the block is to be shown only to logged-out users, so the WP Fusion
 	// control does not apply, skip tests.
 	if ( 'logged-out' === $visibility_by_role ) {
 		return true;
@@ -83,7 +83,7 @@ function wp_fusion_test( $is_visible, $settings, $attributes ) {
 	}
 
 	// In WP Fusion the "exclude admins" option has been selected and the current user is an admin, so skip tests.
-	if ( true === wp_fusion()->settings->get( 'exclude_admins' ) && current_user_can( 'manage_options' ) ) {
+	if ( wp_fusion()->settings->get( 'exclude_admins' ) && current_user_can( 'manage_options' ) ) {
 		return true;
 	}
 
@@ -108,7 +108,7 @@ function wp_fusion_test( $is_visible, $settings, $attributes ) {
 				}
 			}
 
-			if ( ! empty( $widget_tags_all ) ) {
+			if ( ! empty( $tags_all ) ) {
 
 				// Required tags (all).
 				$result = array_intersect( $tags_all, $user_tags );

@@ -161,6 +161,7 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 * Updated control set UI when multiple controls are enabled to emphasize that all control conditions need to be satisfied for the block to be visible.
 * The "Restricted User Roles" setting now uses `react-select` for a cleaner user interface.
+* Updated contextual indicator icons. A generic indicator is now displayed when more than 2 controls are enabled.
 
 **Fixed**
 
