@@ -183,7 +183,7 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 			return $tags_for_select;
 		}
 
-		$available_tags  = wp_fusion()->settings->get( 'available_tags', array() );
+		$available_tags = wp_fusion()->settings->get( 'available_tags', array() );
 
 		foreach ( $available_tags as $tag_id => $tag ) {
 			if ( is_array( $tag ) ) {

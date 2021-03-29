@@ -8,7 +8,7 @@ import Select from 'react-select';
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
-import { CheckboxControl, ToggleControl, Slot } from '@wordpress/components';
+import { ToggleControl, Slot } from '@wordpress/components';
 
 /**
  * Add the User Roles control to the main Visibility By User Role control
@@ -25,25 +25,15 @@ export default function UserRoles( props ) {
 	const label = hideOnRestrictedRoles
 		? __( 'Hide from all', 'block-visibility' )
 		: __( 'Only visible to', 'block-visibility' );
-
-		const options = [
-	  { value: 'chocolate', label: 'Chocolate' },
-	  { value: 'strawberry', label: 'Strawberry' },
-	  { value: 'vanilla', label: 'Vanilla' }
-	]
-
-	const selectedRoles = roles.filter(
-		( role ) => restrictedRoles.includes( role.value )
+	const selectedRoles = roles.filter( ( role ) =>
+		restrictedRoles.includes( role.value )
 	);
 
-	// A very loose test to see if some previously saved restricted roles are no longer "available" roles on the website.
-	const missingRoles = restrictedRoles.length > selectedRoles.length;
+	const handleOnChange = ( _roles ) => {
+		const newRoles = [];
 
-	const handleOnChange = ( roles ) => {
-		let newRoles = [];
-
-		if ( roles.length != 0 ) {
-			roles.forEach( ( role ) => {
+		if ( _roles.length !== 0 ) {
+			_roles.forEach( ( role ) => {
 				newRoles.push( role.value );
 			} );
 		}
@@ -56,8 +46,8 @@ export default function UserRoles( props ) {
 					restrictedRoles: newRoles,
 				}
 			)
-		)
-	}
+		);
+	};
 
 	return (
 		<>
@@ -65,10 +55,10 @@ export default function UserRoles( props ) {
 				<div className="visibility-control__label">
 					{ __( 'Restricted User Roles', 'block-visibility' ) }
 				</div>
-				 <Select
-				 	className="block-visibility__react-select"
+				<Select
+					className="block-visibility__react-select"
 					classNamePrefix="react-select"
-				 	options={ roles }
+					options={ roles }
 					value={ selectedRoles }
 					onChange={ ( value ) => handleOnChange( value ) }
 					isMulti

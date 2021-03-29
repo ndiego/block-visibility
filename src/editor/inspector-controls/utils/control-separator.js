@@ -29,8 +29,8 @@ export default function ControlSeparator( props ) {
 		'wpFusion',
 	];
 
-	const activeControls = controlOrder.filter(
-		( _control ) => controls.hasOwnProperty( _control )
+	const activeControls = controlOrder.filter( ( _control ) =>
+		controls.hasOwnProperty( _control )
 	);
 
 	if (

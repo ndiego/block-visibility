@@ -46,11 +46,11 @@ export default function Footer( props ) {
 		const rel = links[ link ].rel ?? 'noreferrer';
 
 		return (
-			<a
+			<a // eslint-disable-line
 				key={ link }
 				href={ links[ link ].url }
 				className={ 'footer-links__' + link }
-				target="_blank" // eslint-disable-line
+				target="_blank"
 				rel={ rel }
 			>
 				{ links[ link ].title }

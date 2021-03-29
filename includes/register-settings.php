@@ -102,7 +102,7 @@ function register_settings() {
 						),
 					),
 				),
-				'query_string'         => array(
+				'query_string'       => array(
 					'type'       => 'object',
 					'properties' => array(
 						'enable' => array(
@@ -110,8 +110,8 @@ function register_settings() {
 						),
 					),
 				),
-				// Third-party Integrations
-				'wp_fusion'         => array(
+				// Third-party Integrations.
+				'wp_fusion'          => array(
 					'type'       => 'object',
 					'properties' => array(
 						'enable' => array(

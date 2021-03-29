@@ -182,19 +182,28 @@ function blockVisibilityAttributes( settings ) {
 											tagsAny: {
 												type: 'array',
 												items: {
-													type: [ 'number', 'string' ],
+													type: [
+														'number',
+														'string',
+													],
 												},
 											},
 											tagsAll: {
 												type: 'array',
 												items: {
-													type: [ 'number', 'string' ],
+													type: [
+														'number',
+														'string',
+													],
 												},
 											},
 											tagsNot: {
 												type: 'array',
 												items: {
-													type: [ 'number', 'string' ],
+													type: [
+														'number',
+														'string',
+													],
 												},
 											},
 										},

@@ -1,9 +1,9 @@
 <?php
 /**
- * Adds a filter to the visibility test for the Hide Block control.
+ * Adds a filter to the visibility test for the Query String control.
  *
  * @package block-visibility
- * @since   1.0.0
+ * @since   1.7.0
  */
 
 namespace BlockVisibility\Frontend\VisibilityTests;
@@ -15,31 +15,34 @@ defined( 'ABSPATH' ) || exit;
  */
 use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
 
-
-function prepareQueries( $queries ) {
+/**
+ * Turn a query string into an array.
+ *
+ * @since 1.7.0
+ *
+ * @param string $queries         A string of queries.
+ * @return array $ordered_queries An array of queries.
+ */
+function prepare_queries( $queries ) {
 	if ( empty( $queries ) ) {
 		return null;
 	}
 
 	$query_array = explode( "\n", $queries );
 
-	$orderedQueries =array();
+	$ordered_queries = array();
 
-	foreach( $query_array as $query ){
+	foreach ( $query_array as $query ) {
 		parse_str( $query, $result );
-		$orderedQueries = array_merge( $orderedQueries, $result );
+		$ordered_queries = array_merge( $ordered_queries, $result );
 	}
-	return $orderedQueries;
+	return $ordered_queries;
 }
 
 /**
- * Run test to see if the hide block setting is enabled for the block.
+ * Run test to see if block visibility should be restricted by query string.
  *
- * This test is applied at a priotity of 20 to try and ensure it goes last.
- * This should generally be the last test that is run and should override all
- * other tests.
- *
- * @since 1.0.0
+ * @since 1.7.0
  *
  * @param boolean $is_visible The current value of the visibility test.
  * @param array   $settings   The core plugin settings.
@@ -54,32 +57,31 @@ function query_string_test( $is_visible, $settings, $attributes ) {
 	}
 
 	// If this control has been disabled, skip test.
-    if ( ! is_control_enabled( $settings, 'query_string' ) ) {
-        return true;
-    }
+	if ( ! is_control_enabled( $settings, 'query_string' ) ) {
+		return true;
+	}
 
-    $has_control_sets = isset( $attributes['controlSets'] );
-	//echo print_r( $attributes['controlSets'] );
+	$has_control_sets = isset( $attributes['controlSets'] );
 
-    if ( $has_control_sets ) {
-        // Just retrieve the first set, need to update in future.
-        $query_string_atts =
-            isset( $attributes['controlSets'][0]['controls']['queryString'] )
-                ? $attributes['controlSets'][0]['controls']['queryString']
-                : null;
-    } else {
-        // There are no Query String settings, so skip tests.
-        return true;
-    }
+	if ( $has_control_sets ) {
+		// Just retrieve the first set, need to update in future.
+		$query_string_atts =
+			isset( $attributes['controlSets'][0]['controls']['queryString'] )
+				? $attributes['controlSets'][0]['controls']['queryString']
+				: null;
+	} else {
+		// There are no Query String settings, so skip tests.
+		return true;
+	}
 
 	$query_string_any = isset( $query_string_atts['queryStringAny'] )
-		? prepareQueries( $query_string_atts['queryStringAny'] )
+		? prepare_queries( $query_string_atts['queryStringAny'] )
 		: null;
 	$query_string_all = isset( $query_string_atts['queryStringAll'] )
-		? prepareQueries( $query_string_atts['queryStringAll'] )
+		? prepare_queries( $query_string_atts['queryStringAll'] )
 		: null;
 	$query_string_not = isset( $query_string_atts['queryStringNot'] )
-		? prepareQueries( $query_string_atts['queryStringNot'] )
+		? prepare_queries( $query_string_atts['queryStringNot'] )
 		: null;
 
 	// If there is "any" query strings, need to find at lease one match to pass.
@@ -90,7 +92,7 @@ function query_string_test( $is_visible, $settings, $attributes ) {
 			if ( isset( $_REQUEST[ $param ] ) ) {
 				if ( ! $value || '*' === $value ) {
 					$any_matches++;
-				} else if ( $value === $_REQUEST[ $param ] ) {
+				} elseif ( $value === $_REQUEST[ $param ] ) {
 					$any_matches++;
 				}
 			}
@@ -109,7 +111,7 @@ function query_string_test( $is_visible, $settings, $attributes ) {
 			if ( isset( $_REQUEST[ $param ] ) ) {
 				if ( ! $value || '*' === $value ) {
 					$all_matches++;
-				} else if ( $value === $_REQUEST[ $param ] ) {
+				} elseif ( $value === $_REQUEST[ $param ] ) {
 					$all_matches++;
 				}
 			}
@@ -126,13 +128,13 @@ function query_string_test( $is_visible, $settings, $attributes ) {
 			if ( isset( $_REQUEST[ $param ] ) ) {
 				if ( ! $value || '*' === $value ) {
 					return false;
-				} else if ( $value === $_REQUEST[ $param ] ) {
+				} elseif ( $value === $_REQUEST[ $param ] ) {
 					return false;
 				}
 			}
 		}
 	}
 
-    return true;
+	return true;
 }
 add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\query_string_test', 10, 3 );

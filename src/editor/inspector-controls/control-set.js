@@ -66,7 +66,7 @@ export default function ControlSet( props ) {
 	const isPluginActive = ( plugin ) => {
 		const isActive = variables?.integrations[ plugin ]?.active ?? false;
 		return isActive;
-	}
+	};
 
 	let controls = [
 		{
@@ -98,8 +98,9 @@ export default function ControlSet( props ) {
 			name: __( 'WP Fusion', 'block-visibility' ),
 			icon: icons.wpFusion,
 			active: controlSetAtts?.controls.hasOwnProperty( 'wpFusion' ),
-			enable: enabledControls.includes( 'wp_fusion' )
-				&& isPluginActive( 'wpFusion' ),
+			enable:
+				enabledControls.includes( 'wp_fusion' ) &&
+				isPluginActive( 'wpFusion' ),
 		},
 	];
 

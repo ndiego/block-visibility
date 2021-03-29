@@ -8,7 +8,6 @@ import { Icon } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
-import InformationPopover from './../../utils/information-popover';
 import icons from './../../../utils/icons';
 
 /**

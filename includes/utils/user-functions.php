@@ -34,7 +34,7 @@ function get_user_roles() {
 
 	foreach ( $all_roles as $role_slug => $role_atts ) {
 		$atts = array(
-			'value'  => $role_slug,
+			'value' => $role_slug,
 			'label' => $role_atts['name'],
 		);
 
@@ -49,7 +49,7 @@ function get_user_roles() {
 
 	// Add the logged-out role to the end.
 	$roles[] = array(
-		'value'  => 'logged-out',
+		'value' => 'logged-out',
 		'label' => __( 'None (Logged-out users)', 'block-visibility' ),
 		'type'  => 'core', // Not really a core role, but a proxy for when a user has no roles.
 	);
