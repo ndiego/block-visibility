@@ -368,6 +368,19 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
             }
         }
     }
+
+    .components-notice {
+        margin: 10px 0;
+
+        .components-notice__content {
+            margin: 2px 0;
+
+            .visibility-control__help {
+                display: inline-block;
+                margin: 4px 0 0;
+            }
+        }
+    }
 }
 
 .block-visibility__control-set {

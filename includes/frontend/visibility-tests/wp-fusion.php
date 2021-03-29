@@ -31,7 +31,12 @@ use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
 function wp_fusion_test( $is_visible, $settings, $attributes ) {
 
 	// If the test is already false, or WP Fusion is not active, skip this test.
-	if ( ! $is_visible || ! function_exists( 'wp_fusion' ) ) {
+	if (
+		! $is_visible ||
+		! function_exists( 'wp_fusion' ) ||
+		! function_exists( 'wpf_is_user_logged_in' ) ||
+		! function_exists( 'wpf_get_current_user_id' )
+	) {
 		return $is_visible;
 	}
 
@@ -82,13 +87,15 @@ function wp_fusion_test( $is_visible, $settings, $attributes ) {
 		return true;
 	}
 
+	$can_access = false;
+
 	// In WP Fusion the "exclude admins" option has been selected and the current user is an admin, so skip tests.
 	if ( wp_fusion()->settings->get( 'exclude_admins' ) && current_user_can( 'manage_options' ) ) {
-		return true;
+		$can_access = true;
 	}
 
 	// Tags can only be applied to logged-in users.
-	if ( is_user_logged_in() ) {
+	if ( wpf_is_user_logged_in() ) {
 
 		$user_tags = wp_fusion()->user->get_tags();
 
@@ -103,8 +110,8 @@ function wp_fusion_test( $is_visible, $settings, $attributes ) {
 				// Required tags (any).
 				$result = array_intersect( $tags_any, $user_tags );
 
-				if ( empty( $result ) ) {
-					return false;
+				if ( ! empty( $result ) ) {
+					$can_access = true;
 				}
 			}
 
@@ -114,8 +121,8 @@ function wp_fusion_test( $is_visible, $settings, $attributes ) {
 				$result = array_intersect( $tags_all, $user_tags );
 
 				// The user must have all the seleted tags but could also have more.
-				if ( count( $result ) < count( $tags_all ) ) {
-					return false;
+				if ( count( $result ) === count( $tags_all ) ) {
+					$can_access = true;
 				}
 			}
 		}
@@ -126,13 +133,41 @@ function wp_fusion_test( $is_visible, $settings, $attributes ) {
 			// Required tags (not).
 			$result = array_intersect( $tags_not, $user_tags );
 
-			if ( ! empty( $result ) ) {
-				return false;
+			if ( empty( $result ) ) {
+				$can_access = true;
 			}
 		}
+	} else {
+		// The user is not logged-in.
+		$can_access = true;
 	}
 
-	return true;
+	global $post;
+
+	if ( ! empty( $post ) ) {
+		$post_id = $post->ID;
+	} else {
+		$post_id = 0;
+	}
+
+	$can_access = apply_filters(
+		'wpf_user_can_access_block',
+		$can_access,
+		$attributes
+	);
+
+	$can_access = apply_filters(
+		'wpf_user_can_access',
+		$can_access,
+		wpf_get_current_user_id(),
+		$post_id
+	);
+
+	if ( $can_access ) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 // Run all integration tests at "15" priority, which is after the main controls,

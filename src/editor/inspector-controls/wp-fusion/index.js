@@ -176,7 +176,7 @@ export default function WPFusion( props ) {
 								focusOnMount="container"
 								onClose={ () => setTipsPopoverOpen( false ) }
 							>
-								<TipWPFusion />
+								<TipWPFusion { ...props } />
 							</Popover>
 						) }
 					</span>

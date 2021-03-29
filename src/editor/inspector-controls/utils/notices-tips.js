@@ -235,9 +235,14 @@ export function TipQueryString() {
  * Helper function for printing the WP Fusion control tips.
  *
  * @since 1.7.0
+ * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
-export function TipWPFusion() {
+export function TipWPFusion( props ) {
+	const { variables } = props;
+	const isAdmin = variables.currentUsersRoles.includes( 'administrator' );
+	const excludeAdmins = variables?.integrations?.wpFusion?.excludeAdmins ?? false;
+
 	return (
 		<>
 			<h3>{ __( 'WP Fusion', 'block-visibility' ) }</h3>
@@ -247,6 +252,14 @@ export function TipWPFusion() {
 					'block-visibility'
 				) }
 			</p>
+			{ isAdmin && excludeAdmins && (
+				<Notice status="warning" isDismissible={ false }>
+					{ __(
+						'It looks like the "Exclude Administrators" setting has been enabled in the WP Fusion plugin settings. Therefore, when you preview this block while logged-in as an Administrator, the content will remain visible regardless of the WP Fusion visibility control settings.',
+						'block-visibility'
+					) }
+				</Notice>
+			) }
 			<h4>{ __( 'Required Tags (Any)', 'block-visibility' ) }</h4>
 			<p>
 				{ __(

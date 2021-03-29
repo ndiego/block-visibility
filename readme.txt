@@ -5,7 +5,7 @@ Tags: visibility, schedule blocks, hide blocks, conditional blocks, restrict blo
 Requires at least: 5.5
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
