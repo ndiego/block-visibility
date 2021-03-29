@@ -20,7 +20,7 @@ import {
 } from '@wordpress/components';
 import { applyFilters } from '@wordpress/hooks';
 import { useState } from '@wordpress/element';
-import { moreHorizontalMobile, check, info } from '@wordpress/icons';
+import { Icon, moreHorizontalMobile, check, info } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -28,10 +28,13 @@ import { moreHorizontalMobile, check, info } from '@wordpress/icons';
 import UserRole from './user-role';
 import DateTime from './date-time';
 import ScreenSize from './screen-size';
+import QueryString from './query-string';
+import WPFusion from './wp-fusion';
 import {
 	NoticeBlockControlsDisabled,
 	TipControlSet,
 } from './utils/notices-tips';
+import icons from './../../utils/icons';
 
 /**
  * Render a control set
@@ -51,7 +54,7 @@ export default function ControlSet( props ) {
 		blockAtts,
 		controlSetAtts,
 	} = props;
-	const settingsUrl = variables?.pluginVariables.settingsUrl ?? ''; // eslint-disable-line
+	const settingsUrl = variables?.pluginVariables?.settingsUrl ?? '';
 	const noControls =
 		enabledControls.length === 1 &&
 		enabledControls.includes( 'hide_block' );
@@ -60,24 +63,44 @@ export default function ControlSet( props ) {
 		return null;
 	}
 
+	const isPluginActive = ( plugin ) => {
+		const isActive = variables?.integrations[ plugin ]?.active ?? false;
+		return isActive;
+	};
+
 	let controls = [
 		{
 			slug: 'dateTime',
-			name: 'Date & Time',
+			name: __( 'Date & Time', 'block-visibility' ),
 			active: controlSetAtts?.controls.hasOwnProperty( 'dateTime' ),
 			enable: enabledControls.includes( 'date_time' ),
 		},
 		{
 			slug: 'userRole',
-			name: 'User Role',
+			name: __( 'User Role', 'block-visibility' ),
 			active: controlSetAtts?.controls.hasOwnProperty( 'userRole' ),
 			enable: enabledControls.includes( 'visibility_by_role' ),
 		},
 		{
 			slug: 'screenSize',
-			name: 'Screen Size',
+			name: __( 'Screen Size', 'block-visibility' ),
 			active: controlSetAtts?.controls.hasOwnProperty( 'screenSize' ),
 			enable: enabledControls.includes( 'screen_size' ),
+		},
+		{
+			slug: 'queryString',
+			name: __( 'Query String', 'block-visibility' ),
+			active: controlSetAtts?.controls.hasOwnProperty( 'queryString' ),
+			enable: enabledControls.includes( 'query_string' ),
+		},
+		{
+			slug: 'wpFusion',
+			name: __( 'WP Fusion', 'block-visibility' ),
+			icon: icons.wpFusion,
+			active: controlSetAtts?.controls.hasOwnProperty( 'wpFusion' ),
+			enable:
+				enabledControls.includes( 'wp_fusion' ) &&
+				isPluginActive( 'wpFusion' ),
 		},
 	];
 
@@ -166,7 +189,12 @@ export default function ControlSet( props ) {
 							focusOnMount="container"
 							onClose={ () => setPopoverOpen( false ) }
 						>
-							<MenuGroup label="Enabled Controls">
+							<MenuGroup
+								label={ __(
+									'Enabled Controls',
+									'block-visibility'
+								) }
+							>
 								{ controls.map( ( control ) => {
 									if ( ! control.enable ) {
 										return null;
@@ -181,6 +209,12 @@ export default function ControlSet( props ) {
 											}
 										>
 											{ control.name }
+											{ control.icon && (
+												<Icon
+													className="control-branding-icon"
+													icon={ control.icon }
+												/>
+											) }
 										</MenuItem>
 									);
 								} ) }
@@ -208,6 +242,22 @@ export default function ControlSet( props ) {
 			/>
 			<ScreenSize
 				settings={ settings }
+				enabledControls={ enabledControls }
+				setControlAtts={ setControlAtts }
+				controlSetAtts={ controlSetAtts }
+				{ ...props }
+			/>
+			<QueryString
+				settings={ settings }
+				enabledControls={ enabledControls }
+				setControlAtts={ setControlAtts }
+				controlSetAtts={ controlSetAtts }
+				{ ...props }
+			/>
+			<Slot name="ControlSetControlsMiddle" />
+			<WPFusion
+				settings={ settings }
+				variables={ variables }
 				enabledControls={ enabledControls }
 				setControlAtts={ setControlAtts }
 				controlSetAtts={ controlSetAtts }

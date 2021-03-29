@@ -1,6 +1,6 @@
 {
 	"name": "block-visibility",
-	"version": "1.6.0",
+	"version": "1.7.0",
 	"description": "Provides visibility controls and scheduling functionality to all WordPress blocks.",
 	"author": "Nick Diego",
 	"license": "GPL-2.0-or-later",
@@ -25,6 +25,7 @@
 	},
 	"dependencies": {
 		"@wordpress/components": "^11.1.1",
-		"@wordpress/element": "^2.18.0"
+		"@wordpress/element": "^2.18.0",
+		"react-select": "^4.3.0"
 	}
 }

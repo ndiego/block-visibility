@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-03-21T16:24:41+00:00\n"
+"POT-Creation-Date: 2021-03-29T17:33:37+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: block-visibility\n"
@@ -68,15 +68,15 @@ msgstr ""
 msgid "Thank you for using Block Visibility. Please rate the plugin %1$s on %2$sWordPress.org%3$s to help us spread the word."
 msgstr ""
 
-#: includes/class-block-visibility.php:50
+#: includes/class-block-visibility.php:49
 msgid "Cloning instances of the class is forbidden."
 msgstr ""
 
-#: includes/class-block-visibility.php:64
+#: includes/class-block-visibility.php:62
 msgid "Unserializing instances of the class is forbidden."
 msgstr ""
 
-#: includes/register-settings.php:196
+#: includes/register-settings.php:213
 msgid "Settings for the Block Visibility plugin."
 msgstr ""
 
@@ -103,11 +103,11 @@ msgid "Hide selected block from everyone."
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
-msgid "hidden"
+msgid "Hide from all"
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
-msgid "visible"
+msgid "Only visible to"
 msgstr ""
 
 #: dist/block-visibility-editor.js:1
@@ -116,7 +116,7 @@ msgstr ""
 
 #. Translators: Whether the block is hidden or visible.
 #: dist/block-visibility-editor.js:2
-msgid "The block will be %s to all users with one of the selected roles."
+msgid "%s users with at least one of the selected roles."
 msgstr ""
 
 #. Translators: Whether the block is hidden or visible.
@@ -126,6 +126,10 @@ msgstr ""
 
 #: dist/block-visibility-editor.js:2
 msgid "Alternatively, hide the block to all users with one of the selected roles."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "AND"
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
@@ -278,6 +282,140 @@ msgid "As a website administrator, you can customize and restrict the available 
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
+#: dist/block-visibility-settings.js:8
+msgid "Query String"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Configure block visibility based on URL query strings."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Usage"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "In order for the Query String control to work properly, only add one query string per line in each textbox. The following three formats are accepted."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Query parameter with a specific value."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Query parameter with a wildcard value. (i.e. the value could be anything)"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Query parameter with no value. Operates the same as a wildcard value."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Required Queries (Any)"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "The block will only be shown if if the URL has at least one of the provided query strings."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Required Queries (All)"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "The block will only be shown if the URL, at a minimum, has all of the provided query strings. It could have more."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Required Queries (Not)"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "The block will be hidden whenever at least one of the provided query strings is present in the URL. The \"Not\" queries take precedent over all other queries."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "To learn more, visit the plugin <a>Knowledge Base</a>."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+#: dist/block-visibility-settings.js:8
+msgid "WP Fusion"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Configure block visibility based on WP Fusion tags. Note that the available fields depend on the User Role control settings. If the User Role control is disabled, only the Required Tags (Not) field will be available."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "It looks like the \"Exclude Administrators\" setting has been enabled in the WP Fusion plugin settings. Therefore, when you preview this block while logged-in as an Administrator, the content will remain visible regardless of the WP Fusion visibility control settings."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Required Tags (Any)"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "The block will only be shown if the user is logged-in and has at least one of the selected tags. This field is disabled if the User Role control is set to Public, Logged-out, or is disabled."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Required Tags (All)"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "The block will only be shown if the user is logged-in and, at a minimum, has all of the selected tags. They could have more. This field is disabled if the User Role control is set to Public, Logged-out, or is disabled."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Required Tags (Not)"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "The block will be hidden from logged-in users if they have at least-one of the selected tags. If the User Role control is set to Public, or is disabled, the block will still display to logged-out users. This field is disabled if the User Role control is set to Logged-out."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Query String Tips"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Enter one URL query string per line."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Only visible when least one of the provided URL query strings is present."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Only visible when <strong>all</strong> of the provided URL query strings are present."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Hide when at least one of the provided URL query strings is present."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Only visible to logged-in users with at least one of the selected tags."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Only visible to logged-in users with <strong>all</strong> of the selected tags."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Hide from logged-in users with at least one of the selected tags."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Wp Fusion Tips"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "The WP Fusion control works best in coordination with the User Role control, which has been disabled. To re-enable, click the ellipsis icon above."
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
 #: dist/block-visibility-settings.js:1
 #: src/settings/visibility-controls/screen-size/screen-size-controls.js:45
 msgid "Controls"
@@ -285,6 +423,10 @@ msgstr ""
 
 #: dist/block-visibility-editor.js:2
 msgid "Configure Visibility Controls"
+msgstr ""
+
+#: dist/block-visibility-editor.js:2
+msgid "Enabled Controls"
 msgstr ""
 
 #: dist/block-visibility-editor.js:2
@@ -385,7 +527,7 @@ msgstr ""
 #: dist/block-visibility-settings.js:10
 #: src/settings/getting-started/index.js:101
 #: src/settings/index.js:127
-#: src/settings/visibility-controls/index.js:47
+#: src/settings/visibility-controls/index.js:49
 msgid "Visibility Controls"
 msgstr ""
 
@@ -527,10 +669,6 @@ msgid "The Hide Block control allows you easily hide blocks completely from the 
 msgstr ""
 
 #: dist/block-visibility-settings.js:1
-msgid "To learn more about the Hide Block control, review the plugin documentation using the link below."
-msgstr ""
-
-#: dist/block-visibility-settings.js:1
 msgid "Enable block scheduling."
 msgstr ""
 
@@ -540,10 +678,6 @@ msgstr ""
 
 #: dist/block-visibility-settings.js:1
 msgid "Date & Time controls allow you hide blocks based on time and date settings, which includes the ability to schedule the visibility of blocks."
-msgstr ""
-
-#: dist/block-visibility-settings.js:1
-msgid "To learn more about the Date & Time controls, review the plugin documentation using the link below."
 msgstr ""
 
 #: dist/block-visibility-settings.js:1
@@ -560,10 +694,6 @@ msgstr ""
 
 #: dist/block-visibility-settings.js:1
 msgid "User Role controls allow you to hide blocks based on whether a user is logged-in, logged-out, and more."
-msgstr ""
-
-#: dist/block-visibility-settings.js:1
-msgid "To learn more about User Role controls, review the plugin documentation using the link below."
 msgstr ""
 
 #: dist/block-visibility-settings.js:1
@@ -734,10 +864,6 @@ msgid "Screen Size controls allow you hide blocks based on the current width of 
 msgstr ""
 
 #: dist/block-visibility-settings.js:8
-msgid "To learn more about the Screen Size controls, review the plugin documentation using the link below."
-msgstr ""
-
-#: dist/block-visibility-settings.js:8
 msgid "By default, the Screen Size controls include two breakpoints and three controls for users to hide blocks. There are certain situations where you may need more control over when a block should be visible, for example in the case of very large or small screens. Enabling advanced controls provides these options."
 msgstr ""
 
@@ -750,12 +876,28 @@ msgid "By default, the CSS needed for the Screen Size controls is loaded on the 
 msgstr ""
 
 #: dist/block-visibility-settings.js:8
-#: src/settings/visibility-controls/index.js:50
+msgid "Enable the Query String control."
+msgstr ""
+
+#: dist/block-visibility-settings.js:8
+msgid "The Query String control allows you to conditionally display blocks based on URL query strings."
+msgstr ""
+
+#: dist/block-visibility-settings.js:8
+msgid "Third-Party Integrations"
+msgstr ""
+
+#: dist/block-visibility-settings.js:8
+msgid "Enable the WP Fusion control."
+msgstr ""
+
+#: dist/block-visibility-settings.js:8
+#: src/settings/visibility-controls/index.js:52
 msgid "The settings below allow you to configure the visibility controls that power this plugin. Pick and choose which controls you would like to enable and how you would like them to function. When a visibility control is disabled, blocks that relied on the disabled control will become visible again."
 msgstr ""
 
 #: dist/block-visibility-settings.js:8
-#: src/settings/visibility-controls/index.js:54
+#: src/settings/visibility-controls/index.js:56
 msgid "To learn more about Visibility Controls, review the plugin documentation using the link below."
 msgstr ""
 

@@ -69,7 +69,7 @@ function enqueue_settings_assets() {
 	// The full homepage url for use in fetching data from the REST api. The
 	// full path is needed on websites where WordPress in installed in a
 	// subdirectory. Without the full path, fetch( '/wp-json/...') fails.
-	$home_url = 'const blockVisibilityHomeUrl = "' . home_url() . '";';
+	$home_url = 'const blockVisibilityRestUrl = "' . get_rest_url() . '";';
 
 	wp_add_inline_script(
 		'block-visibility-setting-scripts',

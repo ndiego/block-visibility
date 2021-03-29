@@ -368,10 +368,22 @@ $mobile: 426px;
 					margin-left: 20px;
 				}
 
-				label,
-				.settings-label {
+				label {
 					font-size: 14px;
 					margin-bottom: 8px;
+				}
+
+				.settings-label {
+					font-size: 15px;
+					font-weight: 500;
+					display: flex;
+					align-items: center;
+					margin-bottom: 20px;
+
+					&>svg {
+						width: 16px;
+    					margin-left: 10px;
+					}
 				}
 
 				.settings-panel__help {
@@ -397,9 +409,6 @@ $mobile: 426px;
 		justify-content: space-between;
 
 		.settings-label {
-			font-weight: 500;
-			margin-bottom: 20px !important;
-			display: flex;
 			justify-content: space-between;
 		}
 
@@ -670,6 +679,7 @@ $mobile: 426px;
 			}
 
 			.components-popover__content {
+				font-weight: 400;
 				line-height: 1.4;
 				padding: 16px;
 				font-size: 13px;

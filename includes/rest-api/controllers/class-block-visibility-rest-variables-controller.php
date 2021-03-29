@@ -84,6 +84,13 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 			'pluginVariables'   => $plugin_variables,
 			'isFullControlMode' => $is_full_control_mode,
 			'isPro'             => defined( 'BVP_VERSION' ), // If the Pro version constant is set, then Block Visibility Pro is active.
+			'integrations'      => array(
+				'wpFusion' => array(
+					'active'        => function_exists( 'wp_fusion' ),
+					'tags'          => self::get_wp_fusion_tags(),
+					'excludeAdmins' => self::get_wp_fusion_exclude_admins(),
+				),
+			),
 		);
 
 		$variables = apply_filters(
@@ -134,6 +141,28 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 				'isPro'             => array(
 					'type' => 'boolean',
 				),
+				'integrations'      => array(
+					'type'       => 'object',
+					'properties' => array(
+						'wpFusion' => array(
+							'type'       => 'object',
+							'properties' => array(
+								'active'         => array(
+									'type' => 'boolean',
+								),
+								'tags'           => array(
+									'type'  => 'array',
+									'items' => array(
+										'type' => 'string',
+									),
+								),
+								'exclude_admins' => array(
+									'type' => 'boolean',
+								),
+							),
+						),
+					),
+				),
 			),
 		);
 
@@ -143,5 +172,53 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 		);
 
 		return $this->schema;
+	}
+
+	/**
+	 * Fetch all available tags in WP Fusion.
+	 *
+	 * @return array
+	 */
+	public static function get_wp_fusion_tags() {
+
+		$tags_for_select = array();
+
+		if ( ! function_exists( 'wp_fusion' ) ) {
+			return $tags_for_select;
+		}
+
+		$available_tags = wp_fusion()->settings->get( 'available_tags', array() );
+
+		foreach ( $available_tags as $tag_id => $tag ) {
+			if ( is_array( $tag ) ) {
+				$tags_for_select[] = array(
+					'value' => $tag_id,
+					'label' => $tag['label'],
+				);
+			} else {
+				$tags_for_select[] = array(
+					'value' => $tag_id,
+					'label' => $tag,
+				);
+			}
+		}
+
+		return $tags_for_select;
+	}
+
+	/**
+	 * Fetch the exclude admin setting in WP Fusion
+	 *
+	 * @return array
+	 */
+	public static function get_wp_fusion_exclude_admins() {
+
+		if ( ! function_exists( 'wp_fusion' ) ) {
+			return $tags_for_select;
+		}
+
+		$exclude_admins = wp_fusion()->settings->get( 'exclude_admins' );
+
+		return $exclude_admins;
 	}
 }

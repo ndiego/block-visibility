@@ -156,11 +156,7 @@ export default function ScreenSize( props ) {
 							"Screen Size controls allow you hide blocks based on the current width of the browser window, or in other words, the screen size of a user's device.",
 							'block-visibility'
 						) }
-						subMessage={ __(
-							'To learn more about the Screen Size controls, review the plugin documentation using the link below.',
-							'block-visibility'
-						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/screen-size/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
 				<hr />
@@ -176,7 +172,7 @@ export default function ScreenSize( props ) {
 							'Note that once enabled, any block that is only using the advanced controls to hide at extra large, or extra small, breakpoints will become visible again if this setting is ever disabled in the future.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/screen-size/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
 				<div className="settings-type__toggle has-info-popover subsetting">
@@ -186,7 +182,7 @@ export default function ScreenSize( props ) {
 							'By default, the CSS needed for the Screen Size controls is loaded on the frontend of your website. If disabled, you will need to add the CSS manually to your theme in order for the Screen Size controls to work properly. This CSS code is available via the "Preview Frontend CSS" button on this page.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/screen-size/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
 				<Slot name="ScreenSizeControls" />

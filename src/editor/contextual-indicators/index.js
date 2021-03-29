@@ -14,6 +14,8 @@ import { addFilter } from '@wordpress/hooks';
 import hasDateTime from './has-date-time';
 import hasUserRole from './has-user-role';
 import hasScreenSize from './has-screen-size';
+import hasQueryString from './has-query-string';
+import hasWPFusion from './has-wp-fusion';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import usePluginData from './../utils/use-plugin-data';
 import {
@@ -30,6 +32,7 @@ import {
 function withContextualIndicators( BlockListBlock ) {
 	return ( props ) => {
 		const settings = usePluginData( 'settings' );
+		const variables = usePluginData( 'variables' );
 
 		if ( settings === 'fetching' ) {
 			return <BlockListBlock { ...props } />;
@@ -75,28 +78,59 @@ function withContextualIndicators( BlockListBlock ) {
 		// instead.
 		const backgroundBlocks = [ 'core/pullquote' ];
 
-		let classes = classnames( {
-			'block-visibility__is-hidden': isHidden,
-			'block-visibility__has-roles': hasUserRole(
+		let activeControls = {
+			'date-time': hasDateTime(
 				testAtts,
 				hasControlSets,
 				enabledControls
 			),
-			'block-visibility__has-date-time': hasDateTime(
+			'user-role': hasUserRole(
 				testAtts,
 				hasControlSets,
 				enabledControls
 			),
-			'block-visibility__has-screen-size': hasScreenSize(
+			'screen-size': hasScreenSize(
 				testAtts,
 				hasControlSets,
 				enabledControls,
 				settings
 			),
-			'block-visibility__set-icon-background': backgroundBlocks.includes(
-				name
+			'query-string': hasQueryString(
+				testAtts,
+				hasControlSets,
+				enabledControls
 			),
-		} );
+			'wp-fusion': hasWPFusion(
+				testAtts,
+				hasControlSets,
+				enabledControls,
+				variables
+			),
+		};
+
+		activeControls = Object.keys( activeControls ).filter(
+			( control ) => activeControls[ control ] === true
+		);
+
+		let controlsClass = '';
+
+		if ( activeControls.length > 2 ) {
+			controlsClass =
+				'block-visibility__has-' + activeControls.length + '-controls';
+		} else if ( activeControls.length !== 0 ) {
+			controlsClass =
+				'block-visibility__has-' + activeControls.join( '-' );
+		}
+
+		let classes = classnames(
+			{
+				'block-visibility__is-hidden': isHidden,
+				'block-visibility__set-icon-background': backgroundBlocks.includes(
+					name
+				),
+			},
+			controlsClass
+		);
 
 		if ( classes ) {
 			classes = classes + ' block-visibility__has-visibility';

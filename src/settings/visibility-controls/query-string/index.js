@@ -10,38 +10,38 @@ import { ToggleControl } from '@wordpress/components';
 import InformationPopover from './../../utils/information-popover';
 
 /**
- * Renders the hide block control settings.
+ * Renders the Query String control settings.
  *
  * @since 1.4.0
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
-export default function HideBlock( props ) {
+export default function QueryString( props ) {
 	const { settings, setSettings, setHasUpdates } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enable = settings?.hide_block?.enable ?? true; // eslint-disable-line
+	const enable = settings?.query_string?.enable ?? true; // eslint-disable-line
 
 	return (
 		<div className="setting-tabs__settings-panel">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
-					{ __( 'Hide Block', 'block-visibility' ) }
+					{ __( 'Query String', 'block-visibility' ) }
 				</span>
 			</div>
 			<div className="settings-panel__container">
 				<div className="settings-type__toggle has-info-popover">
 					<ToggleControl
 						label={ __(
-							'Enable the Hide Block control.',
+							'Enable the Query String control.',
 							'block-visibility'
 						) }
 						checked={ enable }
 						onChange={ () => {
 							setSettings( {
 								...settings,
-								hide_block: {
-									...settings.hide_block,
+								query_string: {
+									...settings.query_string,
 									enable: ! enable,
 								},
 							} );
@@ -50,10 +50,10 @@ export default function HideBlock( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							'The Hide Block control allows you easily hide blocks completely from the frontend of your website. It is the simplest, yet most powerful, control and overrides all others when enabled on the block.',
+							'The Query String control allows you to conditionally display blocks based on URL query strings.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/hide-block/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/query-string/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
 			</div>

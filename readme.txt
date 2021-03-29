@@ -1,11 +1,11 @@
 === Block Visibility — Conditional Visibility Controls for all Blocks ===
-Author URI: https://www.nickdiego.com
+Author URI: https://www.nickdiego.com/?bv_query=readme
 Contributors: ndiego, outermostdesign
 Tags: visibility, schedule blocks, hide blocks, conditional blocks, restrict blocks
 Requires at least: 5.5
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,6 +27,12 @@ Visibility controls determine whether a block should be visible to users on the 
 * Only show blocks to **logged-in** users
 * Only show blocks to **logged-out** users
 * Only show blocks to users with **specific roles** (Administrator, Subscriber, Customer, Member etc.)
+* Show or hide dynamic blocks based on **URL query strings**. Great for marketing campaigns!
+
+==== Third-Party Integrations ====
+
+* **WP Fusion:** Combine Block Visibility with the power of [WP Fusion](https://wordpress.org/plugins/wp-fusion-lite/) to conditionally show or hide content based on data from your favorite CRM or marketing automation platform.
+* More to come...
 
 Have an idea for additional block logic? Let us know in the plugin support forum.
 
@@ -73,6 +79,7 @@ Block Visibility is designed to work with **any** block and has been tested with
 * Getwid
 * EditorsKit
 * Genesis Blocks
+* WP Fusion
 
 Find an issue? Let us know in the plugin support forum and we will investigate ASAP. Excellent compatibility with the greater WordPress block ecosystem is our top priority.
 
@@ -86,8 +93,8 @@ https://www.youtube.com/watch?v=DdDwQCE7RNE
 
 Stay up-to-date on Block Visibility using the links below. The plugin is also being developed transparently on GitHub, so give it a star and follow along!
 
-* [Plugin Website](https://www.blockvisibilitywp.com/?utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
-* [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
+* [Plugin Website](https://www.blockvisibilitywp.com/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
+* [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
 * [Follow on Twitter](https://twitter.com/BlockVisibility)
 * [View on GitHub](https://github.com/ndiego/block-visibility)
 
@@ -138,9 +145,29 @@ As of version 1.4.0, Block Visibility is supported in the Site Editor, which is 
 No. Block Visibility was design specifically for the WordPress Block (Gutenberg) Editor, and therefore does no work on pages that are controlled by the Elementor editor. There are other visibility logic plugins in the WordPress.org repository designed specifically for Elementor.
 
 = Is block visibility controlled using CSS? =
-Visibility is controlled primarily on the server, so if a block should be hidden based on the set block controls, it will not even be rendered. This ensures the plugin does not load any additional resources on the frontend of your site, thereby optimizing performance. The **one exception** to this is the Screen Size block controls. Visibility by screen size requires the use of CSS, which is loaded to the frontend of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary yourself. Visit the plugin [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) to learn more.
+Visibility is controlled primarily on the server, so if a block should be hidden based on the set block controls, it will not even be rendered. This ensures the plugin does not load any additional resources on the frontend of your site, thereby optimizing performance. The **one exception** to this is the Screen Size block controls. Visibility by screen size requires the use of CSS, which is loaded to the frontend of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary yourself. Visit the plugin [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) to learn more.
 
 == Changelog ==
+
+= 1.7.0 - 2021-03-29 =
+
+**Added**
+
+* Added the WP Fusion control, the first third-party integration for Block Visibility! 🎉
+* Added the Query String control, significantly increasing the marketing capabilities of Block Visibility! 🎉
+* Added `react-select` as a project dependency for all multi-select fields.
+
+**Changed**
+
+* Updated control set UI when multiple controls are enabled to emphasize that all control conditions need to be satisfied for the block to be visible.
+* The "Restricted User Roles" setting now uses `react-select` for a cleaner user interface.
+* Updated contextual indicator icons. A generic indicator is now displayed when more than 2 controls are enabled.
+
+**Fixed**
+
+* Fixed issue where blocks that should have been hidden by enabled visibility controls were appearing in REST API requests. This allowed sophisticated users to "see" content that was not intended for them via a public endpoint, i.e. `wp-json/wp/v2/...`. This is now fixed. Thanks @tkraftner for reporting this.
+* Fixed issue where the REST API url was not being fetched correctly in the plugin settings for WP installations that had prefixed, or "relocated", the REST API. Thanks Mike for reporting this issue.
+* Fix minor error due to missing attribute schema.
 
 = 1.6.0 - 2021-03-21 =
 
@@ -164,7 +191,7 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 **Fixed**
 
-* Fixed PHP error triggered by missing hideBlock attribute setting. (Thanks @muppix for discovering this issue and opening a support ticket!)
+* Fixed PHP error triggered by missing hideBlock attribute setting. Thanks @muppix for discovering this issue and opening a support ticket!
 
 = 1.5.2 - 2021-03-06 =
 
@@ -182,7 +209,7 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 **Fixed**
 
-* Fixed error where plugin settings were not being fetched from the REST api as expected. This issue impacted websites that had WordPress installed in a subdirectory. (Thanks @elenasaygo for discovering this issue and opening a support ticket!)
+* Fixed error where plugin settings were not being fetched from the REST api as expected. This issue impacted websites that had WordPress installed in a subdirectory. Thanks @elenasaygo for discovering this issue and opening a support ticket!
 * Fixed logic in the `get_current_user_role()` so no errors are thrown when WordPress installed in a subdirectory.
 
 = 1.5.0 - 2021-02-22 =
@@ -286,7 +313,7 @@ This is an unfortunate issue that will occur only once. We apologize for any inc
 = 1.2.0 - 2020-11-15 =
 **Added**
 
-* Added the ability to "hide on selected roles" in the Restrict by User Roles visibility control (Thanks to @edwardsh for the feature request!)
+* Added the ability to "hide on selected roles" in the Restrict by User Roles visibility control Thanks to @edwardsh for the feature request!
 
 = 1.1.0 - 2020-11-05 =
 **Added**

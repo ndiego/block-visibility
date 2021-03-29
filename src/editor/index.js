@@ -80,74 +80,130 @@ function blockVisibilityAttributes( settings ) {
 								type: 'boolean',
 							},
 							controls: {
-								dateTime: {
-									type: 'object',
-									properties: {
-										schedules: {
-											type: 'array',
-											items: {
-												type: 'object',
-												properties: {
-													id: {
-														type: 'number',
-													},
-													enable: {
-														type: 'boolean',
-													},
-													start: {
-														type: 'string',
-													},
-													end: {
-														type: 'string',
+								type: 'object',
+								properties: {
+									dateTime: {
+										type: 'object',
+										properties: {
+											schedules: {
+												type: 'array',
+												items: {
+													type: 'object',
+													properties: {
+														id: {
+															type: 'number',
+														},
+														enable: {
+															type: 'boolean',
+														},
+														start: {
+															type: 'string',
+														},
+														end: {
+															type: 'string',
+														},
 													},
 												},
 											},
 										},
 									},
-								},
-								userRoles: {
-									type: 'object',
-									properties: {
-										enable: {
-											type: 'boolean',
+									userRoles: {
+										type: 'object',
+										properties: {
+											enable: {
+												type: 'boolean',
+											},
+											visibilityByRole: {
+												type: 'string',
+											},
+											hideOnRestrictedRoles: {
+												type: 'boolean',
+											},
+											restrictedRoles: {
+												type: 'array',
+												items: {
+													type: 'string',
+												},
+											},
 										},
-										visibilityByRole: {
-											type: 'string',
+									},
+									screenSize: {
+										type: 'object',
+										properties: {
+											enable: {
+												type: 'boolean',
+											},
+											hideOnScreenSize: {
+												type: 'object',
+												properties: {
+													extraLarge: {
+														type: 'boolean',
+													},
+													large: {
+														type: 'boolean',
+													},
+													medium: {
+														type: 'boolean',
+													},
+													small: {
+														type: 'boolean',
+													},
+													extraSmall: {
+														type: 'boolean',
+													},
+												},
+											},
 										},
-										hideOnRestrictedRoles: {
-											type: 'boolean',
-										},
-										restrictedRoles: {
-											type: 'array',
-											items: {
+									},
+									queryString: {
+										type: 'object',
+										properties: {
+											enable: {
+												type: 'boolean',
+											},
+											queryStringAny: {
+												type: 'string',
+											},
+											queryStringAll: {
+												type: 'string',
+											},
+											queryStringNot: {
 												type: 'string',
 											},
 										},
 									},
-								},
-								screenSize: {
-									type: 'object',
-									properties: {
-										enable: {
-											type: 'boolean',
-										},
-										hideOnScreenSize: {
-											type: 'object',
-											properties: {
-												extraLarge: {
-													type: 'boolean',
+									// Integrations
+									wpFusion: {
+										type: 'object',
+										properties: {
+											enable: {
+												type: 'boolean',
+											},
+											tagsAny: {
+												type: 'array',
+												items: {
+													type: [
+														'number',
+														'string',
+													],
 												},
-												large: {
-													type: 'boolean',
+											},
+											tagsAll: {
+												type: 'array',
+												items: {
+													type: [
+														'number',
+														'string',
+													],
 												},
-												medium: {
-													type: 'boolean',
-												},
-												small: {
-													type: 'boolean',
-												},
-												extraSmall: {
-													type: 'boolean',
+											},
+											tagsNot: {
+												type: 'array',
+												items: {
+													type: [
+														'number',
+														'string',
+													],
 												},
 											},
 										},

@@ -42,11 +42,11 @@ export default function Masthead( props ) {
 		const rel = links[ link ].rel ?? 'noreferrer';
 
 		return (
-			<a
+			<a // eslint-disable-line
 				key={ link }
 				href={ links[ link ].url }
 				className={ 'plugin-links__' + link }
-				target="_blank" // eslint-disable-line
+				target="_blank"
 				rel={ rel }
 			>
 				<Icon icon={ icons[ links[ link ].icon ] } />

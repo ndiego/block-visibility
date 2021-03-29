@@ -45,7 +45,7 @@ function Settings() {
 			setStatus( 'fetching' );
 
 			// blockVisibilityHomeUrl is provided by wp_add_inline_script.
-			const fetchUrl = `${ blockVisibilityHomeUrl }/wp-json/block-visibility/v1/${ route }`; // eslint-disable-line
+			const fetchUrl = `${ blockVisibilityRestUrl }block-visibility/v1/${ route }`; // eslint-disable-line
 			const response = await fetch( fetchUrl, { method: 'GET' } ); // eslint-disable-line
 
 			if ( response.ok ) {
@@ -67,7 +67,7 @@ function Settings() {
 		setSaveStatus( 'saving' );
 
 		const newSettings = assign( { ...settings }, { [ option ]: value } );
-		const fetchUrl = `${ blockVisibilityHomeUrl }/wp-json/block-visibility/v1/settings`; // eslint-disable-line
+		const fetchUrl = `${ blockVisibilityRestUrl }block-visibility/v1/settings`; // eslint-disable-line
 
 		const response = await fetch( fetchUrl, { // eslint-disable-line
 			method: 'POST',
@@ -165,6 +165,7 @@ function Settings() {
 						case 'visibility-controls':
 							return (
 								<VisibilityControls
+									variables={ variables }
 									saveStatus={ saveStatus }
 									handleSettingsChange={
 										handleSettingsChange

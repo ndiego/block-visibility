@@ -14,6 +14,8 @@ import HideBlock from './hide-block';
 import DateTime from './date-time';
 import UserRole from './user-role';
 import ScreenSize from './screen-size';
+import QueryString from './query-string';
+import Integrations from './integrations';
 
 /**
  * Renders the Visibility Controls tab of the Block Visibility settings page
@@ -27,7 +29,7 @@ export default function VisibilityControls( props ) {
 		props.visibilityControls
 	);
 	const [ hasUpdates, setHasUpdates ] = useState( false );
-	const { handleSettingsChange, saveStatus } = props;
+	const { variables, handleSettingsChange, saveStatus } = props;
 
 	function onSettingsChange() {
 		handleSettingsChange( 'visibility_controls', visibilityControls );
@@ -70,7 +72,6 @@ export default function VisibilityControls( props ) {
 				setSettings={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }
 			/>
-			<Slot name="VisibilityControlsMiddle" />
 			<DateTime
 				settings={ visibilityControls }
 				setSettings={ setVisibilityControls }
@@ -83,6 +84,18 @@ export default function VisibilityControls( props ) {
 			/>
 			<ScreenSize
 				settings={ visibilityControls }
+				setSettings={ setVisibilityControls }
+				setHasUpdates={ setHasUpdates }
+			/>
+			<QueryString
+				settings={ visibilityControls }
+				setSettings={ setVisibilityControls }
+				setHasUpdates={ setHasUpdates }
+			/>
+			<Slot name="VisibilityControlsMiddle" />
+			<Integrations
+				settings={ visibilityControls }
+				variables={ variables }
 				setSettings={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }
 			/>

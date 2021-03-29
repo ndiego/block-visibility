@@ -102,6 +102,23 @@ function register_settings() {
 						),
 					),
 				),
+				'query_string'       => array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable' => array(
+							'type' => 'boolean',
+						),
+					),
+				),
+				// Third-party Integrations.
+				'wp_fusion'          => array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable' => array(
+							'type' => 'boolean',
+						),
+					),
+				),
 			),
 		),
 		'disabled_blocks'     => array(
