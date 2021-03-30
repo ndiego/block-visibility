@@ -209,12 +209,12 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 	/**
 	 * Fetch the exclude admin setting in WP Fusion
 	 *
-	 * @return array
+	 * @return boolean $exclude_admins Whether admins should be excluded or not.
 	 */
 	public static function get_wp_fusion_exclude_admins() {
 
 		if ( ! function_exists( 'wp_fusion' ) ) {
-			return $tags_for_select;
+			return false;
 		}
 
 		$exclude_admins = wp_fusion()->settings->get( 'exclude_admins' );
