@@ -5,7 +5,7 @@ Tags: visibility, schedule blocks, hide blocks, conditional blocks, restrict blo
 Requires at least: 5.5
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -148,6 +148,12 @@ No. Block Visibility was design specifically for the WordPress Block (Gutenberg)
 Visibility is controlled primarily on the server, so if a block should be hidden based on the set block controls, it will not even be rendered. This ensures the plugin does not load any additional resources on the frontend of your site, thereby optimizing performance. The **one exception** to this is the Screen Size block controls. Visibility by screen size requires the use of CSS, which is loaded to the frontend of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary yourself. Visit the plugin [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) to learn more.
 
 == Changelog ==
+
+= 1.7.1 - 2021-03-29 =
+
+**Fixed**
+
+* Fixed error in the plugin variables REST API route that caused the settings page not to load if WP Debug was enabled. Thanks @gsarig for discovering this issue and opening a support ticket!
 
 = 1.7.0 - 2021-03-29 =
 
