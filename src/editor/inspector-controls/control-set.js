@@ -14,6 +14,7 @@ import {
 	FlexBlock,
 	MenuGroup,
 	MenuItem,
+	Modal,
 	Popover,
 	Slot,
 	withFilters,
@@ -46,10 +47,12 @@ import icons from './../../utils/icons';
 export default function ControlSet( props ) {
 	const [ popoverOpen, setPopoverOpen ] = useState( false );
 	const [ tipsPopoverOpen, setTipsPopoverOpen ] = useState( false );
+	const [ resetModalOpen, setResetModalOpen ] = useState( false );
 	const {
 		setAttributes,
 		settings,
 		variables,
+		defaultControls,
 		enabledControls,
 		blockAtts,
 		controlSetAtts,
@@ -142,6 +145,21 @@ export default function ControlSet( props ) {
 		} );
 	}
 
+	function resetControlAtts() {
+		controlSetAtts.controls = defaultControls;
+
+		blockAtts.controlSets[ controlSetAtts.id ] = controlSetAtts;
+
+		setAttributes( {
+			blockVisibility: assign(
+				{ ...blockAtts },
+				{ controlSets: blockAtts.controlSets }
+			),
+		} );
+
+		setResetModalOpen( false );
+	}
+
 	// Provides an entry point to slot in additional settings.
 	const AdditionalControlSetControls = withFilters(
 		'blockVisibility.addControlSetControls'
@@ -218,11 +236,55 @@ export default function ControlSet( props ) {
 										</MenuItem>
 									);
 								} ) }
+								<div className="reset-container">
+									<MenuItem
+										className="reset"
+										onClick={ () => {
+											setResetModalOpen( true );
+										} }
+									>
+										{ __(
+											'Reset all',
+											'block-visibility'
+										) }
+									</MenuItem>
+								</div>
 							</MenuGroup>
 						</Popover>
 					) }
 				</FlexItem>
 			</Flex>
+			{ resetModalOpen && (
+				<Modal
+					title={ __(
+						'Reset all visibility controls?',
+						'block-visibility'
+					) }
+					className="reset-modal"
+					onRequestClose={ () => setResetModalOpen( false ) }
+				>
+					<p>
+						{ __(
+							'Resetting will remove all control settings that you may have configured and will restore the default controls.',
+							'block-visibility'
+						) }
+					</p>
+					<div className="reset-modal__buttons">
+						<Button isSecondary onClick={ () => setResetModalOpen( false ) }>
+							{ __(
+								'Cancel',
+								'block-visibility'
+							) }
+						</Button>
+						<Button isPrimary onClick={ () => resetControlAtts() }>
+							{ __(
+								'Reset',
+								'block-visibility'
+							) }
+						</Button>
+					</div>
+				</Modal>
+			) }
 			<Slot name="ControlSetControlsTop" />
 			<DateTime
 				settings={ settings }

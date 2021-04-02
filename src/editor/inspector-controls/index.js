@@ -33,6 +33,14 @@ export default function VisibilityInspectorControls( props ) {
 	const { attributes, name } = props;
 	const blockVisibility = attributes?.blockVisibility;
 	const [ blockAtts, setBlockAtts ] = useState( blockVisibility );
+	const settings = usePluginData( 'settings' );
+	const variables = usePluginData( 'variables' );
+
+	const defaultControls = settings?.plugin_settings?.default_controls ?? {
+		dateTime: {},
+		userRole: {},
+		screenSize: {},
+	};
 
 	useEffect( () => {
 		let controlSets = blockAtts?.controlSets ?? [];
@@ -44,11 +52,7 @@ export default function VisibilityInspectorControls( props ) {
 					id: 0,
 					name: __( 'Control Set', 'block-visibility' ),
 					enable: true,
-					controls: {
-						dateTime: {},
-						userRole: {},
-						screenSize: {},
-					},
+					controls: defaultControls,
 				},
 			];
 			controlSets = getDeprecatedAtts( blockAtts, defaultSet );
@@ -56,9 +60,6 @@ export default function VisibilityInspectorControls( props ) {
 			setBlockAtts( assign( { ...blockAtts }, { controlSets } ) );
 		}
 	}, [] );
-
-	const settings = usePluginData( 'settings' );
-	const variables = usePluginData( 'variables' );
 
 	if ( settings === 'fetching' || variables === 'fetching' || ! blockAtts ) {
 		return null;
@@ -117,6 +118,7 @@ export default function VisibilityInspectorControls( props ) {
 											key={ controlSet.id }
 											settings={ settings }
 											variables={ variables }
+											defaultControls={ defaultControls }
 											enabledControls={ enabledControls }
 											controlSetAtts={ controlSet }
 											blockAtts={ blockAtts }

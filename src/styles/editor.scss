@@ -286,7 +286,13 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
 .block-visibility__control-popover {
     &>div {
         min-width: 180px;
-        padding: 12px 8px;
+        padding: 12px 4px 0;
+    }
+
+    .reset-container {
+        border-top: 1px solid #ccc;
+        margin: 12px -4px 0;
+        padding: 8px 4px;
     }
 
     &.tips>div {
@@ -803,5 +809,19 @@ $icon__color: #000000;
         background: white;
         color: #007cba;
         color: var(--wp-admin-theme-color);
+    }
+}
+
+.reset-modal {
+    max-width: 400px;
+    
+    .reset-modal__buttons {
+        margin-top: 24px;
+
+        button {
+            &:first-child {
+                margin-right: 10px;
+            }
+        }
     }
 }
