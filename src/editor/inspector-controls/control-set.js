@@ -6,36 +6,18 @@ import { assign, isEmpty } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
-import {
-	Button,
-	Flex,
-	FlexItem,
-	FlexBlock,
-	MenuGroup,
-	MenuItem,
-	Modal,
-	Popover,
-	Slot,
-	withFilters,
-} from '@wordpress/components';
-import { applyFilters } from '@wordpress/hooks';
-import { useState } from '@wordpress/element';
-import { Icon, moreHorizontalMobile, check, info } from '@wordpress/icons';
+import { Slot, withFilters } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
+import ControlSetToolbar from './control-set-toolbar';
 import UserRole from './user-role';
 import DateTime from './date-time';
 import ScreenSize from './screen-size';
 import QueryString from './query-string';
 import WPFusion from './wp-fusion';
-import {
-	NoticeBlockControlsDisabled,
-	TipControlSet,
-} from './utils/notices-tips';
-import icons from './../../utils/icons';
+import { NoticeBlockControlsDisabled } from './utils/notices-tips';
 
 /**
  * Render a control set
@@ -45,14 +27,9 @@ import icons from './../../utils/icons';
  * @return {string}		 Return the rendered JSX
  */
 export default function ControlSet( props ) {
-	const [ popoverOpen, setPopoverOpen ] = useState( false );
-	const [ tipsPopoverOpen, setTipsPopoverOpen ] = useState( false );
-	const [ resetModalOpen, setResetModalOpen ] = useState( false );
 	const {
 		setAttributes,
-		settings,
 		variables,
-		defaultControls,
 		enabledControls,
 		blockAtts,
 		controlSetAtts,
@@ -64,72 +41,6 @@ export default function ControlSet( props ) {
 
 	if ( noControls ) {
 		return null;
-	}
-
-	const isPluginActive = ( plugin ) => {
-		const isActive = variables?.integrations[ plugin ]?.active ?? false;
-		return isActive;
-	};
-
-	let controls = [
-		{
-			slug: 'dateTime',
-			name: __( 'Date & Time', 'block-visibility' ),
-			active: controlSetAtts?.controls.hasOwnProperty( 'dateTime' ),
-			enable: enabledControls.includes( 'date_time' ),
-		},
-		{
-			slug: 'userRole',
-			name: __( 'User Role', 'block-visibility' ),
-			active: controlSetAtts?.controls.hasOwnProperty( 'userRole' ),
-			enable: enabledControls.includes( 'visibility_by_role' ),
-		},
-		{
-			slug: 'screenSize',
-			name: __( 'Screen Size', 'block-visibility' ),
-			active: controlSetAtts?.controls.hasOwnProperty( 'screenSize' ),
-			enable: enabledControls.includes( 'screen_size' ),
-		},
-		{
-			slug: 'queryString',
-			name: __( 'Query String', 'block-visibility' ),
-			active: controlSetAtts?.controls.hasOwnProperty( 'queryString' ),
-			enable: enabledControls.includes( 'query_string' ),
-		},
-		{
-			slug: 'wpFusion',
-			name: __( 'WP Fusion', 'block-visibility' ),
-			icon: icons.wpFusion,
-			active: controlSetAtts?.controls.hasOwnProperty( 'wpFusion' ),
-			enable:
-				enabledControls.includes( 'wp_fusion' ) &&
-				isPluginActive( 'wpFusion' ),
-		},
-	];
-
-	// Filter allows the pro plugin to add new visibility controls.
-	controls = applyFilters(
-		'blockVisibility.visibilityControls',
-		controls,
-		controlSetAtts,
-		enabledControls
-	);
-
-	function toggleControls( control ) {
-		if ( control.active ) {
-			delete controlSetAtts.controls[ control.slug ];
-		} else if ( ! controlSetAtts.controls[ control.slug ] ) {
-			controlSetAtts.controls[ control.slug ] = {};
-		}
-
-		blockAtts.controlSets[ controlSetAtts.id ] = controlSetAtts;
-
-		setAttributes( {
-			blockVisibility: assign(
-				{ ...blockAtts },
-				{ controlSets: blockAtts.controlSets }
-			),
-		} );
 	}
 
 	function setControlAtts( control, values ) {
@@ -145,21 +56,6 @@ export default function ControlSet( props ) {
 		} );
 	}
 
-	function resetControlAtts() {
-		controlSetAtts.controls = defaultControls;
-
-		blockAtts.controlSets[ controlSetAtts.id ] = controlSetAtts;
-
-		setAttributes( {
-			blockVisibility: assign(
-				{ ...blockAtts },
-				{ controlSets: blockAtts.controlSets }
-			),
-		} );
-
-		setResetModalOpen( false );
-	}
-
 	// Provides an entry point to slot in additional settings.
 	const AdditionalControlSetControls = withFilters(
 		'blockVisibility.addControlSetControls'
@@ -167,170 +63,23 @@ export default function ControlSet( props ) {
 
 	return (
 		<div className="block-visibility__control-set">
-			<Flex className="block-visibility__control-set-header">
-				<FlexBlock>
-					<h3>
-						{ __( 'Controls', 'block-visibility' ) }
-						<Button
-							label={ __( 'Quick Tips', 'block-visibility' ) }
-							icon={ info }
-							className="control-tips"
-							onClick={ () =>
-								setTipsPopoverOpen( ( open ) => ! open )
-							}
-							isSmall
-						/>
-						{ tipsPopoverOpen && (
-							<Popover
-								className="block-visibility__control-popover tips"
-								focusOnMount="container"
-								onClose={ () => setTipsPopoverOpen( false ) }
-							>
-								<TipControlSet { ...props } />
-							</Popover>
-						) }
-					</h3>
-				</FlexBlock>
-				<FlexItem>
-					<Button
-						label={ __(
-							'Configure Visibility Controls',
-							'block-visibility'
-						) }
-						icon={ moreHorizontalMobile }
-						className="control-ellipsis"
-						onClick={ () => setPopoverOpen( ( open ) => ! open ) }
-					/>
-					{ popoverOpen && (
-						<Popover
-							className="block-visibility__control-popover"
-							focusOnMount="container"
-							onClose={ () => setPopoverOpen( false ) }
-						>
-							<MenuGroup
-								label={ __(
-									'Enabled Controls',
-									'block-visibility'
-								) }
-							>
-								{ controls.map( ( control ) => {
-									if ( ! control.enable ) {
-										return null;
-									}
+			<ControlSetToolbar { ...props } />
 
-									return (
-										<MenuItem
-											key={ control.slug }
-											icon={ control.active ? check : '' }
-											onClick={ () =>
-												toggleControls( control )
-											}
-										>
-											{ control.name }
-											{ control.icon && (
-												<Icon
-													className="control-branding-icon"
-													icon={ control.icon }
-												/>
-											) }
-										</MenuItem>
-									);
-								} ) }
-								<div className="reset-container">
-									<MenuItem
-										className="reset"
-										onClick={ () => {
-											setResetModalOpen( true );
-										} }
-									>
-										{ __(
-											'Reset all',
-											'block-visibility'
-										) }
-									</MenuItem>
-								</div>
-							</MenuGroup>
-						</Popover>
-					) }
-				</FlexItem>
-			</Flex>
-			{ resetModalOpen && (
-				<Modal
-					title={ __(
-						'Reset all visibility controls?',
-						'block-visibility'
-					) }
-					className="reset-modal"
-					onRequestClose={ () => setResetModalOpen( false ) }
-				>
-					<p>
-						{ __(
-							'Resetting will remove all control settings that you may have configured and will restore the default controls.',
-							'block-visibility'
-						) }
-					</p>
-					<div className="reset-modal__buttons">
-						<Button isSecondary onClick={ () => setResetModalOpen( false ) }>
-							{ __(
-								'Cancel',
-								'block-visibility'
-							) }
-						</Button>
-						<Button isPrimary onClick={ () => resetControlAtts() }>
-							{ __(
-								'Reset',
-								'block-visibility'
-							) }
-						</Button>
-					</div>
-				</Modal>
-			) }
 			<Slot name="ControlSetControlsTop" />
-			<DateTime
-				settings={ settings }
-				variables={ variables }
-				enabledControls={ enabledControls }
-				setControlAtts={ setControlAtts }
-				controlSetAtts={ controlSetAtts }
-				{ ...props }
-			/>
-			<UserRole
-				settings={ settings }
-				variables={ variables }
-				enabledControls={ enabledControls }
-				setControlAtts={ setControlAtts }
-				controlSetAtts={ controlSetAtts }
-				{ ...props }
-			/>
-			<ScreenSize
-				settings={ settings }
-				enabledControls={ enabledControls }
-				setControlAtts={ setControlAtts }
-				controlSetAtts={ controlSetAtts }
-				{ ...props }
-			/>
-			<QueryString
-				settings={ settings }
-				enabledControls={ enabledControls }
-				setControlAtts={ setControlAtts }
-				controlSetAtts={ controlSetAtts }
-				{ ...props }
-			/>
+
+			<DateTime setControlAtts={ setControlAtts } { ...props } />
+			<UserRole setControlAtts={ setControlAtts } { ...props } />
+			<ScreenSize setControlAtts={ setControlAtts } { ...props } />
+			<QueryString setControlAtts={ setControlAtts } { ...props } />
+
 			<Slot name="ControlSetControlsMiddle" />
-			<WPFusion
-				settings={ settings }
-				variables={ variables }
-				enabledControls={ enabledControls }
-				setControlAtts={ setControlAtts }
-				controlSetAtts={ controlSetAtts }
-				{ ...props }
-			/>
+
+			<WPFusion setControlAtts={ setControlAtts } { ...props } />
+
 			<Slot name="ControlSetControlsBottom" />
+
 			<AdditionalControlSetControls
-				settings={ settings }
-				enabledControls={ enabledControls }
 				setControlAtts={ setControlAtts }
-				controlSetAtts={ controlSetAtts }
 				{ ...props }
 			/>
 			{ ! noControls && isEmpty( controlSetAtts.controls ) && (

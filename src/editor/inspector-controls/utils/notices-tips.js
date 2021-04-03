@@ -241,7 +241,8 @@ export function TipQueryString() {
 export function TipWPFusion( props ) {
 	const { variables } = props;
 	const isAdmin = variables.currentUsersRoles.includes( 'administrator' );
-	const excludeAdmins = variables?.integrations?.wpFusion?.excludeAdmins ?? false;
+	const excludeAdmins =
+		variables?.integrations?.wpFusion?.excludeAdmins ?? false;
 
 	return (
 		<>
