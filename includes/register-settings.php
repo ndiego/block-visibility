@@ -191,6 +191,12 @@ function register_settings() {
 				'enable_advanced_controls' => false,
 				'enable_frontend_css'      => true,
 			),
+			'query_string'       => array(
+				'enable' => true,
+			),
+			'wp_fusion'          => array(
+				'enable' => true,
+			),
 		),
 		'disabled_blocks'     => array(),
 		'plugin_settings'     => array(
