@@ -22,7 +22,7 @@ export default function hasPermission( settings, variables ) {
 		permittedRoles.push( 'administrator' ); // Admins are always permitted.
 	}
 
-	const userRoles = variables?.currentUsersRoles ?? [];
+	const userRoles = variables?.current_users_roles ?? [];
 
 	if ( userRoles.length === 0 ) {
 		isPermitted = false;

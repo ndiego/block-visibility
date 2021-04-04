@@ -19,10 +19,15 @@ export default function hasWPFusion(
 	enabledControls,
 	variables
 ) {
-	const pluginActive = variables?.integrations?.wpFusion?.active ?? false;
+	const pluginActive = variables?.integrations?.wp_fusion?.active ?? false;
 
 	// WP Fusion is not active so return false even if saved controls exist.
-	if ( ! pluginActive || ! enabledControls.includes( 'wp_fusion' ) ) {
+	if ( 
+		! pluginActive ||
+		! enabledControls.some( ( control ) =>
+			control.settingSlug === 'wp_fusion'
+		)
+	) {
 		return false;
 	}
 

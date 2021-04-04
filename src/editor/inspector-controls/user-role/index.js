@@ -32,7 +32,9 @@ export default function UserRole( props ) {
 		setControlAtts,
 		controlSetAtts,
 	} = props;
-	const controlEnabled = enabledControls.includes( 'visibility_by_role' );
+	const controlEnabled = enabledControls.some( ( control ) =>
+		control.settingSlug === 'visibility_by_role'
+	);
 	const controlToggledOn =
 		controlSetAtts?.controls.hasOwnProperty( 'userRole' ) ?? false;
 
@@ -43,7 +45,7 @@ export default function UserRole( props ) {
 	const userRole = controlSetAtts?.controls?.userRole ?? {};
 	const visibilityByRole = userRole?.visibilityByRole ?? 'public';
 
-	const settingsUrl = variables?.pluginVariables.settingsUrl ?? ''; // eslint-disable-line
+	const settingsUrl = variables?.plugin_variables.settings_url ?? ''; // eslint-disable-line
 	const enableUserRoles = isControlSettingEnabled(
 		settings,
 		'visibility_by_role',
@@ -146,10 +148,7 @@ export default function UserRole( props ) {
 				) }
 				<Slot name="VisibilityByRoleControls" />
 			</div>
-			<ControlSeparator
-				controlSetAtts={ controlSetAtts }
-				control="userRole"
-			/>
+			<ControlSeparator control="userRole" { ...props } />
 		</>
 	);
 }

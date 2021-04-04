@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { assign } from 'lodash';
+import { assign, isEmpty } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -17,10 +17,10 @@ import { useState, useEffect } from '@wordpress/element';
 import HideBlock from './hide-block';
 import ControlSet from './control-set';
 import { NoticeControlsDisabled } from './utils/notices-tips';
-import { getEnabledControls } from './../utils/setting-utilities';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import hasPermission from './../utils/has-permission';
 import usePluginData from './../utils/use-plugin-data';
+import getEnabledControls from './../../utils/get-enabled-controls';
 
 /**
  * Add the Visibility inspector control to each allowed block in the editor
@@ -36,10 +36,22 @@ export default function VisibilityInspectorControls( props ) {
 	const settings = usePluginData( 'settings' );
 	const variables = usePluginData( 'variables' );
 
-	const defaultControls = settings?.plugin_settings?.default_controls ?? {
-		dateTime: {},
-		userRole: {},
-		screenSize: {},
+	const enabledControls = getEnabledControls( settings, variables );
+	const defaultControlSettings = settings?.plugin_settings?.default_controls ?? {};
+	let defaultControls = {};
+
+	if ( ! isEmpty( defaultControlSettings ) ) {
+		enabledControls.forEach( ( control ) => {
+			if ( defaultControlSettings.includes( control.settingSlug ) ) {
+				defaultControls[ control.attributeSlug ] = {};
+			}
+		} );
+	} else {
+		defaultControls = {
+			dateTime: {},
+			userRole: {},
+			screenSize: {},
+		}
 	};
 
 	useEffect( () => {
@@ -75,8 +87,7 @@ export default function VisibilityInspectorControls( props ) {
 		return null;
 	}
 
-	const settingsUrl = variables?.pluginVariables.settingsUrl ?? ''; // eslint-disable-line
-	const enabledControls = getEnabledControls( settings );
+	const settingsUrl = variables?.plugin_variables.settings_url ?? ''; // eslint-disable-line
 
 	// Provides an entry point to slot in additional settings.
 	const AdditionalInspectorControls = withFilters(
@@ -87,7 +98,10 @@ export default function VisibilityInspectorControls( props ) {
 	const controlSets = blockAtts?.controlSets ?? [];
 
 	const hideBlock = blockVisibility?.hideBlock ?? false;
-	const blockHidden = enabledControls.includes( 'hide_block' ) && hideBlock;
+	const hasHideBlock = enabledControls.some( ( control ) =>
+		control.settingSlug === 'hide_block'
+	);
+	const blockHidden = hasHideBlock && hideBlock;
 
 	return (
 		// Note that the core InspectorControls component is already making use

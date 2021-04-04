@@ -34,8 +34,10 @@ export default function WPFusion( props ) {
 		controlSetAtts,
 		setControlAtts,
 	} = props;
-	const pluginActive = variables?.integrations?.wpFusion?.active ?? false;
-	const controlEnabled = enabledControls.includes( 'wp_fusion' );
+	const pluginActive = variables?.integrations?.wp_fusion?.active ?? false;
+	const controlEnabled = enabledControls.some( ( control ) =>
+		control.settingSlug === 'wp_fusion'
+	);
 	const controlToggledOn =
 		controlSetAtts?.controls.hasOwnProperty( 'wpFusion' ) ?? false;
 
@@ -47,7 +49,7 @@ export default function WPFusion( props ) {
 		controlSetAtts?.controls.hasOwnProperty( 'userRole' ) ?? false;
 	const userRoles =
 		controlSetAtts?.controls?.userRole?.visibilityByRole ?? 'public';
-	const availableTags = variables?.integrations?.wpFusion?.tags ?? [];
+	const availableTags = variables?.integrations?.wp_fusion?.tags ?? [];
 
 	// Concert array of tag value to array of tag objects with values and labels.
 	const convertTags = ( tags ) => {
@@ -194,10 +196,7 @@ export default function WPFusion( props ) {
 					</Notice>
 				) }
 			</div>
-			<ControlSeparator
-				controlSetAtts={ controlSetAtts }
-				control="wpFusion"
-			/>
+            <ControlSeparator control="wpFusion" { ...props } />
 		</>
 	);
 }

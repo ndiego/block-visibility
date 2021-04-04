@@ -18,10 +18,10 @@ import InformationPopover from './../../utils/information-popover';
  * @return {string}		 Return the rendered JSX
  */
 export default function FullControlMode( props ) {
-	const { settings, setSettings, setHasUpdates } = props;
+	const { pluginSettings, setPluginSettings, setHasUpdates } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enableFullControlMode = settings?.enable_full_control_mode ?? false; // eslint-disable-line
+	const enableFullControlMode = pluginSettings?.enable_full_control_mode ?? false; // eslint-disable-line
 
 	return (
 		<div className="setting-tabs__settings-panel">
@@ -51,8 +51,8 @@ export default function FullControlMode( props ) {
 						) }
 						checked={ enableFullControlMode }
 						onChange={ () => {
-							setSettings( {
-								...settings,
+							setPluginSettings( {
+								...pluginSettings,
 								enable_full_control_mode: ! enableFullControlMode,
 							} );
 							setHasUpdates( true );

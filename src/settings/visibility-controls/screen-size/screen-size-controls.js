@@ -18,16 +18,16 @@ import InformationPopover from './../../utils/information-popover';
  */
 export default function ScreenSizeControls( props ) {
 	const {
-		settings,
-		setSettings,
+		visibilityControls,
+		setVisibilityControls,
 		setHasUpdates,
 		screenSize,
 		enableAdvancedControls,
 	} = props;
 
 	function onControlChange( control, value ) {
-		setSettings( {
-			...settings,
+		setVisibilityControls( {
+			...visibilityControls,
 			screen_size: {
 				...screenSize,
 				controls: {

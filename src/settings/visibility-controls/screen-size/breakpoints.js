@@ -18,8 +18,8 @@ import InformationPopover from './../../utils/information-popover';
  */
 export default function Breakpoints( props ) {
 	const {
-		settings,
-		setSettings,
+		visibilityControls,
+		setVisibilityControls,
 		setHasUpdates,
 		screenSize,
 		enableAdvancedControls,
@@ -54,8 +54,8 @@ export default function Breakpoints( props ) {
 	};
 
 	function onBreakpointChange( breakpoint, value ) {
-		setSettings( {
-			...settings,
+		setVisibilityControls( {
+			...visibilityControls,
 			screen_size: {
 				...screenSize,
 				breakpoints: {

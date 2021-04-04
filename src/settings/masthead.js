@@ -20,18 +20,21 @@ import icons from './../utils/icons';
  * @return {string}		 Return the rendered JSX
  */
 export default function Masthead( props ) {
-	const { isPro, pluginVariables } = props.variables;
+	const { variables } = props;
+
+	const isPro = variables?.is_pro ?? false;
+	const pluginVariables = variables?.plugin_variables ?? [];
 
 	// Default header links.
 	const links = {
 		review: {
 			title: __( 'Review', 'block-visibility' ),
-			url: pluginVariables.supportUrl + 'reviews/?filter=5',
+			url: pluginVariables.support_url + 'reviews/?filter=5',
 			icon: 'star',
 		},
 		support: {
 			title: __( 'Support', 'block-visibility' ),
-			url: pluginVariables.supportUrl,
+			url: pluginVariables.support_url,
 			icon: 'help',
 		},
 	};
@@ -90,7 +93,7 @@ export default function Masthead( props ) {
 										a: (
 											<a // eslint-disable-line
 												href={
-													pluginVariables.supportUrl
+													pluginVariables.support_url
 												}
 												target="_blank"
 												rel="noreferrer"
@@ -109,7 +112,7 @@ export default function Masthead( props ) {
 										a: (
 											<a // eslint-disable-line
 												href={
-													pluginVariables.supportUrl +
+													pluginVariables.support_url +
 													'reviews/?filter=5'
 												}
 												target="_blank"

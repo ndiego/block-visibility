@@ -17,10 +17,8 @@ import icons from './../../utils/icons';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import hasPermission from './../utils/has-permission';
 import usePluginData from './../utils/use-plugin-data';
-import {
-	isPluginSettingEnabled,
-	getEnabledControls,
-} from './../utils/setting-utilities';
+import { isPluginSettingEnabled } from './../utils/setting-utilities';
+import getEnabledControls from './../../utils/get-enabled-controls';
 
 /**
  * Adds the toolbar control for showing/hiding the selected block.
@@ -57,13 +55,15 @@ function ToolbarControls( props ) {
 		'enable_toolbar_controls'
 	);
 	const hasVisibility = hasVisibilityControls( settings, blockType.name );
-	const enabledControls = getEnabledControls( settings );
+	const enabledControls = getEnabledControls( settings, variables );
 
 	// As of v1.1.0 we only have hide block controls.
 	if (
 		! enableToolbarControls ||
 		! hasVisibility ||
-		! enabledControls.includes( 'hide_block' )
+		! enabledControls.some( ( control ) =>
+			control.settingSlug === 'hide_block'
+		)
 	) {
 		return null;
 	}

@@ -17,10 +17,10 @@ import InformationPopover from './../../utils/information-popover';
  * @return {string}		 Return the rendered JSX
  */
 export default function QueryString( props ) {
-	const { settings, setSettings, setHasUpdates } = props;
+	const { visibilityControls, setVisibilityControls, setHasUpdates } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enable = settings?.query_string?.enable ?? true; // eslint-disable-line
+	const enable = visibilityControls?.query_string?.enable ?? true; // eslint-disable-line
 
 	return (
 		<div className="setting-tabs__settings-panel">
@@ -38,10 +38,10 @@ export default function QueryString( props ) {
 						) }
 						checked={ enable }
 						onChange={ () => {
-							setSettings( {
-								...settings,
+							setVisibilityControls( {
+								...visibilityControls,
 								query_string: {
-									...settings.query_string,
+									...visibilityControls.query_string,
 									enable: ! enable,
 								},
 							} );

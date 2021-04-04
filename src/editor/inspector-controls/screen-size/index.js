@@ -25,7 +25,9 @@ import ControlSeparator from './../utils/control-separator';
  */
 export default function ScreenSize( props ) {
 	const { settings, enabledControls, controlSetAtts, setControlAtts } = props;
-	const controlEnabled = enabledControls.includes( 'screen_size' );
+    const controlEnabled = enabledControls.some( ( control ) =>
+        control.settingSlug === 'screen_size'
+    );
 	const controlToggledOn =
 		controlSetAtts?.controls.hasOwnProperty( 'screenSize' ) ?? false;
 
@@ -136,10 +138,7 @@ export default function ScreenSize( props ) {
 				) }
 				<Slot name="ScreenSizeControls" />
 			</div>
-			<ControlSeparator
-				controlSetAtts={ controlSetAtts }
-				control="screenSize"
-			/>
+            <ControlSeparator control="screenSize" { ...props } />
 		</>
 	);
 }

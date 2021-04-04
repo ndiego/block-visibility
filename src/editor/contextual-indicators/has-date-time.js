@@ -41,7 +41,9 @@ export default function hasDateTime(
 	let indicatorTest = true;
 
 	if (
-		! enabledControls.includes( 'date_time' ) ||
+		! enabledControls.some( ( control ) =>
+			control.settingSlug === 'date_time'
+		) ||
 		( ! enable && ! deprecatedStart && ! deprecatedEnd ) ||
 		( enable && ! start && ! end )
 	) {

@@ -4,6 +4,11 @@
 import { has } from 'lodash';
 
 /**
+ * Internal dependencies
+ */
+import _getEnabledControls from './../../utils/get-enabled-controls';
+
+/**
  * Get all the visibility controls that are enabled in the plugin settings.
  *
  * @since 1.1.0
@@ -47,6 +52,24 @@ export function getEnabledControls( settings ) {
 	} );
 
 	return enabledControls;
+}
+
+/**
+ * Get a simplified array of all enabled controls by setting slug.
+ *
+ * @since 1.8.0
+ * @param {Object} settings All plugin settings
+ * @return {Array}   	    Return array of all enabled visibility controls.
+ */
+export function getEnabledControlsSimplified( settings, variables ) {
+	const enabledControls = _getEnabledControls( settings, variables );
+	let controls = [];
+
+	enabledControls.forEach( ( control ) => {
+		controls.push( control.settingSlug )
+	} );
+
+	return controls;
 }
 
 /**

@@ -17,10 +17,10 @@ import InformationPopover from './../../utils/information-popover';
  * @return {string}		 Return the rendered JSX
  */
 export default function HideBlock( props ) {
-	const { settings, setSettings, setHasUpdates } = props;
+	const { visibilityControls, setVisibilityControls, setHasUpdates } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enable = settings?.hide_block?.enable ?? true; // eslint-disable-line
+	const enable = visibilityControls?.hide_block?.enable ?? true; // eslint-disable-line
 
 	return (
 		<div className="setting-tabs__settings-panel">
@@ -38,10 +38,10 @@ export default function HideBlock( props ) {
 						) }
 						checked={ enable }
 						onChange={ () => {
-							setSettings( {
-								...settings,
+							setVisibilityControls( {
+								...visibilityControls,
 								hide_block: {
-									...settings.hide_block,
+									...visibilityControls.hide_block,
 									enable: ! enable,
 								},
 							} );

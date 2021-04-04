@@ -21,7 +21,11 @@ export default function hasQueryString(
 		return false;
 	}
 
-	if ( ! enabledControls.includes( 'query_string' ) ) {
+	if (
+		! enabledControls.some( ( control ) =>
+			control.settingSlug === 'query_string'
+		)
+	) {
 		return false;
 	}
 

@@ -696,4 +696,82 @@ $mobile: 426px;
 			}
 		}
 	}
+
+	// Custom styling to make react-select components look more like WordPress.
+	.block-visibility__react-select {
+	    margin: 10px 0;
+
+	    .react-select__control {
+	        border-radius: 2px;
+	        border: 1px solid #757575;
+	        min-height: 20px;
+
+	        &:hover {
+	            border: 1px solid #757575;
+	        }
+
+	        &:focus,
+	        &.react-select__control--is-focused {
+	            border-color: #007cba;
+	            border-color: var(--wp-admin-theme-color);
+	            box-shadow: 0 0 0 1px #007cba;
+	            box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
+	            outline: 2px solid transparent;
+	        }
+	    }
+
+	    // Removes added height on cursor.
+	    .react-select__value-container {
+	        padding: 2px 4px;
+
+	        .react-select__placeholder {
+	            margin-left: 5px;
+	            margin-right: 5px;
+	        }
+
+	        div:last-child {
+	            margin: 0 2px;
+	            padding-bottom: 0;
+	            padding-top: 0;
+	        }
+	    }
+
+	    .react-select__multi-value {
+	        background-color: #ddd;
+
+	        .react-select__multi-value__label {
+	            font-size: 95%;
+	        }
+	    }
+
+	    .react-select__input {
+	        input {
+	            min-height: auto;
+
+	            &:focus {
+	                box-shadow: none;
+	            }
+	        }
+	    }
+
+	    .react-select__clear-indicator,
+	    .react-select__dropdown-indicator {
+	        &:hover {
+	            color: #007cba;
+	            color: var(--wp-admin-theme-color);
+	            cursor: pointer;
+	        }
+	    }
+
+	    .react-select__option,
+	    .react-select__multi-value__remove {
+	        cursor: pointer;
+	    }
+
+	    .react-select__option--is-focused {
+	        background: white;
+	        color: #007cba;
+	        color: var(--wp-admin-theme-color);
+	    }
+	}
 }

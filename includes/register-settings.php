@@ -130,6 +130,12 @@ function register_settings() {
 		'plugin_settings'     => array(
 			'type'       => 'object',
 			'properties' => array(
+				'default_controls'              => array(
+					'type'  => 'array',
+					'items' => array(
+						'type' => 'string',
+					),
+				),
 				'enable_contextual_indicators'  => array(
 					'type' => 'boolean',
 				),
@@ -200,6 +206,7 @@ function register_settings() {
 		),
 		'disabled_blocks'     => array(),
 		'plugin_settings'     => array(
+			'default_controls'              => array( 'date_time', 'visibility_by_role', 'screen_size' ),
 			'enable_contextual_indicators'  => true,
 			'enable_toolbar_controls'       => true,
 			'enable_editor_notices'         => true,
@@ -210,7 +217,7 @@ function register_settings() {
 		),
 	);
 
-	$defaults = apply_filters( 'block_visibility_setting_defaults', $defaults );
+	$defaults = apply_filters( 'block_visibility_settings_defaults', $defaults );
 
 	register_setting(
 		'block_visibility',
@@ -231,5 +238,7 @@ function register_settings() {
 		)
 	);
 }
+// @TODO remove
+//delete_option( 'block_visibility_settings' );
 add_action( 'rest_api_init', __NAMESPACE__ . '\register_settings' );
 add_action( 'admin_init', __NAMESPACE__ . '\register_settings' );

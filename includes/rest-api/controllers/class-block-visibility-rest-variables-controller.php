@@ -73,22 +73,22 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 		}
 
 		$plugin_variables = array(
-			'version'     => BLOCK_VISIBILITY_VERSION,
-			'settingsUrl' => BLOCK_VISIBILITY_SETTINGS_URL,
-			'supportUrl'  => BLOCK_VISIBILITY_SUPPORT_URL,
+			'version'      => BLOCK_VISIBILITY_VERSION,
+			'settings_url' => BLOCK_VISIBILITY_SETTINGS_URL,
+			'support_url'  => BLOCK_VISIBILITY_SUPPORT_URL,
 		);
 
 		$variables = array(
-			'currentUsersRoles' => get_current_user_role(),
-			'userRoles'         => get_user_roles(),
-			'pluginVariables'   => $plugin_variables,
-			'isFullControlMode' => $is_full_control_mode,
-			'isPro'             => defined( 'BVP_VERSION' ), // If the Pro version constant is set, then Block Visibility Pro is active.
-			'integrations'      => array(
-				'wpFusion' => array(
+			'current_users_roles'  => get_current_user_role(),
+			'user_roles'           => get_user_roles(),
+			'plugin_variables'     => $plugin_variables,
+			'is_full_control_mode' => $is_full_control_mode,
+			'is_pro'               => defined( 'BVP_VERSION' ), // If the Pro version constant is set, then Block Visibility Pro is active.
+			'integrations'         => array(
+				'wp_fusion' => array(
 					'active'        => function_exists( 'wp_fusion' ),
 					'tags'          => self::get_wp_fusion_tags(),
-					'excludeAdmins' => self::get_wp_fusion_exclude_admins(),
+					'exclude_admins' => self::get_wp_fusion_exclude_admins(),
 				),
 			),
 		);
@@ -117,34 +117,34 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 			'title'      => 'variables',
 			'type'       => 'object',
 			'properties' => array(
-				'currentUsersRoles' => array(
+				'current_users_roles' => array(
 					'type'  => 'array',
 					'items' => array(
 						'type' => 'string',
 					),
 				),
-				'userRoles'         => array(
+				'user_roles'         => array(
 					'type'  => 'array',
 					'items' => array(
 						'type' => 'string',
 					),
 				),
-				'pluginVariables'   => array(
+				'plugin_variables'   => array(
 					'type'  => 'array',
 					'items' => array(
 						'type' => 'string',
 					),
 				),
-				'isFullControlMode' => array(
+				'is_full_control_mode' => array(
 					'type' => 'boolean',
 				),
-				'isPro'             => array(
+				'is_pro'             => array(
 					'type' => 'boolean',
 				),
 				'integrations'      => array(
 					'type'       => 'object',
 					'properties' => array(
-						'wpFusion' => array(
+						'wp_fusion' => array(
 							'type'       => 'object',
 							'properties' => array(
 								'active'         => array(

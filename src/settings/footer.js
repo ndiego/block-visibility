@@ -12,7 +12,8 @@ import { applyFilters } from '@wordpress/hooks';
  * @return {string}		 Return the rendered JSX
  */
 export default function Footer( props ) {
-	const { pluginVariables } = props.variables;
+	const { variables } = props;
+	const pluginVariables = variables?.plugin_variables ?? [];
 
 	// Default footer links.
 	const links = {
@@ -28,7 +29,7 @@ export default function Footer( props ) {
 		},
 		support: {
 			title: __( 'Support', 'block-visibility' ),
-			url: pluginVariables.supportUrl,
+			url: pluginVariables.support_url,
 		},
 		repo: {
 			title: __( 'GitHub', 'block-visibility' ),

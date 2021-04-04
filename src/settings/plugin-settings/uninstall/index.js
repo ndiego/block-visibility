@@ -17,10 +17,10 @@ import InformationPopover from './../../utils/information-popover';
  * @return {string}		 Return the rendered JSX
  */
 export default function FullControlMode( props ) {
-	const { settings, setSettings, setHasUpdates } = props;
+	const { pluginSettings, setPluginSettings, setHasUpdates } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
-	const removeOnUninstall = settings?.remove_on_uninstall ?? false; // eslint-disable-line
+	const removeOnUninstall = pluginSettings?.remove_on_uninstall ?? false; // eslint-disable-line
 
 	return (
 		<div className="setting-tabs__settings-panel">
@@ -44,8 +44,8 @@ export default function FullControlMode( props ) {
 						) }
 						checked={ removeOnUninstall }
 						onChange={ () => {
-							setSettings( {
-								...settings,
+							setPluginSettings( {
+								...pluginSettings,
 								remove_on_uninstall: ! removeOnUninstall,
 							} );
 							setHasUpdates( true );

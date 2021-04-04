@@ -18,15 +18,15 @@ import EnabledUserRoles from './enabled-user-roles';
  * @return {string}		 Return the rendered JSX
  */
 export default function UserPermissions( props ) {
-	const { settings, setSettings, setHasUpdates } = props;
+	const { pluginSettings, setPluginSettings, setHasUpdates } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enable = settings?.enable_user_role_restrictions ?? false; // eslint-disable-line
+	const enable = pluginSettings?.enable_user_role_restrictions ?? false; // eslint-disable-line
 
 	let userRolesElement = (
 		<EnabledUserRoles
-			settings={ settings }
-			setSettings={ setSettings }
+			pluginSettings={ pluginSettings }
+			setPluginSettings={ setPluginSettings }
 			setHasUpdates={ setHasUpdates }
 		/>
 	);
@@ -51,8 +51,8 @@ export default function UserPermissions( props ) {
 						) }
 						checked={ enable }
 						onChange={ () => {
-							setSettings( {
-								...settings,
+							setPluginSettings( {
+								...pluginSettings,
 								enable_user_role_restrictions: ! enable,
 							} );
 							setHasUpdates( true );

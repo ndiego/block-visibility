@@ -18,7 +18,7 @@ import icons from './../../../utils/icons';
  * @return {string}		 Return the rendered JSX
  */
 export default function Integrations( props ) {
-	const { settings, variables, setSettings, setHasUpdates } = props;
+	const { variables, visibilityControls, setVisibilityControls, setHasUpdates } = props;
 	const wpFusionActive = variables?.integrations?.wpFusion?.active ?? false;
 
 	// If WP Fusion is not active, don't display the integrations pane. Need to
@@ -28,7 +28,7 @@ export default function Integrations( props ) {
 	}
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enable = settings?.wp_fusion?.enable ?? true; // eslint-disable-line
+	const enable = visibilityControls?.wp_fusion?.enable ?? true; // eslint-disable-line
 
 	return (
 		<div className="setting-tabs__settings-panel">
@@ -51,10 +51,10 @@ export default function Integrations( props ) {
 							) }
 							checked={ enable }
 							onChange={ () => {
-								setSettings( {
-									...settings,
+								setVisibilityControls( {
+									...visibilityControls,
 									wp_fusion: {
-										...settings.wp_fusion,
+										...visibilityControls.wp_fusion,
 										enable: ! enable,
 									},
 								} );

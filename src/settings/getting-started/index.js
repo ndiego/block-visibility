@@ -18,7 +18,8 @@ import { createInterpolateElement } from '@wordpress/element';
  * @return {string}		 Return the rendered JSX
  */
 export default function GettingStarted( props ) {
-	const { pluginVariables } = props.variables;
+	const { variables } = props;
+	const pluginVariables = variables?.plugin_variables ?? [];
 
 	return (
 		<div className="setting-tabs__getting-started inner-container narrow">
@@ -171,7 +172,7 @@ export default function GettingStarted( props ) {
 								{
 									a: (
 										<ExternalLink // eslint-disable-line
-											href={ pluginVariables.supportUrl }
+											href={ pluginVariables.support_url }
 											target="_blank"
 											rel="noreferrer"
 										/>
@@ -194,7 +195,7 @@ export default function GettingStarted( props ) {
 								{
 									a: (
 										<ExternalLink // eslint-disable-line
-											href={ pluginVariables.supportUrl }
+											href={ pluginVariables.support_url }
 											target="_blank"
 											rel="noreferrer"
 										/>
@@ -217,7 +218,7 @@ export default function GettingStarted( props ) {
 								{
 									a: (
 										<ExternalLink // eslint-disable-line
-											href={ pluginVariables.supportUrl }
+											href={ pluginVariables.support_url }
 											target="_blank"
 											rel="noreferrer"
 										/>
@@ -260,7 +261,7 @@ export default function GettingStarted( props ) {
 					) }
 				</p>
 				<Button
-					href={ pluginVariables.supportUrl }
+					href={ pluginVariables.support_url }
 					target="__blank"
 					isPrimary
 				>

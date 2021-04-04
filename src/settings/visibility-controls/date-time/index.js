@@ -17,21 +17,21 @@ import InformationPopover from './../../utils/information-popover';
  * @return {string}		 Return the rendered JSX
  */
 export default function DateTime( props ) {
-	const { settings, setSettings, setHasUpdates } = props;
+	const { visibilityControls, setVisibilityControls, setHasUpdates } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enable = settings?.date_time?.enable ?? true; // eslint-disable-line
-	const enableScheduling = settings?.date_time?.enable_scheduling ?? true; // eslint-disable-line
+	const enable = visibilityControls?.date_time?.enable ?? true; // eslint-disable-line
+	const enableScheduling = visibilityControls?.date_time?.enable_scheduling ?? true; // eslint-disable-line
 
 	let schedulingControl = (
 		<ToggleControl
 			label={ __( 'Enable block scheduling.', 'block-visibility' ) }
 			checked={ enableScheduling }
 			onChange={ () => {
-				setSettings( {
-					...settings,
+				setVisibilityControls( {
+					...visibilityControls,
 					date_time: {
-						...settings.date_time,
+						...visibilityControls.date_time,
 						enable_scheduling: ! enableScheduling,
 					},
 				} );
@@ -60,10 +60,10 @@ export default function DateTime( props ) {
 						) }
 						checked={ enable }
 						onChange={ () => {
-							setSettings( {
-								...settings,
+							setVisibilityControls( {
+								...visibilityControls,
 								date_time: {
-									...settings.date_time,
+									...visibilityControls.date_time,
 									enable: ! enable,
 								},
 							} );

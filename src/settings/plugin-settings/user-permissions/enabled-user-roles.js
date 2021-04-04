@@ -17,11 +17,11 @@ import { CheckboxControl } from '@wordpress/components';
  * @return {string}		 Return the rendered JSX
  */
 export default function EnabledUserRoles( props ) {
-	const { settings, setSettings, setHasUpdates } = props;
+	const { pluginSettings, setPluginSettings, setHasUpdates } = props;
 	const roles = [ 'editor', 'author', 'contributor' ];
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enabledRoles = settings?.enabled_user_roles ?? []; // eslint-disable-line
+	const enabledRoles = pluginSettings?.enabled_user_roles ?? []; // eslint-disable-line
 
 	return (
 		<div className="subsetting">
@@ -43,8 +43,8 @@ export default function EnabledUserRoles( props ) {
 						checked={ isChecked }
 						label={ <span>{ startCase( role ) + 's' }</span> }
 						onChange={ () => {
-							setSettings( {
-								...settings,
+							setPluginSettings( {
+								...pluginSettings,
 								enabled_user_roles: newEnabledRoles,
 							} );
 							setHasUpdates( true );

@@ -6,6 +6,8 @@ import { assign, isEmpty } from 'lodash';
 /**
  * WordPress dependencies
  */
+import { __ } from '@wordpress/i18n';
+import { applyFilters } from '@wordpress/hooks';
 import { Slot, withFilters } from '@wordpress/components';
 
 /**
@@ -18,6 +20,7 @@ import ScreenSize from './screen-size';
 import QueryString from './query-string';
 import WPFusion from './wp-fusion';
 import { NoticeBlockControlsDisabled } from './utils/notices-tips';
+import icons from './../../utils/icons';
 
 /**
  * Render a control set
@@ -34,14 +37,46 @@ export default function ControlSet( props ) {
 		blockAtts,
 		controlSetAtts,
 	} = props;
-	const settingsUrl = variables?.pluginVariables?.settingsUrl ?? '';
+	const settingsUrl = variables?.plugin_variables?.settings_url ?? '';
+
 	const noControls =
 		enabledControls.length === 1 &&
-		enabledControls.includes( 'hide_block' );
+		enabledControls.some( ( control ) =>
+			control.settingSlug === 'hide_block'
+		);
 
 	if ( noControls ) {
 		return null;
 	}
+
+	let controls = [];
+
+	enabledControls.forEach( ( control ) => {
+
+		// We don't want to include the hide block control.
+		if ( control.settingSlug !== 'hide_block' ) {
+			controls.push( {
+				label: control.label,
+				type: control.type,
+				attributeSlug: control.attributeSlug,
+				settingSlug: control.settingSlug,
+				icon: control?.icon ?? false ,
+				active: controlSetAtts?.controls.hasOwnProperty( control.attributeSlug ),
+			} );
+		}
+	} );
+
+	// setControls are all saved controls on the block, but a block can have
+	// saved settings from controls that have since been disabled.
+	const setControls = Object.keys( controlSetAtts.controls );
+	const activeControls = controls.filter( ( control ) => {
+		if (
+			control.active &&
+			setControls.includes( control.attributeSlug )
+		) {
+			return true;
+		}
+	} );
 
 	function setControlAtts( control, values ) {
 		controlSetAtts.controls[ control ] = values;
@@ -63,7 +98,7 @@ export default function ControlSet( props ) {
 
 	return (
 		<div className="block-visibility__control-set">
-			<ControlSetToolbar { ...props } />
+			<ControlSetToolbar controls={ controls } { ...props } />
 
 			<Slot name="ControlSetControlsTop" />
 
@@ -82,7 +117,7 @@ export default function ControlSet( props ) {
 				setControlAtts={ setControlAtts }
 				{ ...props }
 			/>
-			{ ! noControls && isEmpty( controlSetAtts.controls ) && (
+			{ ! noControls && isEmpty( activeControls ) && (
 				<NoticeBlockControlsDisabled settingsUrl={ settingsUrl } />
 			) }
 		</div>

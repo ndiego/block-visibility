@@ -17,7 +17,6 @@ import {
 	Modal,
 	Popover,
 } from '@wordpress/components';
-import { applyFilters } from '@wordpress/hooks';
 import { useState } from '@wordpress/element';
 import { Icon, moreHorizontalMobile, check, info } from '@wordpress/icons';
 
@@ -25,7 +24,6 @@ import { Icon, moreHorizontalMobile, check, info } from '@wordpress/icons';
  * Internal dependencies
  */
 import { TipControlSet } from './utils/notices-tips';
-import icons from './../../utils/icons';
 
 /**
  * Render a control set
@@ -42,7 +40,7 @@ export default function ControlSetToolbar( props ) {
 		setAttributes,
 		variables,
 		defaultControls,
-		enabledControls,
+		controls,
 		blockAtts,
 		controlSetAtts,
 	} = props;
@@ -52,55 +50,11 @@ export default function ControlSetToolbar( props ) {
 		return isActive;
 	};
 
-	let controls = [
-		{
-			slug: 'dateTime',
-			name: __( 'Date & Time', 'block-visibility' ),
-			active: controlSetAtts?.controls.hasOwnProperty( 'dateTime' ),
-			enable: enabledControls.includes( 'date_time' ),
-		},
-		{
-			slug: 'userRole',
-			name: __( 'User Role', 'block-visibility' ),
-			active: controlSetAtts?.controls.hasOwnProperty( 'userRole' ),
-			enable: enabledControls.includes( 'visibility_by_role' ),
-		},
-		{
-			slug: 'screenSize',
-			name: __( 'Screen Size', 'block-visibility' ),
-			active: controlSetAtts?.controls.hasOwnProperty( 'screenSize' ),
-			enable: enabledControls.includes( 'screen_size' ),
-		},
-		{
-			slug: 'queryString',
-			name: __( 'Query String', 'block-visibility' ),
-			active: controlSetAtts?.controls.hasOwnProperty( 'queryString' ),
-			enable: enabledControls.includes( 'query_string' ),
-		},
-		{
-			slug: 'wpFusion',
-			name: __( 'WP Fusion', 'block-visibility' ),
-			icon: icons.wpFusion,
-			active: controlSetAtts?.controls.hasOwnProperty( 'wpFusion' ),
-			enable:
-				enabledControls.includes( 'wp_fusion' ) &&
-				isPluginActive( 'wpFusion' ),
-		},
-	];
-
-	// Filter allows the pro plugin to add new visibility controls.
-	controls = applyFilters(
-		'blockVisibility.visibilityControls',
-		controls,
-		controlSetAtts,
-		enabledControls
-	);
-
 	function toggleControls( control ) {
 		if ( control.active ) {
-			delete controlSetAtts.controls[ control.slug ];
-		} else if ( ! controlSetAtts.controls[ control.slug ] ) {
-			controlSetAtts.controls[ control.slug ] = {};
+			delete controlSetAtts.controls[ control.attributeSlug ];
+		} else if ( ! controlSetAtts.controls[ control.attributeSlug ] ) {
+			controlSetAtts.controls[ control.attributeSlug ] = {};
 		}
 
 		blockAtts.controlSets[ controlSetAtts.id ] = controlSetAtts;
@@ -177,19 +131,15 @@ export default function ControlSetToolbar( props ) {
 								) }
 							>
 								{ controls.map( ( control ) => {
-									if ( ! control.enable ) {
-										return null;
-									}
-
 									return (
 										<MenuItem
-											key={ control.slug }
+											key={ control.attributeSlug }
 											icon={ control.active ? check : '' }
 											onClick={ () =>
 												toggleControls( control )
 											}
 										>
-											{ control.name }
+											{ control.label }
 											{ control.icon && (
 												<Icon
 													className="control-branding-icon"

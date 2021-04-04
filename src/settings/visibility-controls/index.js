@@ -26,7 +26,7 @@ import Integrations from './integrations';
  */
 export default function VisibilityControls( props ) {
 	const [ visibilityControls, setVisibilityControls ] = useState(
-		props.visibilityControls
+		props.settings.visibility_controls
 	);
 	const [ hasUpdates, setHasUpdates ] = useState( false );
 	const { variables, handleSettingsChange, saveStatus } = props;
@@ -68,41 +68,46 @@ export default function VisibilityControls( props ) {
 			</div>
 			<Slot name="VisibilityControlsTop" />
 			<HideBlock
-				settings={ visibilityControls }
-				setSettings={ setVisibilityControls }
+				visibilityControls={ visibilityControls }
+				setVisibilityControls={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }
+				{ ...props }
 			/>
 			<DateTime
-				settings={ visibilityControls }
-				setSettings={ setVisibilityControls }
+				visibilityControls={ visibilityControls }
+				setVisibilityControls={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }
+				{ ...props }
 			/>
 			<UserRole
-				settings={ visibilityControls }
-				setSettings={ setVisibilityControls }
+				visibilityControls={ visibilityControls }
+				setVisibilityControls={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }
+				{ ...props }
 			/>
 			<ScreenSize
-				settings={ visibilityControls }
-				setSettings={ setVisibilityControls }
+				visibilityControls={ visibilityControls }
+				setVisibilityControls={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }
+				{ ...props }
 			/>
 			<QueryString
-				settings={ visibilityControls }
-				setSettings={ setVisibilityControls }
+				visibilityControls={ visibilityControls }
+				setVisibilityControls={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }
+				{ ...props }
 			/>
 			<Slot name="VisibilityControlsMiddle" />
 			<Integrations
-				settings={ visibilityControls }
-				variables={ variables }
-				setSettings={ setVisibilityControls }
+				visibilityControls={ visibilityControls }
+				setVisibilityControls={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }
+				{ ...props }
 			/>
 			<Slot name="VisibilityControlsBottom" />
 			<AdditionalControls
-				settings={ visibilityControls }
-				setSettings={ setVisibilityControls }
+				visibilityControls={ visibilityControls }
+				setVisibilityControls={ setVisibilityControls }
 				setHasUpdates={ setHasUpdates }
 				{ ...props }
 			/>

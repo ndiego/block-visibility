@@ -4,30 +4,25 @@
 import { __ } from '@wordpress/i18n';
 
 /**
- * Add the date/time vsibility controls
+ * Add visual separators between active visibility controls.
  *
- * @since 1.1.0
+ * @since 1.7.0
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
 export default function ControlSeparator( props ) {
-	const { controlSetAtts, control } = props;
+	const { control, controlSetAtts, enabledControls } = props;
 	const controls = controlSetAtts?.controls ?? null;
 
 	if ( ! controls ) {
 		return null;
 	}
 
-	const controlOrder = [
-		'dateTime',
-		'userRole',
-		'screenSize',
-		'queryString',
-		// Add additional controls here.
+	let controlOrder = [];
 
-		// integrations
-		'wpFusion',
-	];
+	enabledControls.forEach( ( control ) => {
+		controlOrder.push( control.attributeSlug );
+	} );
 
 	const activeControls = controlOrder.filter( ( _control ) =>
 		controls.hasOwnProperty( _control )

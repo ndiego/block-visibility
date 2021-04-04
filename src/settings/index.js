@@ -165,35 +165,34 @@ function Settings() {
 						case 'visibility-controls':
 							return (
 								<VisibilityControls
+									settings={ settings }
 									variables={ variables }
 									saveStatus={ saveStatus }
 									handleSettingsChange={
 										handleSettingsChange
-									}
-									visibilityControls={
-										settings.visibility_controls
 									}
 								/>
 							);
 						case 'block-manager':
 							return (
 								<BlockManager
+									settings={ settings }
+									variables={ variables }
 									saveStatus={ saveStatus }
 									handleSettingsChange={
 										handleSettingsChange
 									}
-									disabledBlocks={ settings.disabled_blocks }
-									pluginSettings={ settings.plugin_settings }
 								/>
 							);
 						case 'plugin-settings':
 							return (
 								<PluginSettings
+									settings={ settings }
+									variables={ variables }
 									saveStatus={ saveStatus }
 									handleSettingsChange={
 										handleSettingsChange
 									}
-									pluginSettings={ settings.plugin_settings }
 								/>
 							);
 						default:

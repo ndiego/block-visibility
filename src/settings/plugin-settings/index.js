@@ -24,9 +24,10 @@ import Uninstall from './uninstall';
  */
 export default function PluginSettings( props ) {
 	const [ pluginSettings, setPluginSettings ] = useState(
-		props.pluginSettings
+		props.settings.plugin_settings
 	);
 	const [ hasUpdates, setHasUpdates ] = useState( false );
+
 	const {
 		handleSettingsChange,
 		isAPISaving,
@@ -69,30 +70,34 @@ export default function PluginSettings( props ) {
 			</div>
 			<Slot name="PluginSettingsTop" />
 			<BlockEditor
-				settings={ pluginSettings }
-				setSettings={ setPluginSettings }
+				pluginSettings={ pluginSettings }
+				setPluginSettings={ setPluginSettings }
 				setHasUpdates={ setHasUpdates }
+				{ ...props }
 			/>
 			<UserPermissions
-				settings={ pluginSettings }
-				setSettings={ setPluginSettings }
+				pluginSettings={ pluginSettings }
+				setPluginSettings={ setPluginSettings }
 				setHasUpdates={ setHasUpdates }
+				{ ...props }
 			/>
 			<Slot name="PluginSettingsMiddle" />
 			<FullControlMode
-				settings={ pluginSettings }
-				setSettings={ setPluginSettings }
+				pluginSettings={ pluginSettings }
+				setPluginSettings={ setPluginSettings }
 				setHasUpdates={ setHasUpdates }
+				{ ...props }
 			/>
 			<Uninstall
-				settings={ pluginSettings }
-				setSettings={ setPluginSettings }
+				pluginSettings={ pluginSettings }
+				setPluginSettings={ setPluginSettings }
 				setHasUpdates={ setHasUpdates }
+				{ ...props }
 			/>
 			<Slot name="PluginSettingsBottom" />
 			<AdditionalSettings
-				settings={ pluginSettings }
-				setSettings={ setPluginSettings }
+				pluginSettings={ pluginSettings }
+				setPluginSettings={ setPluginSettings }
 				setHasUpdates={ setHasUpdates }
 				{ ...props }
 			/>

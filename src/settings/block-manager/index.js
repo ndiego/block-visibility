@@ -28,19 +28,19 @@ import icons from './../../utils/icons';
  */
 function BlockManager( props ) {
 	const [ disabledBlocks, setDisabledBlocks ] = useState(
-		props.disabledBlocks
+		props.settings.disabled_blocks
 	);
 	const [ hasUpdates, setHasUpdates ] = useState( false );
 	const [ search, setSearch ] = useState( '' );
 
 	const {
+		settings,
 		handleSettingsChange,
 		saveStatus,
 		blockTypes,
 		categories,
 		hasBlockSupport,
 		isMatchingSearchTerm,
-		pluginSettings,
 	} = props;
 
 	function onSettingsChange() {
@@ -84,7 +84,7 @@ function BlockManager( props ) {
 	}
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enabledFullControlMode = pluginSettings?.enable_full_control_mode ?? false; // eslint-disable-line
+	const enabledFullControlMode = settings?.plugin_settings?.enable_full_control_mode ?? false; // eslint-disable-line
 
 	let allowedBlockTypes;
 

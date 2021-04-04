@@ -18,10 +18,8 @@ import hasQueryString from './has-query-string';
 import hasWPFusion from './has-wp-fusion';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import usePluginData from './../utils/use-plugin-data';
-import {
-	isPluginSettingEnabled,
-	getEnabledControls,
-} from './../utils/setting-utilities';
+import { isPluginSettingEnabled } from './../utils/setting-utilities';
+import getEnabledControls from './../../utils/get-enabled-controls';
 
 /**
  * Filter each block and add CSS classes based on visibility settings.
@@ -44,7 +42,7 @@ function withContextualIndicators( BlockListBlock ) {
 			'enable_contextual_indicators'
 		);
 		const hasVisibility = hasVisibilityControls( settings, name );
-		const enabledControls = getEnabledControls( settings );
+		const enabledControls = getEnabledControls( settings, variables );
 
 		if (
 			! enableIndicators ||
@@ -56,7 +54,9 @@ function withContextualIndicators( BlockListBlock ) {
 
 		const { blockVisibility } = attributes;
 		const hideBlock = blockVisibility?.hideBlock ?? false;
-		const isHidden = hideBlock && enabledControls.includes( 'hide_block' );
+		const isHidden = hideBlock && enabledControls.some( ( control ) =>
+			control.settingSlug === 'hide_block'
+		);
 
 		const hasControlSets = blockVisibility?.controlSets ?? false;
 		let testAtts = blockVisibility ?? {};

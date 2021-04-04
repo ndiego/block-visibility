@@ -21,7 +21,7 @@ export default function UserRoles( props ) {
 	const { variables, userRole, setControlAtts } = props;
 	const restrictedRoles = userRole?.restrictedRoles ?? [];
 	const hideOnRestrictedRoles = userRole?.hideOnRestrictedRoles ?? false;
-	const roles = variables?.userRoles ?? [];
+	const roles = variables?.user_roles ?? [];
 	const label = hideOnRestrictedRoles
 		? __( 'Hide from all', 'block-visibility' )
 		: __( 'Only visible to', 'block-visibility' );

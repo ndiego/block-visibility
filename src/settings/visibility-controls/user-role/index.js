@@ -17,11 +17,11 @@ import InformationPopover from './../../utils/information-popover';
  * @return {string}		 Return the rendered JSX
  */
 export default function UserRole( props ) {
-	const { settings, setSettings, setHasUpdates } = props;
+	const { visibilityControls, setVisibilityControls, setHasUpdates } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enable = settings?.visibility_by_role?.enable ?? true; // eslint-disable-line
-	const enableUserRoles = settings?.visibility_by_role?.enable_user_roles ?? true; // eslint-disable-line
+	const enable = visibilityControls?.visibility_by_role?.enable ?? true; // eslint-disable-line
+	const enableUserRoles = visibilityControls?.visibility_by_role?.enable_user_roles ?? true; // eslint-disable-line
 
 	let enableUserRolesElement = (
 		<ToggleControl
@@ -31,10 +31,10 @@ export default function UserRole( props ) {
 			) }
 			checked={ enableUserRoles }
 			onChange={ () => {
-				setSettings( {
-					...settings,
+				setVisibilityControls( {
+					...visibilityControls,
 					visibility_by_role: {
-						...settings.visibility_by_role,
+						...visibilityControls.visibility_by_role,
 						enable_user_roles: ! enableUserRoles,
 					},
 				} );
@@ -65,10 +65,10 @@ export default function UserRole( props ) {
 						) }
 						checked={ enable }
 						onChange={ () => {
-							setSettings( {
-								...settings,
+							setVisibilityControls( {
+								...visibilityControls,
 								visibility_by_role: {
-									...settings.visibility_by_role,
+									...visibilityControls.visibility_by_role,
 									enable: ! enable,
 								},
 							} );

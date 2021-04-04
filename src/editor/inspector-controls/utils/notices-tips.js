@@ -73,8 +73,8 @@ export function NoticeBlockControlsDisabled() {
  */
 export function TipControlSet( props ) {
 	const { settings, variables } = props;
-	const settingsUrl = variables?.pluginVariables.settingsUrl ?? '';
-	const isAdmin = variables.currentUsersRoles.includes( 'administrator' );
+	const settingsUrl = variables?.plugin_variables.settings_url ?? '';
+	const isAdmin = variables.current_users_roles.includes( 'administrator' );
 	const enableEditorNotices = isPluginSettingEnabled(
 		settings,
 		'enable_editor_notices'
@@ -240,9 +240,9 @@ export function TipQueryString() {
  */
 export function TipWPFusion( props ) {
 	const { variables } = props;
-	const isAdmin = variables.currentUsersRoles.includes( 'administrator' );
+	const isAdmin = variables.current_users_roles.includes( 'administrator' );
 	const excludeAdmins =
-		variables?.integrations?.wpFusion?.excludeAdmins ?? false;
+		variables?.integrations?.wp_fusion?.exclude_admins ?? false;
 
 	return (
 		<>

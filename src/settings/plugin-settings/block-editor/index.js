@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import Select from 'react-select';
+
+/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -7,6 +12,7 @@ import { ToggleControl, Slot } from '@wordpress/components';
 /**
  * Internal dependencies
  */
+import getEnabledControls from './../../../utils/get-enabled-controls';
 import InformationPopover from './../../utils/information-popover';
 
 /**
@@ -17,12 +23,54 @@ import InformationPopover from './../../utils/information-popover';
  * @return {string}		 Return the rendered JSX
  */
 export default function BlockEditor( props ) {
-	const { settings, setSettings, setHasUpdates } = props;
+	const {
+		settings,
+		variables,
+		pluginSettings,
+		setPluginSettings,
+		setHasUpdates
+	} = props;
+
+	let enabledControls = getEnabledControls( settings, variables );
+	console.log( enabledControls );
+	enabledControls = enabledControls.filter( ( control ) =>
+		control.settingSlug !== 'hide_block'
+	);
+
+	const defaultControlOptions = [];
+
+	enabledControls.forEach( ( control ) => {
+		defaultControlOptions.push( {
+			label: control.label,
+			value: control.settingSlug
+		} );
+	} );
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enableContextualIndicators = settings?.enable_contextual_indicators ?? true; // eslint-disable-line
-	const enableToolbarControls = settings?.enable_toolbar_controls ?? true; // eslint-disable-line
-	const enableEditorNotices = settings?.enable_editor_notices ?? true; // eslint-disable-line
+	const defaultControls = pluginSettings?.default_controls ?? [ 'date_time', 'visibility_by_role', 'screen_size' ]; // eslint-disable-line
+	const enableContextualIndicators = pluginSettings?.enable_contextual_indicators ?? true; // eslint-disable-line
+	const enableToolbarControls = pluginSettings?.enable_toolbar_controls ?? true; // eslint-disable-line
+	const enableEditorNotices = pluginSettings?.enable_editor_notices ?? true; // eslint-disable-line
+
+	const selectedControls = defaultControlOptions.filter( ( control ) =>
+		defaultControls.includes( control.value )
+	);
+
+	const handleControlsChange = ( _control ) => {
+		const newControls = [];
+
+		if ( _control.length !== 0 ) {
+			_control.forEach( ( control ) => {
+				newControls.push( control.value );
+			} );
+		}
+
+		setPluginSettings( {
+			...pluginSettings,
+			default_controls: newControls,
+		} );
+		setHasUpdates( true );
+	};
 
 	return (
 		<div className="setting-tabs__settings-panel">
@@ -41,6 +89,19 @@ export default function BlockEditor( props ) {
 				/>
 			</div>
 			<div className="settings-panel__container">
+				<div className="settings-type__select">
+					<div className="settings-label">
+						<span>{ __( 'Default Visibility Controls', 'block-visibility' ) }</span>
+					</div>
+					<Select
+						className="block-visibility__react-select"
+						classNamePrefix="react-select"
+						options={ defaultControlOptions }
+						value={ selectedControls }
+						onChange={ ( value ) => handleControlsChange( value ) }
+						isMulti
+					/>
+				</div>
 				<div className="settings-type__toggle">
 					<ToggleControl
 						label={ __(
@@ -49,8 +110,8 @@ export default function BlockEditor( props ) {
 						) }
 						checked={ enableContextualIndicators }
 						onChange={ () => {
-							setSettings( {
-								...settings,
+							setPluginSettings( {
+								...pluginSettings,
 								enable_contextual_indicators: ! enableContextualIndicators,
 							} );
 							setHasUpdates( true );
@@ -65,8 +126,8 @@ export default function BlockEditor( props ) {
 						) }
 						checked={ enableToolbarControls }
 						onChange={ () => {
-							setSettings( {
-								...settings,
+							setPluginSettings( {
+								...pluginSettings,
 								enable_toolbar_controls: ! enableToolbarControls,
 							} );
 							setHasUpdates( true );
@@ -81,8 +142,8 @@ export default function BlockEditor( props ) {
 						) }
 						checked={ enableEditorNotices }
 						onChange={ () => {
-							setSettings( {
-								...settings,
+							setPluginSettings( {
+								...pluginSettings,
 								enable_editor_notices: ! enableEditorNotices,
 							} );
 							setHasUpdates( true );

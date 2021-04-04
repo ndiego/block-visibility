@@ -20,12 +20,12 @@ import ScreenSizeControls from './screen-size-controls';
  * @return {string}		 Return the rendered JSX
  */
 export default function ScreenSize( props ) {
-	const { settings, setSettings, setHasUpdates } = props;
+	const { visibilityControls, setVisibilityControls, setHasUpdates } = props;
 
 	// Manually set defaults, this ensures the main settings function properly.
 	let screenSize;
 
-	if ( ! settings?.screen_size ) {
+	if ( ! visibilityControls?.screen_size ) {
 		screenSize = {
 			enable: true,
 			breakpoints: {
@@ -45,15 +45,15 @@ export default function ScreenSize( props ) {
 			enable_frontend_css: true,
 		};
 	} else {
-		screenSize = settings.screen_size;
+		screenSize = visibilityControls.screen_size;
 	}
 
 	let screenSizeControls = (
 		<>
 			<div className="breakpoint-control-container subsetting">
 				<Breakpoints
-					settings={ settings }
-					setSettings={ setSettings }
+					visibilityControls={ visibilityControls }
+					setVisibilityControls={ setVisibilityControls }
 					setHasUpdates={ setHasUpdates }
 					screenSize={ screenSize }
 					enableAdvancedControls={
@@ -61,8 +61,8 @@ export default function ScreenSize( props ) {
 					}
 				/>
 				<ScreenSizeControls
-					settings={ settings }
-					setSettings={ setSettings }
+					visibilityControls={ visibilityControls }
+					setVisibilityControls={ setVisibilityControls }
 					setHasUpdates={ setHasUpdates }
 					screenSize={ screenSize }
 					enableAdvancedControls={
@@ -85,8 +85,8 @@ export default function ScreenSize( props ) {
 			) }
 			checked={ screenSize.enable_advanced_controls }
 			onChange={ () => {
-				setSettings( {
-					...settings,
+				setVisibilityControls( {
+					...visibilityControls,
 					screen_size: {
 						...screenSize,
 						enable_advanced_controls: ! screenSize.enable_advanced_controls,
@@ -105,8 +105,8 @@ export default function ScreenSize( props ) {
 			) }
 			checked={ screenSize.enable_frontend_css }
 			onChange={ () => {
-				setSettings( {
-					...settings,
+				setVisibilityControls( {
+					...visibilityControls,
 					screen_size: {
 						...screenSize,
 						enable_frontend_css: ! screenSize.enable_frontend_css,
@@ -141,8 +141,8 @@ export default function ScreenSize( props ) {
 						) }
 						checked={ screenSize.enable }
 						onChange={ () => {
-							setSettings( {
-								...settings,
+							setVisibilityControls( {
+								...visibilityControls,
 								screen_size: {
 									...screenSize,
 									enable: ! screenSize.enable,
