@@ -32,8 +32,8 @@ export default function UserRole( props ) {
 		setControlAtts,
 		controlSetAtts,
 	} = props;
-	const controlEnabled = enabledControls.some( ( control ) =>
-		control.settingSlug === 'visibility_by_role'
+	const controlEnabled = enabledControls.some(
+		( control ) => control.settingSlug === 'visibility_by_role'
 	);
 	const controlToggledOn =
 		controlSetAtts?.controls.hasOwnProperty( 'userRole' ) ?? false;

@@ -33,11 +33,13 @@ export default function VisibilityInspectorControls( props ) {
 	const { attributes, name } = props;
 	const blockVisibility = attributes?.blockVisibility;
 	const [ blockAtts, setBlockAtts ] = useState( blockVisibility );
+
 	const settings = usePluginData( 'settings' );
 	const variables = usePluginData( 'variables' );
 
 	const enabledControls = getEnabledControls( settings, variables );
-	const defaultControlSettings = settings?.plugin_settings?.default_controls ?? {};
+	const defaultControlSettings =
+		settings?.plugin_settings?.default_controls ?? {};
 	let defaultControls = {};
 
 	if ( ! isEmpty( defaultControlSettings ) ) {
@@ -51,8 +53,8 @@ export default function VisibilityInspectorControls( props ) {
 			dateTime: {},
 			userRole: {},
 			screenSize: {},
-		}
-	};
+		};
+	}
 
 	useEffect( () => {
 		let controlSets = blockAtts?.controlSets ?? [];
@@ -98,8 +100,8 @@ export default function VisibilityInspectorControls( props ) {
 	const controlSets = blockAtts?.controlSets ?? [];
 
 	const hideBlock = blockVisibility?.hideBlock ?? false;
-	const hasHideBlock = enabledControls.some( ( control ) =>
-		control.settingSlug === 'hide_block'
+	const hasHideBlock = enabledControls.some(
+		( control ) => control.settingSlug === 'hide_block'
 	);
 	const blockHidden = hasHideBlock && hideBlock;
 

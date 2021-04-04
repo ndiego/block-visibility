@@ -30,8 +30,8 @@ export default function hasUserRole(
 	let indicatorTest = true;
 
 	if (
-		! enabledControls.some( ( control ) =>
-			control.settingSlug === 'visibility_by_role'
+		! enabledControls.some(
+			( control ) => control.settingSlug === 'visibility_by_role'
 		) ||
 		! visibilityByRole ||
 		visibilityByRole === 'public' ||

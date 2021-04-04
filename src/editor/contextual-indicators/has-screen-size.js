@@ -55,8 +55,8 @@ export default function hasScreenSize(
 	let indicatorTest = true;
 
 	if (
-		! enabledControls.some( ( control ) =>
-			control.settingSlug === 'screen_size'
+		! enabledControls.some(
+			( control ) => control.settingSlug === 'screen_size'
 		) ||
 		! hasSizeRestrictions.includes( true )
 	) {

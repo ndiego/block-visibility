@@ -18,8 +18,13 @@ import icons from './../../../utils/icons';
  * @return {string}		 Return the rendered JSX
  */
 export default function Integrations( props ) {
-	const { variables, visibilityControls, setVisibilityControls, setHasUpdates } = props;
-	const wpFusionActive = variables?.integrations?.wpFusion?.active ?? false;
+	const {
+		variables,
+		visibilityControls,
+		setVisibilityControls,
+		setHasUpdates,
+	} = props;
+	const wpFusionActive = variables?.integrations?.wp_fusion?.active ?? false;
 
 	// If WP Fusion is not active, don't display the integrations pane. Need to
 	// update in the future when we have additional integrations to check.

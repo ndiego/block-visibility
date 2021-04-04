@@ -364,6 +364,23 @@ $mobile: 426px;
 					}
 				}
 
+				.settings-type__select {
+					&.has-info-popover {
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+					}
+
+					.block-visibility__react-select {
+						width: 100%;
+						max-width: 60%;
+
+						@media ( max-width: $tablet ) {
+							max-width: 90%;
+						}
+					}
+				}
+
 				.subsetting {
 					margin-left: 20px;
 				}
@@ -374,11 +391,16 @@ $mobile: 426px;
 				}
 
 				.settings-label {
-					font-size: 15px;
+					font-size: 14px;
 					font-weight: 500;
 					display: flex;
 					align-items: center;
-					margin-bottom: 20px;
+					margin-bottom: 15px;
+					margin-top: 30px;
+
+					&:first-child {
+						margin-top: 0;
+					}
 
 					&>svg {
 						width: 16px;
@@ -676,6 +698,10 @@ $mobile: 426px;
 				color: #32373C;
 				line-height: 1.5;
 				margin: 0 0 1em;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
 			}
 
 			.components-popover__content {

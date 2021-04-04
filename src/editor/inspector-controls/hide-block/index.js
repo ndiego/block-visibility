@@ -24,8 +24,8 @@ export default function HideBlock( props ) {
 		setBlockAtts,
 		enabledControls,
 	} = props;
-	const controlEnabled = enabledControls.some( ( control ) =>
-		control.settingSlug === 'hide_block'
+	const controlEnabled = enabledControls.some(
+		( control ) => control.settingSlug === 'hide_block'
 	);
 
 	if ( ! controlEnabled ) {

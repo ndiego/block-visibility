@@ -35,8 +35,8 @@ export default function WPFusion( props ) {
 		setControlAtts,
 	} = props;
 	const pluginActive = variables?.integrations?.wp_fusion?.active ?? false;
-	const controlEnabled = enabledControls.some( ( control ) =>
-		control.settingSlug === 'wp_fusion'
+	const controlEnabled = enabledControls.some(
+		( control ) => control.settingSlug === 'wp_fusion'
 	);
 	const controlToggledOn =
 		controlSetAtts?.controls.hasOwnProperty( 'wpFusion' ) ?? false;
@@ -196,7 +196,7 @@ export default function WPFusion( props ) {
 					</Notice>
 				) }
 			</div>
-            <ControlSeparator control="wpFusion" { ...props } />
+			<ControlSeparator control="wpFusion" { ...props } />
 		</>
 	);
 }

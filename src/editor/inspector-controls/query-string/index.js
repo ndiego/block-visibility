@@ -27,8 +27,8 @@ import { TipQueryString } from './../utils/notices-tips';
 export default function QueryString( props ) {
 	const [ tipsPopoverOpen, setTipsPopoverOpen ] = useState( false );
 	const { enabledControls, controlSetAtts, setControlAtts } = props;
-	const controlEnabled = enabledControls.some( ( control ) =>
-		control.settingSlug === 'query_string'
+	const controlEnabled = enabledControls.some(
+		( control ) => control.settingSlug === 'query_string'
 	);
 	const controlToggledOn =
 		controlSetAtts?.controls.hasOwnProperty( 'queryString' ) ?? false;
@@ -126,7 +126,7 @@ export default function QueryString( props ) {
 				/>
 				<Slot name="QueryStringControls" />
 			</div>
-            <ControlSeparator control="queryString" { ...props } />
+			<ControlSeparator control="queryString" { ...props } />
 		</>
 	);
 }

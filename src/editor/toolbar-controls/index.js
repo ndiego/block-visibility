@@ -61,8 +61,8 @@ function ToolbarControls( props ) {
 	if (
 		! enableToolbarControls ||
 		! hasVisibility ||
-		! enabledControls.some( ( control ) =>
-			control.settingSlug === 'hide_block'
+		! enabledControls.some(
+			( control ) => control.settingSlug === 'hide_block'
 		)
 	) {
 		return null;

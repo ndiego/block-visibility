@@ -28,7 +28,7 @@ export default function SaveSettings( props ) {
 		saveStatus === 'saving'
 			? __( 'Updating…', 'block-visibility' )
 			: __( 'Update', 'block-visibility' );
-			
+
 	return (
 		<div className="setting-controls__save-settings">
 			{ [

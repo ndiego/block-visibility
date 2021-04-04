@@ -18,14 +18,14 @@ export default function ControlSeparator( props ) {
 		return null;
 	}
 
-	let controlOrder = [];
+	const controlOrder = [];
 
-	enabledControls.forEach( ( control ) => {
-		controlOrder.push( control.attributeSlug );
+	enabledControls.forEach( ( cont ) => {
+		controlOrder.push( cont.attributeSlug );
 	} );
 
-	const activeControls = controlOrder.filter( ( _control ) =>
-		controls.hasOwnProperty( _control )
+	const activeControls = controlOrder.filter( ( cont ) =>
+		controls.hasOwnProperty( cont )
 	);
 
 	if (

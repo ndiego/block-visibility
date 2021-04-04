@@ -54,9 +54,11 @@ function withContextualIndicators( BlockListBlock ) {
 
 		const { blockVisibility } = attributes;
 		const hideBlock = blockVisibility?.hideBlock ?? false;
-		const isHidden = hideBlock && enabledControls.some( ( control ) =>
-			control.settingSlug === 'hide_block'
-		);
+		const isHidden =
+			hideBlock &&
+			enabledControls.some(
+				( control ) => control.settingSlug === 'hide_block'
+			);
 
 		const hasControlSets = blockVisibility?.controlSets ?? false;
 		let testAtts = blockVisibility ?? {};

@@ -20,8 +20,8 @@ import ControlSeparator from './../utils/control-separator';
  */
 export default function DateTime( props ) {
 	const { settings, enabledControls, controlSetAtts } = props;
-	const controlEnabled = enabledControls.some( ( control ) =>
-		control.settingSlug === 'date_time'
+	const controlEnabled = enabledControls.some(
+		( control ) => control.settingSlug === 'date_time'
 	);
 	const controlToggledOn =
 		controlSetAtts?.controls.hasOwnProperty( 'dateTime' ) ?? false;

@@ -6,8 +6,6 @@ import { assign, isEmpty } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
-import { applyFilters } from '@wordpress/hooks';
 import { Slot, withFilters } from '@wordpress/components';
 
 /**
@@ -20,7 +18,6 @@ import ScreenSize from './screen-size';
 import QueryString from './query-string';
 import WPFusion from './wp-fusion';
 import { NoticeBlockControlsDisabled } from './utils/notices-tips';
-import icons from './../../utils/icons';
 
 /**
  * Render a control set
@@ -41,18 +38,17 @@ export default function ControlSet( props ) {
 
 	const noControls =
 		enabledControls.length === 1 &&
-		enabledControls.some( ( control ) =>
-			control.settingSlug === 'hide_block'
+		enabledControls.some(
+			( control ) => control.settingSlug === 'hide_block'
 		);
 
 	if ( noControls ) {
 		return null;
 	}
 
-	let controls = [];
+	const controls = [];
 
 	enabledControls.forEach( ( control ) => {
-
 		// We don't want to include the hide block control.
 		if ( control.settingSlug !== 'hide_block' ) {
 			controls.push( {
@@ -60,8 +56,10 @@ export default function ControlSet( props ) {
 				type: control.type,
 				attributeSlug: control.attributeSlug,
 				settingSlug: control.settingSlug,
-				icon: control?.icon ?? false ,
-				active: controlSetAtts?.controls.hasOwnProperty( control.attributeSlug ),
+				icon: control?.icon ?? false,
+				active: controlSetAtts?.controls.hasOwnProperty(
+					control.attributeSlug
+				),
 			} );
 		}
 	} );
@@ -70,12 +68,10 @@ export default function ControlSet( props ) {
 	// saved settings from controls that have since been disabled.
 	const setControls = Object.keys( controlSetAtts.controls );
 	const activeControls = controls.filter( ( control ) => {
-		if (
-			control.active &&
-			setControls.includes( control.attributeSlug )
-		) {
+		if ( control.active && setControls.includes( control.attributeSlug ) ) {
 			return true;
 		}
+		return false;
 	} );
 
 	function setControlAtts( control, values ) {

@@ -38,17 +38,11 @@ export default function ControlSetToolbar( props ) {
 	const [ resetModalOpen, setResetModalOpen ] = useState( false );
 	const {
 		setAttributes,
-		variables,
 		defaultControls,
 		controls,
 		blockAtts,
 		controlSetAtts,
 	} = props;
-
-	const isPluginActive = ( plugin ) => {
-		const isActive = variables?.integrations[ plugin ]?.active ?? false;
-		return isActive;
-	};
 
 	function toggleControls( control ) {
 		if ( control.active ) {

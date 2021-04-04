@@ -28,13 +28,13 @@ export default function BlockEditor( props ) {
 		variables,
 		pluginSettings,
 		setPluginSettings,
-		setHasUpdates
+		setHasUpdates,
 	} = props;
 
 	let enabledControls = getEnabledControls( settings, variables );
-	console.log( enabledControls );
-	enabledControls = enabledControls.filter( ( control ) =>
-		control.settingSlug !== 'hide_block'
+
+	enabledControls = enabledControls.filter(
+		( control ) => control.settingSlug !== 'hide_block'
 	);
 
 	const defaultControlOptions = [];
@@ -42,7 +42,7 @@ export default function BlockEditor( props ) {
 	enabledControls.forEach( ( control ) => {
 		defaultControlOptions.push( {
 			label: control.label,
-			value: control.settingSlug
+			value: control.settingSlug,
 		} );
 	} );
 
@@ -89,10 +89,15 @@ export default function BlockEditor( props ) {
 				/>
 			</div>
 			<div className="settings-panel__container">
-				<div className="settings-type__select">
-					<div className="settings-label">
-						<span>{ __( 'Default Visibility Controls', 'block-visibility' ) }</span>
-					</div>
+				<div className="settings-label">
+					<span>
+						{ __(
+							'Default Visibility Controls',
+							'block-visibility'
+						) }
+					</span>
+				</div>
+				<div className="settings-type__select has-info-popover">
 					<Select
 						className="block-visibility__react-select"
 						classNamePrefix="react-select"
@@ -101,11 +106,22 @@ export default function BlockEditor( props ) {
 						onChange={ ( value ) => handleControlsChange( value ) }
 						isMulti
 					/>
+					<InformationPopover
+						message={ __(
+							"Optionally set the default controls that will be available when editing a block's visibility for the first time. This can be useful if you find yourself using the same few controls frequently. Controls can be disabled entirely on the Visibility Controls tab.",
+							'block-visibility'
+						) }
+					/>
 				</div>
-				<div className="settings-type__toggle">
+				<div className="settings-label">
+					<span>
+						{ __( 'Contextual Indicators', 'block-visibility' ) }
+					</span>
+				</div>
+				<div className="settings-type__toggle has-info-popover">
 					<ToggleControl
 						label={ __(
-							'Enable contextual indicators when visibility settings are applied to a block.',
+							'Enable contextual indicators.',
 							'block-visibility'
 						) }
 						checked={ enableContextualIndicators }
@@ -117,8 +133,19 @@ export default function BlockEditor( props ) {
 							setHasUpdates( true );
 						} }
 					/>
+					<InformationPopover
+						message={ __(
+							'Contextual indicators allow you to quickly tell which blocks in the Block Editor have active visibility controls.',
+							'block-visibility'
+						) }
+					/>
 				</div>
-				<div className="settings-type__toggle">
+				<div className="settings-label">
+					<span>
+						{ __( 'Toolbar Controls', 'block-visibility' ) }
+					</span>
+				</div>
+				<div className="settings-type__toggle has-info-popover">
 					<ToggleControl
 						label={ __(
 							'Enable block toolbar controls for visibility settings.',
@@ -133,6 +160,15 @@ export default function BlockEditor( props ) {
 							setHasUpdates( true );
 						} }
 					/>
+					<InformationPopover
+						message={ __(
+							'Some visibility controls (currently just the Hide Block control) can be made available in the toolbar of each block. This provides a more streamlined workflow and can improve content management.',
+							'block-visibility'
+						) }
+					/>
+				</div>
+				<div className="settings-label">
+					<span>{ __( 'Miscellaneous', 'block-visibility' ) }</span>
 				</div>
 				<div className="settings-type__toggle has-info-popover">
 					<ToggleControl

@@ -29,7 +29,7 @@ export default function VisibilityControls( props ) {
 		props.settings.visibility_controls
 	);
 	const [ hasUpdates, setHasUpdates ] = useState( false );
-	const { variables, handleSettingsChange, saveStatus } = props;
+	const { handleSettingsChange, saveStatus } = props;
 
 	function onSettingsChange() {
 		handleSettingsChange( 'visibility_controls', visibilityControls );
