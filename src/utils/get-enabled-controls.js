@@ -21,7 +21,7 @@ import icons from './icons';
  * @return {Object} Return the available controls
  */
 export function getControls() {
-	let controls = [
+	let coreControls = [
 		{
 			label: __( 'Hide Block', 'block-visibility' ),
 			type: 'core',
@@ -52,6 +52,11 @@ export function getControls() {
 			attributeSlug: 'queryString',
 			settingSlug: 'query_string',
 		},
+	];
+
+	coreControls = applyFilters( 'blockVisibility.coreControls', coreControls );
+
+	let integrationControls = [
 		{
 			label: __( 'WP Fusion', 'block-visibility' ),
 			type: 'integration',
@@ -61,7 +66,12 @@ export function getControls() {
 		},
 	];
 
-	controls = applyFilters( 'blockVisibility.controls', controls );
+	integrationControls = applyFilters(
+		'blockVisibility.integrationControls',
+		integrationControls
+	);
+
+	const controls = [ ...coreControls, ...integrationControls ];
 
 	return controls;
 }
@@ -116,14 +126,19 @@ export default function getEnabledControls( settings, variables ) {
 	if ( ! isEmpty( visibilityControls ) ) {
 		controls.forEach( function ( control ) {
 			const hasControl = has( visibilityControls, control.settingSlug );
+			let addControl = false;
 
 			// If the control does not exist, assume true.
 			if ( ! hasControl ) {
-				enabledControls.push( control );
+				addControl = true;
 			}
 
 			// Check if the control is set, default to "true".
 			if ( visibilityControls[ control.settingSlug ]?.enable ?? true ) {
+				addControl = true;
+			}
+
+			if ( addControl ) {
 				enabledControls.push( control );
 			}
 		} );
