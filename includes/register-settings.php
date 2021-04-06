@@ -111,6 +111,14 @@ function register_settings() {
 					),
 				),
 				// Third-party Integrations.
+				'acf'                => array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable' => array(
+							'type' => 'boolean',
+						),
+					),
+				),
 				'wp_fusion'          => array(
 					'type'       => 'object',
 					'properties' => array(

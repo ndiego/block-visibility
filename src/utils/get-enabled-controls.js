@@ -58,6 +58,13 @@ export function getControls() {
 
 	let integrationControls = [
 		{
+			label: __( 'ACF', 'block-visibility' ),
+			type: 'integration',
+			attributeSlug: 'acf',
+			settingSlug: 'acf',
+			icon: icons.acf,
+		},
+		{
 			label: __( 'WP Fusion', 'block-visibility' ),
 			type: 'integration',
 			attributeSlug: 'wpFusion',

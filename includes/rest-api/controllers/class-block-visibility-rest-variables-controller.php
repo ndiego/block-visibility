@@ -85,9 +85,14 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 			'is_full_control_mode' => $is_full_control_mode,
 			'is_pro'               => defined( 'BVP_VERSION' ), // If the Pro version constant is set, then Block Visibility Pro is active.
 			'integrations'         => array(
+				'acf'       => array(
+					'active'        => function_exists( 'acf' ),
+					'fields'        => self::get_acf_fields(),
+					//'exclude_admins' => self::get_wp_fusion_exclude_admins(),
+				),
 				'wp_fusion' => array(
-					'active'        => function_exists( 'wp_fusion' ),
-					'tags'          => self::get_wp_fusion_tags(),
+					'active'         => function_exists( 'wp_fusion' ),
+					'tags'           => self::get_wp_fusion_tags(),
 					'exclude_admins' => self::get_wp_fusion_exclude_admins(),
 				),
 			),
@@ -172,6 +177,47 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 		);
 
 		return $this->schema;
+	}
+
+
+	public static function get_acf_fields() {
+		$fields = array();
+		if ( function_exists( 'acf_get_field_groups' ) ) {
+
+			$groups = acf_get_field_groups();
+			if ( is_array( $groups ) ) {
+
+				foreach ( $groups as $group ) {
+
+					$fields_group = acf_get_fields( $group );
+					if ( ! empty( $fields_group ) ) {
+
+						$fields[ $group['key'] ] = array(
+							'title'  => $group['title'],
+							'active' => $group['active'],
+						);
+
+						foreach ( $fields_group as $k => $fg ) {
+							$fields[ $group['key'] ][ 'fields' ][ $fg['key'] ] = $fg;
+						}
+					}
+				}
+			}
+		} else {
+			$groups = apply_filters( 'acf/get_field_groups', array() ); // phpcs:ignore
+			if ( is_array( $groups ) ) {
+				foreach ( $groups as $group ) {
+					$fields_group = apply_filters( 'acf/field_group/get_fields', array(), $group['id'] ); // phpcs:ignore
+					if ( ! empty( $fields_group ) ) {
+						foreach ( $fields_group as $k => $fg ) {
+							$fields[ $fg['key'] ] = $fg['label'];
+						}
+					}
+				}
+			}
+		}
+
+		return (object) array_reverse( $fields );
 	}
 
 	/**

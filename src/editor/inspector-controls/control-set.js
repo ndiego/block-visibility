@@ -16,6 +16,7 @@ import UserRole from './user-role';
 import DateTime from './date-time';
 import ScreenSize from './screen-size';
 import QueryString from './query-string';
+import ACF from './acf';
 import WPFusion from './wp-fusion';
 import { NoticeBlockControlsDisabled } from './utils/notices-tips';
 
@@ -105,6 +106,7 @@ export default function ControlSet( props ) {
 
 			<Slot name="ControlSetControlsMiddle" />
 
+			<ACF setControlAtts={ setControlAtts } { ...props } />
 			<WPFusion setControlAtts={ setControlAtts } { ...props } />
 
 			<Slot name="ControlSetControlsBottom" />
