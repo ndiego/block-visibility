@@ -18,16 +18,10 @@ import { Button, Disabled, TextControl } from '@wordpress/components';
  * @return {string}		 Return the rendered JSX
  */
 export default function RuleSets( props ) {
-	const {
-		acf,
-		variables,
-		enabledControls,
-		controlSetAtts,
-		setControlAtts,
-	} = props;
+	const { acf, variables, setControlAtts } = props;
 	const retrievedFields = variables?.integrations?.acf?.fields ?? [];
 	const availableFields = [];
-	console.log(retrievedFields );
+
 	if ( retrievedFields.length !== 0 ) {
 		retrievedFields.forEach( ( group ) => {
 			const groupKey = group?.key ?? '';
@@ -59,37 +53,39 @@ export default function RuleSets( props ) {
 	}
 
 	const ruleSets = acf?.ruleSets ?? [
-		[ {
-			field: '',
-			operator: '!=empty',
-			value: '',
-		} ]
+		[
+			{
+				field: '',
+				operator: '!=empty',
+				value: '',
+			},
+		],
 	];
 
 	const operators = [
 		{
 			value: '!=empty',
-			label: __( 'Has any value', 'block-visibility' )
+			label: __( 'Has any value', 'block-visibility' ),
 		},
 		{
-			 value: '==empty',
-			 label: __( 'Has no value', 'block-visibility' )
-		 },
+			value: '==empty',
+			label: __( 'Has no value', 'block-visibility' ),
+		},
 		{
 			value: '==',
-			label: __( 'Value is equal to', 'block-visibility' )
+			label: __( 'Value is equal to', 'block-visibility' ),
 		},
 		{
 			value: '!=',
-			label: __( 'Value is not equal to', 'block-visibility' )
+			label: __( 'Value is not equal to', 'block-visibility' ),
 		},
 		{
 			value: '==contains',
-			label: __( "Value contains", 'block-visibility' )
+			label: __( 'Value contains', 'block-visibility' ),
 		},
 		{
 			value: '!=contains',
-			label: __( "Value does not contain", 'block-visibility' )
+			label: __( 'Value does not contain', 'block-visibility' ),
 		},
 	];
 
@@ -102,28 +98,16 @@ export default function RuleSets( props ) {
 
 		ruleSets[ ruleSetIndex ] = ruleSet;
 
-		setControlAtts(
-			'acf',
-			assign(
-				{ ...acf },
-				{ ruleSets: ruleSets }
-			)
-		)
-	}
+		setControlAtts( 'acf', assign( { ...acf }, { ruleSets } ) );
+	};
 
 	const removeRule = ( ruleSet, ruleSetIndex, ruleIndex ) => {
 		ruleSets[ ruleSetIndex ] = ruleSet.filter(
-			( value, index ) => index != ruleIndex
+			( value, index ) => index !== ruleIndex
 		);
 
-		setControlAtts(
-			'acf',
-			assign(
-				{ ...acf },
-				{ ruleSets: ruleSets }
-			)
-		)
-	}
+		setControlAtts( 'acf', assign( { ...acf }, { ruleSets } ) );
+	};
 
 	const handleRuleChange = (
 		type,
@@ -134,25 +118,19 @@ export default function RuleSets( props ) {
 		ruleIndex
 	) => {
 		let newValue = type === 'select' ? value?.value : value;
-		newValue === null ? '' : newValue;
+		newValue = newValue === null ? '' : newValue;
 
 		ruleSet[ ruleIndex ][ ruleParam ] = newValue;
 		ruleSets[ ruleSetIndex ] = ruleSet;
 
-		setControlAtts(
-			'acf',
-			assign(
-				{ ...acf },
-				{ ruleSets: ruleSets }
-			)
-		)
-	}
+		setControlAtts( 'acf', assign( { ...acf }, { ruleSets } ) );
+	};
 
 	return (
 		<div className="acf-control__rule-sets">
 			{ ruleSets.map( ( ruleSet, ruleSetIndex ) => {
 				return (
-					<div className="acf-control__rule-set">
+					<div key={ ruleSetIndex } className="acf-control__rule-set">
 						{ ruleSet.map( ( rule, ruleIndex ) => {
 							const selectedField = availableFields.filter(
 								( field ) => field.value === rule.field
@@ -168,7 +146,16 @@ export default function RuleSets( props ) {
 										'block-visibility'
 									) }
 									value={ rule.value }
-									onChange={ ( value ) => handleRuleChange( 'text', value, 'value', ruleSet, ruleSetIndex, ruleIndex ) }
+									onChange={ ( value ) =>
+										handleRuleChange(
+											'text',
+											value,
+											'value',
+											ruleSet,
+											ruleSetIndex,
+											ruleIndex
+										)
+									}
 								/>
 							);
 
@@ -176,19 +163,35 @@ export default function RuleSets( props ) {
 								'!=empty' === rule.operator ||
 								'==empty' === rule.operator
 							) {
-								valueField =
-									<Disabled>{ valueField }</Disabled>;
+								valueField = (
+									<Disabled>{ valueField }</Disabled>
+								);
 							}
 
 							return (
-								<div className="acf-control__rule">
+								<div
+									key={ ruleIndex }
+									className="acf-control__rule"
+								>
 									<Select
 										className="block-visibility__react-select"
 										classNamePrefix="react-select"
 										options={ availableFields }
-										placeholder={ __( 'Select Field…', 'block-visibility' ) }
+										placeholder={ __(
+											'Select Field…',
+											'block-visibility'
+										) }
 										value={ selectedField }
-										onChange={ ( value ) => handleRuleChange( 'select', value, 'field', ruleSet, ruleSetIndex, ruleIndex ) }
+										onChange={ ( value ) =>
+											handleRuleChange(
+												'select',
+												value,
+												'field',
+												ruleSet,
+												ruleSetIndex,
+												ruleIndex
+											)
+										}
 										isClearable={ true }
 									/>
 									<Select
@@ -196,12 +199,19 @@ export default function RuleSets( props ) {
 										classNamePrefix="react-select"
 										options={ operators }
 										value={ selectedOperator }
-										onChange={ ( value ) => handleRuleChange( 'select', value, 'operator', ruleSet, ruleSetIndex, ruleIndex ) }
+										onChange={ ( value ) =>
+											handleRuleChange(
+												'select',
+												value,
+												'operator',
+												ruleSet,
+												ruleSetIndex,
+												ruleIndex
+											)
+										}
 									/>
 									{ valueField }
-									<div
-										className="acf-control__rule--controls"
-									>
+									<div className="acf-control__rule--controls">
 										<Button
 											onClick={ () =>
 												addRule( ruleSet, ruleSetIndex )
@@ -227,10 +237,10 @@ export default function RuleSets( props ) {
 										) }
 									</div>
 								</div>
-							)
+							);
 						} ) }
 					</div>
-				)
+				);
 			} ) }
 		</div>
 	);

@@ -86,8 +86,8 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 			'is_pro'               => defined( 'BVP_VERSION' ), // If the Pro version constant is set, then Block Visibility Pro is active.
 			'integrations'         => array(
 				'acf'       => array(
-					'active'        => function_exists( 'acf' ),
-					'fields'        => self::get_acf_fields(),
+					'active' => function_exists( 'acf' ),
+					'fields' => self::get_acf_fields(),
 				),
 				'wp_fusion' => array(
 					'active'         => function_exists( 'wp_fusion' ),
@@ -121,19 +121,19 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 			'title'      => 'variables',
 			'type'       => 'object',
 			'properties' => array(
-				'current_users_roles' => array(
+				'current_users_roles'  => array(
 					'type'  => 'array',
 					'items' => array(
 						'type' => 'string',
 					),
 				),
-				'user_roles'         => array(
+				'user_roles'           => array(
 					'type'  => 'array',
 					'items' => array(
 						'type' => 'string',
 					),
 				),
-				'plugin_variables'   => array(
+				'plugin_variables'     => array(
 					'type'  => 'array',
 					'items' => array(
 						'type' => 'string',
@@ -142,10 +142,10 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 				'is_full_control_mode' => array(
 					'type' => 'boolean',
 				),
-				'is_pro'             => array(
+				'is_pro'               => array(
 					'type' => 'boolean',
 				),
-				'integrations'      => array(
+				'integrations'         => array(
 					'type'       => 'object',
 					'properties' => array(
 						'acf'       => array(
@@ -213,7 +213,7 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 
 					if ( ! empty( $group_fields ) ) {
 
-						$group_fields_simplified= array();
+						$group_fields_simplified = array();
 
 						foreach ( $group_fields as $key => $fields ) {
 							$group_fields_simplified[] = $fields;
@@ -238,7 +238,7 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 
 					if ( ! empty( $group_fields ) ) {
 
-						$group_fields_simplified= array();
+						$group_fields_simplified = array();
 
 						foreach ( $group_fields as $key => $fields ) {
 							$group_fields_simplified[] = $fields;

@@ -1,16 +1,15 @@
 /**
  * External dependencies
  */
-import { assign, isEmpty } from 'lodash';
-import Select from 'react-select';
+import { assign } from 'lodash';
 
 /**
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
-import { Button, Notice, Popover, ToggleControl } from '@wordpress/components';
+import { Button, Popover, ToggleControl } from '@wordpress/components';
 import { Icon, info } from '@wordpress/icons';
-import { createInterpolateElement, useState } from '@wordpress/element';
+import { useState } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -18,7 +17,7 @@ import { createInterpolateElement, useState } from '@wordpress/element';
 import RuleSets from './rule-sets';
 import icons from './../../../utils/icons';
 import ControlSeparator from './../utils/control-separator';
-import { TipWPFusion } from './../utils/notices-tips';
+import { TipACF } from './../utils/notices-tips';
 
 /**
  * Add the ACF controls
@@ -70,7 +69,7 @@ export default function ACF( props ) {
 								focusOnMount="container"
 								onClose={ () => setTipsPopoverOpen( false ) }
 							>
-								<TipWPFusion { ...props } />
+								<TipACF { ...props } />
 							</Popover>
 						) }
 					</span>
@@ -79,17 +78,19 @@ export default function ACF( props ) {
 				<div className="visibility-control__label">
 					{ sprintf(
 						// Translators: Whether the block is hidden or visible.
-						__(
-							'%s the block if:',
-							'block-visibility'
-						),
-						hideOnRuleSets ? __( 'Hide', 'block-visibility' ) : __( 'Show', 'block-visibility' )
+						__( '%s the block if:', 'block-visibility' ),
+						hideOnRuleSets
+							? __( 'Hide', 'block-visibility' )
+							: __( 'Show', 'block-visibility' )
 					) }
 				</div>
-				<RuleSets acf={ acf } {...props } />
+				<RuleSets acf={ acf } { ...props } />
 				<div className="visibility-control hide-on-rule-sets">
 					<ToggleControl
-						label={ __( 'Hide on applied rules', 'block-visibility' ) }
+						label={ __(
+							'Hide on applied rules',
+							'block-visibility'
+						) }
 						checked={ hideOnRuleSets }
 						onChange={ () =>
 							setControlAtts(

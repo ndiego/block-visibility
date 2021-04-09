@@ -143,13 +143,13 @@ function wp_fusion_test( $is_visible, $settings, $attributes ) {
 	}
 
 	$can_access = apply_filters(
-		'wpf_user_can_access_block',
+		'wpf_user_can_access_block', // phpcs:ignore
 		$can_access,
 		$attributes
 	);
 
 	$can_access = apply_filters(
-		'wpf_user_can_access',
+		'wpf_user_can_access', // phpcs:ignore
 		$can_access,
 		wpf_get_current_user_id(),
 		false

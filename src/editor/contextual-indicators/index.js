@@ -103,12 +103,7 @@ function withContextualIndicators( BlockListBlock ) {
 				hasControlSets,
 				enabledControls
 			),
-			'acf': hasACF(
-				testAtts,
-				hasControlSets,
-				enabledControls,
-				variables
-			),
+			acf: hasACF( testAtts, hasControlSets, enabledControls, variables ),
 			'wp-fusion': hasWPFusion(
 				testAtts,
 				hasControlSets,

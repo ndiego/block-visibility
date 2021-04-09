@@ -31,6 +31,7 @@ Visibility controls determine whether a block should be visible to users on the 
 
 ==== Third-Party Integrations ====
 
+* **Advanced Custom Fields (ACF):** Ever wanted to control the visibility of block content based on [ACF](https://wordpress.org/plugins/advanced-custom-fields/) fields? Well now you can!
 * **WP Fusion:** Combine Block Visibility with the power of [WP Fusion](https://wordpress.org/plugins/wp-fusion-lite/) to conditionally show or hide content based on data from your favorite CRM or marketing automation platform.
 * More to come...
 
@@ -149,6 +150,21 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 == Changelog ==
 
+= 1.8.0 - TBD =
+
+**Added**
+
+* Added the [Advanced Custom Field](https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/advanced-custom-fields/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control, the second third-party integration for Block Visibility! 🎉
+* Added multiple [Date & Time](https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/date-time/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) scheduling functionality. 🎉
+
+**Changed**
+
+* Updated control set controls toggle icon to be more consistent with WP core.
+
+**Fixed**
+
+* Fixed the WP Fusion filters to improve the integration.
+
 = 1.7.1 - 2021-03-29 =
 
 **Fixed**
@@ -159,8 +175,8 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 **Added**
 
-* Added the WP Fusion control, the first third-party integration for Block Visibility! 🎉
-* Added the Query String control, significantly increasing the marketing capabilities of Block Visibility! 🎉
+* Added the [WP Fusion](https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/wp-fusion/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control, the first third-party integration for Block Visibility! 🎉
+* Added the [Query String](https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/query-string/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control, significantly increasing the marketing capabilities of Block Visibility! 🎉
 * Added `react-select` as a project dependency for all multi-select fields.
 
 **Changed**

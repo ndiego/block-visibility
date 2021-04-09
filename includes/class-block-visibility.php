@@ -183,7 +183,7 @@ final class Block_Visibility {
 	 *
 	 * @return array Returns updated results.
 	 */
-	public function conditionally_remove_attributes( $result, $server, $request ) {
+	public function conditionally_remove_attributes( $result, $server, $request ) { // phpcs:ignore
 
 		if ( strpos( $request->get_route(), '/wp/v2/block-renderer' ) !== false ) {
 

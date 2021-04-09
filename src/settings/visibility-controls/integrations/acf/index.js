@@ -36,7 +36,9 @@ export default function ACF( props ) {
 	return (
 		<>
 			<div className="settings-label">
-				<span>{ __( 'Advaced Custom Fields', 'block-visibility' ) }</span>
+				<span>
+					{ __( 'Advaced Custom Fields', 'block-visibility' ) }
+				</span>
 				<Icon icon={ icons.acf } />
 			</div>
 			<div className="settings-type__toggle has-info-popover">

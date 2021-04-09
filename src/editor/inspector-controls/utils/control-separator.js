@@ -24,14 +24,9 @@ export default function ControlSeparator( props ) {
 		controlOrder.push( cont.attributeSlug );
 	} );
 
-	console.log( enabledControls );
-
 	const activeControls = controlOrder.filter( ( cont ) =>
 		controls.hasOwnProperty( cont )
 	);
-
-		console.log( activeControls );
-		console.log( activeControls.includes( control ) );
 
 	if (
 		! activeControls.includes( control ) || // The current control is not enabled.

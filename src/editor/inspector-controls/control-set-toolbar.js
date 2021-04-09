@@ -18,7 +18,7 @@ import {
 	Popover,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-import { Icon, moreHorizontalMobile, moreVertical, check, info } from '@wordpress/icons';
+import { Icon, moreVertical, check, info } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -151,10 +151,7 @@ export default function ControlSetToolbar( props ) {
 										setResetModalOpen( true );
 									} }
 								>
-									{ __(
-										'Reset all',
-										'block-visibility'
-									) }
+									{ __( 'Reset all', 'block-visibility' ) }
 								</MenuItem>
 							</MenuGroup>
 						</Popover>

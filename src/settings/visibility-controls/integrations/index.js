@@ -2,15 +2,12 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { ToggleControl } from '@wordpress/components';
-import { Icon } from '@wordpress/icons';
 
 /**
  * Internal dependencies
  */
 import ACF from './acf';
 import WPFusion from './wp-fusion';
-import icons from './../../../utils/icons';
 
 /**
  * Renders all the control settings.
@@ -23,9 +20,9 @@ export default function Integrations( props ) {
 	const { variables } = props;
 	let activeIntegrations = variables?.integrations ?? {};
 
-	activeIntegrations = Object.keys( activeIntegrations ).map( key => {
-	    return activeIntegrations[ key ];
-	})
+	activeIntegrations = Object.keys( activeIntegrations ).map( ( key ) => {
+		return activeIntegrations[ key ];
+	} );
 
 	activeIntegrations = activeIntegrations.filter(
 		( integration ) => integration.active === true

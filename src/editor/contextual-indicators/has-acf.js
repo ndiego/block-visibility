@@ -24,9 +24,7 @@ export default function hasACF(
 	// WP Fusion is not active so return false even if saved controls exist.
 	if (
 		! pluginActive ||
-		! enabledControls.some(
-			( control ) => control.settingSlug === 'acf'
-		)
+		! enabledControls.some( ( control ) => control.settingSlug === 'acf' )
 	) {
 		return false;
 	}
@@ -42,10 +40,7 @@ export default function hasACF(
 		indicatorTest = false;
 	}
 
-	indicatorTest = applyFilters(
-		'blockVisibility.hasACF',
-		indicatorTest
-	);
+	indicatorTest = applyFilters( 'blockVisibility.hasACF', indicatorTest );
 
 	return indicatorTest;
 }

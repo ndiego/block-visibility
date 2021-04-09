@@ -32,23 +32,23 @@ function run_rule_tests( $rule_operator, $rule_value, $acf_field ) {
 	}
 
 	switch ( $rule_operator ) {
-		case '!=empty' :
+		case '!=empty':
 			$test_result = ! empty( $acf_field['value'] ) ? true : false;
 			break;
 
-		case '==empty' :
+		case '==empty':
 			$test_result = empty( $acf_field['value'] ) ? true : false;
 			break;
 
-		case '==' :
+		case '==':
 			$test_result = $acf_field['value'] === $rule_value ? true : false;
 			break;
 
-		case '!=' :
+		case '!=':
 			$test_result = $acf_field['value'] !== $rule_value ? true : false;
 			break;
 
-		case '==contains' :
+		case '==contains':
 			if ( strpos( $acf_field['value'], $rule_value ) !== false ) {
 				$test_result = true;
 			} else {
@@ -56,7 +56,7 @@ function run_rule_tests( $rule_operator, $rule_value, $acf_field ) {
 			}
 			break;
 
-		case '!=contains' :
+		case '!=contains':
 			if ( strpos( $acf_field['value'], $rule_value ) === false ) {
 				$test_result = true;
 			} else {
