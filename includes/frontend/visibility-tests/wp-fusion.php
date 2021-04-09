@@ -26,7 +26,7 @@ use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
  * @param boolean $is_visible The current value of the visibility test.
  * @param array   $settings   The core plugin settings.
  * @param array   $attributes The block visibility attributes.
- * @return boolean            Return true is the block should be visible, false if not.
+ * @return boolean            Return true if the block should be visible, false if not.
  */
 function wp_fusion_test( $is_visible, $settings, $attributes ) {
 
