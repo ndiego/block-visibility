@@ -102,7 +102,8 @@ require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/user
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/date-time.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/query-string.php';
 
-// run our integraiton tests.
+// Run our integraiton tests.
+require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/acf.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/wp-fusion.php';
 
 // Require utlity functions for tests.

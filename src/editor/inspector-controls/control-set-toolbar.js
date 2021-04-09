@@ -18,7 +18,7 @@ import {
 	Popover,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-import { Icon, moreHorizontalMobile, check, info } from '@wordpress/icons';
+import { Icon, moreHorizontalMobile, moreVertical, check, info } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -108,7 +108,7 @@ export default function ControlSetToolbar( props ) {
 							'Configure Visibility Controls',
 							'block-visibility'
 						) }
-						icon={ moreHorizontalMobile }
+						icon={ moreVertical }
 						className="control-ellipsis"
 						onClick={ () => setPopoverOpen( ( open ) => ! open ) }
 					/>
@@ -143,19 +143,19 @@ export default function ControlSetToolbar( props ) {
 										</MenuItem>
 									);
 								} ) }
-								<div className="reset-container">
-									<MenuItem
-										className="reset"
-										onClick={ () => {
-											setResetModalOpen( true );
-										} }
-									>
-										{ __(
-											'Reset all',
-											'block-visibility'
-										) }
-									</MenuItem>
-								</div>
+							</MenuGroup>
+							<MenuGroup className="reset-container">
+								<MenuItem
+									className="reset"
+									onClick={ () => {
+										setResetModalOpen( true );
+									} }
+								>
+									{ __(
+										'Reset all',
+										'block-visibility'
+									) }
+								</MenuItem>
 							</MenuGroup>
 						</Popover>
 					) }

@@ -90,6 +90,7 @@ export default function WPFusion( props ) {
 					classNamePrefix="react-select"
 					options={ availableTags }
 					value={ tagsAny }
+					placeholder={ __( 'Select Tag…', 'block-visibility' ) }
 					onChange={ ( value ) => handleOnChange( 'tagsAny', value ) }
 					isMulti
 				/>
@@ -109,6 +110,7 @@ export default function WPFusion( props ) {
 					classNamePrefix="react-select"
 					options={ availableTags }
 					value={ tagsAll }
+					placeholder={ __( 'Select Tag…', 'block-visibility' ) }
 					onChange={ ( value ) => handleOnChange( 'tagsAll', value ) }
 					isMulti
 				/>
@@ -141,6 +143,7 @@ export default function WPFusion( props ) {
 				classNamePrefix="react-select"
 				options={ availableTags }
 				value={ tagsNot }
+				placeholder={ __( 'Select Tag…', 'block-visibility' ) }
 				onChange={ ( value ) => handleOnChange( 'tagsNot', value ) }
 				isMulti
 			/>

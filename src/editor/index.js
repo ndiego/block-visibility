@@ -173,6 +173,37 @@ function blockVisibilityAttributes( settings ) {
 										},
 									},
 									// Integrations
+									acf: {
+										type: 'object',
+										properties: {
+											enable: {
+												type: 'boolean',
+											},
+											hideOnRuleSets: {
+												type: 'boolean',
+											},
+											ruleSets: {
+												type: 'array',
+												items: {
+													type: 'array',
+													items: {
+														type: 'object',
+														properties: {
+															field: {
+																type: 'string',
+															},
+															operator: {
+																type: 'string',
+															},
+															value: {
+																type: 'string',
+															},
+														},
+													},
+												},
+											},
+										},
+									},
 									wpFusion: {
 										type: 'object',
 										properties: {

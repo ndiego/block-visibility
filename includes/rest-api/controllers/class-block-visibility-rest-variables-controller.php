@@ -88,7 +88,6 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 				'acf'       => array(
 					'active'        => function_exists( 'acf' ),
 					'fields'        => self::get_acf_fields(),
-					//'exclude_admins' => self::get_wp_fusion_exclude_admins(),
 				),
 				'wp_fusion' => array(
 					'active'         => function_exists( 'wp_fusion' ),
@@ -149,6 +148,20 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 				'integrations'      => array(
 					'type'       => 'object',
 					'properties' => array(
+						'acf'       => array(
+							'type'       => 'object',
+							'properties' => array(
+								'active' => array(
+									'type' => 'boolean',
+								),
+								'fields' => array(
+									'type'  => 'array',
+									'items' => array(
+										'type' => 'string',
+									),
+								),
+							),
+						),
 						'wp_fusion' => array(
 							'type'       => 'object',
 							'properties' => array(
@@ -179,45 +192,70 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 		return $this->schema;
 	}
 
-
+	/**
+	 * Fetch all available tags in ACF field groups and fields.
+	 *
+	 * @return array
+	 */
 	public static function get_acf_fields() {
-		$fields = array();
-		if ( function_exists( 'acf_get_field_groups' ) ) {
+		$all_groups_and_fields = array();
 
+		if (
+			function_exists( 'acf' ) &&
+			function_exists( 'acf_get_field_groups' )
+		) {
 			$groups = acf_get_field_groups();
+
 			if ( is_array( $groups ) ) {
 
 				foreach ( $groups as $group ) {
+					$group_fields = acf_get_fields( $group );
 
-					$fields_group = acf_get_fields( $group );
-					if ( ! empty( $fields_group ) ) {
+					if ( ! empty( $group_fields ) ) {
 
-						$fields[ $group['key'] ] = array(
+						$group_fields_simplified= array();
+
+						foreach ( $group_fields as $key => $fields ) {
+							$group_fields_simplified[] = $fields;
+						}
+
+						$all_groups_and_fields[] = array(
+							'key'    => $group['key'],
 							'title'  => $group['title'],
 							'active' => $group['active'],
+							'fields' => $group_fields_simplified,
 						);
-
-						foreach ( $fields_group as $k => $fg ) {
-							$fields[ $group['key'] ][ 'fields' ][ $fg['key'] ] = $fg;
-						}
 					}
 				}
 			}
 		} else {
 			$groups = apply_filters( 'acf/get_field_groups', array() ); // phpcs:ignore
+
 			if ( is_array( $groups ) ) {
+
 				foreach ( $groups as $group ) {
-					$fields_group = apply_filters( 'acf/field_group/get_fields', array(), $group['id'] ); // phpcs:ignore
-					if ( ! empty( $fields_group ) ) {
-						foreach ( $fields_group as $k => $fg ) {
-							$fields[ $fg['key'] ] = $fg['label'];
+					$group_fields = apply_filters( 'acf/field_group/get_fields', array(), $group['id'] ); // phpcs:ignore
+
+					if ( ! empty( $group_fields ) ) {
+
+						$group_fields_simplified= array();
+
+						foreach ( $group_fields as $key => $fields ) {
+							$group_fields_simplified[] = $fields;
 						}
+
+						$all_groups_and_fields[] = array(
+							'key'    => $group['key'],
+							'title'  => $group['title'],
+							'active' => $group['active'],
+							'fields' => $group_fields_simplified,
+						);
 					}
 				}
 			}
 		}
 
-		return (object) array_reverse( $fields );
+		return array_reverse( $all_groups_and_fields );
 	}
 
 	/**

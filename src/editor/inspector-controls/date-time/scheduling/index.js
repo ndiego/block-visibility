@@ -27,7 +27,7 @@ export default function Scheduling( props ) {
 	}
 
 	return (
-		<div className="block-visibility__schedules">
+		<div className="date-time-control__schedules">
 			{ schedules.map( ( schedule ) => {
 				return (
 					<Schedule

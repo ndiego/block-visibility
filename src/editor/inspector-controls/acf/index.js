@@ -1,28 +1,29 @@
 /**
  * External dependencies
  */
-import { assign } from 'lodash';
+import { assign, isEmpty } from 'lodash';
 import Select from 'react-select';
 
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
-import { Button, Disabled, Notice, Popover, SelectControl, Slot, TextControl } from '@wordpress/components';
+import { __, sprintf } from '@wordpress/i18n';
+import { Button, Notice, Popover, ToggleControl } from '@wordpress/components';
 import { Icon, info } from '@wordpress/icons';
 import { createInterpolateElement, useState } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
+import RuleSets from './rule-sets';
 import icons from './../../../utils/icons';
 import ControlSeparator from './../utils/control-separator';
 import { TipWPFusion } from './../utils/notices-tips';
 
 /**
- * Add the Wp Fusion controls
+ * Add the ACF controls
  *
- * @since 1.7.0
+ * @since 1.8.0
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
@@ -45,51 +46,9 @@ export default function ACF( props ) {
 		return null;
 	}
 
-	const availableFields = variables?.integrations?.acf?.fields ?? [];
+	const acf = controlSetAtts?.controls?.acf ?? {};
+	const hideOnRuleSets = acf?.hideOnRuleSets ?? false;
 
-	console.log( availableFields );
-
-	const conditions = [
-		{
-			value: '!=empty',
-			label: __( 'Has any value', 'block-visibility' )
-		},
-		{
-			 value: '==empty',
-			 label: __( 'Has no value', 'block-visibility' )
-		 },
-		{
-			value: '==',
-			label: __( 'Value is equal to', 'block-visibility' )
-		},
-		{
-			value: '!=',
-			label: __( 'Value is not equal to', 'block-visibility' )
-		},
-		{
-			value: '==contains',
-			label: __( "Value contains", 'block-visibility' )
-		},
-		{
-			value: '!=contains',
-			label: __( "Value does not contain", 'block-visibility' )
-		},
-	];
-
-	const handleOnChange = ( attribute, tags ) => {
-		const newTags = [];
-
-		if ( tags.length !== 0 ) {
-			tags.forEach( ( tag ) => {
-				newTags.push( tag.value );
-			} );
-		}
-
-		setControlAtts(
-			'acf',
-			assign( { ...wpFusion }, { [ attribute ]: newTags } )
-		);
-	};
 	return (
 		<>
 			<div className="visibility-control__group acf-control">
@@ -117,27 +76,36 @@ export default function ACF( props ) {
 					</span>
 					<Icon icon={ icons.acf } />
 				</h3>
-				Some content here
-				<div>
-					<SelectControl
-						options={ [
-							{ value: null, label: 'Select a User', disabled: true },
-							{ value: 'a', label: 'User A' },
-							{ value: 'b', label: 'User B' },
-							{ value: 'c', label: 'User c' },
-						] }
-					/>
-					<Select
-						className="block-visibility__react-select"
-						classNamePrefix="react-select"
-						options={ conditions }
-						//value={ selectedRoles }
-						//onChange={ ( value ) => handleOnChange( value ) }
+				<div className="visibility-control__label">
+					{ sprintf(
+						// Translators: Whether the block is hidden or visible.
+						__(
+							'%s the block if:',
+							'block-visibility'
+						),
+						hideOnRuleSets ? __( 'Hide', 'block-visibility' ) : __( 'Show', 'block-visibility' )
+					) }
+				</div>
+				<RuleSets acf={ acf } {...props } />
+				<div className="visibility-control hide-on-rule-sets">
+					<ToggleControl
+						label={ __( 'Hide on applied rules', 'block-visibility' ) }
+						checked={ hideOnRuleSets }
+						onChange={ () =>
+							setControlAtts(
+								'acf',
+								assign(
+									{ ...acf },
+									{ hideOnRuleSets: ! hideOnRuleSets }
+								)
+							)
+						}
+						help={ __(
+							'Alternatively, hide the block when the applied rules are satisfied.',
+							'block-visibility'
+						) }
 					/>
 				</div>
-
-
-				<TextControl />
 			</div>
 			<ControlSeparator control="acf" { ...props } />
 		</>

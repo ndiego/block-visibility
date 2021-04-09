@@ -50,7 +50,7 @@ export default function hasWPFusion(
 		( userRoles === 'public' && tagsNot.length === 0 ) || // Only public and no not tags
 		userRoles === 'logged-out' // WP fusion does not apply if only logged-out
 	) {
-		return false;
+		indicatorTest = false;
 	}
 
 	if (
@@ -59,7 +59,7 @@ export default function hasWPFusion(
 		tagsAll.length === 0 &&
 		tagsNot.length === 0
 	) {
-		return false;
+		indicatorTest = false;
 	}
 
 	indicatorTest = applyFilters(

@@ -15,6 +15,7 @@ import hasDateTime from './has-date-time';
 import hasUserRole from './has-user-role';
 import hasScreenSize from './has-screen-size';
 import hasQueryString from './has-query-string';
+import hasACF from './has-acf';
 import hasWPFusion from './has-wp-fusion';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import usePluginData from './../utils/use-plugin-data';
@@ -101,6 +102,12 @@ function withContextualIndicators( BlockListBlock ) {
 				testAtts,
 				hasControlSets,
 				enabledControls
+			),
+			'acf': hasACF(
+				testAtts,
+				hasControlSets,
+				enabledControls,
+				variables
 			),
 			'wp-fusion': hasWPFusion(
 				testAtts,

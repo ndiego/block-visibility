@@ -60,6 +60,7 @@ export default function UserRoles( props ) {
 					classNamePrefix="react-select"
 					options={ roles }
 					value={ selectedRoles }
+					placeholder={ __( 'Select Role…', 'block-visibility' ) }
 					onChange={ ( value ) => handleOnChange( value ) }
 					isMulti
 				/>
