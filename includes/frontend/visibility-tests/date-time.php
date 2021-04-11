@@ -144,6 +144,13 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 			$test_result =
 				run_schedule_test( $enable, $start, $end, $hide_on_schedules );
 
+			$test_result = apply_filters(
+				'block_visibility_visibility_test_date_time_schedule',
+				$test_result,
+				$schedule,
+				$settings
+			);
+
 			$test_results[] = $test_result;
 		}
 	} elseif ( $depracated_start || $depracated_end ) {
@@ -153,7 +160,11 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 		$test_results[] = $test_result;
 	}
 
-	if ( in_array( 'fail', $test_results, true ) ) {
+	// Under normal circumstances, need at lease one "pass" to hide the block.
+	// When hide_on_schedules is enabled, we need at least on "fail" to hide.
+	if ( ! $hide_on_schedules && ! in_array( 'pass', $test_results, true ) ) {
+		return false;
+	} elseif ( $hide_on_schedules && in_array( 'fail', $test_results, true ) ) {
 		return false;
 	} else {
 		return true;
@@ -218,5 +229,11 @@ function run_schedule_test( $enable, $start, $end, $hide_on_schedules ) {
 	}
 
 	// Block has passed the date & time test.
-	return 'pass';
+	//return 'pass';
+
+	if ( $hide_on_schedules ) {
+		return 'fail';
+	} else {
+		return 'pass';
+	}
 }
