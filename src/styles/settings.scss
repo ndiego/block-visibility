@@ -373,11 +373,6 @@ $mobile: 426px;
 
 					.block-visibility__react-select {
 						width: 100%;
-						max-width: 60%;
-
-						@media ( max-width: $tablet ) {
-							max-width: 90%;
-						}
 					}
 				}
 

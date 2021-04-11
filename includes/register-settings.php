@@ -46,7 +46,7 @@ function register_settings() {
 						'enable'            => array(
 							'type' => 'boolean',
 						),
-						// Deprecated in 1.8.0
+						// Deprecated in 1.8.0.
 						'enable_scheduling' => array(
 							'type' => 'boolean',
 						),
@@ -247,7 +247,5 @@ function register_settings() {
 		)
 	);
 }
-// @TODO remove
-//delete_option( 'block_visibility_settings' );
 add_action( 'rest_api_init', __NAMESPACE__ . '\register_settings' );
 add_action( 'admin_init', __NAMESPACE__ . '\register_settings' );

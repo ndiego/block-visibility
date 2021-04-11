@@ -57,7 +57,7 @@ export function NoticeBlockControlsDisabled() {
 	return (
 		<Notice status="warning" isDismissible={ false }>
 			{ __(
-				'All visibility controls have been disabled for this block. Add controls using the ellipsis icon above.',
+				'All visibility controls have been disabled for this block. Add controls using the three dots icon above.',
 				'block-visibility'
 			) }
 		</Notice>
@@ -86,7 +86,7 @@ export function TipControlSet( props ) {
 			<ol>
 				<li className="tip">
 					{ __(
-						'Block Visibility provides various controls that allow you to restrict the visibility of the selected block. Click the ellipsis icon on the right to toggle the controls that you would like to use. A few controls have been added for you by default.',
+						'Block Visibility provides various controls that allow you to restrict the visibility of the selected block. Click the three dots icon on the right to toggle the controls that you would like to use. A few controls have been added for you by default.',
 						'block-visibility'
 					) }
 				</li>

@@ -98,14 +98,28 @@ export default function BlockEditor( props ) {
 					</span>
 				</div>
 				<div className="settings-type__select has-info-popover">
-					<Select
-						className="block-visibility__react-select"
-						classNamePrefix="react-select"
-						options={ defaultControlOptions }
-						value={ selectedControls }
-						onChange={ ( value ) => handleControlsChange( value ) }
-						isMulti
-					/>
+					<div>
+						<Select
+							className="block-visibility__react-select"
+							classNamePrefix="react-select"
+							placeholder={ __(
+								'Select Controls…',
+								'block-visibility'
+							) }
+							options={ defaultControlOptions }
+							value={ selectedControls }
+							onChange={ ( value ) =>
+								handleControlsChange( value )
+							}
+							isMulti
+						/>
+						<div className="settings-panel__help">
+							{ __(
+								'If no controls are selected, the plugin will default to Date & Time, User Role, and Screen Size.',
+								'block-visibility'
+							) }
+						</div>
+					</div>
 					<InformationPopover
 						message={ __(
 							"Optionally set the default controls that will be available when editing a block's visibility for the first time. This can be useful if you find yourself using the same few controls frequently. Controls can be disabled entirely on the Visibility Controls tab.",

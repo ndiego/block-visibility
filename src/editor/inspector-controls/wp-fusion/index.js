@@ -193,7 +193,7 @@ export default function WPFusion( props ) {
 				{ ! hasUserRoles && (
 					<Notice status="warning" isDismissible={ false }>
 						{ __(
-							'The WP Fusion control works best in coordination with the User Role control, which has been disabled. To re-enable, click the ellipsis icon above.',
+							'The WP Fusion control works best in coordination with the User Role control, which has been disabled. To re-enable, click the three dots icon in the Controls Toolbar above.',
 							'block-visibility'
 						) }
 					</Notice>

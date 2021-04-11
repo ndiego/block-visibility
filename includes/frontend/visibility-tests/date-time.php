@@ -75,34 +75,6 @@ function create_date_time( $timestamp = null, $localize = true ) {
 }
 
 /**
- * Helper function for getting the end date. Function checks if the depracated
- * endDateTime attribute is set and handles accordingly.
- *
- * @since 1.6.0
- *
- * @param array  $attributes    The block visibility attributes.
- * @param array  $schedule_atts The schedule specific attributes.
- * @param string $old           The old date time attribute.
- * @param string $new           The new date time attribute.
- * @return string               Return the correct end date.
- */
-function get_date_time( $attributes, $schedule_atts, $old, $new ) {
-	$depracated_date_time = isset( $attributes[ $old ] )
-		? $attributes[ $old ]
-		: null;
-	$new_date_time        = isset( $schedule_atts[ $new ] )
-		? $schedule_atts[ $new ]
-		: null;
-
-	// If the enable setting exists then use the new start attribute.
-	if ( isset( $schedule_atts['enable'] ) ) {
-		return $new_date_time;
-	}
-
-	return $depracated_date_time;
-}
-
-/**
  * Run test to see if block visibility should be restricted by date and time.
  *
  * @since 1.1.0
@@ -128,56 +100,93 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 
 	if ( $has_control_sets ) {
 		// Just retrieve the first set and schedule, need to update in future.
-		$schedule_atts =
-			isset( $attributes['controlSets'][0]['controls']['dateTime']['schedules'][0] )
-				? $attributes['controlSets'][0]['controls']['dateTime']['schedules'][0]
-				: null;
+		$schedules =
+			isset( $attributes['controlSets'][0]['controls']['dateTime']['schedules'] )
+				? $attributes['controlSets'][0]['controls']['dateTime']['schedules']
+				: array();
+
+		$hide_on_schedules =
+			isset( $attributes['controlSets'][0]['controls']['dateTime']['hideOnSchedules'] )
+				? $attributes['controlSets'][0]['controls']['dateTime']['hideOnSchedules']
+				: false;
 	} else {
-		$schedule_atts = isset( $attributes['scheduling'] )
-			? $attributes['scheduling']
-			: null;
+		$schedules = isset( $attributes['scheduling'] )
+			? array( $attributes['scheduling'] )
+			: array();
+
+		$hide_on_schedules = false;
 	}
+
+	$depracated_start = isset( $attributes['startDateTime'] )
+		? $attributes['startDateTime']
+		: null;
+	$depracated_end   = isset( $attributes['endDateTime'] )
+		? $attributes['endDateTime']
+		: null;
 
 	// There are no date time settings, skip tests.
 	if (
-		! $schedule_atts &&
-		! isset( $attributes['startDateTime'] ) &&
-		! isset( $attributes['endDateTime'] )
+		0 === count( $schedules ) &&
+		! $depracated_start &&
+		! $depracated_end
 	) {
 		return true;
 	}
 
-	$enable = isset( $schedule_atts['enable'] )
-		? $schedule_atts['enable']
-		: true;
-	$start  = get_date_time(
-		$attributes,
-		$schedule_atts,
-		'startDateTime',
-		'start'
-	);
-	$end    = get_date_time(
-		$attributes,
-		$schedule_atts,
-		'endDateTime',
-		'end'
-	);
+	$test_results = array();
 
-	// The new enable setting does not exist and there are no depracated
-	// scheduling settings, so skip the est.
-	if ( ! isset( $enable ) && ! $start && ! $end ) {
-		return true;
+	if ( 0 < count( $schedules ) ) {
+		foreach ( $schedules as $schedule ) {
+			$enable = isset( $schedule['enable'] ) ? $schedule['enable'] : true;
+			$start  = isset( $schedule['start'] ) ? $schedule['start'] : null;
+			$end    = isset( $schedule['end'] ) ? $schedule['end'] : null;
+
+			$test_result =
+				run_schedule_test( $enable, $start, $end, $hide_on_schedules );
+
+			$test_results[] = $test_result;
+		}
+	} elseif ( $depracated_start || $depracated_end ) {
+		$test_result =
+			run_schedule_test( true, $depracated_start, $depracated_end, false );
+
+		$test_results[] = $test_result;
 	}
 
-	// Enable setting exists and is not enabled, so skip the test.
-	if ( isset( $enable ) && ! $enable ) {
+	if ( in_array( 'fail', $test_results, true ) ) {
+		return false;
+	} else {
 		return true;
 	}
+}
+add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\date_time_test', 10, 3 );
 
-	// Enable setting exists and is enabled, but there is no saved start or end
-	// date, skip the test.
-	if ( isset( $enable ) && $enable && ! $start && ! $end ) {
-		return true;
+/**
+ * Run individual date/time test for each schedule.
+ *
+ * @since 1.8.0
+ *
+ * @param boolean $enable            Is the schedule enabled or not.
+ * @param string  $start             The set start date/time.
+ * @param string  $end               The set end date/time.
+ * @param boolean $hide_on_schedules Is hide_one_schedules enabled or not.
+ * @return boolean                    Return true if the schedule passes the test, false if not.
+ */
+function run_schedule_test( $enable, $start, $end, $hide_on_schedules ) {
+
+	// Enable setting is not enabled, so skip the test.
+	if ( ! $enable ) {
+		return 'pass';
+	}
+
+	// Enable setting is enabled, but there is no saved start or end date. Skip
+	// test unless hide_on_schedules is set to true.
+	if ( $enable && ! $start && ! $end ) {
+		if ( $hide_on_schedules ) {
+			return 'fail';
+		} else {
+			return 'pass';
+		}
 	}
 
 	$start = $start ? create_date_time( $start, false ) : null;
@@ -185,17 +194,29 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 
 	// If the start date is before the end date, skip test.
 	if ( ( $start && $end ) && $start > $end ) {
-		return true;
+		return 'pass';
 	}
 
 	// Current time based on the date/time settings set in the WP admin.
 	$current = current_datetime();
 
 	if ( ( $start && $start > $current ) || ( $end && $end < $current ) ) {
-		return false;
+		if ( $hide_on_schedules ) {
+			return 'pass';
+		} else {
+			return 'fail';
+		}
+	} elseif (
+		( $start && $start < $current ) ||
+		( $end && $end < $current )
+	) {
+		if ( $hide_on_schedules ) {
+			return 'fail';
+		} else {
+			return 'pass';
+		}
 	}
 
 	// Block has passed the date & time test.
-	return true;
+	return 'pass';
 }
-add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\date_time_test', 10, 3 );

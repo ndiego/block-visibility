@@ -164,6 +164,7 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 * Updated control set controls toggle icon to be more consistent with WP core.
 * Updated popover styling to be more consistent with WP core.
+
 **Removed**
 
 * Removed the `enable_scheduling` setting. Users can now easily toggle visibility controls at the block level so this setting is not longer needed. The entire Date & Time control can still be enabled/disabled in the Visibility Control settings. 
