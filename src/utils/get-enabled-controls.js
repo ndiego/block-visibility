@@ -58,7 +58,7 @@ export function getControls() {
 
 	let integrationControls = [
 		{
-			label: __( 'ACF', 'block-visibility' ),
+			label: __( 'Advanced Custom Fields', 'block-visibility' ),
 			type: 'integration',
 			attributeSlug: 'acf',
 			settingSlug: 'acf',

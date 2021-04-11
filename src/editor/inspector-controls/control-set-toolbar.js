@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { assign } from 'lodash';
+import classnames from 'classnames';
 
 /**
  * WordPress dependencies
@@ -109,7 +110,7 @@ export default function ControlSetToolbar( props ) {
 							'block-visibility'
 						) }
 						icon={ moreVertical }
-						className="control-ellipsis"
+						className="configure-controls"
 						onClick={ () => setPopoverOpen( ( open ) => ! open ) }
 					/>
 					{ popoverOpen && (
@@ -128,6 +129,9 @@ export default function ControlSetToolbar( props ) {
 									return (
 										<MenuItem
 											key={ control.attributeSlug }
+											className={ classnames( {
+												disabled: ! control.active,
+											} ) }
 											icon={ control.active ? check : '' }
 											onClick={ () =>
 												toggleControls( control )

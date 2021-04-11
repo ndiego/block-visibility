@@ -21,50 +21,54 @@ export default function hasDateTime(
 		return false;
 	}
 
-	let controlAtts = {};
-
-	if ( hasControlSets ) {
-		const schedules = testAtts.dateTime?.schedules ?? [];
-		controlAtts = schedules[ 0 ] ?? {};
-	} else {
-		controlAtts = testAtts?.scheduling ?? {};
-	}
-
-	const enable = controlAtts?.enable ?? false;
-	const start = controlAtts?.start ?? '';
-	const end = controlAtts?.end ?? '';
-
-	// Check to see if there are any deprecated settings.
-	const deprecatedStart = testAtts?.startDateTime ?? '';
-	const deprecatedEnd = testAtts?.endDateTime ?? '';
-
-	let indicatorTest = true;
-
 	if (
 		! enabledControls.some(
 			( control ) => control.settingSlug === 'date_time'
-		) ||
-		( ! enable && ! deprecatedStart && ! deprecatedEnd ) ||
-		( enable && ! start && ! end )
+		)
 	) {
-		indicatorTest = false;
+		return false;
 	}
 
-	if ( ! enable ) {
-		if (
-			deprecatedStart &&
-			deprecatedEnd &&
-			deprecatedStart >= deprecatedEnd
-		) {
-			indicatorTest = false;
-		}
+	let schedules = [];
+	let hideOnSchedules = false;
+
+	if ( hasControlSets ) {
+		schedules = testAtts.dateTime?.schedules ?? [];
+		hideOnSchedules = testAtts.dateTime?.hideOnSchedules ?? false;
+	} else {
+		schedules = testAtts?.scheduling ? [ testAtts?.scheduling ] : [];
 	}
 
-	if ( enable ) {
-		if ( start && end && start >= end ) {
-			indicatorTest = false;
-		}
+	if ( schedules.length === 0 ) {
+		return false;
 	}
+
+	const indicatorTestArray = [];
+
+	schedules.forEach( ( schedule ) => {
+		const enable = schedule?.enable ?? false;
+		const start = schedule?.start ?? '';
+		const end = schedule?.end ?? '';
+		let test = true;
+
+		if ( ! enable ) {
+			test = false;
+		}
+
+		if ( ! hideOnSchedules && enable && ! start && ! end ) {
+			test = false;
+		}
+
+		if ( enable ) {
+			if ( start && end && start >= end ) {
+				test = false;
+			}
+		}
+
+		indicatorTestArray.push( test );
+	} );
+
+	let indicatorTest = indicatorTestArray.includes( true );
 
 	indicatorTest = applyFilters(
 		'blockVisibility.hasDateTime',

@@ -155,15 +155,23 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 **Added**
 
 * Added the [Advanced Custom Field](https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/advanced-custom-fields/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control, the second third-party integration for Block Visibility! 🎉
-* Added multiple [Date & Time](https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/date-time/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) scheduling functionality. 🎉
+* Added functionality for multiple [Date & Time](https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/date-time/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) schedules. 🎉
+* Added the ability "invert" the Date & Time control per-block. By default, this control allows you to **show** the selected block if at least one schedule applies. You can now optionally **hide** the block if at least one schedule applies!
+* Added the ability to set default visibility controls.
+* Added the ability to easily reset the visibility controls on each block.
 
 **Changed**
 
 * Updated control set controls toggle icon to be more consistent with WP core.
+* Updated popover styling to be more consistent with WP core.
+**Removed**
+
+* Removed the `enable_scheduling` setting. Users can now easily toggle visibility controls at the block level so this setting is not longer needed. The entire Date & Time control can still be enabled/disabled in the Visibility Control settings. 
+* Removed conditional indicator support for the `startDateTime` and `endDateTime` properties that were deprecated in version 1.4.1. Frontend visibility tests for these properties are still operational, but will likely be removed in version 2.0.
 
 **Fixed**
 
-* Fixed the WP Fusion filters to improve the integration.
+* Fixed WP Fusion filters to improve the integration.
 
 = 1.7.1 - 2021-03-29 =
 

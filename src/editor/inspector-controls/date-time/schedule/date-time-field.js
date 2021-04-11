@@ -16,14 +16,14 @@ export default function DateTimeField( props ) {
 	const { label, title, hasDateTime, onOpenPopover, onClearDateTime } = props;
 
 	return (
-		<div className="date-time-field">
+		<div className="date-time-control__schedule--date-time-field">
 			<Button
 				icon={ calendar }
 				title={ title }
 				onClick={ () => onOpenPopover( ( _isOpen ) => ! _isOpen ) }
 				isLink
 			>
-				{ label }
+				<span>{ label }</span>
 			</Button>
 			{ hasDateTime && (
 				<Button

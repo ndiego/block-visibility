@@ -218,7 +218,7 @@ export default function RuleSets( props ) {
 											}
 											isSecondary
 										>
-											AND
+											{ __( 'AND', 'block-visibility' ) }
 										</Button>
 										{ ruleIndex !== 0 && (
 											<Button
@@ -232,7 +232,10 @@ export default function RuleSets( props ) {
 												isTertiary
 												isDestructive
 											>
-												Remove
+												{ __(
+													'Remove',
+													'block-visibility'
+												) }
 											</Button>
 										) }
 									</div>

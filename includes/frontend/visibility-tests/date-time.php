@@ -120,10 +120,7 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 	}
 
 	// If this functionality has been disabled, skip test.
-	if (
-		! is_control_enabled( $settings, 'date_time' ) ||
-		! is_control_enabled( $settings, 'date_time', 'enable_scheduling' )
-	) {
+	if ( ! is_control_enabled( $settings, 'date_time' ) ) {
 		return true;
 	}
 

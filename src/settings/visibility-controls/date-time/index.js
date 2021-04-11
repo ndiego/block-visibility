@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { ToggleControl, Disabled, Slot } from '@wordpress/components';
+import { ToggleControl, Slot } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -21,28 +21,6 @@ export default function DateTime( props ) {
 
 	// Manually set defaults, this ensures the main settings function properly
 	const enable = visibilityControls?.date_time?.enable ?? true; // eslint-disable-line
-	const enableScheduling = visibilityControls?.date_time?.enable_scheduling ?? true; // eslint-disable-line
-
-	let schedulingControl = (
-		<ToggleControl
-			label={ __( 'Enable block scheduling.', 'block-visibility' ) }
-			checked={ enableScheduling }
-			onChange={ () => {
-				setVisibilityControls( {
-					...visibilityControls,
-					date_time: {
-						...visibilityControls.date_time,
-						enable_scheduling: ! enableScheduling,
-					},
-				} );
-				setHasUpdates( true );
-			} }
-		/>
-	);
-
-	if ( ! enable ) {
-		schedulingControl = <Disabled>{ schedulingControl }</Disabled>;
-	}
 
 	return (
 		<div className="setting-tabs__settings-panel">
@@ -73,17 +51,6 @@ export default function DateTime( props ) {
 					<InformationPopover
 						message={ __(
 							'Date & Time controls allow you hide blocks based on time and date settings, which includes the ability to schedule the visibility of blocks.',
-							'block-visibility'
-						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/date-time/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
-					/>
-				</div>
-				<hr />
-				<div className="settings-type__toggle first has-info-popover subsetting">
-					{ schedulingControl }
-					<InformationPopover
-						message={ __(
-							'Block scheduling allows you to restrict block visibility based on a start and end date/time.',
 							'block-visibility'
 						) }
 						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/date-time/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"

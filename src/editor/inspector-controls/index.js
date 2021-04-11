@@ -9,7 +9,8 @@ import { assign, isEmpty } from 'lodash';
 import { __ } from '@wordpress/i18n';
 import { PanelBody, withFilters, Slot } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useState, useEffect } from '@wordpress/element';
+import { useState } from '@wordpress/element';
+import { withSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -19,7 +20,6 @@ import ControlSet from './control-set';
 import { NoticeControlsDisabled } from './utils/notices-tips';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import hasPermission from './../utils/has-permission';
-import usePluginData from './../utils/use-plugin-data';
 import getEnabledControls from './../../utils/get-enabled-controls';
 
 /**
@@ -29,13 +29,21 @@ import getEnabledControls from './../../utils/get-enabled-controls';
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
-export default function VisibilityInspectorControls( props ) {
-	const { attributes, name } = props;
+function VisibilityInspectorControls( props ) {
+	const { attributes, name, settings, variables } = props;
 	const blockVisibility = attributes?.blockVisibility;
 	const [ blockAtts, setBlockAtts ] = useState( blockVisibility );
 
-	const settings = usePluginData( 'settings' );
-	const variables = usePluginData( 'variables' );
+	if ( settings === 'fetching' || variables === 'fetching' ) {
+		return null;
+	}
+
+	if (
+		! hasPermission( settings, variables ) || // Does the user haver permission to edit visibility settings?
+		! hasVisibilityControls( settings, name ) // Does the block type have visibility controls?
+	) {
+		return null;
+	}
 
 	const enabledControls = getEnabledControls( settings, variables );
 	const defaultControlSettings =
@@ -56,48 +64,29 @@ export default function VisibilityInspectorControls( props ) {
 		};
 	}
 
-	useEffect( () => {
-		let controlSets = blockAtts?.controlSets ?? [];
+	let controlSets = blockAtts?.controlSets ?? [];
 
-		// Create the default control set and populate with any previous attributes.
-		if ( controlSets.length === 0 ) {
-			const defaultSet = [
-				{
-					id: 0,
-					name: __( 'Control Set', 'block-visibility' ),
-					enable: true,
-					controls: defaultControls,
-				},
-			];
-			controlSets = getDeprecatedAtts( blockAtts, defaultSet );
+	// Create the default control set and populate with any previous attributes.
+	if ( controlSets.length === 0 ) {
+		const defaultSet = [
+			{
+				id: 0,
+				name: __( 'Control Set', 'block-visibility' ),
+				enable: true,
+				controls: defaultControls,
+			},
+		];
+		controlSets = getDeprecatedAtts( blockAtts, defaultSet );
 
-			setBlockAtts( assign( { ...blockAtts }, { controlSets } ) );
-		}
-	}, [] );
-
-	if ( settings === 'fetching' || variables === 'fetching' || ! blockAtts ) {
-		return null;
+		setBlockAtts( assign( { ...blockAtts }, { controlSets } ) );
 	}
 
-	if ( ! hasPermission( settings, variables ) ) {
-		return null;
-	}
-
-	const hasVisibility = hasVisibilityControls( settings, name );
-
-	if ( ! hasVisibility ) {
-		return null;
-	}
-
-	const settingsUrl = variables?.plugin_variables.settings_url ?? ''; // eslint-disable-line
+	const settingsUrl = variables?.plugin_variables?.settings_url ?? ''; // eslint-disable-line
 
 	// Provides an entry point to slot in additional settings.
 	const AdditionalInspectorControls = withFilters(
 		'blockVisibility.addInspectorControls'
 	)( ( props ) => <></> ); // eslint-disable-line
-
-	// Need to reset due to error when switching from code editor to visual editor.
-	const controlSets = blockAtts?.controlSets ?? [];
 
 	const hideBlock = blockVisibility?.hideBlock ?? false;
 	const hasHideBlock = enabledControls.some(
@@ -160,6 +149,16 @@ export default function VisibilityInspectorControls( props ) {
 	);
 }
 
+export default withSelect( ( select ) => {
+	const { getEntityRecord } = select( 'core' );
+	const settings =
+		getEntityRecord( 'block-visibility/v1', 'settings' ) ?? 'fetching';
+	const variables =
+		getEntityRecord( 'block-visibility/v1', 'variables' ) ?? 'fetching';
+
+	return { settings, variables };
+} )( VisibilityInspectorControls );
+
 /**
  * Converts visibility attributes pre v1.6 to a control set. Also handles some
  * deprecation logic from previous versions.
@@ -175,58 +174,72 @@ function getDeprecatedAtts( blockAtts, controlSets ) {
 		blockAtts?.startDateTime ||
 		blockAtts?.endDateTime
 	) {
-		controlSets[ 0 ].controls.dateTime.schedules = [ { id: 0 } ];
-	}
+		controlSets[ 0 ].controls.dateTime = {};
+		controlSets[ 0 ].controls.dateTime.schedules = [ {} ];
 
-	if ( blockAtts?.startDateTime ) {
-		controlSets[ 0 ].controls.dateTime.schedules[ 0 ].start =
-			blockAtts.startDateTime;
-	}
+		if ( blockAtts?.startDateTime || blockAtts?.endDateTime ) {
+			controlSets[ 0 ].controls.dateTime.schedules[ 0 ].enable = true;
 
-	if ( blockAtts?.endDateTime ) {
-		controlSets[ 0 ].controls.dateTime.schedules[ 0 ].end =
-			blockAtts.endDateTime;
-	}
+			if ( blockAtts?.startDateTime ) {
+				controlSets[ 0 ].controls.dateTime.schedules[ 0 ].start =
+					blockAtts.startDateTime;
+			}
 
-	if ( blockAtts?.scheduling ) {
-		if ( blockAtts?.scheduling?.enable ) {
-			controlSets[ 0 ].controls.dateTime.schedules[ 0 ].enable =
-				blockAtts.scheduling.enable;
+			if ( blockAtts?.endDateTime ) {
+				controlSets[ 0 ].controls.dateTime.schedules[ 0 ].end =
+					blockAtts.endDateTime;
+			}
 		}
 
-		if ( blockAtts?.scheduling?.start ) {
-			controlSets[ 0 ].controls.dateTime.schedules[ 0 ].start =
-				blockAtts.scheduling.start;
-		}
+		if ( blockAtts?.scheduling ) {
+			if ( blockAtts?.scheduling?.enable ) {
+				controlSets[ 0 ].controls.dateTime.schedules[ 0 ].enable =
+					blockAtts.scheduling.enable;
+			}
 
-		if ( blockAtts?.scheduling?.end ) {
-			controlSets[ 0 ].controls.dateTime.schedules[ 0 ].end =
-				blockAtts.scheduling.end;
+			if ( blockAtts?.scheduling?.start ) {
+				controlSets[ 0 ].controls.dateTime.schedules[ 0 ].start =
+					blockAtts.scheduling.start;
+			}
+
+			if ( blockAtts?.scheduling?.end ) {
+				controlSets[ 0 ].controls.dateTime.schedules[ 0 ].end =
+					blockAtts.scheduling.end;
+			}
 		}
 	}
 
 	if ( blockAtts?.hideOnScreenSize ) {
+		controlSets[ 0 ].controls.screenSize = {};
 		controlSets[ 0 ].controls.screenSize.hideOnScreenSize =
 			blockAtts.hideOnScreenSize;
 	}
 
-	if ( blockAtts?.visibilityByRole ) {
-		if ( blockAtts?.visibilityByRole === 'all' ) {
-			controlSets[ 0 ].controls.userRole.visibilityByRole = 'public';
-		} else {
-			controlSets[ 0 ].controls.userRole.visibilityByRole =
-				blockAtts.visibilityByRole;
+	if (
+		blockAtts?.visibilityByRole ||
+		blockAtts?.hideOnRestrictedRoles ||
+		blockAtts?.restrictedRoles
+	) {
+		controlSets[ 0 ].controls.userRole = {};
+
+		if ( blockAtts?.visibilityByRole ) {
+			if ( blockAtts?.visibilityByRole === 'all' ) {
+				controlSets[ 0 ].controls.userRole.visibilityByRole = 'public';
+			} else {
+				controlSets[ 0 ].controls.userRole.visibilityByRole =
+					blockAtts.visibilityByRole;
+			}
 		}
-	}
 
-	if ( blockAtts?.hideOnRestrictedRoles ) {
-		controlSets[ 0 ].controls.userRole.hideOnRestrictedRoles =
-			blockAtts.hideOnRestrictedRoles;
-	}
+		if ( blockAtts?.hideOnRestrictedRoles ) {
+			controlSets[ 0 ].controls.userRole.hideOnRestrictedRoles =
+				blockAtts.hideOnRestrictedRoles;
+		}
 
-	if ( blockAtts?.restrictedRoles ) {
-		controlSets[ 0 ].controls.userRole.restrictedRoles =
-			blockAtts.restrictedRoles;
+		if ( blockAtts?.restrictedRoles ) {
+			controlSets[ 0 ].controls.userRole.restrictedRoles =
+				blockAtts.restrictedRoles;
+		}
 	}
 
 	return controlSets;

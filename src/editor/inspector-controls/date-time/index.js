@@ -1,14 +1,18 @@
 /**
+ * External dependencies
+ */
+import { assign } from 'lodash';
+
+/**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
-import { Slot } from '@wordpress/components';
+import { __, sprintf } from '@wordpress/i18n';
+import { Button, Slot, ToggleControl } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import { isControlSettingEnabled } from './../../utils/setting-utilities';
-import Scheduling from './scheduling';
+import Schedule from './schedule';
 import ControlSeparator from './../utils/control-separator';
 
 /**
@@ -19,7 +23,7 @@ import ControlSeparator from './../utils/control-separator';
  * @return {string}		 Return the rendered JSX
  */
 export default function DateTime( props ) {
-	const { settings, enabledControls, controlSetAtts } = props;
+	const { enabledControls, controlSetAtts, setControlAtts } = props;
 	const controlEnabled = enabledControls.some(
 		( control ) => control.settingSlug === 'date_time'
 	);
@@ -31,12 +35,29 @@ export default function DateTime( props ) {
 	}
 
 	const dateTime = controlSetAtts?.controls?.dateTime ?? {};
+	const hideOnSchedules = dateTime?.hideOnSchedules ?? false;
+	let schedules = dateTime?.schedules ?? [];
 
-	const enableScheduling = isControlSettingEnabled(
-		settings,
-		'date_time',
-		'enable_scheduling'
-	);
+	if ( schedules.length === 0 ) {
+		const defaultSchedule = {
+			enable: true,
+			start: '',
+			end: '',
+		};
+
+		dateTime.schedules = [ defaultSchedule ];
+		schedules = dateTime.schedules;
+	}
+
+	const addSchedule = () => {
+		schedules.push( {
+			enable: true,
+			start: '',
+			end: '',
+		} );
+
+		setControlAtts( 'dateTime', assign( { ...dateTime }, { schedules } ) );
+	};
 
 	return (
 		<>
@@ -44,9 +65,60 @@ export default function DateTime( props ) {
 				<h3 className="visibility-control__group-heading">
 					{ __( 'Date & Time', 'block-visibility' ) }
 				</h3>
-				{ enableScheduling && (
-					<Scheduling dateTime={ dateTime } { ...props } />
-				) }
+				<div className="visibility-control__help">
+					{ sprintf(
+						// Translators: Whether the block is hidden or visible.
+						__(
+							'%s the block if at least one schedule applies.',
+							'block-visibility'
+						),
+						hideOnSchedules
+							? __( 'Hide', 'block-visibility' )
+							: __( 'Show', 'block-visibility' )
+					) }
+				</div>
+				<div className="date-time-control__schedules">
+					{ schedules.map( ( schedule, scheduleIndex ) => {
+						return (
+							<Schedule
+								key={ scheduleIndex }
+								dateTime={ dateTime }
+								schedules={ schedules }
+								scheduleIndex={ scheduleIndex }
+								scheduleAtts={ schedule }
+								hideOnSchedules={ hideOnSchedules }
+								{ ...props }
+							/>
+						);
+					} ) }
+					<div className="date-time-control__schedules--add">
+						<Button onClick={ () => addSchedule() } isSecondary>
+							{ __( 'Add Schedule', 'block-visibility' ) }
+						</Button>
+					</div>
+				</div>
+				<div className="date-time-control__hide-on-schedules">
+					<ToggleControl
+						label={ __(
+							'Hide when schedules apply',
+							'block-visibility'
+						) }
+						checked={ hideOnSchedules }
+						onChange={ () =>
+							setControlAtts(
+								'dateTime',
+								assign(
+									{ ...dateTime },
+									{ hideOnSchedules: ! hideOnSchedules }
+								)
+							)
+						}
+						help={ __(
+							'Alternatively, hide the block when at least on schedule applies.',
+							'block-visibility'
+						) }
+					/>
+				</div>
 				<Slot name="DateTimeControls" />
 			</div>
 			<ControlSeparator control="dateTime" { ...props } />

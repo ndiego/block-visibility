@@ -2,18 +2,23 @@
  * External dependencies
  */
 import { assign } from 'lodash';
+import classnames from 'classnames';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
 import {
+	Button,
 	Disabled,
 	Notice,
 	Slot,
+	Popover,
+	TextControl,
 	ToggleControl,
 	withFilters,
 } from '@wordpress/components';
+import { settings } from '@wordpress/icons';
 import { useState } from '@wordpress/element';
 
 /**
@@ -24,24 +29,33 @@ import DateTimeField from './date-time-field';
 import formatDateLabel from './format-date-label';
 
 /**
- * Add the block Scheduling control
+ * Add the block Schedule component.
  *
- * @since 1.6.0
+ * @since 1.8.0
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
 export default function Schedule( props ) {
-	const { dateTime, scheduleAtts, setControlAtts } = props;
-	const [ isPickerOpen, setIsPickerOpen ] = useState( false );
-	const [ isEndPickerOpen, setIsEndPickerOpen ] = useState( false );
+	const {
+		dateTime,
+		schedules,
+		scheduleIndex,
+		scheduleAtts,
+		setControlAtts,
+		hideOnSchedules,
+	} = props;
+	const [ startPickerOpen, setStartPickerOpen ] = useState( false );
+	const [ endPickerOpen, setEndPickerOpen ] = useState( false );
+	const [ settingsPopoverOpen, setSettingsPopoverOpen ] = useState( false );
 
-	const enable = scheduleAtts?.enable ?? false;
-	const today = new Date( new Date().setHours( 0, 0, 0, 0 ) );
-
-	// Run get functions to clean up depracated attributes
+	const title = scheduleAtts?.title ?? '';
+	const enable = scheduleAtts?.enable ?? true;
 	const start = scheduleAtts?.start ?? null;
 	const end = scheduleAtts?.end ?? null;
 
+	const today = new Date( new Date().setHours( 0, 0, 0, 0 ) );
+
+	const scheduleTitle = title ? title : __( 'Schedule', 'block-visibility' );
 	const startDateLabel = formatDateLabel(
 		start,
 		__( 'Now', 'block-visibility' )
@@ -88,15 +102,22 @@ export default function Schedule( props ) {
 		alert = start >= end ? true : false;
 	}
 
-	const setAttribute = ( attribute, value ) => {
-		scheduleAtts[ attribute ] = value;
-
-		dateTime.schedules[ scheduleAtts.id ] = scheduleAtts;
+	const removeSchedule = () => {
+		const newSchedules = schedules.filter(
+			( value, index ) => index !== scheduleIndex
+		);
 
 		setControlAtts(
 			'dateTime',
-			assign( { ...dateTime }, { schedules: dateTime.schedules } )
+			assign( { ...dateTime }, { schedules: newSchedules } )
 		);
+	};
+
+	const setAttribute = ( attribute, value ) => {
+		scheduleAtts[ attribute ] = value;
+		schedules[ scheduleIndex ] = scheduleAtts;
+
+		setControlAtts( 'dateTime', assign( { ...dateTime }, { schedules } ) );
 	};
 
 	// Provides an entry point to slot in additional settings.
@@ -105,42 +126,46 @@ export default function Schedule( props ) {
 	)( ( props ) => <></> ); // eslint-disable-line
 
 	let dateTimeFields = (
-		<div className="scheduling__date-time-fields">
+		<div className="date-time-control__schedule--date-time-fields">
 			<div className="visibility-control__label">
-				{ __( 'Start showing', 'block-visibility' ) }
+				{ hideOnSchedules
+					? __( 'Stop showing', 'block-visibility' )
+					: __( 'Start showing', 'block-visibility' ) }
 			</div>
 			<DateTimeField
 				label={ startDateLabel }
 				title={ __( 'Choose a start date/time', 'block-visibility' ) }
 				hasDateTime={ start }
-				onOpenPopover={ setIsPickerOpen }
+				onOpenPopover={ setStartPickerOpen }
 				onClearDateTime={ () => setAttribute( 'start', '' ) }
 			/>
-			{ isPickerOpen && (
+			{ startPickerOpen && (
 				<CalendarPopover
 					label={ __( 'Start Date/Time', 'block-visibility' ) }
 					currentDate={ selectedStart( start, end, today ) }
 					onDateChange={ ( date ) => setAttribute( 'start', date ) }
-					isOpen={ setIsPickerOpen }
+					isOpen={ setStartPickerOpen }
 					highlightedDate={ end }
 				/>
 			) }
 			<div className="visibility-control__label">
-				{ __( 'Stop showing', 'block-visibility' ) }
+				{ hideOnSchedules
+					? __( 'Resume showing', 'block-visibility' )
+					: __( 'Stop showing', 'block-visibility' ) }
 			</div>
 			<DateTimeField
 				label={ endDateLabel }
 				title={ __( 'Choose an end date/time', 'block-visibility' ) }
 				hasDateTime={ end }
-				onOpenPopover={ setIsEndPickerOpen }
+				onOpenPopover={ setEndPickerOpen }
 				onClearDateTime={ () => setAttribute( 'end', '' ) }
 			/>
-			{ isEndPickerOpen && (
+			{ endPickerOpen && (
 				<CalendarPopover
 					label={ __( 'End Date/Time', 'block-visibility' ) }
 					currentDate={ selectedEnd( start, end, today ) }
 					onDateChange={ ( date ) => setAttribute( 'end', date ) }
-					isOpen={ setIsEndPickerOpen }
+					isOpen={ setEndPickerOpen }
 					highlightedDate={ start }
 				/>
 			) }
@@ -160,19 +185,84 @@ export default function Schedule( props ) {
 	}
 
 	return (
-		<div className="visibility-control scheduling">
+		<div
+			className={ classnames( 'date-time-control__schedule', {
+				disabled: ! enable,
+			} ) }
+		>
 			<Slot name="ScheduleControlsTop" />
-			<ToggleControl
-				label={ __( 'Enable block scheduling', 'block-visibility' ) }
-				checked={ enable }
-				onChange={ () => setAttribute( 'enable', ! enable ) }
-				help={ __(
-					'Schedule the block to only be visible between a start and end date/time.',
-					'block-visibility'
-				) }
-			/>
+			<div className="date-time-control__schedule--heading">
+				<span>{ scheduleTitle }</span>
+				<div>
+					<Button
+						label={ __( 'Schedule Settings', 'block-visibility' ) }
+						icon={ settings }
+						onClick={ () =>
+							setSettingsPopoverOpen( ( open ) => ! open )
+						}
+						isSmall
+					/>
+					{ settingsPopoverOpen && (
+						<Popover
+							className="block-visibility__control-popover schedule-settings"
+							focusOnMount="container"
+							onClose={ () => setSettingsPopoverOpen( false ) }
+						>
+							<h3>
+								{ __(
+									'Schedule Settings',
+									'block-visibility'
+								) }
+							</h3>
+							<TextControl
+								value={ title }
+								label={ __(
+									'Schedule Title',
+									'block-visibility'
+								) }
+								placeholder={ __(
+									'Schedule',
+									'block-visibility'
+								) }
+								help={ __(
+									'Optionally set a descriptive schedule title.',
+									'block-visibility'
+								) }
+								onChange={ ( value ) =>
+									setAttribute( 'title', value )
+								}
+							/>
+							<ToggleControl
+								label={ __(
+									'Enable schedule',
+									'block-visibility'
+								) }
+								checked={ enable }
+								onChange={ () =>
+									setAttribute( 'enable', ! enable )
+								}
+								help={ __(
+									'Enable or disable the selected schedule.',
+									'block-visibility'
+								) }
+							/>
+						</Popover>
+					) }
+				</div>
+			</div>
 			{ dateTimeFields }
 			<Slot name="ScheduleControlsBottom" />
+			<div className="date-time-control__schedule--remove">
+				{ schedules.length >= 2 && (
+					<Button
+						onClick={ () => removeSchedule() }
+						isTertiary
+						isDestructive
+					>
+						{ __( 'Remove', 'block-visibility' ) }
+					</Button>
+				) }
+			</div>
 			<AdditionalScheduleControls { ...props } />
 		</div>
 	);

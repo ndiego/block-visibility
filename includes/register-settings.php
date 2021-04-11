@@ -46,6 +46,7 @@ function register_settings() {
 						'enable'            => array(
 							'type' => 'boolean',
 						),
+						// Deprecated in 1.8.0
 						'enable_scheduling' => array(
 							'type' => 'boolean',
 						),

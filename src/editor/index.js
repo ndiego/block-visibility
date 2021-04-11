@@ -93,6 +93,9 @@ function blockVisibilityAttributes( settings ) {
 														id: {
 															type: 'number',
 														},
+														title: {
+															type: 'string',
+														},
 														enable: {
 															type: 'boolean',
 														},
@@ -104,6 +107,9 @@ function blockVisibilityAttributes( settings ) {
 														},
 													},
 												},
+											},
+											hideOnSchedules: {
+												type: 'boolean',
 											},
 										},
 									},

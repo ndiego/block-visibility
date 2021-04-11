@@ -16,7 +16,6 @@ import { useDispatch, withSelect } from '@wordpress/data';
 import icons from './../../utils/icons';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import hasPermission from './../utils/has-permission';
-import usePluginData from './../utils/use-plugin-data';
 import { isPluginSettingEnabled } from './../utils/setting-utilities';
 import getEnabledControls from './../../utils/get-enabled-controls';
 
@@ -32,8 +31,14 @@ function ToolbarControls( props ) {
 		'core/block-editor'
 	);
 	const { createSuccessNotice } = useDispatch( 'core/notices' );
-	const settings = usePluginData( 'settings' );
-	const variables = usePluginData( 'variables' );
+	const {
+		enableMenuItem,
+		clientId,
+		blockType,
+		blockAttributes,
+		settings,
+		variables,
+	} = props;
 
 	if ( settings === 'fetching' || variables === 'fetching' ) {
 		return null;
@@ -42,8 +47,6 @@ function ToolbarControls( props ) {
 	if ( ! hasPermission( settings, variables ) ) {
 		return null;
 	}
-
-	const { enableMenuItem, clientId, blockType, blockAttributes } = props;
 
 	// Make sure the menu item is enabled and we have recieved a block type.
 	if ( ! enableMenuItem || ! blockType ) {
@@ -130,5 +133,18 @@ export default withSelect( ( select ) => {
 	const blockType = getBlockType( getBlockName( clientId ) );
 	const blockAttributes = getBlockAttributes( clientId );
 
-	return { enableMenuItem, clientId, blockType, blockAttributes };
+	// Fetch the plugin settings and variables.
+	const settings =
+		getEntityRecord( 'block-visibility/v1', 'settings' ) ?? 'fetching';
+	const variables =
+		getEntityRecord( 'block-visibility/v1', 'variables' ) ?? 'fetching';
+
+	return {
+		enableMenuItem,
+		clientId,
+		blockType,
+		blockAttributes,
+		settings,
+		variables,
+	};
 } )( ToolbarControls );

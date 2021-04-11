@@ -7,9 +7,8 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
-import { Button, Popover, ToggleControl } from '@wordpress/components';
-import { Icon, info } from '@wordpress/icons';
-import { useState } from '@wordpress/element';
+import { ToggleControl } from '@wordpress/components';
+import { Icon } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -17,7 +16,6 @@ import { useState } from '@wordpress/element';
 import RuleSets from './rule-sets';
 import icons from './../../../utils/icons';
 import ControlSeparator from './../utils/control-separator';
-import { TipACF } from './../utils/notices-tips';
 
 /**
  * Add the ACF controls
@@ -27,7 +25,6 @@ import { TipACF } from './../utils/notices-tips';
  * @return {string}		 Return the rendered JSX
  */
 export default function ACF( props ) {
-	const [ tipsPopoverOpen, setTipsPopoverOpen ] = useState( false );
 	const {
 		variables,
 		enabledControls,
@@ -54,24 +51,6 @@ export default function ACF( props ) {
 				<h3 className="visibility-control__group-heading has-icon">
 					<span>
 						{ __( 'Advanced Custom Fields', 'block-visibility' ) }
-						<Button
-							label={ __( 'ACF Tips', 'block-visibility' ) }
-							icon={ info }
-							className="control-tips"
-							onClick={ () =>
-								setTipsPopoverOpen( ( open ) => ! open )
-							}
-							isSmall
-						/>
-						{ tipsPopoverOpen && (
-							<Popover
-								className="block-visibility__control-popover tips"
-								focusOnMount="container"
-								onClose={ () => setTipsPopoverOpen( false ) }
-							>
-								<TipACF { ...props } />
-							</Popover>
-						) }
 					</span>
 					<Icon icon={ icons.acf } />
 				</h3>
@@ -85,10 +64,10 @@ export default function ACF( props ) {
 					) }
 				</div>
 				<RuleSets acf={ acf } { ...props } />
-				<div className="visibility-control hide-on-rule-sets">
+				<div className="acf-control__hide-on-rule-sets">
 					<ToggleControl
 						label={ __(
-							'Hide on applied rules',
+							'Hide when rules apply',
 							'block-visibility'
 						) }
 						checked={ hideOnRuleSets }
