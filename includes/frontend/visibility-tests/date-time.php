@@ -145,7 +145,7 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 				run_schedule_test( $enable, $start, $end, $hide_on_schedules );
 
 			$test_result = apply_filters(
-				'block_visibility_visibility_test_date_time_schedule',
+				'block_visibility_frontend_test_date_time_schedule',
 				$test_result,
 				$schedule,
 				$settings
@@ -227,9 +227,6 @@ function run_schedule_test( $enable, $start, $end, $hide_on_schedules ) {
 			return 'pass';
 		}
 	}
-
-	// Block has passed the date & time test.
-	//return 'pass';
 
 	if ( $hide_on_schedules ) {
 		return 'fail';
