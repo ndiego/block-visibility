@@ -395,7 +395,9 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
 
         .components-menu-item__button {
             &.disabled {
-                margin-right: 46px;
+                span {
+                    margin-right: 46px;
+                }
             }
         }
     }
