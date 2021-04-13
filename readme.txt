@@ -13,7 +13,7 @@ Show or hide any WordPress block with ease. Schedule when blocks should be visib
 
 == Description ==
 
-Block Visibility allows you to control which blocks are visible on your website and who can see them, which gives you the power of dynamic and personalized content. Effortlessly display conditional blocks based on specific schedules, user roles, screen sizes, query strings, ACF fields, WP Fusion tags and more.
+Block Visibility allows you to control which blocks are visible on your website and who can see them. Effortlessly display conditional blocks based on specific schedules, user roles, screen sizes, query strings, ACF fields, WP Fusion tags and more. Block Visibility unlocks the power of dynamic and personalized content.
 
 Built for the new Block (Gutenberg) Editor, this plugin was designed to work with **any** WordPress block. This includes blocks natively provided by WordPress as well as third-party blocks.
 
@@ -28,6 +28,7 @@ Visibility controls determine whether a block should be visible to users on the 
 * Only show blocks to **logged-out** users
 * Only show blocks to users with **specific roles** (Administrator, Subscriber, Customer, Member etc.)
 * Show or hide dynamic blocks based on **URL query strings**. Great for marketing campaigns!
+* More to come...
 
 ==== Third-Party Integrations ====
 
@@ -152,7 +153,7 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 == Changelog ==
 
-= 1.8.0 - TBD =
+= 1.8.0 - 2021-04-13 =
 
 **Added**
 
