@@ -82,17 +82,16 @@ function VisibilityInspectorControls( props ) {
 	}
 
 	const settingsUrl = variables?.plugin_variables?.settings_url ?? ''; // eslint-disable-line
-
-	// Provides an entry point to slot in additional settings.
-	const AdditionalInspectorControls = withFilters(
-		'blockVisibility.addInspectorControls'
-	)( ( props ) => <></> ); // eslint-disable-line
-
 	const hideBlock = blockVisibility?.hideBlock ?? false;
 	const hasHideBlock = enabledControls.some(
 		( control ) => control.settingSlug === 'hide_block'
 	);
 	const blockHidden = hasHideBlock && hideBlock;
+
+	// Provides an entry point to slot in additional settings.
+	const AdditionalInspectorControls = withFilters(
+		'blockVisibility.addInspectorControls'
+	)( ( props ) => <></> ); // eslint-disable-line
 
 	return (
 		// Note that the core InspectorControls component is already making use
@@ -121,12 +120,10 @@ function VisibilityInspectorControls( props ) {
 									return (
 										<ControlSet
 											key={ controlSet.id }
-											settings={ settings }
-											variables={ variables }
-											defaultControls={ defaultControls }
-											enabledControls={ enabledControls }
-											controlSetAtts={ controlSet }
 											blockAtts={ blockAtts }
+											controlSetAtts={ controlSet }
+											enabledControls={ enabledControls }
+											defaultControls={ defaultControls }
 											{ ...props }
 										/>
 									);
@@ -140,8 +137,7 @@ function VisibilityInspectorControls( props ) {
 				</div>
 			</PanelBody>
 			<AdditionalInspectorControls
-				settings={ settings }
-				variables={ variables }
+				blockAtts={ blockAtts }
 				enabledControls={ enabledControls }
 				{ ...props }
 			/>

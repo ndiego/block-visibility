@@ -27,6 +27,32 @@ import { Icon, moreVertical, check, info } from '@wordpress/icons';
 import { TipControlSet } from './utils/notices-tips';
 
 /**
+ * Render a control menu item
+ *
+ * @since 1.9.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
+function ControlMenuItem( props ) {
+	const { control, toggleControls } = props;
+	return (
+		<MenuItem
+			key={ control.attributeSlug }
+			className={ classnames( {
+				disabled: ! control.active,
+			} ) }
+			icon={ control.active ? check : '' }
+			onClick={ () => toggleControls( control ) }
+		>
+			{ control.label }
+			{ control.icon && (
+				<Icon className="control-branding-icon" icon={ control.icon } />
+			) }
+		</MenuItem>
+	);
+}
+
+/**
  * Render a control set
  *
  * @since 1.6.0
@@ -77,6 +103,13 @@ export default function ControlSetToolbar( props ) {
 		setResetModalOpen( false );
 	}
 
+	const coreControls = controls.filter(
+		( control ) => control.type === 'core'
+	);
+	const integrationControls = controls.filter(
+		( control ) => control.type === 'integration'
+	);
+
 	return (
 		<>
 			<Flex className="block-visibility__control-set-header">
@@ -120,34 +153,41 @@ export default function ControlSetToolbar( props ) {
 							onClose={ () => setPopoverOpen( false ) }
 						>
 							<MenuGroup
+								className="core-controls"
 								label={ __(
-									'Enabled Controls',
+									'Visibility Controls',
 									'block-visibility'
 								) }
 							>
-								{ controls.map( ( control ) => {
-									return (
-										<MenuItem
-											key={ control.attributeSlug }
-											className={ classnames( {
-												disabled: ! control.active,
-											} ) }
-											icon={ control.active ? check : '' }
-											onClick={ () =>
-												toggleControls( control )
-											}
-										>
-											{ control.label }
-											{ control.icon && (
-												<Icon
-													className="control-branding-icon"
-													icon={ control.icon }
-												/>
-											) }
-										</MenuItem>
-									);
-								} ) }
+								{ coreControls.map( ( control, index ) => (
+									<ControlMenuItem
+										key={ index }
+										control={ control }
+										toggleControls={ toggleControls }
+									/>
+								) ) }
 							</MenuGroup>
+							{ integrationControls.length !== 0 && (
+								<MenuGroup
+									className="integration-controls"
+									label={ __(
+										'Integrations',
+										'block-visibility'
+									) }
+								>
+									{ integrationControls.map(
+										( control, index ) => (
+											<ControlMenuItem
+												key={ index }
+												control={ control }
+												toggleControls={
+													toggleControls
+												}
+											/>
+										)
+									) }
+								</MenuGroup>
+							) }
 							<MenuGroup className="reset-container">
 								<MenuItem
 									className="reset"

@@ -8,7 +8,7 @@ import Select from 'react-select';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Button, Disabled, Notice, Popover, Slot } from '@wordpress/components';
+import { Button, Disabled, Notice, Popover } from '@wordpress/components';
 import { Icon, info } from '@wordpress/icons';
 import { createInterpolateElement, useState } from '@wordpress/element';
 
@@ -17,7 +17,7 @@ import { createInterpolateElement, useState } from '@wordpress/element';
  */
 import icons from './../../../utils/icons';
 import ControlSeparator from './../utils/control-separator';
-import { TipWPFusion } from './../utils/notices-tips';
+import TipWPFusion from './notices-tips';
 
 /**
  * Add the Wp Fusion controls
@@ -189,7 +189,6 @@ export default function WPFusion( props ) {
 				</h3>
 				{ anyAllFields }
 				{ notField }
-				<Slot name="WPFusionControls" />
 				{ ! hasUserRoles && (
 					<Notice status="warning" isDismissible={ false }>
 						{ __(

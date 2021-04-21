@@ -8,7 +8,7 @@ import Select from 'react-select';
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
-import { ToggleControl, Slot } from '@wordpress/components';
+import { ToggleControl } from '@wordpress/components';
 
 /**
  * Add the User Roles control to the main Visibility By User Role control
@@ -95,7 +95,6 @@ export default function UserRoles( props ) {
 						'block-visibility'
 					) }
 				/>
-				<Slot name="userRolesEnd" />
 			</div>
 		</>
 	);

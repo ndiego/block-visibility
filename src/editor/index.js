@@ -47,7 +47,7 @@ dispatch( 'core' ).addEntities( [
  * @param {Object}  settings All settings associated with a block type.
  * @return {Object} settings The updated array of settings.
  */
-function blockVisibilityAttributes( settings ) {
+function addAttributes( settings ) {
 	// The freeform (Classic Editor) block is incompatible because it does not
 	// support custom attributes.
 	if ( settings.name === 'core/freeform' ) {
@@ -330,30 +330,8 @@ function blockVisibilityAttributes( settings ) {
 
 addFilter(
 	'blocks.registerBlockType',
-	'block-visibility/attributes',
-	blockVisibilityAttributes
-);
-
-/**
- * Filter the BlockEdit object and add visibility controls to selected blocks.
- *
- * @since 1.0.0
- * @param {Object} BlockEdit
- */
-function blockVisibilityInspectorControls( BlockEdit ) {
-	return ( props ) => (
-		<>
-			<BlockEdit { ...props } />
-			<VisibilityInspectorControls { ...props } />
-		</>
-	);
-}
-
-addFilter(
-	'editor.BlockEdit',
-	'block-visibility/inspector-controls',
-	blockVisibilityInspectorControls,
-	100 // We want Visibility to appear right above Advanced controls
+	'block-visibility/add-attributes',
+	addAttributes
 );
 
 /**
@@ -433,8 +411,30 @@ function applyVisibilityClasses( extraProps, blockType, attributes ) {
 
 addFilter(
 	'blocks.getSaveContent.extraProps',
-	'block-visibility/applyVisibilityClasses',
+	'block-visibility/apply-visibility-classes',
 	applyVisibilityClasses
+);
+
+/**
+ * Filter the BlockEdit object and add visibility controls to selected blocks.
+ *
+ * @since 1.0.0
+ * @param {Object} BlockEdit
+ */
+function addInspectorControls( BlockEdit ) {
+	return ( props ) => (
+		<>
+			<BlockEdit { ...props } />
+			<VisibilityInspectorControls { ...props } />
+		</>
+	);
+}
+
+addFilter(
+	'editor.BlockEdit',
+	'block-visibility/add-inspector-controls',
+	addInspectorControls,
+	100 // We want Visibility to appear right above Advanced controls
 );
 
 /**

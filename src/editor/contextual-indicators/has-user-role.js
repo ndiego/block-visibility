@@ -7,21 +7,21 @@ import { applyFilters } from '@wordpress/hooks';
  * Determine if user role controls are enabled for the block.
  *
  * @since 1.1.0
- * @param {Object}  testAtts        All visibility attributes for the block
+ * @param {Object}  controls        All visibility controls for the block
  * @param {boolean} hasControlSets  Whether or not the block has a control set
  * @param {Array}   enabledControls Array of all enabled visibility controls
  * @return {boolean}		        Does the block have user role settings
  */
 export default function hasUserRole(
-	testAtts,
+	controls,
 	hasControlSets,
 	enabledControls
 ) {
-	if ( hasControlSets && ! testAtts.hasOwnProperty( 'userRole' ) ) {
+	if ( hasControlSets && ! controls.hasOwnProperty( 'userRole' ) ) {
 		return false;
 	}
 
-	const controlAtts = hasControlSets ? testAtts.userRole : testAtts;
+	const controlAtts = hasControlSets ? controls.userRole : controls;
 
 	const visibilityByRole = controlAtts?.visibilityByRole ?? 'public';
 	const restrictedRoles = controlAtts?.restrictedRoles ?? [];
@@ -52,8 +52,11 @@ export default function hasUserRole(
 	}
 
 	indicatorTest = applyFilters(
-		'blockVisibility.hasUserRoles',
-		indicatorTest
+		'blockVisibility.hasUserRoleIndicator',
+		indicatorTest,
+		controls,
+		hasControlSets,
+		enabledControls
 	);
 
 	return indicatorTest;

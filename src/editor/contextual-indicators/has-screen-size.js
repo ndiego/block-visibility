@@ -7,23 +7,23 @@ import { applyFilters } from '@wordpress/hooks';
  * Determine if screen size settings are enabled for the block.
  *
  * @since 1.1.0
- * @param {Object}  testAtts        All visibility attributes for the block
+ * @param {Object}  controls        All visibility controls for the block
  * @param {boolean} hasControlSets  Whether or not the block has a control set
  * @param {Array}   enabledControls Array of all enabled visibility controls
  * @param {Object}  settings        All available plugin settings
  * @return {boolean}		        Does the block have date time settings
  */
 export default function hasScreenSize(
-	testAtts,
+	controls,
 	hasControlSets,
 	enabledControls,
 	settings
 ) {
-	if ( hasControlSets && ! testAtts.hasOwnProperty( 'screenSize' ) ) {
+	if ( hasControlSets && ! controls.hasOwnProperty( 'screenSize' ) ) {
 		return false;
 	}
 
-	const controlAtts = hasControlSets ? testAtts.screenSize : testAtts;
+	const controlAtts = hasControlSets ? controls.screenSize : controls;
 
 	// Set default attributes if needed.
 	const screenSize = controlAtts?.hideOnScreenSize ?? {
@@ -35,7 +35,7 @@ export default function hasScreenSize(
 	};
 
 	// Get the screen size control settings.
-	const controls = settings?.visibility_controls?.screen_size?.controls ?? {
+	const screenSizeControls = settings?.visibility_controls?.screen_size?.controls ?? { // eslint-disable-line
 		extra_large: true,
 		large: true,
 		medium: true,
@@ -45,11 +45,11 @@ export default function hasScreenSize(
 
 	// @TODO: Refactor in future to identify the specific active restrictions.
 	const hasSizeRestrictions = [
-		screenSize.extraLarge && controls.extra_large ? true : false,
-		screenSize.large && controls.large ? true : false,
-		screenSize.medium && controls.medium ? true : false,
-		screenSize.small && controls.small ? true : false,
-		screenSize.extraSmall && controls.extra_small ? true : false,
+		screenSize.extraLarge && screenSizeControls.extra_large ? true : false,
+		screenSize.large && screenSizeControls.large ? true : false,
+		screenSize.medium && screenSizeControls.medium ? true : false,
+		screenSize.small && screenSizeControls.small ? true : false,
+		screenSize.extraSmall && screenSizeControls.extra_small ? true : false,
 	];
 
 	let indicatorTest = true;
@@ -64,8 +64,12 @@ export default function hasScreenSize(
 	}
 
 	indicatorTest = applyFilters(
-		'blockVisibility.hasScreenSize',
-		indicatorTest
+		'blockVisibility.hasScreenSizeIndicator',
+		indicatorTest,
+		controls,
+		hasControlSets,
+		enabledControls,
+		settings
 	);
 
 	return indicatorTest;

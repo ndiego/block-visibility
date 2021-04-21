@@ -138,33 +138,50 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 	if ( 0 < count( $schedules ) ) {
 		foreach ( $schedules as $schedule ) {
 			$enable = isset( $schedule['enable'] ) ? $schedule['enable'] : true;
-			$start  = isset( $schedule['start'] ) ? $schedule['start'] : null;
-			$end    = isset( $schedule['end'] ) ? $schedule['end'] : null;
 
-			$test_result =
-				run_schedule_test( $enable, $start, $end, $hide_on_schedules );
+			if ( ! $enable ) {
 
-			$test_result = apply_filters(
-				'block_visibility_frontend_test_date_time_schedule',
-				$test_result,
-				$schedule,
-				$settings
-			);
+				// If the schedule is not enabled, skip the tests.
+				$test_results[] = 'visible';
 
-			$test_results[] = $test_result;
+			} else {
+				$start = isset( $schedule['start'] ) ? $schedule['start'] : null;
+				$end   = isset( $schedule['end'] ) ? $schedule['end'] : null;
+
+				$test_result =
+					run_schedule_test( $start, $end, $hide_on_schedules );
+
+				$test_result = apply_filters(
+					'block_visibility_frontend_test_date_time_schedule',
+					$test_result,
+					$schedule,
+					$settings
+				);
+
+				// Reverse the test result if hide_on_schedules is active.
+				if ( $hide_on_schedules && $test_result !== 'error' ) {
+					$test_result = $test_result === 'visible' ? 'hidden' : 'visible';
+				}
+
+				// If there is an error, default to showing the block.
+				$test_result =
+					$test_result === 'error' ? 'visible' : $test_result;
+
+				$test_results[] = $test_result;
+			}
 		}
 	} elseif ( $depracated_start || $depracated_end ) {
 		$test_result =
-			run_schedule_test( true, $depracated_start, $depracated_end, false );
+			run_schedule_test( $depracated_start, $depracated_end, false );
 
 		$test_results[] = $test_result;
 	}
 
-	// Under normal circumstances, need at lease one "pass" to hide the block.
-	// When hide_on_schedules is enabled, we need at least on "fail" to hide.
-	if ( ! $hide_on_schedules && ! in_array( 'pass', $test_results, true ) ) {
+	// Under normal circumstances, need no "visible" results to hide the block.
+	// When hide_on_schedules is enabled, we need at least one "hidden" to hide.
+	if ( ! $hide_on_schedules && ! in_array( 'visible', $test_results, true ) ) {
 		return false;
-	} elseif ( $hide_on_schedules && in_array( 'fail', $test_results, true ) ) {
+	} elseif ( $hide_on_schedules && in_array( 'hidden', $test_results, true ) ) {
 		return false;
 	} else {
 		return true;
@@ -177,60 +194,32 @@ add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\date_time_tes
  *
  * @since 1.8.0
  *
- * @param boolean $enable            Is the schedule enabled or not.
- * @param string  $start             The set start date/time.
- * @param string  $end               The set end date/time.
+ * @param array   $schedule          Array of all schedule settings.
  * @param boolean $hide_on_schedules Is hide_one_schedules enabled or not.
- * @return boolean                    Return true if the schedule passes the test, false if not.
+ * @return boolean                   Return pass if should be visible, fail if not.
  */
-function run_schedule_test( $enable, $start, $end, $hide_on_schedules ) {
+function run_schedule_test( $start, $end, $hide_on_schedules ) {
 
-	// Enable setting is not enabled, so skip the test.
-	if ( ! $enable ) {
-		return 'pass';
-	}
-
-	// Enable setting is enabled, but there is no saved start or end date. Skip
-	// test unless hide_on_schedules is set to true.
-	if ( $enable && ! $start && ! $end ) {
-		if ( $hide_on_schedules ) {
-			return 'fail';
-		} else {
-			return 'pass';
-		}
+	// If there is no saved start or end date, skip the test unless
+	// hide_on_schedules is set to true.
+	if ( ! $start && ! $end ) {
+		return 'visible';
 	}
 
 	$start = $start ? create_date_time( $start, false ) : null;
 	$end   = $end ? create_date_time( $end, false ) : null;
 
-	// If the start date is before the end date, skip test.
+	// If the start date is after the end date, skip test and throw error.
 	if ( ( $start && $end ) && $start > $end ) {
-		return 'pass';
+		return 'error';
 	}
 
 	// Current time based on the date/time settings set in the WP admin.
-	$current = current_datetime();
+	$current   = current_datetime();
 
 	if ( ( $start && $start > $current ) || ( $end && $end < $current ) ) {
-		if ( $hide_on_schedules ) {
-			return 'pass';
-		} else {
-			return 'fail';
-		}
-	} elseif (
-		( $start && $start < $current ) ||
-		( $end && $end < $current )
-	) {
-		if ( $hide_on_schedules ) {
-			return 'fail';
-		} else {
-			return 'pass';
-		}
+		return 'hidden';
 	}
 
-	if ( $hide_on_schedules ) {
-		return 'fail';
-	} else {
-		return 'pass';
-	}
+	return 'visible';
 }

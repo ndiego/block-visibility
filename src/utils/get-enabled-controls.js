@@ -78,7 +78,9 @@ export function getControls() {
 		integrationControls
 	);
 
-	const controls = [ ...coreControls, ...integrationControls ];
+	let controls = [ ...coreControls, ...integrationControls ];
+
+	controls = applyFilters( 'blockVisibility.controls', controls );
 
 	return controls;
 }
@@ -92,7 +94,7 @@ export function getControls() {
  * @return {Object}		     Return the enabled controls
  */
 export default function getEnabledControls( settings, variables ) {
-	const enabledControls = [];
+	let enabledControls = [];
 
 	// Make sure we have plugin settings and variables.
 	if (
@@ -150,6 +152,13 @@ export default function getEnabledControls( settings, variables ) {
 			}
 		} );
 	}
+
+	enabledControls = applyFilters(
+		'blockVisibility.enabledControls',
+		enabledControls,
+		settings,
+		variables
+	);
 
 	return enabledControls;
 }

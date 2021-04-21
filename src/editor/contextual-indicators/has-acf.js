@@ -7,14 +7,14 @@ import { applyFilters } from '@wordpress/hooks';
  * Determine if ACF controls are enabled for the block.
  *
  * @since 1.8.0
- * @param {Object}  testAtts        All visibility attributes for the block
+ * @param {Object}  controls        All visibility controls for the block
  * @param {boolean} hasControlSets  Whether or not the block has a control set
  * @param {Array}   enabledControls Array of all enabled visibility controls
  * @param {Object}  variables       All available plugin variables
  * @return {boolean}		        Does the block have user role settings
  */
 export default function hasACF(
-	testAtts,
+	controls,
 	hasControlSets,
 	enabledControls,
 	variables
@@ -29,18 +29,25 @@ export default function hasACF(
 		return false;
 	}
 
-	if ( hasControlSets && ! testAtts.hasOwnProperty( 'acf' ) ) {
+	if ( hasControlSets && ! controls.hasOwnProperty( 'acf' ) ) {
 		return false;
 	}
 
-	const ruleSets = testAtts?.acf?.ruleSets ?? [];
+	const ruleSets = controls?.acf?.ruleSets ?? [];
 	let indicatorTest = true;
 
 	if ( ruleSets.length === 0 ) {
 		indicatorTest = false;
 	}
 
-	indicatorTest = applyFilters( 'blockVisibility.hasACF', indicatorTest );
+	indicatorTest = applyFilters(
+		'blockVisibility.hasACFIndicator',
+		indicatorTest,
+		controls,
+		hasControlSets,
+		enabledControls,
+		variables
+	);
 
 	return indicatorTest;
 }

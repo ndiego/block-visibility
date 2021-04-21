@@ -384,8 +384,8 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
         margin: 0 -12px;
         padding: 12px;
 
-        &:not( :last-child ) {
-            border-top: 0;
+        &.core-controls {
+            border-top: 0 !important;
             margin-top: -12px;
         }
 

@@ -7,17 +7,17 @@ import { applyFilters } from '@wordpress/hooks';
  * Determine if date time settings are enabled for the block.
  *
  * @since 1.1.0
- * @param {Object}  testAtts        All visibility attributes for the block
+ * @param {Object}  controls        All visibility controls for the block
  * @param {boolean} hasControlSets  Whether or not the block has a control set
  * @param {Array}   enabledControls Array of all enabled visibility controls
  * @return {boolean}		        Does the block have date time settings
  */
 export default function hasDateTime(
-	testAtts,
+	controls,
 	hasControlSets,
 	enabledControls
 ) {
-	if ( hasControlSets && ! testAtts.hasOwnProperty( 'dateTime' ) ) {
+	if ( hasControlSets && ! controls.hasOwnProperty( 'dateTime' ) ) {
 		return false;
 	}
 
@@ -33,10 +33,10 @@ export default function hasDateTime(
 	let hideOnSchedules = false;
 
 	if ( hasControlSets ) {
-		schedules = testAtts.dateTime?.schedules ?? [];
-		hideOnSchedules = testAtts.dateTime?.hideOnSchedules ?? false;
+		schedules = controls.dateTime?.schedules ?? [];
+		hideOnSchedules = controls.dateTime?.hideOnSchedules ?? false;
 	} else {
-		schedules = testAtts?.scheduling ? [ testAtts?.scheduling ] : [];
+		schedules = controls?.scheduling ? [ controls?.scheduling ] : [];
 	}
 
 	if ( schedules.length === 0 ) {
@@ -49,30 +49,40 @@ export default function hasDateTime(
 		const enable = schedule?.enable ?? false;
 		const start = schedule?.start ?? '';
 		const end = schedule?.end ?? '';
-		let test = true;
+		let scheduleTest = true;
 
 		if ( ! enable ) {
-			test = false;
+			scheduleTest = false;
 		}
 
 		if ( ! hideOnSchedules && enable && ! start && ! end ) {
-			test = false;
+			scheduleTest = false;
 		}
 
+		scheduleTest = applyFilters(
+			'blockVisibility.hasDateTimeScheduleIndicator',
+			scheduleTest,
+			schedule
+		);
+
+		// This test needs to go last to check for config error.
 		if ( enable ) {
 			if ( start && end && start >= end ) {
-				test = false;
+				scheduleTest = false;
 			}
 		}
 
-		indicatorTestArray.push( test );
+		indicatorTestArray.push( scheduleTest );
 	} );
 
 	let indicatorTest = indicatorTestArray.includes( true );
 
 	indicatorTest = applyFilters(
-		'blockVisibility.hasDateTime',
-		indicatorTest
+		'blockVisibility.hasDateTimeIndicator',
+		indicatorTest,
+		controls,
+		hasControlSets,
+		enabledControls
 	);
 
 	return indicatorTest;

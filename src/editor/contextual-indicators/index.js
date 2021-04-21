@@ -6,7 +6,7 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies
  */
-import { addFilter } from '@wordpress/hooks';
+import { addFilter, applyFilters } from '@wordpress/hooks';
 
 /**
  * Internal dependencies
@@ -62,7 +62,7 @@ function withContextualIndicators( BlockListBlock ) {
 			);
 
 		const hasControlSets = blockVisibility?.controlSets ?? false;
-		let testAtts = blockVisibility ?? {};
+		let controls = blockVisibility ?? {};
 
 		if ( hasControlSets ) {
 			// The control set array is empty or the default set has no applied controls.
@@ -70,9 +70,9 @@ function withContextualIndicators( BlockListBlock ) {
 				blockVisibility.controlSets.length !== 0 &&
 				blockVisibility.controlSets[ 0 ]?.controls
 			) {
-				testAtts = blockVisibility.controlSets[ 0 ].controls;
+				controls = blockVisibility.controlSets[ 0 ].controls;
 			} else {
-				testAtts = {};
+				controls = {};
 			}
 		}
 
@@ -83,29 +83,29 @@ function withContextualIndicators( BlockListBlock ) {
 
 		let activeControls = {
 			'date-time': hasDateTime(
-				testAtts,
+				controls,
 				hasControlSets,
 				enabledControls
 			),
 			'user-role': hasUserRole(
-				testAtts,
+				controls,
 				hasControlSets,
 				enabledControls
 			),
 			'screen-size': hasScreenSize(
-				testAtts,
+				controls,
 				hasControlSets,
 				enabledControls,
 				settings
 			),
 			'query-string': hasQueryString(
-				testAtts,
+				controls,
 				hasControlSets,
 				enabledControls
 			),
-			acf: hasACF( testAtts, hasControlSets, enabledControls, variables ),
+			acf: hasACF( controls, hasControlSets, enabledControls, variables ),
 			'wp-fusion': hasWPFusion(
-				testAtts,
+				controls,
 				hasControlSets,
 				enabledControls,
 				variables
@@ -140,12 +140,17 @@ function withContextualIndicators( BlockListBlock ) {
 			classes = classes + ' block-visibility__has-visibility';
 		}
 
+		classes = applyFilters(
+			'blockVisibility.conditionalIndicatorClasses',
+			classes
+		);
+
 		return <BlockListBlock { ...props } className={ classes } />;
 	};
 }
 
 addFilter(
 	'editor.BlockListBlock',
-	'block-visibility/visibility-contextual-indicators',
+	'block-visibility/contextual-indicators',
 	withContextualIndicators
 );

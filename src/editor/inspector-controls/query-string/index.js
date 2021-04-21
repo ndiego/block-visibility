@@ -7,7 +7,7 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Button, Popover, Slot, TextareaControl } from '@wordpress/components';
+import { Button, Popover, TextareaControl } from '@wordpress/components';
 import { createInterpolateElement, useState } from '@wordpress/element';
 import { info } from '@wordpress/icons';
 
@@ -15,7 +15,7 @@ import { info } from '@wordpress/icons';
  * Internal dependencies
  */
 import ControlSeparator from './../utils/control-separator';
-import { TipQueryString } from './../utils/notices-tips';
+import TipQueryString from './notices-tips';
 
 /**
  * Add the Query String controls
@@ -124,7 +124,6 @@ export default function QueryString( props ) {
 					}
 					rows="2"
 				/>
-				<Slot name="QueryStringControls" />
 			</div>
 			<ControlSeparator control="queryString" { ...props } />
 		</>

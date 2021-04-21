@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { __experimentalUnitControl as UnitControl } from '@wordpress/components';
+import { __experimentalUnitControl as UnitControl } from '@wordpress/components'; // eslint-disable-line
 
 /**
  * Internal dependencies

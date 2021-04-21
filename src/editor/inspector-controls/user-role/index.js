@@ -7,7 +7,7 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { RadioControl, Notice, Slot } from '@wordpress/components';
+import { RadioControl, Notice } from '@wordpress/components';
 import { createInterpolateElement } from '@wordpress/element';
 
 /**
@@ -146,7 +146,6 @@ export default function UserRole( props ) {
 						) }
 					</Notice>
 				) }
-				<Slot name="VisibilityByRoleControls" />
 			</div>
 			<ControlSeparator control="userRole" { ...props } />
 		</>

@@ -7,7 +7,7 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { ToggleControl, Slot } from '@wordpress/components';
+import { ToggleControl } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -136,7 +136,6 @@ export default function ScreenSize( props ) {
 						} }
 					/>
 				) }
-				<Slot name="ScreenSizeControls" />
 			</div>
 			<ControlSeparator control="screenSize" { ...props } />
 		</>

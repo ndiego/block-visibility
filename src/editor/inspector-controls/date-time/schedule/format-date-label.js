@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { __experimentalGetSettings, format } from '@wordpress/date';
+import { __experimentalGetSettings, format } from '@wordpress/date'; // eslint-disable-line
 
 /**
  * Format the given date.
