@@ -10,6 +10,7 @@ import classnames from 'classnames';
 import { __ } from '@wordpress/i18n';
 import {
 	Button,
+	DropdownMenu,
 	Flex,
 	FlexItem,
 	FlexBlock,
@@ -137,69 +138,69 @@ export default function ControlSetToolbar( props ) {
 					</h3>
 				</FlexBlock>
 				<FlexItem>
-					<Button
+					<DropdownMenu
 						label={ __(
 							'Configure Visibility Controls',
 							'block-visibility'
 						) }
 						icon={ moreVertical }
 						className="configure-controls"
-						onClick={ () => setPopoverOpen( ( open ) => ! open ) }
-					/>
-					{ popoverOpen && (
-						<Popover
-							className="block-visibility__control-popover"
-							focusOnMount="container"
-							onClose={ () => setPopoverOpen( false ) }
-						>
-							<MenuGroup
-								className="core-controls"
-								label={ __(
-									'Visibility Controls',
-									'block-visibility'
-								) }
-							>
-								{ coreControls.map( ( control, index ) => (
-									<ControlMenuItem
-										key={ index }
-										control={ control }
-										toggleControls={ toggleControls }
-									/>
-								) ) }
-							</MenuGroup>
-							{ integrationControls.length !== 0 && (
+						popoverProps={ {
+							className: 'block-visibility__control-popover'
+						} }
+					>
+						{ ( { onClose } ) => (
+							<>
 								<MenuGroup
-									className="integration-controls"
+									className="core-controls"
 									label={ __(
-										'Integrations',
+										'Visibility Controls',
 										'block-visibility'
 									) }
 								>
-									{ integrationControls.map(
-										( control, index ) => (
-											<ControlMenuItem
-												key={ index }
-												control={ control }
-												toggleControls={
-													toggleControls
-												}
-											/>
-										)
-									) }
+									{ coreControls.map( ( control, index ) => (
+										<ControlMenuItem
+											key={ index }
+											control={ control }
+											toggleControls={ toggleControls }
+										/>
+									) ) }
 								</MenuGroup>
-							) }
-							<MenuGroup className="reset-container">
-								<MenuItem
-									className="reset"
-									onClick={ () => {
-										setResetModalOpen( true );
-									} }
-								>
-									{ __( 'Reset all', 'block-visibility' ) }
-								</MenuItem>
-							</MenuGroup>
-						</Popover>
-					) }
+								{ integrationControls.length !== 0 && (
+									<MenuGroup
+										className="integration-controls"
+										label={ __(
+											'Integrations',
+											'block-visibility'
+										) }
+									>
+										{ integrationControls.map(
+											( control, index ) => (
+												<ControlMenuItem
+													key={ index }
+													control={ control }
+													toggleControls={
+														toggleControls
+													}
+												/>
+											)
+										) }
+									</MenuGroup>
+								) }
+								<MenuGroup className="reset-container">
+									<MenuItem
+										className="reset"
+										onClick={ () => {
+											setResetModalOpen( true );
+											onClose();
+										} }
+									>
+										{ __( 'Reset all', 'block-visibility' ) }
+									</MenuItem>
+								</MenuGroup>
+							</>
+						) }
+					</DropdownMenu>
 				</FlexItem>
 			</Flex>
 			{ resetModalOpen && (

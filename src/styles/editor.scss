@@ -57,7 +57,6 @@ $icon__four-controls: $svg-start + $four-controls + $svg-end;
 $icon__five-controls: $svg-start + $five-controls + $svg-end;
 
 .visibility-controls__container {
-    padding-top: 10px;
 
     .components-disabled {
         opacity: .4;
@@ -207,6 +206,11 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
         }
     }
 
+    /* Specific styles for the Hide Block visibility control */
+    .hide-block-control {
+        padding-top: 10px;
+    }
+
     /* Specific styles for the Date Time visibility control */
     .date-time-control {
         .components-base-control {
@@ -214,11 +218,19 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
         }
 
         .date-time-control__schedules {
-            margin-bottom: 24px;
+            margin-bottom: 28px;
+        }
+
+        .date-time-control__schedules--add {
+            margin-top: 20px;
         }
 
         .date-time-control__schedule {
-            margin-bottom: 24px;
+            margin-top: 20px;
+
+            &:first-child {
+                margin-top: 0;
+            }
 
             &.disabled {
                 .date-time-control__schedule--heading {
@@ -235,22 +247,41 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
             align-items: center;
             margin-bottom: 12px;
 
-            span {
+            .schedule--heading__title {
                 font-weight: 500;
+                margin-right: 6px;
             }
 
-            button {
-                color: #c8c8c8;
-                padding: 0 !important;
-                min-width: 24px !important;
-                margin: 0 4px;
+            .schedule--heading__toolbar {
+                height: 24px;
+                width: 64px;
+                min-width: 64px;
+                text-align: right;
 
-                &:hover {
-                    color: var( --wp-admin-theme-color );
+                button {
+                    //color: #c8c8c8;
+                    padding: 0 !important;
+                    height: 24px;
+                    min-width: 24px;
+
+                    &:hover {
+                        color: var( --wp-admin-theme-color );
+                    }
+
+                    svg {
+                        width: 20px;
+                    }
                 }
 
-                svg {
-                    width: 20px;
+
+                .schedule--heading__toolbar--delete {
+                    svg {
+                        width: 24px;
+                    }
+                }
+
+                .components-disabled {
+                    display: inline-block;
                 }
             }
         }
@@ -262,7 +293,11 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+
+            &:last-child {
+                margin-bottom: 8px;
+            }
 
             .components-button {
                 padding: 0;
@@ -274,6 +309,7 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
                 &.is-link {
                     color: #333;
                     text-decoration: none;
+                    width: 100%;
 
                     svg {
                         margin: 4px 0 4px 8px;
@@ -375,10 +411,7 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
 
 /* Control set styles */
 .block-visibility__control-popover {
-    &>div {
-        min-width: 200px;
-        padding: 12px;
-    }
+
     .components-menu-group {
         border-top: 1px solid #cccccc !important;
         margin: 0 -12px;
@@ -466,8 +499,7 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
 
     &.schedule-settings>div {
         min-width: 300px;
-
-        padding: 18px;
+        padding: 6px;
         cursor: default;
 
         h3 {
@@ -497,10 +529,6 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
                 }
             }
         }
-    }
-
-    .components-menu-group__label {
-        padding: 0 12px;
     }
 
     .components-menu-item__button {
@@ -552,8 +580,8 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
             margin: 10px 0 8px;
         }
 
-        button {
-            &.configure-controls {
+        .configure-controls {
+            button {
                 padding: 0;
                 height: 28px;
                 min-width: 28px;

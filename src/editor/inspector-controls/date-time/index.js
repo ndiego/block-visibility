@@ -93,7 +93,7 @@ export default function DateTime( props ) {
 					} ) }
 					<div className="date-time-control__schedules--add">
 						<Button onClick={ () => addSchedule() } isSecondary>
-							{ __( 'Add Schedule', 'block-visibility' ) }
+							{ __( 'Add schedule', 'block-visibility' ) }
 						</Button>
 					</div>
 				</div>

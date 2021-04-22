@@ -11,6 +11,7 @@ import { __ } from '@wordpress/i18n';
 import {
 	Button,
 	Disabled,
+	DropdownMenu,
 	Notice,
 	Slot,
 	Popover,
@@ -18,7 +19,7 @@ import {
 	ToggleControl,
 	withFilters,
 } from '@wordpress/components';
-import { settings } from '@wordpress/icons';
+import { settings, cog, trash, closeSmall, close, stack } from '@wordpress/icons';
 import { useState } from '@wordpress/element';
 
 /**
@@ -47,6 +48,8 @@ export default function Schedule( props ) {
 	const [ startPickerOpen, setStartPickerOpen ] = useState( false );
 	const [ endPickerOpen, setEndPickerOpen ] = useState( false );
 	const [ settingsPopoverOpen, setSettingsPopoverOpen ] = useState( false );
+
+	const [ testPopover, setTestPopover ] = useState( false );
 
 	const title = scheduleAtts?.title ?? '';
 	const enable = scheduleAtts?.enable ?? true;
@@ -196,6 +199,20 @@ export default function Schedule( props ) {
 		dateTimeControls = <Disabled>{ dateTimeControls }</Disabled>;
 	}
 
+	let deleteScheduleButton = (
+		<Button
+			label={ __( 'Delete Schedule', 'block-visibility' ) }
+			icon={ closeSmall }
+			className="schedule--heading__toolbar--delete"
+			onClick={ () => removeSchedule() }
+			isSmall
+		/>
+	);
+
+	if ( schedules.length <= 1 ) {
+		deleteScheduleButton = <Disabled>{ deleteScheduleButton }</Disabled>;
+	}
+
 	return (
 		<div
 			className={ classnames( 'date-time-control__schedule', {
@@ -203,82 +220,73 @@ export default function Schedule( props ) {
 			} ) }
 		>
 			<div className="date-time-control__schedule--heading">
-				<span>{ scheduleTitle }</span>
-				<div>
-					<Button
+				<span className="schedule--heading__title">
+					{ scheduleTitle }
+				</span>
+				<div className="schedule--heading__toolbar">
+					<DropdownMenu
 						label={ __( 'Schedule Settings', 'block-visibility' ) }
-						icon={ settings }
-						onClick={ () =>
-							setSettingsPopoverOpen( ( open ) => ! open )
-						}
-						isSmall
-					/>
-					{ settingsPopoverOpen && (
-						<Popover
-							className="block-visibility__control-popover schedule-settings"
-							focusOnMount="container"
-							onClose={ () => setSettingsPopoverOpen( false ) }
-						>
-							<h3>
-								{ __(
-									'Schedule Settings',
-									'block-visibility'
-								) }
-							</h3>
-							<TextControl
-								value={ title }
-								label={ __(
-									'Schedule Title',
-									'block-visibility'
-								) }
-								placeholder={ __(
-									'Schedule',
-									'block-visibility'
-								) }
-								help={ __(
-									'Optionally set a descriptive schedule title.',
-									'block-visibility'
-								) }
-								onChange={ ( value ) =>
-									setAttribute( 'title', value )
-								}
-							/>
-							<ToggleControl
-								label={ __(
-									'Enable schedule',
-									'block-visibility'
-								) }
-								checked={ enable }
-								onChange={ () =>
-									setAttribute( 'enable', ! enable )
-								}
-								help={ __(
-									'Enable or disable the selected schedule.',
-									'block-visibility'
-								) }
-							/>
-							<Slot
-								name={
-									'DateTimeScheduleControlsSettings-' +
-									scheduleIndex
-								}
-							/>
-						</Popover>
-					) }
+						icon={ cog }
+						toggleProps={ {
+							className: 'schedule--heading__toolbar--settings'
+						} }
+						popoverProps={ {
+							className: 'block-visibility__control-popover schedule-settings'
+						} }
+					>
+						{ ( { onClose } ) => (
+							<>
+								<h3>
+									{ __(
+										'Schedule Settings',
+										'block-visibility'
+									) }
+								</h3>
+								<TextControl
+									value={ title }
+									label={ __(
+										'Schedule Title',
+										'block-visibility'
+									) }
+									placeholder={ __(
+										'Schedule',
+										'block-visibility'
+									) }
+									help={ __(
+										'Optionally set a descriptive schedule title.',
+										'block-visibility'
+									) }
+									onChange={ ( value ) =>
+										setAttribute( 'title', value )
+									}
+								/>
+								<ToggleControl
+									label={ __(
+										'Enable schedule',
+										'block-visibility'
+									) }
+									checked={ enable }
+									onChange={ () =>
+										setAttribute( 'enable', ! enable )
+									}
+									help={ __(
+										'Enable or disable the selected schedule.',
+										'block-visibility'
+									) }
+								/>
+								<Slot
+									name={
+										'DateTimeScheduleControlsSettings-' +
+										scheduleIndex
+									}
+								/>
+							</>
+						) }
+					</DropdownMenu>
+					{ deleteScheduleButton }
 				</div>
 			</div>
 			{ dateTimeControls }
-			<div className="date-time-control__schedule--remove">
-				{ schedules.length >= 2 && (
-					<Button
-						onClick={ () => removeSchedule() }
-						isTertiary
-						isDestructive
-					>
-						{ __( 'Remove', 'block-visibility' ) }
-					</Button>
-				) }
-			</div>
 			<AdditionalScheduleControls { ...props } />
 		</div>
 	);
