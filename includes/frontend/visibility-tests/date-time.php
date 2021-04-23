@@ -149,7 +149,7 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 				$end   = isset( $schedule['end'] ) ? $schedule['end'] : null;
 
 				$test_result =
-					run_schedule_test( $start, $end, $hide_on_schedules );
+					run_schedule_test( $start, $end );
 
 				$test_result = apply_filters(
 					'block_visibility_frontend_test_date_time_schedule',
@@ -159,20 +159,20 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 				);
 
 				// Reverse the test result if hide_on_schedules is active.
-				if ( $hide_on_schedules && $test_result !== 'error' ) {
-					$test_result = $test_result === 'visible' ? 'hidden' : 'visible';
+				if ( $hide_on_schedules && 'error' !== $test_result ) {
+					$test_result = 'visible' === $test_result ? 'hidden' : 'visible';
 				}
 
 				// If there is an error, default to showing the block.
 				$test_result =
-					$test_result === 'error' ? 'visible' : $test_result;
+					'error' !== $test_result ? 'visible' : $test_result;
 
 				$test_results[] = $test_result;
 			}
 		}
 	} elseif ( $depracated_start || $depracated_end ) {
 		$test_result =
-			run_schedule_test( $depracated_start, $depracated_end, false );
+			run_schedule_test( $depracated_start, $depracated_end );
 
 		$test_results[] = $test_result;
 	}
@@ -194,11 +194,11 @@ add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\date_time_tes
  *
  * @since 1.8.0
  *
- * @param array   $schedule          Array of all schedule settings.
- * @param boolean $hide_on_schedules Is hide_one_schedules enabled or not.
- * @return boolean                   Return pass if should be visible, fail if not.
+ * @param string $start The start date/time string.
+ * @param string $end   The end date/time string.
+ * @return boolean      Return pass if should be visible, fail if not.
  */
-function run_schedule_test( $start, $end, $hide_on_schedules ) {
+function run_schedule_test( $start, $end ) {
 
 	// If there is no saved start or end date, skip the test unless
 	// hide_on_schedules is set to true.
@@ -215,7 +215,7 @@ function run_schedule_test( $start, $end, $hide_on_schedules ) {
 	}
 
 	// Current time based on the date/time settings set in the WP admin.
-	$current   = current_datetime();
+	$current = current_datetime();
 
 	if ( ( $start && $start > $current ) || ( $end && $end < $current ) ) {
 		return 'hidden';
