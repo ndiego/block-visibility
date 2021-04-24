@@ -19,7 +19,7 @@ import {
 	ToggleControl,
 	withFilters,
 } from '@wordpress/components';
-import { settings, cog, trash, closeSmall, close, stack } from '@wordpress/icons';
+import { cog, closeSmall } from '@wordpress/icons';
 import { useState } from '@wordpress/element';
 
 /**

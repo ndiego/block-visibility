@@ -9,6 +9,9 @@ import Select from 'react-select';
  */
 import { __ } from '@wordpress/i18n';
 import { Button, Disabled, TextControl } from '@wordpress/components';
+import { closeSmall } from '@wordpress/icons';
+
+import Rule from './rule';
 
 /**
  * Handles the ACF rule sets.
@@ -101,147 +104,35 @@ export default function RuleSets( props ) {
 		setControlAtts( 'acf', assign( { ...acf }, { ruleSets } ) );
 	};
 
-	const removeRule = ( ruleSet, ruleSetIndex, ruleIndex ) => {
-		ruleSets[ ruleSetIndex ] = ruleSet.filter(
-			( value, index ) => index !== ruleIndex
-		);
-
-		setControlAtts( 'acf', assign( { ...acf }, { ruleSets } ) );
-	};
-
-	const handleRuleChange = (
-		type,
-		value,
-		ruleParam,
-		ruleSet,
-		ruleSetIndex,
-		ruleIndex
-	) => {
-		let newValue = type === 'select' ? value?.value : value;
-		newValue = newValue === null ? '' : newValue;
-
-		ruleSet[ ruleIndex ][ ruleParam ] = newValue;
-		ruleSets[ ruleSetIndex ] = ruleSet;
-
-		setControlAtts( 'acf', assign( { ...acf }, { ruleSets } ) );
-	};
-
 	return (
 		<div className="acf-control__rule-sets">
 			{ ruleSets.map( ( ruleSet, ruleSetIndex ) => {
 				return (
 					<div key={ ruleSetIndex } className="acf-control__rule-set">
 						{ ruleSet.map( ( rule, ruleIndex ) => {
-							const selectedField = availableFields.filter(
-								( field ) => field.value === rule.field
-							);
-							const selectedOperator = operators.filter(
-								( operator ) => operator.value === rule.operator
-							);
-
-							let valueField = (
-								<TextControl
-									placeholder={ __(
-										'Field Value…',
-										'block-visibility'
-									) }
-									value={ rule.value }
-									onChange={ ( value ) =>
-										handleRuleChange(
-											'text',
-											value,
-											'value',
-											ruleSet,
-											ruleSetIndex,
-											ruleIndex
-										)
-									}
+							return (
+								<Rule
+									rule={ rule }
+									ruleIndex={ ruleIndex }
+									ruleSet={ ruleSet }
+									ruleSetIndex={ ruleSetIndex }
+									ruleSets={ ruleSets }
+									availableFields={ availableFields }
+									operators={ operators }
+									{ ...props }
 								/>
 							);
-
-							if (
-								'!=empty' === rule.operator ||
-								'==empty' === rule.operator
-							) {
-								valueField = (
-									<Disabled>{ valueField }</Disabled>
-								);
-							}
-
-							return (
-								<div
-									key={ ruleIndex }
-									className="acf-control__rule"
-								>
-									<Select
-										className="block-visibility__react-select"
-										classNamePrefix="react-select"
-										options={ availableFields }
-										placeholder={ __(
-											'Select Field…',
-											'block-visibility'
-										) }
-										value={ selectedField }
-										onChange={ ( value ) =>
-											handleRuleChange(
-												'select',
-												value,
-												'field',
-												ruleSet,
-												ruleSetIndex,
-												ruleIndex
-											)
-										}
-										isClearable={ true }
-									/>
-									<Select
-										className="block-visibility__react-select"
-										classNamePrefix="react-select"
-										options={ operators }
-										value={ selectedOperator }
-										onChange={ ( value ) =>
-											handleRuleChange(
-												'select',
-												value,
-												'operator',
-												ruleSet,
-												ruleSetIndex,
-												ruleIndex
-											)
-										}
-									/>
-									{ valueField }
-									<div className="acf-control__rule--controls">
-										<Button
-											onClick={ () =>
-												addRule( ruleSet, ruleSetIndex )
-											}
-											isSecondary
-										>
-											{ __( 'AND', 'block-visibility' ) }
-										</Button>
-										{ ruleIndex !== 0 && (
-											<Button
-												onClick={ () =>
-													removeRule(
-														ruleSet,
-														ruleSetIndex,
-														ruleIndex
-													)
-												}
-												isTertiary
-												isDestructive
-											>
-												{ __(
-													'Remove',
-													'block-visibility'
-												) }
-											</Button>
-										) }
-									</div>
-								</div>
-							);
 						} ) }
+						<div className="acf-control__rule-set--add">
+							<Button
+								onClick={ () =>
+									addRule( ruleSet, ruleSetIndex )
+								}
+								isSecondary
+							>
+								{ __( 'Add rule', 'block-visibility' ) }
+							</Button>
+						</div>
 					</div>
 				);
 			} ) }

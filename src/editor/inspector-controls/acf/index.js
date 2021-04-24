@@ -54,16 +54,11 @@ export default function ACF( props ) {
 					</span>
 					<Icon icon={ icons.acf } />
 				</h3>
-				<div className="visibility-control__label">
-					{ sprintf(
-						// Translators: Whether the block is hidden or visible.
-						__( '%s the block if:', 'block-visibility' ),
-						hideOnRuleSets
-							? __( 'Hide', 'block-visibility' )
-							: __( 'Show', 'block-visibility' )
-					) }
-				</div>
-				<RuleSets acf={ acf } { ...props } />
+				<RuleSets
+					acf={ acf }
+					hideOnRuleSets={ hideOnRuleSets }
+					{ ...props }
+				/>
 				<div className="acf-control__hide-on-rule-sets">
 					<ToggleControl
 						label={ __(

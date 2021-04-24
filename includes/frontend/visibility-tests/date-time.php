@@ -165,7 +165,7 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 
 				// If there is an error, default to showing the block.
 				$test_result =
-					'error' !== $test_result ? 'visible' : $test_result;
+					'error' === $test_result ? 'visible' : $test_result;
 
 				$test_results[] = $test_result;
 			}

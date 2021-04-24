@@ -32,7 +32,10 @@ export default function InformationPopover( props ) {
 					position={ popoverPosition }
 					focusOnMount="container"
 					noArrow={ false }
-					onClose={ () => setIsVisible( ! isVisible ) }
+					onClose={ ( e ) => {
+						e.stopPropagation();
+						setIsVisible( ! isVisible );
+					} }
 				>
 					<p>{ message }</p>
 					{ subMessage && <p>{ subMessage }</p> }

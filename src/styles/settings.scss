@@ -685,6 +685,10 @@ $mobile: 426px;
 				box-shadow: none !important;
 				color: #414141;
 			}
+
+			&:focus {
+				box-shadow: none !important;
+			}
 		}
 
 		.information-popover__popover {

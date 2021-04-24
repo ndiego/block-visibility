@@ -83,6 +83,10 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
             color: #c8c8c8;
         }
 
+        &:focus {
+            box-shadow: none !important;
+        }
+
         svg {
             width: 18px;
             height: 18px;
@@ -373,9 +377,28 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
         .acf-control__rule-sets {
             margin-bottom: 24px;
         }
+        
+        .acf-control__rule-set {
+            .acf-control__rule-set--add {
+                margin-top: 24px;
+            }
+        }
 
         .acf-control__rule {
-            margin-bottom: 22px;
+            margin-bottom: 18px;
+
+            .acf-control__rule--header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                button {
+                    height: 24px;
+                    min-width: 24px;
+                    width: 24px;
+                    padding: 0;
+                }
+            }
 
             .components-base-control {
                 margin-bottom: 0;
@@ -384,11 +407,6 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
             .components-text-control__input {
                 padding: 8px;
             }
-        }
-
-        .acf-control__rule--controls {
-            display: flex;
-            justify-content: space-between;
         }
     }
 }
