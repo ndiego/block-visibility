@@ -143,6 +143,25 @@ function Settings() {
 		? requestedTab
 		: 'plugin-settings';
 
+	const updateUrl = ( tabName ) => {
+		urlParams.set( 'tab', tabName );
+
+		if ( history.pushState ) {
+			const newUrl =
+				window.location.protocol +
+				"//" +
+				window.location.host +
+				window.location.pathname +
+				"?" +
+				urlParams.toString() +
+				window.location.hash;
+
+		  window.history.replaceState( { path: newUrl }, "", newUrl );
+		} else {
+		  window.location.search = urlParams.toString();
+		}
+	}
+
 	// Provides an entry point to slot in additional settings.
 	const AdditionalSettings = withFilters(
 		'blockVisibility.MainSettings'
@@ -157,6 +176,7 @@ function Settings() {
 				activeClass="active-tab"
 				initialTabName={ initialTab }
 				tabs={ settingTabs }
+				onSelect={ ( tabName ) => updateUrl( tabName ) }
 			>
 				{ ( tab ) => {
 					switch ( tab.name ) {

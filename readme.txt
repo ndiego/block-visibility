@@ -164,6 +164,7 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 * Replaced most Button/Popover components with DropdownMenu components for improved UI.
 * The schedule "Setting" button is now a cog icon to be more consistent with other WordPress UI.
 * The "Remove" schedule button is now an X icon in the Schedule toolbar.
+* Plugin settings tabs are now navigable based on URL query parameter. 
 
 **Removed**
 
