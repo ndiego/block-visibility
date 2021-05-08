@@ -20,7 +20,7 @@ export default function QueryString( props ) {
 	const { visibilityControls, setVisibilityControls, setHasUpdates } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enable = visibilityControls?.query_string?.enable ?? true; // eslint-disable-line
+	const enable = visibilityControls?.query_string?.enable ?? true;
 
 	return (
 		<div className="setting-tabs__settings-panel">

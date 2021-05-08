@@ -112,6 +112,17 @@ function withContextualIndicators( BlockListBlock ) {
 			),
 		};
 
+		activeControls = applyFilters(
+			'blockVisibility.conditionalIndicatorActiveControls',
+			activeControls,
+			controls,
+			hasControlSets,
+			enabledControls,
+			variables
+		);
+
+		console.log( activeControls );
+
 		activeControls = Object.keys( activeControls ).filter(
 			( control ) => activeControls[ control ] === true
 		);

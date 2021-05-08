@@ -153,7 +153,7 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 == Changelog ==
 
-= 1.9.0 - 2021-04-TBD =
+= 1.9.0 - 2021-05-TBD =
 
 **Added**
 
@@ -164,7 +164,7 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 * Replaced most Button/Popover components with DropdownMenu components for improved UI.
 * The schedule "Setting" button is now a cog icon to be more consistent with other WordPress UI.
 * The "Remove" schedule button is now an X icon in the Schedule toolbar.
-* Plugin settings tabs are now navigable based on URL query parameter. 
+* Plugin settings tabs are now navigable based on URL query parameter.
 
 **Removed**
 
@@ -172,7 +172,9 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 **Fixed**
 
+* Fixed unnecessary re-renders and loss of focus for slotted components by relocating withFilter HOCs outside of all render functions. 
 * Fixed error in the Date & Time frontend test.
+* Fixed labels on the Query String control that were previously not translatable.
 
 = 1.8.0 - 2021-04-13 =
 

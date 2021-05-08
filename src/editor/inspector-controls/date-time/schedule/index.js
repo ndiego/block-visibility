@@ -29,6 +29,12 @@ import CalendarPopover from './calendar-popover';
 import DateTimeField from './date-time-field';
 import formatDateLabel from './format-date-label';
 
+// Provides an entry point to slot in additional settings. Must be placed
+// outside of function to avoid unnecessary rerenders.
+const AdditionalScheduleControls = withFilters(
+	'blockVisibility.addDateTimeScheduleControls'
+)( ( props ) => <></> ); // eslint-disable-line
+
 /**
  * Add the block Schedule component.
  *
@@ -122,11 +128,6 @@ export default function Schedule( props ) {
 
 		setControlAtts( 'dateTime', assign( { ...dateTime }, { schedules } ) );
 	};
-
-	// Provides an entry point to slot in additional settings.
-	const AdditionalScheduleControls = withFilters(
-		'blockVisibility.addDateTimeScheduleControls'
-	)( ( props ) => <></> ); // eslint-disable-line
 
 	let dateTimeControls = (
 		<>

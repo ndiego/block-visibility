@@ -17,6 +17,12 @@ import ScreenSize from './screen-size';
 import QueryString from './query-string';
 import Integrations from './integrations';
 
+// Provides an entry point to slot in additional settings. Must be placed
+// outside of function to avoid unnecessary rerenders.
+const AdditionalControls = withFilters(
+	'blockVisibility.VisibilityControls'
+)( ( props ) => <></> ); // eslint-disable-line
+
 /**
  * Renders the Visibility Controls tab of the Block Visibility settings page
  *
@@ -35,11 +41,6 @@ export default function VisibilityControls( props ) {
 		handleSettingsChange( 'visibility_controls', visibilityControls );
 		setHasUpdates( false );
 	}
-
-	// Provides an entry point to slot in additional settings.
-	const AdditionalControls = withFilters(
-		'blockVisibility.VisibilityControls'
-	)( ( props ) => <></> ); // eslint-disable-line
 
 	return (
 		<div className="setting-tabs__visibility-controls inner-container">

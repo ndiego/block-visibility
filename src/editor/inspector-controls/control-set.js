@@ -20,6 +20,12 @@ import ACF from './acf';
 import WPFusion from './wp-fusion';
 import { NoticeBlockControlsDisabled } from './utils/notices-tips';
 
+// Provides an entry point to slot in additional settings. Must be placed
+// outside of function to avoid unnecessary rerenders.
+const AdditionalControlSetControls = withFilters(
+	'blockVisibility.addControlSetControls'
+)( ( props ) => <></> ); // eslint-disable-line
+
 /**
  * Render a control set
  *
@@ -87,11 +93,6 @@ export default function ControlSet( props ) {
 			),
 		} );
 	}
-
-	// Provides an entry point to slot in additional settings.
-	const AdditionalControlSetControls = withFilters(
-		'blockVisibility.addControlSetControls'
-	)( ( props ) => <></> ); // eslint-disable-line
 
 	return (
 		<div className="block-visibility__control-set">

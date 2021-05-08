@@ -22,6 +22,12 @@ import hasVisibilityControls from './../utils/has-visibility-controls';
 import hasPermission from './../utils/has-permission';
 import getEnabledControls from './../../utils/get-enabled-controls';
 
+// Provides an entry point to slot in additional settings. Must be placed
+// outside of function to avoid unnecessary rerenders.
+const AdditionalInspectorControls = withFilters(
+	'blockVisibility.addInspectorControls'
+)( ( props ) => <></> ); // eslint-disable-line
+
 /**
  * Add the Visibility inspector control to each allowed block in the editor
  *
@@ -87,11 +93,6 @@ function VisibilityInspectorControls( props ) {
 		( control ) => control.settingSlug === 'hide_block'
 	);
 	const blockHidden = hasHideBlock && hideBlock;
-
-	// Provides an entry point to slot in additional settings.
-	const AdditionalInspectorControls = withFilters(
-		'blockVisibility.addInspectorControls'
-	)( ( props ) => <></> ); // eslint-disable-line
 
 	return (
 		// Note that the core InspectorControls component is already making use

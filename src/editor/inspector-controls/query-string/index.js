@@ -84,7 +84,7 @@ export default function QueryString( props ) {
 					) }
 				</div>
 				<TextareaControl
-					label="Required Queries (Any)"
+					label={ __( 'Required Queries (Any)', 'block-visibility' ) }
 					help={ __(
 						'Only visible when least one of the provided URL query strings is present.',
 						'block-visibility'
@@ -96,7 +96,7 @@ export default function QueryString( props ) {
 					rows="2"
 				/>
 				<TextareaControl
-					label="Required Queries (All)"
+					label={ __( 'Required Queries (All)', 'block-visibility' ) }
 					help={ createInterpolateElement(
 						__(
 							'Only visible when <strong>all</strong> of the provided URL query strings are present.',
@@ -113,7 +113,7 @@ export default function QueryString( props ) {
 					rows="2"
 				/>
 				<TextareaControl
-					label="Required Queries (Not)"
+					label={ __( 'Required Queries (Not)', 'block-visibility' ) }
 					help={ __(
 						'Hide when at least one of the provided URL query strings is present.',
 						'block-visibility'

@@ -28,6 +28,12 @@ import VisibilityControls from './visibility-controls';
 import BlockManager from './block-manager';
 import PluginSettings from './plugin-settings';
 
+// Provides an entry point to slot in additional settings. Must be placed
+// outside of function to avoid unnecessary rerenders.
+const AdditionalSettings = withFilters(
+	'blockVisibility.MainSettings'
+)( ( props ) => <></> ); // eslint-disable-line
+
 /**
  * Renders the Block Visibility settings page
  *
@@ -161,11 +167,6 @@ function Settings() {
 		  window.location.search = urlParams.toString();
 		}
 	}
-
-	// Provides an entry point to slot in additional settings.
-	const AdditionalSettings = withFilters(
-		'blockVisibility.MainSettings'
-	)( ( props ) => <></> ); // eslint-disable-line
 
 	return (
 		<SlotFillProvider>
