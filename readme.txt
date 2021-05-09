@@ -157,11 +157,12 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 **Added**
 
-* TBD
+* Added notice regarding compatibility issues with the Screen Size control and the Shortcode Block, plus links to a workaround in the Knowledge Base.
 
 **Changed**
 
-* Replaced most Button/Popover components with DropdownMenu components for improved UI.
+* Replaced many Popover components in the block editor with Modal components for improved UI.
+* Replaced most other Button/Popover components with DropdownMenu components for improved UI.
 * The schedule "Setting" button is now a cog icon to be more consistent with other WordPress UI.
 * The "Remove" schedule button is now an X icon in the Schedule toolbar.
 * Plugin settings tabs are now navigable based on URL query parameter.
@@ -172,9 +173,10 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 **Fixed**
 
-* Fixed unnecessary re-renders and loss of focus for slotted components by relocating withFilter HOCs outside of all render functions. 
+* Fixed unnecessary re-renders and loss of focus for slotted components by relocating withFilter HOCs outside of all render functions.
 * Fixed error in the Date & Time frontend test.
 * Fixed labels on the Query String control that were previously not translatable.
+* Fixed incorrect links to the plugin Knowledge Base.
 
 = 1.8.0 - 2021-04-13 =
 

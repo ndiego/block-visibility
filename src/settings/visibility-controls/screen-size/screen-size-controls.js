@@ -52,7 +52,7 @@ export default function ScreenSizeControls( props ) {
 						'The default controls are Desktop, Tablet, and Mobile. Advanced screen size controls add Large Desktop and Mobile (portrait).',
 						'block-visibility'
 					) }
-					link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/screen-size/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 				/>
 			</div>
 			{ enableAdvancedControls && (

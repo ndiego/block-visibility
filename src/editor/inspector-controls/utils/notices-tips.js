@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Notice } from '@wordpress/components';
+import { Notice, ExternalLink } from '@wordpress/components';
 import { createInterpolateElement } from '@wordpress/element';
 
 /**
@@ -65,7 +65,7 @@ export function NoticeBlockControlsDisabled() {
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
-export function TipControlSet( props ) {
+export function TipsControlSet( props ) {
 	const { settings, variables } = props;
 	const settingsUrl = variables?.plugin_variables.settings_url ?? '';
 	const isAdmin = variables.current_users_roles.includes( 'administrator' );
@@ -76,7 +76,6 @@ export function TipControlSet( props ) {
 
 	return (
 		<>
-			<h3>{ __( 'Quick Tips', 'block-visibility' ) }</h3>
 			<ol>
 				<li className="tip">
 					{ __(
@@ -119,6 +118,27 @@ export function TipControlSet( props ) {
 					</li>
 				) }
 			</ol>
+            <div className="learn-more">
+				<span>
+					{ createInterpolateElement(
+						__(
+							'To learn more, visit the plugin <a>Knowledge Base</a>.',
+							'block-visibility'
+						),
+						{
+							a: (
+								<ExternalLink // eslint-disable-line
+									href={
+										'https://www.blockvisibilitywp.com/knowledge-base/?bv_query=learn_more&utm_source=plugin&utm_medium=editor&utm_campaign=plugin_referrals'
+									}
+									target="_blank"
+									rel="noreferrer"
+								/>
+							),
+						}
+					) }
+				</span>
+			</div>
 		</>
 	);
 }

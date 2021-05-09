@@ -8,7 +8,7 @@ import Select from 'react-select';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Button, Disabled, Notice, Popover } from '@wordpress/components';
+import { Button, Disabled, Modal, Notice } from '@wordpress/components';
 import { Icon, info } from '@wordpress/icons';
 import { createInterpolateElement, useState } from '@wordpress/element';
 
@@ -17,7 +17,7 @@ import { createInterpolateElement, useState } from '@wordpress/element';
  */
 import icons from './../../../utils/icons';
 import ControlSeparator from './../utils/control-separator';
-import TipWPFusion from './notices-tips';
+import TipsWPFusion from './notices-tips';
 
 /**
  * Add the Wp Fusion controls
@@ -27,7 +27,7 @@ import TipWPFusion from './notices-tips';
  * @return {string}		 Return the rendered JSX
  */
 export default function WPFusion( props ) {
-	const [ tipsPopoverOpen, setTipsPopoverOpen ] = useState( false );
+	const [ tipsModalOpen, setTipsModalOpen ] = useState( false );
 	const {
 		variables,
 		enabledControls,
@@ -171,19 +171,10 @@ export default function WPFusion( props ) {
 							icon={ info }
 							className="control-tips"
 							onClick={ () =>
-								setTipsPopoverOpen( ( open ) => ! open )
+								setTipsModalOpen( ( open ) => ! open )
 							}
 							isSmall
 						/>
-						{ tipsPopoverOpen && (
-							<Popover
-								className="block-visibility__control-popover tips"
-								focusOnMount="container"
-								onClose={ () => setTipsPopoverOpen( false ) }
-							>
-								<TipWPFusion { ...props } />
-							</Popover>
-						) }
 					</span>
 					<Icon icon={ icons.wpFusion } />
 				</h3>
@@ -199,6 +190,18 @@ export default function WPFusion( props ) {
 				) }
 			</div>
 			<ControlSeparator control="wpFusion" { ...props } />
+			{ tipsModalOpen && (
+				<Modal
+					className="block-visibility__tips-modal"
+					title={ __(
+						'WP Fusion Control',
+						'block-visibility'
+					) }
+					onRequestClose={ () => setTipsModalOpen( false ) }
+				>
+					<TipsWPFusion { ...props } />
+				</Modal>
+			) }
 		</>
 	);
 }

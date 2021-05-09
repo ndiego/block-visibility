@@ -675,6 +675,7 @@ $mobile: 426px;
 			color: #c8c8c8;
 		    padding: 0;
 		    height: 18px;
+			min-width: 20px;
 
 			svg {
 				width: 22px;
@@ -692,6 +693,7 @@ $mobile: 426px;
 		}
 
 		.information-popover__popover {
+
 			p {
 				font-size: 13px;
 				color: #32373C;
@@ -706,7 +708,7 @@ $mobile: 426px;
 			.components-popover__content {
 				font-weight: 400;
 				line-height: 1.4;
-				padding: 16px;
+				padding: 4px;
 				font-size: 13px;
 				text-align: left;
 				min-width: 200px;

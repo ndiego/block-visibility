@@ -58,7 +58,7 @@ export default function VisibilityControls( props ) {
 							'To learn more about Visibility Controls, review the plugin documentation using the link below.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/documentation/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link="https://www.blockvisibilitywp.com/knowledge-base-category/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
 				<SaveSettings

@@ -12,7 +12,7 @@ import { createInterpolateElement } from '@wordpress/element';
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
-export default function TipWPFusion( props ) {
+export default function TipsWPFusion( props ) {
 	const { variables } = props;
 	const isAdmin = variables.current_users_roles.includes( 'administrator' );
 	const excludeAdmins =
@@ -20,21 +20,22 @@ export default function TipWPFusion( props ) {
 
 	return (
 		<>
-			<h3>{ __( 'WP Fusion', 'block-visibility' ) }</h3>
-			<p>
-				{ __(
-					'Configure block visibility based on WP Fusion tags. Note that the available fields depend on the User Role control settings. If the User Role control is disabled, only the Required Tags (Not) field will be available.',
-					'block-visibility'
-				) }
-			</p>
-			{ isAdmin && excludeAdmins && (
-				<Notice status="warning" isDismissible={ false }>
+			<div className="usage">
+				<p>
 					{ __(
-						'It looks like the "Exclude Administrators" setting has been enabled in the WP Fusion plugin settings. Therefore, when you preview this block while logged-in as an Administrator, the content will remain visible regardless of the WP Fusion visibility control settings.',
+						'The WP Fusion control allows you to configure block visibility based on WP Fusion tags. Note that the available fields depend on the User Role control settings. If the User Role control is disabled, only the Required Tags (Not) field will be available.',
 						'block-visibility'
 					) }
-				</Notice>
-			) }
+				</p>
+				{ isAdmin && excludeAdmins && (
+					<Notice status="warning" isDismissible={ false }>
+						{ __(
+							'It looks like the "Exclude Administrators" setting has been enabled in the WP Fusion plugin settings. Therefore, when you preview this block while logged-in as an Administrator, the content will remain visible regardless of the WP Fusion visibility control settings.',
+							'block-visibility'
+						) }
+					</Notice>
+				) }
+			</div>
 			<h4>{ __( 'Required Tags (Any)', 'block-visibility' ) }</h4>
 			<p>
 				{ __(
@@ -56,25 +57,27 @@ export default function TipWPFusion( props ) {
 					'block-visibility'
 				) }
 			</p>
-			<p className="learn-more">
-				{ createInterpolateElement(
-					__(
-						'To learn more, visit the plugin <a>Knowledge Base</a>.',
-						'block-visibility'
-					),
-					{
-						a: (
-							<ExternalLink // eslint-disable-line
-								href={
-									'https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/wp-fusion/?bv_query=learn_more'
-								}
-								target="_blank"
-								rel="noreferrer"
-							/>
+			<div className="learn-more">
+				<span>
+					{ createInterpolateElement(
+						__(
+							'To learn more, visit the plugin <a>Knowledge Base</a>.',
+							'block-visibility'
 						),
-					}
-				) }
-			</p>
+						{
+							a: (
+								<ExternalLink // eslint-disable-line
+									href={
+										'https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-wp-fusion-control/?bv_query=learn_more&utm_source=plugin&utm_medium=editor&utm_campaign=plugin_referrals'
+									}
+									target="_blank"
+									rel="noreferrer"
+								/>
+							),
+						}
+					) }
+				</span>
+			</div>
 		</>
 	);
 }

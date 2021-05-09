@@ -121,8 +121,6 @@ function withContextualIndicators( BlockListBlock ) {
 			variables
 		);
 
-		console.log( activeControls );
-
 		activeControls = Object.keys( activeControls ).filter(
 			( control ) => activeControls[ control ] === true
 		);

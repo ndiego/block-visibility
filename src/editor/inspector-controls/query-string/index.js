@@ -122,7 +122,7 @@ export default function QueryString( props ) {
 					className="block-visibility__tips-modal"
 					title={ __(
 						'Query String Control',
-						'block-visibility-pro'
+						'block-visibility'
 					) }
 					onRequestClose={ () => setTipsModalOpen( false ) }
 				>

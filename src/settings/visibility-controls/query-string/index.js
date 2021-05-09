@@ -53,7 +53,7 @@ export default function QueryString( props ) {
 							'The Query String control allows you to conditionally display blocks based on URL query strings.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/query-string/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-query-string-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
 			</div>

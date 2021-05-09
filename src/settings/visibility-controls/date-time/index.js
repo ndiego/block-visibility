@@ -53,7 +53,7 @@ export default function DateTime( props ) {
 							'Date & Time controls allow you hide blocks based on time and date settings, which includes the ability to schedule the visibility of blocks.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/date-time/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-date-time-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
 				<Slot name="DateTimeControls" />

@@ -80,7 +80,7 @@ export default function UserRole( props ) {
 							'User Role controls allow you to hide blocks based on whether a user is logged-in, logged-out, and more.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/user-role/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
 				<hr />
@@ -91,7 +91,7 @@ export default function UserRole( props ) {
 							'Restrict visibility by any user role, not just users that are logged-in or logged-out. This includes roles that are added by third-party plugins.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/user-role/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
 				<Slot name="VisibilityByRoleControls" />

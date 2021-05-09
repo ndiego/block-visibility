@@ -80,7 +80,7 @@ export default function Breakpoints( props ) {
 						'The default breakpoints are Large (992px) and Medium (768px). Advanced screen size controls add Extra Large (1200px) and Small (576px).',
 						'block-visibility'
 					) }
-					link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/screen-size/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 				/>
 			</div>
 			{ Object.entries( breakpoints ).map( ( [ breakpoint, labels ] ) => {

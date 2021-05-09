@@ -17,7 +17,6 @@ import {
 	MenuGroup,
 	MenuItem,
 	Modal,
-	Popover,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { Icon, moreVertical, check, info } from '@wordpress/icons';
@@ -25,7 +24,7 @@ import { Icon, moreVertical, check, info } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
-import { TipControlSet } from './utils/notices-tips';
+import { TipsControlSet } from './utils/notices-tips';
 
 /**
  * Render a control menu item
@@ -62,7 +61,7 @@ function ControlMenuItem( props ) {
  */
 export default function ControlSetToolbar( props ) {
 	const [ popoverOpen, setPopoverOpen ] = useState( false );
-	const [ tipsPopoverOpen, setTipsPopoverOpen ] = useState( false );
+	const [ tipsModalOpen, setTipsModalOpen ] = useState( false );
 	const [ resetModalOpen, setResetModalOpen ] = useState( false );
 	const {
 		setAttributes,
@@ -122,19 +121,10 @@ export default function ControlSetToolbar( props ) {
 							icon={ info }
 							className="control-tips"
 							onClick={ () =>
-								setTipsPopoverOpen( ( open ) => ! open )
+								setTipsModalOpen( ( open ) => ! open )
 							}
 							isSmall
 						/>
-						{ tipsPopoverOpen && (
-							<Popover
-								className="block-visibility__control-popover tips"
-								focusOnMount="container"
-								onClose={ () => setTipsPopoverOpen( false ) }
-							>
-								<TipControlSet { ...props } />
-							</Popover>
-						) }
 					</h3>
 				</FlexBlock>
 				<FlexItem>
@@ -146,7 +136,8 @@ export default function ControlSetToolbar( props ) {
 						icon={ moreVertical }
 						className="configure-controls"
 						popoverProps={ {
-							className: 'block-visibility__control-popover'
+							className: 'block-visibility__control-popover',
+							focusOnMount: 'container'
 						} }
 					>
 						{ ( { onClose } ) => (
@@ -203,6 +194,18 @@ export default function ControlSetToolbar( props ) {
 					</DropdownMenu>
 				</FlexItem>
 			</Flex>
+			{ tipsModalOpen && (
+				<Modal
+					className="block-visibility__tips-modal"
+					title={ __(
+						'Block Visibility: Quick Tips',
+						'block-visibility'
+					) }
+					onRequestClose={ () => setTipsModalOpen( false ) }
+				>
+					<TipsControlSet { ...props } />
+				</Modal>
+			) }
 			{ resetModalOpen && (
 				<Modal
 					className="block-visibility__reset-modal"

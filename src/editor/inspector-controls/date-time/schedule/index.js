@@ -232,7 +232,8 @@ export default function Schedule( props ) {
 							className: 'schedule--heading__toolbar--settings'
 						} }
 						popoverProps={ {
-							className: 'block-visibility__control-popover schedule-settings'
+							className: 'block-visibility__control-popover schedule-settings',
+							focusOnMount: 'container',
 						} }
 					>
 						{ ( { onClose } ) => (

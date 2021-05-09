@@ -53,7 +53,7 @@ export default function HideBlock( props ) {
 							'The Hide Block control allows you easily hide blocks completely from the frontend of your website. It is the simplest, yet most powerful, control and overrides all others when enabled on the block.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/hide-block/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-hide-block-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
 			</div>

@@ -89,7 +89,7 @@ export default function TipsQueryString() {
 							a: (
 								<ExternalLink // eslint-disable-line
 									href={
-										'https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/query-string/?bv_query=learn_more'
+										'https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-query-string-control/?bv_query=learn_more&utm_source=plugin&utm_medium=editor&utm_campaign=plugin_referrals'
 									}
 									target="_blank"
 									rel="noreferrer"

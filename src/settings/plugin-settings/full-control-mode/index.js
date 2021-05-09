@@ -42,7 +42,7 @@ export default function FullControlMode( props ) {
 								strong: <strong />,
 								a: (
 									<ExternalLink // eslint-disable-line
-										href="https://www.blockvisibilitywp.com/knowledge-base/general-settings/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+										href="https://www.blockvisibilitywp.com/knowledge-base/how-to-configure-the-general-settings/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 										target="_blank"
 										rel="noreferrer"
 									/>
@@ -64,7 +64,7 @@ export default function FullControlMode( props ) {
 							'block-visibility'
 						) }
 						link={
-							'https://www.blockvisibilitywp.com/knowledge-base/general-settings/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals'
+							'https://www.blockvisibilitywp.com/knowledge-base/how-to-configure-the-general-settings/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals'
 						}
 					/>
 				</div>
