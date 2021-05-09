@@ -1,18 +1,19 @@
 /**
  * External dependencies
  */
-import { assign, isEmpty } from 'lodash';
+import { assign } from 'lodash';
 import Select from 'react-select';
 
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { Button, Disabled, TextControl } from '@wordpress/components';
 import { closeSmall } from '@wordpress/icons';
 
 export default function Rule( props ) {
 	const {
+		acf,
 		rule,
 		ruleIndex,
 		ruleSet,
@@ -31,9 +32,9 @@ export default function Rule( props ) {
 		( operator ) => operator.value === rule.operator
 	);
 
-	const removeRule = ( ruleSet, ruleSetIndex, ruleIndex ) => {
-		ruleSets[ ruleSetIndex ] = ruleSet.filter(
-			( value, index ) => index !== ruleIndex
+	const removeRule = ( _ruleSet, _ruleSetIndex, _ruleIndex ) => {
+		ruleSets[ _ruleSetIndex ] = _ruleSet.filter(
+			( value, index ) => index !== _ruleIndex
 		);
 
 		setControlAtts( 'acf', assign( { ...acf }, { ruleSets } ) );
@@ -43,25 +44,22 @@ export default function Rule( props ) {
 		type,
 		value,
 		ruleParam,
-		ruleSet,
-		ruleSetIndex,
-		ruleIndex
+		_ruleSet,
+		_ruleSetIndex,
+		_ruleIndex
 	) => {
 		let newValue = type === 'select' ? value?.value : value;
 		newValue = newValue === null ? '' : newValue;
 
-		ruleSet[ ruleIndex ][ ruleParam ] = newValue;
-		ruleSets[ ruleSetIndex ] = ruleSet;
+		_ruleSet[ _ruleIndex ][ ruleParam ] = newValue;
+		ruleSets[ _ruleSetIndex ] = _ruleSet;
 
 		setControlAtts( 'acf', assign( { ...acf }, { ruleSets } ) );
 	};
 
 	let valueField = (
 		<TextControl
-			placeholder={ __(
-				'Field Value…',
-				'block-visibility'
-			) }
+			placeholder={ __( 'Field Value…', 'block-visibility' ) }
 			value={ rule.value }
 			onChange={ ( value ) =>
 				handleRuleChange(
@@ -76,27 +74,22 @@ export default function Rule( props ) {
 		/>
 	);
 
-	if (
-		'!=empty' === rule.operator ||
-		'==empty' === rule.operator
-	) {
-		valueField = (
-			<Disabled>{ valueField }</Disabled>
-		);
+	if ( '!=empty' === rule.operator || '==empty' === rule.operator ) {
+		valueField = <Disabled>{ valueField }</Disabled>;
 	}
 
-	const ruleLabel = ( ruleIndex ) => {
-		if ( ruleIndex === 0 ) {
+	const ruleLabel = ( _ruleIndex ) => {
+		if ( _ruleIndex === 0 ) {
 			return sprintf(
 				// Translators: Whether the block is hidden or visible.
-				__( '%s the block if', 'block-visibility' ) ,
+				__( '%s the block if', 'block-visibility' ),
 				hideOnRuleSets
 					? __( 'Hide', 'block-visibility' )
 					: __( 'Show', 'block-visibility' )
 			);
-		} else {
-			return ( __( 'And if', 'block-visibility' ) )
 		}
+
+		return __( 'And if', 'block-visibility' );
 	};
 
 	let deleteRuleButton = (

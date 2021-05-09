@@ -7,7 +7,7 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Disabled, Notice, ToggleControl } from '@wordpress/components';
+import { Disabled, ToggleControl } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -25,8 +25,14 @@ import NoticeBlockNotCompatible from './notices-tips';
  * @return {string}		 Return the rendered JSX
  */
 export default function ScreenSize( props ) {
-	const { name, settings, enabledControls, controlSetAtts, setControlAtts } = props;
-    console.log( name );
+	const {
+		name,
+		settings,
+		enabledControls,
+		controlSetAtts,
+		setControlAtts,
+	} = props;
+
 	const controlEnabled = enabledControls.some(
 		( control ) => control.settingSlug === 'screen_size'
 	);
@@ -77,69 +83,70 @@ export default function ScreenSize( props ) {
 	const small = hideOnScreenSize?.small ?? false;
 	const extraSmall = hideOnScreenSize?.extraSmall ?? false;
 
-    let allScreenSizeFields = (
-        <>
-            { enableAdvancedControls && controls.extra_large && (
-                <ToggleControl
-                    label={ __(
-                        'Hide on large desktop',
-                        'block-visibility'
-                    ) }
-                    checked={ extraLarge }
-                    onChange={ () => {
-                        setAttribute( 'extraLarge', ! extraLarge );
-                    } }
-                />
-            ) }
-            { controls.large && (
-                <ToggleControl
-                    label={ __( 'Hide on desktop', 'block-visibility' ) }
-                    checked={ large }
-                    onChange={ () => {
-                        setAttribute( 'large', ! large );
-                    } }
-                />
-            ) }
-            { controls.medium && (
-                <ToggleControl
-                    label={ __( 'Hide on tablet', 'block-visibility' ) }
-                    checked={ medium }
-                    onChange={ () => {
-                        setAttribute( 'medium', ! medium );
-                    } }
-                />
-            ) }
-            { controls.small && (
-                <ToggleControl
-                    label={ [
-                        ! enableAdvancedControls && 'Hide on mobile',
-                        enableAdvancedControls &&
-                            'Hide on mobile (landscape)',
-                    ] }
-                    checked={ small }
-                    onChange={ () => {
-                        setAttribute( 'small', ! small );
-                    } }
-                />
-            ) }
-            { enableAdvancedControls && controls.extra_small && (
-                <ToggleControl
-                    label={ __(
-                        'Hide on mobile (portrait)',
-                        'block-visibility'
-                    ) }
-                    checked={ extraSmall }
-                    onChange={ () => {
-                        setAttribute( 'extraSmall', ! extraSmall );
-                    } }
-                />
-            ) }
-        </>
-    );
+	let allScreenSizeFields = (
+		<>
+			{ enableAdvancedControls && controls.extra_large && (
+				<ToggleControl
+					label={ __( 'Hide on large desktop', 'block-visibility' ) }
+					checked={ extraLarge }
+					onChange={ () => {
+						setAttribute( 'extraLarge', ! extraLarge );
+					} }
+				/>
+			) }
+			{ controls.large && (
+				<ToggleControl
+					label={ __( 'Hide on desktop', 'block-visibility' ) }
+					checked={ large }
+					onChange={ () => {
+						setAttribute( 'large', ! large );
+					} }
+				/>
+			) }
+			{ controls.medium && (
+				<ToggleControl
+					label={ __( 'Hide on tablet', 'block-visibility' ) }
+					checked={ medium }
+					onChange={ () => {
+						setAttribute( 'medium', ! medium );
+					} }
+				/>
+			) }
+			{ controls.small && (
+				<ToggleControl
+					label={ [
+						! enableAdvancedControls &&
+							__( 'Hide on mobile', 'block-visibility' ),
+						enableAdvancedControls &&
+							__(
+								'Hide on mobile (landscape)',
+								'block-visibility'
+							),
+					] }
+					checked={ small }
+					onChange={ () => {
+						setAttribute( 'small', ! small );
+					} }
+				/>
+			) }
+			{ enableAdvancedControls && controls.extra_small && (
+				<ToggleControl
+					label={ __(
+						'Hide on mobile (portrait)',
+						'block-visibility'
+					) }
+					checked={ extraSmall }
+					onChange={ () => {
+						setAttribute( 'extraSmall', ! extraSmall );
+					} }
+				/>
+			) }
+		</>
+	);
 
-    if ( name === 'core/shortcode' ) {
-        allScreenSizeFields = <Disabled>{ allScreenSizeFields }</Disabled>;
-    }
+	if ( name === 'core/shortcode' ) {
+		allScreenSizeFields = <Disabled>{ allScreenSizeFields }</Disabled>;
+	}
 
 	return (
 		<>
@@ -147,10 +154,8 @@ export default function ScreenSize( props ) {
 				<h3 className="visibility-control__group-heading">
 					{ __( 'Screen Size', 'block-visibility' ) }
 				</h3>
-                { allScreenSizeFields }
-                { name === 'core/shortcode' && (
-                    <NoticeBlockNotCompatible />
-                ) }
+				{ allScreenSizeFields }
+				{ name === 'core/shortcode' && <NoticeBlockNotCompatible /> }
 			</div>
 			<ControlSeparator control="screenSize" { ...props } />
 		</>

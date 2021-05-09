@@ -2,15 +2,16 @@
  * External dependencies
  */
 import { assign, isEmpty } from 'lodash';
-import Select from 'react-select';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Button, Disabled, TextControl } from '@wordpress/components';
-import { closeSmall } from '@wordpress/icons';
+import { Button } from '@wordpress/components';
 
+/**
+ * Internal dependencies
+ */
 import Rule from './rule';
 
 /**
@@ -112,6 +113,7 @@ export default function RuleSets( props ) {
 						{ ruleSet.map( ( rule, ruleIndex ) => {
 							return (
 								<Rule
+									key={ ruleIndex }
 									rule={ rule }
 									ruleIndex={ ruleIndex }
 									ruleSet={ ruleSet }

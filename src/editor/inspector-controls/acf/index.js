@@ -6,7 +6,7 @@ import { assign } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import { ToggleControl } from '@wordpress/components';
 import { Icon } from '@wordpress/icons';
 

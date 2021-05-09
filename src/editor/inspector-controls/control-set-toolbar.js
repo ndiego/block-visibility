@@ -60,7 +60,6 @@ function ControlMenuItem( props ) {
  * @return {string}		 Return the rendered JSX
  */
 export default function ControlSetToolbar( props ) {
-	const [ popoverOpen, setPopoverOpen ] = useState( false );
 	const [ tipsModalOpen, setTipsModalOpen ] = useState( false );
 	const [ resetModalOpen, setResetModalOpen ] = useState( false );
 	const {
@@ -137,7 +136,7 @@ export default function ControlSetToolbar( props ) {
 						className="configure-controls"
 						popoverProps={ {
 							className: 'block-visibility__control-popover',
-							focusOnMount: 'container'
+							focusOnMount: 'container',
 						} }
 					>
 						{ ( { onClose } ) => (
@@ -186,7 +185,10 @@ export default function ControlSetToolbar( props ) {
 											onClose();
 										} }
 									>
-										{ __( 'Reset all', 'block-visibility' ) }
+										{ __(
+											'Reset all',
+											'block-visibility'
+										) }
 									</MenuItem>
 								</MenuGroup>
 							</>

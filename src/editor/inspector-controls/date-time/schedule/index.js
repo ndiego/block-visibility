@@ -14,7 +14,6 @@ import {
 	DropdownMenu,
 	Notice,
 	Slot,
-	Popover,
 	TextControl,
 	ToggleControl,
 	withFilters,
@@ -53,9 +52,6 @@ export default function Schedule( props ) {
 	} = props;
 	const [ startPickerOpen, setStartPickerOpen ] = useState( false );
 	const [ endPickerOpen, setEndPickerOpen ] = useState( false );
-	const [ settingsPopoverOpen, setSettingsPopoverOpen ] = useState( false );
-
-	const [ testPopover, setTestPopover ] = useState( false );
 
 	const title = scheduleAtts?.title ?? '';
 	const enable = scheduleAtts?.enable ?? true;
@@ -229,14 +225,15 @@ export default function Schedule( props ) {
 						label={ __( 'Schedule Settings', 'block-visibility' ) }
 						icon={ cog }
 						toggleProps={ {
-							className: 'schedule--heading__toolbar--settings'
+							className: 'schedule--heading__toolbar--settings',
 						} }
 						popoverProps={ {
-							className: 'block-visibility__control-popover schedule-settings',
+							className:
+								'block-visibility__control-popover schedule-settings',
 							focusOnMount: 'container',
 						} }
 					>
-						{ ( { onClose } ) => (
+						{ () => (
 							<>
 								<h3>
 									{ __(

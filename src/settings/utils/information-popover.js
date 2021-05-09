@@ -22,16 +22,16 @@ export default function InformationPopover( props ) {
 				label={ __( 'More Information', 'block-visibility' ) }
 				icon={ info }
 				toggleProps={ {
-					className: 'information-popover__button'
+					className: 'information-popover__button',
 				} }
 				popoverProps={ {
 					className: 'information-popover__popover',
 					focusOnMount: 'container',
 					position: popoverPosition,
-					noArrow: false
+					noArrow: false,
 				} }
 			>
-				{ ( { onClose } ) => (
+				{ () => (
 					<>
 						<p>{ message }</p>
 						{ subMessage && <p>{ subMessage }</p> }
@@ -44,5 +44,5 @@ export default function InformationPopover( props ) {
 				) }
 			</DropdownMenu>
 		</div>
-	)
+	);
 }

@@ -62,9 +62,7 @@ export default function QueryString( props ) {
 						label={ __( 'Query String Tips', 'block-visibility' ) }
 						icon={ info }
 						className="control-tips"
-						onClick={ () =>
-							setTipsModalOpen( ( open ) => ! open )
-						}
+						onClick={ () => setTipsModalOpen( ( open ) => ! open ) }
 						isSmall
 					/>
 				</h3>
@@ -120,10 +118,7 @@ export default function QueryString( props ) {
 			{ tipsModalOpen && (
 				<Modal
 					className="block-visibility__tips-modal"
-					title={ __(
-						'Query String Control',
-						'block-visibility'
-					) }
+					title={ __( 'Query String Control', 'block-visibility' ) }
 					onRequestClose={ () => setTipsModalOpen( false ) }
 				>
 					<TipsQueryString />

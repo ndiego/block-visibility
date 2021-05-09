@@ -118,7 +118,7 @@ export function TipsControlSet( props ) {
 					</li>
 				) }
 			</ol>
-            <div className="learn-more">
+			<div className="learn-more">
 				<span>
 					{ createInterpolateElement(
 						__(

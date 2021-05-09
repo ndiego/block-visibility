@@ -152,21 +152,21 @@ function Settings() {
 	const updateUrl = ( tabName ) => {
 		urlParams.set( 'tab', tabName );
 
-		if ( history.pushState ) {
+		if ( history.pushState ) { // eslint-disable-line
 			const newUrl =
 				window.location.protocol +
-				"//" +
+				'//' +
 				window.location.host +
 				window.location.pathname +
-				"?" +
+				'?' +
 				urlParams.toString() +
 				window.location.hash;
 
-		  window.history.replaceState( { path: newUrl }, "", newUrl );
+			window.history.replaceState( { path: newUrl }, '', newUrl );
 		} else {
-		  window.location.search = urlParams.toString();
+			window.location.search = urlParams.toString();
 		}
-	}
+	};
 
 	return (
 		<SlotFillProvider>

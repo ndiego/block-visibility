@@ -193,10 +193,7 @@ export default function WPFusion( props ) {
 			{ tipsModalOpen && (
 				<Modal
 					className="block-visibility__tips-modal"
-					title={ __(
-						'WP Fusion Control',
-						'block-visibility'
-					) }
+					title={ __( 'WP Fusion Control', 'block-visibility' ) }
 					onRequestClose={ () => setTipsModalOpen( false ) }
 				>
 					<TipsWPFusion { ...props } />

@@ -22,13 +22,13 @@ export default function NoticeBlockNotCompatible() {
 				),
 				{
 					a: (
-                        <ExternalLink // eslint-disable-line
-                            href={
-                                'https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=editor&utm_campaign=plugin_referrals'
-                            }
-                            target="_blank"
-                            rel="noreferrer"
-                        />
+						<ExternalLink // eslint-disable-line
+							href={
+								'https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=editor&utm_campaign=plugin_referrals'
+							}
+							target="_blank"
+							rel="noreferrer"
+						/>
 					),
 				}
 			) }
