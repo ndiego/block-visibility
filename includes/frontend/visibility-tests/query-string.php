@@ -84,7 +84,7 @@ function query_string_test( $is_visible, $settings, $attributes ) {
 		? prepare_queries( $query_string_atts['queryStringNot'] )
 		: null;
 
-	// If there is "any" query strings, need to find at lease one match to pass.
+	// If there is "any" query strings, need to find at least one match to pass.
 	if ( ! empty( $query_string_any ) ) {
 		$any_matches = 0;
 

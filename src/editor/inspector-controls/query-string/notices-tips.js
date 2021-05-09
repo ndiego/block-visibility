@@ -11,62 +11,56 @@ import { createInterpolateElement } from '@wordpress/element';
  * @since 1.7.0
  * @return {string}		 Return the rendered JSX
  */
-export default function TipQueryString() {
+export default function TipsQueryString() {
 	return (
 		<>
-			<h3>{ __( 'Query String', 'block-visibility' ) }</h3>
-			<p>
-				{ __(
-					'Configure block visibility based on URL query strings.',
-					'block-visibility'
-				) }
-			</p>
 			<div className="usage">
-				<h4>{ __( 'Usage', 'block-visibility' ) }</h4>
 				<p>
 					{ __(
-						'In order for the Query String control to work properly, only add one query string per line in each textbox. The following three formats are accepted.',
+						'The Query String control allows you to configure block visibility based on URL query strings. In order for this control to work properly, only add one query string per line in each textbox. The following three formats are accepted.',
 						'block-visibility'
 					) }
 				</p>
-				<Flex>
-					<FlexItem>
-						<code>param=value</code>
-					</FlexItem>
-					<FlexBlock>
-						{ __(
-							'Query parameter with a specific value.',
-							'block-visibility'
-						) }
-					</FlexBlock>
-				</Flex>
-				<Flex>
-					<FlexItem>
-						<code>param=*</code>
-					</FlexItem>
-					<FlexBlock>
-						{ __(
-							'Query parameter with a wildcard value. (i.e. the value could be anything)',
-							'block-visibility'
-						) }
-					</FlexBlock>
-				</Flex>
-				<Flex>
-					<FlexItem>
-						<code>param</code>
-					</FlexItem>
-					<FlexBlock>
-						{ __(
-							'Query parameter with no value. Operates the same as a wildcard value.',
-							'block-visibility'
-						) }
-					</FlexBlock>
-				</Flex>
+				<div className="flex-table">
+					<Flex>
+						<FlexItem>
+							<code>param=value</code>
+						</FlexItem>
+						<FlexBlock>
+							{ __(
+								'Query parameter with a specific value.',
+								'block-visibility'
+							) }
+						</FlexBlock>
+					</Flex>
+					<Flex>
+						<FlexItem>
+							<code>param=*</code>
+						</FlexItem>
+						<FlexBlock>
+							{ __(
+								'Query parameter with a wildcard value. (i.e. the value could be anything)',
+								'block-visibility'
+							) }
+						</FlexBlock>
+					</Flex>
+					<Flex>
+						<FlexItem>
+							<code>param</code>
+						</FlexItem>
+						<FlexBlock>
+							{ __(
+								'Query parameter with no value. Operates the same as a wildcard value.',
+								'block-visibility'
+							) }
+						</FlexBlock>
+					</Flex>
+				</div>
 			</div>
 			<h4>{ __( 'Required Queries (Any)', 'block-visibility' ) }</h4>
 			<p>
 				{ __(
-					'The block will only be shown if if the URL has at least one of the provided query strings.',
+					'The block will only be shown if the URL has at least one of the provided query strings.',
 					'block-visibility'
 				) }
 			</p>
@@ -84,25 +78,27 @@ export default function TipQueryString() {
 					'block-visibility'
 				) }
 			</p>
-			<p className="learn-more">
-				{ createInterpolateElement(
-					__(
-						'To learn more, visit the plugin <a>Knowledge Base</a>.',
-						'block-visibility'
-					),
-					{
-						a: (
-							<ExternalLink // eslint-disable-line
-								href={
-									'https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/query-string/?bv_query=learn_more'
-								}
-								target="_blank"
-								rel="noreferrer"
-							/>
+			<div className="learn-more">
+				<span>
+					{ createInterpolateElement(
+						__(
+							'To learn more, visit the plugin <a>Knowledge Base</a>',
+							'block-visibility'
 						),
-					}
-				) }
-			</p>
+						{
+							a: (
+								<ExternalLink // eslint-disable-line
+									href={
+										'https://www.blockvisibilitywp.com/knowledge-base/visibility-controls/query-string/?bv_query=learn_more'
+									}
+									target="_blank"
+									rel="noreferrer"
+								/>
+							),
+						}
+					) }
+				</span>
+			</div>
 		</>
 	);
 }

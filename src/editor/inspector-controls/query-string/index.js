@@ -7,7 +7,7 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Button, Popover, TextareaControl } from '@wordpress/components';
+import { Button, Modal, TextareaControl } from '@wordpress/components';
 import { createInterpolateElement, useState } from '@wordpress/element';
 import { info } from '@wordpress/icons';
 
@@ -15,7 +15,7 @@ import { info } from '@wordpress/icons';
  * Internal dependencies
  */
 import ControlSeparator from './../utils/control-separator';
-import TipQueryString from './notices-tips';
+import TipsQueryString from './notices-tips';
 
 /**
  * Add the Query String controls
@@ -25,7 +25,7 @@ import TipQueryString from './notices-tips';
  * @return {string}		 Return the rendered JSX
  */
 export default function QueryString( props ) {
-	const [ tipsPopoverOpen, setTipsPopoverOpen ] = useState( false );
+	const [ tipsModalOpen, setTipsModalOpen ] = useState( false );
 	const { enabledControls, controlSetAtts, setControlAtts } = props;
 	const controlEnabled = enabledControls.some(
 		( control ) => control.settingSlug === 'query_string'
@@ -63,19 +63,10 @@ export default function QueryString( props ) {
 						icon={ info }
 						className="control-tips"
 						onClick={ () =>
-							setTipsPopoverOpen( ( open ) => ! open )
+							setTipsModalOpen( ( open ) => ! open )
 						}
 						isSmall
 					/>
-					{ tipsPopoverOpen && (
-						<Popover
-							className="block-visibility__control-popover tips"
-							focusOnMount="container"
-							onClose={ () => setTipsPopoverOpen( false ) }
-						>
-							<TipQueryString />
-						</Popover>
-					) }
 				</h3>
 				<div className="visibility-control__help">
 					{ __(
@@ -126,6 +117,18 @@ export default function QueryString( props ) {
 				/>
 			</div>
 			<ControlSeparator control="queryString" { ...props } />
+			{ tipsModalOpen && (
+				<Modal
+					className="block-visibility__tips-modal"
+					title={ __(
+						'Query String Control',
+						'block-visibility-pro'
+					) }
+					onRequestClose={ () => setTipsModalOpen( false ) }
+				>
+					<TipsQueryString />
+				</Modal>
+			) }
 		</>
 	);
 }
