@@ -108,6 +108,10 @@
     }
 
     .components-base-control__help {
+        a {
+            cursor: pointer;
+        }
+        
         strong {
             font-weight: 700;
         }
