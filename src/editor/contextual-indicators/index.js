@@ -81,7 +81,7 @@ function withContextualIndicators( BlockListBlock ) {
 		// instead.
 		const backgroundBlocks = [ 'core/pullquote' ];
 
-		let activeControls = {
+		let activeCoreControls = {
 			'date-time': hasDateTime(
 				controls,
 				hasControlSets,
@@ -103,6 +103,18 @@ function withContextualIndicators( BlockListBlock ) {
 				hasControlSets,
 				enabledControls
 			),
+		};
+
+		activeCoreControls = applyFilters(
+			'blockVisibility.conditionalIndicatorActiveCoreControls',
+			activeCoreControls,
+			controls,
+			hasControlSets,
+			enabledControls,
+			variables
+		);
+
+		let activeIntegrationControls = {
 			acf: hasACF( controls, hasControlSets, enabledControls, variables ),
 			'wp-fusion': hasWPFusion(
 				controls,
@@ -112,14 +124,19 @@ function withContextualIndicators( BlockListBlock ) {
 			),
 		};
 
-		activeControls = applyFilters(
-			'blockVisibility.conditionalIndicatorActiveControls',
-			activeControls,
+		activeIntegrationControls = applyFilters(
+			'blockVisibility.conditionalIndicatorActiveIntegrationControls',
+			activeIntegrationControls,
 			controls,
 			hasControlSets,
 			enabledControls,
 			variables
 		);
+
+		let activeControls = {
+			...activeCoreControls,
+			...activeIntegrationControls
+		};
 
 		activeControls = Object.keys( activeControls ).filter(
 			( control ) => activeControls[ control ] === true
