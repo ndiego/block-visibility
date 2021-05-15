@@ -2,6 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { Slot } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -41,8 +42,10 @@ export default function Integrations( props ) {
 				</span>
 			</div>
 			<div className="settings-panel__container">
+				<Slot name="VisibilityControlsIntegrationsTop" />
 				<ACF { ...props } />
 				<WPFusion { ...props } />
+				<Slot name="VisibilityControlsIntegrationsBottom" />
 			</div>
 		</div>
 	);
