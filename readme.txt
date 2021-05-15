@@ -158,6 +158,7 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 **Added**
 
 * Added notice regarding compatibility issues with the Screen Size control and the Shortcode Block, plus links to a workaround in the Knowledge Base.
+* Added additional Slots for integration Visibility Controls.
 
 **Changed**
 
@@ -166,6 +167,7 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 * The schedule "Setting" button is now a cog icon to be more consistent with other WordPress UI.
 * The "Remove" schedule button is now an X icon in the Schedule toolbar.
 * Plugin settings tabs are now navigable based on URL query parameter.
+* Minor UI enhancements throughout.
 
 **Removed**
 
