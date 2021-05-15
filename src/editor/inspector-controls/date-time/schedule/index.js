@@ -231,6 +231,7 @@ export default function Schedule( props ) {
 							className:
 								'block-visibility__control-popover schedule-settings',
 							focusOnMount: 'container',
+							noArrow: false,
 						} }
 					>
 						{ () => (

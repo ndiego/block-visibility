@@ -111,7 +111,7 @@
         a {
             cursor: pointer;
         }
-        
+
         strong {
             font-weight: 700;
         }
@@ -121,7 +121,7 @@
         font-size: 12px;
         font-style: normal;
         color: rgb(117, 117, 117);
-        margin-bottom: 12px;
+        margin-bottom: 16px;
 
         strong {
             font-weight: 700;
@@ -197,7 +197,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 6px;
 
             .schedule--heading__title {
                 font-weight: 500;
@@ -211,7 +213,6 @@
                 text-align: right;
 
                 button {
-                    //color: #c8c8c8;
                     padding: 0 !important;
                     height: 24px;
                     min-width: 24px;
@@ -245,11 +246,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
-
-            &:last-child {
-                margin-bottom: 8px;
-            }
+            margin-bottom: 10px;
 
             .components-button {
                 padding: 0;
@@ -656,8 +653,17 @@
         color: var(--wp-admin-theme-color);
     }
 
+    .react-select__option--is-selected {
+        background: #eee;
+    }
+
     .react-select__option--is-disabled {
         color: #cccccc !important;
+    }
+
+    // Fixes issue where editor footer is above the menu. This shifts the page up.
+    .react-select__menu {
+        margin-bottom: 50px;
     }
 }
 
