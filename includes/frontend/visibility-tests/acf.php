@@ -22,7 +22,7 @@ use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
  *
  * @param string $rule_operator The rule operator.
  * @param string $rule_value    The rule value.
- * @param array  $acf_field     The ACF filed array.
+ * @param array  $acf_field     The ACF fieled array.
  * @return boolean              Return true if the test passes.
  */
 function run_rule_tests( $rule_operator, $rule_value, $acf_field ) {
