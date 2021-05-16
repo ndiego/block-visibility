@@ -135,7 +135,7 @@ function withContextualIndicators( BlockListBlock ) {
 
 		let activeControls = {
 			...activeCoreControls,
-			...activeIntegrationControls
+			...activeIntegrationControls,
 		};
 
 		activeControls = Object.keys( activeControls ).filter(
