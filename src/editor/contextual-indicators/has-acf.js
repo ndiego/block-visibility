@@ -21,7 +21,7 @@ export default function hasACF(
 ) {
 	const pluginActive = variables?.integrations?.acf?.active ?? false;
 
-	// WP Fusion is not active so return false even if saved controls exist.
+	// ACF is not active so return false even if saved controls exist.
 	if (
 		! pluginActive ||
 		! enabledControls.some( ( control ) => control.settingSlug === 'acf' )

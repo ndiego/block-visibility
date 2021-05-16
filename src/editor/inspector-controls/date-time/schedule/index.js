@@ -18,12 +18,13 @@ import {
 	ToggleControl,
 	withFilters,
 } from '@wordpress/components';
-import { cog, closeSmall } from '@wordpress/icons';
+import { cog } from '@wordpress/icons';
 import { useState } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
+import icons from './../../../../utils/icons';
 import CalendarPopover from './calendar-popover';
 import DateTimeField from './date-time-field';
 import formatDateLabel from './format-date-label';
@@ -196,19 +197,19 @@ export default function Schedule( props ) {
 		dateTimeControls = <Disabled>{ dateTimeControls }</Disabled>;
 	}
 
-	let deleteScheduleButton = (
+	const deleteScheduleButton = (
 		<Button
-			label={ __( 'Delete Schedule', 'block-visibility' ) }
-			icon={ closeSmall }
+			label={
+				schedules.length <= 1
+					? __( 'Clear Schedule', 'block-visibility' )
+					: __( 'Delete Schedule', 'block-visibility' )
+			}
+			icon={ icons.trash }
 			className="schedule--heading__toolbar--delete"
 			onClick={ () => removeSchedule() }
 			isSmall
 		/>
 	);
-
-	if ( schedules.length <= 1 ) {
-		deleteScheduleButton = <Disabled>{ deleteScheduleButton }</Disabled>;
-	}
 
 	return (
 		<div

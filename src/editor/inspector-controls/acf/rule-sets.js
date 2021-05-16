@@ -108,6 +108,14 @@ export default function RuleSets( props ) {
 	return (
 		<div className="acf-control__rule-sets">
 			{ ruleSets.map( ( ruleSet, ruleSetIndex ) => {
+				if ( ruleSet.length === 0 ) {
+					ruleSet.push( {
+						field: '',
+						operator: '!=empty',
+						value: '',
+					} );
+				}
+
 				return (
 					<div key={ ruleSetIndex } className="acf-control__rule-set">
 						{ ruleSet.map( ( rule, ruleIndex ) => {

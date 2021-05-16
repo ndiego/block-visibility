@@ -32,27 +32,20 @@ export default function Rule( props ) {
 		( operator ) => operator.value === rule.operator
 	);
 
-	const removeRule = ( _ruleSet, _ruleSetIndex, _ruleIndex ) => {
-		ruleSets[ _ruleSetIndex ] = _ruleSet.filter(
-			( value, index ) => index !== _ruleIndex
+	const removeRule = () => {
+		ruleSets[ ruleSetIndex ] = ruleSet.filter(
+			( value, index ) => index !== ruleIndex
 		);
 
 		setControlAtts( 'acf', assign( { ...acf }, { ruleSets } ) );
 	};
 
-	const handleRuleChange = (
-		type,
-		value,
-		ruleParam,
-		_ruleSet,
-		_ruleSetIndex,
-		_ruleIndex
-	) => {
+	const handleRuleChange = ( type, value, ruleParam ) => {
 		let newValue = type === 'select' ? value?.value : value;
 		newValue = newValue === null ? '' : newValue;
 
-		_ruleSet[ _ruleIndex ][ ruleParam ] = newValue;
-		ruleSets[ _ruleSetIndex ] = _ruleSet;
+		ruleSet[ ruleIndex ][ ruleParam ] = newValue;
+		ruleSets[ ruleSetIndex ] = ruleSet;
 
 		setControlAtts( 'acf', assign( { ...acf }, { ruleSets } ) );
 	};
@@ -61,16 +54,7 @@ export default function Rule( props ) {
 		<TextControl
 			placeholder={ __( 'Field Value…', 'block-visibility' ) }
 			value={ rule.value }
-			onChange={ ( value ) =>
-				handleRuleChange(
-					'text',
-					value,
-					'value',
-					ruleSet,
-					ruleSetIndex,
-					ruleIndex
-				)
-			}
+			onChange={ ( value ) => handleRuleChange( 'text', value, 'value' ) }
 		/>
 	);
 
@@ -92,18 +76,18 @@ export default function Rule( props ) {
 		return __( 'And if', 'block-visibility' );
 	};
 
-	let deleteRuleButton = (
+	const deleteRuleButton = (
 		<Button
-			label={ __( 'Delete Rule', 'block-visibility' ) }
+			label={
+				ruleSet.length <= 1
+					? __( 'Clear Rule', 'block-visibility' )
+					: __( 'Delete Rule', 'block-visibility' )
+			}
 			icon={ closeSmall }
 			className="schedule--heading__toolbar--delete"
-			onClick={ () => removeRule( ruleSet, ruleSetIndex, ruleIndex ) }
+			onClick={ () => removeRule() }
 		/>
 	);
-
-	if ( ruleSet.length <= 1 ) {
-		deleteRuleButton = <Disabled>{ deleteRuleButton }</Disabled>;
-	}
 
 	return (
 		<div key={ ruleIndex } className="acf-control__rule">
@@ -118,14 +102,7 @@ export default function Rule( props ) {
 				placeholder={ __( 'Select Field…', 'block-visibility' ) }
 				value={ selectedField }
 				onChange={ ( value ) =>
-					handleRuleChange(
-						'select',
-						value,
-						'field',
-						ruleSet,
-						ruleSetIndex,
-						ruleIndex
-					)
+					handleRuleChange( 'select', value, 'field' )
 				}
 				isClearable={ true }
 			/>
@@ -135,14 +112,7 @@ export default function Rule( props ) {
 				options={ operators }
 				value={ selectedOperator }
 				onChange={ ( value ) =>
-					handleRuleChange(
-						'select',
-						value,
-						'operator',
-						ruleSet,
-						ruleSetIndex,
-						ruleIndex
-					)
+					handleRuleChange( 'select', value, 'operator' )
 				}
 			/>
 			{ valueField }
