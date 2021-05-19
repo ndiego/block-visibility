@@ -18,7 +18,7 @@ import {
 	ToggleControl,
 	withFilters,
 } from '@wordpress/components';
-import { cog } from '@wordpress/icons';
+import { settings } from '@wordpress/icons';
 import { useState } from '@wordpress/element';
 
 /**
@@ -224,7 +224,7 @@ export default function Schedule( props ) {
 				<div className="schedule--heading__toolbar">
 					<DropdownMenu
 						label={ __( 'Schedule Settings', 'block-visibility' ) }
-						icon={ cog }
+						icon={ settings }
 						toggleProps={ {
 							className: 'schedule--heading__toolbar--settings',
 						} }
