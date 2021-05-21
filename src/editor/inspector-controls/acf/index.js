@@ -6,16 +6,19 @@ import { assign } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
-import { ToggleControl } from '@wordpress/components';
-import { Icon } from '@wordpress/icons';
+import { __, sprintf } from '@wordpress/i18n';
+import { Button, Modal, Notice, ToggleControl } from '@wordpress/components';
+import { useState } from '@wordpress/element';
+import { Icon, info } from '@wordpress/icons';
 
 /**
  * Internal dependencies
  */
-import RuleSets from './rule-sets';
 import icons from './../../../utils/icons';
 import ControlSeparator from './../utils/control-separator';
+import RuleSets from './../utils/rule-sets';
+import { getGroupedFields, getAllFields } from './fields';
+import TipsACF from './notices-tips';
 
 /**
  * Add the ACF controls
@@ -25,6 +28,7 @@ import ControlSeparator from './../utils/control-separator';
  * @return {string}		 Return the rendered JSX
  */
 export default function ACF( props ) {
+	const [ tipsModalOpen, setTipsModalOpen ] = useState( false );
 	const {
 		variables,
 		enabledControls,
@@ -44,6 +48,60 @@ export default function ACF( props ) {
 
 	const acf = controlSetAtts?.controls?.acf ?? {};
 	const hideOnRuleSets = acf?.hideOnRuleSets ?? false;
+	let ruleSets = acf?.ruleSets ?? [];
+
+	// Hande the deprecated ruleSet structue in v1.8 and lower.
+	if ( ruleSets.length === 0 ) {
+		ruleSets.push( {
+			enable: true,
+			rules: [ { field: '' } ],
+		} );
+	} else if ( ruleSets.length === 1 && ! ruleSets[0]?.rules ) {
+		const rules = ruleSets[0];
+
+		if ( rules.length !== 0 ) {
+			console.log( rules );
+			rules.forEach( ( rule ) => {
+				const operator = rule?.operator ?? '';
+
+				if ( operator === '!=empty' ) {
+					rule.operator = 'notEmpty';
+				} else if ( operator === '==empty' ) {
+					rule.operator = 'empty';
+				} else if ( operator === '==' ) {
+					rule.operator = 'equal';
+				} else if ( operator === '!=' ) {
+					rule.operator = 'notEqual';
+				} else if ( operator === '==contains' ) {
+					rule.operator = 'contains';
+				} else if ( operator === '!=contains' ) {
+					rule.operator = 'notContain';
+				} else {
+					rule.operator = '';
+				}
+			} );
+		}
+
+		ruleSets = [ {
+			enable: true,
+			rules: rules,
+		} ]
+	}
+
+	const addRuleSet = () => {
+		ruleSets.push( {
+			enable: true,
+			rules: [ { field: '' } ],
+		} );
+
+		setControlAtts(
+			'acf',
+			assign( { ...acf }, { ruleSets } )
+		);
+	};
+
+	const groupedFields = getGroupedFields( variables );
+	const allFields = getAllFields( variables );
 
 	return (
 		<>
@@ -51,15 +109,65 @@ export default function ACF( props ) {
 				<h3 className="visibility-control__group-heading has-icon">
 					<span>
 						{ __( 'Advanced Custom Fields', 'block-visibility' ) }
+						<Button
+							label={ __(
+								'Advanced Custom Fields Tips',
+								'block-visibility'
+							) }
+							icon={ info }
+							className="control-tips"
+							onClick={ () =>
+								setTipsModalOpen( ( open ) => ! open )
+							}
+							isSmall
+						/>
 					</span>
 					<Icon icon={ icons.acf } />
 				</h3>
-				<RuleSets
-					acf={ acf }
-					hideOnRuleSets={ hideOnRuleSets }
-					{ ...props }
-				/>
-				<div className="acf-control__hide-on-rule-sets">
+				<div className="visibility-control__help">
+					{ sprintf(
+						// Translators: Whether the block is hidden or visible.
+						__(
+							'%s the block if at least one rule set applies.',
+							'block-visibility-pro'
+						),
+						hideOnRuleSets
+							? __( 'Hide', 'block-visibility-pro' )
+							: __( 'Show', 'block-visibility-pro' )
+					) }
+				</div>
+				{ ! variables?.integrations?.acf?.fields && (
+					<Notice status="warning" isDismissible={ false }>
+						{ __(
+							'It does not appear that your website contains any published fields.',
+							'block-visibility'
+						) }
+					</Notice>
+				) }
+				<div className="rule-sets">
+					{ ruleSets.map( ( ruleSet, ruleSetIndex ) => {
+						return (
+							<RuleSets
+								key={ ruleSetIndex }
+								ruleSet={ ruleSet }
+								ruleSetIndex={ ruleSetIndex }
+								ruleSets={ ruleSets }
+								groupedFields={ groupedFields }
+								allFields={ allFields }
+								controlName='acf'
+								controlAtts={ acf }
+								hideOnRuleSets={ hideOnRuleSets }
+								{ ...props }
+							/>
+						);
+					} ) }
+					<div className="rule-sets--add">
+						<Button onClick={ () => addRuleSet() } isSecondary>
+							{ __( 'Add rule set', 'block-visibility' ) }
+						</Button>
+					</div>
+				</div>
+				<div className="hide-on-rule-sets">
 					<ToggleControl
 						label={ __(
 							'Hide when rules apply',
@@ -83,6 +191,18 @@ export default function ACF( props ) {
 				</div>
 			</div>
 			<ControlSeparator control="acf" { ...props } />
+			{ tipsModalOpen && (
+				<Modal
+					className="block-visibility__tips-modal"
+					title={ __(
+						'Advanced Custom Fields Control',
+						'block-visibility'
+					) }
+					onRequestClose={ () => setTipsModalOpen( false ) }
+				>
+					<TipsACF />
+				</Modal>
+			) }
 		</>
 	);
 }

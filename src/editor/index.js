@@ -191,7 +191,7 @@ function addAttributes( settings ) {
 											ruleSets: {
 												type: 'array',
 												items: {
-													type: 'array',
+													type: [ 'array', 'object' ],
 													items: {
 														type: 'object',
 														properties: {
@@ -203,6 +203,45 @@ function addAttributes( settings ) {
 															},
 															value: {
 																type: 'string',
+															},
+														},
+													},
+													properties: {
+														id: {
+															type: 'number',
+														},
+														title: {
+															type: 'string',
+														},
+														enable: {
+															type: 'boolean',
+														},
+														rules: {
+															type: 'array',
+															items: {
+																type: 'object',
+																properties: {
+																	field: {
+																		type: 'string',
+																	},
+																	subField: {
+																		type: [
+																			'string',
+																			'integer',
+																			'array',
+																		],
+																	},
+																	operator: {
+																		type: 'string',
+																	},
+																	value: {
+																		type: [
+																			'string',
+																			'integer',
+																			'array',
+																		],
+																	},
+																},
 															},
 														},
 													},

@@ -128,7 +128,7 @@
         }
     }
 
-    /* Specific styling for radion controls with help text */
+    /* Specific styling for radio controls with help text --------------------*/
     .compound-radio-control {
         .components-radio-control__option {
 
@@ -158,12 +158,163 @@
         }
     }
 
-    /* Specific styles for the Hide Block visibility control */
+    /* Control Set styling -------------------------------------------------- */
+    .control-set {
+        margin-bottom: 30px;
+
+        .block-visibility__control-set-header {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+            border-top: 1px solid #e0e0e0;
+            margin-left: -16px;
+            margin-right: -16px;
+            width: calc(100% + 32px);
+            padding: 4px 16px;
+
+            h3 {
+                font-weight: 500;
+                color: #757575;
+                text-transform: uppercase;
+                font-size: 12px;
+                letter-spacing: 0.5px;
+                margin: 10px 0 8px;
+            }
+
+            .configure-controls {
+                button {
+                    padding: 0;
+                    height: 28px;
+                    min-width: 28px;
+                }
+            }
+        }
+
+        .visibility-control__group {
+            &:not(:last-child) {
+                margin-bottom: 15px;
+            }
+        }
+    }
+
+    /* Rule Set styling ----------------------------------------------------- */
+    .rule-sets {
+        margin-bottom: 24px;
+
+        .rule-sets--add {
+            margin-top: 24px;
+        }
+
+        .rule-sets__rule-set {
+            margin-bottom: 20px;
+
+            .rule-sets__rule-set--heading {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 16px;
+                border-bottom: 1px solid #e0e0e0;
+                padding-bottom: 6px;
+
+                .heading__title {
+                    font-weight: 500;
+                    margin-right: 6px;
+                }
+
+                .heading__toolbar {
+                    height: 24px;
+                    width: 64px;
+                    min-width: 64px;
+                    text-align: right;
+
+                    button {
+                        padding: 0 !important;
+                        height: 24px;
+                        min-width: 24px;
+
+                        &:hover {
+                            color: var( --wp-admin-theme-color );
+                        }
+
+                        svg {
+                            width: 20px;
+                        }
+                    }
+
+                    .toolbar--delete {
+                        svg {
+                            width: 19px;
+                        }
+                    }
+
+                    .components-disabled {
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+
+        .rule-sets__rule {
+            margin-bottom: 18px;
+
+            .rule-sets__rule--header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                button {
+                    height: 24px;
+                    min-width: 24px;
+                    width: 24px;
+                    padding: 0;
+                }
+            }
+
+            .rule-sets__rule--fields {
+                .fields__operator-and-value {
+                    &.is-number {
+                        display: flex;
+
+                        .block-visibility__react-select {
+                            margin: 0;
+                            width: 100%;
+                            margin-right: 10px;
+                        }
+
+                        .components-base-control {
+                            width: 110px;
+
+                            .components-base-control__field {
+                                margin-bottom: 0;
+
+                                .components-text-control__input {
+                                    height: 36px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .visibility-control__help {
+                    margin-top: 10px;
+                }
+            }
+
+            .components-base-control {
+                margin-bottom: 0;
+            }
+
+            .components-text-control__input {
+                padding: 8px;
+            }
+        }
+    }
+
+    /* Specific styles for the Hide Block visibility control -----------------*/
     .hide-block-control {
         padding-top: 10px;
     }
 
-    /* Specific styles for the Date Time visibility control */
+    /* Specific styles for the Date Time visibility control ------------------*/
     .date-time-control {
         .components-base-control {
             margin-bottom: 20px;
@@ -225,13 +376,7 @@
                         width: 20px;
                     }
                 }
-                /*
-                .schedule--heading__toolbar--delete {
-                    svg {
-                        width: 24px;
-                    }
-                }
-                */
+
                 .components-disabled {
                     display: inline-block;
                 }
@@ -285,7 +430,7 @@
         }
     }
 
-    /* Specific styles for the Screen Size visibility control */
+    /* Specific styles for the Screen Size visibility control ----------------*/
     .screen-size-control {
         .components-base-control {
             margin-bottom: 18px;
@@ -309,7 +454,7 @@
         }
     }
 
-    /* Specific styles for the Query String visibility control */
+    /* Specific styles for the Query String visibility control ---------------*/
     .query-string-control {
         .visibility-control__help {
             margin-bottom: 18px;
@@ -317,44 +462,6 @@
 
         textarea {
             white-space: nowrap;
-        }
-    }
-
-    /* Specific styles for the ACF visibility control */
-    .acf-control {
-        .acf-control__rule-sets {
-            margin-bottom: 24px;
-        }
-
-        .acf-control__rule-set {
-            .acf-control__rule-set--add {
-                margin-top: 24px;
-            }
-        }
-
-        .acf-control__rule {
-            margin-bottom: 18px;
-
-            .acf-control__rule--header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-
-                button {
-                    height: 24px;
-                    min-width: 24px;
-                    width: 24px;
-                    padding: 0;
-                }
-            }
-
-            .components-base-control {
-                margin-bottom: 0;
-            }
-
-            .components-text-control__input {
-                padding: 8px;
-            }
         }
     }
 }
@@ -501,7 +608,7 @@
 
         .control-branding-icon {
             width: 14px;
-            margin-left: 8px;
+            margin-right: 8px;
         }
 
         &:hover {
@@ -521,43 +628,6 @@
                 display: inline-block;
                 margin: 4px 0 0;
             }
-        }
-    }
-}
-
-.block-visibility__control-set {
-    margin-bottom: 30px;
-
-    .block-visibility__control-set-header {
-        margin-bottom: 30px;
-        border-bottom: 1px solid #e0e0e0;
-        border-top: 1px solid #e0e0e0;
-        margin-left: -16px;
-        margin-right: -16px;
-        width: calc(100% + 32px);
-        padding: 4px 16px;
-
-        h3 {
-            font-weight: 500;
-            color: #757575;
-            text-transform: uppercase;
-            font-size: 12px;
-            letter-spacing: 0.5px;
-            margin: 10px 0 8px;
-        }
-
-        .configure-controls {
-            button {
-                padding: 0;
-                height: 28px;
-                min-width: 28px;
-            }
-        }
-    }
-
-    .visibility-control__group {
-        &:not(:last-child) {
-            margin-bottom: 15px;
         }
     }
 }
