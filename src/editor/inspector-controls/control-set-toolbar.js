@@ -44,10 +44,10 @@ function ControlMenuItem( props ) {
 			icon={ control.active ? check : '' }
 			onClick={ () => toggleControls( control ) }
 		>
-			{ control.label }
 			{ control.icon && (
 				<Icon className="control-branding-icon" icon={ control.icon } />
 			) }
+			{ control.label }
 		</MenuItem>
 	);
 }

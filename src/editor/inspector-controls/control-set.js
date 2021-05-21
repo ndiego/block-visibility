@@ -95,7 +95,7 @@ export default function ControlSet( props ) {
 	}
 
 	return (
-		<div className="block-visibility__control-set">
+		<div className="control-set">
 			<ControlSetToolbar controls={ controls } { ...props } />
 
 			<Slot name="ControlSetControlsTop" />
