@@ -157,6 +157,8 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 **Added**
 
+* Added rule set functionality to the ACF control. This allows you to create OR conditions within the ACF control.
+* Added "rule set" and "rule"0 architecture.
 * Added notice regarding compatibility issues with the Screen Size control and the Shortcode Block, plus links to a workaround in the Knowledge Base.
 * Added additional Slots for integration Visibility Controls.
 
