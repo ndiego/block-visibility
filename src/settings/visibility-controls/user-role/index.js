@@ -77,10 +77,10 @@ export default function UserRole( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							'User Role controls allow you to hide blocks based on whether a user is logged-in, logged-out, and more.',
+							'The User Role control allows you to conditionally display blocks based on whether a user is logged-in, logged-out, and more. Visit the plugin Knowledge Base for more information.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
 				<hr />
@@ -88,10 +88,10 @@ export default function UserRole( props ) {
 					{ enableUserRolesElement }
 					<InformationPopover
 						message={ __(
-							'Restrict visibility by any user role, not just users that are logged-in or logged-out. This includes roles that are added by third-party plugins.',
+							'Restrict visibility by any user role (Administrator, Editor, Subscriber, etc.). Roles that are added by third-party plugins will also be available to choose from.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
 				<Slot name="VisibilityByRoleControls" />

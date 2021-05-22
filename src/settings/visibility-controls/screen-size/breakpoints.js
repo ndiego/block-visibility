@@ -73,7 +73,7 @@ export default function Breakpoints( props ) {
 				<span>{ __( 'Breakpoints', 'block-visibility' ) }</span>
 				<InformationPopover
 					message={ __(
-						'The plugin sets a series of breakpoints which enable screen size control out of the box. However for best results, you can configure the breakpoints to correspond with the media breakpoints of your current theme.',
+						'The plugin sets a series of breakpoints which enable the Screen Size control automatically. However for best results, you can configure the breakpoints to correspond with the media breakpoints of your current theme.',
 						'block-visibility'
 					) }
 					subMessage={ __(

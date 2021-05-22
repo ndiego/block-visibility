@@ -50,7 +50,7 @@ export default function DateTime( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							'Date & Time controls allow you hide blocks based on time and date settings, which includes the ability to schedule the visibility of blocks.',
+							'The Date & Time control allows you to conditionally display blocks based on time and date settings, which includes the ability to schedule blocks. Visit the plugin Knowledge Base for more information.',
 							'block-visibility'
 						) }
 						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-date-time-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"

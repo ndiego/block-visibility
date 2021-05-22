@@ -51,14 +51,14 @@ export default function VisibilityControls( props ) {
 					</span>
 					<InformationPopover
 						message={ __(
-							'The settings below allow you to configure the visibility controls that power this plugin. Pick and choose which controls you would like to enable and how you would like them to function. When a visibility control is disabled, blocks that relied on the disabled control will become visible again.',
+							'The settings below allow you to configure the visibility controls that power Block Visibility. Pick and choose which controls you would like to enable and how you would like them to function.',
 							'block-visibility'
 						) }
 						subMessage={ __(
-							'To learn more about Visibility Controls, review the plugin documentation using the link below.',
+							'When a visibility control is disabled, blocks that relied on the disabled control will become visible again unless they are hidden by other enabled controls. Visit the plugin Knowledge Base for more information on configuring visibility controls.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base-category/visibility-controls/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link="https://www.blockvisibilitywp.com/knowledge-base/guide-to-visibility-controls-in-block-visibility/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
 				<SaveSettings
@@ -102,6 +102,9 @@ export default function VisibilityControls( props ) {
 			<Integrations
 				visibilityControls={ visibilityControls }
 				setVisibilityControls={ setVisibilityControls }
+				saveStatus={ saveStatus }
+				onSettingsChange={ onSettingsChange }
+				hasUpdates={ hasUpdates }
 				setHasUpdates={ setHasUpdates }
 				{ ...props }
 			/>

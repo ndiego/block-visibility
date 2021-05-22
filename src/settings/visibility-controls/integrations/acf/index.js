@@ -9,6 +9,7 @@ import { Icon } from '@wordpress/icons';
  * Internal dependencies
  */
 import icons from './../../../../utils/icons';
+import InformationPopover from './../../../utils/information-popover';
 
 /**
  * Renders the ACF control settings.
@@ -34,32 +35,41 @@ export default function ACF( props ) {
 	const enable = visibilityControls?.acf?.enable ?? true; // eslint-disable-line
 
 	return (
-		<>
-			<div className="settings-label">
-				<span>
-					{ __( 'Advaced Custom Fields', 'block-visibility' ) }
+		<div className="setting-tabs__settings-panel">
+			<div className="settings-panel__header">
+				<span className="settings-panel__header-title">
+					<Icon icon={ icons.acf } />
+					{ __( 'Advanced Custom Fields', 'block-visibility' ) }
 				</span>
-				<Icon icon={ icons.acf } />
 			</div>
-			<div className="settings-type__toggle has-info-popover">
-				<ToggleControl
-					label={ __(
-						'Enable the Advanced Custom Fields (ACF) control.',
-						'block-visibility'
-					) }
-					checked={ enable }
-					onChange={ () => {
-						setVisibilityControls( {
-							...visibilityControls,
-							acf: {
-								...visibilityControls.acf,
-								enable: ! enable,
-							},
-						} );
-						setHasUpdates( true );
-					} }
-				/>
+			<div className="settings-panel__container">
+				<div className="settings-type__toggle has-info-popover">
+					<ToggleControl
+						label={ __(
+							'Enable the Advanced Custom Fields control.',
+							'block-visibility'
+						) }
+						checked={ enable }
+						onChange={ () => {
+							setVisibilityControls( {
+								...visibilityControls,
+								acf: {
+									...visibilityControls.acf,
+									enable: ! enable,
+								},
+							} );
+							setHasUpdates( true );
+						} }
+					/>
+					<InformationPopover
+						message={ __(
+							'The Advanced Custom Fields (ACF) control allows you to conditionally display blocks, including ACF blocks, based on ACF fields. Visit the plugin Knowledge Base for more information.',
+							'block-visibility'
+						) }
+						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-advanced-custom-fields-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					/>
+				</div>
 			</div>
-		</>
+		</div>
 	);
 }

@@ -45,7 +45,7 @@ export default function ScreenSizeControls( props ) {
 				<span>{ __( 'Controls', 'block-visibility' ) }</span>
 				<InformationPopover
 					message={ __(
-						'The settings below allow you to retrict which controls are available to users in the Block/Site Editor. Disabling controls will remove the corresponding CSS from the frontend of your website.',
+						'The settings below allow you to restrict which controls are available to users in the Block/Site Editor. Disabling controls will remove the corresponding CSS from the frontend of your website.',
 						'block-visibility'
 					) }
 					subMessage={ __(

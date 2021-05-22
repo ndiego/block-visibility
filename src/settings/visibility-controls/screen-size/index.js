@@ -153,7 +153,7 @@ export default function ScreenSize( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							"Screen Size controls allow you hide blocks based on the current width of the browser window, or in other words, the screen size of a user's device.",
+							"The Screen Size control allows you to conditionally display blocks on the current width of the browser window, or in other words, the screen size of a user's device. Visit the plugin Knowledge Base for more information.",
 							'block-visibility'
 						) }
 						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
@@ -165,7 +165,7 @@ export default function ScreenSize( props ) {
 					{ enableAdvancedControls }
 					<InformationPopover
 						message={ __(
-							'By default, the Screen Size controls include two breakpoints and three controls for users to hide blocks. There are certain situations where you may need more control over when a block should be visible, for example in the case of very large or small screens. Enabling advanced controls provides these options.',
+							'By default, the Screen Size control includes two breakpoints and three controls for users to hide blocks. There are certain situations where you may need more control over when a block should be visible, for example in the case of very large or small screens. Enabling advanced controls provides these options.',
 							'block-visibility'
 						) }
 						subMessage={ __(

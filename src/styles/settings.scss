@@ -246,6 +246,10 @@ $mobile: 426px;
 			margin-bottom: 20px;
 			min-height: 36px;
 
+			&.integrations {
+				margin-top: 50px;
+			}
+
 			.setting-controls__title {
 				display: flex;
 				align-items: center;
@@ -329,6 +333,13 @@ $mobile: 426px;
 
 				.settings-panel__header-title {
 					font-weight: 500;
+					display: flex;
+    				align-items: center;
+					
+					&>svg {
+						width: 18px;
+						margin-right: 10px;
+					}
 				}
 			}
 
@@ -395,11 +406,6 @@ $mobile: 426px;
 
 					&:first-child {
 						margin-top: 0;
-					}
-
-					&>svg {
-						width: 16px;
-    					margin-left: 10px;
 					}
 				}
 
