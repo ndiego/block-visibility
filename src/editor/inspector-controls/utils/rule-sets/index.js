@@ -48,9 +48,7 @@ export default function RuleSets( props ) {
 		rules.push( { field: '' } );
 	}
 
-	const ruleSetTitle = title
-		? title
-		: __( 'Rule Set', 'block-visibility' );
+	const ruleSetTitle = title ? title : __( 'Rule Set', 'block-visibility' );
 
 	const removeRuleSet = () => {
 		const newRuleSets = ruleSets.filter(
@@ -137,10 +135,7 @@ export default function RuleSets( props ) {
 				<span className="heading__title">{ ruleSetTitle }</span>
 				<div className="heading__toolbar">
 					<DropdownMenu
-						label={ __(
-							'Rule Set Settings',
-							'block-visibility'
-						) }
+						label={ __( 'Rule Set Settings', 'block-visibility' ) }
 						icon={ settings }
 						toggleProps={ {
 							className: 'heading__toolbar--settings',

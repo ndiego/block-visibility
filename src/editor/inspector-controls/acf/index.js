@@ -56,11 +56,10 @@ export default function ACF( props ) {
 			enable: true,
 			rules: [ { field: '' } ],
 		} );
-	} else if ( ruleSets.length === 1 && ! ruleSets[0]?.rules ) {
-		const rules = ruleSets[0];
+	} else if ( ruleSets.length === 1 && ! ruleSets[ 0 ]?.rules ) {
+		const rules = ruleSets[ 0 ];
 
 		if ( rules.length !== 0 ) {
-			console.log( rules );
 			rules.forEach( ( rule ) => {
 				const operator = rule?.operator ?? '';
 
@@ -82,10 +81,7 @@ export default function ACF( props ) {
 			} );
 		}
 
-		ruleSets = [ {
-			enable: true,
-			rules: rules,
-		} ]
+		ruleSets = [ { enable: true, rules } ];
 	}
 
 	const addRuleSet = () => {
@@ -94,10 +90,7 @@ export default function ACF( props ) {
 			rules: [ { field: '' } ],
 		} );
 
-		setControlAtts(
-			'acf',
-			assign( { ...acf }, { ruleSets } )
-		);
+		setControlAtts( 'acf', assign( { ...acf }, { ruleSets } ) );
 	};
 
 	const groupedFields = getGroupedFields( variables );
@@ -129,11 +122,11 @@ export default function ACF( props ) {
 						// Translators: Whether the block is hidden or visible.
 						__(
 							'%s the block if at least one rule set applies.',
-							'block-visibility-pro'
+							'block-visibility'
 						),
 						hideOnRuleSets
-							? __( 'Hide', 'block-visibility-pro' )
-							: __( 'Show', 'block-visibility-pro' )
+							? __( 'Hide', 'block-visibility' )
+							: __( 'Show', 'block-visibility' )
 					) }
 				</div>
 				{ ! variables?.integrations?.acf?.fields && (
@@ -154,7 +147,7 @@ export default function ACF( props ) {
 								ruleSets={ ruleSets }
 								groupedFields={ groupedFields }
 								allFields={ allFields }
-								controlName='acf'
+								controlName="acf"
 								controlAtts={ acf }
 								hideOnRuleSets={ hideOnRuleSets }
 								{ ...props }

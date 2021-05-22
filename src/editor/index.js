@@ -222,7 +222,8 @@ function addAttributes( settings ) {
 																type: 'object',
 																properties: {
 																	field: {
-																		type: 'string',
+																		type:
+																			'string',
 																	},
 																	subField: {
 																		type: [
@@ -232,7 +233,8 @@ function addAttributes( settings ) {
 																		],
 																	},
 																	operator: {
-																		type: 'string',
+																		type:
+																			'string',
 																	},
 																	value: {
 																		type: [

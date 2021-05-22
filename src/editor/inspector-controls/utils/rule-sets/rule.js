@@ -136,10 +136,7 @@ export default function Rule( props ) {
 						className="block-visibility__react-select"
 						classNamePrefix="react-select"
 						options={ groupedFields }
-						placeholder={ __(
-							'Select Rule…',
-							'block-visibility'
-						) }
+						placeholder={ __( 'Select Rule…', 'block-visibility' ) }
 						value={ selectedField }
 						onChange={ ( value ) =>
 							handleRuleChange( 'select', value, 'field' )
@@ -256,9 +253,7 @@ function FieldValue( props ) {
 
 	if ( ! valuePlaceholder ) {
 		valuePlaceholder =
-			valueType === 'number'
-				? ''
-				: __( 'Select…', 'block-visibility' );
+			valueType === 'number' ? '' : __( 'Select…', 'block-visibility' );
 	}
 
 	// The value field should not be displayed, so hide.
@@ -323,6 +318,7 @@ function FieldValue( props ) {
 		valueField = (
 			<TextControl
 				type={ valueType }
+				min={ 0 }
 				value={ isSubField ? ruleSubField : ruleValue }
 				placeholder={ valuePlaceholder }
 				onChange={ ( value ) =>
@@ -347,8 +343,8 @@ function FieldValue( props ) {
 	if ( selectedField?.operators && ruleOperator ) {
 		const selectedOperator = selectedField.operators.filter(
 			( operator ) => operator.value === ruleOperator
-		)
-		disableValue = selectedOperator[0]?.disableValue ?? false;
+		);
+		disableValue = selectedOperator[ 0 ]?.disableValue ?? false;
 	}
 
 	return (

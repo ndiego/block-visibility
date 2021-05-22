@@ -72,14 +72,12 @@ export function getAllFields( variables ) {
 	if ( fields.length !== 0 ) {
 		fields.forEach( ( group ) => {
 			const groupKey = group?.key ?? '';
-			const groupTitle = group?.title ?? '';
 			const groupFields = group?.fields ?? [];
 
 			if ( groupFields.length !== 0 ) {
 				groupFields.forEach( ( field ) => {
 					const fieldKey = field?.key ?? '';
 					const fieldLabel = field?.label ?? '';
-					const fieldType = field?.type ?? '';
 
 					allFields.push( {
 						value: fieldKey,
