@@ -158,7 +158,7 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 **Added**
 
 * Added rule set functionality to the ACF control. This allows you to create OR conditions within the ACF control.
-* Added "rule set" and "rule"0 architecture.
+* Added "rule set" and "rule" architecture.
 * Added notice regarding compatibility issues with the Screen Size control and the Shortcode Block, plus links to a workaround in the Knowledge Base.
 * Added additional Slots for integration Visibility Controls.
 
@@ -166,9 +166,9 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 * Replaced many Popover components in the block editor with Modal components for improved UI.
 * Replaced most other Button/Popover components with DropdownMenu components for improved UI.
-* The schedule "Setting" button is now a cog icon to be more consistent with other WordPress UI.
-* The "Remove" schedule button is now an X icon in the Schedule toolbar.
+* The "Remove" schedule button is now an trashcan icon in the Schedule toolbar.
 * Plugin settings tabs are now navigable based on URL query parameter.
+* Controls are now alphabetically ordered in the control selectors.
 * Minor UI enhancements throughout.
 
 **Removed**

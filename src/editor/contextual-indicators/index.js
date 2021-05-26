@@ -114,6 +114,8 @@ function withContextualIndicators( BlockListBlock ) {
 			variables
 		);
 
+		//activeCoreControls.sort();
+
 		let activeIntegrationControls = {
 			acf: hasACF( controls, hasControlSets, enabledControls, variables ),
 			'wp-fusion': hasWPFusion(
@@ -133,6 +135,8 @@ function withContextualIndicators( BlockListBlock ) {
 			variables
 		);
 
+		//activeIntegrationControls.sort();
+
 		let activeControls = {
 			...activeCoreControls,
 			...activeIntegrationControls,
@@ -141,6 +145,9 @@ function withContextualIndicators( BlockListBlock ) {
 		activeControls = Object.keys( activeControls ).filter(
 			( control ) => activeControls[ control ] === true
 		);
+
+		// Sort active controls in ASC order.
+		activeControls.sort();
 
 		let controlsClass = '';
 

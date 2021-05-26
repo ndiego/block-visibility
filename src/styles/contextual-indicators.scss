@@ -49,21 +49,21 @@ $icon__acf: $svg-start + $acf + $svg-end;
 $icon__wp-fusion: $svg-start + $wp-fusion + $svg-end;
 
 // Two Icons
+$icon__acf-date-time: $svg-start + '<g transform="translate(29,0)">' + $acf + '</g><g>' + $date-time + '</g>' + $svg-end;
+$icon__acf-user-role: $svg-start + '<g transform="translate(29,0)">' + $acf + '</g><g>' + $user-role + '</g>' + $svg-end;
+$icon__acf-screen-size: $svg-start + '<g transform="translate(29,0)">' + $acf + '</g><g>' + $screen-size + '</g>' + $svg-end;
+$icon__acf-query-string: $svg-start + '<g transform="translate(29,0)">' + $acf + '</g><g>' + $query-string + '</g>' + $svg-end;
+$icon__acf-wp-fusion: $svg-start + '<g transform="translate(29,0)">' + $acf + '</g><g>' + $wp-fusion + '</g>' + $svg-end;
 $icon__date-time-user-role: $svg-start + '<g transform="translate(29,0)">' + $date-time + '</g><g>' + $user-role + '</g>' + $svg-end;
 $icon__date-time-screen-size: $svg-start + '<g transform="translate(29,0)">' + $date-time + '</g><g>' + $screen-size + '</g>' + $svg-end;
 $icon__date-time-query-string: $svg-start + '<g transform="translate(29,0)">' + $date-time + '</g><g>' + $query-string + '</g>' + $svg-end;
 $icon__date-time-wp-fusion: $svg-start + '<g transform="translate(29,0)">' + $date-time + '</g><g>' + $wp-fusion + '</g>' + $svg-end;
-$icon__date-time-acf: $svg-start + '<g transform="translate(29,0)">' + $date-time + '</g><g>' + $acf + '</g>' + $svg-end;
-$icon__user-role-screen-size: $svg-start + '<g transform="translate(29,0)">' + $user-role + '</g><g>' + $screen-size + '</g>' + $svg-end;
-$icon__user-role-query-string: $svg-start + '<g transform="translate(29,0)">' + $user-role + '</g><g>' + $query-string + '</g>' + $svg-end;
-$icon__user-role-wp-fusion: $svg-start + '<g transform="translate(29,0)">' + $user-role + '</g><g>' + $wp-fusion + '</g>' + $svg-end;
-$icon__user-role-acf: $svg-start + '<g transform="translate(29,0)">' + $user-role + '</g><g>' + $acf + '</g>' + $svg-end;
-$icon__screen-size-query-string: $svg-start + '<g transform="translate(29,0)">' + $screen-size + '</g><g>' + $query-string + '</g>' + $svg-end;
-$icon__screen-size-wp-fusion: $svg-start + '<g transform="translate(29,0)">' + $screen-size + '</g><g>' + $wp-fusion + '</g>' + $svg-end;
-$icon__screen-size-acf: $svg-start + '<g transform="translate(29,0)">' + $screen-size + '</g><g>' + $acf + '</g>' + $svg-end;
+$icon__query-string-screen-size: $svg-start + '<g transform="translate(29,0)">' + $query-string + '</g><g>' + $screen-size + '</g>' + $svg-end;
+$icon__query-string-user-role: $svg-start + '<g transform="translate(29,0)">' + $query-string + '</g><g>' + $user-role + '</g>' + $svg-end;
 $icon__query-string-wp-fusion: $svg-start + '<g transform="translate(29,0)">' + $query-string + '</g><g>' + $wp-fusion + '</g>' + $svg-end;
-$icon__query-string-acf: $svg-start + '<g transform="translate(29,0)">' + $query-string + '</g><g>' + $acf + '</g>' + $svg-end;
-$icon__acf-wp-fusion: $svg-start + '<g transform="translate(29,0)">' + $acf + '</g><g>' + $wp-fusion + '</g>' + $svg-end;
+$icon__screen-size-wp-fusion: $svg-start + '<g transform="translate(29,0)">' + $screen-size + '</g><g>' + $wp-fusion + '</g>' + $svg-end;
+$icon__screen-size-user-role: $svg-start + '<g transform="translate(29,0)">' + $screen-size + '</g><g>' + $user-role + '</g>' + $svg-end;
+$icon__user-role-wp-fusion: $svg-start + '<g transform="translate(29,0)">' + $user-role + '</g><g>' + $wp-fusion + '</g>' + $svg-end;
 
 // Multiple Icons
 $icon__three-controls: $svg-start + $three-controls + $svg-end;
@@ -175,10 +175,10 @@ $icon__color: #000000;
             }
         }
 
-        &.block-visibility__has-date-time-acf {
+        &.block-visibility__has-acf-date-time {
             &:before {
-                mask: url( $icon__date-time-acf );
-                -webkit-mask: url( $icon__date-time-acf );
+                mask: url( $icon__acf-date-time );
+                -webkit-mask: url( $icon__acf-date-time );
                 width: 52px;
             }
         }
@@ -191,26 +191,26 @@ $icon__color: #000000;
             }
         }
 
-        &.block-visibility__has-user-role-screen-size {
+        &.block-visibility__has-screen-size-user-role {
             &:before {
-                mask: url( $icon__user-role-screen-size );
-                -webkit-mask: url( $icon__user-role-screen-size );
+                mask: url( $icon__screen-size-user-role );
+                -webkit-mask: url( $icon__screen-size-user-role );
                 width: 52px;
             }
         }
 
-        &.block-visibility__has-user-role-query-string {
+        &.block-visibility__has-query-string-user-role {
             &:before {
-                mask: url( $icon__user-role-query-string );
-                -webkit-mask: url( $icon__user-role-query-string );
+                mask: url( $icon__query-string-user-role );
+                -webkit-mask: url( $icon__query-string-user-role );
                 width: 52px;
             }
         }
 
-        &.block-visibility__has-user-role-acf {
+        &.block-visibility__has-acf-user-role {
             &:before {
-                mask: url( $icon__user-role-acf );
-                -webkit-mask: url( $icon__user-role-acf );
+                mask: url( $icon__acf-user-role );
+                -webkit-mask: url( $icon__acf-user-role );
                 width: 52px;
             }
         }
@@ -223,18 +223,18 @@ $icon__color: #000000;
             }
         }
 
-        &.block-visibility__has-screen-size-query-string {
+        &.block-visibility__has-query-string-screen-size {
             &:before {
-                mask: url( $icon__screen-size-query-string );
-                -webkit-mask: url( $icon__screen-size-query-string );
+                mask: url( $icon__query-string-screen-size );
+                -webkit-mask: url( $icon__query-string-screen-size );
                 width: 52px;
             }
         }
 
-        &.block-visibility__has-screen-size-acf {
+        &.block-visibility__has-acf-screen-size {
             &:before {
-                mask: url( $icon__screen-size-acf );
-                -webkit-mask: url( $icon__screen-size-acf );
+                mask: url( $icon__acf-screen-size );
+                -webkit-mask: url( $icon__acf-screen-size );
                 width: 52px;
             }
         }
@@ -247,10 +247,10 @@ $icon__color: #000000;
             }
         }
 
-        &.block-visibility__has-query-string-acf {
+        &.block-visibility__has-acf-query-string {
             &:before {
-                mask: url( $icon__query-string-acf );
-                -webkit-mask: url( $icon__query-string-acf );
+                mask: url( $icon__acf-query-string );
+                -webkit-mask: url( $icon__acf-query-string );
                 width: 52px;
             }
         }
@@ -412,8 +412,8 @@ $icon__color: #000000;
             background-size: 52px 24px;
         }
 
-        &.block-visibility__has-date-time-acf {
-            background-image: url( $icon__date-time-acf );
+        &.block-visibility__has-acf-date-time {
+            background-image: url( $icon__acf-date-time );
             background-size: 52px 24px;
         }
 
@@ -422,18 +422,18 @@ $icon__color: #000000;
             background-size: 52px 24px;
         }
 
-        &.block-visibility__has-user-role-screen-size {
-            background-image: url( $icon__user-role-screen-size );
+        &.block-visibility__has-screen-size-user-role {
+            background-image: url( $icon__screen-size-user-role );
             background-size: 52px 24px;
         }
 
         &.block-visibility__has-user-role-squery-string {
-            background-image: url( $icon__user-role-query-string );
+            background-image: url( $icon__query-string-user-role );
             background-size: 52px 24px;
         }
 
-        &.block-visibility__has-user-role-acf {
-            background-image: url( $icon__user-role-acf );
+        &.block-visibility__has-acf-user-role {
+            background-image: url( $icon__acf-user-role );
             background-size: 52px 24px;
         }
 
@@ -442,13 +442,13 @@ $icon__color: #000000;
             background-size: 52px 24px;
         }
 
-        &.block-visibility__has-screen-size-query-string {
-            background-image: url( $icon__screen-size-query-string );
+        &.block-visibility__has-query-string-screen-size {
+            background-image: url( $icon__query-string-screen-size );
             background-size: 52px 24px;
         }
 
-        &.block-visibility__has-screen-size-acf {
-            background-image: url( $icon__screen-size-acf );
+        &.block-visibility__has-acf-screen-size {
+            background-image: url( $icon__acf-screen-size );
             background-size: 52px 24px;
         }
 
@@ -457,13 +457,13 @@ $icon__color: #000000;
             background-size: 52px 24px;
         }
 
-        &.block-visibility__has-query-string-acf {
-            background-image: url( $icon__query-string-acf );
+        &.block-visibility__has-acf-query-string {
+            background-image: url( $icon__acf-query-string );
             background-size: 52px 24px;
         }
 
         &.block-visibility__has-acf-wp-fusion {
-            background-image: url( $icon__query-string-acf );
+            background-image: url( $icon__acf-wp-fusion );
             background-size: 52px 24px;
         }
 

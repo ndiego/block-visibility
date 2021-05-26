@@ -56,6 +56,11 @@ export function getControls() {
 
 	coreControls = applyFilters( 'blockVisibility.coreControls', coreControls );
 
+	// Sort controls in ASC order.
+	coreControls.sort( ( a, b ) =>
+		a.attributeSlug.localeCompare( b.attributeSlug )
+	);
+
 	let integrationControls = [
 		{
 			label: __( 'Advanced Custom Fields', 'block-visibility' ),
@@ -76,6 +81,11 @@ export function getControls() {
 	integrationControls = applyFilters(
 		'blockVisibility.integrationControls',
 		integrationControls
+	);
+
+	// Sort controls in ASC order.
+	integrationControls.sort( ( a, b ) =>
+		a.attributeSlug.localeCompare( b.attributeSlug )
 	);
 
 	let controls = [ ...coreControls, ...integrationControls ];
