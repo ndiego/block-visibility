@@ -1,59 +1,79 @@
 <?php
 /**
- * Enqueue frontend styles.
+ * Adds a filter to the visibility test for the Query String control.
  *
  * @package block-visibility
- * @since   1.5.0
+ * @since   1.7.0
  */
 
-namespace BlockVisibility\Frontend;
+namespace BlockVisibility\Frontend\VisibilityTests;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Internal dependencies
  */
-use function BlockVisibility\Utils\get_asset_file as get_asset_file;
 use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
 use function BlockVisibility\Utils\get_setting as get_setting;
 
 /**
- * Enqueue plugin specific frontend styles
+ * Run test to see if block visibility should be restricted by screen size.
  *
- * @since 1.5.0
+ * @since 1.9.0
+ *
+ * @param boolean $is_visible The current value of the visibility test.
+ * @param array   $settings   The core plugin settings.
+ * @param array   $attributes The block visibility attributes.
+ * @return boolean            Return true if the block should be visible, false if not
  */
-function enqueue_frontend_styles() {
+function screen_size_test( $is_visible, $settings, $attributes ) {
 
-	// Get the plugin core settings.
-	$settings = get_option( 'block_visibility_settings' );
+	// The test is already false, so skip this test, the block should be hidden.
+	if ( ! $is_visible ) {
+		return $is_visible;
+	}
 
-	// Bail early if screen size controls are disabled, or the user has chosen
-	// not to enable frontend CSS.
+	// If this control has been disabled, skip test.
+	if ( ! is_control_enabled( $settings, 'screen_size' ) ) {
+		return true;
+	}
+
+	$has_control_sets = isset( $attributes['controlSets'] );
+
+	if ( $has_control_sets ) {
+		// Just retrieve the first set, need to update in future.
+		$control_atts =
+			isset( $attributes['controlSets'][0]['controls']['screenSize'] )
+				? $attributes['controlSets'][0]['controls']['screenSize']
+				: null;
+
+	} else {
+		// There are no screen size settings, so skip tests.
+		return true;
+	}
+
+	// If we have screen size settings, register the required CSS. Also make
+	// sure the styles have not already been enqueued.
 	if (
-		! is_control_enabled( $settings, 'screen_size' ) ||
-		! is_control_enabled( $settings, 'screen_size', 'enable_frontend_css' )
+		! empty( $control_atts ) &&
+		is_control_enabled( $settings, 'screen_size', 'enable_frontend_css' ) &&
+		! wp_script_is( 'block-visibility-frontend-styles' )
 	) {
-		return;
+		// Register a "dummy" frontend styles file. This is needed for wp_add_inline_style.
+		wp_register_style( 'block-visibility-frontend-styles', false );
+		wp_enqueue_style( 'block-visibility-frontend-styles' );
+
+		$styles = get_screen_size_styles( $settings );
+
+		if ( $styles ) {
+			wp_add_inline_style( 'block-visibility-frontend-styles', $styles );
+		}
 	}
 
-	// Styles.
-	$asset_file = get_asset_file( 'dist/block-visibility-frontend-styles' );
-
-	// Currently this is a "dummy" file, but is needed for wp_add_inline_style.
-	wp_enqueue_style(
-		'block-visibility-frontend-styles',
-		BLOCK_VISIBILITY_PLUGIN_URL . 'dist/block-visibility-frontend-styles.css',
-		array(),
-		$asset_file['version']
-	);
-
-	$styles = get_screen_size_styles( $settings );
-
-	if ( $styles ) {
-		wp_add_inline_style( 'block-visibility-frontend-styles', $styles );
-	}
+	// Always return true because the screen size controls are handled with CSS.
+	return true;
 }
-add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_frontend_styles' );
+add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\screen_size_test', 10, 3 );
 
 /**
  * Get the screen size styles.
@@ -241,7 +261,3 @@ function set_max_width( $width ) {
 	$max_width = trim( $width, 'px' ) - 0.02;
 	return (string) $max_width . 'px';
 }
-
-// Require utlity functions for tests.
-require_once BLOCK_VISIBILITY_ABSPATH . 'includes/utils/is-control-enabled.php';
-require_once BLOCK_VISIBILITY_ABSPATH . 'includes/utils/get-setting.php';

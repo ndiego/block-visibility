@@ -169,11 +169,12 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 * The "Remove" schedule button is now an trashcan icon in the Schedule toolbar.
 * Plugin settings tabs are now navigable based on URL query parameter.
 * Controls are now alphabetically ordered in the control selectors.
+* Screen size control CSS is now conditionally loaded only when there are actually blocks using these settings.
 * Minor UI enhancements throughout.
 
 **Removed**
 
-* TBD
+* Removed the dummy frontend.css file which was used for the screen size control and required an extra file to be loaded. An alternative implementation is now used.
 
 **Fixed**
 

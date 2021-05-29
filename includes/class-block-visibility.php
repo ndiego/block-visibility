@@ -115,7 +115,6 @@ final class Block_Visibility {
 		// Only include on the frontend.
 		if ( ! is_admin() ) {
 			include_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/render-block.php';
-			include_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/styles.php';
 		}
 	}
 

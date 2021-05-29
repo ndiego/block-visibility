@@ -98,13 +98,15 @@ add_filter( 'render_block', __NAMESPACE__ . '\render_with_visibility', 10, 2 );
 
 // Run our core tests.
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/hide-block.php';
-require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/user-role.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/date-time.php';
+require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/screen-size.php';
+require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/user-role.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/query-string.php';
 
-// Run our integraiton tests.
+// Run our integration tests.
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/acf.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/wp-fusion.php';
 
 // Require utlity functions for tests.
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/utils/is-control-enabled.php';
+require_once BLOCK_VISIBILITY_ABSPATH . 'includes/utils/get-setting.php';
