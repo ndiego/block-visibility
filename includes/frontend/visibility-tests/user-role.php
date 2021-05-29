@@ -41,21 +41,21 @@ function user_role_test( $is_visible, $settings, $attributes ) {
 
 	if ( $has_control_sets ) {
 		// Just retrieve the first set and schedule, need to update in future.
-		$user_role_atts =
+		$control_atts =
 			isset( $attributes['controlSets'][0]['controls']['userRole'] )
 				? $attributes['controlSets'][0]['controls']['userRole']
 				: null;
 	} else {
-		$user_role_atts = $attributes;
+		$control_atts = $attributes;
 	}
 
 	// There are no user role settings, skip tests.
-	if ( ! $user_role_atts ) {
+	if ( ! $control_atts ) {
 		return true;
 	}
 
-	$visibility_by_role = isset( $user_role_atts['visibilityByRole'] )
-		? $user_role_atts['visibilityByRole']
+	$visibility_by_role = isset( $control_atts['visibilityByRole'] )
+		? $control_atts['visibilityByRole']
 		: null;
 
 	// Run through our visibility by role tests.
@@ -76,13 +76,13 @@ function user_role_test( $is_visible, $settings, $attributes ) {
 			return true;
 		}
 
-		$restricted_roles = isset( $user_role_atts['restrictedRoles'] )
-			? $user_role_atts['restrictedRoles']
+		$restricted_roles = isset( $control_atts['restrictedRoles'] )
+			? $control_atts['restrictedRoles']
 			: array();
 
 		$hide_on_resticted_roles =
-			isset( $user_role_atts['hideOnRestrictedRoles'] )
-				? $user_role_atts['hideOnRestrictedRoles']
+			isset( $control_atts['hideOnRestrictedRoles'] )
+				? $control_atts['hideOnRestrictedRoles']
 				: false;
 
 		// Make sure there are restricted roles set, if not the block should be

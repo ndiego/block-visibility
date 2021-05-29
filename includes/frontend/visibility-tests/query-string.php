@@ -16,30 +16,6 @@ defined( 'ABSPATH' ) || exit;
 use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
 
 /**
- * Turn a query string into an array.
- *
- * @since 1.7.0
- *
- * @param string $queries         A string of queries.
- * @return array $ordered_queries An array of queries.
- */
-function prepare_queries( $queries ) {
-	if ( empty( $queries ) ) {
-		return null;
-	}
-
-	$query_array = explode( "\n", $queries );
-
-	$ordered_queries = array();
-
-	foreach ( $query_array as $query ) {
-		parse_str( $query, $result );
-		$ordered_queries = array_merge( $ordered_queries, $result );
-	}
-	return $ordered_queries;
-}
-
-/**
  * Run test to see if block visibility should be restricted by query string.
  *
  * @since 1.7.0
@@ -65,7 +41,7 @@ function query_string_test( $is_visible, $settings, $attributes ) {
 
 	if ( $has_control_sets ) {
 		// Just retrieve the first set, need to update in future.
-		$query_string_atts =
+		$control_atts =
 			isset( $attributes['controlSets'][0]['controls']['queryString'] )
 				? $attributes['controlSets'][0]['controls']['queryString']
 				: null;
@@ -74,14 +50,14 @@ function query_string_test( $is_visible, $settings, $attributes ) {
 		return true;
 	}
 
-	$query_string_any = isset( $query_string_atts['queryStringAny'] )
-		? prepare_queries( $query_string_atts['queryStringAny'] )
+	$query_string_any = isset( $control_atts['queryStringAny'] )
+		? prepare_queries( $control_atts['queryStringAny'] )
 		: null;
-	$query_string_all = isset( $query_string_atts['queryStringAll'] )
-		? prepare_queries( $query_string_atts['queryStringAll'] )
+	$query_string_all = isset( $control_atts['queryStringAll'] )
+		? prepare_queries( $control_atts['queryStringAll'] )
 		: null;
-	$query_string_not = isset( $query_string_atts['queryStringNot'] )
-		? prepare_queries( $query_string_atts['queryStringNot'] )
+	$query_string_not = isset( $control_atts['queryStringNot'] )
+		? prepare_queries( $control_atts['queryStringNot'] )
 		: null;
 
 	// If there is "any" query strings, need to find at least one match to pass.
@@ -138,3 +114,27 @@ function query_string_test( $is_visible, $settings, $attributes ) {
 	return true;
 }
 add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\query_string_test', 10, 3 );
+
+/**
+ * Turn a query string into an array.
+ *
+ * @since 1.7.0
+ *
+ * @param string $queries         A string of queries.
+ * @return array $ordered_queries An array of queries.
+ */
+function prepare_queries( $queries ) {
+	if ( empty( $queries ) ) {
+		return null;
+	}
+
+	$query_array = explode( "\n", $queries );
+
+	$ordered_queries = array();
+
+	foreach ( $query_array as $query ) {
+		parse_str( $query, $result );
+		$ordered_queries = array_merge( $ordered_queries, $result );
+	}
+	return $ordered_queries;
+}
