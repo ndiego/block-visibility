@@ -11,7 +11,6 @@ module.exports = {
         'block-visibility-settings' : path.resolve( process.cwd(), 'src/settings.js' ),
         'block-visibility-editor-styles': path.resolve( process.cwd(), 'src/styles/editor.scss' ),
         'block-visibility-setting-styles' : path.resolve( process.cwd(), 'src/styles/settings.scss' ),
-        'block-visibility-frontend-styles' : path.resolve( process.cwd(), 'src/styles/frontend.scss' ),
     },
 
     output: {

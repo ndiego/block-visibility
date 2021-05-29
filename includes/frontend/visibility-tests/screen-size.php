@@ -57,16 +57,17 @@ function screen_size_test( $is_visible, $settings, $attributes ) {
 	if (
 		! empty( $control_atts ) &&
 		is_control_enabled( $settings, 'screen_size', 'enable_frontend_css' ) &&
-		! wp_script_is( 'block-visibility-frontend-styles' )
+		! wp_script_is( 'block-visibility-screen-size-styles' )
 	) {
-		// Register a "dummy" frontend styles file. This is needed for wp_add_inline_style.
-		wp_register_style( 'block-visibility-frontend-styles', false );
-		wp_enqueue_style( 'block-visibility-frontend-styles' );
+
+		// Register an alias screen-size styles file. This is needed for wp_add_inline_style.
+		wp_register_style( 'block-visibility-screen-size-styles', false, array(), '1.0.0' );
+		wp_enqueue_style( 'block-visibility-screen-size-styles' );
 
 		$styles = get_screen_size_styles( $settings );
 
 		if ( $styles ) {
-			wp_add_inline_style( 'block-visibility-frontend-styles', $styles );
+			wp_add_inline_style( 'block-visibility-screen-size-styles', $styles );
 		}
 	}
 
