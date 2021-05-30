@@ -170,6 +170,7 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 * Plugin settings tabs are now navigable based on URL query parameter.
 * Controls are now alphabetically ordered in the control selectors.
 * Screen size control CSS is now conditionally loaded only when there are actually blocks using these settings.
+* Contextual indicators are now powered by a custom icon font to improve performance and decrease file size.
 * Minor UI enhancements throughout.
 
 **Removed**

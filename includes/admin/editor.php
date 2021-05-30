@@ -54,6 +54,19 @@ function enqueue_editor_assets() {
 		array(),
 		$asset_file['version']
 	);
+
+	// Load the contextual indicator styles if enabled.
+	if ( contextual_indicators_enabled() ) {
+
+		$asset_file = get_asset_file( 'dist/block-visibility-contextual-indicator-styles' );
+
+		wp_enqueue_style(
+			'block-visibility-contextual-indicator-styles',
+			BLOCK_VISIBILITY_PLUGIN_URL . 'dist/block-visibility-contextual-indicator-styles.css',
+			array(),
+			$asset_file['version']
+		);
+	}
 }
 
 /**
@@ -108,4 +121,24 @@ function is_full_control_mode() {
 	}
 
 	return wp_json_encode( $enabled );
+}
+
+/**
+ * See if contextual indicators are enabled.
+ *
+ * @since 1.9.0
+ *
+ * @return bool Returns true or false.
+ */
+function contextual_indicators_enabled() {
+	$settings = get_option( 'block_visibility_settings' );
+	$enabled  = false;
+
+	if ( isset( $settings['plugin_settings']['enable_contextual_indicators'] ) ) {
+		if ( $settings['plugin_settings']['enable_contextual_indicators'] ) {
+			$enabled = true;
+		}
+	}
+
+	return $enabled;
 }

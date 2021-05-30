@@ -76,11 +76,6 @@ function withContextualIndicators( BlockListBlock ) {
 			}
 		}
 
-		// Some blocks have rendering issues when we set the icons to the
-		// :before pseudo class. For those blocks, use a background image
-		// instead.
-		const backgroundBlocks = [ 'core/pullquote' ];
-
 		let activeCoreControls = {
 			'date-time': hasDateTime(
 				controls,
@@ -114,8 +109,6 @@ function withContextualIndicators( BlockListBlock ) {
 			variables
 		);
 
-		//activeCoreControls.sort();
-
 		let activeIntegrationControls = {
 			acf: hasACF( controls, hasControlSets, enabledControls, variables ),
 			'wp-fusion': hasWPFusion(
@@ -134,8 +127,6 @@ function withContextualIndicators( BlockListBlock ) {
 			enabledControls,
 			variables
 		);
-
-		//activeIntegrationControls.sort();
 
 		let activeControls = {
 			...activeCoreControls,
@@ -162,9 +153,6 @@ function withContextualIndicators( BlockListBlock ) {
 		let classes = classnames(
 			{
 				'block-visibility__is-hidden': isHidden,
-				'block-visibility__set-icon-background': backgroundBlocks.includes(
-					name
-				),
 			},
 			controlsClass
 		);
