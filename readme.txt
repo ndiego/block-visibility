@@ -179,6 +179,7 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 **Fixed**
 
+* Fixed error were editing the visibility of a duplicated block would also edit the original block. Thanks @mmcginnis for discovering this issue and opening a support ticket!
 * Fixed unnecessary re-renders and loss of focus for slotted components by relocating withFilter HOCs outside of all render functions.
 * Fixed error in the Date & Time frontend test.
 * Fixed labels on the Query String control that were previously not translatable.
