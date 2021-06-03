@@ -15,7 +15,6 @@ import { Icon, info } from '@wordpress/icons';
  * Internal dependencies
  */
 import icons from './../../../utils/icons';
-import ControlSeparator from './../utils/control-separator';
 import RuleSets from './../utils/rule-sets';
 import { getGroupedFields, getAllFields } from './fields';
 import TipsACF from './notices-tips';
@@ -85,12 +84,18 @@ export default function ACF( props ) {
 	}
 
 	const addRuleSet = () => {
-		ruleSets.push( {
-			enable: true,
-			rules: [ { field: '' } ],
-		} );
+		const newRuleSets = [
+			...ruleSets,
+			{
+				enable: true,
+				rules: [ { field: '' } ],
+			},
+		];
 
-		setControlAtts( 'acf', assign( { ...acf }, { ruleSets } ) );
+		setControlAtts(
+			'acf',
+			assign( { ...acf }, { ruleSets: [ ...newRuleSets ] } )
+		);
 	};
 
 	const groupedFields = getGroupedFields( variables );
@@ -183,7 +188,9 @@ export default function ACF( props ) {
 					/>
 				</div>
 			</div>
-			<ControlSeparator control="acf" { ...props } />
+			<div className="control-separator">
+				<span>{ __( 'AND', 'block-visibility' ) }</span>
+			</div>
 			{ tipsModalOpen && (
 				<Modal
 					className="block-visibility__tips-modal"

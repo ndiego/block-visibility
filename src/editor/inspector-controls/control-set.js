@@ -35,6 +35,7 @@ const AdditionalControlSetControls = withFilters(
  */
 export default function ControlSet( props ) {
 	const {
+		attributes,
 		setAttributes,
 		variables,
 		enabledControls,
@@ -42,6 +43,7 @@ export default function ControlSet( props ) {
 		controlSetAtts,
 	} = props;
 	const settingsUrl = variables?.plugin_variables?.settings_url ?? '';
+	const { blockVisibility } = attributes;
 
 	const noControls =
 		enabledControls.length === 1 &&
@@ -82,14 +84,31 @@ export default function ControlSet( props ) {
 	} );
 
 	function setControlAtts( control, values ) {
-		controlSetAtts.controls[ control ] = values;
+		const controls = controlSetAtts?.controls ?? {};
+		const newControlSetAtts = assign(
+			{ ...controlSetAtts },
+			{
+				controls: assign(
+					{ ...controls },
+					{ [ control ]: values }
+				),
+			}
+		);
 
-		blockAtts.controlSets[ controlSetAtts.id ] = controlSetAtts;
+		/*
+		const newBlockAtts = { ...blockAtts };
+
+		const _newControlSets = blockVisibility?.controlSets ?? [];
+
+		// Need to update in future when mutliple control sets are enabled.
+		newBlockAtts.controlSets[ 0 ] = newControlSetAtts;
+		const newControlSets = [ ...newBlockAtts.controlSets ];
+		*/
 
 		setAttributes( {
 			blockVisibility: assign(
-				{ ...blockAtts },
-				{ controlSets: blockAtts.controlSets }
+				{ ...blockVisibility },
+				{ controlSets: [ ...[ newControlSetAtts ] ] }
 			),
 		} );
 	}

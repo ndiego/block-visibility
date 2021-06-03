@@ -46,13 +46,18 @@ export default function Rule( props ) {
 	const fieldHasHelp = selectedField?.help ?? false;
 
 	const removeRule = () => {
-		ruleSets[ ruleSetIndex ].rules = ruleSet.rules.filter(
+		const newRuleSets = [ ...ruleSets ];
+
+		const newRules = ruleSet.rules.filter(
 			( value, index ) => index !== ruleIndex
 		);
 
+		newRuleSets[ ruleSetIndex ] =
+			assign( { ...ruleSet }, { rules: [ ...newRules ] } );
+
 		setControlAtts(
 			controlName,
-			assign( { ...controlAtts }, { ruleSets } )
+			assign( { ...controlAtts }, { ruleSets: [ ...newRuleSets ] } )
 		);
 	};
 
@@ -61,7 +66,7 @@ export default function Rule( props ) {
 
 		if ( type === 'select' || type === 'selectGroup' ) {
 			newValue = value.value;
-		} else if ( type === 'multiSelect' ) {
+		} else if ( type === 'multiSelect' || type === 'multiSelectGroup' ) {
 			newValue = [];
 
 			if ( value.length !== 0 ) {
@@ -73,23 +78,31 @@ export default function Rule( props ) {
 			newValue = value;
 		}
 
+		const newRuleSets = [ ...ruleSets ];
+		const newRules = [ ...ruleSet.rules ];
+
 		if ( ruleParam === 'field' ) {
-			ruleSet.rules[ ruleIndex ] = { field: newValue };
-		} else if ( ruleParam === 'subField' && type === 'select' ) {
+			newRules[ ruleIndex ] = { field: newValue };
+		} else {
+			newRules[ ruleIndex ] = assign( { ...newRules[ ruleIndex ] }, { [ ruleParam ]: newValue } );
+
 			// If a select field is changed, reset the corresponding operator
 			// and value. Not needed for multi-select
-			ruleSet.rules[ ruleIndex ][ ruleParam ] = newValue;
-			delete ruleSet.rules[ ruleIndex ].operator;
-			delete ruleSet.rules[ ruleIndex ].value;
-		} else {
-			ruleSet.rules[ ruleIndex ][ ruleParam ] = newValue;
+			if (
+				( ruleParam === 'subField' && type === 'select' ) ||
+				( ruleParam === 'subField' && type === 'selectGroup' )
+			) {
+				delete newRules[ ruleIndex ].operator;
+				delete newRules[ ruleIndex ].value;
+			}
 		}
 
-		ruleSets[ ruleSetIndex ] = ruleSet;
+		newRuleSets[ ruleSetIndex ] =
+			assign( { ...ruleSet }, { rules: newRules } );
 
 		setControlAtts(
 			controlName,
-			assign( { ...controlAtts }, { ruleSets } )
+			assign( { ...controlAtts }, { ruleSets: [ ...newRuleSets ] } )
 		);
 	};
 

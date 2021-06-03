@@ -13,7 +13,6 @@ import { Button, Slot, ToggleControl } from '@wordpress/components';
  * Internal dependencies
  */
 import Schedule from './schedule';
-import ControlSeparator from './../utils/control-separator';
 
 /**
  * Add the date/time vsibility controls
@@ -50,13 +49,17 @@ export default function DateTime( props ) {
 	}
 
 	const addSchedule = () => {
-		schedules.push( {
+		const newSchedules = [ ...schedules ];
+		newSchedules.push( {
 			enable: true,
 			start: '',
 			end: '',
 		} );
 
-		setControlAtts( 'dateTime', assign( { ...dateTime }, { schedules } ) );
+		setControlAtts(
+			'dateTime',
+			assign( { ...dateTime }, { schedules: [ ...newSchedules ] } )
+		);
 	};
 
 	return (
@@ -121,7 +124,9 @@ export default function DateTime( props ) {
 				</div>
 				<Slot name="DateTimeControls" />
 			</div>
-			<ControlSeparator control="dateTime" { ...props } />
+			<div className="control-separator">
+				<span>{ __( 'AND', 'block-visibility' ) }</span>
+			</div>
 		</>
 	);
 }

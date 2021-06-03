@@ -13,7 +13,6 @@ import { Disabled, ToggleControl } from '@wordpress/components';
  * Internal dependencies
  */
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
-import ControlSeparator from './../utils/control-separator';
 import NoticeBlockNotCompatible from './notices-tips';
 
 /**
@@ -157,7 +156,9 @@ export default function ScreenSize( props ) {
 				{ allScreenSizeFields }
 				{ name === 'core/shortcode' && <NoticeBlockNotCompatible /> }
 			</div>
-			<ControlSeparator control="screenSize" { ...props } />
+            <div className="control-separator">
+                <span>{ __( 'AND', 'block-visibility' ) }</span>
+            </div>
 		</>
 	);
 }

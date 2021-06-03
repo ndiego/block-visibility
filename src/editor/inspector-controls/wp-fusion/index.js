@@ -16,7 +16,6 @@ import { createInterpolateElement, useState } from '@wordpress/element';
  * Internal dependencies
  */
 import icons from './../../../utils/icons';
-import ControlSeparator from './../utils/control-separator';
 import TipsWPFusion from './notices-tips';
 
 /**
@@ -75,8 +74,18 @@ export default function WPFusion( props ) {
 
 		setControlAtts(
 			'wpFusion',
+			//assign( { ...wpFusion }, { [ attribute ]: newTags } )
 			assign( { ...wpFusion }, { [ attribute ]: newTags } )
 		);
+
+		/*
+		const newPropertes = { [ attribute ]: newTags };
+
+		setControlAtts(
+			'wpFusion',
+			{ ...wpFusion, ...newPropertes }
+		);
+		*/
 	};
 
 	let anyAllFields = (
@@ -189,7 +198,9 @@ export default function WPFusion( props ) {
 					</Notice>
 				) }
 			</div>
-			<ControlSeparator control="wpFusion" { ...props } />
+			<div className="control-separator">
+				<span>{ __( 'AND', 'block-visibility' ) }</span>
+			</div>
 			{ tipsModalOpen && (
 				<Modal
 					className="block-visibility__tips-modal"

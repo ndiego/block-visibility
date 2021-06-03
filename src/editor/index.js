@@ -463,12 +463,18 @@ addFilter(
  * @param {Object} BlockEdit
  */
 function addInspectorControls( BlockEdit ) {
-	return ( props ) => (
-		<>
-			<BlockEdit { ...props } />
-			<VisibilityInspectorControls { ...props } />
-		</>
-	);
+	return ( props ) => {
+		if ( props.isSelected ) {
+			return (
+				<>
+					<BlockEdit { ...props } />
+					<VisibilityInspectorControls { ...props } />
+				</>
+			)
+		}
+
+		return <BlockEdit { ...props } />;
+	};
 }
 
 addFilter(

@@ -14,7 +14,6 @@ import { info } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
-import ControlSeparator from './../utils/control-separator';
 import TipsQueryString from './notices-tips';
 
 /**
@@ -114,7 +113,9 @@ export default function QueryString( props ) {
 					rows="2"
 				/>
 			</div>
-			<ControlSeparator control="queryString" { ...props } />
+			<div className="control-separator">
+				<span>{ __( 'AND', 'block-visibility' ) }</span>
+			</div>
 			{ tipsModalOpen && (
 				<Modal
 					className="block-visibility__tips-modal"

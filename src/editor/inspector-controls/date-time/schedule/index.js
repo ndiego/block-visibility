@@ -115,15 +115,21 @@ export default function Schedule( props ) {
 
 		setControlAtts(
 			'dateTime',
-			assign( { ...dateTime }, { schedules: newSchedules } )
+			assign( { ...dateTime }, { schedules: [ ...newSchedules ] } )
 		);
 	};
 
 	const setAttribute = ( attribute, value ) => {
-		scheduleAtts[ attribute ] = value;
-		schedules[ scheduleIndex ] = scheduleAtts;
+		const newScheduleAtts = { ...scheduleAtts };
+		const newSchedules = [ ...schedules ];
 
-		setControlAtts( 'dateTime', assign( { ...dateTime }, { schedules } ) );
+		newScheduleAtts[ attribute ] = value;
+		newSchedules[ scheduleIndex ] = newScheduleAtts;
+
+		setControlAtts(
+			'dateTime',
+			assign( { ...dateTime }, { schedules: [ ...newSchedules ] } )
+		);
 	};
 
 	let dateTimeControls = (

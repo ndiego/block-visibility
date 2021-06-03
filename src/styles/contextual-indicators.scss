@@ -112,12 +112,17 @@ $icon__ten-controls: "\e906";
     &.has-child-selected {
         outline: none;
         opacity: 1;
+
+        &.has-background-dim {
+            opacity: inherit;
+        }
     }
 
     &:before {
         font-family: 'block-visibility';
         font-size: 24px;
         letter-spacing: 4px;
+        line-height: 1;
         height: 24px;
         width: 28px;
         position: absolute;
@@ -128,383 +133,383 @@ $icon__ten-controls: "\e906";
 
     &.block-visibility__has-date-time {
         &:before {
-            content: $icon__date-time;
+            content: $icon__date-time !important;
         }
     }
 
     &.block-visibility__has-user-role {
         &:before {
-            content: $icon__user-role;
+            content: $icon__user-role !important;
         }
     }
 
     &.block-visibility__has-screen-size {
         &:before {
-            content: $icon__screen-size;
+            content: $icon__screen-size !important;
         }
     }
 
     &.block-visibility__has-query-string {
         &:before {
-            content: $icon__query-string;
+            content: $icon__query-string !important;
         }
     }
 
     &.block-visibility__has-wp-fusion {
         &:before {
-            content: $icon__wp-fusion;
+            content: $icon__wp-fusion !important;
         }
     }
 
     &.block-visibility__has-acf {
         &:before {
-            content: $icon__acf;
+            content: $icon__acf !important;
         }
     }
 
     &.block-visibility__has-location {
         &:before {
-            content: $icon__location;
+            content: $icon__location !important;
         }
     }
 
     &.block-visibility__has-referral-source {
         &:before {
-            content: $icon__referral-source;
+            content: $icon__referral-source !important;
         }
     }
 
     &.block-visibility__has-edd {
         &:before {
-            content: $icon__edd;
+            content: $icon__edd !important
         }
     }
 
     &.block-visibility__has-woocommerce {
         &:before {
-            content: $icon__woocommerce;
+            content: $icon__woocommerce !important;
         }
     }
 
     // When 2 controls are enabled.
     &.block-visibility__has-date-time-screen-size {
         &:before {
-            content: $icon__date-time-screen-size;
+            content: $icon__date-time-screen-size !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-date-time-user-role {
         &:before {
-            content: $icon__date-time-user-role;
+            content: $icon__date-time-user-role !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-date-time-query-string {
         &:before {
-            content: $icon__date-time-query-string;
+            content: $icon__date-time-query-string !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-acf-date-time {
         &:before {
-            content: $icon__acf-date-time;
+            content: $icon__acf-date-time !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-date-time-wp-fusion {
         &:before {
-            content: $icon__date-time-wp-fusion;
+            content: $icon__date-time-wp-fusion !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-screen-size-user-role {
         &:before {
-            content: $icon__screen-size-user-role;
+            content: $icon__screen-size-user-role !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-query-string-user-role {
         &:before {
-            content: $icon__query-string-user-role;
+            content: $icon__query-string-user-role !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-acf-user-role {
         &:before {
-            content: $icon__acf-user-role;
+            content: $icon__acf-user-role !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-user-role-wp-fusion {
         &:before {
-            content: $icon__user-role-wp-fusion;
+            content: $icon__user-role-wp-fusion !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-query-string-screen-size {
         &:before {
-            content: $icon__query-string-screen-size;
+            content: $icon__query-string-screen-size !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-acf-screen-size {
         &:before {
-            content: $icon__acf-screen-size;
+            content: $icon__acf-screen-size !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-screen-size-wp-fusion {
         &:before {
-            content: $icon__screen-size-wp-fusion;
+            content: $icon__screen-size-wp-fusion !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-acf-query-string {
         &:before {
-            content: $icon__acf-query-string;
+            content: $icon__acf-query-string !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-query-string-wp-fusion {
         &:before {
-            content: $icon__query-string-wp-fusion;
+            content: $icon__query-string-wp-fusion !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-acf-wp-fusion {
         &:before {
-            content: $icon__acf-wp-fusion;
+            content: $icon__acf-wp-fusion !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-date-time-location {
         &:before {
-            content: $icon__date-time-location;
+            content: $icon__date-time-location !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-location-user-role {
         &:before {
-            content: $icon__location-user-role;
+            content: $icon__location-user-role !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-location-screen-size {
         &:before {
-            content: $icon__location-screen-size;
+            content: $icon__location-screen-size !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-location-query-string {
         &:before {
-            content: $icon__location-query-string;
+            content: $icon__location-query-string !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-location-referral-source {
         &:before {
-            content: $icon__location-referral-source;
+            content: $icon__location-referral-source !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-edd-location {
         &:before {
-            content: $icon__edd-location;
+            content: $icon__edd-location !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-location-woocommerce {
         &:before {
-            content: $icon__location-woocommerce;
+            content: $icon__location-woocommerce !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-location-wp-fusion {
         &:before {
-            content: $icon__location-wp-fusion;
+            content: $icon__location-wp-fusion !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-acf-location {
         &:before {
-            content: $icon__acf-location;
+            content: $icon__acf-location !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-date-time-referral-source {
         &:before {
-            content: $icon__date-time-referral-source;
+            content: $icon__date-time-referral-source !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-referral-source-user-role {
         &:before {
-            content: $icon__referral-source-user-role;
+            content: $icon__referral-source-user-role !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-referral-source-screen-size {
         &:before {
-            content: $icon__referral-source-screen-size;
+            content: $icon__referral-source-screen-size !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-query-string-referral-source {
         &:before {
-            content: $icon__query-string-referral-source;
+            content: $icon__query-string-referral-source !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-edd-referral-source {
         &:before {
-            content: $icon__edd-referral-source;
+            content: $icon__edd-referral-source !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-referral-source-woocommerce {
         &:before {
-            content: $icon__referral-source-woocommerce;
+            content: $icon__referral-source-woocommerce !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-referral-source-wp-fusion {
         &:before {
-            content: $icon__referral-source-wp-fusion;
+            content: $icon__referral-source-wp-fusion !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-acf-referral-source {
         &:before {
-            content: $icon__acf-referral-source;
+            content: $icon__acf-referral-source !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-date-time-edd {
         &:before {
-            content: $icon__date-time-edd;
+            content: $icon__date-time-edd !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-edd-user-role {
         &:before {
-            content: $icon__edd-user-role;
+            content: $icon__edd-user-role !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-edd-screen-size {
         &:before {
-            content: $icon__edd-screen-size;
+            content: $icon__edd-screen-size !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-edd-query-string {
         &:before {
-            content: $icon__edd-query-string;
+            content: $icon__edd-query-string !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-edd-woocommerce {
         &:before {
-            content: $icon__edd-woocommerce;
+            content: $icon__edd-woocommerce !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-edd-wp-fusion {
         &:before {
-            content: $icon__edd-wp-fusion;
+            content: $icon__edd-wp-fusion !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-acf-edd {
         &:before {
-            content: $icon__acf-edd;
+            content: $icon__acf-edd !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-acf-woocommerce {
         &:before {
-            content: $icon__acf-woocommerce;
+            content: $icon__acf-woocommerce !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-date-time-woocommerce {
         &:before {
-            content: $icon__date-time-woocommerce;
+            content: $icon__date-time-woocommerce !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-user-role-woocommerce {
         &:before {
-            content: $icon__user-role-woocommerce;
+            content: $icon__user-role-woocommerce !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-screen-size-woocommerce {
         &:before {
-            content: $icon__screen-size-woocommerce;
+            content: $icon__screen-size-woocommerce !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-query-string-woocommerce {
         &:before {
-            content: $icon__query-string-woocommerce;
+            content: $icon__query-string-woocommerce !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-woocommerce-wp-fusion {
         &:before {
-            content: $icon__woocommerce-wp-fusion;
+            content: $icon__woocommerce-wp-fusion !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-acf-woocommerce {
         &:before {
-            content: $icon__acf-woocommerce;
+            content: $icon__acf-woocommerce !important;
             width: 56px;
         }
     }
@@ -512,56 +517,56 @@ $icon__ten-controls: "\e906";
     // When more than 3 controls are enabled
     &.block-visibility__has-3-controls {
         &:before {
-            content: $icon__three-controls;
+            content: $icon__three-controls !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-4-controls {
         &:before {
-            content: $icon__four-controls;
+            content: $icon__four-controls !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-5-controls {
         &:before {
-            content: $icon__five-controls;
+            content: $icon__five-controls !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-6-controls {
         &:before {
-            content: $icon__six-controls;
+            content: $icon__six-controls !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-7-controls {
         &:before {
-            content: $icon__seven-controls;
+            content: $icon__seven-controls !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-8-controls {
         &:before {
-            content: $icon__eight-controls;
+            content: $icon__eight-controls !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-9-controls {
         &:before {
-            content: $icon__nine-controls;
+            content: $icon__nine-controls !important;
             width: 56px;
         }
     }
 
     &.block-visibility__has-10-controls {
         &:before {
-            content: $icon__ten-controls;
+            content: $icon__ten-controls !important;
             width: 56px;
         }
     }
@@ -584,10 +589,9 @@ $icon__ten-controls: "\e906";
 
     // Cover Block (WordPress Core) when there is a solid color set.
     &.wp-block-cover.has-background-dim:not(.has-background-gradient):before {
-        left: initial;
-        bottom: initial;
-        right: 4px;
-        top: 4px;
-        opacity: 1;
+        text-align: right;
+        padding-top: 4px;
+        height: 100%;
+        width: 100%;
     }
 }

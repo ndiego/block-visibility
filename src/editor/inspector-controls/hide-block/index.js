@@ -21,7 +21,6 @@ export default function HideBlock( props ) {
 		attributes,
 		setAttributes,
 		blockAtts,
-		setBlockAtts,
 		enabledControls,
 	} = props;
 	const controlEnabled = enabledControls.some(
@@ -48,13 +47,6 @@ export default function HideBlock( props ) {
 								{ hideBlock: ! hideBlock }
 							),
 						} );
-						// We also need to update the attribute class.
-						setBlockAtts(
-							assign(
-								{ ...blockAtts },
-								{ hideBlock: ! hideBlock }
-							)
-						);
 					} }
 					help={ __(
 						'Hide selected block from everyone.',

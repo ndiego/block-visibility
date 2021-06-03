@@ -14,7 +14,6 @@ import { createInterpolateElement } from '@wordpress/element';
  * Internal dependencies
  */
 import UserRoles from './user-roles';
-import ControlSeparator from './../utils/control-separator';
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
 
 /**
@@ -147,7 +146,9 @@ export default function UserRole( props ) {
 					</Notice>
 				) }
 			</div>
-			<ControlSeparator control="userRole" { ...props } />
+			<div className="control-separator">
+				<span>{ __( 'AND', 'block-visibility' ) }</span>
+			</div>
 		</>
 	);
 }

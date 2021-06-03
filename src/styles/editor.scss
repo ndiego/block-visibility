@@ -49,7 +49,7 @@
             margin: auto;
         }
 
-        // Corrects for third-party integration if they are deactivated.
+        // Hide the last separator in the list.
         &:last-child {
             display: none;
         }

@@ -57,7 +57,7 @@ export default function RuleSets( props ) {
 
 		setControlAtts(
 			controlName,
-			assign( { ...controlAtts }, { ruleSets: newRuleSets } )
+			assign( { ...controlAtts }, { ruleSets: [ ...newRuleSets ] } )
 		);
 	};
 
@@ -76,22 +76,28 @@ export default function RuleSets( props ) {
 	);
 
 	const setAttribute = ( attribute, value ) => {
-		ruleSet[ attribute ] = value;
-		ruleSets[ ruleSetIndex ] = ruleSet;
+		const newRuleSet = { ...ruleSet };
+		const newRuleSets = [ ...ruleSets ];
+
+		newRuleSet[ attribute ] = value;
+		newRuleSets[ ruleSetIndex ] = newRuleSet;
 
 		setControlAtts(
 			controlName,
-			assign( { ...controlAtts }, { ruleSets } )
+			assign( { ...controlAtts }, { ruleSets: [ ...newRuleSets ] } )
 		);
 	};
 
 	const addRule = () => {
-		ruleSet.rules.push( { field: '' } );
-		ruleSets[ ruleSetIndex ] = ruleSet;
+		const newRuleSets = [ ...ruleSets ];
+		const newRules = [ ...ruleSet.rules, { field: '' } ];
+
+		newRuleSets[ ruleSetIndex ] =
+			assign( { ...ruleSet }, { rules: newRules } );
 
 		setControlAtts(
 			controlName,
-			assign( { ...controlAtts }, { ruleSets } )
+			assign( { ...controlAtts }, { ruleSets: [ ...newRuleSets ] } )
 		);
 	};
 

@@ -36,9 +36,9 @@ const AdditionalInspectorControls = withFilters(
  * @return {string}		 Return the rendered JSX
  */
 function VisibilityInspectorControls( props ) {
-	const { attributes, name, settings, variables } = props;
-	const blockVisibility = attributes?.blockVisibility;
-	const [ blockAtts, setBlockAtts ] = useState( blockVisibility );
+	const { attributes, name, settings, variables, clientId } = props;
+
+//console.log( clientId );
 
 	if ( settings === 'fetching' || variables === 'fetching' ) {
 		return null;
@@ -70,8 +70,11 @@ function VisibilityInspectorControls( props ) {
 		};
 	}
 
+	const blockAttributes = { ...attributes };
+	let blockAtts = blockAttributes?.blockVisibility;
 	let controlSets = blockAtts?.controlSets ?? [];
-
+console.log( clientId );	
+console.log( blockAtts );
 	// Create the default control set and populate with any previous attributes.
 	if ( controlSets.length === 0 ) {
 		const defaultSet = [
@@ -83,12 +86,11 @@ function VisibilityInspectorControls( props ) {
 			},
 		];
 		controlSets = getDeprecatedAtts( blockAtts, defaultSet );
-
-		setBlockAtts( assign( { ...blockAtts }, { controlSets } ) );
+		blockAtts = assign( { ...blockAtts }, { controlSets } );
 	}
 
 	const settingsUrl = variables?.plugin_variables?.settings_url ?? ''; // eslint-disable-line
-	const hideBlock = blockVisibility?.hideBlock ?? false;
+	const hideBlock = blockAtts?.hideBlock ?? false;
 	const hasHideBlock = enabledControls.some(
 		( control ) => control.settingSlug === 'hide_block'
 	);
@@ -112,15 +114,14 @@ function VisibilityInspectorControls( props ) {
 							<HideBlock
 								enabledControls={ enabledControls }
 								blockAtts={ blockAtts }
-								setBlockAtts={ setBlockAtts }
 								{ ...props }
 							/>
 							<Slot name="InspectorControlsMiddle" />
 							{ ! blockHidden &&
-								controlSets.map( ( controlSet ) => {
+								controlSets.map( ( controlSet, index ) => {
 									return (
 										<ControlSet
-											key={ controlSet.id }
+											key={ clientId + index }
 											blockAtts={ blockAtts }
 											controlSetAtts={ controlSet }
 											enabledControls={ enabledControls }
