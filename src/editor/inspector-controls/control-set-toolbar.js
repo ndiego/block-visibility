@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { assign } from 'lodash';
+import { assign, omit } from 'lodash';
 import classnames from 'classnames';
 
 /**
@@ -27,32 +27,6 @@ import { Icon, moreVertical, check, info } from '@wordpress/icons';
 import { TipsControlSet } from './utils/notices-tips';
 
 /**
- * Render a control menu item
- *
- * @since 1.9.0
- * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
- */
-function ControlMenuItem( props ) {
-	const { control, toggleControls } = props;
-	return (
-		<MenuItem
-			key={ control.attributeSlug }
-			className={ classnames( {
-				disabled: ! control.active,
-			} ) }
-			icon={ control.active ? check : '' }
-			onClick={ () => toggleControls( control ) }
-		>
-			{ control.icon && (
-				<Icon className="control-branding-icon" icon={ control.icon } />
-			) }
-			{ control.label }
-		</MenuItem>
-	);
-}
-
-/**
  * Render a control set
  *
  * @since 1.6.0
@@ -63,39 +37,53 @@ export default function ControlSetToolbar( props ) {
 	const [ tipsModalOpen, setTipsModalOpen ] = useState( false );
 	const [ resetModalOpen, setResetModalOpen ] = useState( false );
 	const {
+		attributes,
 		setAttributes,
 		defaultControls,
 		controls,
-		blockAtts,
 		controlSetAtts,
 	} = props;
+	const { blockVisibility } = attributes;
 
 	function toggleControls( control ) {
+		let newControls;
+
 		if ( control.active ) {
-			delete controlSetAtts.controls[ control.attributeSlug ];
-		} else if ( ! controlSetAtts.controls[ control.attributeSlug ] ) {
-			controlSetAtts.controls[ control.attributeSlug ] = {};
+			newControls = omit( { ...controlSetAtts.controls }, [
+				control.attributeSlug,
+			] );
+		} else {
+			newControls = assign(
+				{ ...controlSetAtts.controls },
+				{ [ control.attributeSlug ]: {} }
+			);
 		}
 
-		blockAtts.controlSets[ controlSetAtts.id ] = controlSetAtts;
+		const newControlSetAtts = assign(
+			{ ...controlSetAtts },
+			{ controls: { ...newControls } }
+		);
 
 		setAttributes( {
 			blockVisibility: assign(
-				{ ...blockAtts },
-				{ controlSets: blockAtts.controlSets }
+				{ ...blockVisibility },
+				{ controlSets: [ ...[ newControlSetAtts ] ] }
 			),
 		} );
 	}
 
 	function resetControlAtts() {
-		controlSetAtts.controls = defaultControls;
-
-		blockAtts.controlSets[ controlSetAtts.id ] = controlSetAtts;
+		const newControlSetAtts = assign(
+			{ ...controlSetAtts },
+			{
+				controls: defaultControls,
+			}
+		);
 
 		setAttributes( {
 			blockVisibility: assign(
-				{ ...blockAtts },
-				{ controlSets: blockAtts.controlSets }
+				{ ...blockVisibility },
+				{ controlSets: [ ...[ newControlSetAtts ] ] }
 			),
 		} );
 
@@ -237,5 +225,31 @@ export default function ControlSetToolbar( props ) {
 				</Modal>
 			) }
 		</>
+	);
+}
+
+/**
+ * Render a control menu item
+ *
+ * @since 1.9.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
+function ControlMenuItem( props ) {
+	const { control, toggleControls } = props;
+	return (
+		<MenuItem
+			key={ control.attributeSlug }
+			className={ classnames( {
+				disabled: ! control.active,
+			} ) }
+			icon={ control.active ? check : '' }
+			onClick={ () => toggleControls( control ) }
+		>
+			{ control.icon && (
+				<Icon className="control-branding-icon" icon={ control.icon } />
+			) }
+			{ control.label }
+		</MenuItem>
 	);
 }

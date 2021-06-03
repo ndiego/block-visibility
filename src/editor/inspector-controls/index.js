@@ -9,7 +9,6 @@ import { assign, isEmpty } from 'lodash';
 import { __ } from '@wordpress/i18n';
 import { PanelBody, withFilters, Slot } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useState } from '@wordpress/element';
 import { withSelect } from '@wordpress/data';
 
 /**
@@ -37,8 +36,6 @@ const AdditionalInspectorControls = withFilters(
  */
 function VisibilityInspectorControls( props ) {
 	const { attributes, name, settings, variables, clientId } = props;
-
-//console.log( clientId );
 
 	if ( settings === 'fetching' || variables === 'fetching' ) {
 		return null;
@@ -73,8 +70,7 @@ function VisibilityInspectorControls( props ) {
 	const blockAttributes = { ...attributes };
 	let blockAtts = blockAttributes?.blockVisibility;
 	let controlSets = blockAtts?.controlSets ?? [];
-console.log( clientId );	
-console.log( blockAtts );
+
 	// Create the default control set and populate with any previous attributes.
 	if ( controlSets.length === 0 ) {
 		const defaultSet = [
@@ -113,7 +109,6 @@ console.log( blockAtts );
 							<Slot name="InspectorControlsTop" />
 							<HideBlock
 								enabledControls={ enabledControls }
-								blockAtts={ blockAtts }
 								{ ...props }
 							/>
 							<Slot name="InspectorControlsMiddle" />
@@ -122,7 +117,6 @@ console.log( blockAtts );
 									return (
 										<ControlSet
 											key={ clientId + index }
-											blockAtts={ blockAtts }
 											controlSetAtts={ controlSet }
 											enabledControls={ enabledControls }
 											defaultControls={ defaultControls }

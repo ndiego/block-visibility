@@ -52,8 +52,10 @@ export default function Rule( props ) {
 			( value, index ) => index !== ruleIndex
 		);
 
-		newRuleSets[ ruleSetIndex ] =
-			assign( { ...ruleSet }, { rules: [ ...newRules ] } );
+		newRuleSets[ ruleSetIndex ] = assign(
+			{ ...ruleSet },
+			{ rules: [ ...newRules ] }
+		);
 
 		setControlAtts(
 			controlName,
@@ -84,7 +86,10 @@ export default function Rule( props ) {
 		if ( ruleParam === 'field' ) {
 			newRules[ ruleIndex ] = { field: newValue };
 		} else {
-			newRules[ ruleIndex ] = assign( { ...newRules[ ruleIndex ] }, { [ ruleParam ]: newValue } );
+			newRules[ ruleIndex ] = assign(
+				{ ...newRules[ ruleIndex ] },
+				{ [ ruleParam ]: newValue }
+			);
 
 			// If a select field is changed, reset the corresponding operator
 			// and value. Not needed for multi-select
@@ -97,8 +102,10 @@ export default function Rule( props ) {
 			}
 		}
 
-		newRuleSets[ ruleSetIndex ] =
-			assign( { ...ruleSet }, { rules: newRules } );
+		newRuleSets[ ruleSetIndex ] = assign(
+			{ ...ruleSet },
+			{ rules: newRules }
+		);
 
 		setControlAtts(
 			controlName,

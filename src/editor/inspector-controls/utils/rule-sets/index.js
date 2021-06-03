@@ -92,8 +92,10 @@ export default function RuleSets( props ) {
 		const newRuleSets = [ ...ruleSets ];
 		const newRules = [ ...ruleSet.rules, { field: '' } ];
 
-		newRuleSets[ ruleSetIndex ] =
-			assign( { ...ruleSet }, { rules: newRules } );
+		newRuleSets[ ruleSetIndex ] = assign(
+			{ ...ruleSet },
+			{ rules: newRules }
+		);
 
 		setControlAtts(
 			controlName,

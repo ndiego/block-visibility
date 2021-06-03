@@ -156,9 +156,9 @@ export default function ScreenSize( props ) {
 				{ allScreenSizeFields }
 				{ name === 'core/shortcode' && <NoticeBlockNotCompatible /> }
 			</div>
-            <div className="control-separator">
-                <span>{ __( 'AND', 'block-visibility' ) }</span>
-            </div>
+			<div className="control-separator">
+				<span>{ __( 'AND', 'block-visibility' ) }</span>
+			</div>
 		</>
 	);
 }

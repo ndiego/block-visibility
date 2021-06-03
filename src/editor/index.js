@@ -470,7 +470,7 @@ function addInspectorControls( BlockEdit ) {
 					<BlockEdit { ...props } />
 					<VisibilityInspectorControls { ...props } />
 				</>
-			)
+			);
 		}
 
 		return <BlockEdit { ...props } />;

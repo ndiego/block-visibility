@@ -39,11 +39,10 @@ export default function ControlSet( props ) {
 		setAttributes,
 		variables,
 		enabledControls,
-		blockAtts,
 		controlSetAtts,
 	} = props;
-	const settingsUrl = variables?.plugin_variables?.settings_url ?? '';
 	const { blockVisibility } = attributes;
+	const settingsUrl = variables?.plugin_variables?.settings_url ?? '';
 
 	const noControls =
 		enabledControls.length === 1 &&
@@ -84,31 +83,19 @@ export default function ControlSet( props ) {
 	} );
 
 	function setControlAtts( control, values ) {
-		const controls = controlSetAtts?.controls ?? {};
+		const newControls = controlSetAtts?.controls ?? {};
 		const newControlSetAtts = assign(
 			{ ...controlSetAtts },
 			{
-				controls: assign(
-					{ ...controls },
-					{ [ control ]: values }
-				),
+				controls: assign( { ...newControls }, { [ control ]: values } ),
 			}
 		);
 
-		/*
-		const newBlockAtts = { ...blockAtts };
-
-		const _newControlSets = blockVisibility?.controlSets ?? [];
-
-		// Need to update in future when mutliple control sets are enabled.
-		newBlockAtts.controlSets[ 0 ] = newControlSetAtts;
-		const newControlSets = [ ...newBlockAtts.controlSets ];
-		*/
-
+		// This will need to be updated when multiple control sets are enabled.
 		setAttributes( {
 			blockVisibility: assign(
 				{ ...blockVisibility },
-				{ controlSets: [ ...[ newControlSetAtts ] ] }
+				{ controlSets: [ ...[ newControlSetAtts ] ] } // Ok for now since only one control set available.
 			),
 		} );
 	}
