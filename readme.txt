@@ -5,7 +5,7 @@ Tags: visibility, dynamic content, conditional content, conditional blocks, rest
 Requires at least: 5.5
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 1.8.0
+Stable tag: 1.9.0
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,7 +62,7 @@ Tailor Block Visibility to your needs, or those of your clients, with powerful p
 * Restrict visibility controls to specific block types.
 * Set permissions so only certain users have access to visibility controls.
 * Disable contextual indicators and other plugin utilities.
-* Enable Full Control Mode 🚀(See the FAQs).
+* Enable Full Control Mode 🚀 (See the FAQs).
 * Remove all plugin settings on uninstall.
 
 === Plays nice with others  ===
@@ -153,21 +153,22 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 == Changelog ==
 
-= 1.9.0 - 2021-05-TBD =
+= 1.9.0 - 2021-06-07 =
 
 **Added**
 
+* Added support for Block Visibility Pro.
 * Added rule set functionality to the ACF control. This allows you to create OR conditions within the ACF control.
 * Added "rule set" and "rule" architecture.
 * Added notice regarding compatibility issues with the Screen Size control and the Shortcode Block, plus links to a workaround in the Knowledge Base.
-* Added additional Slots for integration Visibility Controls.
+* Added additional Slots for integrating new visibility controls.
 
 **Changed**
 
 * Replaced many Popover components in the block editor with Modal components for improved UI.
 * Replaced most other Button/Popover components with DropdownMenu components for improved UI.
-* The "Remove" schedule button is now an trashcan icon in the Schedule toolbar.
-* Plugin settings tabs are now navigable based on URL query parameter.
+* The "Remove" schedule button is now an trashcan icon in the Schedule toolbar to be consistent with Block Visibility Pro.
+* Plugin settings tabs are now directly navigable based on URL query parameter.
 * Controls are now alphabetically ordered in the control selectors.
 * Screen size control CSS is now conditionally loaded only when there are actually blocks using these settings.
 * Contextual indicators are now powered by a custom icon font to improve performance and decrease file size.
@@ -183,7 +184,7 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 * Fixed unnecessary re-renders and loss of focus for slotted components by relocating withFilter HOCs outside of all render functions.
 * Fixed error in the Date & Time frontend test.
 * Fixed labels on the Query String control that were previously not translatable.
-* Fixed incorrect links to the plugin Knowledge Base.
+* Fixed incorrect links to the plugin [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme).
 
 = 1.8.0 - 2021-04-13 =
 
