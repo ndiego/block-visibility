@@ -9,8 +9,8 @@
 
 # Packages #
 ############
-# it's better to unpack these files and commit the raw source
-# git has its own built in compression methods
+# It's better to unpack these files and commit the raw source
+# git has its own built in compression methods.
 *.7z
 *.dmg
 *.gz
@@ -37,13 +37,16 @@ logs
 ehthumbs.db
 Thumbs.db
 
-# NPM
-**/node_modules/**
+# NPM #
+#######
+node_modules/
 
-# Composer
-**/vendor/**
+# Composer #
+############
+vendor/
 
-# Package Specific
-dist/*
-!dist/images/
-!dist/assets/
+# Package Specific #
+####################
+# We include the dist folder so the plugin can be served by the EDD Git Download
+# Updater, but we don't need the map files.
+dist/*.map

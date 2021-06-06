@@ -1,0 +1,18 @@
+# Auto detect text files and perform LF normalization #
+#######################################################
+* text=auto
+
+# Items to ignore when downloading a zip #
+##########################################
+.wordpress-org export-ignore
+.gitattributes export-ignore
+.gitignore export-ignore
+composer.json export-ignore
+composer.lock export-ignore
+composer.phar export-ignore
+package-lock.json export-ignore
+package.json export-ignore
+phpcs.xml export-ignore
+README.md export-ignore
+webpack.config.js export-ignore
+yarn.lock export-ignore
