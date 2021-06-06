@@ -13,8 +13,8 @@ defined( 'ABSPATH' ) || exit;
 /**
  * REST API Settings Controller Class.
  *
- * @package WooCommerce\RestApi
- * @extends WC_REST_Controller
+ * @package WordPress\REST_API
+ * @extends WP_REST_Controller
  */
 class Block_Visibility_REST_Settings_Controller extends WP_REST_Controller {
 

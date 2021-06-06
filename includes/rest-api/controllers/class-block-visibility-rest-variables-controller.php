@@ -19,8 +19,8 @@ use function BlockVisibility\Utils\get_current_user_role as get_current_user_rol
 /**
  * REST API Settings Controller Class.
  *
- * @package WooCommerce\RestApi
- * @extends WC_REST_Controller
+ * @package WordPress\REST_API
+ * @extends WP_REST_Controller
  */
 class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 
