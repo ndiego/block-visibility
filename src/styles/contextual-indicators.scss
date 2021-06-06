@@ -129,6 +129,8 @@ $icon__ten-controls: "\e906";
         right: 2px;
         top: 4px;
         z-index: 1000;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
     &.block-visibility__has-date-time {
