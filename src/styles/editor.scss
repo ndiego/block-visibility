@@ -462,6 +462,13 @@
             white-space: nowrap;
         }
     }
+
+    /* Specific styles for the ACF visibility control ---------------*/
+    .acf-control {
+        .components-notice {
+            margin-bottom: 20px;
+        }
+    }
 }
 
 /* Date/Time calendar popover styles */

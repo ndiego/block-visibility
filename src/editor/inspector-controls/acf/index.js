@@ -45,6 +45,7 @@ export default function ACF( props ) {
 		return null;
 	}
 
+	const fields = variables?.integrations?.acf?.fields ?? [];
 	const acf = controlSetAtts?.controls?.acf ?? {};
 	const hideOnRuleSets = acf?.hideOnRuleSets ?? false;
 	let ruleSets = acf?.ruleSets ?? [];
@@ -134,10 +135,10 @@ export default function ACF( props ) {
 							: __( 'Show', 'block-visibility' )
 					) }
 				</div>
-				{ ! variables?.integrations?.acf?.fields && (
+				{ fields.length === 0 && (
 					<Notice status="warning" isDismissible={ false }>
 						{ __(
-							'It does not appear that your website contains any published fields.',
+							'It does not appear that your website contains any published fields yet.',
 							'block-visibility'
 						) }
 					</Notice>
