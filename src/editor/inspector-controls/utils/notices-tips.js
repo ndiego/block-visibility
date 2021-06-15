@@ -68,7 +68,8 @@ export function NoticeBlockControlsDisabled() {
 export function TipsControlSet( props ) {
 	const { settings, variables } = props;
 	const settingsUrl = variables?.plugin_variables.settings_url ?? '';
-	const isAdmin = variables.current_users_roles.includes( 'administrator' );
+    const userRoles = variables?.current_users_roles ?? [];
+	const isAdmin = userRoles.includes( 'administrator' );
 	const enableEditorNotices = isPluginSettingEnabled(
 		settings,
 		'enable_editor_notices'

@@ -153,6 +153,12 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 == Changelog ==
 
+= 1.9.0 - 2021-06-15 =
+
+**Fixed**
+
+* Fixed bug where a Block Editor critical error would sporadically occur for certain admin users when switching from Fullscreen in the Block Editor. Thanks @gsarig for discovering this issue and opening a support ticket!
+
 = 1.9.0 - 2021-06-07 =
 
 **Added**

@@ -14,7 +14,8 @@ import { createInterpolateElement } from '@wordpress/element';
  */
 export default function TipsWPFusion( props ) {
 	const { variables } = props;
-	const isAdmin = variables.current_users_roles.includes( 'administrator' );
+	const userRoles = variables?.current_users_roles ?? [];
+	const isAdmin = userRoles.includes( 'administrator' );
 	const excludeAdmins =
 		variables?.integrations?.wp_fusion?.exclude_admins ?? false;
 
