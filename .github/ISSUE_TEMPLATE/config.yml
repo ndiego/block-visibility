@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+    - name: General help request
+      url: https://wordpress.org/support/plugin/block-visibility/
+      about: For general help requests, create a new topic in the Block Visibility support forum on WordPress.org
