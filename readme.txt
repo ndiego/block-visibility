@@ -5,7 +5,7 @@ Tags: visibility, dynamic content, conditional content, conditional blocks, rest
 Requires at least: 5.5
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 1.9.0
+Stable tag: 1.9.1
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -153,11 +153,17 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 == Changelog ==
 
-= 1.9.0 - 2021-06-15 =
+= 1.9.1 - 2021-06-18 =
+
+**Added**
+
+* Added preliminary support for Block Visibility (and Pro) on the new block-based Widgets screen, the new Widget pane in the customizer, and the experimental Navigation screens added by Gutenberg.
 
 **Fixed**
 
 * Fixed bug where a Block Editor critical error would sporadically occur for certain admin users when switching from Fullscreen in the Block Editor. Thanks @gsarig for discovering this issue and opening a support ticket!
+* Fixed PHP error that would occasionally occur when a previously set ACF field was deleted from the user's website.
+* Fixed bug where contextual indicator style sheet was loading on incorrect admin pages.
 
 = 1.9.0 - 2021-06-07 =
 

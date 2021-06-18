@@ -68,7 +68,6 @@ function enqueue_editor_assets() {
 		);
 	}
 }
-
 /**
  * Need to add at admin_init instead of the normal enqueue_block_editor_assets
  * so that our attributes load for third-party blocks. Hopefully this will be
@@ -76,6 +75,31 @@ function enqueue_editor_assets() {
  * ideal implementation. The primary culprit is Jetpack blocks.
  */
 add_action( 'admin_init', __NAMESPACE__ . '\enqueue_editor_assets', 10000 );
+
+/**
+ * Enqueue editor scripts in the customizer to work with new block based Widgets
+ * panel in Gutenberg and in WordPress v5.8.
+ *
+ * Note that this implementation is not ideal since it does not work for some
+ * blocks, notably Jetpack blocks. We hope for a more permanent solution in the
+ * future which will also resolve the need to use admin_init above.
+ *
+ * @since 1.9.1
+ */
+function enqueue_customizer_assets() {
+
+	// Scripts.
+	$asset_file = get_asset_file( 'dist/block-visibility-editor' );
+
+	wp_enqueue_script(
+		'block-visibility-editor-scripts',
+		BLOCK_VISIBILITY_PLUGIN_URL . 'dist/block-visibility-editor.js',
+		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
+		$asset_file['version'],
+		false // Need false to ensure our filters can target third-party plugins.
+	);
+}
+add_action( 'customize_controls_enqueue_scripts', __NAMESPACE__ . '\enqueue_customizer_assets' );
 
 /**
  * Dequeue our editor assets on pages without the Block Editor.
@@ -91,14 +115,24 @@ add_action( 'admin_init', __NAMESPACE__ . '\enqueue_editor_assets', 10000 );
  */
 function dequeue_editor_assets_on_pages_without_block_editor() {
 
-	$current_screen = get_current_screen();
+	$should_dequeue = true;
 
-	if (
-		! method_exists( $current_screen, 'is_block_editor' ) ||
-		! $current_screen->is_block_editor()
-	) {
+	if ( is_callable( 'get_current_screen' ) ) {
+
+		if (
+			get_current_screen()->is_block_editor ||
+			'appearance_page_gutenberg-widgets' === get_current_screen()->base || // The block-based widgets screen added by Gutenberg.
+			'gutenberg_page_gutenberg-navigation' === get_current_screen()->base || // The block-based navigation screen added by Gutenberg.
+			'customize' === get_current_screen()->base // The customizer, which includes block-based widgets.
+		) {
+			$should_dequeue = false;
+		}
+	}
+
+	if ( $should_dequeue ) {
 		wp_dequeue_script( 'block-visibility-editor-scripts' );
 		wp_dequeue_style( 'block-visibility-editor-styles' );
+		wp_dequeue_style( 'block-visibility-contextual-indicator-styles' );
 	}
 }
 add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\dequeue_editor_assets_on_pages_without_block_editor' );

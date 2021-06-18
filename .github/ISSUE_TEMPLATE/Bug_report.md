@@ -15,7 +15,7 @@ Before submitting a bug report:
 - Check if the bug is caused by a theme by activating a default theme e.g. Twenty Twenty.
 - Check if the bug has already been reported by searching https://github.com/ndiego/block-visibility/issues.
 
- If this issue is related to the Block Visibility Pro plugin, please report it at https://github.com/ndiego/block-visibility-pro-issue-tracker/issues.
+If this issue is related to the Block Visibility Pro plugin, please report it at https://github.com/ndiego/block-visibility-pro-issue-tracker/issues.
 
 If this is a security issue, please report it directly to info@blockvisibilitywp.com.
 -->
@@ -43,19 +43,6 @@ If possible, please upload a screenshot or screen recording which demonstrates
 the bug.
 -->
 
-## Code snippet (optional)
-<!--
-If this bug is to related to a developer API, please share a code snippet that
-demonstrates the issue.
-
-For small snippets paste it directly here, or you can use GitHub Gist to share
-multiple code files: https://gist.github.com
-
-Please ensure the shared code can be used by a developer to reproduce the
-issue—ideally it can be copied into a local development environment or executed
-in a browser console to help debug the issue.
--->
-
 ## System information
 - Block Visibility version: <!-- e.g. "1.9.0" -->
 - Block Visibility Pro version: <!-- e.g. "1.0.0" or "Not installed" -->
@@ -63,8 +50,3 @@ in a browser console to help debug the issue.
 - Gutenberg version: <!-- e.g. "10.0.0" or "Not installed" -->
 - Are all plugins except Block Visibility, Block Visibility Pro (if installed), and Gutenberg (if installed) deactivated? <!-- "Yes" or "No" -->
 - Are you using a default theme (e.g. Twenty Twenty-One)? <!-- "Yes" or "No" -->
-
-## Device information
-- Device: <!-- e.g. "Desktop" or "iPhone 11" -->
-- Operating system: <!-- e.g. "Windows 10" or "iOS 14" -->
-- Browser: <!-- e.g. "Chrome 86.0" or "Mobile Safari" -->

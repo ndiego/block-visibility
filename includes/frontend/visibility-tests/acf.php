@@ -113,10 +113,10 @@ function acf_test( $is_visible, $settings, $attributes ) {
 							$value,
 							$acf_field
 						);
-					}
 
-					if ( 'error' !== $result ) {
-						$test_result = $result ? 'visible' : 'hidden';
+						if ( 'error' !== $result ) {
+							$test_result = $result ? 'visible' : 'hidden';
+						}
 					}
 				}
 
