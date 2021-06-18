@@ -4,6 +4,7 @@
 
 # Items to ignore when downloading a zip #
 ##########################################
+.github export-ignore
 .wordpress-org export-ignore
 src/ export-ignore
 .gitattributes export-ignore
