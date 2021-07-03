@@ -153,6 +153,12 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 == Changelog ==
 
+= 1.9.2 - 2021-07-TBD =
+
+**Fixed**
+
+* Fixed incorrect font-weight on contextual indications for heading blocks.
+
 = 1.9.1 - 2021-06-18 =
 
 **Added**
