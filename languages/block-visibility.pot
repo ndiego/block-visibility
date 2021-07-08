@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-06-18T16:21:18+00:00\n"
+"POT-Creation-Date: 2021-07-08T10:28:34+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: block-visibility\n"
@@ -783,7 +783,7 @@ msgid "Thank you for using Block Visibility."
 msgstr ""
 
 #: dist/block-visibility-settings.js:1
-msgid "Should you need any assistance, simply open a ticket in the <a>support forum</a> on WordPress.org and you will recieve a followup within one business day."
+msgid "Should you need any assistance, simply open a ticket in the <a>support forum</a> on WordPress.org and you will receive a followup within one business day."
 msgstr ""
 
 #: dist/block-visibility-settings.js:1

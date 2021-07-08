@@ -86,7 +86,7 @@ export default function Masthead( props ) {
 							<p>
 								{ createInterpolateElement(
 									__(
-										'Should you need any assistance, simply open a ticket in the <a>support forum</a> on WordPress.org and you will recieve a followup within one business day.',
+										'Should you need any assistance, simply open a ticket in the <a>support forum</a> on WordPress.org and you will receive a followup within one business day.',
 										'block-visibility'
 									),
 									{

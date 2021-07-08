@@ -48,7 +48,7 @@ function ToolbarControls( props ) {
 		return null;
 	}
 
-	// Make sure the menu item is enabled and we have recieved a block type.
+	// Make sure the menu item is enabled and we have received a block type.
 	if ( ! enableMenuItem || ! blockType ) {
 		return null;
 	}
