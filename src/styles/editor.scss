@@ -167,21 +167,19 @@
             margin-left: -16px;
             margin-right: -16px;
             width: calc(100% + 32px);
-            padding: 4px 16px;
+            padding: 6px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
             h3 {
                 font-weight: 500;
-                color: #757575;
-                text-transform: uppercase;
-                font-size: 12px;
-                letter-spacing: 0.5px;
-                margin: 10px 0 8px;
+                margin: 0;
             }
 
             .configure-controls {
                 button {
                     padding: 0;
-                    height: 28px;
                     min-width: 28px;
                 }
             }

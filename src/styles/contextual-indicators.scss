@@ -99,12 +99,13 @@ $icon__ten-controls: "\e906";
 
 /* Contextual indicator styles */
 .block-visibility__has-visibility {
-    outline: 2px dashed rgba(0, 0, 0, 0.7);
+    outline: 1px dashed rgba(0, 0, 0, 0.7);
     opacity: .5;
 
     // Fix for the blocks that are placeholders, like the shortcodes block
+    &.components-placeholder.components-placeholder,
     &.components-placeholder {
-        outline: 2px dashed rgba(0, 0, 0, 0.7);
+        outline: 1px dashed rgba(0, 0, 0, 0.7);
         opacity: .5;
     }
 

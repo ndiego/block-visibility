@@ -196,14 +196,20 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 * Added Block Visibility Pro ad to settings pages to inform users about the Pro add-on.
 * Added a direct link to the plugin Knowledge Base in the settings masthead.
 
+**Changed**
+
+* Changed the contextual indicator styling (again) to improve the UI/UX.
+* Change the control toolbar styling to match the upcoming dimensions panel UI in Gutenberg.
+
+**Removed**
+
+* Removed the "Getting Started" tab in the plugin settings and directed all help links to the Block Visibility website and WordPress.org support forum.
+* Removed the review and support popup on the plugin settings pages.
+
 **Fixed**
 
 * Fixed incorrect font-weight on contextual indications for heading blocks.
 * Fixed spelling errors in plugin settings. Thanks @paaljoachim!
-
-**Removed**
-
-* Removed the "Getting Started" tab in the plugin settings and directed all help links to the plugin website.
 
 = 1.9.1 - 2021-06-18 =
 

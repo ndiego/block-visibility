@@ -2,10 +2,8 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { DotTip } from '@wordpress/nux';
 import { Icon } from '@wordpress/icons';
 import { applyFilters } from '@wordpress/hooks';
-import { createInterpolateElement } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -76,61 +74,7 @@ export default function Masthead( props ) {
 						{ isPro && <span className="pro-badge">Pro</span> }
 					</h1>
 				</div>
-				<div className="masthead__plugin-links">
-					{ linkMarkup }
-					<DotTip
-						tipId="block-visibility/leave-review"
-						position="bottom left"
-					>
-						<div className="masthead__notice">
-							<h3>
-								{ __(
-									'Thank you for using Block Visibility.',
-									'block-visibility'
-								) }
-							</h3>
-							<p>
-								{ createInterpolateElement(
-									__(
-										'Should you need any assistance, simply open a ticket in the <a>support forum</a> on WordPress.org and you will receive a followup within one business day.',
-										'block-visibility'
-									),
-									{
-										a: (
-											<a // eslint-disable-line
-												href={
-													pluginVariables.support_url
-												}
-												target="_blank"
-												rel="noreferrer"
-											/>
-										),
-									}
-								) }
-							</p>
-							<p>
-								{ createInterpolateElement(
-									__(
-										'User reviews are very important for open source projects, and Block Visibility is no different. If you enjoy the plugin, please consider leaving a <a>review ★★★★★</a> on WordPress.org. Your feedback is greatly appreciated.',
-										'block-visibility'
-									),
-									{
-										a: (
-											<a // eslint-disable-line
-												href={
-													pluginVariables.support_url +
-													'reviews/?filter=5'
-												}
-												target="_blank"
-												rel="noreferrer"
-											/>
-										),
-									}
-								) }
-							</p>
-						</div>
-					</DotTip>
-				</div>
+				<div className="masthead__plugin-links">{ linkMarkup }</div>
 			</div>
 		</div>
 	);

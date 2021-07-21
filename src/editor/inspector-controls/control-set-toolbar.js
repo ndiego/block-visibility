@@ -19,7 +19,7 @@ import {
 	Modal,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-import { Icon, moreVertical, check, info } from '@wordpress/icons';
+import { Icon, moreHorizontal, check, info } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -99,91 +99,87 @@ export default function ControlSetToolbar( props ) {
 
 	return (
 		<>
-			<Flex className="block-visibility__control-set-header">
-				<FlexBlock>
-					<h3>
-						{ __( 'Controls', 'block-visibility' ) }
-						<Button
-							label={ __( 'Quick Tips', 'block-visibility' ) }
-							icon={ info }
-							className="control-tips"
-							onClick={ () =>
-								setTipsModalOpen( ( open ) => ! open )
-							}
-							isSmall
-						/>
-					</h3>
-				</FlexBlock>
-				<FlexItem>
-					<DropdownMenu
-						label={ __(
-							'Configure Visibility Controls',
-							'block-visibility'
-						) }
-						icon={ moreVertical }
-						className="configure-controls"
-						popoverProps={ {
-							className: 'block-visibility__control-popover',
-							focusOnMount: 'container',
-						} }
-					>
-						{ ( { onClose } ) => (
-							<>
+			<div className="block-visibility__control-set-header">
+				<h3>
+					{ __( 'Enabled Controls', 'block-visibility' ) }
+					<Button
+						label={ __( 'Quick Tips', 'block-visibility' ) }
+						icon={ info }
+						className="control-tips"
+						onClick={ () =>
+							setTipsModalOpen( ( open ) => ! open )
+						}
+						isSmall
+					/>
+				</h3>
+				<DropdownMenu
+					label={ __(
+						'Configure Visibility Controls',
+						'block-visibility'
+					) }
+					icon={ moreHorizontal }
+					className="configure-controls"
+					popoverProps={ {
+						className: 'block-visibility__control-popover',
+						focusOnMount: 'container',
+					} }
+				>
+					{ ( { onClose } ) => (
+						<>
+							<MenuGroup
+								className="core-controls"
+								label={ __(
+									'Visibility Controls',
+									'block-visibility'
+								) }
+							>
+								{ coreControls.map( ( control, index ) => (
+									<ControlMenuItem
+										key={ index }
+										control={ control }
+										toggleControls={ toggleControls }
+									/>
+								) ) }
+							</MenuGroup>
+							{ integrationControls.length !== 0 && (
 								<MenuGroup
-									className="core-controls"
+									className="integration-controls"
 									label={ __(
-										'Visibility Controls',
+										'Integrations',
 										'block-visibility'
 									) }
 								>
-									{ coreControls.map( ( control, index ) => (
-										<ControlMenuItem
-											key={ index }
-											control={ control }
-											toggleControls={ toggleControls }
-										/>
-									) ) }
+									{ integrationControls.map(
+										( control, index ) => (
+											<ControlMenuItem
+												key={ index }
+												control={ control }
+												toggleControls={
+													toggleControls
+												}
+											/>
+										)
+									) }
 								</MenuGroup>
-								{ integrationControls.length !== 0 && (
-									<MenuGroup
-										className="integration-controls"
-										label={ __(
-											'Integrations',
-											'block-visibility'
-										) }
-									>
-										{ integrationControls.map(
-											( control, index ) => (
-												<ControlMenuItem
-													key={ index }
-													control={ control }
-													toggleControls={
-														toggleControls
-													}
-												/>
-											)
-										) }
-									</MenuGroup>
-								) }
-								<MenuGroup className="reset-container">
-									<MenuItem
-										className="reset"
-										onClick={ () => {
-											setResetModalOpen( true );
-											onClose();
-										} }
-									>
-										{ __(
-											'Reset all',
-											'block-visibility'
-										) }
-									</MenuItem>
-								</MenuGroup>
-							</>
-						) }
-					</DropdownMenu>
-				</FlexItem>
-			</Flex>
+							) }
+							<MenuGroup className="reset-container">
+								<MenuItem
+									className="reset"
+									onClick={ () => {
+										setResetModalOpen( true );
+										onClose();
+									} }
+								>
+									{ __(
+										'Reset all',
+										'block-visibility'
+									) }
+								</MenuItem>
+							</MenuGroup>
+						</>
+					) }
+				</DropdownMenu>
+			</div>
 			{ tipsModalOpen && (
 				<Modal
 					className="block-visibility__tips-modal"
