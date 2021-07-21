@@ -66,12 +66,11 @@ export function NoticeBlockControlsDisabled() {
  * @return {string}          Return the rendered JSX
  */
 export function NoticeIncompatibleBlock( name ) {
-
 	// Currently only Legacy Widget block is incompatible, improve in future.
 	const blockName =
-		name.name === 'core/legacy-widget' ?
-			__( 'Legacy Widget', 'block-visibility' ) :
-			__( 'Current', 'block-visibility' );
+		name.name === 'core/legacy-widget'
+			? __( 'Legacy Widget', 'block-visibility' )
+			: __( 'Current', 'block-visibility' );
 
 	return (
 		<Notice status="warning" isDismissible={ false }>
@@ -97,7 +96,7 @@ export function NoticeIncompatibleBlock( name ) {
 export function TipsControlSet( props ) {
 	const { settings, variables } = props;
 	const settingsUrl = variables?.plugin_variables.settings_url ?? '';
-    const userRoles = variables?.current_users_roles ?? [];
+	const userRoles = variables?.current_users_roles ?? [];
 	const isAdmin = userRoles.includes( 'administrator' );
 	const enableEditorNotices = isPluginSettingEnabled(
 		settings,

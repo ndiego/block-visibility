@@ -18,7 +18,7 @@ import HideBlock from './hide-block';
 import ControlSet from './control-set';
 import {
 	NoticeControlsDisabled,
-	NoticeIncompatibleBlock
+	NoticeIncompatibleBlock,
 } from './utils/notices-tips';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import hasPermission from './../utils/has-permission';
@@ -54,8 +54,6 @@ function VisibilityInspectorControls( props ) {
 	/* There are a few core blocks that are not compatible*/
 	const incompatibleBlocks = [ 'core/legacy-widget' ];
 	const blockIsIncompatible = incompatibleBlocks.includes( name );
-	console.log( 'testing' );
-
 	const enabledControls = getEnabledControls( settings, variables );
 	const defaultControlSettings =
 		settings?.plugin_settings?.default_controls ?? {};

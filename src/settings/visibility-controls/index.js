@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useState, createInterpolateElement } from '@wordpress/element';
+import { useState } from '@wordpress/element';
 import { withFilters, Slot } from '@wordpress/components';
 
 /**
@@ -44,34 +44,6 @@ export default function VisibilityControls( props ) {
 
 	return (
 		<>
-			<Slot name="SettingsTabPanelTop" />
-			<div className="ads-container">
-				<div className="ads-container__pro">
-					<p>Enhance the campabilities of Block Visibility with the Pro add-on</p>
-					<p>Location control, eCommerce integrations, advanced scheduling, premium support and more!</p>
-				</div>
-				<div className="ads-container__support">
-					<p>Enhance the campabilities of Block Visibility with the Pro add-on</p>
-					<p>Location control, eCommerce integrations, advanced scheduling, premium support and more!</p>
-				</div>
-				<div className="ads-container__reviews">
-					{ createInterpolateElement(
-						__(
-							'User reviews are very important for open source projects, and Block Visibility is no different. If you enjoy the plugin, please consider leaving a <a>review ★★★★★</a> on WordPress.org. Your feedback is greatly appreciated.',
-							'block-visibility'
-						),
-						{
-							a: (
-								<a // eslint-disable-line
-									href='https://wordpress.org/support/plugin/block-visibility/reviews/?filter=5'
-									target="_blank"
-									rel="noreferrer"
-								/>
-							),
-						}
-					) }
-				</div>
-			</div>
 			<div className="setting-tabs__visibility-controls inner-container">
 				<div className="setting-tabs__setting-controls">
 					<div className="setting-controls__title">
