@@ -35,7 +35,12 @@ export default function Masthead( props ) {
 		support: {
 			title: __( 'Support', 'block-visibility' ),
 			url: pluginVariables.support_url,
-			icon: 'help',
+			icon: 'support',
+		},
+		knowledgeBase: {
+			title: __( 'Knowledge Base', 'block-visibility' ),
+			url: 'https://www.blockvisibilitywp.com/knowledge-base/?bv_query=knowledge_base&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals',
+			icon: 'school',
 		},
 	};
 
@@ -53,7 +58,7 @@ export default function Masthead( props ) {
 				rel={ rel }
 			>
 				<Icon icon={ icons[ links[ link ].icon ] } />
-				{ links[ link ].title }
+				<span>{ links[ link ].title }</span>
 			</a>
 		);
 	} );
