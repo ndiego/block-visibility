@@ -14,6 +14,7 @@ import { createInterpolateElement } from '@wordpress/element';
  * Internal dependencies
  */
 import UserRoles from './user-roles';
+import Users from './users';
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
 
 /**
@@ -50,6 +51,11 @@ export default function UserRole( props ) {
 		'visibility_by_role',
 		'enable_user_roles'
 	);
+	const enableUsers = isControlSettingEnabled(
+		settings,
+		'visibility_by_role',
+		'enable_users'
+	);
 
 	const optionLabel = ( title, description ) => {
 		return (
@@ -60,7 +66,7 @@ export default function UserRole( props ) {
 		);
 	};
 
-	const options = [
+	let options = [
 		{
 			label: optionLabel(
 				__( 'Public', 'block-visibility' ),
@@ -89,11 +95,23 @@ export default function UserRole( props ) {
 			),
 			value: 'user-role',
 		},
+		{
+			label: optionLabel(
+				__( 'Users', 'block-visibility' ),
+				__( 'Only visible to specific users.', 'block-visibility' )
+			),
+			value: 'users',
+		},
 	];
 
 	// If the User Roles option is not enabled in plugin settings, remove it.
 	if ( ! enableUserRoles ) {
-		options.pop();
+		options = options.filter( ( option ) => option.value !== 'user-role' );
+	}
+
+	// If the Users option is not enabled in plugin settings, remove it.
+	if ( ! enableUsers ) {
+		options = options.filter( ( option ) => option.value !== 'users' );
 	}
 
 	return (
@@ -136,7 +154,40 @@ export default function UserRole( props ) {
 							{
 								a: (
 									<a // eslint-disable-line
-										href={ settingsUrl }
+										href={
+											settingsUrl +
+											'&tab=visibility-controls'
+										}
+										target="_blank"
+										rel="noreferrer"
+									/>
+								),
+							}
+						) }
+					</Notice>
+				) }
+				{ visibilityByRole === 'users' && enableUsers && (
+					<Users
+						variables={ variables }
+						userRole={ userRole }
+						setControlAtts={ setControlAtts }
+						{ ...props }
+					/>
+				) }
+				{ visibilityByRole === 'users' && ! enableUsers && (
+					<Notice status="warning" isDismissible={ false }>
+						{ createInterpolateElement(
+							__(
+								'The Users option was previously selected, but is now disabled. Choose another option or update the <a>Visibility Control</a> settings.',
+								'block-visibility'
+							),
+							{
+								a: (
+									<a // eslint-disable-line
+										href={
+											settingsUrl +
+											'&tab=visibility-controls'
+										}
 										target="_blank"
 										rel="noreferrer"
 									/>

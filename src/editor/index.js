@@ -131,6 +131,15 @@ function addAttributes( settings ) {
 													type: 'string',
 												},
 											},
+											hideOnRestrictedUsers: {
+												type: 'boolean',
+											},
+											restrictedUsers: {
+												type: 'array',
+												items: {
+													type: 'string',
+												},
+											},
 										},
 									},
 									screenSize: {

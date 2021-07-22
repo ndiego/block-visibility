@@ -11,9 +11,6 @@ import { __ } from '@wordpress/i18n';
 import {
 	Button,
 	DropdownMenu,
-	Flex,
-	FlexItem,
-	FlexBlock,
 	MenuGroup,
 	MenuItem,
 	Modal,
@@ -106,9 +103,7 @@ export default function ControlSetToolbar( props ) {
 						label={ __( 'Quick Tips', 'block-visibility' ) }
 						icon={ info }
 						className="control-tips"
-						onClick={ () =>
-							setTipsModalOpen( ( open ) => ! open )
-						}
+						onClick={ () => setTipsModalOpen( ( open ) => ! open ) }
 						isSmall
 					/>
 				</h3>
@@ -170,10 +165,7 @@ export default function ControlSetToolbar( props ) {
 										onClose();
 									} }
 								>
-									{ __(
-										'Reset all',
-										'block-visibility'
-									) }
+									{ __( 'Reset all', 'block-visibility' ) }
 								</MenuItem>
 							</MenuGroup>
 						</>

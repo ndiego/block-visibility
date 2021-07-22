@@ -38,6 +38,9 @@ function register_settings() {
 						'enable_user_roles' => array(
 							'type' => 'boolean',
 						),
+						'enable_users'      => array(
+							'type' => 'boolean',
+						),
 					),
 				),
 				'date_time'          => array(
@@ -183,6 +186,7 @@ function register_settings() {
 			'visibility_by_role' => array(
 				'enable'            => true,
 				'enable_user_roles' => true,
+				'enable_users'      => true,
 			),
 			'date_time'          => array(
 				'enable'            => true,

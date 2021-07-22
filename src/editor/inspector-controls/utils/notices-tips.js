@@ -29,7 +29,7 @@ export function NoticeControlsDisabled( settingsUrl ) {
 				{
 					a: (
 						<a // eslint-disable-line
-							href={ settingsUrl }
+							href={ settingsUrl + '&tab=visibility-controls' }
 							target="_blank"
 							rel="noreferrer"
 						/>

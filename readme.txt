@@ -191,7 +191,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 **Added**
 
-* Added the ability to restrict visibility by specific users by ID.
+* Added the ability to restrict visibility by specific users as part of the User Role control.
 * Added a "block incompatible" message to the Legacy Widget block in WordPress 5.8, since the block does not support custom attributes.
 * Added Block Visibility Pro ad to settings pages to inform users about the Pro add-on.
 * Added a direct link to the plugin Knowledge Base in the settings masthead.

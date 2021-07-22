@@ -62,7 +62,7 @@ function user_role_test( $is_visible, $settings, $attributes ) {
 	if (
 		! $visibility_by_role
 		|| 'public' === $visibility_by_role
-		|| 'all' === $visibility_by_role // Depractated option, but check regardless.
+		|| 'all' === $visibility_by_role // Deprectated option, but check regardless.
 	) {
 		return true;
 	} elseif ( 'logged-out' === $visibility_by_role && ! is_user_logged_in() ) {
@@ -80,7 +80,7 @@ function user_role_test( $is_visible, $settings, $attributes ) {
 			? $control_atts['restrictedRoles']
 			: array();
 
-		$hide_on_resticted_roles =
+		$hide_on_restricted_roles =
 			isset( $control_atts['hideOnRestrictedRoles'] )
 				? $control_atts['hideOnRestrictedRoles']
 				: false;
@@ -95,10 +95,10 @@ function user_role_test( $is_visible, $settings, $attributes ) {
 					in_array( 'logged-out', $restricted_roles, true ) ||
 					in_array( 'public', $restricted_roles, true ); // Depractated role option, but check regardless.
 
-				if ( ! $hide_on_resticted_roles && $in_restricted_roles ) {
+				if ( ! $hide_on_restricted_roles && $in_restricted_roles ) {
 					return true;
 				} elseif (
-					$hide_on_resticted_roles &&
+					$hide_on_restricted_roles &&
 					! $in_restricted_roles
 				) {
 					return true;
@@ -117,17 +117,65 @@ function user_role_test( $is_visible, $settings, $attributes ) {
 
 				// If one of the user's roles is also a restricted role, show
 				// the block, but only if "hide on restricted" is not set.
-				if ( $num_selected_roles > 0 && ! $hide_on_resticted_roles ) {
+				if ( $num_selected_roles > 0 && ! $hide_on_restricted_roles ) {
 					return true;
 				}
 
 				// If the user's roles are not any of the restricted roles, show
 				// the block, but only if "hide on restricted" is set.
-				if ( 0 === $num_selected_roles && $hide_on_resticted_roles ) {
+				if ( 0 === $num_selected_roles && $hide_on_restricted_roles ) {
 					return true;
 				}
 			}
-		} elseif ( empty( $restricted_roles ) && $hide_on_resticted_roles ) {
+		} elseif ( empty( $restricted_roles ) && $hide_on_restricted_roles ) {
+			return true;
+		}
+	} elseif ( 'users' === $visibility_by_role ) {
+
+		// If this functionality has been disabled, skip test.
+		if ( ! is_control_enabled( $settings, 'visibility_by_role', 'enable_users' ) ) {
+			return true;
+		}
+
+		$restricted_users = isset( $control_atts['restrictedUsers'] )
+			? $control_atts['restrictedUsers']
+			: array();
+
+		$hide_on_restricted_users =
+			isset( $control_atts['hideOnRestrictedUsers'] )
+				? $control_atts['hideOnRestrictedUsers']
+				: false;
+
+		// Make sure there are restricted users set, if not the block should be
+		// hidden, unless "hide on restricted" has been set.
+		if ( ! empty( $restricted_users ) ) {
+
+			// If user is logged out.
+			if ( ! is_user_logged_in() && $hide_on_restricted_users ) {
+				return true;
+			}
+
+			// If user is logged in.
+			if ( is_user_logged_in() ) {
+
+				// Get the roles of the current user since they are logged-in.
+				$current_user_id = get_current_user_id();
+				$is_restricted   =
+					in_array( $current_user_id, $restricted_users, true );
+
+				// If the current user is restricted, show the block, but only
+				// if "hide on restricted" is not set.
+				if ( $is_restricted && ! $hide_on_restricted_users ) {
+					return true;
+				}
+
+				// If the current user is not restricted, show the block, but
+				// only if "hide on restricted" is set.
+				if ( ! $is_restricted && $hide_on_restricted_users ) {
+					return true;
+				}
+			}
+		} elseif ( empty( $restricted_users ) && $hide_on_resticted_users ) {
 			return true;
 		}
 	}
