@@ -192,22 +192,24 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 **Added**
 
 * Added the ability to restrict visibility by specific users as part of the User Role control.
-* Added a "block incompatible" message to the Legacy Widget block in WordPress 5.8, since the block does not support custom attributes.
+* Added a "block not compatible" messaging to the Legacy Widget block in WordPress 5.8, since the block does not support custom attributes.
 * Added Block Visibility Pro ad to settings pages to inform users about the Pro add-on.
 * Added a direct link to the plugin Knowledge Base in the settings masthead.
 
 **Changed**
 
-* Changed the contextual indicator styling (again) to improve the UI/UX.
+* Changed the contextual indicator styling (again) to improve the UI/UX. Color now matches the set `--wp-admin-theme-color` and indicators have been moved to the ::after pseudo element for improved block compatibility.
 * Change the control toolbar styling to match the upcoming dimensions panel UI in Gutenberg.
 
 **Removed**
 
+* Removed custom icon font for contextual indicators. Reverting back to SVG icons now that we have a more optimize approach. 
 * Removed the "Getting Started" tab in the plugin settings and directed all help links to the Block Visibility website and WordPress.org support forum.
 * Removed the review and support popup on the plugin settings pages.
 
 **Fixed**
 
+* Fixed error introduced in WordPress 5.8 on the block-based Widgets screen by removing the wp-edit-post dependency from the plugin.
 * Fixed incorrect font-weight on contextual indications for heading blocks.
 * Fixed spelling errors in plugin settings. Thanks @paaljoachim!
 
