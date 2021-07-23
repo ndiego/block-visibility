@@ -6,7 +6,8 @@ import { assign } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { PluginBlockSettingsMenuItem } from '@wordpress/edit-post';
+import { BlockSettingsMenuControls } from '@wordpress/block-editor';
+import { MenuItem } from '@wordpress/components';
 import { __, sprintf } from '@wordpress/i18n';
 import { useDispatch, withSelect } from '@wordpress/data';
 
@@ -50,6 +51,14 @@ function ToolbarControls( props ) {
 
 	// Make sure the menu item is enabled and we have received a block type.
 	if ( ! enableMenuItem || ! blockType ) {
+		return null;
+	}
+
+	// There are a few core blocks that are not compatible.
+	const incompatibleBlocks = [ 'core/legacy-widget' ];
+	const blockIsIncompatible = incompatibleBlocks.includes( blockType.name );
+
+	if ( blockIsIncompatible ) {
 		return null;
 	}
 
@@ -104,11 +113,15 @@ function ToolbarControls( props ) {
 	};
 
 	return (
-		<PluginBlockSettingsMenuItem
-			icon={ icon }
-			label={ label }
-			onClick={ handler }
-		/>
+		<BlockSettingsMenuControls>
+			<MenuItem
+				onClick={ handler }
+				icon={ icon }
+				label={ label }
+			>
+				{ label }
+			</MenuItem>
+		</BlockSettingsMenuControls>
 	);
 }
 
