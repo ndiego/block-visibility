@@ -3,9 +3,9 @@
  * visibility settings.
  *
  * @since 1.3.0
- * @param {Object} settings   All plugin settings
- * @param {Object} variables  All plugin variables
- * @return {boolean}		  Whether the current user has permission or not
+ * @param {Object} settings  All plugin settings
+ * @param {Object} variables All plugin variables
+ * @return {boolean}		 Whether the current user has permission or not
  */
 export default function hasPermission( settings, variables ) {
 	let isPermitted = true;
