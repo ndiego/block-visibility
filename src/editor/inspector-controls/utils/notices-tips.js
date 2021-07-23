@@ -74,14 +74,26 @@ export function NoticeIncompatibleBlock( name ) {
 
 	return (
 		<Notice status="warning" isDismissible={ false }>
-			{ sprintf(
-				// Translators: The current block name.
-				__(
-					'The %1$s block does not support custom attributes and therefore is incompatible with Block Visibility. As a workaround, wrap the %1$s block in a Group block. Then apply the desired visibility settings to the Group block.',
-					'block-visibility'
-				),
-				blockName
-			) }
+			<p>
+				{ sprintf(
+					// Translators: The current block name.
+					__(
+						'Unfortunately the %1$s block does not support custom attributes. Therefore it is not compatible with Block Visibility.',
+						'block-visibility'
+					),
+					blockName
+				) }
+			</p>
+			<p>
+				{ sprintf(
+					// Translators: The current block name.
+					__(
+						'As a workaround, wrap the %1$s block in a Group block. Then apply the desired visibility controls to the Group block.',
+						'block-visibility'
+					),
+					blockName
+				) }
+			</p>
 		</Notice>
 	);
 }

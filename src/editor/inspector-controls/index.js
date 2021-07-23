@@ -51,9 +51,6 @@ function VisibilityInspectorControls( props ) {
 		return null;
 	}
 
-	/* There are a few core blocks that are not compatible*/
-	const incompatibleBlocks = [ 'core/legacy-widget' ];
-	const blockIsIncompatible = incompatibleBlocks.includes( name );
 	const enabledControls = getEnabledControls( settings, variables );
 	const defaultControlSettings =
 		settings?.plugin_settings?.default_controls ?? {};
@@ -97,6 +94,10 @@ function VisibilityInspectorControls( props ) {
 		( control ) => control.settingSlug === 'hide_block'
 	);
 	const blockHidden = hasHideBlock && hideBlock;
+
+	// There are a few core blocks that are not compatible.
+	const incompatibleBlocks = [ 'core/legacy-widget' ];
+	const blockIsIncompatible = incompatibleBlocks.includes( name );
 
 	return (
 		// Note that the core InspectorControls component is already making use
