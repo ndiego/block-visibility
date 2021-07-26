@@ -86,12 +86,7 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 		foreach ( $schedules as $schedule ) {
 			$enable = isset( $schedule['enable'] ) ? $schedule['enable'] : true;
 
-			if ( ! $enable ) {
-
-				// If the schedule is not enabled, skip the tests.
-				$test_results[] = 'visible';
-
-			} else {
+			if ( $enable ) {
 				$start = isset( $schedule['start'] ) ? $schedule['start'] : null;
 				$end   = isset( $schedule['end'] ) ? $schedule['end'] : null;
 
@@ -122,6 +117,12 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 			run_schedule_test( $depracated_start, $depracated_end );
 
 		$test_results[] = $test_result;
+	}
+
+	// If there are no enabled schedules,there will be no results. Default to
+	// showing the block.
+	if ( empty( $test_results ) ) {
+		return true;
 	}
 
 	// Under normal circumstances, need no "visible" results to hide the block.
