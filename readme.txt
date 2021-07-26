@@ -39,6 +39,7 @@ It takes just **3 simple steps**:
 * Only show blocks to **logged-in** users.
 * Only show blocks to **logged-out** users.
 * Only show blocks to users with **specific roles** (Administrator, Subscriber, Customer, Member etc.)
+* Only show blocks to **specific users** on your website. **NEW** 🎉
 * Show or hide dynamic blocks based on **URL query strings**. Great for marketing campaigns!
 * **Advanced Custom Fields (ACF):** Control the visibility of block content based on [ACF](https://wordpress.org/plugins/advanced-custom-fields/) fields.
 * **WP Fusion:** Combine Block Visibility with the power of [WP Fusion](https://wordpress.org/plugins/wp-fusion-lite/) to conditionally show or hide content based on data from your favorite CRM or marketing automation platform.
@@ -203,7 +204,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 **Removed**
 
-* Removed custom icon font for contextual indicators. Reverting back to SVG icons now that we have a more optimize approach. 
+* Removed custom icon font for contextual indicators. Reverting back to SVG icons now that we have a more optimize approach.
 * Removed the "Getting Started" tab in the plugin settings and directed all help links to the Block Visibility website and WordPress.org support forum.
 * Removed the review and support popup on the plugin settings pages.
 
