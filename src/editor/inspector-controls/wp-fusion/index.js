@@ -16,7 +16,7 @@ import { createInterpolateElement, useState } from '@wordpress/element';
  * Internal dependencies
  */
 import icons from './../../../utils/icons';
-import TipsWPFusion from './notices-tips';
+import Tips from './notices-tips';
 
 /**
  * Add the Wp Fusion controls
@@ -207,7 +207,7 @@ export default function WPFusion( props ) {
 					title={ __( 'WP Fusion Control', 'block-visibility' ) }
 					onRequestClose={ () => setTipsModalOpen( false ) }
 				>
-					<TipsWPFusion { ...props } />
+					<Tips { ...props } />
 				</Modal>
 			) }
 		</>

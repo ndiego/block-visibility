@@ -17,7 +17,7 @@ import { Icon, info } from '@wordpress/icons';
 import icons from './../../../utils/icons';
 import RuleSets from './../utils/rule-sets';
 import { getGroupedFields, getAllFields } from './fields';
-import TipsACF from './notices-tips';
+import Tips from './notices-tips';
 
 /**
  * Add the ACF controls
@@ -201,7 +201,7 @@ export default function ACF( props ) {
 					) }
 					onRequestClose={ () => setTipsModalOpen( false ) }
 				>
-					<TipsACF />
+					<Tips />
 				</Modal>
 			) }
 		</>
