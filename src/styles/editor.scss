@@ -471,13 +471,11 @@
 
 /* Date/Time calendar popover styles -----------------------------------------*/
 .block-visibility__date-time-popover {
-    & > div {
-        padding: 12px;
-    }
+
     .date-time-header {
         border-bottom: 1px solid #ddd;
         font-weight: bold;
-        padding-bottom: 12px;
+        padding: 16px 12px;
         margin-bottom: 16px;
 
         display: flex;
