@@ -140,7 +140,7 @@ export function TipsControlSet( props ) {
 					<li className="tip">
 						{ createInterpolateElement(
 							__(
-								'As a website administrator, you can customize and restrict the available visibility controls in the <a>plugins settings</a>.',
+								'As a website administrator, you can customize and restrict the available visibility controls in the <a>plugin settings</a>.',
 								'block-visibility'
 							),
 							{
