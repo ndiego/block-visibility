@@ -83,6 +83,18 @@ function enqueue_editor_styles() {
 			array(),
 			$asset_file['version']
 		);
+
+		// Allow users to customize the color of the contextual indicators.
+		$custom_color = get_contextual_indicator_color();
+
+		if ( $custom_color ) {
+			$inline_style = '.block-visibility__has-visibility, .block-visibility__has-visibility.components-placeholder.components-placeholder, .block-visibility__has-visibility.components-placeholder { outline-color: ' . $custom_color . ' } .block-visibility__has-visibility::after { background-color: ' . $custom_color . ' }';
+
+			wp_add_inline_style(
+				'block-visibility-contextual-indicator-styles',
+				$inline_style,
+			);
+		}
 	}
 }
 add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_styles' );
@@ -184,4 +196,23 @@ function contextual_indicators_enabled() {
 	}
 
 	return $enabled;
+}
+
+/**
+ * Fetch the custom contextual indicator color if there is one.
+ *
+ * @since 2.0.0
+ *
+ * @return bool Returns true or false.
+ */
+function get_contextual_indicator_color() {
+	$settings  = get_option( 'block_visibility_settings' );
+
+	if ( isset( $settings['plugin_settings']['contextual_indicator_color'] ) ) {
+		if ( $settings['plugin_settings']['contextual_indicator_color'] ) {
+			return $settings['plugin_settings']['contextual_indicator_color'];
+		}
+	}
+
+	return false;
 }

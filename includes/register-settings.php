@@ -151,6 +151,9 @@ function register_settings() {
 				'enable_contextual_indicators'  => array(
 					'type' => 'boolean',
 				),
+				'contextual_indicator_color'    => array(
+					'type' => 'string',
+				),
 				'enable_toolbar_controls'       => array(
 					'type' => 'boolean',
 				),
@@ -221,6 +224,7 @@ function register_settings() {
 		'plugin_settings'     => array(
 			'default_controls'              => array( 'date_time', 'visibility_by_role', 'screen_size' ),
 			'enable_contextual_indicators'  => true,
+			'contextual_indicator_color'    => '',
 			'enable_toolbar_controls'       => true,
 			'enable_editor_notices'         => true,
 			'enable_user_role_restrictions' => false,

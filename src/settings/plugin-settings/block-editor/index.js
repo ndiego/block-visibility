@@ -7,7 +7,7 @@ import Select from 'react-select';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { ToggleControl, Slot } from '@wordpress/components';
+import { ToggleControl, Slot, BaseControl, ColorPalette, ColorIndicator } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -49,6 +49,7 @@ export default function BlockEditor( props ) {
 	// Manually set defaults, this ensures the main settings function properly
 	const defaultControls = pluginSettings?.default_controls ?? [ 'date_time', 'visibility_by_role', 'screen_size' ]; // eslint-disable-line
 	const enableContextualIndicators = pluginSettings?.enable_contextual_indicators ?? true; // eslint-disable-line
+	const contextualIndicatorColor = pluginSettings?.contextual_indicator_color ?? ''; // eslint-disable-line
 	const enableToolbarControls = pluginSettings?.enable_toolbar_controls ?? true; // eslint-disable-line
 	const enableEditorNotices = pluginSettings?.enable_editor_notices ?? true; // eslint-disable-line
 
@@ -71,6 +72,23 @@ export default function BlockEditor( props ) {
 		} );
 		setHasUpdates( true );
 	};
+
+	const colors = [
+		{ name: __( 'Black', 'block-visibility' ), color: '#121212' },
+		{ name: __( 'Light Grey', 'block-visibility' ), color: '#F1F1F1' },
+		{ name: __( 'Red', 'block-visibility' ), color: '#DC3232' },
+		{ name: __( 'Orange', 'block-visibility' ), color: '#F56E28' },
+		{ name: __( 'Yellow', 'block-visibility' ), color: '#FFB900' },
+		{ name: __( 'Green', 'block-visibility' ), color: '#46B450' },
+		{ name: __( 'Medium Blue', 'block-visibility' ), color: '#00A0D2' },
+		{ name: __( 'WordPress Blue', 'block-visibility' ), color: '#0073AA' },
+		{ name: __( 'Purple', 'block-visibility' ), color: '#826EB4' },
+	];
+
+	const indicatorColor =
+		contextualIndicatorColor
+			? contextualIndicatorColor
+			: 'var(--wp-admin-theme-color)';
 
 	return (
 		<div className="setting-tabs__settings-panel">
@@ -150,6 +168,35 @@ export default function BlockEditor( props ) {
 					<InformationPopover
 						message={ __(
 							'Contextual indicators allow you to quickly tell which blocks in the Block Editor have active visibility controls.',
+							'block-visibility'
+						) }
+					/>
+				</div>
+				<div className="settings-type__color has-info-popover">
+					<div>
+						<BaseControl
+							label={ __(
+								'Indicator color',
+								'block-visibility'
+							) }
+						>
+							<ColorIndicator colorValue={ indicatorColor } />
+						</BaseControl>
+						<ColorPalette
+							colors={ colors }
+							value={ contextualIndicatorColor }
+							onChange={ ( newColor ) => {
+								setPluginSettings( {
+									...pluginSettings,
+									contextual_indicator_color: newColor,
+								} );
+								setHasUpdates( true );
+							} }
+						/>
+					</div>
+					<InformationPopover
+						message={ __(
+							'By default, contextual indicators will be the primary color of your WordPress admin theme. Feel free to select an alternative from the color palette or choose a custom color.',
 							'block-visibility'
 						) }
 					/>
