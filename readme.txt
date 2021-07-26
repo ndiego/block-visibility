@@ -1,11 +1,11 @@
-=== Block Visibility — Conditional Visibility Controls for all Blocks ===
+=== Block Visibility — Conditional Visibility Control for the Block Editor ===
 Author URI: https://www.nickdiego.com/?bv_query=readme
 Contributors: ndiego, outermostdesign
 Tags: visibility, dynamic content, conditional content, conditional blocks, restrict blocks
 Requires at least: 5.5
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 1.9.1
+Stable tag: 2.0.0
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -188,19 +188,21 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ==
 
-= 2.0.0 - 2021-07-TBD =
+= 2.0.0 - 2021-07-27 =
 
 **Added**
 
 * Added the ability to restrict visibility by specific users as part of the User Role control.
+* Added the ability to customize the color of the contextual indicators.
 * Added a "block not compatible" messaging to the Legacy Widget block in WordPress 5.8, since the block does not support custom attributes.
 * Added Block Visibility Pro ad to settings pages to inform users about the Pro add-on.
-* Added a direct link to the plugin Knowledge Base in the settings masthead.
+* Added a direct link to the plugin Knowledge Base in the plugin settings masthead.
 
 **Changed**
 
-* Changed the contextual indicator styling (again) to improve the UI/UX. Color now matches the set `--wp-admin-theme-color` and indicators have been moved to the ::after pseudo element for improved block compatibility.
-* Change the control toolbar styling to match the upcoming dimensions panel UI in Gutenberg.
+* Changed how the WP Fusion control logic works to be more intuitive. Now all tag conditions need to be *true* for the block to be visible. In v1.9.1 and lower, the conditions operated independently. Thanks @marlonsabala for bringing this to our attention!
+* Changed the contextual indicator styling (again) to improve the UI/UX. Color now defaults to the set `--wp-admin-theme-color` and indicators have been moved to the ::after pseudo element for improved block compatibility.
+* Changed the control toolbar styling to match the upcoming dimensions panel UI in Gutenberg.
 
 **Removed**
 
@@ -213,6 +215,8 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 * Fixed error introduced in WordPress 5.8 on the block-based Widgets screen by removing the wp-edit-post dependency from the plugin.
 * Fixed incorrect font-weight on contextual indications for heading blocks.
 * Fixed spelling errors in plugin settings. Thanks @paaljoachim!
+* Fixed display logic in the Date & Time control when a single schedule was disabled, but others were enabled.
+* Fixed display logic in the ACF control when a single rule set was disabled, but others were enabled.
 
 = 1.9.1 - 2021-06-18 =
 
