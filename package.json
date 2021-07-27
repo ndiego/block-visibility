@@ -1,6 +1,6 @@
 {
 	"name": "block-visibility",
-	"version": "1.9.0",
+	"version": "2.0.0",
 	"description": "Provides visibility controls and scheduling functionality to all WordPress blocks.",
 	"author": "Nick Diego",
 	"license": "GPL-2.0-or-later",

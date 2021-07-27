@@ -21,7 +21,7 @@ final class Block_Visibility {
 	 * @since 1.4.0
 	 * @var string
 	 */
-	public $version = '1.9.1';
+	public $version = '2.0.0';
 
 	/**
 	 * Return singleton instance of the Block Visibility plugin.

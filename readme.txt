@@ -26,7 +26,7 @@ Work directly in the Block Editor with blocks you are already familiar with. The
 It takes just **3 simple steps**:
 
 1. Create your content using **any** WordPress block.
-2. Select the desired Visibility Controls.
+2. Select the desired visibility conditions.
 3. Save the page/post and marvel at the results!
 
 === Free Features ===
@@ -39,7 +39,7 @@ It takes just **3 simple steps**:
 * Only show blocks to **logged-in** users.
 * Only show blocks to **logged-out** users.
 * Only show blocks to users with **specific roles** (Administrator, Subscriber, Customer, Member etc.)
-* Only show blocks to **specific users** on your website. **NEW** 🎉
+* Only show blocks to **specific users**. Great for personalization. **NEW** 🎉
 * Show or hide dynamic blocks based on **URL query strings**. Great for marketing campaigns!
 * **Advanced Custom Fields (ACF):** Control the visibility of block content based on [ACF](https://wordpress.org/plugins/advanced-custom-fields/) fields.
 * **WP Fusion:** Combine Block Visibility with the power of [WP Fusion](https://wordpress.org/plugins/wp-fusion-lite/) to conditionally show or hide content based on data from your favorite CRM or marketing automation platform.
@@ -48,9 +48,10 @@ It takes just **3 simple steps**:
 
 * Globally disable any visibility control.
 * Restrict visibility controls to specific block types.
-* Set permissions so only certain users have access to visibility controls.
+* Set permissions so only certain users have access to visibility conditions.
 * Configure up to 4 different breakpoints to optimize the screen size controls.
 * Disable contextual indicators and other plugin utilities.
+* Customize the contextual indicator color to enhance theme compatibility. **NEW** 🎉
 * Enable Full Control Mode 🚀 (See the FAQs).
 * Remove all plugin settings on uninstall.
 
@@ -97,7 +98,7 @@ Here’s a look at what's currently included with Pro:
 * **WooCommerce** conditional block logic for shopping cart contents, product details, customer metrics and more.
 * **Easy Digital Downloads** conditional block logic for shopping cart contents, customer metrics and more.
 * Access to premium email support.
-* More to come...
+* More conditions coming soon...
 
 **[Learn More About Pro →](https://www.blockvisibilitywp.com/pro/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)**
 
@@ -105,7 +106,15 @@ Here’s a look at what's currently included with Pro:
 
 Block Visibility is designed to work with **any** block and has been tested with these top block libraries and plugins.
 
-* WooCommerce
+**Compatibility + Direct Integration**
+
+* Advanced Custom Fields (Free)
+* WP Fusion (Free)
+* WooCommerce (Pro)
+* Easy Digital Downloads (Pro)
+
+**Compatibility**
+
 * Jetpack
 * CoBlocks
 * Redux Framework
@@ -118,8 +127,6 @@ Block Visibility is designed to work with **any** block and has been tested with
 * Getwid
 * EditorsKit
 * Genesis Blocks
-* Advanced Custom Fields (ACF)
-* WP Fusion
 
 Find an issue? Let us know in the plugin support forum and we will investigate ASAP. Excellent compatibility with the greater WordPress block ecosystem is our top priority.
 
@@ -135,12 +142,14 @@ Stay up-to-date on Block Visibility using the links below. The plugin is also be
 == Screenshots ==
 
 1. Quickly and easily hide show or hide blocks on your website.
-2. Schedule content, i.e. any Gutenberg block, using start and end date/time settings. The plugin provides complete block scheduling and work with all Gutenberg blocks, including WooCommerce as seen here.
+2. Schedule blocks using start and end date/time settings. The plugin provides complete block scheduling and work with all Gutenberg blocks, including WooCommerce as seen here. The [Pro add-on](https://www.blockvisibilitywp.com/pro/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) adds day-of-week and time-of-day recursion functionality.
 3. Show or hide block on mobile devices, tables, desktops and more.
 4. Control who can see each Gutenberg block with user role restrictions. Great for personalization.
-5. General plugin settings to enable/disable certain functionality including user permissions and Full Control Mode.
-6. Choose which conditional visibility controls you would like to use on your site.
-7. Disable or enable conditional visibility on certain block types with the Block Manager.
+5. Create unique marketing campaigns using query string parameters to display personalized messaging ([See it in action](https://www.blockvisibilitywp.com?bv_query=example))
+6. Current integrations include Advanced Custom Fields and WP Fusion. Robust eCommerce integrations for WooCommerce and Easy Digital Downloads are available in the [Pro add-on](https://www.blockvisibilitywp.com/pro/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme).
+7. General plugin settings to enable/disable certain functionality including user permissions and Full Control Mode.
+8. Choose which conditional visibility controls you would like to use on your site.
+9. Disable or enable conditional visibility on certain block types with the Block Manager.
 
 == Installation ==
 
@@ -213,7 +222,6 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 **Fixed**
 
 * Fixed error introduced in WordPress 5.8 on the block-based Widgets screen by removing the wp-edit-post dependency from the plugin.
-* Fixed incorrect font-weight on contextual indications for heading blocks.
 * Fixed spelling errors in plugin settings. Thanks @paaljoachim!
 * Fixed display logic in the Date & Time control when a single schedule was disabled, but others were enabled.
 * Fixed display logic in the ACF control when a single rule set was disabled, but others were enabled.
