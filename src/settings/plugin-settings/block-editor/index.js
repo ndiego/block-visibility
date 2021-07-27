@@ -181,6 +181,7 @@ export default function BlockEditor( props ) {
 					<div>
 						<BaseControl
 							id="indicator-color"
+							className="settings-type__color-selected"
 							label={ __(
 								'Indicator color',
 								'block-visibility'
