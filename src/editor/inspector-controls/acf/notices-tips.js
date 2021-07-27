@@ -11,7 +11,7 @@ import { createInterpolateElement } from '@wordpress/element';
  * @since 1.0.0
  * @return {string} Return the rendered JSX
  */
-export default function TipsACF() {
+export default function Tips() {
 	return (
 		<>
 			<div className="usage">

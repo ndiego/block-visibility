@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { assign, findKey } from 'lodash';
-
+import classnames from 'classnames';
 /**
  * WordPress dependencies
  */
@@ -23,10 +23,10 @@ import { applyFilters } from '@wordpress/hooks';
  */
 import Masthead from './masthead';
 import Footer from './footer';
-import GettingStarted from './getting-started';
 import VisibilityControls from './visibility-controls';
 import BlockManager from './block-manager';
 import PluginSettings from './plugin-settings';
+import Ads from './ads';
 
 // Provides an entry point to slot in additional settings. Must be placed
 // outside of function to avoid unnecessary rerenders.
@@ -119,11 +119,6 @@ function Settings() {
 
 	const settingTabs = [
 		{
-			name: 'getting-started',
-			title: __( 'Getting Started', 'block-visibility' ),
-			className: 'setting-tabs__getting-started',
-		},
-		{
 			name: 'plugin-settings',
 			title: __( 'General Settings', 'block-visibility' ),
 			className: 'setting-tabs__plugin-settings',
@@ -173,7 +168,10 @@ function Settings() {
 			<AdditionalSettings />
 			<Masthead variables={ variables } />
 			<TabPanel
-				className="setting-tabs"
+				className={ classnames( {
+					'setting-tabs': true,
+					is_pro: variables?.is_pro,
+				} ) }
 				activeClass="active-tab"
 				initialTabName={ initialTab }
 				tabs={ settingTabs }
@@ -181,40 +179,47 @@ function Settings() {
 			>
 				{ ( tab ) => {
 					switch ( tab.name ) {
-						case 'getting-started':
-							return <GettingStarted variables={ variables } />;
 						case 'visibility-controls':
 							return (
-								<VisibilityControls
-									settings={ settings }
-									variables={ variables }
-									saveStatus={ saveStatus }
-									handleSettingsChange={
-										handleSettingsChange
-									}
-								/>
+								<>
+									<Ads variables={ variables } />
+									<VisibilityControls
+										settings={ settings }
+										variables={ variables }
+										saveStatus={ saveStatus }
+										handleSettingsChange={
+											handleSettingsChange
+										}
+									/>
+								</>
 							);
 						case 'block-manager':
 							return (
-								<BlockManager
-									settings={ settings }
-									variables={ variables }
-									saveStatus={ saveStatus }
-									handleSettingsChange={
-										handleSettingsChange
-									}
-								/>
+								<>
+									<Ads variables={ variables } />
+									<BlockManager
+										settings={ settings }
+										variables={ variables }
+										saveStatus={ saveStatus }
+										handleSettingsChange={
+											handleSettingsChange
+										}
+									/>
+								</>
 							);
 						case 'plugin-settings':
 							return (
-								<PluginSettings
-									settings={ settings }
-									variables={ variables }
-									saveStatus={ saveStatus }
-									handleSettingsChange={
-										handleSettingsChange
-									}
-								/>
+								<>
+									<Ads variables={ variables } />
+									<PluginSettings
+										settings={ settings }
+										variables={ variables }
+										saveStatus={ saveStatus }
+										handleSettingsChange={
+											handleSettingsChange
+										}
+									/>
+								</>
 							);
 						default:
 							return <Slot name="SettingsTabs" />;

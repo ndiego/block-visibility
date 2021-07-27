@@ -12,7 +12,7 @@ import { createInterpolateElement } from '@wordpress/element';
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
-export default function TipsWPFusion( props ) {
+export default function Tips( props ) {
 	const { variables } = props;
 	const userRoles = variables?.current_users_roles ?? [];
 	const isAdmin = userRoles.includes( 'administrator' );

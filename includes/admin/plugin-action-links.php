@@ -52,7 +52,7 @@ function add_plugin_row_meta( $plugin_meta, $plugin_file ) {
 		return $plugin_meta;
 	}
 
-	$getting_started  = '<a href="' . BLOCK_VISIBILITY_SETTINGS_URL . '&tab=getting-started" aria-label="' . esc_attr( __( 'Navigate to the Block Visibility Getting Started page.', 'block-visibility' ) ) . '">';
+	$getting_started  = '<a href="https://www.blockvisibilitywp.com/knowledge-base/guide-to-getting-started-with-block-visibility/" aria-label="' . esc_attr( __( 'Navigate to the Block Visibility Getting Started page.', 'block-visibility' ) ) . '" target="_blank">';
 	$getting_started .= __( 'Getting Started', 'block-visibility' );
 	$getting_started .= '</a>';
 

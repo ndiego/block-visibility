@@ -72,7 +72,8 @@ function acf_test( $is_visible, $settings, $attributes ) {
 		return true;
 	}
 
-	$rule_set_test_results = array();
+	// Array of results for each rule set.
+	$rule_sets_test_results = array();
 
 	foreach ( $rule_sets as $rule_set ) {
 		$enable = isset( $rule_set['enable'] ) ? $rule_set['enable'] : true;
@@ -86,15 +87,10 @@ function acf_test( $is_visible, $settings, $attributes ) {
 			$rules = isset( $rule_set['rules'] ) ? $rule_set['rules'] : array();
 		}
 
-		if ( ! $enable || 0 === count( $rules ) ) {
+		if ( $enable && 0 < count( $rules ) ) {
 
-			// If the rule set is not enabled, or there are no set rules,
-			// skip further tests.
-			$rule_set_test_results[] = 'visible';
-
-		} else {
-
-			$rules_test_results = array();
+			// Array of results for each rule within the current rule set.
+			$rule_set_test_results = array();
 
 			foreach ( $rules as $rule ) {
 				$field    = isset( $rule['field'] ) ? $rule['field'] : null;
@@ -120,37 +116,45 @@ function acf_test( $is_visible, $settings, $attributes ) {
 					}
 				}
 
-				// Reverse the test result if hide_on_schedules is active.
-				if ( $hide_on_rule_sets && 'error' !== $test_result ) {
-					$test_result =
-						'visible' === $test_result ? 'hidden' : 'visible';
-				}
-
 				// If there is an error, default to showing the block.
 				$test_result =
 					'error' === $test_result ? 'visible' : $test_result;
 
-				$rules_test_results[] = $test_result;
+				$rule_set_test_results[] = $test_result;
 			}
 
 			// Within a rule set, all tests have to pass.
-			$rule_set_test_results[] =
-				in_array( 'hidden', $rules_test_results, true )
-					? 'hidden'
-					: 'visible';
+			$rule_set_result = in_array( 'hidden', $rule_set_test_results, true )
+				? 'hidden'
+				: 'visible';
+
+			// Reverse the rule set result if hide_on_rules setting is active.
+			if ( $hide_on_rule_sets ) {
+				$rule_set_result =
+					'visible' === $rule_set_result ? 'hidden' : 'visible';
+			}
+
+			// Pass the rule set result to the rule *sets* test results array.
+			$rule_sets_test_results[] = $rule_set_result;
 		}
 	}
 
+	// If there are no enabled rule sets, or if the rule sets have no set rules,
+	// there will be no results. Default to showing the block.
+	if ( empty( $rule_sets_test_results ) ) {
+		return true;
+	}
+
 	// Under normal circumstances, need no "visible" results to hide the block.
-	// When hide_on_schedules is enabled, we need at least one "hidden" to hide.
+	// When hide_on_rule_sets is enabled, we need at least one "hidden" to hide.
 	if (
 		! $hide_on_rule_sets &&
-		! in_array( 'visible', $rule_set_test_results, true )
+		! in_array( 'visible', $rule_sets_test_results, true )
 	) {
 		return false;
 	} elseif (
 		$hide_on_rule_sets &&
-		in_array( 'hidden', $rule_set_test_results, true )
+		in_array( 'hidden', $rule_sets_test_results, true )
 	) {
 		return false;
 	} else {

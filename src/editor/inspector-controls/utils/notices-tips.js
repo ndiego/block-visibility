@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { Notice, ExternalLink } from '@wordpress/components';
 import { createInterpolateElement } from '@wordpress/element';
 
@@ -29,7 +29,7 @@ export function NoticeControlsDisabled( settingsUrl ) {
 				{
 					a: (
 						<a // eslint-disable-line
-							href={ settingsUrl }
+							href={ settingsUrl + '&tab=visibility-controls' }
 							target="_blank"
 							rel="noreferrer"
 						/>
@@ -45,7 +45,7 @@ export function NoticeControlsDisabled( settingsUrl ) {
  * at the block level.
  *
  * @since 1.6.0
- * @return {string}		 Return the rendered JSX
+ * @return {string} Return the rendered JSX
  */
 export function NoticeBlockControlsDisabled() {
 	return (
@@ -54,6 +54,46 @@ export function NoticeBlockControlsDisabled() {
 				'All visibility controls have been disabled for this block. Add controls using the three dots icon above.',
 				'block-visibility'
 			) }
+		</Notice>
+	);
+}
+
+/**
+ * Helper function for printing a notice when an incompatible block is selected.
+ *
+ * @since 2.0.0
+ * @param {string} name The name of the current block
+ * @return {string}          Return the rendered JSX
+ */
+export function NoticeIncompatibleBlock( name ) {
+	// Currently only Legacy Widget block is incompatible, improve in future.
+	const blockName =
+		name.name === 'core/legacy-widget'
+			? __( 'Legacy Widget', 'block-visibility' )
+			: __( 'Current', 'block-visibility' );
+
+	return (
+		<Notice status="warning" isDismissible={ false }>
+			<p>
+				{ sprintf(
+					// Translators: The current block name.
+					__(
+						'Unfortunately the %1$s block does not support custom attributes. Therefore it is not compatible with Block Visibility.',
+						'block-visibility'
+					),
+					blockName
+				) }
+			</p>
+			<p>
+				{ sprintf(
+					// Translators: The current block name.
+					__(
+						'As a workaround, wrap the %1$s block in a Group block. Then apply the desired visibility controls to the Group block.',
+						'block-visibility'
+					),
+					blockName
+				) }
+			</p>
 		</Notice>
 	);
 }
@@ -68,7 +108,7 @@ export function NoticeBlockControlsDisabled() {
 export function TipsControlSet( props ) {
 	const { settings, variables } = props;
 	const settingsUrl = variables?.plugin_variables.settings_url ?? '';
-    const userRoles = variables?.current_users_roles ?? [];
+	const userRoles = variables?.current_users_roles ?? [];
 	const isAdmin = userRoles.includes( 'administrator' );
 	const enableEditorNotices = isPluginSettingEnabled(
 		settings,
@@ -100,7 +140,7 @@ export function TipsControlSet( props ) {
 					<li className="tip">
 						{ createInterpolateElement(
 							__(
-								'As a website administrator, you can customize and restrict the available visibility controls in the <a>plugins settings</a>.',
+								'As a website administrator, you can customize and restrict the available visibility controls in the <a>plugin settings</a>.',
 								'block-visibility'
 							),
 							{

@@ -16,7 +16,10 @@ import { withSelect } from '@wordpress/data';
  */
 import HideBlock from './hide-block';
 import ControlSet from './control-set';
-import { NoticeControlsDisabled } from './utils/notices-tips';
+import {
+	NoticeControlsDisabled,
+	NoticeIncompatibleBlock,
+} from './utils/notices-tips';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import hasPermission from './../utils/has-permission';
 import getEnabledControls from './../../utils/get-enabled-controls';
@@ -92,6 +95,10 @@ function VisibilityInspectorControls( props ) {
 	);
 	const blockHidden = hasHideBlock && hideBlock;
 
+	// There are a few core blocks that are not compatible.
+	const incompatibleBlocks = [ 'core/legacy-widget' ];
+	const blockIsIncompatible = incompatibleBlocks.includes( name );
+
 	return (
 		// Note that the core InspectorControls component is already making use
 		// of SlotFill, and is "inside" of a <SlotFillProvider> component.
@@ -104,7 +111,7 @@ function VisibilityInspectorControls( props ) {
 				initialOpen={ false }
 			>
 				<div className="visibility-controls__container">
-					{ enabledControls.length !== 0 && (
+					{ enabledControls.length !== 0 && ! blockIsIncompatible && (
 						<>
 							<Slot name="InspectorControlsTop" />
 							<HideBlock
@@ -127,8 +134,11 @@ function VisibilityInspectorControls( props ) {
 							<Slot name="InspectorControlsBottom" />
 						</>
 					) }
-					{ enabledControls.length === 0 && (
+					{ enabledControls.length === 0 && ! blockIsIncompatible && (
 						<NoticeControlsDisabled settingsUrl={ settingsUrl } />
+					) }
+					{ blockIsIncompatible && (
+						<NoticeIncompatibleBlock name={ name } />
 					) }
 				</div>
 			</PanelBody>

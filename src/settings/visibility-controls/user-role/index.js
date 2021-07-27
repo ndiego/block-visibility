@@ -22,6 +22,7 @@ export default function UserRole( props ) {
 	// Manually set defaults, this ensures the main settings function properly
 	const enable = visibilityControls?.visibility_by_role?.enable ?? true; // eslint-disable-line
 	const enableUserRoles = visibilityControls?.visibility_by_role?.enable_user_roles ?? true; // eslint-disable-line
+	const enableUsers = visibilityControls?.visibility_by_role?.enable_users ?? true; // eslint-disable-line
 
 	let enableUserRolesElement = (
 		<ToggleControl
@@ -43,10 +44,31 @@ export default function UserRole( props ) {
 		/>
 	);
 
+	let enableUsersElement = (
+		<ToggleControl
+			label={ __(
+				'Enable individual user restrictions.',
+				'block-visibility'
+			) }
+			checked={ enableUsers }
+			onChange={ () => {
+				setVisibilityControls( {
+					...visibilityControls,
+					visibility_by_role: {
+						...visibilityControls.visibility_by_role,
+						enable_users: ! enableUsers,
+					},
+				} );
+				setHasUpdates( true );
+			} }
+		/>
+	);
+
 	if ( ! enable ) {
 		enableUserRolesElement = (
 			<Disabled>{ enableUserRolesElement }</Disabled>
 		);
+		enableUsersElement = <Disabled>{ enableUsersElement }</Disabled>;
 	}
 
 	return (
@@ -89,6 +111,16 @@ export default function UserRole( props ) {
 					<InformationPopover
 						message={ __(
 							'Restrict visibility by any user role (Administrator, Editor, Subscriber, etc.). Roles that are added by third-party plugins will also be available to choose from.',
+							'block-visibility'
+						) }
+						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					/>
+				</div>
+				<div className="settings-type__toggle has-info-popover subsetting">
+					{ enableUsersElement }
+					<InformationPopover
+						message={ __(
+							'Restrict visibility to specific individual users on your website based on user ID. Multiple users can be selected at once.',
 							'block-visibility'
 						) }
 						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"

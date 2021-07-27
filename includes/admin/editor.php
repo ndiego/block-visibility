@@ -17,11 +17,11 @@ use function BlockVisibility\Utils\get_asset_file as get_asset_file;
 use function BlockVisibility\Utils\get_user_roles as get_user_roles;
 
 /**
- * Enqueue plugin specific editor scripts and styles
+ * Enqueue plugin specific editor scripts
  *
  * @since 1.0.0
  */
-function enqueue_editor_assets() {
+function enqueue_editor_scripts() {
 
 	// Scripts.
 	$asset_file = get_asset_file( 'dist/block-visibility-editor' );
@@ -44,6 +44,23 @@ function enqueue_editor_assets() {
 		$is_full_control_mode,
 		'before'
 	);
+}
+/**
+ * Need to add at admin_init instead of the normal enqueue_block_editor_assets
+ * so that our attributes load for third-party blocks. Hopefully this will be
+ * resolved in future releases of WP. Using enqueue_block_editor_assets is the
+ * ideal implementation. The primary culprit is Jetpack blocks.
+ */
+add_action( 'admin_init', __NAMESPACE__ . '\enqueue_editor_scripts', 10000 );
+
+/**
+ * Enqueue plugin specific editor styles
+ *
+ * @TODO Move the contextual styles to add_editor_style when fixed in core.
+ *
+ * @since 2.0.0
+ */
+function enqueue_editor_styles() {
 
 	// Styles.
 	$asset_file = get_asset_file( 'dist/block-visibility-editor-styles' );
@@ -66,15 +83,21 @@ function enqueue_editor_assets() {
 			array(),
 			$asset_file['version']
 		);
+
+		// Allow users to customize the color of the contextual indicators.
+		$custom_color = get_contextual_indicator_color();
+
+		if ( $custom_color ) {
+			$inline_style = '.block-visibility__has-visibility, .block-visibility__has-visibility.components-placeholder.components-placeholder, .block-visibility__has-visibility.components-placeholder { outline-color: ' . $custom_color . ' } .block-visibility__has-visibility::after { background-color: ' . $custom_color . ' }';
+
+			wp_add_inline_style(
+				'block-visibility-contextual-indicator-styles',
+				$inline_style
+			);
+		}
 	}
 }
-/**
- * Need to add at admin_init instead of the normal enqueue_block_editor_assets
- * so that our attributes load for third-party blocks. Hopefully this will be
- * resolved in future releases of WP. Using enqueue_block_editor_assets is the
- * ideal implementation. The primary culprit is Jetpack blocks.
- */
-add_action( 'admin_init', __NAMESPACE__ . '\enqueue_editor_assets', 10000 );
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_styles' );
 
 /**
  * Enqueue editor scripts in the customizer to work with new block based Widgets
@@ -131,8 +154,6 @@ function dequeue_editor_assets_on_pages_without_block_editor() {
 
 	if ( $should_dequeue ) {
 		wp_dequeue_script( 'block-visibility-editor-scripts' );
-		wp_dequeue_style( 'block-visibility-editor-styles' );
-		wp_dequeue_style( 'block-visibility-contextual-indicator-styles' );
 	}
 }
 add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\dequeue_editor_assets_on_pages_without_block_editor' );
@@ -175,4 +196,23 @@ function contextual_indicators_enabled() {
 	}
 
 	return $enabled;
+}
+
+/**
+ * Fetch the custom contextual indicator color if there is one.
+ *
+ * @since 2.0.0
+ *
+ * @return bool Returns true or false.
+ */
+function get_contextual_indicator_color() {
+	$settings = get_option( 'block_visibility_settings' );
+
+	if ( isset( $settings['plugin_settings']['contextual_indicator_color'] ) ) {
+		if ( $settings['plugin_settings']['contextual_indicator_color'] ) {
+			return $settings['plugin_settings']['contextual_indicator_color'];
+		}
+	}
+
+	return false;
 }

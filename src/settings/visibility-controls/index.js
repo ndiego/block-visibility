@@ -43,78 +43,81 @@ export default function VisibilityControls( props ) {
 	}
 
 	return (
-		<div className="setting-tabs__visibility-controls inner-container">
-			<div className="setting-tabs__setting-controls">
-				<div className="setting-controls__title">
-					<span>
-						{ __( 'Visibility Controls', 'block-visibility' ) }
-					</span>
-					<InformationPopover
-						message={ __(
-							'The settings below allow you to configure the visibility controls that power Block Visibility. Pick and choose which controls you would like to enable and how you would like them to function.',
-							'block-visibility'
-						) }
-						subMessage={ __(
-							'When a visibility control is disabled, blocks that relied on the disabled control will become visible again unless they are hidden by other enabled controls. Visit the plugin Knowledge Base for more information on configuring visibility controls.',
-							'block-visibility'
-						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/guide-to-visibility-controls-in-block-visibility/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+		<>
+			<div className="setting-tabs__visibility-controls inner-container">
+				<div className="setting-tabs__setting-controls">
+					<div className="setting-controls__title">
+						<span>
+							{ __( 'Visibility Controls', 'block-visibility' ) }
+						</span>
+						<InformationPopover
+							message={ __(
+								'The settings below allow you to configure the visibility controls that power Block Visibility. Pick and choose which controls you would like to enable and how you would like them to function.',
+								'block-visibility'
+							) }
+							subMessage={ __(
+								'When a visibility control is disabled, blocks that relied on the disabled control will become visible again unless they are hidden by other enabled controls. Visit the plugin Knowledge Base for more information on configuring visibility controls.',
+								'block-visibility'
+							) }
+							link="https://www.blockvisibilitywp.com/knowledge-base/guide-to-visibility-controls-in-block-visibility/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						/>
+					</div>
+					<SaveSettings
+						saveStatus={ saveStatus }
+						hasUpdates={ hasUpdates }
+						onSettingsChange={ onSettingsChange }
 					/>
 				</div>
-				<SaveSettings
+				<Slot name="VisibilityControlsTop" />
+				<HideBlock
+					visibilityControls={ visibilityControls }
+					setVisibilityControls={ setVisibilityControls }
+					setHasUpdates={ setHasUpdates }
+					{ ...props }
+				/>
+				<DateTime
+					visibilityControls={ visibilityControls }
+					setVisibilityControls={ setVisibilityControls }
+					setHasUpdates={ setHasUpdates }
+					{ ...props }
+				/>
+				<UserRole
+					visibilityControls={ visibilityControls }
+					setVisibilityControls={ setVisibilityControls }
+					setHasUpdates={ setHasUpdates }
+					{ ...props }
+				/>
+				<ScreenSize
+					visibilityControls={ visibilityControls }
+					setVisibilityControls={ setVisibilityControls }
+					setHasUpdates={ setHasUpdates }
+					{ ...props }
+				/>
+				<QueryString
+					visibilityControls={ visibilityControls }
+					setVisibilityControls={ setVisibilityControls }
+					setHasUpdates={ setHasUpdates }
+					{ ...props }
+				/>
+				<Slot name="VisibilityControlsMiddle" />
+				<Integrations
+					visibilityControls={ visibilityControls }
+					setVisibilityControls={ setVisibilityControls }
 					saveStatus={ saveStatus }
-					hasUpdates={ hasUpdates }
 					onSettingsChange={ onSettingsChange }
+					hasUpdates={ hasUpdates }
+					setHasUpdates={ setHasUpdates }
+					{ ...props }
+				/>
+				<Slot name="VisibilityControlsBottom" />
+				<AdditionalControls
+					visibilityControls={ visibilityControls }
+					setVisibilityControls={ setVisibilityControls }
+					setHasUpdates={ setHasUpdates }
+					{ ...props }
 				/>
 			</div>
-			<Slot name="VisibilityControlsTop" />
-			<HideBlock
-				visibilityControls={ visibilityControls }
-				setVisibilityControls={ setVisibilityControls }
-				setHasUpdates={ setHasUpdates }
-				{ ...props }
-			/>
-			<DateTime
-				visibilityControls={ visibilityControls }
-				setVisibilityControls={ setVisibilityControls }
-				setHasUpdates={ setHasUpdates }
-				{ ...props }
-			/>
-			<UserRole
-				visibilityControls={ visibilityControls }
-				setVisibilityControls={ setVisibilityControls }
-				setHasUpdates={ setHasUpdates }
-				{ ...props }
-			/>
-			<ScreenSize
-				visibilityControls={ visibilityControls }
-				setVisibilityControls={ setVisibilityControls }
-				setHasUpdates={ setHasUpdates }
-				{ ...props }
-			/>
-			<QueryString
-				visibilityControls={ visibilityControls }
-				setVisibilityControls={ setVisibilityControls }
-				setHasUpdates={ setHasUpdates }
-				{ ...props }
-			/>
-			<Slot name="VisibilityControlsMiddle" />
-			<Integrations
-				visibilityControls={ visibilityControls }
-				setVisibilityControls={ setVisibilityControls }
-				saveStatus={ saveStatus }
-				onSettingsChange={ onSettingsChange }
-				hasUpdates={ hasUpdates }
-				setHasUpdates={ setHasUpdates }
-				{ ...props }
-			/>
-			<Slot name="VisibilityControlsBottom" />
-			<AdditionalControls
-				visibilityControls={ visibilityControls }
-				setVisibilityControls={ setVisibilityControls }
-				setHasUpdates={ setHasUpdates }
-				{ ...props }
-			/>
-		</div>
+			<Slot name="SettingsTabPanelBottom" />
+		</>
 	);
 }

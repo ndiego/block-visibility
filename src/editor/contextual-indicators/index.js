@@ -142,7 +142,7 @@ function withContextualIndicators( BlockListBlock ) {
 
 		let controlsClass = '';
 
-		if ( activeControls.length > 2 ) {
+		if ( activeControls.length > 1 ) {
 			controlsClass =
 				'block-visibility__has-' + activeControls.length + '-controls';
 		} else if ( activeControls.length !== 0 ) {

@@ -26,6 +26,8 @@ export default function hasUserRole(
 	const visibilityByRole = controlAtts?.visibilityByRole ?? 'public';
 	const restrictedRoles = controlAtts?.restrictedRoles ?? [];
 	const hideOnRestrictedRoles = controlAtts?.hideOnRestrictedRoles ?? false;
+	const restrictedUsers = controlAtts?.restrictedUsers ?? [];
+	const hideOnRestrictedUsers = controlAtts?.hideOnRestrictedUsers ?? false;
 
 	let indicatorTest = true;
 
@@ -47,6 +49,17 @@ export default function hasUserRole(
 		visibilityByRole === 'user-role' &&
 		restrictedRoles.length === 0 &&
 		hideOnRestrictedRoles
+	) {
+		indicatorTest = false;
+	}
+
+	// If the restriction is set to users, but no users are selected,
+	// and "hide on restricted" has been set. In this case the block actually
+	// does not have any role-based visibility restrictions.
+	if (
+		visibilityByRole === 'users' &&
+		restrictedUsers.length === 0 &&
+		hideOnRestrictedUsers
 	) {
 		indicatorTest = false;
 	}
