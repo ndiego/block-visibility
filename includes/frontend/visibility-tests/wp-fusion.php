@@ -99,46 +99,6 @@ function wp_fusion_test( $is_visible, $settings, $attributes ) {
 
 		$can_access = run_wp_fusion_tests( $tags_any, $tags_all, $tags_not, $visibility_by_role );
 
-		// $user_tags = wp_fusion()->user->get_tags();
-		//
-		// // Only check the (any) and (all) tags when visibility_by_role is set
-		// // to logged-in or user-role.
-		// if (
-		// 	'logged-in' === $visibility_by_role ||
-		// 	'user-role' === $visibility_by_role
-		// ) {
-		// 	if ( ! empty( $tags_any ) ) {
-		//
-		// 		// Required tags (any).
-		// 		$result = array_intersect( $tags_any, $user_tags );
-		//
-		// 		if ( ! empty( $result ) ) {
-		// 			$can_access = true;
-		// 		}
-		// 	}
-		//
-		// 	if ( ! empty( $tags_all ) ) {
-		//
-		// 		// Required tags (all).
-		// 		$result = array_intersect( $tags_all, $user_tags );
-		//
-		// 		// The user must have all the seleted tags but could also have more.
-		// 		if ( count( $result ) === count( $tags_all ) ) {
-		// 			$can_access = true;
-		// 		}
-		// 	}
-		// }
-		//
-		// // Check the (not) tags on all visibility_by_role settings.
-		// if ( ! empty( $tags_not ) ) {
-		//
-		// 	// Required tags (not).
-		// 	$result = array_intersect( $tags_not, $user_tags );
-		//
-		// 	if ( empty( $result ) ) {
-		// 		$can_access = true;
-		// 	}
-		// }
 	} else {
 		// The user is not logged-in.
 		$can_access = true;
@@ -168,7 +128,17 @@ function wp_fusion_test( $is_visible, $settings, $attributes ) {
 // but before the final "hide block" tests.
 add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\wp_fusion_test', 15, 3 );
 
-
+/**
+ * Run individuals test on each category of tags.
+ *
+ * @since 2.0.0
+ *
+ * @param array   $tags_any           All "any" tags.
+ * @param array   $tags_all           All "all" tags.
+ * @param array   $tags_not           All "not" tags.
+ * @param string  $visibility_by_role The current user role setting.
+ * @return boolean                    Return true if the block should be visible, false if not.
+ */
 function run_wp_fusion_tests( $tags_any, $tags_all, $tags_not, $visibility_by_role ) {
 
 	$user_tags = wp_fusion()->user->get_tags();
