@@ -607,6 +607,20 @@ $mobile: 426px;
 					    box-shadow: none;
 					    outline: none;
 					}
+
+					/* Fix for incorrect tooltip formatting */
+					.components-circular-option-picker__option-wrapper {
+						button {
+							&>span {
+								position: absolute;
+
+								* {
+									position: absolute;
+									font-size: 10px !important;
+								}
+							}
+						}
+					}
 				}
 
 				.subsetting {
