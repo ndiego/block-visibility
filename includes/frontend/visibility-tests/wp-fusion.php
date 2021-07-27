@@ -133,11 +133,11 @@ add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\wp_fusion_tes
  *
  * @since 2.0.0
  *
- * @param array   $tags_any           All "any" tags.
- * @param array   $tags_all           All "all" tags.
- * @param array   $tags_not           All "not" tags.
- * @param string  $visibility_by_role The current user role setting.
- * @return boolean                    Return true if the block should be visible, false if not.
+ * @param array  $tags_any           All "any" tags.
+ * @param array  $tags_all           All "all" tags.
+ * @param array  $tags_not           All "not" tags.
+ * @param string $visibility_by_role The current user role setting.
+ * @return boolean                   Return true if the block should be visible, false if not.
  */
 function run_wp_fusion_tests( $tags_any, $tags_all, $tags_not, $visibility_by_role ) {
 

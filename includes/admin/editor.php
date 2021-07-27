@@ -92,7 +92,7 @@ function enqueue_editor_styles() {
 
 			wp_add_inline_style(
 				'block-visibility-contextual-indicator-styles',
-				$inline_style,
+				$inline_style
 			);
 		}
 	}
@@ -206,7 +206,7 @@ function contextual_indicators_enabled() {
  * @return bool Returns true or false.
  */
 function get_contextual_indicator_color() {
-	$settings  = get_option( 'block_visibility_settings' );
+	$settings = get_option( 'block_visibility_settings' );
 
 	if ( isset( $settings['plugin_settings']['contextual_indicator_color'] ) ) {
 		if ( $settings['plugin_settings']['contextual_indicator_color'] ) {

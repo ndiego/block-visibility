@@ -7,7 +7,13 @@ import Select from 'react-select';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { ToggleControl, Slot, BaseControl, ColorPalette, ColorIndicator } from '@wordpress/components';
+import {
+	BaseControl,
+	ColorIndicator,
+	ColorPalette,
+	ToggleControl,
+	Slot,
+} from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -85,10 +91,9 @@ export default function BlockEditor( props ) {
 		{ name: __( 'Purple', 'block-visibility' ), color: '#826EB4' },
 	];
 
-	const indicatorColor =
-		contextualIndicatorColor
-			? contextualIndicatorColor
-			: 'var(--wp-admin-theme-color)';
+	const indicatorColor = contextualIndicatorColor
+		? contextualIndicatorColor
+		: 'var(--wp-admin-theme-color)';
 
 	return (
 		<div className="setting-tabs__settings-panel">
@@ -175,6 +180,7 @@ export default function BlockEditor( props ) {
 				<div className="settings-type__color has-info-popover">
 					<div>
 						<BaseControl
+							id="indicator-color"
 							label={ __(
 								'Indicator color',
 								'block-visibility'
