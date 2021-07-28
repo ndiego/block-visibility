@@ -142,11 +142,11 @@ Stay up-to-date on Block Visibility using the links below. The plugin is also be
 == Screenshots ==
 
 1. Quickly and easily hide show or hide blocks on your website.
-2. Schedule blocks using start and end date/time settings. The plugin provides complete block scheduling and work with all Gutenberg blocks, including WooCommerce as seen here. The [Pro add-on](https://www.blockvisibilitywp.com/pro/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) adds day-of-week and time-of-day recursion functionality.
+2. Schedule blocks using start and end date/time settings. The plugin provides complete block scheduling and work with all Gutenberg blocks, including WooCommerce as seen here. The Pro add-on includes day-of-week and time-of-day recursion functionality.
 3. Show or hide block on mobile devices, tables, desktops and more.
 4. Control who can see each Gutenberg block with user role restrictions. Great for personalization.
-5. Create unique marketing campaigns using query string parameters to display personalized messaging ([See it in action](https://www.blockvisibilitywp.com?bv_query=example))
-6. Current integrations include Advanced Custom Fields and WP Fusion. Robust eCommerce integrations for WooCommerce and Easy Digital Downloads are available in the [Pro add-on](https://www.blockvisibilitywp.com/pro/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme).
+5. Create unique marketing campaigns using query string parameters to display personalized messaging.
+6. Current integrations include Advanced Custom Fields and WP Fusion. Robust eCommerce integrations for WooCommerce and Easy Digital Downloads are available in the Pro add-on.
 7. General plugin settings to enable/disable certain functionality including user permissions and Full Control Mode.
 8. Choose which conditional visibility controls you would like to use on your site.
 9. Disable or enable conditional visibility on certain block types with the Block Manager.
