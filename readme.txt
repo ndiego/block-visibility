@@ -197,6 +197,12 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ==
 
+= 2.0.1 - 2021-08-TBD =
+
+**Fixed**
+
+* Fixed z-index on contextual indicators that was causing some unwanted overlapping.
+
 = 2.0.0 - 2021-07-27 =
 
 **Added**
