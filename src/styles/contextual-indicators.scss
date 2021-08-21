@@ -90,6 +90,9 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
         mask-position: calc( 100% - 4px ) 4px;
         -webkit-mask-repeat: no-repeat;
         mask-repeat: no-repeat;
+
+        // Fixes opacity overlay error with the Cover block.
+        z-index: 1;
     }
 
     // This serves as a default.
