@@ -188,7 +188,7 @@ export default function Rule( props ) {
 /**
  * Renders the operator input.
  *
- * @since 1.0.0
+ * @since 1.9.0
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
@@ -222,7 +222,7 @@ function FieldOperator( props ) {
 /**
  * Renders the sub-field and value inputs.
  *
- * @since 1.0.0
+ * @since 1.9.0
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
