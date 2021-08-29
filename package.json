@@ -18,7 +18,7 @@
 		"packages-update": "wp-scripts packages-update"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^15.0.1",
+		"@wordpress/scripts": "^18.0.0",
 		"classnames": "^2.3.1",
 		"lodash": "^4.17.21",
 		"postcss": "^8.2.15",
