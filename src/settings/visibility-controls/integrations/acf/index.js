@@ -19,11 +19,7 @@ import InformationPopover from './../../../utils/information-popover';
  * @return {string}		 Return the rendered JSX
  */
 export default function ACF( props ) {
-	const {
-		variables,
-		visibilityControls,
-		setVisibilityControls,
-	} = props;
+	const { variables, visibilityControls, setVisibilityControls } = props;
 	const acfActive = variables?.integrations?.acf?.active ?? false;
 
 	if ( ! acfActive ) {

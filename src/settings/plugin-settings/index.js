@@ -36,7 +36,7 @@ export default function PluginSettings( props ) {
 	function setPluginSettings( newSettings ) {
 		setSettings( {
 			...settings,
-			plugin_settings: newSettings
+			plugin_settings: newSettings,
 		} );
 		setHasUpdates( true );
 	}
@@ -57,7 +57,7 @@ export default function PluginSettings( props ) {
 					/>
 				</div>
 				<UpdateSettings
-					tabSlug='plugin_settings'
+					tabSlug="plugin_settings"
 					tabSettings={ pluginSettings }
 					hasUpdates={ hasUpdates }
 					setHasUpdates={ setHasUpdates }

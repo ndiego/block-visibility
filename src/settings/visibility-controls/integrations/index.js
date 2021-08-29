@@ -59,7 +59,7 @@ export default function Integrations( props ) {
 					/>
 				</div>
 				<UpdateSettings
-					tabSlug='visibility_controls'
+					tabSlug="visibility_controls"
 					tabSettings={ visibilityControls }
 					{ ...props }
 				/>

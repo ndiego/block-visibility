@@ -38,7 +38,7 @@ export default function VisibilityControls( props ) {
 	function setVisibilityControls( newSettings ) {
 		setSettings( {
 			...settings,
-			visibility_controls: newSettings
+			visibility_controls: newSettings,
 		} );
 		setHasUpdates( true );
 	}
@@ -64,7 +64,7 @@ export default function VisibilityControls( props ) {
 						/>
 					</div>
 					<UpdateSettings
-						tabSlug='visibility_controls'
+						tabSlug="visibility_controls"
 						tabSettings={ visibilityControls }
 						hasUpdates={ hasUpdates }
 						setHasUpdates={ setHasUpdates }

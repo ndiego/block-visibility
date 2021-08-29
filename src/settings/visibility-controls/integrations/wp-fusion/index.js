@@ -19,11 +19,7 @@ import InformationPopover from './../../../utils/information-popover';
  * @return {string}		 Return the rendered JSX
  */
 export default function WPFusion( props ) {
-	const {
-		variables,
-		visibilityControls,
-		setVisibilityControls,
-	} = props;
+	const { variables, visibilityControls, setVisibilityControls } = props;
 	const wpFusionActive = variables?.integrations?.wp_fusion?.active ?? false;
 
 	if ( ! wpFusionActive ) {

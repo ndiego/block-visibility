@@ -7,9 +7,9 @@ import { has } from 'lodash';
  * Check if the given visibility control settings is enabled.
  *
  * @since 1.1.0
- * @param {Object} settings        All plugin settings
- * @param {string} control         Name of control that has the setting
- * @param {string} setting         Name of setting to check
+ * @param {Object}  settings       All plugin settings
+ * @param {string}  control        Name of control that has the setting
+ * @param {string}  setting        Name of setting to check
  * @param {boolean} settingDefault The defaualt if the setting cannot be found (optional)
  * @return {boolean}		       Whether the setting is enabled or not
  */

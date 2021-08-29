@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { assign, findKey } from 'lodash';
+import { findKey } from 'lodash';
 import classnames from 'classnames';
 /**
  * WordPress dependencies
@@ -41,7 +41,6 @@ const AdditionalSettings = withFilters(
  */
 function Settings() {
 	const [ status, setStatus ] = useState( 'idle' );
-	const [ saveStatus, setSaveStatus ] = useState( 'saved' );
 	const [ settings, setSettings ] = useState( null );
 	const [ variables, setVariables ] = useState( null );
 
@@ -67,8 +66,8 @@ function Settings() {
 		fetchData( 'variables', setVariables );
 	}, [] );
 
-	function onSetSettings( settings ) {
-		setSettings( settings );
+	function onSetSettings( newSettings ) {
+		setSettings( newSettings );
 	}
 
 	// Display loading/error message while settings are being fetched.
@@ -166,7 +165,6 @@ function Settings() {
 										settings={ settings }
 										setSettings={ onSetSettings }
 										variables={ variables }
-										saveStatus={ saveStatus }
 									/>
 								</>
 							);
@@ -178,7 +176,6 @@ function Settings() {
 										settings={ settings }
 										setSettings={ onSetSettings }
 										variables={ variables }
-										saveStatus={ saveStatus }
 									/>
 								</>
 							);
@@ -190,7 +187,6 @@ function Settings() {
 										settings={ settings }
 										setSettings={ onSetSettings }
 										variables={ variables }
-										saveStatus={ saveStatus }
 									/>
 								</>
 							);

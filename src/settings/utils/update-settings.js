@@ -33,7 +33,7 @@ export default function UpdateSettings( props ) {
 		hasUpdates,
 		setHasUpdates,
 		tabSlug,
-		tabSettings
+		tabSettings,
 	} = props;
 
 	const updateButton =
@@ -47,10 +47,10 @@ export default function UpdateSettings( props ) {
 
 		if ( type === 'reset' ) {
 			setStatus( 'resetting' );
-			body = { 'reset': tabSlug };
+			body = { reset: tabSlug };
 		} else if ( type === 'resetAll' ) {
 			setStatus( 'resetting' );
-			body = { 'reset': 'all' };
+			body = { reset: 'all' };
 		} else {
 			setStatus( 'saving' );
 			body = assign( { ...settings }, { [ tabSlug ]: tabSettings } );
@@ -75,7 +75,7 @@ export default function UpdateSettings( props ) {
 			if ( type === 'reset' || type === 'resetAll' ) {
 				setStatus( 'reset' );
 				setResetModalOpen( false );
-			} {
+			} else {
 				setStatus( 'saved' );
 				setHasUpdates( false );
 			}
@@ -112,7 +112,7 @@ export default function UpdateSettings( props ) {
 						</span>
 					),
 				] }
-				{ status !== 'saving' &&
+				{ status !== 'saving' && (
 					<Button
 						className="reset-settings__save-button"
 						onClick={ () => setResetModalOpen( true ) }
@@ -120,7 +120,7 @@ export default function UpdateSettings( props ) {
 					>
 						{ __( 'Reset Settings', 'block-visibility' ) }
 					</Button>
-				}
+				) }
 				<Button
 					className={ classnames( 'save-settings__save-button', {
 						'is-busy': status === 'saving',
@@ -135,10 +135,7 @@ export default function UpdateSettings( props ) {
 			{ resetModalOpen && (
 				<Modal
 					className="block-visibility__reset-modal"
-					title={ __(
-						'Reset Settings',
-						'block-visibility'
-					) }
+					title={ __( 'Reset Settings', 'block-visibility' ) }
 					onRequestClose={ () => setResetModalOpen( false ) }
 				>
 					<p>

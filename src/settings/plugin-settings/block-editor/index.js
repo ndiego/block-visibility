@@ -29,13 +29,7 @@ import InformationPopover from './../../utils/information-popover';
  * @return {string}		 Return the rendered JSX
  */
 export default function BlockEditor( props ) {
-	const {
-		settings,
-		variables,
-		pluginSettings,
-		setPluginSettings,
-	} = props;
-
+	const { settings, variables, pluginSettings, setPluginSettings } = props;
 	let enabledControls = getEnabledControls( settings, variables );
 
 	enabledControls = enabledControls.filter(

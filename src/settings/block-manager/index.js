@@ -42,7 +42,7 @@ function BlockManager( props ) {
 	function setDisabledBlocks( newSettings ) {
 		setSettings( {
 			...settings,
-			disabled_blocks: newSettings
+			disabled_blocks: newSettings,
 		} );
 		setHasUpdates( true );
 	}
@@ -164,7 +164,7 @@ function BlockManager( props ) {
 					/>
 				</div>
 				<UpdateSettings
-					tabSlug='disabled_blocks'
+					tabSlug="disabled_blocks"
 					tabSettings={ disabledBlocks }
 					hasUpdates={ hasUpdates }
 					setHasUpdates={ setHasUpdates }

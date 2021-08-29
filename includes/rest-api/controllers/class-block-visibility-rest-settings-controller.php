@@ -95,8 +95,8 @@ class Block_Visibility_REST_Settings_Controller extends WP_REST_Controller {
 			return new WP_Error( '500', $error_message, array( 'status' => 500 ) );
 		}
 
-		if ( isset( $settings[ 'reset' ] ) ) {
-			if ( 'all' === $settings[ 'reset' ] ) {
+		if ( isset( $settings['reset'] ) ) {
+			if ( 'all' === $settings['reset'] ) {
 
 				// Delete the currently saved settings and pull the defaults.
 				delete_option( 'block_visibility_settings' );
@@ -106,7 +106,7 @@ class Block_Visibility_REST_Settings_Controller extends WP_REST_Controller {
 				// Remove the settings we want to reset from the currently saved
 				// settings.
 				$old_settings = get_option( 'block_visibility_settings' );
-				unset( $old_settings[ $settings[ 'reset' ] ] );
+				unset( $old_settings[ $settings['reset'] ] );
 
 				delete_option( 'block_visibility_settings' );
 
