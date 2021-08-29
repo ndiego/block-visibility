@@ -149,7 +149,7 @@ final class Block_Visibility {
 
 	/**
 	 * This is needed to resolve an issue with blocks that use the
-	 * ServerSideRender component. Regustering the attributes only in js
+	 * ServerSideRender component. Registering the attributes only in js
 	 * can cause an error message to appear. Registering the attributes in
 	 * PHP as well, seems to resolve the issue. Ideally, this bug will be
 	 * fixed in the future.
