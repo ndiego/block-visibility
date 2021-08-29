@@ -15,7 +15,7 @@ import { TextControl, Icon } from '@wordpress/components';
  * Internal dependencies
  */
 import BlockCategory from './block-category';
-import SaveSettings from './../utils/save-settings';
+import UpdateSettings from './../utils/update-settings';
 import InformationPopover from './../utils/information-popover';
 import icons from './../../utils/icons';
 
@@ -27,25 +27,24 @@ import icons from './../../utils/icons';
  * @return {string}		 Return the rendered JSX
  */
 function BlockManager( props ) {
-	const [ disabledBlocks, setDisabledBlocks ] = useState(
-		props.settings.disabled_blocks
-	);
 	const [ hasUpdates, setHasUpdates ] = useState( false );
 	const [ search, setSearch ] = useState( '' );
-
 	const {
 		settings,
-		handleSettingsChange,
-		saveStatus,
+		setSettings,
 		blockTypes,
 		categories,
 		hasBlockSupport,
 		isMatchingSearchTerm,
 	} = props;
+	const disabledBlocks = settings?.disabled_blocks ?? {};
 
-	function onSettingsChange() {
-		handleSettingsChange( 'disabled_blocks', disabledBlocks );
-		setHasUpdates( false );
+	function setDisabledBlocks( newSettings ) {
+		setSettings( {
+			...settings,
+			disabled_blocks: newSettings
+		} );
+		setHasUpdates( true );
 	}
 
 	function handleBlockCategoryChange( checked, blockTypeNames ) {
@@ -164,10 +163,12 @@ function BlockManager( props ) {
 						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-configure-the-block-manager/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
-				<SaveSettings
-					saveStatus={ saveStatus }
+				<UpdateSettings
+					tabSlug='disabled_blocks'
+					tabSettings={ disabledBlocks }
 					hasUpdates={ hasUpdates }
-					onSettingsChange={ onSettingsChange }
+					setHasUpdates={ setHasUpdates }
+					{ ...props }
 				/>
 			</div>
 			<div className="setting-tabs__setting-controls">

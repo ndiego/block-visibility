@@ -34,7 +34,6 @@ export default function BlockEditor( props ) {
 		variables,
 		pluginSettings,
 		setPluginSettings,
-		setHasUpdates,
 	} = props;
 
 	let enabledControls = getEnabledControls( settings, variables );
@@ -76,7 +75,6 @@ export default function BlockEditor( props ) {
 			...pluginSettings,
 			default_controls: newControls,
 		} );
-		setHasUpdates( true );
 	};
 
 	const colors = [
@@ -167,7 +165,6 @@ export default function BlockEditor( props ) {
 								...pluginSettings,
 								enable_contextual_indicators: ! enableContextualIndicators,
 							} );
-							setHasUpdates( true );
 						} }
 					/>
 					<InformationPopover
@@ -197,7 +194,6 @@ export default function BlockEditor( props ) {
 									...pluginSettings,
 									contextual_indicator_color: newColor,
 								} );
-								setHasUpdates( true );
 							} }
 						/>
 					</div>
@@ -225,7 +221,6 @@ export default function BlockEditor( props ) {
 								...pluginSettings,
 								enable_toolbar_controls: ! enableToolbarControls,
 							} );
-							setHasUpdates( true );
 						} }
 					/>
 					<InformationPopover
@@ -250,7 +245,6 @@ export default function BlockEditor( props ) {
 								...pluginSettings,
 								enable_editor_notices: ! enableEditorNotices,
 							} );
-							setHasUpdates( true );
 						} }
 					/>
 					<InformationPopover

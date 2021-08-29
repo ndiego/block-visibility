@@ -50,7 +50,7 @@ function Settings() {
 		async function fetchData( route, setData ) {
 			setStatus( 'fetching' );
 
-			// blockVisibilityHomeUrl is provided by wp_add_inline_script.
+			// blockVisibilityRestUrl is provided by wp_add_inline_script.
 			const fetchUrl = `${ blockVisibilityRestUrl }block-visibility/v1/${ route }`; // eslint-disable-line
 			const response = await fetch( fetchUrl, { method: 'GET' } ); // eslint-disable-line
 
@@ -67,30 +67,8 @@ function Settings() {
 		fetchData( 'variables', setVariables );
 	}, [] );
 
-	// Handle all setting changes, and save to the database.
-	// TODO: Move this function to its own file.
-	async function handleSettingsChange( option, value ) {
-		setSaveStatus( 'saving' );
-
-		const newSettings = assign( { ...settings }, { [ option ]: value } );
-		const fetchUrl = `${ blockVisibilityRestUrl }block-visibility/v1/settings`; // eslint-disable-line
-
-		const response = await fetch( fetchUrl, { // eslint-disable-line
-			method: 'POST',
-			body: JSON.stringify( newSettings ),
-			headers: {
-				'Content-Type': 'application/json',
-				'X-WP-Nonce': wpApiSettings.nonce, // eslint-disable-line
-			},
-		} );
-
-		if ( response.ok ) {
-			const data = await response.json();
-			setSettings( data );
-			setSaveStatus( 'saved' );
-		} else {
-			setSaveStatus( 'error' );
-		}
+	function onSetSettings( settings ) {
+		setSettings( settings );
 	}
 
 	// Display loading/error message while settings are being fetched.
@@ -137,13 +115,14 @@ function Settings() {
 
 	applyFilters( 'blockVisibility.SettingTabs', settingTabs );
 
-	// Switch the default settings tab based on the URL tad query
+	// Switch the default settings tab based on the URL tab query
 	const urlParams = new URLSearchParams( window.location.search );
 	const requestedTab = urlParams.get( 'tab' );
 	const initialTab = findKey( settingTabs, [ 'name', requestedTab ] )
 		? requestedTab
 		: 'plugin-settings';
 
+	// Update URL based on the current tab
 	const updateUrl = ( tabName ) => {
 		urlParams.set( 'tab', tabName );
 
@@ -185,11 +164,9 @@ function Settings() {
 									<Ads variables={ variables } />
 									<VisibilityControls
 										settings={ settings }
+										setSettings={ onSetSettings }
 										variables={ variables }
 										saveStatus={ saveStatus }
-										handleSettingsChange={
-											handleSettingsChange
-										}
 									/>
 								</>
 							);
@@ -199,11 +176,9 @@ function Settings() {
 									<Ads variables={ variables } />
 									<BlockManager
 										settings={ settings }
+										setSettings={ onSetSettings }
 										variables={ variables }
 										saveStatus={ saveStatus }
-										handleSettingsChange={
-											handleSettingsChange
-										}
 									/>
 								</>
 							);
@@ -213,11 +188,9 @@ function Settings() {
 									<Ads variables={ variables } />
 									<PluginSettings
 										settings={ settings }
+										setSettings={ onSetSettings }
 										variables={ variables }
 										saveStatus={ saveStatus }
-										handleSettingsChange={
-											handleSettingsChange
-										}
 									/>
 								</>
 							);

@@ -8,7 +8,7 @@ import { useState } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import SaveSettings from './../utils/save-settings';
+import UpdateSettings from './../utils/update-settings';
 import InformationPopover from './../utils/information-popover';
 import BlockEditor from './block-editor';
 import UserPermissions from './user-permissions';
@@ -29,21 +29,16 @@ const AdditionalSettings = withFilters(
  * @return {string}		 Return the rendered JSX
  */
 export default function PluginSettings( props ) {
-	const [ pluginSettings, setPluginSettings ] = useState(
-		props.settings.plugin_settings
-	);
 	const [ hasUpdates, setHasUpdates ] = useState( false );
+	const { settings, setSettings } = props;
+	const pluginSettings = settings?.plugin_settings ?? {};
 
-	const {
-		handleSettingsChange,
-		isAPISaving,
-		hasSaveError,
-		saveStatus,
-	} = props;
-
-	function onSettingsChange() {
-		handleSettingsChange( 'plugin_settings', pluginSettings );
-		setHasUpdates( false );
+	function setPluginSettings( newSettings ) {
+		setSettings( {
+			...settings,
+			plugin_settings: newSettings
+		} );
+		setHasUpdates( true );
 	}
 
 	return (
@@ -61,12 +56,12 @@ export default function PluginSettings( props ) {
 						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-configure-the-general-settings/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
-				<SaveSettings
-					isAPISaving={ isAPISaving }
-					hasSaveError={ hasSaveError }
-					saveStatus={ saveStatus }
+				<UpdateSettings
+					tabSlug='plugin_settings'
+					tabSettings={ pluginSettings }
 					hasUpdates={ hasUpdates }
-					onSettingsChange={ onSettingsChange }
+					setHasUpdates={ setHasUpdates }
+					{ ...props }
 				/>
 			</div>
 			<Slot name="PluginSettingsTop" />

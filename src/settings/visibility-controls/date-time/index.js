@@ -17,7 +17,7 @@ import InformationPopover from './../../utils/information-popover';
  * @return {string}		 Return the rendered JSX
  */
 export default function DateTime( props ) {
-	const { visibilityControls, setVisibilityControls, setHasUpdates } = props;
+	const { visibilityControls, setVisibilityControls } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
 	const enable = visibilityControls?.date_time?.enable ?? true; // eslint-disable-line
@@ -45,7 +45,6 @@ export default function DateTime( props ) {
 									enable: ! enable,
 								},
 							} );
-							setHasUpdates( true );
 						} }
 					/>
 					<InformationPopover

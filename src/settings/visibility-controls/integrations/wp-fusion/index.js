@@ -23,7 +23,6 @@ export default function WPFusion( props ) {
 		variables,
 		visibilityControls,
 		setVisibilityControls,
-		setHasUpdates,
 	} = props;
 	const wpFusionActive = variables?.integrations?.wp_fusion?.active ?? false;
 
@@ -58,7 +57,6 @@ export default function WPFusion( props ) {
 									enable: ! enable,
 								},
 							} );
-							setHasUpdates( true );
 						} }
 					/>
 					<InformationPopover

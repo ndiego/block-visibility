@@ -7,7 +7,7 @@ import { Slot } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import SaveSettings from './../../utils/save-settings';
+import UpdateSettings from './../../utils/update-settings';
 import InformationPopover from './../../utils/information-popover';
 import ACF from './acf';
 import WPFusion from './wp-fusion';
@@ -20,7 +20,7 @@ import WPFusion from './wp-fusion';
  * @return {string}		 Return the rendered JSX
  */
 export default function Integrations( props ) {
-	const { variables, onSettingsChange, saveStatus, hasUpdates } = props;
+	const { variables, visibilityControls } = props;
 	let activeIntegrations = variables?.integrations ?? {};
 
 	activeIntegrations = Object.keys( activeIntegrations ).map( ( key ) => {
@@ -58,10 +58,10 @@ export default function Integrations( props ) {
 						link="https://www.blockvisibilitywp.com/knowledge-base/guide-to-third-party-integrations-in-block-visibility/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
-				<SaveSettings
-					saveStatus={ saveStatus }
-					hasUpdates={ hasUpdates }
-					onSettingsChange={ onSettingsChange }
+				<UpdateSettings
+					tabSlug='visibility_controls'
+					tabSettings={ visibilityControls }
+					{ ...props }
 				/>
 			</div>
 			<Slot name="VisibilityControlsIntegrationsTop" />

@@ -8,7 +8,7 @@ import { withFilters, Slot } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import SaveSettings from './../utils/save-settings';
+import UpdateSettings from './../utils/update-settings';
 import InformationPopover from './../utils/information-popover';
 import HideBlock from './hide-block';
 import DateTime from './date-time';
@@ -31,15 +31,16 @@ const AdditionalControls = withFilters(
  * @return {string}		 Return the rendered JSX
  */
 export default function VisibilityControls( props ) {
-	const [ visibilityControls, setVisibilityControls ] = useState(
-		props.settings.visibility_controls
-	);
 	const [ hasUpdates, setHasUpdates ] = useState( false );
-	const { handleSettingsChange, saveStatus } = props;
+	const { settings, setSettings } = props;
+	const visibilityControls = settings?.visibility_controls ?? {};
 
-	function onSettingsChange() {
-		handleSettingsChange( 'visibility_controls', visibilityControls );
-		setHasUpdates( false );
+	function setVisibilityControls( newSettings ) {
+		setSettings( {
+			...settings,
+			visibility_controls: newSettings
+		} );
+		setHasUpdates( true );
 	}
 
 	return (
@@ -62,49 +63,44 @@ export default function VisibilityControls( props ) {
 							link="https://www.blockvisibilitywp.com/knowledge-base/guide-to-visibility-controls-in-block-visibility/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 						/>
 					</div>
-					<SaveSettings
-						saveStatus={ saveStatus }
+					<UpdateSettings
+						tabSlug='visibility_controls'
+						tabSettings={ visibilityControls }
 						hasUpdates={ hasUpdates }
-						onSettingsChange={ onSettingsChange }
+						setHasUpdates={ setHasUpdates }
+						{ ...props }
 					/>
 				</div>
 				<Slot name="VisibilityControlsTop" />
 				<HideBlock
 					visibilityControls={ visibilityControls }
 					setVisibilityControls={ setVisibilityControls }
-					setHasUpdates={ setHasUpdates }
 					{ ...props }
 				/>
 				<DateTime
 					visibilityControls={ visibilityControls }
 					setVisibilityControls={ setVisibilityControls }
-					setHasUpdates={ setHasUpdates }
 					{ ...props }
 				/>
 				<UserRole
 					visibilityControls={ visibilityControls }
 					setVisibilityControls={ setVisibilityControls }
-					setHasUpdates={ setHasUpdates }
 					{ ...props }
 				/>
 				<ScreenSize
 					visibilityControls={ visibilityControls }
 					setVisibilityControls={ setVisibilityControls }
-					setHasUpdates={ setHasUpdates }
 					{ ...props }
 				/>
 				<QueryString
 					visibilityControls={ visibilityControls }
 					setVisibilityControls={ setVisibilityControls }
-					setHasUpdates={ setHasUpdates }
 					{ ...props }
 				/>
 				<Slot name="VisibilityControlsMiddle" />
 				<Integrations
 					visibilityControls={ visibilityControls }
 					setVisibilityControls={ setVisibilityControls }
-					saveStatus={ saveStatus }
-					onSettingsChange={ onSettingsChange }
 					hasUpdates={ hasUpdates }
 					setHasUpdates={ setHasUpdates }
 					{ ...props }
@@ -113,7 +109,6 @@ export default function VisibilityControls( props ) {
 				<AdditionalControls
 					visibilityControls={ visibilityControls }
 					setVisibilityControls={ setVisibilityControls }
-					setHasUpdates={ setHasUpdates }
 					{ ...props }
 				/>
 			</div>

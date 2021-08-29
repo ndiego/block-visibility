@@ -23,7 +23,6 @@ export default function ACF( props ) {
 		variables,
 		visibilityControls,
 		setVisibilityControls,
-		setHasUpdates,
 	} = props;
 	const acfActive = variables?.integrations?.acf?.active ?? false;
 
@@ -58,7 +57,6 @@ export default function ACF( props ) {
 									enable: ! enable,
 								},
 							} );
-							setHasUpdates( true );
 						} }
 					/>
 					<InformationPopover

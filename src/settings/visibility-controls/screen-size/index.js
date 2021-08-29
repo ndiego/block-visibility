@@ -20,7 +20,7 @@ import ScreenSizeControls from './screen-size-controls';
  * @return {string}		 Return the rendered JSX
  */
 export default function ScreenSize( props ) {
-	const { visibilityControls, setVisibilityControls, setHasUpdates } = props;
+	const { visibilityControls, setVisibilityControls } = props;
 
 	// Manually set defaults, this ensures the main settings function properly.
 	let screenSize;
@@ -54,7 +54,6 @@ export default function ScreenSize( props ) {
 				<Breakpoints
 					visibilityControls={ visibilityControls }
 					setVisibilityControls={ setVisibilityControls }
-					setHasUpdates={ setHasUpdates }
 					screenSize={ screenSize }
 					enableAdvancedControls={
 						screenSize.enable_advanced_controls
@@ -63,7 +62,6 @@ export default function ScreenSize( props ) {
 				<ScreenSizeControls
 					visibilityControls={ visibilityControls }
 					setVisibilityControls={ setVisibilityControls }
-					setHasUpdates={ setHasUpdates }
 					screenSize={ screenSize }
 					enableAdvancedControls={
 						screenSize.enable_advanced_controls
@@ -92,7 +90,6 @@ export default function ScreenSize( props ) {
 						enable_advanced_controls: ! screenSize.enable_advanced_controls,
 					},
 				} );
-				setHasUpdates( true );
 			} }
 		/>
 	);
@@ -112,7 +109,6 @@ export default function ScreenSize( props ) {
 						enable_frontend_css: ! screenSize.enable_frontend_css,
 					},
 				} );
-				setHasUpdates( true );
 			} }
 		/>
 	);
@@ -148,7 +144,6 @@ export default function ScreenSize( props ) {
 									enable: ! screenSize.enable,
 								},
 							} );
-							setHasUpdates( true );
 						} }
 					/>
 					<InformationPopover

@@ -17,7 +17,7 @@ import InformationPopover from './../../utils/information-popover';
  * @return {string}		 Return the rendered JSX
  */
 export default function QueryString( props ) {
-	const { visibilityControls, setVisibilityControls, setHasUpdates } = props;
+	const { visibilityControls, setVisibilityControls } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
 	const enable = visibilityControls?.query_string?.enable ?? true;
@@ -45,7 +45,6 @@ export default function QueryString( props ) {
 									enable: ! enable,
 								},
 							} );
-							setHasUpdates( true );
 						} }
 					/>
 					<InformationPopover

@@ -20,7 +20,6 @@ export default function ScreenSizeControls( props ) {
 	const {
 		visibilityControls,
 		setVisibilityControls,
-		setHasUpdates,
 		screenSize,
 		enableAdvancedControls,
 	} = props;
@@ -36,7 +35,6 @@ export default function ScreenSizeControls( props ) {
 				},
 			},
 		} );
-		setHasUpdates( true );
 	}
 
 	return (

@@ -17,7 +17,7 @@ import InformationPopover from './../../utils/information-popover';
  * @return {string}		 Return the rendered JSX
  */
 export default function UserRole( props ) {
-	const { visibilityControls, setVisibilityControls, setHasUpdates } = props;
+	const { visibilityControls, setVisibilityControls } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
 	const enable = visibilityControls?.visibility_by_role?.enable ?? true; // eslint-disable-line
@@ -39,7 +39,6 @@ export default function UserRole( props ) {
 						enable_user_roles: ! enableUserRoles,
 					},
 				} );
-				setHasUpdates( true );
 			} }
 		/>
 	);
@@ -59,7 +58,6 @@ export default function UserRole( props ) {
 						enable_users: ! enableUsers,
 					},
 				} );
-				setHasUpdates( true );
 			} }
 		/>
 	);
@@ -94,7 +92,6 @@ export default function UserRole( props ) {
 									enable: ! enable,
 								},
 							} );
-							setHasUpdates( true );
 						} }
 					/>
 					<InformationPopover

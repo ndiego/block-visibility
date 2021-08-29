@@ -18,7 +18,7 @@ import InformationPopover from './../../utils/information-popover';
  * @return {string}		 Return the rendered JSX
  */
 export default function FullControlMode( props ) {
-	const { pluginSettings, setPluginSettings, setHasUpdates } = props;
+	const { pluginSettings, setPluginSettings } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
 	const enableFullControlMode = pluginSettings?.enable_full_control_mode ?? false; // eslint-disable-line
@@ -55,7 +55,6 @@ export default function FullControlMode( props ) {
 								...pluginSettings,
 								enable_full_control_mode: ! enableFullControlMode,
 							} );
-							setHasUpdates( true );
 						} }
 					/>
 					<InformationPopover

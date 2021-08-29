@@ -20,7 +20,6 @@ export default function Breakpoints( props ) {
 	const {
 		visibilityControls,
 		setVisibilityControls,
-		setHasUpdates,
 		screenSize,
 		enableAdvancedControls,
 	} = props;
@@ -64,7 +63,6 @@ export default function Breakpoints( props ) {
 				},
 			},
 		} );
-		setHasUpdates( true );
 	}
 
 	return (

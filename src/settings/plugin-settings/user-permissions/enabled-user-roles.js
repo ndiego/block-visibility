@@ -17,7 +17,7 @@ import { CheckboxControl } from '@wordpress/components';
  * @return {string}		 Return the rendered JSX
  */
 export default function EnabledUserRoles( props ) {
-	const { pluginSettings, setPluginSettings, setHasUpdates } = props;
+	const { pluginSettings, setPluginSettings } = props;
 	const roles = [ 'editor', 'author', 'contributor' ];
 
 	// Manually set defaults, this ensures the main settings function properly
@@ -47,7 +47,6 @@ export default function EnabledUserRoles( props ) {
 								...pluginSettings,
 								enabled_user_roles: newEnabledRoles,
 							} );
-							setHasUpdates( true );
 						} }
 					/>
 				);

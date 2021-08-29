@@ -18,7 +18,7 @@ import EnabledUserRoles from './enabled-user-roles';
  * @return {string}		 Return the rendered JSX
  */
 export default function UserPermissions( props ) {
-	const { pluginSettings, setPluginSettings, setHasUpdates } = props;
+	const { pluginSettings, setPluginSettings } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
 	const enable = pluginSettings?.enable_user_role_restrictions ?? false; // eslint-disable-line
@@ -27,7 +27,6 @@ export default function UserPermissions( props ) {
 		<EnabledUserRoles
 			pluginSettings={ pluginSettings }
 			setPluginSettings={ setPluginSettings }
-			setHasUpdates={ setHasUpdates }
 		/>
 	);
 
@@ -55,7 +54,6 @@ export default function UserPermissions( props ) {
 								...pluginSettings,
 								enable_user_role_restrictions: ! enable,
 							} );
-							setHasUpdates( true );
 						} }
 					/>
 					<InformationPopover
