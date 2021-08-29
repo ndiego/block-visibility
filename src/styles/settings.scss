@@ -220,6 +220,7 @@ $mobile: 426px;
 		.components-tab-panel__tabs {
 			justify-content: center;
 			box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
+			padding-bottom: 0;
 
 			.components-tab-panel__tabs-item {
 				font-size: 15px;
@@ -441,14 +442,13 @@ $mobile: 426px;
 				align-items: center;
 
 				.message {
-					margin-top: 5px;
 					margin-right: 24px;
 
 					@media ( max-width: $tablet ) {
 						display: none;
 					}
 
-					.update-failed {
+					&.update-failed {
 						color: #b52727;
 					}
 				}
@@ -469,6 +469,10 @@ $mobile: 426px;
 						/* stylelint-enable */
 						border-color: color(#1989c1);
 					}
+				}
+
+				.reset-settings__save-button {
+					margin-right: 12px;
 				}
 			}
 
@@ -1050,5 +1054,26 @@ $mobile: 426px;
 	        color: #007cba;
 	        color: var(--wp-admin-theme-color);
 	    }
+	}
+}
+
+.block-visibility__reset-modal {
+	.block-visibility__reset-modal--buttons {
+		display: flex;
+		justify-content: space-between;
+
+		div {
+			display: flex;
+			align-items: center;
+		}
+
+		.components-spinner {
+			margin-top: 0;
+		}
+	}
+
+	.update-failed {
+		color: #b52727;
+		margin-top: 12px;
 	}
 }
