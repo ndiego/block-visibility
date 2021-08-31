@@ -197,10 +197,23 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ==
 
-= 2.0.1 - 2021-08-TBD =
+= 2.1.0 - 2021-09-TBD =
+
+**Added**
+
+* Added the ability to reset plugin settings and restore defaults from within the admin.
+
+**Changed**
+
+* Moved the create_date_time function to its own utility file. This allows for its use across the plugin and Block Visibility Pro.
+
+**Removed**
+
+* Removed erroneous integration-checks.php file.
 
 **Fixed**
 
+* Fixed styling on multi-select components.
 * Fixed z-index on contextual indicators that was causing some unwanted overlapping.
 
 = 2.0.0 - 2021-07-27 =
