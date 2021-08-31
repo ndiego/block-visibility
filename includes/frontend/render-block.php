@@ -108,5 +108,6 @@ require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/acf.
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/wp-fusion.php';
 
 // Require utlity functions for tests.
+require_once BLOCK_VISIBILITY_ABSPATH . 'includes/utils/create-date-time.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/utils/is-control-enabled.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/utils/get-setting.php';
