@@ -266,6 +266,30 @@
             }
 
             .rule-sets__rule--fields {
+
+                .fields-container {
+                    &.is-simplified {
+                        display: grid;
+                        grid-template-columns: 1fr 80px;
+
+                        div {
+                            margin-bottom: 0;
+                        }
+
+                        .field__ruleField,
+                        .field__subField {
+                            grid-column-start: 1;
+                            grid-column-end: 3;
+                            margin-bottom: 0;
+                        }
+
+                        .field__valueField {
+                            margin-top: 10px;
+                            margin-left: 10px;
+                        }
+                    }
+                }
+
                 .fields__operator-and-value {
                     &.is-number {
                         display: flex;
