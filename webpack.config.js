@@ -1,7 +1,7 @@
 const path = require( 'path' );
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 
-const FixStyleOnlyEntriesPlugin = require( 'webpack-fix-style-only-entries' );
+const RemoveEmptyScriptsPlugin = require( 'webpack-remove-empty-scripts' );
 
 module.exports = {
     ...defaultConfig,
@@ -16,7 +16,7 @@ module.exports = {
 
     output: {
         filename: '[name].js',
-        path: path.resolve( process.cwd(), 'dist/' ),
+        path: path.resolve( process.cwd(), 'build/' ),
     },
 
     module: {
@@ -30,6 +30,6 @@ module.exports = {
     plugins: [
         ...defaultConfig.plugins,
         // Add additional plugins as needed.
-        new FixStyleOnlyEntriesPlugin(),
+        new RemoveEmptyScriptsPlugin(),
     ],
 };
