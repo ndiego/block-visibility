@@ -26,7 +26,7 @@ export default function Users( props ) {
 
 	const users = useSelect( ( select ) => {
 		// Requires `list_users` capability, will fail if user is not admin.
-		const data = select( coreStore ).getUsers();
+		const data = select( coreStore ).getUsers( { per_page: -1 } );
 		const allUsers = [];
 
 		if ( data && data.length !== 0 ) {
