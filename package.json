@@ -22,23 +22,22 @@
 		"classnames": "^2.3.1",
 		"lodash": "^4.17.21",
 		"postcss": "^8.2.15",
-		"webpack-fix-style-only-entries": "^0.6.1"
+		"webpack-remove-empty-scripts": "^0.7.1"
 	},
 	"dependencies": {
-		"@wordpress/block-editor": "^5.3.3",
-		"@wordpress/block-library": "^2.29.3",
-		"@wordpress/blocks": "^8.0.3",
-		"@wordpress/components": "^13.0.3",
-		"@wordpress/core-data": "^2.26.3",
-		"@wordpress/data": "^4.27.3",
-		"@wordpress/date": "^3.15.1",
-		"@wordpress/edit-post": "^3.27.3",
-		"@wordpress/element": "^2.20.3",
-		"@wordpress/hooks": "^2.12.3",
-		"@wordpress/i18n": "^3.20.0",
-		"@wordpress/icons": "^2.10.3",
-		"@wordpress/nux": "^3.25.3",
-		"@wordpress/plugins": "^2.25.3",
+		"@wordpress/block-editor": "^7.0.1",
+		"@wordpress/block-library": "^5.0.1",
+		"@wordpress/blocks": "^11.0.1",
+		"@wordpress/components": "^16.0.0",
+		"@wordpress/core-data": "^4.0.1",
+		"@wordpress/data": "^6.0.1",
+		"@wordpress/date": "^4.2.1",
+		"@wordpress/edit-post": "^5.0.1",
+		"@wordpress/element": "^4.0.0",
+		"@wordpress/hooks": "^3.2.0",
+		"@wordpress/i18n": "^4.2.1",
+		"@wordpress/icons": "^5.0.1",
+		"@wordpress/plugins": "^4.0.1",
 		"react-select": "^4.3.1"
 	}
 }
