@@ -47,6 +47,6 @@ vendor/
 
 # Package Specific #
 ####################
-# We include the dist folder so the plugin can be served by the EDD Git Download
+# We include the build folder so the plugin can be served by the EDD Git Download
 # Updater, but we don't need the map files.
-dist/*.map
+build/*.map

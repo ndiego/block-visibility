@@ -24,11 +24,11 @@ use function BlockVisibility\Utils\get_user_roles as get_user_roles;
 function enqueue_editor_scripts() {
 
 	// Scripts.
-	$asset_file = get_asset_file( 'dist/block-visibility-editor' );
+	$asset_file = get_asset_file( 'build/block-visibility-editor' );
 
 	wp_enqueue_script(
 		'block-visibility-editor-scripts',
-		BLOCK_VISIBILITY_PLUGIN_URL . 'dist/block-visibility-editor.js',
+		BLOCK_VISIBILITY_PLUGIN_URL . 'build/block-visibility-editor.js',
 		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
 		$asset_file['version'],
 		false // Need false to ensure our filters can target third-party plugins.
@@ -63,11 +63,11 @@ add_action( 'admin_init', __NAMESPACE__ . '\enqueue_editor_scripts', 10000 );
 function enqueue_editor_styles() {
 
 	// Styles.
-	$asset_file = get_asset_file( 'dist/block-visibility-editor-styles' );
+	$asset_file = get_asset_file( 'build/block-visibility-editor-styles' );
 
 	wp_enqueue_style(
 		'block-visibility-editor-styles',
-		BLOCK_VISIBILITY_PLUGIN_URL . 'dist/block-visibility-editor-styles.css',
+		BLOCK_VISIBILITY_PLUGIN_URL . 'build/block-visibility-editor-styles.css',
 		array(),
 		$asset_file['version']
 	);
@@ -75,11 +75,11 @@ function enqueue_editor_styles() {
 	// Load the contextual indicator styles if enabled.
 	if ( contextual_indicators_enabled() ) {
 
-		$asset_file = get_asset_file( 'dist/block-visibility-contextual-indicator-styles' );
+		$asset_file = get_asset_file( 'build/block-visibility-contextual-indicator-styles' );
 
 		wp_enqueue_style(
 			'block-visibility-contextual-indicator-styles',
-			BLOCK_VISIBILITY_PLUGIN_URL . 'dist/block-visibility-contextual-indicator-styles.css',
+			BLOCK_VISIBILITY_PLUGIN_URL . 'build/block-visibility-contextual-indicator-styles.css',
 			array(),
 			$asset_file['version']
 		);
@@ -112,11 +112,11 @@ add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_styl
 function enqueue_customizer_assets() {
 
 	// Scripts.
-	$asset_file = get_asset_file( 'dist/block-visibility-editor' );
+	$asset_file = get_asset_file( 'build/block-visibility-editor' );
 
 	wp_enqueue_script(
 		'block-visibility-editor-scripts',
-		BLOCK_VISIBILITY_PLUGIN_URL . 'dist/block-visibility-editor.js',
+		BLOCK_VISIBILITY_PLUGIN_URL . 'build/block-visibility-editor.js',
 		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
 		$asset_file['version'],
 		false // Need false to ensure our filters can target third-party plugins.
