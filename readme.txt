@@ -213,6 +213,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 **Fixed**
 
+* Fixed bug where not all users would be fetched in the User Role control. Thanks @lenehanj for discovering this issue and opening a support ticket!
 * Fixed styling on multi-select components.
 * Fixed z-index on contextual indicators that was causing some unwanted overlapping.
 
