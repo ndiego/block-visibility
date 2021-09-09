@@ -72,6 +72,9 @@ function acf_test( $is_visible, $settings, $attributes ) {
 		return true;
 	}
 
+	// If the current user is logged in, fetch their ID, otherwise 0.
+	$current_user_id = get_current_user_id();
+
 	// Array of results for each rule set.
 	$rule_sets_test_results = array();
 
@@ -93,15 +96,29 @@ function acf_test( $is_visible, $settings, $attributes ) {
 			$rule_set_test_results = array();
 
 			foreach ( $rules as $rule ) {
-				$field    = isset( $rule['field'] ) ? $rule['field'] : null;
-				$operator = isset( $rule['operator'] ) ? $rule['operator'] : null;
-				$value    = isset( $rule['value'] ) ? $rule['value'] : null;
+				$field       = isset( $rule['field'] ) ? $rule['field'] : null;
+				$isUserField = isset( $rule['subField'] ) ? $rule['subField'] : null;
+				$operator    = isset( $rule['operator'] ) ? $rule['operator'] : null;
+				$value       = isset( $rule['value'] ) ? $rule['value'] : null;
 
 				// Assume error and try to disprove.
 				$test_result = 'error';
 
 				if ( $field && $operator ) {
-					$acf_field = get_field_object( $field );
+
+					$acf_field = null;
+
+					if ( $isUserField && ! $current_user_id ) {
+
+						// We are evaluating a user field, but the current user
+						// is not logged in, so the test fails.
+						$test_result = 'hidden';
+
+					} else if ( $isUserField && $current_user_id ) {
+						$acf_field = get_field_object( $field, 'user_' . $current_user_id );
+					} else {
+						$acf_field = get_field_object( $field );
+					}
 
 					if ( $acf_field && is_array( $acf_field ) ) {
 						$result = run_acf_rule_tests(
@@ -173,7 +190,7 @@ add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\acf_test', 15
  *
  * @param string $operator  The rule operator.
  * @param string $value     The rule value.
- * @param array  $acf_field The ACF fieled array.
+ * @param array  $acf_field The ACF fielded array.
  * @return boolean          Return true if the test passes.
  */
 function run_acf_rule_tests( $operator, $value, $acf_field ) {

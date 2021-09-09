@@ -36,6 +36,13 @@ export default function Tips() {
 					'block-visibility'
 				) }
 			</p>
+			<h4>{ __( 'User Fields', 'block-visibility' ) }</h4>
+			<p>
+				{ __(
+					'By default, rules evaluate ACF fields attached to the current post, page, or custom post type. Alternatively, you can evaulate fields attached to the current logged-in user.',
+					'block-visibility'
+				) }
+			</p>
 			<h4>{ __( 'WordPress Preview', 'block-visibility' ) }</h4>
 			<p>
 				{ __(

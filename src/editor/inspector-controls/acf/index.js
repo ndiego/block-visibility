@@ -127,7 +127,7 @@ export default function ACF( props ) {
 					{ sprintf(
 						// Translators: Whether the block is hidden or visible.
 						__(
-							'%s the block if at least one rule set applies.',
+							'%s the block if at least one rule set applies. Rules targeting user fields will fail if the current user is not logged in.',
 							'block-visibility'
 						),
 						hideOnRuleSets
@@ -156,6 +156,10 @@ export default function ACF( props ) {
 								controlName="acf"
 								controlAtts={ acf }
 								hideOnRuleSets={ hideOnRuleSets }
+								rulePlaceholder={ __(
+									'Select Field…',
+									'block-visibility'
+								) }
 								{ ...props }
 							/>
 						);

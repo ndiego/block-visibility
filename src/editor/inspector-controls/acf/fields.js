@@ -83,12 +83,45 @@ export function getAllFields( variables ) {
 						value: fieldKey,
 						label: fieldLabel,
 						group: groupKey,
-						operators: valueOperators,
-						valueType: 'text',
-						valuePlaceholder: __(
-							'Enter Value…',
-							'block-visibility'
-						),
+						fields: [
+							{
+								type: 'subField',
+								name: 'isUserField',
+								valueType: 'toggle',
+								placeholder: __(
+									'Evaluate as user field',
+									'block-visibility'
+								),
+							},
+							{
+								type: 'operatorField',
+								valueType: 'select',
+								options: valueOperators,
+								placeholder: __(
+									'Select Condition…',
+									'block-visibility'
+								),
+							},
+							{
+								type: 'valueField',
+								valueType: 'text',
+								placeholder: __(
+									'Enter Value…',
+									'block-visibility'
+								),
+								displayConditions: [
+									{
+										dependencyType: 'operatorField',
+										dependencyValues: [
+											'equal',
+											'notEqual',
+											'contains',
+											'notContain',
+										],
+									},
+								],
+							},
+						],
 					} );
 				} );
 			}
