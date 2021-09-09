@@ -14,6 +14,8 @@ import {
 	MenuGroup,
 	MenuItem,
 	Modal,
+	Slot,
+	withFilters,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { Icon, moreHorizontal, check, info } from '@wordpress/icons';
@@ -22,6 +24,12 @@ import { Icon, moreHorizontal, check, info } from '@wordpress/icons';
  * Internal dependencies
  */
 import { TipsControlSet } from './utils/notices-tips';
+
+// Provides an entry point to slot in additional settings. Must be placed
+// outside of function to avoid unnecessary rerenders.
+const AdditionalControlSetToolbarOptions = withFilters(
+	'blockVisibility.addControlSetToolbarOptions'
+)( ( props ) => <></> ); // eslint-disable-line
 
 /**
  * Render a control set
@@ -121,6 +129,8 @@ export default function ControlSetToolbar( props ) {
 				>
 					{ ( { onClose } ) => (
 						<>
+							<Slot name="ControlSetToolbarTop" />
+
 							<MenuGroup
 								className="core-controls"
 								label={ __(
@@ -157,7 +167,12 @@ export default function ControlSetToolbar( props ) {
 									) }
 								</MenuGroup>
 							) }
+
+							<Slot name="ControlSetToolbarMiddle" />
+
 							<MenuGroup className="reset-container">
+								<Slot name="ControlSetToolbarResetTop" />
+
 								<MenuItem
 									className="reset"
 									onClick={ () => {
@@ -167,7 +182,18 @@ export default function ControlSetToolbar( props ) {
 								>
 									{ __( 'Reset all', 'block-visibility' ) }
 								</MenuItem>
+
+								<Slot name="ControlSetToolbarResetBottom" />
 							</MenuGroup>
+
+							<Slot name="ControlSetToolbarBottom" />
+
+							<AdditionalControlSetToolbarOptions
+								toggleControls={ toggleControls }
+								coreControls={ coreControls }
+								integrationControls={ integrationControls }
+								{ ...props }
+							/>
 						</>
 					) }
 				</DropdownMenu>
