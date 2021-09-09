@@ -13,7 +13,7 @@ import { TextControl, ToggleControl } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import DateTime from './components/date-time';
+import DateTime from './../components/date-time';
 
 /**
  * Render the individual rule fields.
