@@ -16,14 +16,6 @@ defined( 'ABSPATH' ) || exit;
 final class Block_Visibility {
 
 	/**
-	 * Block Visibility version.
-	 *
-	 * @since 1.4.0
-	 * @var string
-	 */
-	public $version = '2.0.0';
-
-	/**
 	 * Return singleton instance of the Block Visibility plugin.
 	 *
 	 * @since 1.0.0
@@ -125,7 +117,7 @@ final class Block_Visibility {
 	 */
 	private function define_constants() {
 		$this->define( 'BLOCK_VISIBILITY_ABSPATH', dirname( BLOCK_VISIBILITY_PLUGIN_FILE ) . '/' );
-		$this->define( 'BLOCK_VISIBILITY_VERSION', $this->version );
+		$this->define( 'BLOCK_VISIBILITY_VERSION', get_file_data( BLOCK_VISIBILITY_PLUGIN_FILE, [ 'Version' ] )[0] );
 		$this->define( 'BLOCK_VISIBILITY_PLUGIN_URL', plugin_dir_url( BLOCK_VISIBILITY_PLUGIN_FILE ) );
 		$this->define( 'BLOCK_VISIBILITY_PLUGIN_BASENAME', plugin_basename( BLOCK_VISIBILITY_PLUGIN_FILE ) );
 		$this->define( 'BLOCK_VISIBILITY_SUPPORT_URL', 'https://wordpress.org/support/plugin/block-visibility/' );
