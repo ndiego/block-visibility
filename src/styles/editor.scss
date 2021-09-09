@@ -290,30 +290,6 @@
                     }
                 }
 
-                .fields__operator-and-value {
-                    &.is-number {
-                        display: flex;
-
-                        .block-visibility__react-select {
-                            margin: 0;
-                            width: 100%;
-                            margin-right: 10px;
-                        }
-
-                        .components-base-control {
-                            width: 110px;
-
-                            .components-base-control__field {
-                                margin-bottom: 0;
-
-                                .components-text-control__input {
-                                    height: 36px;
-                                }
-                            }
-                        }
-                    }
-                }
-
                 .visibility-control__help {
                     margin-top: 10px;
                 }
