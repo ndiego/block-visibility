@@ -5,7 +5,7 @@ Tags: visibility, dynamic content, conditional content, conditional blocks, rest
 Requires at least: 5.5
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 2.0.0
+Stable tag: 2.1.0
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,7 +39,7 @@ It takes just **3 simple steps**:
 * Only show blocks to **logged-in** users.
 * Only show blocks to **logged-out** users.
 * Only show blocks to users with **specific roles** (Administrator, Subscriber, Customer, Member etc.)
-* Only show blocks to **specific users**. Great for personalization. **NEW** 🎉
+* Only show blocks to **specific users**. Great for personalization.
 * Show or hide dynamic blocks based on **URL query strings**. Great for marketing campaigns!
 * **Advanced Custom Fields (ACF):** Control the visibility of block content based on [ACF](https://wordpress.org/plugins/advanced-custom-fields/) fields.
 * **WP Fusion:** Combine Block Visibility with the power of [WP Fusion](https://wordpress.org/plugins/wp-fusion-lite/) to conditionally show or hide content based on data from your favorite CRM or marketing automation platform.
@@ -51,7 +51,7 @@ It takes just **3 simple steps**:
 * Set permissions so only certain users have access to visibility conditions.
 * Configure up to 4 different breakpoints to optimize the screen size controls.
 * Disable contextual indicators and other plugin utilities.
-* Customize the contextual indicator color to enhance theme compatibility. **NEW** 🎉
+* Customize the contextual indicator color to enhance theme compatibility.
 * Enable Full Control Mode 🚀 (See the FAQs).
 * Remove all plugin settings on uninstall.
 
@@ -166,7 +166,7 @@ Stay up-to-date on Block Visibility using the links below. The plugin is also be
 = Who should use Block Visibility? =
 Block Visibility is a powerful, yet simple, plugin that gives marketing agencies, bloggers, eCommerce websites, and small businesses owners the power to conditionally show or hide blocks on their websites. The need to hide Gutenberg blocks varies. Whether you need to restrict content to certain users like members, or launch a promotional campaign at a specific time with block scheduling, the applications are endless.
 
-If you need content control, i.e. Gutenberg block control, on your WordPress website, then you need Block Visibility.
+If you need dynamic content control, i.e. Gutenberg block control, on your WordPress website, then you need Block Visibility.
 
 = Is there a pro/premium version of Block Visibility? =
 Absolutely! [Block Visibility Pro](https://www.blockvisibilitywp.com/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) available as an optional paid add-on and includes advanced functionality and third-party integrations.
@@ -197,15 +197,18 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ==
 
-= 2.1.0 - 2021-09-TBD =
+= 2.1.0 - 2021-09-09 =
 
 **Added**
 
 * Added the ability to reset plugin settings and restore defaults from within the admin.
+* The Advanced Custom Fields control can now display blocks based on user fields.
 
 **Changed**
 
 * Moved the create_date_time function to its own utility file. This allows for its use across the plugin and Block Visibility Pro.
+* Refactored rule and rule set functionality to provide for greater extensibility.
+* Improve extensibility of the control set toolbar menu for future Pro add-on functionality.
 
 **Removed**
 
