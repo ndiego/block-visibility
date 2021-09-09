@@ -236,8 +236,11 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
 
 /**
  * A bit of a hack to enqueue editor styled within the iframe block editor. See
- * https://github.com/WordPress/gutenberg/issues/33212. Also tackles some stying
- * issues in the Site Editor in Gutenberg 11.1.
+ * https://github.com/WordPress/gutenberg/issues/33212. Must include .wp-block
+ * which triggers WP to include the styles. This does generate a console error,
+ * but this is acceptable for now until a more permanent solution exists.
+ *
+ * This also tackles some stying issues in the Site Editor in Gutenberg 11.1.
  */
 .is-outline-mode {
     .wp-block {
