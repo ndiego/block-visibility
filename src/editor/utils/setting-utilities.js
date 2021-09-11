@@ -46,11 +46,16 @@ export function isControlSettingEnabled(
  * Check if the given plugin setting is enabled.
  *
  * @since 1.1.0
- * @param {Object} settings All plugin settings
- * @param {string} setting  Name of setting to check
- * @return {boolean}		Whether the setting is enabled or not
+ * @param {Object}  settings       All plugin settings
+ * @param {string}  setting        Name of setting to check
+ * @param {boolean} settingDefault The defaualt if the setting cannot be found (optional)
+ * @return {boolean}		       Whether the setting is enabled or not
  */
-export function isPluginSettingEnabled( settings, setting ) {
+ export function isPluginSettingEnabled(
+	settings,
+	setting,
+	settingDefault = true
+ ) {
 	// Make sure we have visibility settings, otherwise abort.
 	if ( ! settings || 0 === settings.length ) {
 		return false;
@@ -59,10 +64,10 @@ export function isPluginSettingEnabled( settings, setting ) {
 	const pluginSettings = settings.plugin_settings;
 	const hasSetting = has( pluginSettings, setting );
 
-	// If the setting does not exist, default to enabled.
+	// Return the default if there is no control setting.
 	if ( ! hasSetting ) {
-		return true;
+		return settingDefault;
 	}
 
 	return pluginSettings[ setting ];
-}
+ }
