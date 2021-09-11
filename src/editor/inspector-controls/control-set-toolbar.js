@@ -31,6 +31,10 @@ const AdditionalControlSetToolbarOptions = withFilters(
 	'blockVisibility.addControlSetToolbarOptions'
 )( ( props ) => <></> ); // eslint-disable-line
 
+const AdditionalControlSetModals = withFilters(
+	'blockVisibility.addControlSetModals'
+)( ( props ) => <></> ); // eslint-disable-line
+
 /**
  * Render a control set
  *
@@ -39,6 +43,7 @@ const AdditionalControlSetToolbarOptions = withFilters(
  * @return {string}		 Return the rendered JSX
  */
 export default function ControlSetToolbar( props ) {
+	const [ modalOpen, setModalOpen ] = useState( false );
 	const [ tipsModalOpen, setTipsModalOpen ] = useState( false );
 	const [ resetModalOpen, setResetModalOpen ] = useState( false );
 	const {
@@ -77,24 +82,6 @@ export default function ControlSetToolbar( props ) {
 		} );
 	}
 
-	function resetControlAtts() {
-		const newControlSetAtts = assign(
-			{ ...controlSetAtts },
-			{
-				controls: defaultControls,
-			}
-		);
-
-		setAttributes( {
-			blockVisibility: assign(
-				{ ...blockVisibility },
-				{ controlSets: [ ...[ newControlSetAtts ] ] }
-			),
-		} );
-
-		setResetModalOpen( false );
-	}
-
 	const coreControls = controls.filter(
 		( control ) => control.type === 'core'
 	);
@@ -111,7 +98,8 @@ export default function ControlSetToolbar( props ) {
 						label={ __( 'Quick Tips', 'block-visibility' ) }
 						icon={ info }
 						className="control-tips"
-						onClick={ () => setTipsModalOpen( ( open ) => ! open ) }
+						//onClick={ () => setTipsModalOpen( ( open ) => ! open ) }
+						onClick={ () => setModalOpen( 'tips' ) }
 						isSmall
 					/>
 				</h3>
@@ -176,7 +164,7 @@ export default function ControlSetToolbar( props ) {
 								<MenuItem
 									className="reset"
 									onClick={ () => {
-										setResetModalOpen( true );
+										setModalOpen( 'reset' );
 										onClose();
 									} }
 								>
@@ -189,35 +177,82 @@ export default function ControlSetToolbar( props ) {
 							<Slot name="ControlSetToolbarBottom" />
 
 							<AdditionalControlSetToolbarOptions
+								modalOpen={ modalOpen }
+								setModalOpen={ setModalOpen }
 								toggleControls={ toggleControls }
 								coreControls={ coreControls }
 								integrationControls={ integrationControls }
+								onClose={ onClose }
 								{ ...props }
 							/>
 						</>
 					) }
 				</DropdownMenu>
 			</div>
-			{ tipsModalOpen && (
+			{ modalOpen && (
+				<ControlSetModals
+					modalOpen={ modalOpen }
+					setModalOpen={ setModalOpen }
+					toggleControls={ toggleControls }
+					coreControls={ coreControls }
+					integrationControls={ integrationControls }
+					{ ...props }
+				/>
+			) }
+		</>
+	);
+}
+
+function ControlSetModals( props ) {
+	const {
+		blockVisibility,
+		setAttributes,
+		controlSetAtts,
+		defaultControls,
+		modalOpen,
+		setModalOpen
+	} = props;
+
+	function resetControlAtts() {
+		const newControlSetAtts = assign(
+			{ ...controlSetAtts },
+			{
+				controls: defaultControls,
+			}
+		);
+
+		setAttributes( {
+			blockVisibility: assign(
+				{ ...blockVisibility },
+				{ controlSets: [ ...[ newControlSetAtts ] ] }
+			),
+		} );
+
+		setModalOpen( false );
+	}
+
+	return (
+		<>
+			{ modalOpen === 'tips' && (
 				<Modal
 					className="block-visibility__tips-modal"
 					title={ __(
 						'Block Visibility: Quick Tips',
 						'block-visibility'
 					) }
-					onRequestClose={ () => setTipsModalOpen( false ) }
+					onRequestClose={ () => setModalOpen( false ) }
 				>
 					<TipsControlSet { ...props } />
 				</Modal>
 			) }
-			{ resetModalOpen && (
+			{ modalOpen === 'reset' && (
 				<Modal
 					className="block-visibility__reset-modal"
 					title={ __(
 						'Reset all visibility controls?',
 						'block-visibility'
 					) }
-					onRequestClose={ () => setResetModalOpen( false ) }
+					onRequestClose={ () => setModalOpen( false ) }
 				>
 					<p>
 						{ __(
@@ -228,7 +263,7 @@ export default function ControlSetToolbar( props ) {
 					<div className="block-visibility__reset-modal--buttons">
 						<Button
 							isSecondary
-							onClick={ () => setResetModalOpen( false ) }
+							onClick={ () => setModalOpen( false ) }
 						>
 							{ __( 'Cancel', 'block-visibility' ) }
 						</Button>
@@ -238,9 +273,13 @@ export default function ControlSetToolbar( props ) {
 					</div>
 				</Modal>
 			) }
+
+			<Slot name="ControlSetModals" />
+			<AdditionalControlSetModals { ...props } />
 		</>
 	);
 }
+
 
 /**
  * Render a control menu item
