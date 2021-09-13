@@ -219,7 +219,7 @@ export default function Rule( props ) {
 										condition.dependencyType ===
 										'operatorField'
 											? 'operator'
-											: 'value';
+											: 'subField';
 
 									fieldValue = rule[ fieldType ] ?? '';
 								}
