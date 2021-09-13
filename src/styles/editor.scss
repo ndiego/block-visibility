@@ -472,6 +472,12 @@
 /* Date/Time calendar popover styles -----------------------------------------*/
 .block-visibility__date-time-popover {
 
+    &.no-time {
+        .components-datetime__date {
+            border-top: 0;
+        }
+    }
+    
     .date-time-header {
         border-bottom: 1px solid #ddd;
         font-weight: bold;
