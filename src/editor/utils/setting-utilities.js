@@ -51,11 +51,11 @@ export function isControlSettingEnabled(
  * @param {boolean} settingDefault The defaualt if the setting cannot be found (optional)
  * @return {boolean}		       Whether the setting is enabled or not
  */
- export function isPluginSettingEnabled(
+export function isPluginSettingEnabled(
 	settings,
 	setting,
 	settingDefault = true
- ) {
+) {
 	// Make sure we have visibility settings, otherwise abort.
 	if ( ! settings || 0 === settings.length ) {
 		return false;
@@ -70,4 +70,4 @@ export function isControlSettingEnabled(
 	}
 
 	return pluginSettings[ setting ];
- }
+}

@@ -44,15 +44,7 @@ const AdditionalControlSetModals = withFilters(
  */
 export default function ControlSetToolbar( props ) {
 	const [ modalOpen, setModalOpen ] = useState( false );
-	const [ tipsModalOpen, setTipsModalOpen ] = useState( false );
-	const [ resetModalOpen, setResetModalOpen ] = useState( false );
-	const {
-		attributes,
-		setAttributes,
-		defaultControls,
-		controls,
-		controlSetAtts,
-	} = props;
+	const { attributes, setAttributes, controls, controlSetAtts } = props;
 	const { blockVisibility } = attributes;
 
 	function toggleControls( control ) {
@@ -98,7 +90,6 @@ export default function ControlSetToolbar( props ) {
 						label={ __( 'Quick Tips', 'block-visibility' ) }
 						icon={ info }
 						className="control-tips"
-						//onClick={ () => setTipsModalOpen( ( open ) => ! open ) }
 						onClick={ () => setModalOpen( 'tips' ) }
 						isSmall
 					/>
@@ -203,6 +194,13 @@ export default function ControlSetToolbar( props ) {
 	);
 }
 
+/**
+ * Render all Control Set modals.
+ *
+ * @since 2.1.1
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
 function ControlSetModals( props ) {
 	const {
 		blockVisibility,
@@ -210,7 +208,7 @@ function ControlSetModals( props ) {
 		controlSetAtts,
 		defaultControls,
 		modalOpen,
-		setModalOpen
+		setModalOpen,
 	} = props;
 
 	function resetControlAtts() {
@@ -280,9 +278,8 @@ function ControlSetModals( props ) {
 	);
 }
 
-
 /**
- * Render a control menu item
+ * Render a control menu item.
  *
  * @since 1.9.0
  * @param {Object} props All the props passed to this function
