@@ -5,7 +5,7 @@ Tags: visibility, dynamic content, conditional content, conditional blocks, rest
 Requires at least: 5.5
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,8 +95,10 @@ Here’s a look at what's currently included with Pro:
 * Show or hide blocks based on their **location** and “attributes” of their location (i.e. post type, taxonomy, archive etc.)
 * Advanced **day-of-week** and **time-of-day** controls, which include recursion functionality.
 * Display blocks based on the **referral source** (domain/URL) of a website visitor.
+* Support for all post and user **metadata** (custom fields). **NEW 🎉**
 * **WooCommerce** conditional block logic for shopping cart contents, product details, customer metrics and more.
 * **Easy Digital Downloads** conditional block logic for shopping cart contents, customer metrics and more.
+* eCommerce rules for when a customer placed their first/last order, or when specific products were purchased. **NEW 🎉**
 * Access to premium email support.
 * More conditions coming soon...
 
@@ -120,6 +122,7 @@ Block Visibility is designed to work with **any** block and has been tested with
 * Redux Framework
 * Ultimate Addons for Gutenberg
 * Kadence Blocks
+* GenerateBlocks
 * Otter Blocks
 * Atomic Blocks
 * Gutentor
@@ -196,6 +199,22 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 The **one exception** to this is the Screen Size block controls. Visibility by screen size requires the use of CSS, which is loaded to the frontend of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary yourself. Visit the plugin [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) to learn more.
 
 == Changelog ==
+
+= 2.1.1 - 2021-09-14 =
+
+**Added**
+
+* Added contextual indicator support for the  Metadata control in Block Visibility Pro.
+
+**Changed**
+
+* Continued extensibility improvements of the control set toolbar menu.
+* Updated plugin logo on settings page.
+
+**Fixed**
+
+* Fixed incorrect languages .pot file.
+* Fixed bug in rule set configuration.
 
 = 2.1.0 - 2021-09-09 =
 
