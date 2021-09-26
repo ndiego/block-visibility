@@ -94,14 +94,14 @@ final class Block_Visibility {
 		// needs to be included at all times.
 		include_once BLOCK_VISIBILITY_ABSPATH . 'includes/utils/user-functions.php';
 
-		// General utility functions.
-		include_once BLOCK_VISIBILITY_ABSPATH . 'includes/utils/get-asset-file.php';
-
 		// Only include in the admin.
-		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
+		if ( is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 			include_once BLOCK_VISIBILITY_ABSPATH . 'includes/admin/editor.php';
 			include_once BLOCK_VISIBILITY_ABSPATH . 'includes/admin/settings.php';
 			include_once BLOCK_VISIBILITY_ABSPATH . 'includes/admin/plugin-action-links.php';
+
+			// General utility functions.
+			include_once BLOCK_VISIBILITY_ABSPATH . 'includes/utils/get-asset-file.php';
 		}
 
 		// Only include on the frontend.
