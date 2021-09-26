@@ -88,7 +88,7 @@ function render_with_visibility( $block_content, $block ) {
 		if ( $is_visible ) {
 			return $block_content;
 		} else {
-			return null;
+			return '';
 		}
 	}
 
