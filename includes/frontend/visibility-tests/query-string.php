@@ -64,7 +64,10 @@ function query_string_test( $is_visible, $settings, $attributes ) {
 	if ( ! empty( $query_string_any ) ) {
 		$any_matches = 0;
 
-		foreach ( $query_string_any as $param => $value ) {
+		foreach ( $query_string_any as $string ) {
+			$param = key( $string );
+			$value = $string[ $param ];
+
 			if ( isset( $_REQUEST[ $param ] ) ) { // phpcs:ignore
 				if ( ! $value || '*' === $value ) {
 					$any_matches++;
@@ -83,7 +86,10 @@ function query_string_test( $is_visible, $settings, $attributes ) {
 	if ( ! empty( $query_string_all ) ) {
 		$all_matches = 0;
 
-		foreach ( $query_string_all as $param => $value ) {
+		foreach ( $query_string_all as $string ) {
+			$param = key( $string );
+			$value = $string[ $param ];
+
 			if ( isset( $_REQUEST[ $param ] ) ) { // phpcs:ignore
 				if ( ! $value || '*' === $value ) {
 					$all_matches++;
@@ -100,7 +106,10 @@ function query_string_test( $is_visible, $settings, $attributes ) {
 
 	// If there is "not" query strings, need to not match any to pass.
 	if ( ! empty( $query_string_not ) ) {
-		foreach ( $query_string_not as $param => $value ) {
+		foreach ( $query_string_not as $string ) {
+			$param = key( $string );
+			$value = $string[ $param ];
+
 			if ( isset( $_REQUEST[ $param ] ) ) { // phpcs:ignore
 				if ( ! $value || '*' === $value ) {
 					return false;
@@ -128,13 +137,12 @@ function prepare_queries( $queries ) {
 		return null;
 	}
 
-	$query_array = explode( "\n", $queries );
-
+	$query_array     = explode( "\n", $queries );
 	$ordered_queries = array();
 
 	foreach ( $query_array as $query ) {
 		parse_str( $query, $result );
-		$ordered_queries = array_merge( $ordered_queries, $result );
+		$ordered_queries[] = $result;
 	}
 	return $ordered_queries;
 }
