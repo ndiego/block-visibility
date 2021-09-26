@@ -200,6 +200,14 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ==
 
+= 2.1.2 - 2021-09-TBD =
+
+**Fixed**
+
+* Fixed bug in Query String control that caused a test failure when multiple strings using same query parameter were used. Thanks Lucian for discovering this issue and opening a support ticket!
+* Fixed conflict with Sensei (and potentially other third-party plugins) caused by the render_block filter returning `null` when a block is hidden. An empty string is not returned instead. Thanks Ted for discovering this issue and opening a support ticket!
+* Fixed bug caused by admin scripts being enqueued during DOING_AJAX. Thanks Ted for discovering this issue and opening a support ticket!
+
 = 2.1.1 - 2021-09-14 =
 
 **Added**
