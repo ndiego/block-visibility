@@ -202,6 +202,9 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 = 2.1.2 - 2021-09-TBD =
 
+**Changed**
+Updated incompatibility notice for the Screensize control to include HTML blocks and directed users to a workaround.
+
 **Fixed**
 
 * Fixed bug in Query String control that caused a test failure when multiple strings using same query parameter were used. Thanks Lucian for discovering this issue and opening a support ticket!

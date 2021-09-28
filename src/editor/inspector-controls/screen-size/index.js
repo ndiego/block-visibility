@@ -143,7 +143,9 @@ export default function ScreenSize( props ) {
 		</>
 	);
 
-	if ( name === 'core/shortcode' ) {
+    const isNotCompatible = ( name === 'core/shortcode' || name === 'core/html' );
+
+	if ( isNotCompatible ) {
 		allScreenSizeFields = <Disabled>{ allScreenSizeFields }</Disabled>;
 	}
 
@@ -154,7 +156,7 @@ export default function ScreenSize( props ) {
 					{ __( 'Screen Size', 'block-visibility' ) }
 				</h3>
 				{ allScreenSizeFields }
-				{ name === 'core/shortcode' && <NoticeBlockNotCompatible /> }
+				{ isNotCompatible && <NoticeBlockNotCompatible /> }
 			</div>
 			<div className="control-separator">
 				<span>{ __( 'AND', 'block-visibility' ) }</span>
