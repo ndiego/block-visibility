@@ -45,6 +45,14 @@ function create_date_time( $timestamp = null, $localize = true ) {
 		$timezone = 'UTC';
 
 	} else {
+
+		// Fix to ajust timezone for locals that are offset by 30 or 45 minutes.
+		if ( strpos( $tz_offset, '.5' ) ) {
+			$tz_offset = str_replace( '.5', ':30', $tz_offset );
+		} elseif ( strpos( $tz_offset, '.75' ) ) {
+			$tz_offset = str_replace( '.75', ':45', $tz_offset );
+		}
+
 		$timezone = $tz_offset;
 
 		if (
