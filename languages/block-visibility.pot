@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Block Visibility 2.1.1\n"
+"Project-Id-Version: Block Visibility 2.1.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/block-visibility\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-09-14T12:00:12+00:00\n"
+"POT-Creation-Date: 2021-10-06T11:03:15+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: block-visibility\n"
@@ -434,7 +434,7 @@ msgid "Alternatively, hide the block when at least on schedule applies."
 msgstr ""
 
 #: build/block-visibility-editor.js:6
-msgid "The Screen Size control is not compatible with the Shortcode block. For more information, and a workaround, visit the <a>Knowledge Base</a>."
+msgid "The Screen Size control is unfortunately not compatible with this block type. For more information, and a workaround, visit the <a>Knowledge Base</a>."
 msgstr ""
 
 #: build/block-visibility-editor.js:6
