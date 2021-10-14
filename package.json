@@ -38,6 +38,7 @@
 		"@wordpress/i18n": "^4.2.1",
 		"@wordpress/icons": "^5.0.1",
 		"@wordpress/plugins": "^4.0.1",
-		"react-select": "^4.3.1"
+		"react-select": "^4.3.1",
+		"uuid": "^8.3.2"
 	}
 }

@@ -38,7 +38,14 @@ const AdditionalInspectorControls = withFilters(
  * @return {string}		 Return the rendered JSX
  */
 function VisibilityInspectorControls( props ) {
-	const { attributes, name, settings, variables, clientId } = props;
+	const {
+		attributes,
+		setAttributes,
+		name,
+		settings,
+		variables,
+		clientId,
+	} = props;
 
 	if ( settings === 'fetching' || variables === 'fetching' ) {
 		return null;
@@ -79,7 +86,7 @@ function VisibilityInspectorControls( props ) {
 		const defaultSet = [
 			{
 				id: 0,
-				name: __( 'Control Set', 'block-visibility' ),
+				title: __( 'Control Set', 'block-visibility' ),
 				enable: true,
 				controls: defaultControls,
 			},
@@ -98,6 +105,16 @@ function VisibilityInspectorControls( props ) {
 	// There are a few core blocks that are not compatible.
 	const incompatibleBlocks = [ 'core/legacy-widget' ];
 	const blockIsIncompatible = incompatibleBlocks.includes( name );
+
+	function setControlSetAtts( controlSetAtts ) {
+		// This will need to be updated when multiple control sets are enabled.
+		setAttributes( {
+			blockVisibility: assign(
+				{ ...attributes.blockVisibility },
+				{ controlSets: [ ...[ controlSetAtts ] ] } // Ok for now since only one control set available.
+			),
+		} );
+	}
 
 	return (
 		// Note that the core InspectorControls component is already making use
@@ -125,6 +142,7 @@ function VisibilityInspectorControls( props ) {
 										<ControlSet
 											key={ clientId + index }
 											controlSetAtts={ controlSet }
+											setControlSetAtts={ setControlSetAtts }
 											enabledControls={ enabledControls }
 											defaultControls={ defaultControls }
 											{ ...props }

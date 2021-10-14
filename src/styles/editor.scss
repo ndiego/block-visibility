@@ -1,3 +1,6 @@
+@use 'editor-settings-modal';
+
+.block-visibility-preset-manager-modal,
 .visibility-controls__container {
 
     .components-disabled {
@@ -836,6 +839,16 @@
     }
 }
 
+.block-visibility__confirmation-modal {
+    max-width: 400px !important;
+
+    .block-visibility__confirmation-modal--buttons {
+        margin-top: 24px;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
 /* Specific styles for the Customizer Widgets screen -------------------------*/
 #customize-theme-controls {
 
@@ -856,4 +869,75 @@
             }
         }
     }
+}
+
+
+/* Temporary styling until the SearchControl is included in WP core. ---------*/
+.components-search-control {
+	position: relative;
+
+    &.is-disabled {
+        ::placeholder {
+            opacity: .7;
+        }
+        .components-search-control__icon {
+            opacity: .3;
+        }
+    }
+
+	input[type="search"].components-search-control__input {
+		background: #f0f0f0;
+	    border: none;
+	    border-radius: 2px;
+	    box-shadow: 0 0 0 transparent;
+	    display: block;
+	    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;
+	    font-size: 16px;
+	    height: 48px;
+	    line-height: normal;
+	    padding: 16px 48px 16px 16px;
+	    transition: box-shadow .1s linear;
+	    width: 100%;
+
+		/* Fonts smaller than 16px causes mobile safari to zoom. */
+		@media ( min-width: 600px ) {
+			font-size: 13px;
+		}
+
+		&:focus {
+			background: #fff;
+			box-shadow: 0 0 0 var(--wp-admin-border-width-focus) var(--wp-admin-theme-color);
+		}
+
+		&::placeholder {
+			color: rgba(30,30,30,.62);
+		}
+
+		&::-webkit-search-decoration,
+		&::-webkit-search-cancel-button,
+		&::-webkit-search-results-button,
+		&::-webkit-search-results-decoration {
+			-webkit-appearance: none;
+		}
+	}
+}
+
+.components-search-control__icon {
+	align-items: center;
+    bottom: 0;
+    display: flex;
+    position: absolute;
+    right: 12px;
+    top: 0;
+
+	> button {
+		margin-right: -10px;
+	}
+	> svg {
+		margin: 8px 0;
+	}
+}
+
+.components-search-control__input-wrapper {
+	position: relative;
 }

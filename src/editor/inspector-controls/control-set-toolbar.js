@@ -18,7 +18,7 @@ import {
 	withFilters,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-import { Icon, moreHorizontal, check, info } from '@wordpress/icons';
+import { Icon, moreVertical, check, info } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -44,8 +44,7 @@ const AdditionalControlSetModals = withFilters(
  */
 export default function ControlSetToolbar( props ) {
 	const [ modalOpen, setModalOpen ] = useState( false );
-	const { attributes, setAttributes, controls, controlSetAtts } = props;
-	const { blockVisibility } = attributes;
+	const { controls, controlSetAtts, setControlSetAtts } = props;
 
 	function toggleControls( control ) {
 		let newControls;
@@ -66,12 +65,7 @@ export default function ControlSetToolbar( props ) {
 			{ controls: { ...newControls } }
 		);
 
-		setAttributes( {
-			blockVisibility: assign(
-				{ ...blockVisibility },
-				{ controlSets: [ ...[ newControlSetAtts ] ] }
-			),
-		} );
+		setControlSetAtts( newControlSetAtts );
 	}
 
 	const coreControls = controls.filter(
@@ -99,7 +93,7 @@ export default function ControlSetToolbar( props ) {
 						'Configure Visibility Controls',
 						'block-visibility'
 					) }
-					icon={ moreHorizontal }
+					icon={ moreVertical }
 					className="configure-controls"
 					popoverProps={ {
 						className: 'block-visibility__control-popover',
@@ -203,9 +197,8 @@ export default function ControlSetToolbar( props ) {
  */
 function ControlSetModals( props ) {
 	const {
-		blockVisibility,
-		setAttributes,
 		controlSetAtts,
+		setControlSetAtts,
 		defaultControls,
 		modalOpen,
 		setModalOpen,
@@ -219,13 +212,7 @@ function ControlSetModals( props ) {
 			}
 		);
 
-		setAttributes( {
-			blockVisibility: assign(
-				{ ...blockVisibility },
-				{ controlSets: [ ...[ newControlSetAtts ] ] }
-			),
-		} );
-
+		setControlSetAtts( newControlSetAtts );
 		setModalOpen( false );
 	}
 

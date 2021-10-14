@@ -3,6 +3,7 @@
  */
 import { assign } from 'lodash';
 import classnames from 'classnames';
+import { v4 as uuidv4 } from 'uuid';
 
 /**
  * WordPress dependencies
@@ -54,6 +55,7 @@ export default function Schedule( props ) {
 	const [ startPickerOpen, setStartPickerOpen ] = useState( false );
 	const [ endPickerOpen, setEndPickerOpen ] = useState( false );
 
+	const uniqueIndex = uuidv4();
 	const title = scheduleAtts?.title ?? '';
 	const enable = scheduleAtts?.enable ?? true;
 	const start = scheduleAtts?.start ?? null;
@@ -134,23 +136,25 @@ export default function Schedule( props ) {
 
 	let dateTimeControls = (
 		<>
-			<Slot name={ 'DateTimeScheduleControlsTop-' + scheduleIndex } />
+			<Slot name={ 'DateTimeScheduleControlsTop-' + uniqueIndex } />
 			<div className="date-time-control__schedule--date-time-fields">
-				<div className="visibility-control__label">
-					{ hideOnSchedules
-						? __( 'Stop showing', 'block-visibility' )
-						: __( 'Start showing', 'block-visibility' ) }
+				<div className="date-time-control__schedule-start">
+					<div className="visibility-control__label">
+						{ hideOnSchedules
+							? __( 'Stop showing', 'block-visibility' )
+							: __( 'Start showing', 'block-visibility' ) }
+					</div>
+					<DateTimeField
+						label={ startDateLabel }
+						title={ __(
+							'Choose a start date/time',
+							'block-visibility'
+						) }
+						hasDateTime={ start }
+						onOpenPopover={ setStartPickerOpen }
+						onClearDateTime={ () => setAttribute( 'start', '' ) }
+					/>
 				</div>
-				<DateTimeField
-					label={ startDateLabel }
-					title={ __(
-						'Choose a start date/time',
-						'block-visibility'
-					) }
-					hasDateTime={ start }
-					onOpenPopover={ setStartPickerOpen }
-					onClearDateTime={ () => setAttribute( 'start', '' ) }
-				/>
 				{ startPickerOpen && (
 					<CalendarPopover
 						label={ __( 'Start Date/Time', 'block-visibility' ) }
@@ -162,21 +166,23 @@ export default function Schedule( props ) {
 						highlightedDate={ end }
 					/>
 				) }
-				<div className="visibility-control__label">
-					{ hideOnSchedules
-						? __( 'Resume showing', 'block-visibility' )
-						: __( 'Stop showing', 'block-visibility' ) }
+				<div className="date-time-control__schedule-end">
+					<div className="visibility-control__label">
+						{ hideOnSchedules
+							? __( 'Resume showing', 'block-visibility' )
+							: __( 'Stop showing', 'block-visibility' ) }
+					</div>
+					<DateTimeField
+						label={ endDateLabel }
+						title={ __(
+							'Choose an end date/time',
+							'block-visibility'
+						) }
+						hasDateTime={ end }
+						onOpenPopover={ setEndPickerOpen }
+						onClearDateTime={ () => setAttribute( 'end', '' ) }
+					/>
 				</div>
-				<DateTimeField
-					label={ endDateLabel }
-					title={ __(
-						'Choose an end date/time',
-						'block-visibility'
-					) }
-					hasDateTime={ end }
-					onOpenPopover={ setEndPickerOpen }
-					onClearDateTime={ () => setAttribute( 'end', '' ) }
-				/>
 				{ endPickerOpen && (
 					<CalendarPopover
 						label={ __( 'End Date/Time', 'block-visibility' ) }
@@ -195,7 +201,7 @@ export default function Schedule( props ) {
 					</Notice>
 				) }
 			</div>
-			<Slot name={ 'DateTimeScheduleControlsBottom-' + scheduleIndex } />
+			<Slot name={ 'DateTimeScheduleControlsBottom-' + uniqueIndex } />
 		</>
 	);
 
@@ -284,7 +290,7 @@ export default function Schedule( props ) {
 								<Slot
 									name={
 										'DateTimeScheduleControlsSettings-' +
-										scheduleIndex
+										uniqueIndex
 									}
 								/>
 							</>
@@ -294,7 +300,10 @@ export default function Schedule( props ) {
 				</div>
 			</div>
 			{ dateTimeControls }
-			<AdditionalScheduleControls { ...props } />
+			<AdditionalScheduleControls
+				uniqueIndex={ uniqueIndex }
+				{ ...props }
+			/>
 		</div>
 	);
 }

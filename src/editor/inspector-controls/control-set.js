@@ -35,13 +35,11 @@ const AdditionalControlSetControls = withFilters(
  */
 export default function ControlSet( props ) {
 	const {
-		attributes,
-		setAttributes,
-		variables,
-		enabledControls,
 		controlSetAtts,
+		setControlSetAtts,
+		enabledControls,
+		variables,
 	} = props;
-	const { blockVisibility } = attributes;
 	const settingsUrl = variables?.plugin_variables?.settings_url ?? '';
 
 	const noControls =
@@ -91,18 +89,16 @@ export default function ControlSet( props ) {
 			}
 		);
 
-		// This will need to be updated when multiple control sets are enabled.
-		setAttributes( {
-			blockVisibility: assign(
-				{ ...blockVisibility },
-				{ controlSets: [ ...[ newControlSetAtts ] ] } // Ok for now since only one control set available.
-			),
-		} );
+		setControlSetAtts( newControlSetAtts );
 	}
 
 	return (
 		<div className="control-set">
-			<ControlSetToolbar controls={ controls } { ...props } />
+			<ControlSetToolbar
+				controls={ controls }
+				setControlSetAtts={ setControlSetAtts }
+				{ ...props }
+			/>
 
 			<Slot name="ControlSetControlsTop" />
 
