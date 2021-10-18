@@ -169,12 +169,12 @@ export default function Rule( props ) {
 	};
 
 	return (
-		<div key={ ruleIndex } className="rule-sets__rule">
-			<div className="rule-sets__rule--header">
+		<div key={ ruleIndex } className="rule">
+			<div className="rule__header">
 				<span>{ ruleLabel( ruleIndex ) }</span>
 				{ deleteRuleButton }
 			</div>
-			<div className="rule-sets__rule--fields">
+			<div className="rule__fields">
 				<div
 					className={ classnames( 'fields-container', {
 						'is-simplified': hasSimplifiedLayout,

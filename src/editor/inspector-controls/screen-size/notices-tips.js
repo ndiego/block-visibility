@@ -13,7 +13,6 @@ import { createInterpolateElement } from '@wordpress/element';
  * @return {string} Return the rendered JSX
  */
 export default function NoticeBlockNotCompatible() {
-
 	return (
 		<Notice status="warning" isDismissible={ false }>
 			{ createInterpolateElement(

@@ -120,7 +120,7 @@ export function TipsControlSet( props ) {
 			<ol>
 				<li className="tip">
 					{ __(
-						'Block Visibility provides various controls that allow you to restrict the visibility of the selected block. Click the three dots icon on the right to toggle the controls that you would like to use. A few controls have been added for you by default.',
+						'Block Visibility provides many controls that allow you to restrict the visibility of the selected block. Click the "eye" icon to toggle the controls that you would like to use. A few controls have been added for you by default.',
 						'block-visibility'
 					) }
 				</li>

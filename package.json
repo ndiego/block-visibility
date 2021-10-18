@@ -14,6 +14,7 @@
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
 		"lint:js:src": "wp-scripts lint-js ./src",
+		"lint:js:src:fix": "wp-scripts lint-js ./src --fix",
 		"start": "wp-scripts start",
 		"packages-update": "wp-scripts packages-update"
 	},

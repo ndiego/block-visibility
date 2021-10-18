@@ -54,8 +54,8 @@ export default function Users( props ) {
 	}
 
 	const label = hideOnRestrictedUsers
-		? __( 'Hide from all', 'block-visibility' )
-		: __( 'Only visible to', 'block-visibility' );
+		? __( 'Hide the block from', 'block-visibility' )
+		: __( 'Show the block to', 'block-visibility' );
 
 	const selectedUsers = users.filter( ( user ) =>
 		restrictedUsers.includes( user.value )
@@ -85,7 +85,7 @@ export default function Users( props ) {
 		<>
 			<div className="visibility-control restricted-users">
 				<div className="visibility-control__label">
-					{ __( 'Restricted Users', 'block-visibility' ) }
+					{ __( 'Restricted users', 'block-visibility' ) }
 				</div>
 				<Select
 					className="block-visibility__react-select"
@@ -107,7 +107,10 @@ export default function Users( props ) {
 			</div>
 			<div className="visibility-control hide-on-restricted-users">
 				<ToggleControl
-					label={ __( 'Hide on selected users', 'block-visibility' ) }
+					label={ __(
+						'Hide from selected users',
+						'block-visibility'
+					) }
 					checked={ hideOnRestrictedUsers }
 					onChange={ () =>
 						setControlAtts(
@@ -120,10 +123,6 @@ export default function Users( props ) {
 							)
 						)
 					}
-					help={ __(
-						'Alternatively, hide the block from all selected users.',
-						'block-visibility'
-					) }
 				/>
 			</div>
 		</>

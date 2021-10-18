@@ -2,18 +2,43 @@
     min-width: 80%;
     min-height: 80%;
     max-width: 80%;
+    height: 80%;
 
     .components-modal__content {
         padding: 0;
+        margin-top: 0;
+
+        // Fixes needed for pre 5.9.
+        flex: 1;
+        overflow: auto;
 
         &:before {
-            margin-bottom: 0;
+            content: "";
+            display: block;
+            margin-bottom: 60px;
+        }
+    }
+
+    .components-modal__header {
+        background: #fff;
+        position: absolute;
+        width: 100%;
+        margin: 0;
+    }
+
+    .components-notice {
+        margin: 0 !important;
+
+        // Needed to fix color error in Notice component
+        &.is-error {
+            background-color: #f8ebea;
         }
     }
 
     .preset-manager {
         display: flex;
-        height: 100%;
+        height: calc(100% - 60px);
+        overflow: hidden;
 
         .preset-manager__sidebar {
             width: 280px;
@@ -22,13 +47,26 @@
             border-right: 1px solid #ddd;
 
             .sidebar__presets-title {
-                color: #757575;
-                font-size: 11px;
-                font-weight: 500;
-                margin-bottom: 12px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
                 margin-top: 32px;
-                text-transform: uppercase;
-                white-space: nowrap;
+
+                span {
+                    color: #757575;
+                    font-size: 11px;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    white-space: nowrap;
+                }
+
+                .components-button {
+                    padding: 0;
+                    height: 24px;
+                    width: 24px;
+                    min-width: 24px;
+                }
             }
 
             .components-spinner {
@@ -74,37 +112,99 @@
                         background: #f0f0f0;
                         font-weight: 500;
                     }
+
+                    .components-menu-item__item {
+                        display: flex;
+                        align-items: center;
+                        text-align: left;
+                        width: 100%;
+
+                        .title {
+                            display: inline-block;
+                            overflow: hidden;
+                            text-align: left;
+                            text-overflow: ellipsis;
+                        }
+
+                        .is-disabled {
+                            margin-left: 8px;
+                            display: flex;
+
+                            svg {
+                                width: 6px;
+                                height: 6px;
+                                fill: #cc1818;
+                            }
+                        }
+                    }
                 }
             }
         }
 
         .preset-manager__content {
-            width: 100%;
             background-color: #f1f1f1;
+            overflow: scroll;
+            width: 100%;
 
-            .preset-manager__content-header {
-                background: #fff;
+            .preset-manager__content-placeholder {
                 display: flex;
-                justify-content: space-between;
-                gap: 32px;
+                align-items: center;
+                flex-direction: column;
+                justify-content: center;
+                height: 100%;
+            }
+
+            .preset-manager__preset-header {
+                background: #fff;
                 border-bottom: 1px solid #ddd;
-                padding: 32px;
+                padding: 32px 24px 32px 32px;
 
-                .preset-title {
-                    width: 100%;
-
-                    .components-toggle-control {
-                        margin-top: 12px;
-                    }
-
-                    .components-base-control__field {
-                        margin-bottom: 0;
-                    }
+                .preset-header__notices {
+                    margin-bottom: 24px
                 }
 
-                .preset-controls {
-                    width: 250px;
-                    flex-shrink: 0;
+                .preset-header__settings {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 32px;
+
+                    .preset-title {
+                        width: 100%;
+
+                        .components-toggle-control {
+                            margin-top: 18px;
+                        }
+
+                        .components-base-control__field {
+                            margin-bottom: 0;
+                        }
+
+                        .preset-title__meta {
+                            display: flex;
+                            justify-content: space-between;
+                            margin-bottom: 8px;
+
+                            .preset-title__meta-id {
+                                color: #757575;
+                                font-size: 11px;
+                                text-transform: uppercase;
+                            }
+                        }
+                    }
+
+                    .preset-controls {
+                        width: 250px;
+                        flex-shrink: 0;
+
+                        .preset-controls__toolbar {
+                            display: flex;
+                            justify-content: flex-end;
+
+                            .components-dropdown-menu {
+                                margin-left: 4px;
+                            }
+                        }
+                    }
                 }
             }
 
@@ -114,6 +214,9 @@
 
             .control-sets__controls {
                 padding: 32px;
+
+                display: flex;
+                justify-content: space-between;
             }
 
             .control-sets__container {

@@ -6,12 +6,12 @@ import { assign, isEmpty } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { Slot, withFilters } from '@wordpress/components';
+import { Disabled, Slot, withFilters } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import ControlSetToolbar from './control-set-toolbar';
+import ControlSetHeader from './control-set-header';
 import UserRole from './user-role';
 import DateTime from './date-time';
 import ScreenSize from './screen-size';
@@ -41,6 +41,7 @@ export default function ControlSet( props ) {
 		variables,
 	} = props;
 	const settingsUrl = variables?.plugin_variables?.settings_url ?? '';
+	const enable = controlSetAtts?.enable ?? true;
 
 	const noControls =
 		enabledControls.length === 1 &&
@@ -92,14 +93,8 @@ export default function ControlSet( props ) {
 		setControlSetAtts( newControlSetAtts );
 	}
 
-	return (
-		<div className="control-set">
-			<ControlSetToolbar
-				controls={ controls }
-				setControlSetAtts={ setControlSetAtts }
-				{ ...props }
-			/>
-
+	let controlSetControls = (
+		<div className="control-set__controls">
 			<Slot name="ControlSetControlsTop" />
 
 			<DateTime setControlAtts={ setControlAtts } { ...props } />
@@ -113,7 +108,21 @@ export default function ControlSet( props ) {
 			<WPFusion setControlAtts={ setControlAtts } { ...props } />
 
 			<Slot name="ControlSetControlsBottom" />
+		</div>
+	);
 
+	if ( ! enable ) {
+		controlSetControls = <Disabled>{ controlSetControls }</Disabled>;
+	}
+
+	return (
+		<div className="control-set">
+			<ControlSetHeader
+				controls={ controls }
+				setControlSetAtts={ setControlSetAtts }
+				{ ...props }
+			/>
+			{ controlSetControls }
 			<AdditionalControlSetControls
 				setControlAtts={ setControlAtts }
 				{ ...props }

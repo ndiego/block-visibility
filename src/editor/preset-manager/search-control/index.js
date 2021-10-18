@@ -14,6 +14,16 @@ import { useRef } from '@wordpress/element';
 
 /**
  *  This is a temporary inclusion until the SearchControl is added to WP core.
+ *
+ * @param  root0
+ * @param  root0.className
+ * @param  root0.onChange
+ * @param  root0.value
+ * @param  root0.label
+ * @param  root0.placeholder
+ * @param  root0.hideLabelFromVision
+ * @param  root0.help
+ * @param  root0.disabled
  */
 function SearchControl( {
 	className,

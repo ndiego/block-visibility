@@ -106,6 +106,7 @@ export default function ACF( props ) {
 		<>
 			<div className="visibility-control__group acf-control">
 				<h3 className="visibility-control__group-heading has-icon">
+					<Icon icon={ icons.acf } />
 					<span>
 						{ __( 'Advanced Custom Fields', 'block-visibility' ) }
 						<Button
@@ -121,7 +122,6 @@ export default function ACF( props ) {
 							isSmall
 						/>
 					</span>
-					<Icon icon={ icons.acf } />
 				</h3>
 				<div className="visibility-control__help">
 					{ sprintf(
@@ -164,7 +164,7 @@ export default function ACF( props ) {
 							/>
 						);
 					} ) }
-					<div className="rule-sets--add">
+					<div className="rule-sets__add-rule-set">
 						<Button onClick={ () => addRuleSet() } isSecondary>
 							{ __( 'Add rule set', 'block-visibility' ) }
 						</Button>
@@ -186,10 +186,6 @@ export default function ACF( props ) {
 								)
 							)
 						}
-						help={ __(
-							'Alternatively, hide the block when the applied rules are satisfied.',
-							'block-visibility'
-						) }
 					/>
 				</div>
 			</div>

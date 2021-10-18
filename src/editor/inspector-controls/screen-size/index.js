@@ -143,7 +143,7 @@ export default function ScreenSize( props ) {
 		</>
 	);
 
-    const isNotCompatible = ( name === 'core/shortcode' || name === 'core/html' );
+	const isNotCompatible = name === 'core/shortcode' || name === 'core/html';
 
 	if ( isNotCompatible ) {
 		allScreenSizeFields = <Disabled>{ allScreenSizeFields }</Disabled>;

@@ -23,8 +23,8 @@ export default function UserRoles( props ) {
 	const hideOnRestrictedRoles = userRole?.hideOnRestrictedRoles ?? false;
 	const roles = variables?.user_roles ?? [];
 	const label = hideOnRestrictedRoles
-		? __( 'Hide from all', 'block-visibility' )
-		: __( 'Only visible to', 'block-visibility' );
+		? __( 'Hide the block from', 'block-visibility' )
+		: __( 'Show the block to', 'block-visibility' );
 	const selectedRoles = roles.filter( ( role ) =>
 		restrictedRoles.includes( role.value )
 	);
@@ -53,7 +53,7 @@ export default function UserRoles( props ) {
 		<>
 			<div className="visibility-control restricted-roles">
 				<div className="visibility-control__label">
-					{ __( 'Restricted User Roles', 'block-visibility' ) }
+					{ __( 'Restricted user roles', 'block-visibility' ) }
 				</div>
 				<Select
 					className="block-visibility__react-select"
@@ -77,7 +77,10 @@ export default function UserRoles( props ) {
 			</div>
 			<div className="visibility-control hide-on-restricted-roles">
 				<ToggleControl
-					label={ __( 'Hide on selected roles', 'block-visibility' ) }
+					label={ __(
+						'Hide from selected roles',
+						'block-visibility'
+					) }
 					checked={ hideOnRestrictedRoles }
 					onChange={ () =>
 						setControlAtts(
@@ -90,10 +93,6 @@ export default function UserRoles( props ) {
 							)
 						)
 					}
-					help={ __(
-						'Alternatively, hide the block to all users with one of the selected roles.',
-						'block-visibility'
-					) }
 				/>
 			</div>
 		</>

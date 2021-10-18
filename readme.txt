@@ -200,6 +200,24 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ==
 
+= 2.2.0 - 2021-10-TBD =
+
+**Added**
+
+* Added the ability to duplicate schedules and rule sets.
+* Added support for Pro presets.
+
+**Changed**
+
+* Visibility controls and tools (reset controls, help, etc.) have been separated into two different dropdown menus to reduce menu length. Managing visibility controls can now be done using the "eye" icon whereas tools are managed using the vertical dots icon.
+* Minor changes to labeling throughout the plugin to improve clarity.
+
+**Removed**
+
+* Removed all legacy visibility controls deprecated in version 1.6.0.
+* Removed control reset confirmation modal for a smoother user experience.
+* Removed redundant help/reminder text to simplify user interface.
+
 = 2.1.2 - 2021-10-06 =
 
 **Changed**

@@ -34,13 +34,47 @@ function register_bv_preset_post_type() {
 add_action( 'init', __NAMESPACE__ . '\register_bv_preset_post_type' );
 
 register_meta(
-     'post',
-     'enable',
-     array(
-         'object_subtype' => 'bv_preset',
-         'single'         => true,
-         'type'           => 'boolean',
-         'show_in_rest'   => true,
-         'default'        => true,
-     )
+	 'post',
+	 'enable',
+	 array(
+		 'object_subtype' => 'bv_preset',
+		 'single'         => true,
+		 'type'           => 'boolean',
+		 'show_in_rest'   => true,
+		 'default'        => true,
+	 )
+ );
+
+register_meta(
+	'post',
+	'control_sets',
+	array(
+		'object_subtype' => 'bv_preset',
+		'type'           => 'array',
+		'show_in_rest'   => array(
+			'single' => true,
+			'schema' => array(
+				'type' => 'array',
+				'items' => array(
+					'type' => 'object',
+					'properties' => array(
+						'id'  => array(
+							'type' => 'number',
+						),
+						'title'  => array(
+							'type' => 'string',
+						),
+						'enable'  => array(
+							'type' => 'boolean',
+						),
+						'controls'  => array(
+							'type' => 'object',
+							'additionalProperties' => true,
+							'properties' => array(),
+						),
+					),
+				),
+			),
+		),
+	  )
  );

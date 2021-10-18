@@ -90,7 +90,7 @@ export default function UserRole( props ) {
 		},
 		{
 			label: optionLabel(
-				__( 'User Roles', 'block-visibility' ),
+				__( 'User roles', 'block-visibility' ),
 				__( 'Only visible to specific user roles.', 'block-visibility' )
 			),
 			value: 'user-role',

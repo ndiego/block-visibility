@@ -16,7 +16,7 @@ export default function DateTimeField( props ) {
 	const { label, title, hasDateTime, onOpenPopover, onClearDateTime } = props;
 
 	return (
-		<div className="date-time-control__schedule--date-time-field">
+		<div className="schedule__date-time-field">
 			<Button
 				icon={ calendar }
 				title={ title }

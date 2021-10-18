@@ -81,17 +81,16 @@ function VisibilityInspectorControls( props ) {
 	let blockAtts = blockAttributes?.blockVisibility;
 	let controlSets = blockAtts?.controlSets ?? [];
 
-	// Create the default control set and populate with any previous attributes.
+	// Create the default control set if none exist.
 	if ( controlSets.length === 0 ) {
 		const defaultSet = [
 			{
-				id: 0,
-				title: __( 'Control Set', 'block-visibility' ),
+				id: 1,
 				enable: true,
 				controls: defaultControls,
 			},
 		];
-		controlSets = getDeprecatedAtts( blockAtts, defaultSet );
+		controlSets = defaultSet;
 		blockAtts = assign( { ...blockAtts }, { controlSets } );
 	}
 
@@ -141,8 +140,12 @@ function VisibilityInspectorControls( props ) {
 									return (
 										<ControlSet
 											key={ clientId + index }
+											type={ 'single' }
+											controlSets={ controlSets }
 											controlSetAtts={ controlSet }
-											setControlSetAtts={ setControlSetAtts }
+											setControlSetAtts={
+												setControlSetAtts
+											}
 											enabledControls={ enabledControls }
 											defaultControls={ defaultControls }
 											{ ...props }
@@ -178,89 +181,3 @@ export default withSelect( ( select ) => {
 
 	return { settings, variables };
 } )( VisibilityInspectorControls );
-
-/**
- * Converts visibility attributes pre v1.6 to a control set. Also handles some
- * deprecation logic from previous versions.
- *
- * @since 1.6.0
- * @param {Object} blockAtts   All the current attributes
- * @param {Object} controlSets The new control set
- * @return {Object}		       Return the updated control set with the old attributes applied
- */
-function getDeprecatedAtts( blockAtts, controlSets ) {
-	if (
-		blockAtts?.scheduling ||
-		blockAtts?.startDateTime ||
-		blockAtts?.endDateTime
-	) {
-		controlSets[ 0 ].controls.dateTime = {};
-		controlSets[ 0 ].controls.dateTime.schedules = [ {} ];
-
-		if ( blockAtts?.startDateTime || blockAtts?.endDateTime ) {
-			controlSets[ 0 ].controls.dateTime.schedules[ 0 ].enable = true;
-
-			if ( blockAtts?.startDateTime ) {
-				controlSets[ 0 ].controls.dateTime.schedules[ 0 ].start =
-					blockAtts.startDateTime;
-			}
-
-			if ( blockAtts?.endDateTime ) {
-				controlSets[ 0 ].controls.dateTime.schedules[ 0 ].end =
-					blockAtts.endDateTime;
-			}
-		}
-
-		if ( blockAtts?.scheduling ) {
-			if ( blockAtts?.scheduling?.enable ) {
-				controlSets[ 0 ].controls.dateTime.schedules[ 0 ].enable =
-					blockAtts.scheduling.enable;
-			}
-
-			if ( blockAtts?.scheduling?.start ) {
-				controlSets[ 0 ].controls.dateTime.schedules[ 0 ].start =
-					blockAtts.scheduling.start;
-			}
-
-			if ( blockAtts?.scheduling?.end ) {
-				controlSets[ 0 ].controls.dateTime.schedules[ 0 ].end =
-					blockAtts.scheduling.end;
-			}
-		}
-	}
-
-	if ( blockAtts?.hideOnScreenSize ) {
-		controlSets[ 0 ].controls.screenSize = {};
-		controlSets[ 0 ].controls.screenSize.hideOnScreenSize =
-			blockAtts.hideOnScreenSize;
-	}
-
-	if (
-		blockAtts?.visibilityByRole ||
-		blockAtts?.hideOnRestrictedRoles ||
-		blockAtts?.restrictedRoles
-	) {
-		controlSets[ 0 ].controls.userRole = {};
-
-		if ( blockAtts?.visibilityByRole ) {
-			if ( blockAtts?.visibilityByRole === 'all' ) {
-				controlSets[ 0 ].controls.userRole.visibilityByRole = 'public';
-			} else {
-				controlSets[ 0 ].controls.userRole.visibilityByRole =
-					blockAtts.visibilityByRole;
-			}
-		}
-
-		if ( blockAtts?.hideOnRestrictedRoles ) {
-			controlSets[ 0 ].controls.userRole.hideOnRestrictedRoles =
-				blockAtts.hideOnRestrictedRoles;
-		}
-
-		if ( blockAtts?.restrictedRoles ) {
-			controlSets[ 0 ].controls.userRole.restrictedRoles =
-				blockAtts.restrictedRoles;
-		}
-	}
-
-	return controlSets;
-}

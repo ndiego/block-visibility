@@ -12,15 +12,17 @@ import {
 	Button,
 	Disabled,
 	DropdownMenu,
+	MenuGroup,
+	MenuItem,
+	Slot,
 	TextControl,
 	ToggleControl,
 } from '@wordpress/components';
-import { settings } from '@wordpress/icons';
+import { moreVertical, settings } from '@wordpress/icons';
 
 /**
  * Internal dependencies
  */
-import icons from './../../../../utils/icons';
 import Rule from './rule';
 
 /**
@@ -41,6 +43,7 @@ export default function RuleSets( props ) {
 	} = props;
 
 	const title = ruleSet?.title ?? '';
+	const displayTitle = title ? title : __( 'Rule Set', 'block-visibility' );
 	const enable = ruleSet?.enable ?? true;
 	const rules = ruleSet?.rules ?? [];
 
@@ -48,9 +51,16 @@ export default function RuleSets( props ) {
 		rules.push( { field: '' } );
 	}
 
-	const ruleSetTitle = title ? title : __( 'Rule Set', 'block-visibility' );
+	function duplicateRuleSet() {
+		const newRuleSets = [ ...ruleSets, ruleSet ];
 
-	const removeRuleSet = () => {
+		setControlAtts(
+			controlName,
+			assign( { ...controlAtts }, { ruleSets: [ ...newRuleSets ] } )
+		);
+	}
+
+	function removeRuleSet() {
 		const newRuleSets = ruleSets.filter(
 			( value, index ) => index !== ruleSetIndex
 		);
@@ -59,21 +69,22 @@ export default function RuleSets( props ) {
 			controlName,
 			assign( { ...controlAtts }, { ruleSets: [ ...newRuleSets ] } )
 		);
-	};
+	}
 
-	const deleteRuleSetButton = (
-		<Button
-			label={
-				ruleSets.length <= 1
-					? __( 'Clear Rule Set', 'block-visibility' )
-					: __( 'Delete Rule Set', 'block-visibility' )
-			}
-			icon={ icons.trash }
-			className="toolbar--delete"
-			onClick={ () => removeRuleSet() }
-			isSmall
-		/>
-	);
+	function addRule() {
+		const newRuleSets = [ ...ruleSets ];
+		const newRules = [ ...ruleSet.rules, { field: '' } ];
+
+		newRuleSets[ ruleSetIndex ] = assign(
+			{ ...ruleSet },
+			{ rules: newRules }
+		);
+
+		setControlAtts(
+			controlName,
+			assign( { ...controlAtts }, { ruleSets: [ ...newRuleSets ] } )
+		);
+	}
 
 	const setAttribute = ( attribute, value ) => {
 		const newRuleSet = { ...ruleSet };
@@ -88,24 +99,86 @@ export default function RuleSets( props ) {
 		);
 	};
 
-	const addRule = () => {
-		const newRuleSets = [ ...ruleSets ];
-		const newRules = [ ...ruleSet.rules, { field: '' } ];
+	const settingsDropdown = (
+		<DropdownMenu
+			className="settings-dropdown"
+			label={ __( 'Settings', 'block-visibility' ) }
+			icon={ settings }
+			popoverProps={ {
+				className: 'block-visibility__control-popover control-settings',
+				focusOnMount: 'container',
+			} }
+		>
+			{ () => (
+				<>
+					<h3>{ __( 'Settings', 'block-visibility' ) }</h3>
+					<TextControl
+						value={ title }
+						label={ __( 'Rule set title', 'block-visibility' ) }
+						placeholder={ __( 'Rule Set', 'block-visibility' ) }
+						onChange={ ( value ) => setAttribute( 'title', value ) }
+					/>
+					<ToggleControl
+						label={ __( 'Enable rule set', 'block-visibility' ) }
+						checked={ enable }
+						onChange={ () => setAttribute( 'enable', ! enable ) }
+					/>
+				</>
+			) }
+		</DropdownMenu>
+	);
 
-		newRuleSets[ ruleSetIndex ] = assign(
-			{ ...ruleSet },
-			{ rules: newRules }
-		);
+	const removeLabel =
+		ruleSets.length <= 1
+			? __( 'Clear rule set', 'block-visibility' )
+			: __( 'Remove rule set', 'block-visibility' );
 
-		setControlAtts(
-			controlName,
-			assign( { ...controlAtts }, { ruleSets: [ ...newRuleSets ] } )
-		);
-	};
+	const optionsDropdown = (
+		<DropdownMenu
+			className="options-dropdown"
+			label={ __( 'Options', 'block-visibility' ) }
+			icon={ moreVertical }
+			popoverProps={ { focusOnMount: 'container' } }
+		>
+			{ ( { onClose } ) => (
+				<>
+					<Slot name="RuleSetOptionsTop" />
+
+					<MenuGroup label={ __( 'Tools', 'block-visibility' ) }>
+						<Slot name="RuleSetMoreSettingsTools" />
+						<MenuItem
+							className="more-settings__tools-duplicate"
+							onClick={ () => {
+								duplicateRuleSet();
+								onClose();
+							} }
+						>
+							{ __( 'Duplicate', 'block-visibility' ) }
+						</MenuItem>
+					</MenuGroup>
+
+					<Slot name="RuleSetOptionsMiddle" />
+
+					<MenuGroup>
+						<MenuItem
+							onClick={ () => {
+								removeRuleSet();
+								onClose();
+							} }
+						>
+							{ removeLabel }
+						</MenuItem>
+					</MenuGroup>
+
+					<Slot name="RuleSetOptionsBottom" />
+				</>
+			) }
+		</DropdownMenu>
+	);
 
 	let ruleSetControls = (
 		<>
-			<div className="rule-sets__rule-set--rules">
+			<div className="rule-set__rules">
 				{ rules.map( ( rule, ruleIndex ) => {
 					return (
 						<Rule
@@ -120,7 +193,7 @@ export default function RuleSets( props ) {
 					);
 				} ) }
 			</div>
-			<div className="rule-sets__rule-set--add">
+			<div className="rule-set__add-rule">
 				<Button onClick={ () => addRule() } isLink>
 					{ __( 'Add rule', 'block-visibility' ) }
 				</Button>
@@ -139,66 +212,11 @@ export default function RuleSets( props ) {
 				disabled: ! enable,
 			} ) }
 		>
-			<div className="rule-sets__rule-set--heading">
-				<span className="heading__title">{ ruleSetTitle }</span>
-				<div className="heading__toolbar">
-					<DropdownMenu
-						label={ __( 'Rule Set Settings', 'block-visibility' ) }
-						icon={ settings }
-						toggleProps={ {
-							className: 'heading__toolbar--settings',
-						} }
-						popoverProps={ {
-							className:
-								'block-visibility__control-popover schedule-settings',
-							focusOnMount: 'container',
-							noArrow: false,
-						} }
-					>
-						{ () => (
-							<>
-								<h3>
-									{ __(
-										'Rule Set Settings',
-										'block-visibility'
-									) }
-								</h3>
-								<TextControl
-									value={ title }
-									label={ __(
-										'Rule Set Title',
-										'block-visibility'
-									) }
-									placeholder={ __(
-										'Rule Set',
-										'block-visibility'
-									) }
-									help={ __(
-										'Optionally set a descriptive rule set title.',
-										'block-visibility'
-									) }
-									onChange={ ( value ) =>
-										setAttribute( 'title', value )
-									}
-								/>
-								<ToggleControl
-									label={ __(
-										'Enable rule set',
-										'block-visibility'
-									) }
-									checked={ enable }
-									onChange={ () =>
-										setAttribute( 'enable', ! enable )
-									}
-									help={ __(
-										'Enable or disable the selected rule set.',
-										'block-visibility'
-									) }
-								/>
-							</>
-						) }
-					</DropdownMenu>
-					{ deleteRuleSetButton }
+			<div className="rule-set__header section-header">
+				<span className="section-header__title">{ displayTitle }</span>
+				<div className="section-header__toolbar">
+					{ settingsDropdown }
+					{ optionsDropdown }
 				</div>
 			</div>
 			{ ruleSetControls }

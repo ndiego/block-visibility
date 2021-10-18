@@ -173,6 +173,7 @@ export default function WPFusion( props ) {
 		<>
 			<div className="visibility-control__group wp-fusion-control">
 				<h3 className="visibility-control__group-heading has-icon">
+					<Icon icon={ icons.wpFusion } />
 					<span>
 						{ __( 'WP Fusion', 'block-visibility' ) }
 						<Button
@@ -185,7 +186,6 @@ export default function WPFusion( props ) {
 							isSmall
 						/>
 					</span>
-					<Icon icon={ icons.wpFusion } />
 				</h3>
 				{ anyAllFields }
 				{ notField }
