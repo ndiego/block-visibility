@@ -41,7 +41,7 @@
     .control-separator {
         text-align: center;
         display: flex;
-        flex-direction: row;
+        justify-content: center;
         padding: 10px 50px 20px;
 
         &:before,
@@ -49,7 +49,8 @@
             content: "";
             flex: 1 1;
             border-bottom: 1px solid #e0e0e0;
-            margin: auto;
+            margin: auto 0;
+            max-width: 200px;
         }
 
         // Hide the last separator in the list.
@@ -212,29 +213,26 @@
 
     /* Rule Set styling ----------------------------------------------------- */
     .rule-sets {
-        margin-bottom: 24px;
+        display: grid;
+        grid-template-columns: repeat( auto-fit, minmax( 248px, 1fr ) );
+        grid-column-gap: 32px;
+        grid-row-gap: 16px;
 
         .rule-sets__rule-set {
-            margin-bottom: 20px;
-
-            .rule-set__header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 16px;
-                border-bottom: 1px solid #e0e0e0;
-                padding-bottom: 6px;
-            }
 
             .rule-set__rules {
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-column-gap: 32px;
+                grid-row-gap: 16px;
 
                 .rule {
-                    margin-bottom: 18px;
 
                     .rule__header {
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
+                        margin-bottom: 8px;
 
                         button {
                             height: 24px;
@@ -247,34 +245,29 @@
                     .rule__fields {
 
                         .fields-container {
+                            display: grid;
+                            //grid-template-columns: repeat( auto-fit, minmax( 230px, .5fr ) );
+                            grid-gap: 16px;
+
                             &.is-simplified {
                                 display: grid;
-                                grid-template-columns: 1fr 80px;
-
-                                div {
-                                    margin-bottom: 0;
-                                }
+                                grid-template-columns: 1fr 74px;
 
                                 .field__ruleField,
                                 .field__subField {
                                     grid-column-start: 1;
                                     grid-column-end: 3;
-                                    margin-bottom: 0;
-                                }
-
-                                .field__valueField {
-                                    margin-top: 10px;
-                                    margin-left: 10px;
                                 }
                             }
                         }
 
                         .visibility-control__help {
                             margin-top: 10px;
+                            margin-bottom: 0;
                         }
 
-                        .components-toggle-control {
-                            margin: 16px 0;
+                        .components-base-control__field {
+                            margin-bottom: 0;
                         }
                     }
 
@@ -284,14 +277,19 @@
 
                     .components-text-control__input {
                         padding: 8px;
+                        min-height: 36px;
                     }
                 }
             }
-        }
 
-        .rule-sets__add-rule-set {
-            margin-top: 24px;
+            .rule-set__add-rule {
+                margin: 16px 0 8px;
+            }
         }
+    }
+
+    .rule-sets__add-rule-set {
+        margin: 20px 0 24px;
     }
 
     /* Specific styles for the Hide Block visibility control -----------------*/
@@ -302,21 +300,24 @@
     /* Specific styles for the Date Time visibility control ------------------*/
     .date-time-control {
 
-        .schedules {
-            margin-bottom: 28px;
+        .date-time-control__schedules {
+            display: grid;
+            grid-template-columns: repeat( auto-fit, minmax( 248px, 1fr ) );
+            grid-column-gap: 32px;
+            grid-row-gap: 16px;
 
             .schedules__schedule {
-                margin-top: 20px;
-
-                &:first-child {
-                    margin-top: 0;
-                }
-
                 &.disabled {
                     .date-time-control__schedule--heading {
                         span {
                             opacity: 0.4;
                         }
+                    }
+                }
+
+                .schedule__fields {
+                    &>*:last-child {
+                        margin-bottom: 0;
                     }
                 }
 
@@ -362,10 +363,10 @@
                     }
                 }
             }
+        }
 
-            .schedules__add-schedule {
-                margin-top: 20px;
-            }
+        .date-time-control__add-schedule {
+            margin: 20px 0 24px;
         }
     }
 
@@ -559,12 +560,11 @@
 
 /* Custom styling to make react-select components look more like WordPress. --*/
 .block-visibility__react-select {
-    margin: 10px 0;
 
     .react-select__control {
         border-radius: 2px;
         border: 1px solid #757575;
-        min-height: 20px;
+        min-height: 36px;
 
         &:hover {
             border: 1px solid #757575;

@@ -73,7 +73,11 @@ export default function PresetSidebar( props ) {
 			setPresetAttributes( {
 				id: preset.id,
 				title: preset.title.rendered,
+				date: preset?.date,
+				modified: preset?.modified,
 				enable: preset?.meta?.enable ?? true,
+				layout: preset?.meta?.layout ?? 'columns',
+				hideBlock: preset?.meta?.hide_block ?? false,
 				controlSets: preset?.meta?.control_sets ?? [],
 			} );
 

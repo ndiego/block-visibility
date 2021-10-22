@@ -80,7 +80,7 @@ export default function DateTime( props ) {
 							: __( 'Show', 'block-visibility' )
 					) }
 				</div>
-				<div className="schedules">
+				<div className="date-time-control__schedules">
 					{ schedules.map( ( schedule, scheduleIndex ) => {
 						return (
 							<Schedule
@@ -94,11 +94,11 @@ export default function DateTime( props ) {
 							/>
 						);
 					} ) }
-					<div className="schedules__add-schedule">
-						<Button onClick={ () => addSchedule() } isSecondary>
-							{ __( 'Add schedule', 'block-visibility' ) }
-						</Button>
-					</div>
+				</div>
+				<div className="date-time-control__add-schedule">
+					<Button onClick={ () => addSchedule() } isSecondary>
+						{ __( 'Add schedule', 'block-visibility' ) }
+					</Button>
 				</div>
 				<div className="date-time-control__hide-on-schedules">
 					<ToggleControl

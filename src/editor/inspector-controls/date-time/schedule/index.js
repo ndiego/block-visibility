@@ -3,7 +3,6 @@
  */
 import { assign } from 'lodash';
 import classnames from 'classnames';
-import { v4 as uuidv4 } from 'uuid';
 
 /**
  * WordPress dependencies
@@ -45,17 +44,23 @@ const AdditionalScheduleControls = withFilters(
  */
 export default function Schedule( props ) {
 	const {
+		type,
 		dateTime,
 		schedules,
 		scheduleIndex,
 		scheduleAtts,
+		controlSetAtts,
 		setControlAtts,
 		hideOnSchedules,
 	} = props;
 	const [ startPickerOpen, setStartPickerOpen ] = useState( false );
 	const [ endPickerOpen, setEndPickerOpen ] = useState( false );
 
-	const uniqueIndex = uuidv4();
+	// There needs to be a unique index for the Slots since we technically have
+	// multiple of the same Slot.
+	const uniqueIndex =
+		type === 'single' ? type : type + '-' + controlSetAtts?.id;
+		console.log( uniqueIndex );
 	const title = scheduleAtts?.title ?? '';
 	const enable = scheduleAtts?.enable ?? true;
 	const start = scheduleAtts?.start ?? null;

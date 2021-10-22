@@ -41,7 +41,7 @@ export default function RuleSets( props ) {
 		controlAtts,
 		setControlAtts,
 	} = props;
-
+console.log( ruleSet );
 	const title = ruleSet?.title ?? '';
 	const displayTitle = title ? title : __( 'Rule Set', 'block-visibility' );
 	const enable = ruleSet?.enable ?? true;
@@ -177,7 +177,7 @@ export default function RuleSets( props ) {
 	);
 
 	let ruleSetControls = (
-		<>
+		<div className="rule-set__fields">
 			<div className="rule-set__rules">
 				{ rules.map( ( rule, ruleIndex ) => {
 					return (
@@ -198,7 +198,7 @@ export default function RuleSets( props ) {
 					{ __( 'Add rule', 'block-visibility' ) }
 				</Button>
 			</div>
-		</>
+		</div>
 	);
 
 	if ( ! enable ) {

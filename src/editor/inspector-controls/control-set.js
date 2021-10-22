@@ -35,6 +35,7 @@ const AdditionalControlSetControls = withFilters(
  */
 export default function ControlSet( props ) {
 	const {
+		type,
 		controlSetAtts,
 		setControlSetAtts,
 		enabledControls,
@@ -42,6 +43,11 @@ export default function ControlSet( props ) {
 	} = props;
 	const settingsUrl = variables?.plugin_variables?.settings_url ?? '';
 	const enable = controlSetAtts?.enable ?? true;
+
+	// There needs to be a unique index for the Slots since we technically have
+	// multiple of the same Slot.
+	const uniqueIndex =
+		type === 'single' ? type : type + '-' + controlSetAtts?.id;
 
 	const noControls =
 		enabledControls.length === 1 &&
@@ -95,19 +101,19 @@ export default function ControlSet( props ) {
 
 	let controlSetControls = (
 		<div className="control-set__controls">
-			<Slot name="ControlSetControlsTop" />
+			<Slot name={ 'ControlSetControlsTop-' + uniqueIndex } />
 
 			<DateTime setControlAtts={ setControlAtts } { ...props } />
 			<UserRole setControlAtts={ setControlAtts } { ...props } />
 			<ScreenSize setControlAtts={ setControlAtts } { ...props } />
 			<QueryString setControlAtts={ setControlAtts } { ...props } />
 
-			<Slot name="ControlSetControlsMiddle" />
+			<Slot name={ 'ControlSetControlsMiddle-' + uniqueIndex } />
 
 			<ACF setControlAtts={ setControlAtts } { ...props } />
 			<WPFusion setControlAtts={ setControlAtts } { ...props } />
 
-			<Slot name="ControlSetControlsBottom" />
+			<Slot name={ 'ControlSetControlsBottom-' + uniqueIndex } />
 		</div>
 	);
 
@@ -124,6 +130,7 @@ export default function ControlSet( props ) {
 			/>
 			{ controlSetControls }
 			<AdditionalControlSetControls
+				uniqueIndex={ uniqueIndex }
 				setControlAtts={ setControlAtts }
 				{ ...props }
 			/>

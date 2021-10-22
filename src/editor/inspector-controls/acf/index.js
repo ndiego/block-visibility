@@ -164,11 +164,11 @@ export default function ACF( props ) {
 							/>
 						);
 					} ) }
-					<div className="rule-sets__add-rule-set">
-						<Button onClick={ () => addRuleSet() } isSecondary>
-							{ __( 'Add rule set', 'block-visibility' ) }
-						</Button>
-					</div>
+				</div>
+				<div className="rule-sets__add-rule-set">
+					<Button onClick={ () => addRuleSet() } isSecondary>
+						{ __( 'Add rule set', 'block-visibility' ) }
+					</Button>
 				</div>
 				<div className="hide-on-rule-sets">
 					<ToggleControl

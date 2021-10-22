@@ -21,7 +21,13 @@ import {
 	TextControl,
 	ToggleControl,
 } from '@wordpress/components';
-import { moreVertical } from '@wordpress/icons';
+import { moreVertical, plus } from '@wordpress/icons';
+import { __experimentalGetSettings, format } from '@wordpress/date'; // eslint-disable-line
+
+/**
+ * Internal dependencies.
+ */
+import icons from './../../utils/icons';
 
 /**
  * Render the individual preset header in the presets modal.
@@ -34,6 +40,9 @@ export default function PresetHeader( props ) {
 	const {
 		presetAttributes,
 		setPresetAttributes,
+		controlSets,
+		enabledControls,
+		defaultControls,
 		hasUpdates,
 		setHasUpdates,
 	} = props;
@@ -70,6 +79,8 @@ export default function PresetHeader( props ) {
 			status: 'publish',
 			meta: {
 				enable: presetAttributes?.enable ?? true,
+				layout: presetAttributes?.layout ?? 'columns',
+				hide_block: presetAttributes?.hideBlock ?? false,
 				control_sets: controlSets,
 			},
 		};
@@ -87,13 +98,15 @@ export default function PresetHeader( props ) {
 		} else {
 			response = await saveEntityRecord( 'postType', postType, record );
 		}
-
+console.log( response );
 		if ( response ) {
 			// Need to update the id and the title since they both can change.
 			setPresetAttributes( {
 				...presetAttributes,
 				id: response.id,
 				title: response.title.rendered,
+				date: response?.date,
+				modified: response?.modified,
 			} );
 			setStatus( 'complete' );
 			setHasUpdates( false );
@@ -104,7 +117,12 @@ export default function PresetHeader( props ) {
 
 	const id = presetAttributes?.id ?? null;
 	const title = presetAttributes?.title ?? '';
+	const date = presetAttributes?.date ?? '';
+	const modified = presetAttributes?.modified ?? '';
 	const enable = presetAttributes?.enable ?? true;
+	const hideBlock = presetAttributes?.hideBlock ?? false;
+	const layout = presetAttributes?.layout ?? 'columns';
+	const dateSettings = __experimentalGetSettings();
 
 	function deletePreset() {
 		deleteEntityRecord( 'postType', 'bv_preset', id );
@@ -115,6 +133,22 @@ export default function PresetHeader( props ) {
 
 	function setAttributes( attribute, value ) {
 		setPresetAttributes( { ...presetAttributes, [ attribute ]: value } );
+		setHasUpdates( true );
+	}
+
+	function addControlSet() {
+		const maxId = Math.max( ...controlSets.map( ( set ) => set.id ), 0 );
+		const setId = maxId + 1;
+		const defaultSet = {
+			id: setId,
+			enable: true,
+			controls: defaultControls,
+		};
+
+		setPresetAttributes( {
+			...presetAttributes,
+			controlSets: [ ...controlSets, defaultSet ],
+		} );
 		setHasUpdates( true );
 	}
 
@@ -203,6 +237,44 @@ export default function PresetHeader( props ) {
 
 	return (
 		<div className="preset-manager__preset-header">
+			<div className="preset-header__toolbar">
+				<div className="toolbar__control-set-tools">
+					<Button
+						label={ __( 'Add control set', 'block-visibility' ) }
+						icon={ plus }
+						onClick={ addControlSet }
+						isPrimary
+					/>
+					<Button
+                        label={ __( 'Display as rows', 'block-visibility' ) }
+						icon={ icons.rows }
+						onClick={ () => setAttributes( 'layout', 'rows' ) }
+                        isPressed={ layout === 'rows' }
+					/>
+					<Button
+                        label={ __( 'Display as columns', 'block-visibility' ) }
+						icon={ icons.columns }
+                        onClick={ () => setAttributes( 'layout', 'columns' ) }
+						isPressed={ layout === 'columns' }
+					/>
+				</div>
+				<div className="toolbar__publish-tools">
+					<Button
+						className={ classnames( {
+							'is-busy': status === 'working',
+						} ) }
+						onClick={ () =>
+							triggerAction( id ? 'update' : 'publish' )
+						}
+						disabled={ ! hasUpdates && status !== 'error' }
+						isPrimary
+					>
+						{ publishUpdateLabel }
+					</Button>
+					{ optionsDropdown }
+					{ isDeleteModalOpen && deletePresetModal }
+				</div>
+			</div>
 			{ status === 'error' && (
 				<div className="preset-header__notices">
 					<Notice status="error" isDismissible={ false }>
@@ -215,17 +287,8 @@ export default function PresetHeader( props ) {
 			) }
 			<div className="preset-header__settings">
 				<div className="preset-title">
-					<div className="preset-title__meta">
+					<div className="preset-title__label">
 						<span>{ __( 'Preset title' ) }</span>
-						{ id && (
-							<span className="preset-title__meta-id">
-								{ sprintf(
-									// translators: %s: Id of preset.
-									__( 'Id: %s' ),
-									id
-								) }
-							</span>
-						) }
 					</div>
 					<TextControl
 						value={ title }
@@ -237,33 +300,47 @@ export default function PresetHeader( props ) {
 							'block-visibility'
 						) }
 					/>
+					<div className="preset-title__meta">
+						{ modified && (
+							<span>
+								{ sprintf(
+									// translators: %s: Date/time preset was created.
+									__( 'Modified: %s' ),
+									format(
+										`${ dateSettings.formats.date } ${ dateSettings.formats.time }`,
+										modified
+									)
+								) }
+							</span>
+						) }
+						{ id && (
+							<span>
+								{ sprintf(
+									// translators: %s: Id of preset.
+									__( 'Id: %s' ),
+									id
+								) }
+							</span>
+						) }
+					</div>
+				</div>
+				<div className="preset-controls">
 					<ToggleControl
 						label={ __( 'Enable preset', 'block-visibility' ) }
 						checked={ enable }
 						onChange={ () => setAttributes( 'enable', ! enable ) }
-						// help={ __(
-						//     'Blocks hidden with this preset will become visible again if disabled.',
-						//     'block-visibility'
-						// ) }
 					/>
-				</div>
-				<div className="preset-controls">
-					<div className="preset-controls__toolbar">
-						<Button
-							className={ classnames( {
-								'is-busy': status === 'working',
-							} ) }
-							onClick={ () =>
-								triggerAction( id ? 'update' : 'publish' )
-							}
-							disabled={ ! hasUpdates && status !== 'error' }
-							isPrimary
-						>
-							{ publishUpdateLabel }
-						</Button>
-						{ optionsDropdown }
-						{ isDeleteModalOpen && deletePresetModal }
-					</div>
+					<ToggleControl
+						label={ __( 'Hide block', 'block-visibility' ) }
+						checked={ hideBlock }
+						onChange={ () =>
+							setAttributes( 'hideBlock', ! hideBlock )
+						}
+						help={ __(
+							'Hide blocks with this preset from everyone.',
+							'block-visibility'
+						) }
+					/>
 				</div>
 			</div>
 		</div>

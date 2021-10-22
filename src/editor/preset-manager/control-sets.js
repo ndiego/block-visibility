@@ -2,13 +2,13 @@
  * External dependencies
  */
 import { isEmpty, isUndefined } from 'lodash';
+import classnames from 'classnames';
 
 /**
  * WordPress dependencies.
  */
 import { __ } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
-import { columns, stretchFullWidth } from '@wordpress/icons';
+import { Button, Disabled } from '@wordpress/components';
 
 /**
  * Internal dependencies.
@@ -27,59 +27,13 @@ export default function ControlSets( props ) {
 	const {
 		presetAttributes,
 		setPresetAttributes,
+		controlSets,
+		enabledControls,
+		defaultControls,
 		setHasUpdates,
 		settings,
 		variables,
 	} = props;
-	const enabledControls = getEnabledControls( settings, variables );
-	const defaultControlSettings =
-		settings?.plugin_settings?.default_controls ?? {};
-
-	let defaultControls = {};
-
-	if ( ! isEmpty( defaultControlSettings ) ) {
-		enabledControls.forEach( ( control ) => {
-			if ( defaultControlSettings.includes( control.settingSlug ) ) {
-				defaultControls[ control.attributeSlug ] = {};
-			}
-		} );
-	} else {
-		defaultControls = {
-			dateTime: {},
-			userRole: {},
-			screenSize: {},
-		};
-	}
-
-	let controlSets = presetAttributes?.controlSets ?? [];
-
-	// Create the default control set if none exist.
-	if ( controlSets.length === 0 ) {
-		const defaultSet = [
-			{
-				id: 1,
-				enable: true,
-				controls: defaultControls,
-			},
-		];
-		controlSets = defaultSet;
-	}
-
-	function addControlSet() {
-		const maxId = Math.max( ...controlSets.map( ( set ) => set.id ), 0 );
-		const setId = maxId + 1;
-		const defaultSet = {
-			id: setId,
-			enable: true,
-			controls: defaultControls,
-		};
-
-		setPresetAttributes( {
-			...presetAttributes,
-			controlSets: [ ...controlSets, defaultSet ],
-		} );
-		setHasUpdates( true );
-	}
 
 	function setControlSetAtts( controlSetAtts, remove = false ) {
 		const newControlSets = [ ...controlSets ];
@@ -110,39 +64,44 @@ export default function ControlSets( props ) {
 		setHasUpdates( true );
 	}
 
+    const layout = presetAttributes?.layout ?? 'columns';
+	const hideBlock = presetAttributes?.hideBlock ?? false;
+
+	let controlSetMarkup = ( controlSet, index ) => (
+		<ControlSet
+			key={ index }
+			type={ 'multiple' }
+			controlSets={ controlSets }
+			controlSetAtts={ controlSet }
+			setControlSetAtts={ setControlSetAtts }
+			enabledControls={ enabledControls }
+			defaultControls={ defaultControls }
+			settings={ settings }
+			variables={ variables }
+			{ ...props }
+		/>
+	);
+
 	return (
 		<div className="control-sets">
-			<div className="control-sets__controls">
-				<Button isPrimary onClick={ addControlSet }>
-					{ __( 'Add control set', 'block-visibility' ) }
-				</Button>
-				<div className="control-sets__controls-layouts">
-					<Button
-						icon={ stretchFullWidth }
-						onClick={ () => console.log( 'test' ) }
-					/>
-					<Button
-						icon={ columns }
-						onClick={ () => console.log( 'test' ) }
-					/>
-				</div>
-			</div>
-			<div className="control-sets__container">
+			<div
+                className={ classnames(
+                    'control-sets__container',
+                    { 'is-rows': layout === 'rows' }
+                ) }
+            >
 				{ controlSets.map( ( controlSet, index ) => {
-					return (
-						<ControlSet
-							key={ index }
-							type={ 'multiple' }
-							controlSets={ controlSets }
-							controlSetAtts={ controlSet }
-							setControlSetAtts={ setControlSetAtts }
-							enabledControls={ enabledControls }
-							defaultControls={ defaultControls }
-							settings={ settings }
-							variables={ variables }
-							{ ...props }
-						/>
-					);
+					if ( hideBlock ) {
+						return (
+							<div className="control-set-disabled">
+								<Disabled>
+									{ controlSetMarkup( controlSet, index ) }
+								</Disabled>
+							</div>
+						)
+					}
+
+					return controlSetMarkup( controlSet, index );
 				} ) }
 			</div>
 		</div>

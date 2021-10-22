@@ -74,18 +74,8 @@ export default function WPFusion( props ) {
 
 		setControlAtts(
 			'wpFusion',
-			//assign( { ...wpFusion }, { [ attribute ]: newTags } )
 			assign( { ...wpFusion }, { [ attribute ]: newTags } )
 		);
-
-		/*
-		const newPropertes = { [ attribute ]: newTags };
-
-		setControlAtts(
-			'wpFusion',
-			{ ...wpFusion, ...newPropertes }
-		);
-		*/
 	};
 
 	let anyAllFields = (

@@ -45,6 +45,7 @@
             flex-shrink: 0;
             padding: 32px;
             border-right: 1px solid #ddd;
+            overflow: scroll;
 
             .sidebar__presets-title {
                 display: flex;
@@ -154,19 +155,61 @@
                 height: 100%;
             }
 
+            /* @TODO Fix styling on sticky header */
             .preset-manager__preset-header {
                 background: #fff;
                 border-bottom: 1px solid #ddd;
-                padding: 32px 24px 32px 32px;
+
+                .preset-header__toolbar {
+                    border-bottom: 1px solid #ddd;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 0 24px 0 32px;
+                    height: 60px;
+                    position: absolute;
+                    width: calc(100% - 280px);
+                    background: #fff;
+                    z-index: 1000;
+
+                    .toolbar__control-set-tools {
+                        display: flex;
+
+                        .components-button:first-child {
+                            height: 32px;
+                            margin-right: 8px;
+                            min-width: 32px;
+                            padding: 0;
+                            width: 32px;
+                        }
+
+                        .components-button.is-pressed {
+                            background: #fff;
+                            color: var( --wp-admin-theme-color );
+                        }
+                    }
+
+                    .toolbar__publish-tools {
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+
+                        .components-dropdown-menu {
+                            margin-left: 4px;
+                        }
+                    }
+                }
 
                 .preset-header__notices {
+                    padding: 32px 24px 32px 32px;
                     margin-bottom: 24px
                 }
 
                 .preset-header__settings {
                     display: flex;
                     justify-content: space-between;
-                    gap: 32px;
+                    gap: 64px;
+                    padding: 92px 24px 32px 32px;
 
                     .preset-title {
                         width: 100%;
@@ -179,16 +222,16 @@
                             margin-bottom: 0;
                         }
 
+                        .preset-title__label {
+                            margin-bottom: 8px;
+                        }
+
                         .preset-title__meta {
                             display: flex;
                             justify-content: space-between;
-                            margin-bottom: 8px;
-
-                            .preset-title__meta-id {
-                                color: #757575;
-                                font-size: 11px;
-                                text-transform: uppercase;
-                            }
+                            margin-top: 8px;
+                            color: #757575;
+                            font-size: 11px;
                         }
                     }
 
@@ -196,13 +239,16 @@
                         width: 250px;
                         flex-shrink: 0;
 
-                        .preset-controls__toolbar {
-                            display: flex;
-                            justify-content: flex-end;
+                        .components-toggle-control {
+                            margin-bottom: 16px;
 
-                            .components-dropdown-menu {
-                                margin-left: 4px;
+                            &:last-child {
+                                margin-bottom: 0;
                             }
+                        }
+
+                        .components-base-control__help {
+                            margin-bottom: 0;
                         }
                     }
                 }
@@ -210,13 +256,11 @@
 
             .control-sets {
                 background-color: #f1f1f1;
-            }
 
-            .control-sets__controls {
-                padding: 32px;
-
-                display: flex;
-                justify-content: space-between;
+                /* Makes the sets look better when disabled */
+                .control-set-disabled {
+                    background-color: #fff;
+                }
             }
 
             .control-sets__container {
@@ -224,32 +268,86 @@
                 flex-wrap: nowrap;
                 gap: 32px;
                 overflow-x: auto;
-                padding: 0 32px 32px;
-            }
+                padding: 32px 32px 64px;
 
-            .control-set {
-                background-color: #fff;
-                border: 1px solid #e0e0e0;
-                border-top: 0;
-                flex: 0 0 auto;
-                max-width: 280px;
-                padding: 0 16px;
+                .control-set {
+                    background-color: #fff;
+                    border: 1px solid #e0e0e0;
+                    border-top: 0;
+                    flex: 0 0 auto;
+                    margin-bottom: 0;
+                    max-width: 282px;
+                    padding: 0 16px 24px;
 
-
-                h3 {
-                   color: #1e1e1e;
-                   font-size: 13px;
+                    h3 {
+                       color: #1e1e1e;
+                       font-size: 13px;
+                    }
                 }
 
-                // .date-time-control__schedule--date-time-fields {
-                //     display: flex;
-                //     gap: 24px;
-                //     justify-content: space-between;
-                //
-                //     &>div {
-                //         width: 100%;
-                //     }
-                // }
+                &.is-rows {
+                    flex-direction: column;
+
+                    .control-set {
+                        width: 100%;
+                        max-width: 100%;
+
+                        .section-header:not( .main ) {
+                            border: none;
+                            margin-bottom: 0;
+                        }
+
+                        .rule-set__fields,
+                        .schedule__fields {
+                            border: 1px solid #ddd;
+                            padding: 16px;
+                        }
+
+                        .date-time-control__schedules {
+                            grid-template-columns: repeat( auto-fit, minmax( 460px, 1fr ) );
+                            grid-row-gap: 24px;
+
+                            .fields__date-time {
+                                display: grid;
+                                grid-template-columns: repeat( auto-fit, minmax( 248px, 1fr ) );
+                                grid-column-gap: 16px;
+                            }
+                        }
+
+                        .rule-sets__add-rule-set,
+                        .date-time-control__add-schedule {
+                            margin-top: 24px;
+                        }
+
+                        .rule-sets {
+                            grid-template-columns: repeat( auto-fit, minmax( 460px, 1fr ) );
+                            grid-row-gap: 24px;
+                        }
+
+                        .fields-container {
+                            grid-template-columns: repeat( auto-fit, minmax( 248px, .5fr ) );
+
+                            &.is-simplified {
+                                grid-template-columns: repeat( auto-fit, minmax( 248px, .5fr ) ) !important;
+
+                                .field__ruleField,
+                                .field__subField {
+                                    grid-column-start: unset !important;
+                                    grid-column-end: unset !important;
+                                }
+                            }
+
+                            .components-toggle-control {
+                                height: 36px;
+                                display: flex;
+                            }
+                        }
+
+                        .rule-set__rules {
+                            grid-template-columns: repeat( auto-fit, minmax( 345px, 1fr ) );
+                        }
+                    }
+                }
             }
         }
     }

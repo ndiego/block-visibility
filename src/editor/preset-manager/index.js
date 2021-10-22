@@ -33,7 +33,15 @@ import { PluginMoreMenuItem } from '@wordpress/edit-post';
 import PresetSidebar from './preset-sidebar';
 import PresetHeader from './preset-header';
 import ControlSets from './control-sets';
+import getEnabledControls from './../../utils/get-enabled-controls';
 
+/**
+ * Render the preset manager.
+ *
+ * @since TBD
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
 export default function PresetManager( props ) {
 	const [ presetAttributes, setPresetAttributes ] = useState( {} );
 	const [ hasUpdates, setHasUpdates ] = useState( false );
@@ -62,6 +70,40 @@ export default function PresetManager( props ) {
 
 		return { presets, settings, variables };
 	}, [] );
+
+	const enabledControls = getEnabledControls( settings, variables );
+	const defaultControlSettings =
+		settings?.plugin_settings?.default_controls ?? {};
+
+	let defaultControls = {};
+
+	if ( ! isEmpty( defaultControlSettings ) ) {
+		enabledControls.forEach( ( control ) => {
+			if ( defaultControlSettings.includes( control.settingSlug ) ) {
+				defaultControls[ control.attributeSlug ] = {};
+			}
+		} );
+	} else {
+		defaultControls = {
+			dateTime: {},
+			userRole: {},
+			screenSize: {},
+		};
+	}
+
+	let controlSets = presetAttributes?.controlSets ?? [];
+
+	// Create the default control set if none exist.
+	if ( controlSets.length === 0 ) {
+		const defaultSet = [
+			{
+				id: 1,
+				enable: true,
+				controls: defaultControls,
+			},
+		];
+		controlSets = defaultSet;
+	}
 
 	function addNewPreset() {
 		setPresetAttributes( {
@@ -108,6 +150,9 @@ export default function PresetManager( props ) {
 						<PresetHeader
 							presetAttributes={ presetAttributes }
 							setPresetAttributes={ setPresetAttributes }
+							controlSets={ controlSets }
+							enabledControls={ enabledControls }
+							defaultControls={ defaultControls }
 							hasUpdates={ hasUpdates }
 							setHasUpdates={ setHasUpdates }
 							settings={ settings }
@@ -116,6 +161,9 @@ export default function PresetManager( props ) {
 						<ControlSets
 							presetAttributes={ presetAttributes }
 							setPresetAttributes={ setPresetAttributes }
+							controlSets={ controlSets }
+							enabledControls={ enabledControls }
+							defaultControls={ defaultControls }
 							setHasUpdates={ setHasUpdates }
 							settings={ settings }
 							variables={ variables }
