@@ -98,7 +98,7 @@ export default function PresetHeader( props ) {
 		} else {
 			response = await saveEntityRecord( 'postType', postType, record );
 		}
-console.log( response );
+
 		if ( response ) {
 			// Need to update the id and the title since they both can change.
 			setPresetAttributes( {

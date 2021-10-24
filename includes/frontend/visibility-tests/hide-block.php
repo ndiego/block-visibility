@@ -18,7 +18,7 @@ use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
 /**
  * Run test to see if the hide block setting is enabled for the block.
  *
- * This test is applied at a priotity of 20 to try and ensure it goes last.
+ * This test is applied at a priority of 20 to try and ensure it goes last.
  * This should generally be the last test that is run and should override all
  * other tests.
  *

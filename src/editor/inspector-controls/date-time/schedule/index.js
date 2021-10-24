@@ -60,7 +60,7 @@ export default function Schedule( props ) {
 	// multiple of the same Slot.
 	const uniqueIndex =
 		type === 'single' ? type : type + '-' + controlSetAtts?.id;
-		console.log( uniqueIndex );
+
 	const title = scheduleAtts?.title ?? '';
 	const enable = scheduleAtts?.enable ?? true;
 	const start = scheduleAtts?.start ?? null;

@@ -1,31 +1,16 @@
 /**
  * External dependencies
  */
-import {
-	assign,
-	get,
-	includes,
-	invoke,
-	isUndefined,
-	pickBy,
-	isEmpty,
-} from 'lodash';
+import { includes, isUndefined, pickBy, isEmpty } from 'lodash';
 
 /**
  * WordPress dependencies.
  */
-import { __, sprintf } from '@wordpress/i18n';
-import { dispatch, useDispatch, useSelect } from '@wordpress/data';
+import { __ } from '@wordpress/i18n';
+import { useSelect } from '@wordpress/data';
 import { useState } from '@wordpress/element';
-import { registerPlugin } from '@wordpress/plugins';
 import { store as coreStore } from '@wordpress/core-data';
-import {
-	Button,
-	Modal,
-	TextControl,
-	ToggleControl,
-} from '@wordpress/components';
-import { PluginMoreMenuItem } from '@wordpress/edit-post';
+import { Button } from '@wordpress/components';
 
 /**
  * Internal dependencies.
