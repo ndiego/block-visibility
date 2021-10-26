@@ -59,7 +59,9 @@ export default function Schedule( props ) {
 	// There needs to be a unique index for the Slots since we technically have
 	// multiple of the same Slot.
 	const uniqueIndex =
-		type === 'single' ? type : type + '-' + controlSetAtts?.id;
+		type === 'single'
+			? type + '-' + scheduleIndex
+			: type + '-' + controlSetAtts?.id + '-' + scheduleIndex;
 
 	const title = scheduleAtts?.title ?? '';
 	const enable = scheduleAtts?.enable ?? true;

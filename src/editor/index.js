@@ -457,7 +457,7 @@ function addPresetManagerControlSet() {
 		const { index, type } = props;
 
 		return (
-			<Fill name={ 'PresetManagerControlSet-' + type + '-' + index } >
+			<Fill name={ 'PresetManagerControlSet-' + type + '-' + index }>
 				<ControlSet { ...props } />
 			</Fill>
 		);

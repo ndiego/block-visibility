@@ -12,20 +12,24 @@ import {
 	DropdownMenu,
 	MenuGroup,
 	MenuItem,
-	Modal,
 	Slot,
 	TextControl,
 	ToggleControl,
 	withFilters,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-import { Icon, moreVertical, check, settings } from '@wordpress/icons';
+import {
+	Icon,
+	moreVertical,
+	check,
+	settings,
+	external,
+} from '@wordpress/icons';
 
 /**
  * Internal dependencies
  */
 import icons from './../../utils/icons';
-import { TipsControlSet } from './utils/notices-tips';
 
 // Provides an entry point to slot in additional settings. Must be placed
 // outside of function to avoid unnecessary rerenders.
@@ -229,20 +233,26 @@ export default function ControlSetHeader( props ) {
 						</MenuItem>
 
 						<Slot name="ControlSetOptionsToolsBottom" />
-					</MenuGroup>
 
-					{ type === 'single' && (
-						<MenuGroup>
-							<MenuItem
-								onClick={ () => {
-									setModalOpen( 'tips' );
-									onClose();
-								} }
-							>
+						<a
+							href="https://www.blockvisibilitywp.com/knowledge-base/guide-to-visibility-controls-and-control-sets?bv_query=learn_more&utm_source=plugin&utm_medium=editor&utm_campaign=plugin_referrals"
+							target="_blank"
+							role="menuitem"
+							rel="noopener noreferrer"
+							className="components-button components-menu-item__button"
+						>
+							<span className="components-menu-item__item">
 								{ __( 'Help', 'block-visibility' ) }
-							</MenuItem>
-						</MenuGroup>
-					) }
+								<span className="components-visually-hidden">
+									{ __(
+										'(opens in a new tab)',
+										'block-visibility'
+									) }
+								</span>
+							</span>
+							<Icon icon={ external } size={ 20 } />
+						</a>
+					</MenuGroup>
 
 					<Slot name="ControlSetOptionsBottom" />
 
@@ -308,23 +318,8 @@ export default function ControlSetHeader( props ) {
  * @return {string}		 Return the rendered JSX
  */
 function ControlSetModals( props ) {
-	const { modalOpen, setModalOpen } = props;
-
 	return (
 		<>
-			{ modalOpen === 'tips' && (
-				<Modal
-					className="block-visibility__tips-modal"
-					title={ __(
-						'Block Visibility: Quick Tips',
-						'block-visibility'
-					) }
-					onRequestClose={ () => setModalOpen( false ) }
-				>
-					<TipsControlSet { ...props } />
-				</Modal>
-			) }
-
 			<Slot name="ControlSetModals" />
 			<AdditionalControlSetModals { ...props } />
 		</>

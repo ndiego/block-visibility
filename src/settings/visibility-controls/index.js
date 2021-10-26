@@ -77,6 +77,11 @@ export default function VisibilityControls( props ) {
 					setVisibilityControls={ setVisibilityControls }
 					{ ...props }
 				/>
+				<QueryString
+					visibilityControls={ visibilityControls }
+					setVisibilityControls={ setVisibilityControls }
+					{ ...props }
+				/>
 				<DateTime
 					visibilityControls={ visibilityControls }
 					setVisibilityControls={ setVisibilityControls }
@@ -88,11 +93,6 @@ export default function VisibilityControls( props ) {
 					{ ...props }
 				/>
 				<ScreenSize
-					visibilityControls={ visibilityControls }
-					setVisibilityControls={ setVisibilityControls }
-					{ ...props }
-				/>
-				<QueryString
 					visibilityControls={ visibilityControls }
 					setVisibilityControls={ setVisibilityControls }
 					{ ...props }

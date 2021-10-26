@@ -44,7 +44,7 @@ export default function HideBlock( props ) {
 						} );
 					} }
 					help={ __(
-						'Hide selected block from everyone.',
+						'Hide the block from everyone.',
 						'block-visibility'
 					) }
 				/>

@@ -496,11 +496,11 @@ $mobile: 426px;
 		}
 
 		.setting-tabs__settings-panel {
-			background: #fff;
 			font-size: 15px;
 			margin-bottom: 20px;
 
 			.settings-panel__header {
+				background: #fff;
 				padding: 16px 16px 16px 24px;
 				display: flex;
 				justify-content: space-between;
@@ -521,6 +521,7 @@ $mobile: 426px;
 			}
 
 			.settings-panel__container {
+				background: #fff;
 				padding: 24px 16px 24px 24px;
 				box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
 
@@ -826,6 +827,30 @@ $mobile: 426px;
 				grid-template-columns: repeat(3, 1fr);
 			}
 		}
+
+		div.setting-tabs__visibility-controls {
+		   display: grid;
+		   grid-template-columns: 1fr 1fr;
+		   gap: 32px;
+
+		   @media ( max-width: $tablet ) {
+			   grid-template-columns: 1fr;
+		   }
+
+		   .setting-tabs__setting-controls,
+		   .two-columns {
+			   grid-column: 1 / span 2;
+			   margin-bottom: 0;
+
+			   @media ( max-width: $tablet ) {
+				   grid-column: 1;
+			   }
+		   }
+
+		   .setting-tabs__settings-panel {
+			   margin-bottom: 0;
+		   }
+	   }
 	}
 
 	.setting-tabs__block-manager {

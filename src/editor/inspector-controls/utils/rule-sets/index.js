@@ -41,7 +41,7 @@ export default function RuleSets( props ) {
 		controlAtts,
 		setControlAtts,
 	} = props;
-console.log( ruleSet );
+
 	const title = ruleSet?.title ?? '';
 	const displayTitle = title ? title : __( 'Rule Set', 'block-visibility' );
 	const enable = ruleSet?.enable ?? true;

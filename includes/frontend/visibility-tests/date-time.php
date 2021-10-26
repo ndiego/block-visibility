@@ -23,10 +23,10 @@ use function BlockVisibility\Utils\create_date_time as create_date_time;
  *
  * @param boolean $is_visible The current value of the visibility test.
  * @param array   $settings   The core plugin settings.
- * @param array   $attributes The block visibility attributes.
+ * @param array   $controls   The control set controls.
  * @return boolean            Return true if the block should be visible, false if not.
  */
-function date_time_test( $is_visible, $settings, $attributes ) {
+function date_time_test( $is_visible, $settings, $controls ) {
 
 	// The test is already false, so skip this test, the block should be hidden.
 	if ( ! $is_visible ) {
@@ -38,40 +38,18 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 		return true;
 	}
 
-	$has_control_sets = isset( $attributes['controlSets'] );
-
-	if ( $has_control_sets ) {
-		// Just retrieve the first set and schedule, need to update in future.
-		$schedules =
-			isset( $attributes['controlSets'][0]['controls']['dateTime']['schedules'] )
-				? $attributes['controlSets'][0]['controls']['dateTime']['schedules']
-				: array();
-
-		$hide_on_schedules =
-			isset( $attributes['controlSets'][0]['controls']['dateTime']['hideOnSchedules'] )
-				? $attributes['controlSets'][0]['controls']['dateTime']['hideOnSchedules']
-				: false;
-	} else {
-		$schedules = isset( $attributes['scheduling'] )
-			? array( $attributes['scheduling'] )
+	$schedules =
+		isset( $controls['dateTime']['schedules'] )
+			? $controls['dateTime']['schedules']
 			: array();
 
-		$hide_on_schedules = false;
-	}
-
-	$depracated_start = isset( $attributes['startDateTime'] )
-		? $attributes['startDateTime']
-		: null;
-	$depracated_end   = isset( $attributes['endDateTime'] )
-		? $attributes['endDateTime']
-		: null;
+	$hide_on_schedules =
+		isset( $controls['dateTime']['hideOnSchedules'] )
+			? $controls['dateTime']['hideOnSchedules']
+			: false;
 
 	// There are no date time settings, skip tests.
-	if (
-		0 === count( $schedules ) &&
-		! $depracated_start &&
-		! $depracated_end
-	) {
+	if ( 0 === count( $schedules ) ) {
 		return true;
 	}
 
@@ -107,11 +85,6 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 				$test_results[] = $test_result;
 			}
 		}
-	} elseif ( $depracated_start || $depracated_end ) {
-		$test_result =
-			run_schedule_test( $depracated_start, $depracated_end );
-
-		$test_results[] = $test_result;
 	}
 
 	// If there are no enabled schedules,there will be no results. Default to
@@ -130,7 +103,7 @@ function date_time_test( $is_visible, $settings, $attributes ) {
 		return true;
 	}
 }
-add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\date_time_test', 10, 3 );
+add_filter( 'block_visibility_control_set_is_block_visible', __NAMESPACE__ . '\date_time_test', 10, 3 );
 
 /**
  * Run individual date/time test for each schedule.

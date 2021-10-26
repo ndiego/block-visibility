@@ -23,10 +23,10 @@ use function BlockVisibility\Utils\get_setting as get_setting;
  *
  * @param boolean $is_visible The current value of the visibility test.
  * @param array   $settings   The core plugin settings.
- * @param array   $attributes The block visibility attributes.
+ * @param array   $controls   The control set controls.
  * @return boolean            Return true if the block should be visible, false if not
  */
-function screen_size_test( $is_visible, $settings, $attributes ) {
+function screen_size_test( $is_visible, $settings, $controls ) {
 
 	// The test is already false, so skip this test, the block should be hidden.
 	if ( ! $is_visible ) {
@@ -38,19 +38,9 @@ function screen_size_test( $is_visible, $settings, $attributes ) {
 		return true;
 	}
 
-	$has_control_sets = isset( $attributes['controlSets'] );
-
-	if ( $has_control_sets ) {
-		// Just retrieve the first set, need to update in future.
-		$control_atts =
-			isset( $attributes['controlSets'][0]['controls']['screenSize'] )
-				? $attributes['controlSets'][0]['controls']['screenSize']
-				: null;
-
-	} else {
-		// There are no screen size settings, so skip tests.
-		return true;
-	}
+	$control_atts = isset( $controls['screenSize'] )
+		? $controls['screenSize']
+		: null;
 
 	// If we have screen size settings, register the required CSS. Also make
 	// sure the styles have not already been enqueued.
@@ -74,7 +64,7 @@ function screen_size_test( $is_visible, $settings, $attributes ) {
 	// Always return true because the screen size controls are handled with CSS.
 	return true;
 }
-add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\screen_size_test', 10, 3 );
+add_filter( 'block_visibility_control_set_is_block_visible', __NAMESPACE__ . '\screen_size_test', 10, 3 );
 
 /**
  * Get the screen size styles.

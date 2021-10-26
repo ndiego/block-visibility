@@ -22,10 +22,10 @@ use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
  *
  * @param boolean $is_visible The current value of the visibility test.
  * @param array   $settings   The core plugin settings.
- * @param array   $attributes The block visibility attributes.
+ * @param array   $controls   The control set controls.
  * @return boolean            Return true if the block should be visible, false if not
  */
-function query_string_test( $is_visible, $settings, $attributes ) {
+function query_string_test( $is_visible, $settings, $controls ) {
 
 	// The test is already false, so skip this test, the block should be hidden.
 	if ( ! $is_visible ) {
@@ -37,18 +37,9 @@ function query_string_test( $is_visible, $settings, $attributes ) {
 		return true;
 	}
 
-	$has_control_sets = isset( $attributes['controlSets'] );
-
-	if ( $has_control_sets ) {
-		// Just retrieve the first set, need to update in future.
-		$control_atts =
-			isset( $attributes['controlSets'][0]['controls']['queryString'] )
-				? $attributes['controlSets'][0]['controls']['queryString']
-				: null;
-	} else {
-		// There are no Query String settings, so skip tests.
-		return true;
-	}
+	$control_atts = isset( $controls['queryString'] )
+		? $controls['queryString']
+		: null;
 
 	$query_string_any = isset( $control_atts['queryStringAny'] )
 		? prepare_queries( $control_atts['queryStringAny'] )
@@ -122,7 +113,7 @@ function query_string_test( $is_visible, $settings, $attributes ) {
 
 	return true;
 }
-add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\query_string_test', 10, 3 );
+add_filter( 'block_visibility_control_set_is_block_visible', __NAMESPACE__ . '\query_string_test', 10, 3 );
 
 /**
  * Turn a query string into an array.

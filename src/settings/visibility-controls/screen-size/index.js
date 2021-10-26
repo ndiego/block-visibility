@@ -122,7 +122,7 @@ export default function ScreenSize( props ) {
 	}
 
 	return (
-		<div className="setting-tabs__settings-panel">
+		<div className="setting-tabs__settings-panel two-columns">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'Screen Size', 'block-visibility' ) }

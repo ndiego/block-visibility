@@ -22,10 +22,10 @@ use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
  *
  * @param boolean $is_visible The current value of the visibility test.
  * @param array   $settings   The core plugin settings.
- * @param array   $attributes The block visibility attributes.
+ * @param array   $controls   The control set controls.
  * @return boolean            Return true if the block should be visible, false if not.
  */
-function acf_test( $is_visible, $settings, $attributes ) {
+function acf_test( $is_visible, $settings, $controls ) {
 
 	// If the test is already false, or ACF is not active, skip this test.
 	if (
@@ -41,18 +41,7 @@ function acf_test( $is_visible, $settings, $attributes ) {
 		return true;
 	}
 
-	$has_control_sets = isset( $attributes['controlSets'] );
-
-	if ( $has_control_sets ) {
-		// Just retrieve the first set, need to update in future.
-		$control_atts =
-			isset( $attributes['controlSets'][0]['controls']['acf'] )
-				? $attributes['controlSets'][0]['controls']['acf']
-				: null;
-	} else {
-		// There are no control sets, so skip tests.
-		return true;
-	}
+	$control_atts = isset( $controls['acf'] ) ? $controls['acf'] : null;
 
 	// There are no control settings, so skip tests.
 	if ( ! $control_atts ) {
@@ -181,7 +170,7 @@ function acf_test( $is_visible, $settings, $attributes ) {
 
 // Run all integration tests at "15" priority, which is after the main controls,
 // but before the final "hide block" tests.
-add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\acf_test', 15, 3 );
+add_filter( 'block_visibility_control_set_is_block_visible', __NAMESPACE__ . '\acf_test', 15, 3 );
 
 /**
  * Run the individual rule tests.

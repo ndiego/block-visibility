@@ -22,10 +22,10 @@ use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
  *
  * @param boolean $is_visible The current value of the visibility test.
  * @param array   $settings   The core plugin settings.
- * @param array   $attributes The block visibility attributes.
+ * @param array   $controls   The control set controls.
  * @return boolean            Return true if the block should be visible, false if not.
  */
-function user_role_test( $is_visible, $settings, $attributes ) {
+function user_role_test( $is_visible, $settings, $controls ) {
 
 	// The test is already false, so skip this test, the block should be hidden.
 	if ( ! $is_visible ) {
@@ -37,17 +37,9 @@ function user_role_test( $is_visible, $settings, $attributes ) {
 		return true;
 	}
 
-	$has_control_sets = isset( $attributes['controlSets'] );
-
-	if ( $has_control_sets ) {
-		// Just retrieve the first set and schedule, need to update in future.
-		$control_atts =
-			isset( $attributes['controlSets'][0]['controls']['userRole'] )
-				? $attributes['controlSets'][0]['controls']['userRole']
-				: null;
-	} else {
-		$control_atts = $attributes;
-	}
+	$control_atts = isset( $controls['userRole'] )
+		? $controls['userRole']
+		: null;
 
 	// There are no user role settings, skip tests.
 	if ( ! $control_atts ) {
@@ -183,4 +175,4 @@ function user_role_test( $is_visible, $settings, $attributes ) {
 	// If we don't pass any of the above tests, hide the block.
 	return false;
 }
-add_filter( 'block_visibility_is_block_visible', __NAMESPACE__ . '\user_role_test', 10, 3 );
+add_filter( 'block_visibility_control_set_is_block_visible', __NAMESPACE__ . '\user_role_test', 10, 3 );
