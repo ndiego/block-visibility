@@ -15,6 +15,7 @@ import {
 	Slot,
 	TextControl,
 	ToggleControl,
+	VisuallyHidden,
 	withFilters,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
@@ -243,12 +244,12 @@ export default function ControlSetHeader( props ) {
 						>
 							<span className="components-menu-item__item">
 								{ __( 'Help', 'block-visibility' ) }
-								<span className="components-visually-hidden">
+								<VisuallyHidden>
 									{ __(
 										'(opens in a new tab)',
 										'block-visibility'
 									) }
-								</span>
+								</VisuallyHidden>
 							</span>
 							<Icon icon={ external } size={ 20 } />
 						</a>
