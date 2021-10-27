@@ -22,9 +22,9 @@ use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
  *
  * @since 1.0.0
  *
- * @param array   $settings   The core plugin settings.
- * @param array   $attributes The block visibility attributes.
- * @return boolean            Return true if the block should be visible, false if not
+ * @param array $settings   The core plugin settings.
+ * @param array $attributes The block visibility attributes.
+ * @return boolean          Return true if the block should be visible, false if not
  */
 function hide_block_test( $settings, $attributes ) {
 

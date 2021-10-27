@@ -50,7 +50,7 @@ export default function UserRoles( props ) {
 	};
 
 	return (
-		<>
+		<div className="visibility-control__container">
 			<div className="visibility-control restricted-roles">
 				<div className="visibility-control__label">
 					{ __( 'Restricted user roles', 'block-visibility' ) }
@@ -95,6 +95,6 @@ export default function UserRoles( props ) {
 					}
 				/>
 			</div>
-		</>
+		</div>
 	);
 }

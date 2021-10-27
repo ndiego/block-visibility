@@ -82,7 +82,7 @@ export default function Users( props ) {
 	};
 
 	return (
-		<>
+		<div className="visibility-control__container">
 			<div className="visibility-control restricted-users">
 				<div className="visibility-control__label">
 					{ __( 'Restricted users', 'block-visibility' ) }
@@ -125,6 +125,6 @@ export default function Users( props ) {
 					}
 				/>
 			</div>
-		</>
+		</div>
 	);
 }

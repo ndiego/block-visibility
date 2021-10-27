@@ -1,6 +1,6 @@
 {
 	"name": "block-visibility",
-	"version": "2.1.2",
+	"version": "2.2.0",
 	"description": "Provides visibility controls and scheduling functionality to all WordPress blocks.",
 	"author": "Nick Diego",
 	"license": "GPL-2.0-or-later",
@@ -22,7 +22,7 @@
 		"@wordpress/scripts": "^19.0.0",
 		"classnames": "^2.3.1",
 		"lodash": "^4.17.21",
-		"postcss": "^8.2.15",
+		"postcss": "^8.3.11",
 		"webpack-remove-empty-scripts": "^0.7.1"
 	},
 	"dependencies": {

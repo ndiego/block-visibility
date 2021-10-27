@@ -40,7 +40,7 @@
         text-align: center;
         display: flex;
         justify-content: center;
-        padding: 10px 50px 20px;
+        padding: 20px 0 30px;
 
         &:before,
         &:after {
@@ -48,7 +48,6 @@
             flex: 1 1;
             border-bottom: 1px solid #e0e0e0;
             margin: auto 0;
-            max-width: 200px;
         }
 
         // Hide the last separator in the list.
@@ -100,6 +99,10 @@
         &:last-child {
             margin-bottom: 0;
         }
+
+        &>.block-visibility__react-select {
+            margin: 10px 0;
+        }
     }
 
     .visibility-control__label {
@@ -124,6 +127,14 @@
 
         strong {
             font-weight: 700;
+        }
+    }
+
+    .visibility-control__group-fields {
+        margin-bottom: 24px;
+
+        .components-base-control__help {
+            margin-top: 0;
         }
     }
 
@@ -369,7 +380,7 @@
             display: grid;
             grid-template-columns: repeat( auto-fit, minmax( 248px, 1fr ) );
             grid-column-gap: 32px;
-            grid-row-gap: 16px;
+            grid-row-gap: 20px;
 
             .schedules__schedule {
                 &.disabled {
@@ -488,7 +499,7 @@
     }
 
     .date-time-header {
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid #e0e0e0;
         font-weight: bold;
         padding: 16px 12px;
         margin-bottom: 16px;

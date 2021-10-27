@@ -177,12 +177,14 @@ export default function WPFusion( props ) {
 						/>
 					</span>
 				</h3>
-				{ anyAllFields }
-				{ notField }
+				<div className="visibility-control__group-fields">
+					{ anyAllFields }
+					{ notField }
+				</div>
 				{ ! hasUserRoles && (
 					<Notice status="warning" isDismissible={ false }>
 						{ __(
-							'The WP Fusion control works best in coordination with the User Role control, which has been disabled. To re-enable, click the three dots icon in the Controls Toolbar above.',
+							'The WP Fusion control works best in coordination with the User Role control, which has been disabled. To re-enable, click the eye icon in the Controls Toolbar above.',
 							'block-visibility'
 						) }
 					</Notice>

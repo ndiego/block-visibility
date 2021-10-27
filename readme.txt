@@ -5,7 +5,7 @@ Tags: visibility, dynamic content, conditional content, conditional blocks, rest
 Requires at least: 5.5
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 2.1.2
+Stable tag: 2.2.0
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -205,12 +205,13 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 **Added**
 
 * Added the ability to duplicate schedules and rule sets.
-* Added support for Pro presets.
+* Added support for Visibility Presets in Block Visibility Pro.
 
 **Changed**
 
-* Visibility controls and tools (reset controls, help, etc.) have been separated into two different dropdown menus to reduce menu length. Managing visibility controls can now be done using the "eye" icon whereas tools are managed using the vertical dots icon.
-* Minor changes to labeling throughout the plugin to improve clarity.
+* Visibility controls and tools (reset controls, help, etc.) have been separated into two different dropdown menus to reduce menu length.
+* Managing visibility controls can now be done using the "eye" icon whereas tools are managed using the vertical dots icon.
+* Minor changes to labeling has been done throughout the plugin to improve clarity.
 
 **Removed**
 

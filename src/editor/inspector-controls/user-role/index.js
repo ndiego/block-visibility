@@ -120,30 +120,40 @@ export default function UserRole( props ) {
 				<h3 className="visibility-control__group-heading">
 					{ __( 'User Role', 'block-visibility' ) }
 				</h3>
-				<div className="visibility-control visibility-by-role">
-					<RadioControl
-						className="compound-radio-control"
-						selected={ visibilityByRole }
-						options={ options }
-						onChange={ ( value ) =>
-							setControlAtts(
-								'userRole',
-								assign(
-									{ ...userRole },
-									{ visibilityByRole: value }
+				<div className="visibility-control__group-fields">
+					<div className="visibility-control visibility-by-role">
+						<RadioControl
+							className="compound-radio-control"
+							selected={ visibilityByRole }
+							options={ options }
+							onChange={ ( value ) =>
+								setControlAtts(
+									'userRole',
+									assign(
+										{ ...userRole },
+										{ visibilityByRole: value }
+									)
 								)
-							)
-						}
-					/>
+							}
+						/>
+					</div>
+					{ visibilityByRole === 'user-role' && enableUserRoles && (
+						<UserRoles
+							variables={ variables }
+							userRole={ userRole }
+							setControlAtts={ setControlAtts }
+							{ ...props }
+						/>
+					) }
+					{ visibilityByRole === 'users' && enableUsers && (
+						<Users
+							variables={ variables }
+							userRole={ userRole }
+							setControlAtts={ setControlAtts }
+							{ ...props }
+						/>
+					) }
 				</div>
-				{ visibilityByRole === 'user-role' && enableUserRoles && (
-					<UserRoles
-						variables={ variables }
-						userRole={ userRole }
-						setControlAtts={ setControlAtts }
-						{ ...props }
-					/>
-				) }
 				{ visibilityByRole === 'user-role' && ! enableUserRoles && (
 					<Notice status="warning" isDismissible={ false }>
 						{ createInterpolateElement(
@@ -165,14 +175,6 @@ export default function UserRole( props ) {
 							}
 						) }
 					</Notice>
-				) }
-				{ visibilityByRole === 'users' && enableUsers && (
-					<Users
-						variables={ variables }
-						userRole={ userRole }
-						setControlAtts={ setControlAtts }
-						{ ...props }
-					/>
 				) }
 				{ visibilityByRole === 'users' && ! enableUsers && (
 					<Notice status="warning" isDismissible={ false }>
