@@ -1,13 +1,13 @@
 === Block Visibility — Conditional Visibility Control for the Block Editor ===
-Author URI: https://www.nickdiego.com/?bv_query=readme
-Contributors: ndiego, outermostdesign
-Tags: visibility, dynamic content, conditional content, conditional blocks, restrict blocks
+Author URI:        https://www.nickdiego.com/?bv_query=readme
+Contributors:      ndiego, outermostdesign
+Tags:              visibility, dynamic content, conditional content, conditional blocks, restrict blocks
 Requires at least: 5.5
-Tested up to: 5.8
-Requires PHP: 5.6
-Stable tag: 2.2.0
-License: GPL-2.0
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tested up to:      5.8
+Requires PHP:      5.6
+Stable tag:        2.2.0
+License:           GPL-2.0
+License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
 Show or hide any WordPress block with ease. Schedule when blocks should be visible. Restrict blocks to specific screen sizes, user roles, and more.
 
@@ -17,7 +17,13 @@ Effortlessly create dynamic content in WordPress that will increase conversions,
 
 With this **no-code** solution, control which blocks are visible on your website and who can see them. Schedule content to show or hide at a specific time. Display exclusive promotions to your customers or members. Restrict blocks to specific user roles, screen sizes, query strings, ACF fields, WP Fusion tags and more.
 
-Built exclusively for the Block Editor (Gutenberg), Block Visibility is designed to work with **any** WordPress block. This includes blocks natively provided by WordPress as well as third-party blocks.
+Built exclusively for the Block Editor (Gutenberg), Block Visibility is designed to work with **any** WordPress block. This includes blocks natively provided by WordPress, third-party blocks, and even block-based widgets.
+
+=== See How It Works ===
+
+https://youtu.be/CW1L4vBpXjw
+
+For more informational videos, visit our [YouTube channel](https://www.youtube.com/channel/UCDsTrm-1766AmNqwdzwJ4KQ).
 
 === Create Conditional Blocks in Seconds! ===
 
@@ -55,6 +61,25 @@ It takes just **3 simple steps**:
 * Enable Full Control Mode 🚀 (See the FAQs).
 * Remove all plugin settings on uninstall.
 
+=== Pro Features ===
+
+Take Block Visibility to the next level with **[Block Visibility Pro](https://www.blockvisibilitywp.com/pro/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)**. The Pro add-on enhances your marketing capabilities, improves compatibility with new Full Site Editing features, and introduces eCommerce integrations.
+
+Here’s a look at what's currently included with Pro:
+
+* Visibility Presets allow you to control multiple blocks at once. **NEW 🎉**
+* Show or hide blocks based on their **location** and “attributes” of their location (i.e. post type, taxonomy, archive etc.)
+* Advanced **day-of-week** and **time-of-day** controls, which include recursion functionality.
+* Display blocks based on the **referral source** (domain/URL) of a website visitor.
+* Support for all post and user **metadata** (custom fields).
+* **WooCommerce** conditional block logic for shopping cart contents, product details, customer metrics and more.
+* **Easy Digital Downloads** conditional block logic for shopping cart contents, customer metrics and more.
+* eCommerce rules for when a customer placed their first/last order, or when specific products were purchased. **NEW 🎉**
+* Access to premium email support.
+* More conditions coming soon...
+
+**[Learn More About Pro →](https://www.blockvisibilitywp.com/pro/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)**
+
 === Why Do I Need This? ===
 
 While there are countless applications for conditional blocks, here are a few examples to get you started:
@@ -85,24 +110,6 @@ Block Visibility and the [Pro add-on](https://www.blockvisibilitywp.com/pro/?bv_
 - [Premium support with Pro (email)](https://www.blockvisibilitywp.com/account/pro-support/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
 
 For an **unbiased review**, the plugin was featured on [WordPress Tavern](https://wptavern.com/show-and-hide-content-via-the-block-visibility-wordpress-plugin).
-
-=== Pro Features ===
-
-Take Block Visibility to the next level with **[Block Visibility Pro](https://www.blockvisibilitywp.com/pro/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)**. The Pro add-on enhances your marketing capabilities, improves compatibility with new Full Site Editing features, and introduces eCommerce integrations.
-
-Here’s a look at what's currently included with Pro:
-
-* Show or hide blocks based on their **location** and “attributes” of their location (i.e. post type, taxonomy, archive etc.)
-* Advanced **day-of-week** and **time-of-day** controls, which include recursion functionality.
-* Display blocks based on the **referral source** (domain/URL) of a website visitor.
-* Support for all post and user **metadata** (custom fields). **NEW 🎉**
-* **WooCommerce** conditional block logic for shopping cart contents, product details, customer metrics and more.
-* **Easy Digital Downloads** conditional block logic for shopping cart contents, customer metrics and more.
-* eCommerce rules for when a customer placed their first/last order, or when specific products were purchased. **NEW 🎉**
-* Access to premium email support.
-* More conditions coming soon...
-
-**[Learn More About Pro →](https://www.blockvisibilitywp.com/pro/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)**
 
 === Plays nice with others  ===
 
@@ -139,6 +146,7 @@ Stay up-to-date on Block Visibility using the links below. The plugin is also be
 
 * [Plugin Website](https://www.blockvisibilitywp.com/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
 * [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
+* [YouTube Channel](https://www.youtube.com/channel/UCDsTrm-1766AmNqwdzwJ4KQ)
 * [Follow on Twitter](https://twitter.com/BlockVisibility)
 * [View on GitHub](https://github.com/ndiego/block-visibility)
 
@@ -200,7 +208,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ==
 
-= 2.2.0 - 2021-10-TBD =
+= 2.2.0 - 2021-10-29 =
 
 **Added**
 
