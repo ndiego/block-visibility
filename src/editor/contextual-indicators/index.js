@@ -102,8 +102,8 @@ function withContextualIndicators( BlockListBlock ) {
 
 		activeCoreControls = applyFilters(
 			'blockVisibility.conditionalIndicatorActiveCoreControls',
-			blockVisibility,
 			activeCoreControls,
+			blockVisibility,
 			controls,
 			hasControlSets,
 			enabledControls,
