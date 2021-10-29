@@ -71,8 +71,10 @@
     }
 
     .visibility-control__group-heading {
+        font-size: 13px;
         font-weight: 500;
         margin-bottom: 16px;
+        text-transform: none;
 
         &.has-icon {
             display: flex;
