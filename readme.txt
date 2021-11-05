@@ -166,7 +166,7 @@ Stay up-to-date on Block Visibility using the links below. The plugin is also be
 
 1. You have a couple options:
 	* Go to Plugins &rarr; Add New and search for "Block Visibility". Once found, click "Install".
-	* Download Block Visibility from Wordpress.org and make sure the folder us zipped. Then upload via Plugins &rarr; Add New &rarr; Upload.
+	* Download Block Visibility from WordPress.org and make sure the folder is zipped. Then upload via Plugins &rarr; Add New &rarr; Upload.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. From the 'Plugins' page, head directly to the plugin 'Settings' page.
 4. Once there, you can click on the 'Getting Started' tab where you will be presented with some getting started information along with the plugin [demo video](https://www.youtube.com/watch?v=DdDwQCE7RNE).
