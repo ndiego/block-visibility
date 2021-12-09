@@ -208,6 +208,17 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ==
 
+= 2.3.0 - 2021-12-TBD =
+
+**Changed**
+
+* The additional contextual indicator settings are now disabled when indicators are disabled.
+
+**Fixed**
+
+* Fixed issue where Visibility Presets would appear in available control defaults with Block Visibility Pro is enabled.
+* Fixed minor styling issues found in WordPress 5.9 testing.
+
 = 2.2.0 - 2021-10-29 =
 
 **Added**
