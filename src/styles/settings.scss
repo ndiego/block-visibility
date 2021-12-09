@@ -594,11 +594,10 @@ $mobile: 426px;
 
 					.components-circular-option-picker__custom-clear-wrapper {
 						justify-content: flex-start;
-						margin-bottom: 14px;
-    					margin-left: 20px;
+						margin: 10px 0 10px 20px;
 
 						@media ( max-width: $tablet ) {
-							margin-left: 0;
+							margin: 10px 0;
 						}
 					}
 

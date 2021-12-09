@@ -11,6 +11,7 @@ import {
 	BaseControl,
 	ColorIndicator,
 	ColorPalette,
+	Disabled,
 	ToggleControl,
 	Slot,
 } from '@wordpress/components';
@@ -33,7 +34,9 @@ export default function BlockEditor( props ) {
 	let enabledControls = getEnabledControls( settings, variables );
 
 	enabledControls = enabledControls.filter(
-		( control ) => control.settingSlug !== 'hide_block'
+		( control ) =>
+			control.settingSlug !== 'hide_block' &&
+			control.settingSlug !== 'visibility_presets'
 	);
 
 	const defaultControlOptions = [];
@@ -86,6 +89,36 @@ export default function BlockEditor( props ) {
 	const indicatorColor = contextualIndicatorColor
 		? contextualIndicatorColor
 		: 'var(--wp-admin-theme-color)';
+
+	let contextualIndicatorColorPicker = (
+		<div className="settings-type__color">
+			<div>
+				<BaseControl
+					id="indicator-color"
+					className="settings-type__color-selected"
+					label={ __( 'Indicator color', 'block-visibility' ) }
+				>
+					<ColorIndicator colorValue={ indicatorColor } />
+				</BaseControl>
+				<ColorPalette
+					colors={ colors }
+					value={ contextualIndicatorColor }
+					onChange={ ( newColor ) => {
+						setPluginSettings( {
+							...pluginSettings,
+							contextual_indicator_color: newColor,
+						} );
+					} }
+				/>
+			</div>
+		</div>
+	);
+
+	if ( ! enableContextualIndicators ) {
+		contextualIndicatorColorPicker = (
+			<Disabled>{ contextualIndicatorColorPicker }</Disabled>
+		);
+	}
 
 	return (
 		<div className="setting-tabs__settings-panel">
@@ -168,36 +201,7 @@ export default function BlockEditor( props ) {
 						) }
 					/>
 				</div>
-				<div className="settings-type__color has-info-popover">
-					<div>
-						<BaseControl
-							id="indicator-color"
-							className="settings-type__color-selected"
-							label={ __(
-								'Indicator color',
-								'block-visibility'
-							) }
-						>
-							<ColorIndicator colorValue={ indicatorColor } />
-						</BaseControl>
-						<ColorPalette
-							colors={ colors }
-							value={ contextualIndicatorColor }
-							onChange={ ( newColor ) => {
-								setPluginSettings( {
-									...pluginSettings,
-									contextual_indicator_color: newColor,
-								} );
-							} }
-						/>
-					</div>
-					<InformationPopover
-						message={ __(
-							'By default, contextual indicators will be the primary color of your WordPress admin theme. Feel free to select an alternative from the color palette or choose a custom color.',
-							'block-visibility'
-						) }
-					/>
-				</div>
+				{ contextualIndicatorColorPicker }
 				<div className="settings-label">
 					<span>
 						{ __( 'Toolbar Controls', 'block-visibility' ) }
