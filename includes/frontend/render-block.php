@@ -97,9 +97,9 @@ function render_with_visibility( $block_content, $block ) {
 		$attributes
 	);
 
-	// Allow local controls to be disabled in Pro.
+	// If Pro is active, allow local controls to be disabled in Pro.
 	$enable_local_controls =
-		isset( $settings['visibility_controls']['general']['enable_local_controls'] )
+		isset( $settings['visibility_controls']['general']['enable_local_controls'] ) && class_exists( 'Block_Visibility_Pro' )
 			? $settings['visibility_controls']['general']['enable_local_controls']
 			: true;
 
