@@ -2,12 +2,13 @@
  * External dependencies
  */
 import { assign } from 'lodash';
+import Select from 'react-select';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { RadioControl, Notice } from '@wordpress/components';
+import { SelectControl, Notice } from '@wordpress/components';
 import { createInterpolateElement } from '@wordpress/element';
 
 /**
@@ -15,6 +16,7 @@ import { createInterpolateElement } from '@wordpress/element';
  */
 import UserRoles from './user-roles';
 import Users from './users';
+import AdvancedRoles from './advanced-roles';
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
 
 /**
@@ -56,51 +58,78 @@ export default function UserRole( props ) {
 		'visibility_by_role',
 		'enable_users'
 	);
-
-	const optionLabel = ( title, description ) => {
-		return (
-			<div className="compound-radio-label">
-				{ title }
-				<span>{ description }</span>
-			</div>
-		);
-	};
+	const enableAdvanced = isControlSettingEnabled(
+		settings,
+		'visibility_by_role',
+		'enable_advanced'
+	);
 
 	let options = [
 		{
-			label: optionLabel(
-				__( 'Public', 'block-visibility' ),
-				__( 'Visible to everyone.', 'block-visibility' )
-			),
+			label: __( 'Public', 'block-visibility' ),
 			value: 'public',
 		},
 		{
-			label: optionLabel(
-				__( 'Logged-out', 'block-visibility' ),
-				__( 'Only visible to logged-out users.', 'block-visibility' )
+			label: __( 'Logged-out', 'block-visibility' ),
+			value: 'logged-out',
+		},
+		{
+			label: __( 'Logged-in', 'block-visibility' ),
+			value: 'logged-in',
+		},
+		{
+			label: __( 'User roles', 'block-visibility' ),
+			value: 'user-role',
+		},
+		{
+			label: __( 'Users', 'block-visibility' ),
+			value: 'users',
+		},
+		{
+			label: __( 'Advanced configuration', 'block-visibility' ),
+			value: 'advanced',
+		},
+	];
+
+	const optionsHelp = [
+		{
+			label: __( 'Block is visible to everyone.', 'block-visibility' ),
+			value: 'public',
+		},
+		{
+			label: __(
+				'Block is only visible to logged-out users.',
+				'block-visibility'
 			),
 			value: 'logged-out',
 		},
 		{
-			label: optionLabel(
-				__( 'Logged-in', 'block-visibility' ),
-				__( 'Only visible to logged-in users.', 'block-visibility' )
+			label: __(
+				'Block is only visible to logged-in users.',
+				'block-visibility'
 			),
 			value: 'logged-in',
 		},
 		{
-			label: optionLabel(
-				__( 'User roles', 'block-visibility' ),
-				__( 'Only visible to specific user roles.', 'block-visibility' )
+			label: __(
+				'Block is only visible to specific user roles.',
+				'block-visibility'
 			),
 			value: 'user-role',
 		},
 		{
-			label: optionLabel(
-				__( 'Users', 'block-visibility' ),
-				__( 'Only visible to specific users.', 'block-visibility' )
+			label: __(
+				'Block is only visible to specific users.',
+				'block-visibility'
 			),
 			value: 'users',
+		},
+		{
+			label: __(
+				'Block is visible based on the applied rule sets.',
+				'block-visibility'
+			),
+			value: 'advanced',
 		},
 	];
 
@@ -114,6 +143,11 @@ export default function UserRole( props ) {
 		options = options.filter( ( option ) => option.value !== 'users' );
 	}
 
+	// If the Advanced option is not enabled in plugin settings, remove it.
+	if ( ! enableAdvanced ) {
+		options = options.filter( ( option ) => option.value !== 'advanced' );
+	}
+
 	return (
 		<>
 			<div className="visibility-control__group user-role-control">
@@ -122,10 +156,15 @@ export default function UserRole( props ) {
 				</h3>
 				<div className="visibility-control__group-fields">
 					<div className="visibility-control visibility-by-role">
-						<RadioControl
-							className="compound-radio-control"
+						<SelectControl
 							selected={ visibilityByRole }
 							options={ options }
+							help={
+								optionsHelp.filter(
+									( option ) =>
+										option.value === visibilityByRole
+								)[ 0 ]?.label ?? ''
+							}
 							onChange={ ( value ) =>
 								setControlAtts(
 									'userRole',
@@ -153,34 +192,22 @@ export default function UserRole( props ) {
 							{ ...props }
 						/>
 					) }
+					{ visibilityByRole === 'advanced' && enableAdvanced && (
+						<AdvancedRoles
+							variables={ variables }
+							userRole={ userRole }
+							setControlAtts={ setControlAtts }
+							{ ...props }
+						/>
+					) }
 				</div>
-				{ visibilityByRole === 'user-role' && ! enableUserRoles && (
+				{ ! options.some(
+					( option ) => option.value === visibilityByRole
+				) && (
 					<Notice status="warning" isDismissible={ false }>
 						{ createInterpolateElement(
 							__(
-								'The User Role option was previously selected, but is now disabled. Choose another option or update the <a>Visibility Control</a> settings.',
-								'block-visibility'
-							),
-							{
-								a: (
-									<a // eslint-disable-line
-										href={
-											settingsUrl +
-											'&tab=visibility-controls'
-										}
-										target="_blank"
-										rel="noreferrer"
-									/>
-								),
-							}
-						) }
-					</Notice>
-				) }
-				{ visibilityByRole === 'users' && ! enableUsers && (
-					<Notice status="warning" isDismissible={ false }>
-						{ createInterpolateElement(
-							__(
-								'The Users option was previously selected, but is now disabled. Choose another option or update the <a>Visibility Control</a> settings.',
+								'The User Role option that was previously selected has been disabled. Choose another option or update the <a>Visibility Control</a> settings.',
 								'block-visibility'
 							),
 							{

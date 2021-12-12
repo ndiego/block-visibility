@@ -41,6 +41,9 @@ function register_settings() {
 						'enable_users'      => array(
 							'type' => 'boolean',
 						),
+						'enable_advanced'   => array(
+							'type' => 'boolean',
+						),
 					),
 				),
 				'date_time'          => array(
@@ -190,6 +193,7 @@ function register_settings() {
 				'enable'            => true,
 				'enable_user_roles' => true,
 				'enable_users'      => true,
+				'enable_advanced'   => true,
 			),
 			'date_time'          => array(
 				'enable'            => true,
