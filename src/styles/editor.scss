@@ -1,3 +1,17 @@
+.block-visibility {
+    &.is-opened {
+        &>.components-panel__body-title {
+            margin-bottom: 0;
+        }
+
+        &>.visibility-controls__container {
+            &>:first-child:not(.control-set) {
+                margin-top: 15px;
+            }
+        }
+    }
+}
+
 .visibility-controls__container,
 .preset-manager__content {
 
@@ -368,11 +382,6 @@
 
     .rule-sets__add-rule-set {
         margin: 20px 0 24px;
-    }
-
-    /* Specific styles for the Hide Block visibility control -----------------*/
-    .hide-block-control {
-        padding-top: 10px;
     }
 
     /* Specific styles for the Date Time visibility control ------------------*/

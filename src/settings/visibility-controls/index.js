@@ -10,6 +10,7 @@ import { withFilters, Slot } from '@wordpress/components';
  */
 import UpdateSettings from './../utils/update-settings';
 import InformationPopover from './../utils/information-popover';
+import General from './general';
 import HideBlock from './hide-block';
 import DateTime from './date-time';
 import UserRole from './user-role';
@@ -72,6 +73,12 @@ export default function VisibilityControls( props ) {
 					/>
 				</div>
 				<Slot name="VisibilityControlsTop" />
+				<General
+					visibilityControls={ visibilityControls }
+					setVisibilityControls={ setVisibilityControls }
+					setHasUpdates={ setHasUpdates }
+					{ ...props }
+				/>
 				<HideBlock
 					visibilityControls={ visibilityControls }
 					setVisibilityControls={ setVisibilityControls }

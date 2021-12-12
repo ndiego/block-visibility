@@ -210,8 +210,13 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 = 2.3.0 - 2021-12-TBD =
 
+**Added**
+
+* Allow Block Visibility Pro settings to disable local visibility controls.
+
 **Changed**
 
+* Moved the default visibility control settings from the "General Settings" tab to the "Visibility Controls" tab.
 * The additional contextual indicator settings are now disabled when indicators are disabled.
 
 **Fixed**

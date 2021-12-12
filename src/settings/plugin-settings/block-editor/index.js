@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import Select from 'react-select';
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -19,7 +14,6 @@ import {
 /**
  * Internal dependencies
  */
-import getEnabledControls from './../../../utils/get-enabled-controls';
 import InformationPopover from './../../utils/information-popover';
 
 /**
@@ -30,49 +24,13 @@ import InformationPopover from './../../utils/information-popover';
  * @return {string}		 Return the rendered JSX
  */
 export default function BlockEditor( props ) {
-	const { settings, variables, pluginSettings, setPluginSettings } = props;
-	let enabledControls = getEnabledControls( settings, variables );
-
-	enabledControls = enabledControls.filter(
-		( control ) =>
-			control.settingSlug !== 'hide_block' &&
-			control.settingSlug !== 'visibility_presets'
-	);
-
-	const defaultControlOptions = [];
-
-	enabledControls.forEach( ( control ) => {
-		defaultControlOptions.push( {
-			label: control.label,
-			value: control.settingSlug,
-		} );
-	} );
+	const { pluginSettings, setPluginSettings } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
-	const defaultControls = pluginSettings?.default_controls ?? [ 'date_time', 'visibility_by_role', 'screen_size' ]; // eslint-disable-line
 	const enableContextualIndicators = pluginSettings?.enable_contextual_indicators ?? true; // eslint-disable-line
 	const contextualIndicatorColor = pluginSettings?.contextual_indicator_color ?? ''; // eslint-disable-line
 	const enableToolbarControls = pluginSettings?.enable_toolbar_controls ?? true; // eslint-disable-line
 	const enableEditorNotices = pluginSettings?.enable_editor_notices ?? true; // eslint-disable-line
-
-	const selectedControls = defaultControlOptions.filter( ( control ) =>
-		defaultControls.includes( control.value )
-	);
-
-	const handleControlsChange = ( _control ) => {
-		const newControls = [];
-
-		if ( _control.length !== 0 ) {
-			_control.forEach( ( control ) => {
-				newControls.push( control.value );
-			} );
-		}
-
-		setPluginSettings( {
-			...pluginSettings,
-			default_controls: newControls,
-		} );
-	};
 
 	const colors = [
 		{ name: __( 'Black', 'block-visibility' ), color: '#121212' },
@@ -137,44 +95,6 @@ export default function BlockEditor( props ) {
 				/>
 			</div>
 			<div className="settings-panel__container">
-				<div className="settings-label">
-					<span>
-						{ __(
-							'Default Visibility Controls',
-							'block-visibility'
-						) }
-					</span>
-				</div>
-				<div className="settings-type__select has-info-popover">
-					<div>
-						<Select
-							className="block-visibility__react-select"
-							classNamePrefix="react-select"
-							placeholder={ __(
-								'Select Controls…',
-								'block-visibility'
-							) }
-							options={ defaultControlOptions }
-							value={ selectedControls }
-							onChange={ ( value ) =>
-								handleControlsChange( value )
-							}
-							isMulti
-						/>
-						<div className="settings-panel__help">
-							{ __(
-								'If no controls are selected, the plugin will default to Date & Time, User Role, and Screen Size.',
-								'block-visibility'
-							) }
-						</div>
-					</div>
-					<InformationPopover
-						message={ __(
-							"Optionally set the default controls that will be available when editing a block's visibility for the first time. This can be useful if you find yourself using the same few controls frequently. Controls can be disabled entirely on the Visibility Controls tab.",
-							'block-visibility'
-						) }
-					/>
-				</div>
 				<div className="settings-label">
 					<span>
 						{ __( 'Contextual Indicators', 'block-visibility' ) }

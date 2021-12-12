@@ -58,7 +58,8 @@ function VisibilityInspectorControls( props ) {
 		return null;
 	}
 
-	const enabledControls = getEnabledControls( settings, variables );
+	let enabledControls = getEnabledControls( settings, variables );
+	console.log( enabledControls );
 	const defaultControlSettings =
 		settings?.plugin_settings?.default_controls ?? {};
 	let defaultControls = {};
@@ -92,6 +93,19 @@ function VisibilityInspectorControls( props ) {
 		];
 		controlSets = defaultSet;
 		blockAtts = assign( { ...blockAtts }, { controlSets } );
+	}
+
+	// Allow local controls to be disabled in Pro.
+	const enableLocalControls =
+		settings?.visibility_controls?.general?.enable_local_controls ?? true;
+
+	// If local controls have been disabled, remove them from the array.
+	if ( ! enableLocalControls ) {
+		enabledControls = enabledControls.filter(
+			( control ) =>
+				control.attributeSlug === 'hideBlock' ||
+				control.attributeSlug === 'visibilityPresets'
+		);
 	}
 
 	const settingsUrl = variables?.plugin_variables?.settings_url ?? ''; // eslint-disable-line
@@ -136,6 +150,7 @@ function VisibilityInspectorControls( props ) {
 							/>
 							<Slot name="InspectorControlsMiddle" />
 							{ ! blockHidden &&
+								enableLocalControls &&
 								controlSets.map( ( controlSet, index ) => {
 									return (
 										<ControlSet
