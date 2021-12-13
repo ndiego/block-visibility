@@ -16,7 +16,7 @@ import { createInterpolateElement } from '@wordpress/element';
  */
 import UserRoles from './user-roles';
 import Users from './users';
-import AdvancedRoles from './advanced-roles';
+import AdvancedUserRules from './advanced-user-rules';
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
 
 /**
@@ -86,7 +86,7 @@ export default function UserRole( props ) {
 			value: 'users',
 		},
 		{
-			label: __( 'Advanced configuration', 'block-visibility' ),
+			label: __( 'Advanced user rules', 'block-visibility' ),
 			value: 'advanced',
 		},
 	];
@@ -110,27 +110,6 @@ export default function UserRole( props ) {
 			),
 			value: 'logged-in',
 		},
-		{
-			label: __(
-				'Block is only visible to specific user roles.',
-				'block-visibility'
-			),
-			value: 'user-role',
-		},
-		{
-			label: __(
-				'Block is only visible to specific users.',
-				'block-visibility'
-			),
-			value: 'users',
-		},
-		{
-			label: __(
-				'Block is visible based on the applied rule sets.',
-				'block-visibility'
-			),
-			value: 'advanced',
-		},
 	];
 
 	// If the User Roles option is not enabled in plugin settings, remove it.
@@ -147,7 +126,7 @@ export default function UserRole( props ) {
 	if ( ! enableAdvanced ) {
 		options = options.filter( ( option ) => option.value !== 'advanced' );
 	}
-
+console.log( visibilityByRole );
 	return (
 		<>
 			<div className="visibility-control__group user-role-control">
@@ -157,7 +136,7 @@ export default function UserRole( props ) {
 				<div className="visibility-control__group-fields">
 					<div className="visibility-control visibility-by-role">
 						<SelectControl
-							selected={ visibilityByRole }
+							value={ visibilityByRole }
 							options={ options }
 							help={
 								optionsHelp.filter(
@@ -193,7 +172,7 @@ export default function UserRole( props ) {
 						/>
 					) }
 					{ visibilityByRole === 'advanced' && enableAdvanced && (
-						<AdvancedRoles
+						<AdvancedUserRules
 							variables={ variables }
 							userRole={ userRole }
 							setControlAtts={ setControlAtts }

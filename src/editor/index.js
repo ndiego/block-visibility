@@ -115,7 +115,7 @@ function addAttributes( settings ) {
 											},
 										},
 									},
-									userRoles: {
+									userRole: {
 										type: 'object',
 										properties: {
 											enable: {
@@ -140,6 +140,57 @@ function addAttributes( settings ) {
 												type: 'array',
 												items: {
 													type: 'string',
+												},
+											},
+											hideOnRuleSets: {
+												type: 'boolean',
+											},
+											ruleSets: {
+												type: 'array',
+												items: {
+													type: 'object',
+													properties: {
+														id: {
+															type: 'number',
+														},
+														title: {
+															type: 'string',
+														},
+														enable: {
+															type: 'boolean',
+														},
+														rules: {
+															type: 'array',
+															items: {
+																type: 'object',
+																properties: {
+																	field: {
+																		type: 'string',
+																	},
+																	subField: {
+																		type: [
+																			'string',
+																			'integer',
+																			'array',
+																		],
+																	},
+																	subFields: {
+																		type: 'object',
+																	},
+																	operator: {
+																		type: 'string',
+																	},
+																	value: {
+																		type: [
+																			'string',
+																			'integer',
+																			'array',
+																		],
+																	},
+																},
+															},
+														},
+													},
 												},
 											},
 										},

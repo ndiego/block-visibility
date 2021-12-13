@@ -54,7 +54,7 @@ function user_role_test( $is_visible, $settings, $controls ) {
 	if (
 		! $visibility_by_role
 		|| 'public' === $visibility_by_role
-		|| 'all' === $visibility_by_role // Deprectated option, but check regardless.
+		|| 'all' === $visibility_by_role // Deprecated option, but check regardless.
 	) {
 		return true;
 	} elseif ( 'logged-out' === $visibility_by_role && ! is_user_logged_in() ) {
@@ -170,9 +170,244 @@ function user_role_test( $is_visible, $settings, $controls ) {
 		} elseif ( empty( $restricted_users ) && $hide_on_resticted_users ) {
 			return true;
 		}
+	} else if ( 'advanced' === $visibility_by_role ) {
+
+		// If this functionality has been disabled, skip test.
+		if ( ! is_control_enabled( $settings, 'visibility_by_role', 'enable_advanced' ) ) {
+			return true;
+		}
+
+		$rule_sets = isset( $control_atts['ruleSets'] )
+			? $control_atts['ruleSets']
+			: array();
+
+		$hide_on_rule_sets = isset( $control_atts['hideOnRuleSets'] )
+			? $control_atts['hideOnRuleSets']
+			: false;
+
+		// There are no rule sets, skip tests.
+		if ( ! is_array( $rule_sets ) || 0 === count( $rule_sets ) ) {
+			return true;
+		}
+
+		// Array of results for each rule set.
+		$rule_sets_test_results = array();
+
+		foreach ( $rule_sets as $rule_set ) {
+			$enable = isset( $rule_set['enable'] ) ? $rule_set['enable'] : true;
+			$rules  =
+				isset( $rule_set['rules'] ) ? $rule_set['rules'] : array();
+
+			if ( $enable && 0 < count( $rules ) ) {
+
+				// Array of results for each rule within the current rule set.
+				$rule_set_test_results = array();
+
+				foreach ( $rules as $rule ) {
+
+					$test_result = run_user_rule_tests( $rule );
+
+					// If there is an error, default to showing the block.
+					$test_result =
+						'error' === $test_result ? 'visible' : $test_result;
+
+					$rule_set_test_results[] = $test_result;
+				}
+
+				// Within a rule set, all tests have to pass.
+				$rule_set_result = in_array( 'hidden', $rule_set_test_results, true )
+					? 'hidden'
+					: 'visible';
+
+				// Reverse the rule set result if hide_on_rules setting is active.
+				if ( $hide_on_rule_sets ) {
+					$rule_set_result =
+						'visible' === $rule_set_result ? 'hidden' : 'visible';
+				}
+
+				// Pass the rule set result to the rule *sets* test results array.
+				$rule_sets_test_results[] = $rule_set_result;
+			}
+		}
+
+		// If there are no enabled rule sets, or if the rule sets have no set rules,
+		// there will be no results. Default to showing the block.
+		if ( empty( $rule_sets_test_results ) ) {
+			return true;
+		}
+
+		// Under normal circumstances, need no "visible" results to hide the block.
+		// When hide_on_rule_sets is enabled, we need at least one "hidden" to hide.
+		if (
+			! $hide_on_rule_sets &&
+			! in_array( 'visible', $rule_sets_test_results, true )
+		) {
+			return false;
+		} elseif (
+			$hide_on_rule_sets &&
+			in_array( 'hidden', $rule_sets_test_results, true )
+		) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	// If we don't pass any of the above tests, hide the block.
 	return false;
 }
 add_filter( 'block_visibility_control_set_is_block_visible', __NAMESPACE__ . '\user_role_test', 10, 3 );
+
+/**
+ * Run the individual rule tests.
+ *
+ * @since 2.4.0
+ *
+ * @param array $rule All rule settings.
+ * @return string     Returns 'visible', 'hidden', or 'error'.
+ */
+function run_user_rule_tests( $rule ) {
+
+	$field = isset( $rule['field'] ) ? $rule['field'] : null;
+
+	// No field is set, so return an error.
+	if ( ! $field ) {
+		return 'error';
+	}
+
+	switch ( $field ) {
+		case 'logged-out':
+			$test_result = ! is_user_logged_in() ? 'visible' : 'hidden';
+			break;
+
+		case 'logged-in':
+			$test_result = is_user_logged_in() ? 'visible' : 'hidden';
+			break;
+
+		case 'user-role':
+			$test_result = run_user_role_test( $rule );;
+			break;
+
+		case 'user-role':
+			$test_result = run_users_test( $rule );;
+			break;
+
+		default:
+			$test_result = 'error';
+			break;
+	}
+
+	return $test_result;
+}
+
+/**
+ * Run the user role test.
+ *
+ * @since 2.4.0
+ *
+ * @param array $rule All rule settings.
+ * @return string     Returns 'visible', 'hidden', or 'error'.
+ */
+function run_user_role_test( $rule ) {
+
+	if ( ! isset( $rule['operator'] ) || ! isset( $rule['value'] ) ) {
+		return 'error';
+	}
+
+	// Only proceed if the user is logged in.
+	if ( ! is_user_logged_in() ) {
+		return 'hidden';
+	}
+
+	// Assume error and try to disprove.
+	$test_result = 'error';
+
+	// Get the roles of the current user.
+	$current_user = wp_get_current_user();
+	$user_roles   = $current_user->roles;
+	$operator     = $rule['operator'];
+	$roles        = $rule['value'];
+
+	if ( ! empty( $roles ) && is_array( $roles ) ) {
+		$results = array();
+
+		foreach ( $roles as $role ) {
+			$results[] = in_array( $role, $user_roles, true ) ? 'true' : 'false';
+		}
+
+		$test_result = contains_value_compare( $operator, $results );
+	}
+
+	return $test_result;
+}
+
+
+/**
+ * Run the users test.
+ *
+ * @since 2.4.0
+ *
+ * @param array $rule All rule settings.
+ * @return string     Returns 'visible', 'hidden', or 'error'.
+ */
+function run_users_test( $rule ) {
+
+	if ( ! isset( $rule['operator'] ) || ! isset( $rule['value'] ) ) {
+		return 'error';
+	}
+
+	// Only proceed if the user is logged in.
+	if ( ! is_user_logged_in() ) {
+		return 'hidden';
+	}
+
+	// Assume error and try to disprove.
+	$test_result = 'error';
+
+	// Get the id of the current user.
+	$current_user_id = get_current_user_id();
+	$operator        = $rule['operator'];
+	$users           = $rule['value'];
+
+	$is_restricted = in_array( $current_user_id, $users, true );
+
+	if (
+		( 'any' === $operator && $is_restricted ) ||
+		( 'none' === $operator && ! $is_restricted )
+	) {
+		$test_result = 'visible';
+	} else {
+		$test_result = 'hidden';
+	}
+
+	return $test_result;
+}
+
+/**
+ * Helper function for determining if an array contains all 'true's, at least
+ * one 'true' or no 'true's.
+ *
+ * @since 2.4.0
+ *
+ * @param string $operator The rule operator.
+ * @param string $results  An array of 'true' and 'false' to compare agains the operator.
+ * @return string          Returns 'visible', 'hidden', or 'error'.
+ */
+function contains_value_compare( $operator, $results ) {
+
+	if ( empty( $results ) || ! is_array( $results ) ) {
+		return 'error';
+	}
+
+	$test_result = 'error';
+
+	if ( 'atLeastOne' === $operator ) {
+		$test_result = in_array( 'true', $results, true ) ? 'visible' : 'hidden';
+	} elseif ( 'all' === $operator ) {
+		$test_result = ! in_array( 'false', $results, true ) ? 'visible' : 'hidden';
+	} elseif ( 'none' === $operator ) {
+		$test_result = ! in_array( 'true', $results, true ) ? 'visible' : 'hidden';
+	}
+
+	return $test_result;
+}

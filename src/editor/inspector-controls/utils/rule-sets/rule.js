@@ -32,6 +32,7 @@ export default function Rule( props ) {
 		ruleSets,
 		hideOnRuleSets,
 		rulePlaceholder,
+		ruleLabel,
 		controlName,
 		controlAtts,
 		setControlAtts,
@@ -69,19 +70,23 @@ export default function Rule( props ) {
 		);
 	};
 
-	const ruleLabel = () => {
-		if ( ruleIndex === 0 ) {
-			return sprintf(
-				// Translators: Whether the block is hidden or visible.
-				__( '%s the block if', 'block-visibility' ),
-				hideOnRuleSets
-					? __( 'Hide', 'block-visibility' )
-					: __( 'Show', 'block-visibility' )
-			);
-		}
+	let defaultRuleLabel = ruleLabel;
 
-		return __( 'And if', 'block-visibility' );
-	};
+	if ( ! defaultRuleLabel ) {
+		defaultRuleLabel = () => {
+			if ( ruleIndex === 0 ) {
+				return sprintf(
+					// Translators: Whether the block is hidden or visible.
+					__( '%s the block if', 'block-visibility' ),
+					hideOnRuleSets
+						? __( 'Hide', 'block-visibility' )
+						: __( 'Show', 'block-visibility' )
+				);
+			}
+
+			return __( 'And if', 'block-visibility' );
+		};
+	}
 
 	const deleteRuleButton = (
 		<Button
@@ -171,7 +176,7 @@ export default function Rule( props ) {
 	return (
 		<div key={ ruleIndex } className="rule">
 			<div className="rule__header">
-				<span>{ ruleLabel( ruleIndex ) }</span>
+				<span>{ defaultRuleLabel( ruleIndex ) }</span>
 				{ deleteRuleButton }
 			</div>
 			<div className="rule__fields">

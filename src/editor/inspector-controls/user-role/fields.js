@@ -2,6 +2,8 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { useSelect } from '@wordpress/data';
+import { store as coreStore } from '@wordpress/core-data';
 
 /**
  * Get all available field groups.
@@ -11,20 +13,12 @@ import { __ } from '@wordpress/i18n';
  * @return {string} All field groups
  */
 export function getFieldGroups( variables ) {
-	const fields = variables?.integrations?.acf?.fields ?? [];
-	const groups = [];
-
-	if ( fields.length !== 0 ) {
-		fields.forEach( ( group ) => {
-			const groupKey = group?.key ?? '';
-			const groupTitle = group?.title ?? '';
-
-			groups.push( {
-				value: groupKey,
-				label: groupTitle,
-			} );
-		} );
-	}
+	const groups = [
+		{
+			value: 'type',
+			label: __( 'User Rule Type', 'block-visibility' ),
+		},
+	];
 
 	return groups;
 }
@@ -37,98 +31,119 @@ export function getFieldGroups( variables ) {
  * @return {string}          All fields
  */
 export function getAllFields( variables ) {
-	const fields = variables?.integrations?.acf?.fields ?? [];
-	const allFields = [];
+	let roles = variables?.user_roles ?? [];
 
-	const valueOperators = [
+	// We don't need the 'logged-out in this context.
+	roles = roles.filter( ( role ) => role.value !== 'logged-out' );
+
+	const users = useSelect( ( select ) => {
+		// Requires `list_users` capability, will fail if user is not admin.
+		const data = select( coreStore ).getUsers( { per_page: -1 } );
+		const allUsers = [];
+
+		if ( data && data.length !== 0 ) {
+			data.forEach( ( user ) => {
+				const value = { value: user.id, label: user.name };
+				allUsers.push( value );
+			} );
+		}
+
+		return allUsers;
+	}, [] );
+
+	console.log( roles );
+
+	const anyOperators = [
 		{
-			value: 'notEmpty',
-			label: __( 'Has any value', 'block-visibility' ),
-			disableValue: true,
+			value: 'any',
+			label: __( 'Is any of the selected', 'block-visibility' ),
 		},
 		{
-			value: 'empty',
-			label: __( 'Has no value', 'block-visibility' ),
-			disableValue: true,
-		},
-		{
-			value: 'equal',
-			label: __( 'Value is equal to', 'block-visibility' ),
-		},
-		{
-			value: 'notEqual',
-			label: __( 'Value is not equal to', 'block-visibility' ),
-		},
-		{
-			value: 'contains',
-			label: __( 'Value contains', 'block-visibility' ),
-		},
-		{
-			value: 'notContain',
-			label: __( 'Value does not contain', 'block-visibility' ),
+			value: 'none',
+			label: __( 'Is none of the selected', 'block-visibility' ),
 		},
 	];
 
-	if ( fields.length !== 0 ) {
-		fields.forEach( ( group ) => {
-			const groupKey = group?.key ?? '';
-			const groupFields = group?.fields ?? [];
+	const containsOperators = [
+		{
+			value: 'atLeastOne',
+			label: __(
+				'Is at least one of the selected',
+				'block-visibility'
+			),
+		},
+		{
+			value: 'all',
+			label: __( 'Is all of the selected', 'block-visibility' ),
+		},
+		{
+			value: 'none',
+			label: __( 'Is none of the selected', 'block-visibility' ),
+		},
+	];
 
-			if ( groupFields.length !== 0 ) {
-				groupFields.forEach( ( field ) => {
-					const fieldKey = field?.key ?? '';
-					const fieldLabel = field?.label ?? '';
+	const operatorPlaceholder = __(
+		'Select Condition…',
+		'block-visibility'
+	);
 
-					allFields.push( {
-						value: fieldKey,
-						label: fieldLabel,
-						group: groupKey,
-						fields: [
-							{
-								type: 'subField',
-								name: 'isUserField',
-								valueType: 'toggle',
-								placeholder: __(
-									'Evaluate as user field',
-									'block-visibility'
-								),
-							},
-							{
-								type: 'operatorField',
-								valueType: 'select',
-								options: valueOperators,
-								placeholder: __(
-									'Select Condition…',
-									'block-visibility'
-								),
-							},
-							{
-								type: 'valueField',
-								valueType: 'text',
-								placeholder: __(
-									'Enter Value…',
-									'block-visibility'
-								),
-								displayConditions: [
-									{
-										dependencyType: 'operatorField',
-										dependencyValues: [
-											'equal',
-											'notEqual',
-											'contains',
-											'notContain',
-										],
-									},
-								],
-							},
-						],
-					} );
-				} );
-			}
-		} );
-	}
+	const fields = [
+		{
+			value: 'logged-out',
+			label: __( 'User is logged-out', 'block-visibility' ),
+			group: 'type',
+		},
+		{
+			value: 'logged-in',
+			label: __( 'User is logged-in', 'block-visibility' ),
+			group: 'type',
+		},
+		{
+			value: 'user-role',
+			label: __( 'User\'s role…', 'block-visibility' ),
+			group: 'type',
+			fields: [
+				{
+					type: 'operatorField',
+					valueType: 'select',
+					options: containsOperators,
+					placeholder: operatorPlaceholder,
+				},
+				{
+					type: 'valueField',
+					valueType: 'multiSelect',
+					options: roles,
+					placeholder: __(
+						'Select User Roles…',
+						'block-visibility'
+					),
+					isMulti: true,
+				},
+			],
+		},
+		{
+			value: 'users',
+			label: __( 'User…', 'block-visibility' ),
+			group: 'type',
+			fields: [
+				{
+					type: 'operatorField',
+					valueType: 'select',
+					options: anyOperators,
+					placeholder: operatorPlaceholder,
+				},
+				{
+					type: 'valueField',
+					valueType: 'multiSelect',
+					options: users,
+					placeholder: __( 'Select Users…', 'block-visibility' ),
+					isMulti: true,
+				},
+			],
+		},
+	];
 
-	return allFields;
+	return fields;
 }
 
 /**
