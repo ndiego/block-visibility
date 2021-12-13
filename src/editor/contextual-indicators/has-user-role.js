@@ -28,6 +28,7 @@ export default function hasUserRole(
 	const hideOnRestrictedRoles = controlAtts?.hideOnRestrictedRoles ?? false;
 	const restrictedUsers = controlAtts?.restrictedUsers ?? [];
 	const hideOnRestrictedUsers = controlAtts?.hideOnRestrictedUsers ?? false;
+	const ruleSets = controlAtts?.ruleSets ?? [];
 
 	let indicatorTest = true;
 
@@ -61,6 +62,11 @@ export default function hasUserRole(
 		restrictedUsers.length === 0 &&
 		hideOnRestrictedUsers
 	) {
+		indicatorTest = false;
+	}
+
+	// Make sure there are rule sets.
+	if ( visibilityByRole === 'user-rule-sets' && ruleSets.length === 0 ) {
 		indicatorTest = false;
 	}
 

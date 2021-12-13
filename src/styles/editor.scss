@@ -457,6 +457,13 @@
         }
     }
 
+    /* Specific styles for the User Role visibility control ----------------*/
+    .user-role-control {
+        .visibility-control__container {
+            margin-top: -10px;
+        }
+    }
+
     /* Specific styles for the Screen Size visibility control ----------------*/
     .screen-size-control {
         .components-base-control {

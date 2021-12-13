@@ -170,10 +170,10 @@ function user_role_test( $is_visible, $settings, $controls ) {
 		} elseif ( empty( $restricted_users ) && $hide_on_resticted_users ) {
 			return true;
 		}
-	} else if ( 'advanced' === $visibility_by_role ) {
+	} else if ( 'user-rule-sets' === $visibility_by_role ) {
 
 		// If this functionality has been disabled, skip test.
-		if ( ! is_control_enabled( $settings, 'visibility_by_role', 'enable_advanced' ) ) {
+		if ( ! is_control_enabled( $settings, 'visibility_by_role', 'enable_user_rule_sets' ) ) {
 			return true;
 		}
 
@@ -285,11 +285,11 @@ function run_user_rule_tests( $rule ) {
 			break;
 
 		case 'user-role':
-			$test_result = run_user_role_test( $rule );;
+			$test_result = run_user_role_test( $rule );
 			break;
 
-		case 'user-role':
-			$test_result = run_users_test( $rule );;
+		case 'users':
+			$test_result = run_users_test( $rule );
 			break;
 
 		default:

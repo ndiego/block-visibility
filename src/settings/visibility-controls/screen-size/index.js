@@ -78,7 +78,7 @@ export default function ScreenSize( props ) {
 	let enableAdvancedControls = (
 		<ToggleControl
 			label={ __(
-				'Enable advanced screen size controls',
+				'Enable advanced screen size controls.',
 				'block-visibility'
 			) }
 			checked={ screenSize.enable_advanced_controls }

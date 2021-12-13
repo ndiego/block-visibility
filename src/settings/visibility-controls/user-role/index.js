@@ -23,7 +23,7 @@ export default function UserRole( props ) {
 	const enable = visibilityControls?.visibility_by_role?.enable ?? true; // eslint-disable-line
 	const enableUserRoles = visibilityControls?.visibility_by_role?.enable_user_roles ?? true; // eslint-disable-line
 	const enableUsers = visibilityControls?.visibility_by_role?.enable_users ?? true; // eslint-disable-line
-	const enableAdvanced = visibilityControls?.visibility_by_role?.enable_advanced ?? true; // eslint-disable-line
+	const enableUserRuleSets = visibilityControls?.visibility_by_role?.enable_user_rule_sets ?? true; // eslint-disable-line
 
 	let enableUserRolesElement = (
 		<ToggleControl
@@ -63,19 +63,19 @@ export default function UserRole( props ) {
 		/>
 	);
 
-	let enableAdvancedElement = (
+	let enableUserRuleSetsElement = (
 		<ToggleControl
 			label={ __(
-				'Enable advanced user role restrictions (Rule sets).',
+				'Enable advanced user role restrictions (User rule sets)',
 				'block-visibility'
 			) }
-			checked={ enableAdvanced }
+			checked={ enableUserRuleSets }
 			onChange={ () => {
 				setVisibilityControls( {
 					...visibilityControls,
 					visibility_by_role: {
 						...visibilityControls.visibility_by_role,
-						enable_advanced: ! enableAdvanced,
+						enable_user_rule_sets: ! enableUserRuleSets,
 					},
 				} );
 			} }
@@ -87,7 +87,9 @@ export default function UserRole( props ) {
 			<Disabled>{ enableUserRolesElement }</Disabled>
 		);
 		enableUsersElement = <Disabled>{ enableUsersElement }</Disabled>;
-		enableAdvancedElement = <Disabled>{ enableAdvancedElement }</Disabled>;
+		enableUserRuleSetsElement = (
+			<Disabled>{ enableUserRuleSetsElement }</Disabled>
+		);
 	}
 
 	return (
@@ -145,10 +147,10 @@ export default function UserRole( props ) {
 					/>
 				</div>
 				<div className="settings-type__toggle has-info-popover subsetting">
-					{ enableAdvancedElement }
+					{ enableUserRuleSetsElement }
 					<InformationPopover
 						message={ __(
-							'The advanced option allows you to create user-based rule sets, which provide extensive configuration options and great flexibilty.',
+							'This functionality allows you to create user-based rule sets, which provide extensive configuration options and greater flexibilty.',
 							'block-visibility'
 						) }
 						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"

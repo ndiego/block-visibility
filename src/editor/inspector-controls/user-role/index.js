@@ -8,7 +8,7 @@ import Select from 'react-select';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { SelectControl, Notice } from '@wordpress/components';
+import { Notice } from '@wordpress/components';
 import { createInterpolateElement } from '@wordpress/element';
 
 /**
@@ -16,7 +16,7 @@ import { createInterpolateElement } from '@wordpress/element';
  */
 import UserRoles from './user-roles';
 import Users from './users';
-import AdvancedUserRules from './advanced-user-rules';
+import UserRuleSets from './user-rule-sets';
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
 
 /**
@@ -58,10 +58,10 @@ export default function UserRole( props ) {
 		'visibility_by_role',
 		'enable_users'
 	);
-	const enableAdvanced = isControlSettingEnabled(
+	const enableUserRuleSets = isControlSettingEnabled(
 		settings,
 		'visibility_by_role',
-		'enable_advanced'
+		'enable_user_rule_sets'
 	);
 
 	let options = [
@@ -86,8 +86,8 @@ export default function UserRole( props ) {
 			value: 'users',
 		},
 		{
-			label: __( 'Advanced user rules', 'block-visibility' ),
-			value: 'advanced',
+			label: __( 'User rule sets', 'block-visibility' ),
+			value: 'user-rule-sets',
 		},
 	];
 
@@ -122,11 +122,22 @@ export default function UserRole( props ) {
 		options = options.filter( ( option ) => option.value !== 'users' );
 	}
 
-	// If the Advanced option is not enabled in plugin settings, remove it.
-	if ( ! enableAdvanced ) {
-		options = options.filter( ( option ) => option.value !== 'advanced' );
+	// If the User Rule Sets option is not enabled in plugin settings, remove it.
+	if ( ! enableUserRuleSets ) {
+		options = options.filter(
+			( option ) => option.value !== 'user-rule-sets'
+		);
 	}
-console.log( visibilityByRole );
+
+	const selectedOption = options.filter(
+		( option ) => option.value === visibilityByRole
+	);
+
+	const helpMessage =
+		optionsHelp.filter(
+			( option ) => option.value === visibilityByRole
+		)[ 0 ]?.label ?? '';
+
 	return (
 		<>
 			<div className="visibility-control__group user-role-control">
@@ -135,25 +146,26 @@ console.log( visibilityByRole );
 				</h3>
 				<div className="visibility-control__group-fields">
 					<div className="visibility-control visibility-by-role">
-						<SelectControl
-							value={ visibilityByRole }
+						<Select
+							className="block-visibility__react-select"
+							classNamePrefix="react-select"
 							options={ options }
-							help={
-								optionsHelp.filter(
-									( option ) =>
-										option.value === visibilityByRole
-								)[ 0 ]?.label ?? ''
-							}
+							value={ selectedOption }
 							onChange={ ( value ) =>
 								setControlAtts(
 									'userRole',
 									assign(
 										{ ...userRole },
-										{ visibilityByRole: value }
+										{ visibilityByRole: value.value }
 									)
 								)
 							}
 						/>
+						{ helpMessage && (
+							<div className="visibility-control__help">
+								{ helpMessage }
+							</div>
+						) }
 					</div>
 					{ visibilityByRole === 'user-role' && enableUserRoles && (
 						<UserRoles
@@ -171,14 +183,15 @@ console.log( visibilityByRole );
 							{ ...props }
 						/>
 					) }
-					{ visibilityByRole === 'advanced' && enableAdvanced && (
-						<AdvancedUserRules
-							variables={ variables }
-							userRole={ userRole }
-							setControlAtts={ setControlAtts }
-							{ ...props }
-						/>
-					) }
+					{ visibilityByRole === 'user-rule-sets' &&
+						enableUserRuleSets && (
+							<UserRuleSets
+								variables={ variables }
+								userRole={ userRole }
+								setControlAtts={ setControlAtts }
+								{ ...props }
+							/>
+						) }
 				</div>
 				{ ! options.some(
 					( option ) => option.value === visibilityByRole

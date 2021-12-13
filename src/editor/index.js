@@ -165,7 +165,8 @@ function addAttributes( settings ) {
 																type: 'object',
 																properties: {
 																	field: {
-																		type: 'string',
+																		type:
+																			'string',
 																	},
 																	subField: {
 																		type: [
@@ -175,10 +176,12 @@ function addAttributes( settings ) {
 																		],
 																	},
 																	subFields: {
-																		type: 'object',
+																		type:
+																			'object',
 																	},
 																	operator: {
-																		type: 'string',
+																		type:
+																			'string',
 																	},
 																	value: {
 																		type: [

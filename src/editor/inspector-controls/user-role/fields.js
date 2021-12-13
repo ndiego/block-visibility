@@ -8,11 +8,10 @@ import { store as coreStore } from '@wordpress/core-data';
 /**
  * Get all available field groups.
  *
- * @since 1.9.0
- * @param {Object} variables All plugin variables available via the REST API
+ * @since 2.4.0
  * @return {string} All field groups
  */
-export function getFieldGroups( variables ) {
+export function getFieldGroups() {
 	const groups = [
 		{
 			value: 'type',
@@ -26,7 +25,7 @@ export function getFieldGroups( variables ) {
 /**
  * Get all available fields.
  *
- * @since 1.9.0
+ * @since 2.4.0
  * @param {Object} variables All plugin variables available via the REST API
  * @return {string}          All fields
  */
@@ -51,8 +50,6 @@ export function getAllFields( variables ) {
 		return allUsers;
 	}, [] );
 
-	console.log( roles );
-
 	const anyOperators = [
 		{
 			value: 'any',
@@ -67,10 +64,7 @@ export function getAllFields( variables ) {
 	const containsOperators = [
 		{
 			value: 'atLeastOne',
-			label: __(
-				'Is at least one of the selected',
-				'block-visibility'
-			),
+			label: __( 'Is at least one of the selected', 'block-visibility' ),
 		},
 		{
 			value: 'all',
@@ -82,10 +76,7 @@ export function getAllFields( variables ) {
 		},
 	];
 
-	const operatorPlaceholder = __(
-		'Select Condition…',
-		'block-visibility'
-	);
+	const operatorPlaceholder = __( 'Select Condition…', 'block-visibility' );
 
 	const fields = [
 		{
@@ -100,7 +91,7 @@ export function getAllFields( variables ) {
 		},
 		{
 			value: 'user-role',
-			label: __( 'User\'s role…', 'block-visibility' ),
+			label: __( "User's role", 'block-visibility' ),
 			group: 'type',
 			fields: [
 				{
@@ -113,17 +104,14 @@ export function getAllFields( variables ) {
 					type: 'valueField',
 					valueType: 'multiSelect',
 					options: roles,
-					placeholder: __(
-						'Select User Roles…',
-						'block-visibility'
-					),
+					placeholder: __( 'Select User Roles…', 'block-visibility' ),
 					isMulti: true,
 				},
 			],
 		},
 		{
 			value: 'users',
-			label: __( 'User…', 'block-visibility' ),
+			label: __( 'User', 'block-visibility' ),
 			group: 'type',
 			fields: [
 				{
@@ -150,7 +138,7 @@ export function getAllFields( variables ) {
  * Get all grouped fields. This takes the available fields and puts them in the
  * proper field groups.
  *
- * @since 1.9.0
+ * @since 2.4.0
  * @param {Object} variables All plugin variables available via the REST API
  * @return {string} All fields perpared in their respective field groups
  */

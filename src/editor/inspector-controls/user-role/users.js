@@ -84,8 +84,12 @@ export default function Users( props ) {
 	return (
 		<div className="visibility-control__container">
 			<div className="visibility-control restricted-users">
-				<div className="visibility-control__label">
-					{ __( 'Restricted users', 'block-visibility' ) }
+				<div className="visibility-control__help">
+					{ sprintf(
+						// Translators: Whether the block is hidden or visible.
+						__( '%s the selected users.', 'block-visibility' ),
+						label
+					) }
 				</div>
 				<Select
 					className="block-visibility__react-select"
@@ -97,13 +101,6 @@ export default function Users( props ) {
 					isMulti
 					isLoading={ users.length === 0 }
 				/>
-				<div className="visibility-control__help">
-					{ sprintf(
-						// Translators: Whether the block is hidden or visible.
-						__( '%s the selected users.', 'block-visibility' ),
-						label
-					) }
-				</div>
 			</div>
 			<div className="visibility-control hide-on-restricted-users">
 				<ToggleControl
