@@ -3,7 +3,7 @@ Author URI:        https://www.nickdiego.com/?bv_query=readme
 Contributors:      ndiego, outermostdesign
 Tags:              visibility, dynamic content, conditional content, conditional blocks, restrict blocks
 Requires at least: 5.5
-Tested up to:      5.8
+Tested up to:      5.9
 Requires PHP:      5.6
 Stable tag:        2.2.0
 License:           GPL-2.0
@@ -212,12 +212,15 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 **Added**
 
+* Added advanced User Role controls.
 * Allow Block Visibility Pro settings to disable local visibility controls.
 
 **Changed**
 
 * Moved the default visibility control settings from the "General Settings" tab to the "Visibility Controls" tab.
 * The additional contextual indicator settings are now disabled when indicators are disabled.
+* Rule sets now support a custom rule label.
+* Updated plugin compatibility to WordPress 5.9.
 
 **Fixed**
 
