@@ -30,7 +30,6 @@ export default function BlockEditor( props ) {
 	const enableContextualIndicators = pluginSettings?.enable_contextual_indicators ?? true; // eslint-disable-line
 	const contextualIndicatorColor = pluginSettings?.contextual_indicator_color ?? ''; // eslint-disable-line
 	const enableToolbarControls = pluginSettings?.enable_toolbar_controls ?? true; // eslint-disable-line
-	const enableEditorNotices = pluginSettings?.enable_editor_notices ?? true; // eslint-disable-line
 
 	const colors = [
 		{ name: __( 'Black', 'block-visibility' ), color: '#121212' },
@@ -144,30 +143,6 @@ export default function BlockEditor( props ) {
 					<InformationPopover
 						message={ __(
 							'Some visibility controls (currently just the Hide Block control) can be made available in the toolbar of each block. This provides a more streamlined workflow and can improve content management.',
-							'block-visibility'
-						) }
-					/>
-				</div>
-				<div className="settings-label">
-					<span>{ __( 'Miscellaneous', 'block-visibility' ) }</span>
-				</div>
-				<div className="settings-type__toggle has-info-popover">
-					<ToggleControl
-						label={ __(
-							'Enable plugin notices in the editor.',
-							'block-visibility'
-						) }
-						checked={ enableEditorNotices }
-						onChange={ () => {
-							setPluginSettings( {
-								...pluginSettings,
-								enable_editor_notices: ! enableEditorNotices,
-							} );
-						} }
-					/>
-					<InformationPopover
-						message={ __(
-							'Block Visibility provides various notices in the editor to provide helpful warnings, tips, and links. This setting allows you to disable those notices for a more steamlined user interface.',
 							'block-visibility'
 						) }
 					/>
