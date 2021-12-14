@@ -15,8 +15,8 @@ import { createInterpolateElement } from '@wordpress/element';
  * Internal dependencies
  */
 import UserRoles from './user-roles';
-import Users from './users';
 import UserRuleSets from './user-rule-sets';
+import Users from './users';
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
 
 /**
