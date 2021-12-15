@@ -212,7 +212,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 **Added**
 
-* Added advanced User Role controls.
+* Added advanced User Role controls (User Rule Sets).
 * Allow Block Visibility Pro settings to disable local visibility controls.
 
 **Changed**
@@ -220,7 +220,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 * Moved the default visibility control settings from the "General Settings" tab to the "Visibility Controls" tab.
 * The additional contextual indicator settings are now disabled when indicators are disabled.
 * Rule sets now support a custom rule label.
-* Temporarily remove the "Miscellaneous" Block Editor settings since they no longer relevant. These settings will be evaluated and potentially reintroduced in v2.4.
+* Temporarily remove the "Editor Notices" Block Editor setting since it's no longer relevant. This setting will be evaluated and potentially reintroduced in v2.4.
 * Updated plugin compatibility to WordPress 5.9.
 
 **Fixed**
