@@ -871,7 +871,7 @@
 
 
 /* Temporary styling until the SearchControl is included in WP core. ---------*/
-.components-search-control {
+.preset-manager .components-search-control {
 	position: relative;
 
     &.is-disabled {
@@ -918,24 +918,24 @@
 			-webkit-appearance: none;
 		}
 	}
-}
 
-.components-search-control__icon {
-	align-items: center;
-    bottom: 0;
-    display: flex;
-    position: absolute;
-    right: 12px;
-    top: 0;
+    .components-search-control__icon {
+    	align-items: center;
+        bottom: 0;
+        display: flex;
+        position: absolute;
+        right: 12px;
+        top: 0;
 
-	> button {
-		margin-right: -10px;
-	}
-	> svg {
-		margin: 8px 0;
-	}
-}
+    	> button {
+    		margin-right: -10px;
+    	}
+    	> svg {
+    		margin: 8px 0;
+    	}
+    }
 
-.components-search-control__input-wrapper {
-	position: relative;
+    .components-search-control__input-wrapper {
+    	position: relative;
+    }
 }
