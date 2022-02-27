@@ -206,7 +206,22 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 The **one exception** to this is the Screen Size block controls. Visibility by screen size requires the use of CSS, which is loaded to the frontend of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary yourself. Visit the plugin [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) to learn more.
 
+= The Screen Size controls aren't working, what's going on? =
+
+The [Screen Size](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control adds CSS classes to each block when enabled. It uses these classes to show or hide blocks. Unfortunately, not all blocks support CSS classes, notably the Shortcode and HTML blocks. Furthermore, many dynamic blocks also do not work as expected with the Screen Size control. For dynamic blocks specifically, we are exploring potential alternative solutions.
+
+If you run into a block that is not working with the Screen Size control, there is a quick and easy workaround that can be applied in most use cases. Simply wrap the block in a Group block. Then apply the screen size settings to the Group block and everything will work as expected. For more information and a live walkthrough, check out [this video](https://www.youtube.com/watch?v=fAn-U4tw3rw).
+
 == Changelog ==
+
+= 2.3.1 - 2022-02-28 =
+
+**Fixed**
+
+- Fixed issue with block-based widgets where widget markup would still be rendered even if the block content was not. ([#26])(https://github.com/ndiego/block-visibility/issues/26))
+- Fixed React Select input styling.
+- Fixed styles that were bleeding into the Editor.
+- Fixed linting errors.
 
 = 2.3.0 - 2021-12-14 =
 
