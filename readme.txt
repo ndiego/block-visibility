@@ -214,7 +214,7 @@ If you run into a block that is not working with the Screen Size control, there 
 
 == Changelog ==
 
-= 2.3.1 - 2022-02-28 =
+= 2.3.1 - 2022-02-27 =
 
 **Fixed**
 
