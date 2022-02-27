@@ -9,6 +9,9 @@
 	"config": {
 		"platform": {
 			"php": "5.6"
+		},
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
 	},
 	"require-dev": {
