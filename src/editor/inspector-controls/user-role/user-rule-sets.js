@@ -13,12 +13,12 @@ import { Button, ToggleControl, Notice } from '@wordpress/components';
  * Internal dependencies
  */
 import RuleSets from './../utils/rule-sets';
-import { getGroupedFields, getAllFields } from './fields';
+import { getGroupedFields, GetAllFields } from './fields';
 
 /**
  * Add the User Rule Sets control to the main User Role control
  *
- * @since 2.4.0
+ * @since 2.3.0
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
@@ -50,7 +50,7 @@ export default function UserRuleSets( props ) {
 	};
 
 	const groupedFields = getGroupedFields();
-	const allFields = getAllFields( variables );
+	const allFields = GetAllFields( variables );
 
 	const currentUsersRoles = variables?.current_users_roles ?? [];
 	const isAdmin = currentUsersRoles.includes( 'administrator' ) ?? false;

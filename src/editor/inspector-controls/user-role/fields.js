@@ -8,7 +8,7 @@ import { store as coreStore } from '@wordpress/core-data';
 /**
  * Get all available field groups.
  *
- * @since 2.4.0
+ * @since 2.3.0
  * @return {string} All field groups
  */
 export function getFieldGroups() {
@@ -25,11 +25,11 @@ export function getFieldGroups() {
 /**
  * Get all available fields.
  *
- * @since 2.4.0
+ * @since 2.3.0
  * @param {Object} variables All plugin variables available via the REST API
  * @return {string}          All fields
  */
-export function getAllFields( variables ) {
+export function GetAllFields( variables ) {
 	let roles = variables?.user_roles ?? [];
 
 	// We don't need the 'logged-out in this context.
@@ -138,13 +138,13 @@ export function getAllFields( variables ) {
  * Get all grouped fields. This takes the available fields and puts them in the
  * proper field groups.
  *
- * @since 2.4.0
+ * @since 2.3.0
  * @param {Object} variables All plugin variables available via the REST API
  * @return {string} All fields perpared in their respective field groups
  */
 export function getGroupedFields( variables ) {
 	const groups = getFieldGroups( variables );
-	const fields = getAllFields( variables );
+	const fields = GetAllFields( variables );
 	const groupedFields = [];
 
 	groups.forEach( ( group ) => {

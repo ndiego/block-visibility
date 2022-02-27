@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  * @param string  $type         Is the control set "local" or part of a "preset".
  * @return boolean              Return true if the block should be visible, false if not.
  */
-function control_sets_test( $is_visible, $settings, $control_sets, $type = 'local' ) {
+function control_sets_test( $is_visible, $settings, $control_sets, $type = 'local' ) { // phpcs:ignore
 
 	// There are no control sets, skip tests.
 	if ( ! is_array( $control_sets ) || 0 === count( $control_sets ) ) {
