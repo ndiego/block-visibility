@@ -37,7 +37,7 @@ function enqueue_editor_scripts() {
 	// Create a global variable to indicate whether we are in full control mode
 	// or not. This is needed for the Block Visibility attribute filter since
 	// it will not allow us to fetch this data directly.
-	$is_full_control_mode = 'const blockVisibilityFullControlMode = ' . is_full_control_mode() . ';';
+	$is_full_control_mode = 'const blockVisibilityFullControlMode = ' . wp_json_encode( get_plugin_setting( 'enable_full_control_mode', true ) ) . ';';
 
 	wp_add_inline_script(
 		'block-visibility-editor-scripts',
@@ -73,7 +73,7 @@ function enqueue_editor_styles() {
 	);
 
 	// Load the contextual indicator styles if enabled.
-	if ( contextual_indicators_enabled() ) {
+	if ( get_plugin_setting( 'enable_contextual_indicators', true ) ) {
 
 		$asset_file = get_asset_file( 'build/block-visibility-contextual-indicator-styles' );
 
@@ -85,13 +85,29 @@ function enqueue_editor_styles() {
 		);
 
 		// Allow users to customize the color of the contextual indicators.
-		$custom_color = get_contextual_indicator_color();
+		$custom_color = get_plugin_setting( 'contextual_indicator_color' );
 
 		if ( $custom_color ) {
 			$inline_style = '.block-visibility__has-visibility, .block-visibility__has-visibility.components-placeholder.components-placeholder, .block-visibility__has-visibility.components-placeholder { outline-color: ' . $custom_color . ' } .block-visibility__has-visibility::after { background-color: ' . $custom_color . ' }';
 
 			wp_add_inline_style(
 				'block-visibility-contextual-indicator-styles',
+				$inline_style
+			);
+		}
+	}
+
+	if ( get_plugin_setting( 'enable_block_opacity', true ) ) {
+
+		// Allow users to set contextual block opacity.
+		$block_opacity = get_plugin_setting( 'block_opacity' );
+
+		if ( $block_opacity ) {
+			$opacity      = intval( $block_opacity ) * 0.01;
+			$inline_style = '.block-visibility__has-visibility:not(.is-selected):not(.has-child-selected) > * { opacity: ' . $opacity . ' }';
+
+			wp_add_inline_style(
+				'block-visibility-editor-styles',
 				$inline_style
 			);
 		}
@@ -159,58 +175,20 @@ function dequeue_editor_assets_on_pages_without_block_editor() {
 add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\dequeue_editor_assets_on_pages_without_block_editor' );
 
 /**
- * See if we are in full control mode.
+ * Fetch the value of the given plugin setting.
  *
- * @since 1.0.0
+ * @since 2.4.0
  *
- * @return bool Returns true or false.
+ * @param string $setting    The setting name.
+ * @param string $is_boolean Is the setting value boolean.
+ * @return mixed Returns boolean or the setting value.
  */
-function is_full_control_mode() {
-	$settings = get_option( 'block_visibility_settings' );
-	$enabled  = false;
-
-	if ( isset( $settings['plugin_settings']['enable_full_control_mode'] ) ) {
-		if ( $settings['plugin_settings']['enable_full_control_mode'] ) {
-			$enabled = true;
-		}
-	}
-
-	return wp_json_encode( $enabled );
-}
-
-/**
- * See if contextual indicators are enabled.
- *
- * @since 1.9.0
- *
- * @return bool Returns true or false.
- */
-function contextual_indicators_enabled() {
-	$settings = get_option( 'block_visibility_settings' );
-	$enabled  = false;
-
-	if ( isset( $settings['plugin_settings']['enable_contextual_indicators'] ) ) {
-		if ( $settings['plugin_settings']['enable_contextual_indicators'] ) {
-			$enabled = true;
-		}
-	}
-
-	return $enabled;
-}
-
-/**
- * Fetch the custom contextual indicator color if there is one.
- *
- * @since 2.0.0
- *
- * @return bool Returns true or false.
- */
-function get_contextual_indicator_color() {
+function get_plugin_setting( $setting, $is_boolean = false ) {
 	$settings = get_option( 'block_visibility_settings' );
 
-	if ( isset( $settings['plugin_settings']['contextual_indicator_color'] ) ) {
-		if ( $settings['plugin_settings']['contextual_indicator_color'] ) {
-			return $settings['plugin_settings']['contextual_indicator_color'];
+	if ( isset( $settings['plugin_settings'][ $setting ] ) ) {
+		if ( $settings['plugin_settings'][ $setting ] ) {
+			return $is_boolean ? true : $settings['plugin_settings'][ $setting ];
 		}
 	}
 

@@ -638,6 +638,11 @@ $mobile: 426px;
 					}
 				}
 
+				/* Align the range control with the color picker. */
+				.settings-type__range {
+					max-width: 410px;
+				}
+
 				.subsetting {
 					margin-left: 20px;
 				}

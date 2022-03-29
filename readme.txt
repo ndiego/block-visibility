@@ -214,6 +214,17 @@ If you run into a block that is not working with the Screen Size control, there 
 
 == Changelog ==
 
+= 2.4.0 - TBD =
+
+**Added**
+
+* Added contextual block opacity settings.
+* Added cookie contextual indicator for Cookie control in Block Visibility Pro.
+
+**Fixed**
+
+- Fix indicator color styling in settings.
+
 = 2.3.1 - 2022-02-28 =
 
 **Fixed**
