@@ -1,3 +1,5 @@
+@import './common';
+
 // Media query variables
 $desktop: 1024px;
 $tablet: 782px;
@@ -869,63 +871,6 @@ $mobile: 426px;
 						}
 					}
 				}
-			}
-		}
-	}
-
-	/* Information Popover */
-	.information-popover {
-		line-height: 0; /* Correction for button */
-
-		.information-popover__button {
-			color: #c8c8c8;
-		    padding: 0;
-		    height: 24px;
-			min-width: 20px;
-
-			svg {
-				width: 22px;
-			}
-
-			&:hover {
-				background-color: transparent !important;
-				box-shadow: none !important;
-				color: #414141;
-			}
-
-			&:focus {
-				box-shadow: none !important;
-			}
-		}
-
-		.information-popover__popover {
-
-			p {
-				font-size: 13px;
-				color: #32373C;
-				line-height: 1.5;
-				margin: 0 0 1em;
-
-				&:last-child {
-					margin-bottom: 0;
-				}
-			}
-
-			.components-popover__content {
-				font-weight: 400;
-				line-height: 1.4;
-				padding: 4px;
-				font-size: 13px;
-				text-align: left;
-				min-width: 200px;
-				max-width: 250px;
-			}
-
-			.components-external-link {
-				display: block;
-				margin-top: 12px;
-				padding-top: 12px;
-				border-top: 1px solid #d0d0d0;
 			}
 		}
 	}

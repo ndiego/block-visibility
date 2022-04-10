@@ -1,3 +1,5 @@
+@import './common';
+
 .block-visibility {
     &.is-opened {
         &>.components-panel__body-title {
@@ -94,9 +96,19 @@
             display: flex;
             align-items: center;
 
-            &>svg {
-                width: 16px;
-                margin-right: 8px;
+            span {
+                display: inline-block;
+                margin-right: 4px;
+            }
+
+            /* Reduce the size of the popover icon. */
+            .information-popover__button {
+                height: 20px;
+                min-width: 20px;
+
+                svg {
+                    width: 18px;
+                }
             }
         }
     }
