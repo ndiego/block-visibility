@@ -8,13 +8,14 @@ import {
 	ColorPalette,
 	Disabled,
 	ToggleControl,
+	RangeControl,
 	Slot,
 } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import InformationPopover from './../../utils/information-popover';
+import InformationPopover from './../../../utils/components/information-popover';
 
 /**
  * Renders the Block Editor visibility settings.
@@ -29,6 +30,8 @@ export default function BlockEditor( props ) {
 	// Manually set defaults, this ensures the main settings function properly
 	const enableContextualIndicators = pluginSettings?.enable_contextual_indicators ?? true; // eslint-disable-line
 	const contextualIndicatorColor = pluginSettings?.contextual_indicator_color ?? ''; // eslint-disable-line
+	const enableBlockOpacity = pluginSettings?.enable_block_opacity ?? false; // eslint-disable-line
+	const blockOpacity = pluginSettings?.block_opacity ?? 100; // eslint-disable-line
 	const enableToolbarControls = pluginSettings?.enable_toolbar_controls ?? true; // eslint-disable-line
 
 	const colors = [
@@ -77,6 +80,30 @@ export default function BlockEditor( props ) {
 		);
 	}
 
+	let contextualBlockOpacity = (
+		<div className="settings-type__range">
+			<RangeControl
+				label={ __( 'Block Opacity', 'block-visibility' ) }
+				value={ blockOpacity }
+				onChange={ ( newOpacity ) => {
+					setPluginSettings( {
+						...pluginSettings,
+						block_opacity: newOpacity,
+					} );
+				} }
+				min={ 10 }
+				max={ 100 }
+				step={ 10 }
+			/>
+		</div>
+	);
+
+	if ( ! enableBlockOpacity ) {
+		contextualBlockOpacity = (
+			<Disabled>{ contextualBlockOpacity }</Disabled>
+		);
+	}
+
 	return (
 		<div className="setting-tabs__settings-panel">
 			<div className="settings-panel__header">
@@ -115,12 +142,39 @@ export default function BlockEditor( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							'Contextual indicators allow you to quickly tell which blocks in the Block Editor have active visibility controls.',
+							'Contextual indicators allow users to quickly tell which blocks in the Block Editor have active visibility controls.',
 							'block-visibility'
 						) }
 					/>
 				</div>
 				{ contextualIndicatorColorPicker }
+				<div className="settings-label">
+					<span>
+						{ __( 'Contextual Block Opacity', 'block-visibility' ) }
+					</span>
+				</div>
+				<div className="settings-type__toggle has-info-popover">
+					<ToggleControl
+						label={ __(
+							'Reduce block opacity when visibility controls are applied.',
+							'block-visibility'
+						) }
+						checked={ enableBlockOpacity }
+						onChange={ () => {
+							setPluginSettings( {
+								...pluginSettings,
+								enable_block_opacity: ! enableBlockOpacity,
+							} );
+						} }
+					/>
+					<InformationPopover
+						message={ __(
+							'Reducing block opacity, coupled with contextual indicators, can further help users quickly tell which blocks in the Block Editor have active visibility controls.',
+							'block-visibility'
+						) }
+					/>
+				</div>
+				{ contextualBlockOpacity }
 				<div className="settings-label">
 					<span>
 						{ __( 'Toolbar Controls', 'block-visibility' ) }

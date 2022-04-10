@@ -9,7 +9,7 @@ import { useState } from '@wordpress/element';
  * Internal dependencies
  */
 import UpdateSettings from './../utils/update-settings';
-import InformationPopover from './../utils/information-popover';
+import InformationPopover from './../../utils/components/information-popover';
 import BlockEditor from './block-editor';
 import UserPermissions from './user-permissions';
 import FullControlMode from './full-control-mode';

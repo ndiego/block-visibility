@@ -9,7 +9,7 @@ import { withFilters, Slot } from '@wordpress/components';
  * Internal dependencies
  */
 import UpdateSettings from './../utils/update-settings';
-import InformationPopover from './../utils/information-popover';
+import InformationPopover from './../../utils/components/information-popover';
 import General from './general';
 import HideBlock from './hide-block';
 import DateTime from './date-time';

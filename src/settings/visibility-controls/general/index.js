@@ -13,7 +13,7 @@ import { Slot } from '@wordpress/components';
  * Internal dependencies
  */
 import getEnabledControls from './../../../utils/get-enabled-controls';
-import InformationPopover from './../../utils/information-popover';
+import InformationPopover from './../../../utils/components/information-popover';
 
 /**
  * Renders the general visibility control settings.

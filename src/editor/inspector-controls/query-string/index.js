@@ -7,14 +7,13 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Button, Modal, TextareaControl } from '@wordpress/components';
-import { createInterpolateElement, useState } from '@wordpress/element';
-import { info } from '@wordpress/icons';
+import { TextareaControl } from '@wordpress/components';
+import { createInterpolateElement } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
-import TipsQueryString from './notices-tips';
+import InformationPopover from './../../../utils/components/information-popover';
 
 /**
  * Add the Query String controls
@@ -24,7 +23,6 @@ import TipsQueryString from './notices-tips';
  * @return {string}		 Return the rendered JSX
  */
 export default function QueryString( props ) {
-	const [ tipsModalOpen, setTipsModalOpen ] = useState( false );
 	const { enabledControls, controlSetAtts, setControlAtts } = props;
 	const controlEnabled = enabledControls.some(
 		( control ) => control.settingSlug === 'query_string'
@@ -55,14 +53,15 @@ export default function QueryString( props ) {
 	return (
 		<>
 			<div className="visibility-control__group query-string-control">
-				<h3 className="visibility-control__group-heading">
-					{ __( 'Query String', 'block-visibility' ) }
-					<Button
-						label={ __( 'Query String Tips', 'block-visibility' ) }
-						icon={ info }
-						className="control-tips"
-						onClick={ () => setTipsModalOpen( ( open ) => ! open ) }
-						isSmall
+				<h3 className="visibility-control__group-heading has-icon">
+					<span>{ __( 'Query String', 'block-visibility' ) }</span>
+					<InformationPopover
+						message={ __(
+							'The Query String control allows you to configure block visibility based on URL query strings.',
+							'block-visibility-pro'
+						) }
+						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-query-string-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						position="bottom center"
 					/>
 				</h3>
 				<div className="visibility-control__help">
@@ -116,15 +115,6 @@ export default function QueryString( props ) {
 			<div className="control-separator">
 				<span>{ __( 'AND', 'block-visibility' ) }</span>
 			</div>
-			{ tipsModalOpen && (
-				<Modal
-					className="block-visibility__tips-modal"
-					title={ __( 'Query String Control', 'block-visibility' ) }
-					onRequestClose={ () => setTipsModalOpen( false ) }
-				>
-					<TipsQueryString />
-				</Modal>
-			) }
 		</>
 	);
 }

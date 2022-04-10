@@ -7,13 +7,18 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Disabled, ToggleControl } from '@wordpress/components';
-
+import {
+	Disabled,
+	ExternalLink,
+	Notice,
+	ToggleControl,
+} from '@wordpress/components';
+import { createInterpolateElement } from '@wordpress/element';
 /**
  * Internal dependencies
  */
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
-import NoticeBlockNotCompatible from './notices-tips';
+import InformationPopover from './../../../utils/components/information-popover';
 
 /**
  * Add the screen size vsibility controls
@@ -152,11 +157,39 @@ export default function ScreenSize( props ) {
 	return (
 		<>
 			<div className="visibility-control__group screen-size-control">
-				<h3 className="visibility-control__group-heading">
-					{ __( 'Screen Size', 'block-visibility' ) }
+				<h3 className="visibility-control__group-heading has-icon">
+					<span>{ __( 'Screen Size', 'block-visibility' ) }</span>
+					<InformationPopover
+						message={ __(
+							'The Screen Size control allows you to conditionally display the block based on the width of the current screen.',
+							'block-visibility-pro'
+						) }
+						link="https://blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						position="bottom center"
+					/>
 				</h3>
 				{ allScreenSizeFields }
-				{ isNotCompatible && <NoticeBlockNotCompatible /> }
+				{ isNotCompatible && (
+					<Notice status="warning" isDismissible={ false }>
+						{ createInterpolateElement(
+							__(
+								'The Screen Size control is unfortunately not compatible with this block type. For more information, and a workaround, visit the <a>Knowledge Base</a>.',
+								'block-visibility'
+							),
+							{
+								a: (
+            						<ExternalLink // eslint-disable-line
+										href={
+											'https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=editor&utm_campaign=plugin_referrals#limitations'
+										}
+										target="_blank"
+										rel="noreferrer"
+									/>
+								),
+							}
+						) }
+					</Notice>
+				) }
 			</div>
 			<div className="control-separator">
 				<span>{ __( 'AND', 'block-visibility' ) }</span>

@@ -7,7 +7,7 @@ import { ToggleControl } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import InformationPopover from './../../utils/information-popover';
+import InformationPopover from './../../../utils/components/information-popover';
 
 /**
  * Renders the hide block control settings.

@@ -8,7 +8,7 @@ import { Slot } from '@wordpress/components';
  * Internal dependencies
  */
 import UpdateSettings from './../../utils/update-settings';
-import InformationPopover from './../../utils/information-popover';
+import InformationPopover from './../../../utils/components/information-popover';
 import ACF from './acf';
 import WPFusion from './wp-fusion';
 

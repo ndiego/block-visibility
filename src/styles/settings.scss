@@ -1,3 +1,5 @@
+@import './common';
+
 // Media query variables
 $desktop: 1024px;
 $tablet: 782px;
@@ -590,6 +592,11 @@ $mobile: 426px;
     					margin-bottom: 2px;
 					}
 
+					/* Fix needed for Gutenberg 12.7+ */
+					.component-color-indicator {
+						margin-left: 0.5rem;
+					}
+
 					.components-circular-option-picker {
 						display: flex;
 						align-items: center;
@@ -631,6 +638,11 @@ $mobile: 426px;
 							}
 						}
 					}
+				}
+
+				/* Align the range control with the color picker. */
+				.settings-type__range {
+					max-width: 410px;
 				}
 
 				.subsetting {
@@ -737,95 +749,6 @@ $mobile: 426px;
 		}
 	}
 
-	/* Specific styles for the Getting Started tab */
-	.setting-tabs__getting-started {
-		h2 {
-			font-size: 20px;
-			font-weight: 400;
-		}
-
-		p {
-			font-size: 15px;
-			line-height: 1.4;
-			margin-bottom: 1.5em;
-		}
-
-		.getting-started__video {
-			background: lightgrey;
-			margin: 40px 0;
-			text-align: center;
-			position: relative;
-			padding-bottom: 56.25%; /* 16:9 */
-			height: 0;
-
-			iframe {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-			}
-		}
-
-		.getting-started__panels {
-
-			.components-panel__body {
-				box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
-				border: 0;
-
-				.components-panel__row {
-					display: block;
-				}
-
-				h2 {
-					background-color: #ffffff;
-
-					button {
-						font-size: 15px;
-						font-weight: 500;
-					}
-				}
-
-				p {
-					font-size: 14px;
-
-					&:last-child {
-						margin-bottom: 0;
-					}
-				}
-
-				&.is-opened {
-					h2 {
-						border-bottom: 1px solid #ccd0d4 !important;
-					}
-				}
-			}
-
-			.panels__content-label {
-			    font-weight: 500;
-			    font-size: 15px;
-				margin-top: 15px;
-				padding-top: 20px;
-				border-top: 1px solid #ccd0d4;
-
-				&:first-child {
-					margin-top: 25px;
-					padding-top: 0;
-					border: 0;
-				}
-			}
-		}
-
-		.getting-started__help {
-			background: #FFFFFF;
-			box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
-			box-sizing: border-box;
-			padding: 1em 3em 2em;
-			margin: 40px auto 0;
-			text-align: center;
-		}
-	}
-
 	/* Specific styles for the Block Manager tab */
 	.is_pro {
 		.setting-tabs__block-manager {
@@ -859,6 +782,7 @@ $mobile: 426px;
 	   }
 	}
 
+	/* Specific styles for the Block Manager tab */
 	.setting-tabs__block-manager {
 
 		.block-manager__category-container {
@@ -951,64 +875,7 @@ $mobile: 426px;
 		}
 	}
 
-	/* Information Popover */
-	.information-popover {
-		line-height: 0; /* Correction for button */
-
-		.information-popover__button {
-			color: #c8c8c8;
-		    padding: 0;
-		    height: 24px;
-			min-width: 20px;
-
-			svg {
-				width: 22px;
-			}
-
-			&:hover {
-				background-color: transparent !important;
-				box-shadow: none !important;
-				color: #414141;
-			}
-
-			&:focus {
-				box-shadow: none !important;
-			}
-		}
-
-		.information-popover__popover {
-
-			p {
-				font-size: 13px;
-				color: #32373C;
-				line-height: 1.5;
-				margin: 0 0 1em;
-
-				&:last-child {
-					margin-bottom: 0;
-				}
-			}
-
-			.components-popover__content {
-				font-weight: 400;
-				line-height: 1.4;
-				padding: 4px;
-				font-size: 13px;
-				text-align: left;
-				min-width: 200px;
-				max-width: 250px;
-			}
-
-			.components-external-link {
-				display: block;
-				margin-top: 12px;
-				padding-top: 12px;
-				border-top: 1px solid #d0d0d0;
-			}
-		}
-	}
-
-	// Custom styling to make react-select components look more like WordPress.
+	/* Custom styling to make react-select components look like WordPress. */
 	.block-visibility__react-select {
 	    margin: 10px 0;
 

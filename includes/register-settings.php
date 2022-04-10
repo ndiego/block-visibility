@@ -157,6 +157,12 @@ function register_settings() {
 				'contextual_indicator_color'    => array(
 					'type' => 'string',
 				),
+				'enable_block_opacity'          => array(
+					'type' => 'boolean',
+				),
+				'block_opacity'                 => array(
+					'type' => 'number',
+				),
 				'enable_toolbar_controls'       => array(
 					'type' => 'boolean',
 				),
@@ -229,6 +235,8 @@ function register_settings() {
 			'default_controls'              => array( 'date_time', 'visibility_by_role', 'screen_size' ),
 			'enable_contextual_indicators'  => true,
 			'contextual_indicator_color'    => '',
+			'enable_block_opacity'          => false,
+			'block_opacity'                 => 100,
 			'enable_toolbar_controls'       => true,
 			'enable_editor_notices'         => true,
 			'enable_user_role_restrictions' => false,
