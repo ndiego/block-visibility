@@ -7,7 +7,7 @@ import { ToggleControl, Disabled, Slot } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import InformationPopover from './../../utils/information-popover';
+import InformationPopover from './../../../utils/components/information-popover';
 import PreviewStyles from './preview-styles';
 import Breakpoints from './breakpoints';
 import ScreenSizeControls from './screen-size-controls';

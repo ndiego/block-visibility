@@ -8,15 +8,15 @@ import Select from 'react-select';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Button, Disabled, Modal, Notice } from '@wordpress/components';
-import { Icon, info } from '@wordpress/icons';
-import { createInterpolateElement, useState } from '@wordpress/element';
+import { Disabled, Notice } from '@wordpress/components';
+import { Icon } from '@wordpress/icons';
+import { createInterpolateElement } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
 import icons from './../../../utils/icons';
-import Tips from './notices-tips';
+import InformationPopover from './../../../utils/components/information-popover';
 
 /**
  * Add the Wp Fusion controls
@@ -26,7 +26,6 @@ import Tips from './notices-tips';
  * @return {string}		 Return the rendered JSX
  */
 export default function WPFusion( props ) {
-	const [ tipsModalOpen, setTipsModalOpen ] = useState( false );
 	const {
 		variables,
 		enabledControls,
@@ -164,18 +163,19 @@ export default function WPFusion( props ) {
 			<div className="visibility-control__group wp-fusion-control">
 				<h3 className="visibility-control__group-heading has-icon">
 					<Icon icon={ icons.wpFusion } />
-					<span>
-						{ __( 'WP Fusion', 'block-visibility' ) }
-						<Button
-							label={ __( 'Wp Fusion Tips', 'block-visibility' ) }
-							icon={ info }
-							className="control-tips"
-							onClick={ () =>
-								setTipsModalOpen( ( open ) => ! open )
-							}
-							isSmall
-						/>
-					</span>
+					<span>{ __( 'WP Fusion', 'block-visibility' ) }</span>
+					<InformationPopover
+						message={ __(
+							'The WP Fusion control allows you to configure block visibility based on WP Fusion tags.',
+							'block-visibility'
+						) }
+						subMessage={ __(
+							'Note that the available fields depend on the User Role control settings. If the User Role control is disabled, only the Required Tags (Not) field will be available.',
+							'block-visibility'
+						) }
+						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-wp-fusion-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						position="bottom center"
+					/>
 				</h3>
 				<div className="visibility-control__group-fields">
 					{ anyAllFields }
@@ -193,15 +193,6 @@ export default function WPFusion( props ) {
 			<div className="control-separator">
 				<span>{ __( 'AND', 'block-visibility' ) }</span>
 			</div>
-			{ tipsModalOpen && (
-				<Modal
-					className="block-visibility__tips-modal"
-					title={ __( 'WP Fusion Control', 'block-visibility' ) }
-					onRequestClose={ () => setTipsModalOpen( false ) }
-				>
-					<Tips { ...props } />
-				</Modal>
-			) }
 		</>
 	);
 }

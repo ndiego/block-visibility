@@ -13,6 +13,7 @@ import { Button, Slot, ToggleControl } from '@wordpress/components';
  * Internal dependencies
  */
 import Schedule from './schedule';
+import InformationPopover from './../../../utils/components/information-popover';
 
 /**
  * Add the date/time vsibility controls
@@ -65,8 +66,16 @@ export default function DateTime( props ) {
 	return (
 		<>
 			<div className="visibility-control__group date-time-control">
-				<h3 className="visibility-control__group-heading">
-					{ __( 'Date & Time', 'block-visibility' ) }
+				<h3 className="visibility-control__group-heading has-icon">
+					<span>{ __( 'Date & Time', 'block-visibility' ) }</span>
+					<InformationPopover
+						message={ __(
+							'The Date & Time control allows you to automatically schedule when the block should be visible on your website.',
+							'block-visibility-pro'
+						) }
+						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-date-time-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						position="bottom center"
+					/>
 				</h3>
 				<div className="visibility-control__help">
 					{ sprintf(

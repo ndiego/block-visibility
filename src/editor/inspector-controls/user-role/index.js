@@ -18,6 +18,7 @@ import UserRoles from './user-roles';
 import UserRuleSets from './user-rule-sets';
 import Users from './users';
 import { isControlSettingEnabled } from './../../utils/setting-utilities';
+import InformationPopover from './../../../utils/components/information-popover';
 
 /**
  * Add the User Role control
@@ -141,8 +142,16 @@ export default function UserRole( props ) {
 	return (
 		<>
 			<div className="visibility-control__group user-role-control">
-				<h3 className="visibility-control__group-heading">
-					{ __( 'User Role', 'block-visibility' ) }
+				<h3 className="visibility-control__group-heading has-icon">
+					<span>{ __( 'User Role', 'block-visibility' ) }</span>
+					<InformationPopover
+						message={ __(
+							"The User Role control allows you to conditionally display the block based on the current user's role and/or specific users.",
+							'block-visibility-pro'
+						) }
+						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						position="bottom center"
+					/>
 				</h3>
 				<div className="visibility-control__group-fields">
 					<div className="visibility-control visibility-by-role">

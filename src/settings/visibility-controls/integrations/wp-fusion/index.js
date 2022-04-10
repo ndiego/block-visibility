@@ -9,7 +9,7 @@ import { Icon } from '@wordpress/icons';
  * Internal dependencies
  */
 import icons from './../../../../utils/icons';
-import InformationPopover from './../../../utils/information-popover';
+import InformationPopover from './../../../../utils/components/information-popover';
 
 /**
  * Renders the Wp Fusion control settings.

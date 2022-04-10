@@ -7,9 +7,8 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
-import { Button, Modal, Notice, ToggleControl } from '@wordpress/components';
-import { useState } from '@wordpress/element';
-import { Icon, info } from '@wordpress/icons';
+import { Button, Notice, ToggleControl } from '@wordpress/components';
+import { Icon } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -17,7 +16,7 @@ import { Icon, info } from '@wordpress/icons';
 import icons from './../../../utils/icons';
 import RuleSets from './../utils/rule-sets';
 import { getGroupedFields, getAllFields } from './fields';
-import Tips from './notices-tips';
+import InformationPopover from './../../../utils/components/information-popover';
 
 /**
  * Add the ACF controls
@@ -27,7 +26,6 @@ import Tips from './notices-tips';
  * @return {string}		 Return the rendered JSX
  */
 export default function ACF( props ) {
-	const [ tipsModalOpen, setTipsModalOpen ] = useState( false );
 	const {
 		variables,
 		enabledControls,
@@ -109,19 +107,15 @@ export default function ACF( props ) {
 					<Icon icon={ icons.acf } />
 					<span>
 						{ __( 'Advanced Custom Fields', 'block-visibility' ) }
-						<Button
-							label={ __(
-								'Advanced Custom Fields Tips',
-								'block-visibility'
-							) }
-							icon={ info }
-							className="control-tips"
-							onClick={ () =>
-								setTipsModalOpen( ( open ) => ! open )
-							}
-							isSmall
-						/>
 					</span>
+					<InformationPopover
+						message={ __(
+							'The Advanced Custom Fields (ACF) control allows you configure block visibility based on a variety of field-related rules, which form rule sets.',
+							'block-visibility'
+						) }
+						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-advanced-custom-fields-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						position="bottom center"
+					/>
 				</h3>
 				<div className="visibility-control__help">
 					{ sprintf(
@@ -192,18 +186,6 @@ export default function ACF( props ) {
 			<div className="control-separator">
 				<span>{ __( 'AND', 'block-visibility' ) }</span>
 			</div>
-			{ tipsModalOpen && (
-				<Modal
-					className="block-visibility__tips-modal"
-					title={ __(
-						'Advanced Custom Fields Control',
-						'block-visibility'
-					) }
-					onRequestClose={ () => setTipsModalOpen( false ) }
-				>
-					<Tips />
-				</Modal>
-			) }
 		</>
 	);
 }

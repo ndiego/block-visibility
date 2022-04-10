@@ -96,6 +96,12 @@
             display: flex;
             align-items: center;
 
+            /* For the integration icons */
+            &>svg {
+                width: 16px;
+                margin-right: 8px;
+            }
+
             span {
                 display: inline-block;
                 margin-right: 4px;
