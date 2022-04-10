@@ -1,6 +1,6 @@
 # Block Visibility
 
-[![License](https://img.shields.io/badge/license-GPL--2.0%2B-green.svg)](https://github.com/ndiego/block-visibility/blob/master/LICENSE.txt)
+[![License](https://img.shields.io/badge/license-GPL--2.0%2B-green.svg)](https://github.com/ndiego/block-visibility/blob/master/LICENSE.txt) ![WordPress Plugin Active Installs](https://img.shields.io/wordpress/plugin/installs/block-visibility?color=%23007cba&label=Active%20Installs&logo=wordpress&style=flat-square)
 
 [Block Visibility](https://wordpress.org/plugins/block-visibility/) allows you to dynamically control which blocks are visible on your WordPress website and who can see them, which includes the ability to schedule blocks.
 
