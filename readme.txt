@@ -67,14 +67,15 @@ Take Block Visibility to the next level with **[Block Visibility Pro](https://ww
 
 Here’s a look at what's currently included with Pro:
 
-* Visibility Presets allow you to control multiple blocks at once. **NEW 🎉**
-* Show or hide blocks based on their **location** and “attributes” of their location (i.e. post type, taxonomy, archive, etc.)
+* Visibility Presets allow you to control multiple blocks at once.
+* Show or hide blocks based on their **location** and “attributes” of their location (i.e. post type, taxonomy, archive etc.)
 * Advanced **day-of-week** and **time-of-day** controls, which include recursion functionality.
 * Display blocks based on the **referral source** (domain/URL) of a website visitor.
 * Support for all post and user **metadata** (custom fields).
-* **WooCommerce** conditional block logic for shopping cart contents, product details, customer metrics, and more.
-* **Easy Digital Downloads** conditional block logic for shopping cart contents, customer metrics, and more.
-* eCommerce rules for when a customer placed their first/last order, or when specific products were purchased. **NEW 🎉**
+* Display blocks based on HTML **cookies**.
+* **WooCommerce** conditional block logic for shopping cart contents, product details, customer metrics and more.
+* **Easy Digital Downloads** conditional block logic for shopping cart contents, customer metrics and more.
+* eCommerce rules for when a customer placed their first/last order, or when specific products were purchased.
 * Access to premium email support.
 * More conditions coming soon...
 

@@ -8,7 +8,7 @@
 
 Built for the new Block (Gutenberg) Editor, this plugin was designed to work with **any** WordPress block. This includes blocks natively provided by WordPress as well as third-party blocks.
 
-To get started with Block Visibility, watch the [Plugin Overview](https://www.youtube.com/watch?v=DdDwQCE7RNE) demo video.
+To get started with Block Visibility, watch the [Plugin Overview](https://www.youtube.com/watch?v=CW1L4vBpXjw) demo video.
 
 ## Connect
 - [Learn more at Blockvisibilitywp.com](https://www.blockvisibilitywp.com/)
