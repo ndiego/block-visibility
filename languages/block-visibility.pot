@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Block Visibility 2.3.1\n"
+"Project-Id-Version: Block Visibility 2.4.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/block-visibility\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-02-27T19:55:13+00:00\n"
+"POT-Creation-Date: 2022-04-10T14:57:41+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: block-visibility\n"
@@ -77,7 +77,7 @@ msgstr ""
 msgid "Unserializing instances of the class is forbidden."
 msgstr ""
 
-#: includes/register-settings.php:247
+#: includes/register-settings.php:255
 msgid "Settings for the Block Visibility plugin."
 msgstr ""
 
@@ -356,6 +356,16 @@ msgid "Hide from selected users"
 msgstr ""
 
 #: build/block-visibility-editor.js:5
+#: build/block-visibility-settings.js:1
+msgid "More Information"
+msgstr ""
+
+#: build/block-visibility-editor.js:5
+#: build/block-visibility-settings.js:1
+msgid "Learn More"
+msgstr ""
+
+#: build/block-visibility-editor.js:5
 msgid "Public"
 msgstr ""
 
@@ -491,10 +501,6 @@ msgid "Hide when schedules apply"
 msgstr ""
 
 #: build/block-visibility-editor.js:6
-msgid "The Screen Size control is unfortunately not compatible with this block type. For more information, and a workaround, visit the <a>Knowledge Base</a>."
-msgstr ""
-
-#: build/block-visibility-editor.js:6
 msgid "Hide on large desktop"
 msgstr ""
 
@@ -526,47 +532,7 @@ msgid "Screen Size"
 msgstr ""
 
 #: build/block-visibility-editor.js:6
-msgid "The Query String control allows you to configure block visibility based on URL query strings. In order for this control to work properly, only add one query string per line in each textbox. The following three formats are accepted."
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-msgid "Query parameter with a specific value."
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-msgid "Query parameter with a wildcard value. (i.e. the value could be anything)"
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-msgid "Query parameter with no value. Operates the same as a wildcard value."
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-msgid "Required Queries (Any)"
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-msgid "The block will only be shown if the URL has at least one of the provided query strings."
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-msgid "Required Queries (All)"
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-msgid "The block will only be shown if the URL, at a minimum, has all of the provided query strings. It could have more."
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-msgid "Required Queries (Not)"
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-msgid "The block will be hidden whenever at least one of the provided query strings is present in the URL. The \"Not\" queries take precedent over all other queries."
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-msgid "To learn more, visit the plugin <a>Knowledge Base</a>"
+msgid "The Screen Size control is unfortunately not compatible with this block type. For more information, and a workaround, visit the <a>Knowledge Base</a>."
 msgstr ""
 
 #: build/block-visibility-editor.js:6
@@ -577,11 +543,11 @@ msgid "Query String"
 msgstr ""
 
 #: build/block-visibility-editor.js:6
-msgid "Query String Tips"
+msgid "Enter one URL query string per line."
 msgstr ""
 
 #: build/block-visibility-editor.js:6
-msgid "Enter one URL query string per line."
+msgid "Required Queries (Any)"
 msgstr ""
 
 #: build/block-visibility-editor.js:6
@@ -589,15 +555,19 @@ msgid "Only visible when least one of the provided URL query strings is present.
 msgstr ""
 
 #: build/block-visibility-editor.js:6
+msgid "Required Queries (All)"
+msgstr ""
+
+#: build/block-visibility-editor.js:6
 msgid "Only visible when <strong>all</strong> of the provided URL query strings are present."
 msgstr ""
 
 #: build/block-visibility-editor.js:6
-msgid "Hide when at least one of the provided URL query strings is present."
+msgid "Required Queries (Not)"
 msgstr ""
 
 #: build/block-visibility-editor.js:6
-msgid "Query String Control"
+msgid "Hide when at least one of the provided URL query strings is present."
 msgstr ""
 
 #: build/block-visibility-editor.js:6
@@ -633,47 +603,6 @@ msgid "Enter Value…"
 msgstr ""
 
 #: build/block-visibility-editor.js:6
-msgid "The Advanced Custom Fields (ACF) control allows you configure block visibility based on a variety of field-related rules, which form rule sets. A complete overview is available in the plugin Knowledge Base."
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-msgid "Rules & Rule Sets"
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-msgid "All rules within a rule set must be satisfied for the selected block to be visible. However, you can also create multiple rule sets. Only one rule set needs to apply for the block to be visible."
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-msgid "Rule Errors"
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-msgid "There are instances when rule errors can occur. For example, if rule inputs are not completely filled out, or if a rule is based on an ACF field that has since been deleted from your website. In these situations, the plugin defaults to showing the block."
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-msgid "User Fields"
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-msgid "By default, rules evaluate ACF fields attached to the current post, page, or custom post type. Alternatively, you can evaulate fields attached to the current logged-in user."
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-msgid "WordPress Preview"
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-msgid "Blocks using the ACF control do not always display as you would expect in the WordPress “preview”. At the top of the editor, there is a preview button that will open the page/post in a new window. It is not (currently) possible to accurately fetch ACF fields on a “preview” page and therefore the ACF visibility conditions may appear to not be working. But don’t worry, if you view the actual page on the frontend of your site, all block conditions will function as you expect."
-msgstr ""
-
-#: build/block-visibility-editor.js:6
-#: build/block-visibility-editor.js:7
-msgid "To learn more, visit the plugin <a>Knowledge Base</a>."
-msgstr ""
-
-#: build/block-visibility-editor.js:6
 #: build/block-visibility-editor.js:9
 #: build/block-visibility-settings.js:1
 #: build/block-visibility-settings.js:8
@@ -681,7 +610,7 @@ msgid "Advanced Custom Fields"
 msgstr ""
 
 #: build/block-visibility-editor.js:6
-msgid "Advanced Custom Fields Tips"
+msgid "The Advanced Custom Fields (ACF) control allows you configure block visibility based on a variety of field-related rules, which form rule sets."
 msgstr ""
 
 #. Translators: Whether the block is hidden or visible.
@@ -698,39 +627,7 @@ msgid "Select Field…"
 msgstr ""
 
 #: build/block-visibility-editor.js:7
-msgid "Advanced Custom Fields Control"
-msgstr ""
-
-#: build/block-visibility-editor.js:7
-msgid "The WP Fusion control allows you to configure block visibility based on WP Fusion tags. Note that the available fields depend on the User Role control settings. If the User Role control is disabled, only the Required Tags (Not) field will be available."
-msgstr ""
-
-#: build/block-visibility-editor.js:7
-msgid "It looks like the \"Exclude Administrators\" setting has been enabled in the WP Fusion plugin settings. Therefore, when you preview this block while logged-in as an Administrator, the content will remain visible regardless of the WP Fusion visibility control settings."
-msgstr ""
-
-#: build/block-visibility-editor.js:7
 msgid "Required Tags (Any)"
-msgstr ""
-
-#: build/block-visibility-editor.js:7
-msgid "The block will only be shown if the user is logged-in and has at least one of the selected tags. This field is disabled if the User Role control is set to Public, Logged-out, or is disabled."
-msgstr ""
-
-#: build/block-visibility-editor.js:7
-msgid "Required Tags (All)"
-msgstr ""
-
-#: build/block-visibility-editor.js:7
-msgid "The block will only be shown if the user is logged-in and, at a minimum, has all of the selected tags. They could have more. This field is disabled if the User Role control is set to Public, Logged-out, or is disabled."
-msgstr ""
-
-#: build/block-visibility-editor.js:7
-msgid "Required Tags (Not)"
-msgstr ""
-
-#: build/block-visibility-editor.js:7
-msgid "The block will be hidden from logged-in users if they have at least-one of the selected tags. If the User Role control is set to Public, or is disabled, the block will still display to logged-out users. This field is disabled if the User Role control is set to Logged-out."
 msgstr ""
 
 #: build/block-visibility-editor.js:7
@@ -742,7 +639,15 @@ msgid "Only visible to logged-in users with at least one of the selected tags."
 msgstr ""
 
 #: build/block-visibility-editor.js:7
+msgid "Required Tags (All)"
+msgstr ""
+
+#: build/block-visibility-editor.js:7
 msgid "Only visible to logged-in users with <strong>all</strong> of the selected tags."
+msgstr ""
+
+#: build/block-visibility-editor.js:7
+msgid "Required Tags (Not)"
 msgstr ""
 
 #: build/block-visibility-editor.js:7
@@ -757,15 +662,15 @@ msgid "WP Fusion"
 msgstr ""
 
 #: build/block-visibility-editor.js:7
-msgid "Wp Fusion Tips"
+msgid "The WP Fusion control allows you to configure block visibility based on WP Fusion tags."
+msgstr ""
+
+#: build/block-visibility-editor.js:7
+msgid "Note that the available fields depend on the User Role control settings. If the User Role control is disabled, only the Required Tags (Not) field will be available."
 msgstr ""
 
 #: build/block-visibility-editor.js:7
 msgid "The WP Fusion control works best in coordination with the User Role control, which has been disabled. To re-enable, click the eye icon in the Controls Toolbar above."
-msgstr ""
-
-#: build/block-visibility-editor.js:7
-msgid "WP Fusion Control"
 msgstr ""
 
 #: build/block-visibility-editor.js:7
@@ -875,14 +780,6 @@ msgstr ""
 
 #: build/block-visibility-settings.js:1
 msgid "Reset failed. Try again or contact support."
-msgstr ""
-
-#: build/block-visibility-settings.js:1
-msgid "More Information"
-msgstr ""
-
-#: build/block-visibility-settings.js:1
-msgid "Learn More"
 msgstr ""
 
 #: build/block-visibility-settings.js:1
@@ -1207,6 +1104,10 @@ msgid "Indicator color"
 msgstr ""
 
 #: build/block-visibility-settings.js:10
+msgid "Block Opacity"
+msgstr ""
+
+#: build/block-visibility-settings.js:10
 msgid "Block Editor"
 msgstr ""
 
@@ -1223,7 +1124,19 @@ msgid "Enable contextual indicators."
 msgstr ""
 
 #: build/block-visibility-settings.js:10
-msgid "Contextual indicators allow you to quickly tell which blocks in the Block Editor have active visibility controls."
+msgid "Contextual indicators allow users to quickly tell which blocks in the Block Editor have active visibility controls."
+msgstr ""
+
+#: build/block-visibility-settings.js:10
+msgid "Contextual Block Opacity"
+msgstr ""
+
+#: build/block-visibility-settings.js:10
+msgid "Reduce block opacity when visibility controls are applied."
+msgstr ""
+
+#: build/block-visibility-settings.js:10
+msgid "Reducing block opacity, coupled with contextual indicators, can further help users quickly tell which blocks in the Block Editor have active visibility controls."
 msgstr ""
 
 #: build/block-visibility-settings.js:10
