@@ -3,9 +3,9 @@ Author URI:        https://www.nickdiego.com/?bv_query=readme
 Contributors:      ndiego, outermostdesign
 Tags:              visibility, dynamic content, conditional content, conditional blocks, restrict blocks
 Requires at least: 5.5
-Tested up to:      5.9
+Tested up to:      6.0
 Requires PHP:      5.6
-Stable tag:        2.4.0
+Stable tag:        2.5.0
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -214,6 +214,8 @@ The [Screen Size](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-sc
 If you run into a block that is not working with the Screen Size control, there is a quick and easy workaround that can be applied in most use cases. Simply wrap the block in a Group block. Then apply the screen size settings to the Group block and everything will work as expected. For more information and a live walkthrough, check out [this video](https://www.youtube.com/watch?v=fAn-U4tw3rw).
 
 == Changelog ==
+
+= 2.5.0 - 2022-05-TBD =
 
 = 2.4.0 - 2022-04-10 =
 
