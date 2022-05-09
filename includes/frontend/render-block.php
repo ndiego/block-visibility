@@ -99,9 +99,9 @@ function is_visible( $settings, $attributes ) {
 }
 
 /**
- * Add custom classes to the blocks.
+ * Add custom block classes.
  *
- * @since 2.5.0
+ * @since 2.4.1
  *
  * @param array $settings   The plugin settings.
  * @param array $attributes The block attributes.
@@ -143,7 +143,7 @@ function add_custom_classes( $settings, $attributes ) {
  * This function is heavily influenced/taken from the WordPress core elements
  * block supports code: https://github.com/WordPress/wordpress-develop/blob/trunk/src/wp-includes/block-supports/elements.php
  *
- * @since 2.5.0
+ * @since 2.4.1
  *
  * @param string $block_content   The block frontend output.
  * @param array  $content_classes Custom classes to be added in array form.
@@ -151,13 +151,13 @@ function add_custom_classes( $settings, $attributes ) {
  */
 function append_content_classes( $block_content, $content_classes ) {
 
-	$classes = array_unique( $content_classes );
-
 	// If there are no content classes, return the original block content.
-	if ( empty( $classes ) ) {
+	if ( empty( $content_classes ) ) {
 		return $block_content;
 	}
 
+	// Remove duplicate classes and turn into string.
+	$classes = array_unique( $content_classes );
 	$classes = implode( ' ', $classes );
 
 	// Retrieve the opening tag of the first HTML element.
@@ -173,7 +173,7 @@ function append_content_classes( $block_content, $content_classes ) {
 			$block_content,
 			1
 		);
-	} else if ( strpos( $first_element, "class='" ) !== false ) {
+	} elseif ( strpos( $first_element, "class='" ) !== false ) {
 
 		// We also need to take into account markup that uses single quotes.
 		$block_content = preg_replace(
@@ -225,6 +225,7 @@ function render_with_visibility( $block_content, $block ) {
 		return '';
 	}
 
+	// If the block is visible, add custom classes as needed.
 	if ( is_visible( $settings, $attributes ) ) {
 
 		$content_classes = add_custom_classes( $settings, $attributes );
