@@ -69,7 +69,7 @@ add_filter( 'block_visibility_control_set_is_block_visible', __NAMESPACE__ . '\s
 /**
  * Add the screen size classes on render.
  *
- * @since 2.5.0
+ * @since 2.4.1
  *
  * @param array $custom_classes Existing custom classes to be added to the block.
  * @param array $settings       The plugin settings.
@@ -102,8 +102,8 @@ function add_screen_size_classes( $custom_classes, $settings, $controls ) {
 			$size,
 			true
 		);
-		$is_set  = isset( $control_atts[ 'hideOnScreenSize' ][ snake_to_camel_case( $size ) ] )
-			? $control_atts[ 'hideOnScreenSize' ][ snake_to_camel_case( $size ) ]
+		$is_set  = isset( $control_atts['hideOnScreenSize'][ snake_to_camel_case( $size ) ] )
+			? $control_atts['hideOnScreenSize'][ snake_to_camel_case( $size ) ]
 			: false;
 
 		// If advanced controls are not enabled, don't print the corresponding
@@ -317,7 +317,7 @@ function set_max_width( $width ) {
 /**
  * A simple utlity that transforms a snake case string to camel case.
  *
- * @since 2.5.0
+ * @since 2.4.1
  *
  * @param string $string A snake case string.
  * @return string        The string in camel case.
