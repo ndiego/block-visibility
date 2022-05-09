@@ -127,16 +127,30 @@ add_filter( 'block_visibility_control_set_add_custom_classes', __NAMESPACE__ . '
  * @since 2.4.1
  */
 function add_inline_styles() {
-	if ( wp_style_is( 'block-visibility-screen-size-styles' ) ) {
 
-		// Get the plugin core settings.
-		$settings = get_option( 'block_visibility_settings' );
-		$styles   = get_screen_size_styles( $settings );
+	// Get the plugin core settings.
+	$settings = get_option( 'block_visibility_settings' );
+
+	// We do not want to have to do this, but needed for classic themes. This
+	// will enqueue the screen size inline styles on all pages, but does fix
+	// the multiple printing of styles issue.
+	// @TODO explore alternative approaches.
+	if (
+		is_control_enabled( $settings, 'screen_size' ) &&
+		is_control_enabled( $settings, 'screen_size', 'enable_frontend_css' ) &&
+		! wp_script_is( 'block-visibility-screen-size-styles' )
+	) {
+		wp_register_style( 'block-visibility-screen-size-styles', false, array(), '1.0.0' );
+		wp_enqueue_style( 'block-visibility-screen-size-styles' );
+	}
+
+	if ( wp_style_is( 'block-visibility-screen-size-styles' ) ) {
+		$styles = get_screen_size_styles( $settings );
 
 		wp_add_inline_style( 'block-visibility-screen-size-styles', $styles );
 	}
 }
-add_filter( 'wp_enqueue_scripts', __NAMESPACE__ . '\add_inline_styles' );
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\add_inline_styles', 1000 );
 
 /**
  * Get the screen size styles.
