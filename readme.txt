@@ -215,6 +215,10 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 * The Screen Size CSS classes are now added via PHP allowing the control to be used in dynamic blocks.
 
+**Fixed**
+
+* Fixed bug where Screen Size inline styles would be printed multiple times.
+
 = 2.4.0 - 2022-04-10 =
 
 **Added**
