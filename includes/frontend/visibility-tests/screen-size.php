@@ -53,12 +53,6 @@ function screen_size_test( $is_visible, $settings, $controls ) {
 		// Register an alias screen-size styles file. This is needed for wp_add_inline_style.
 		wp_register_style( 'block-visibility-screen-size-styles', false, array(), '1.0.0' );
 		wp_enqueue_style( 'block-visibility-screen-size-styles' );
-
-		$styles = get_screen_size_styles( $settings );
-
-		if ( $styles ) {
-			wp_add_inline_style( 'block-visibility-screen-size-styles', $styles );
-		}
 	}
 
 	// Always return true because the screen size controls are handled with CSS.
@@ -126,6 +120,23 @@ function add_screen_size_classes( $custom_classes, $settings, $controls ) {
 	return $custom_classes;
 }
 add_filter( 'block_visibility_control_set_add_custom_classes', __NAMESPACE__ . '\add_screen_size_classes', 10, 3 );
+
+/**
+ * Only add inline styles if a block with Screen Size controls is present.
+ *
+ * @since 2.4.1
+ */
+function add_inline_styles() {
+	if ( wp_style_is( 'block-visibility-screen-size-styles' ) ) {
+
+		// Get the plugin core settings.
+		$settings = get_option( 'block_visibility_settings' );
+		$styles   = get_screen_size_styles( $settings );
+
+		wp_add_inline_style( 'block-visibility-screen-size-styles', $styles );
+	}
+}
+add_filter( 'wp_enqueue_scripts', __NAMESPACE__ . '\add_inline_styles' );
 
 /**
  * Get the screen size styles.
