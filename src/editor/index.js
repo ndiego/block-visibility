@@ -2,7 +2,6 @@
  * External dependencies
  */
 import { assign } from 'lodash';
-import classnames from 'classnames';
 
 /**
  * WordPress dependencies
@@ -385,87 +384,6 @@ addFilter(
 	'blocks.registerBlockType',
 	'block-visibility/add-attributes',
 	addAttributes
-);
-
-/**
- * Override props assigned to save component to inject atttributes
- *
- * @param {Object} extraProps Additional props applied to save element.
- * @param {Object} blockType  Block type.
- * @param {Object} attributes Current block attributes.
- * @return {Object} Filtered props applied to save element.
- */
-function applyVisibilityClasses( extraProps, blockType, attributes ) {
-	const { blockVisibility } = attributes;
-	const hasControlSets = blockVisibility?.controlSets ?? false;
-	let testAtts = blockVisibility;
-
-	if ( hasControlSets ) {
-		// The control set array is empty or the default set has no applied controls.
-		if (
-			blockVisibility.controlSets.length !== 0 &&
-			blockVisibility.controlSets[ 0 ]?.controls
-		) {
-			testAtts =
-				blockVisibility.controlSets[ 0 ].controls?.screenSize ?? null;
-		} else {
-			testAtts = null;
-		}
-	}
-
-	if ( ! testAtts ) {
-		return extraProps;
-	}
-
-	// Conditionally add the screen size control classes.
-	const hideExtraLarge = testAtts?.hideOnScreenSize?.extraLarge ?? false;
-	const hideLarge = testAtts?.hideOnScreenSize?.large ?? false;
-	const hideMedium = testAtts?.hideOnScreenSize?.medium ?? false;
-	const hideSmall = testAtts?.hideOnScreenSize?.small ?? false;
-	const hideExtraSmall = testAtts?.hideOnScreenSize?.extraSmall ?? false;
-
-	if ( hideExtraLarge ) {
-		extraProps.className = classnames(
-			extraProps.className,
-			'block-visibility-hide-extra-large-screen'
-		);
-	}
-
-	if ( hideLarge ) {
-		extraProps.className = classnames(
-			extraProps.className,
-			'block-visibility-hide-large-screen'
-		);
-	}
-
-	if ( hideMedium ) {
-		extraProps.className = classnames(
-			extraProps.className,
-			'block-visibility-hide-medium-screen'
-		);
-	}
-
-	if ( hideSmall ) {
-		extraProps.className = classnames(
-			extraProps.className,
-			'block-visibility-hide-small-screen'
-		);
-	}
-
-	if ( hideExtraSmall ) {
-		extraProps.className = classnames(
-			extraProps.className,
-			'block-visibility-hide-extra-small-screen'
-		);
-	}
-
-	return extraProps;
-}
-
-addFilter(
-	'blocks.getSaveContent.extraProps',
-	'block-visibility/apply-visibility-classes',
-	applyVisibilityClasses
 );
 
 /**
