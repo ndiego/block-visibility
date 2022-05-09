@@ -3,9 +3,9 @@ Author URI:        https://www.nickdiego.com/?bv_query=readme
 Contributors:      ndiego, outermostdesign
 Tags:              visibility, dynamic content, conditional content, conditional blocks, restrict blocks
 Requires at least: 5.5
-Tested up to:      5.9
+Tested up to:      6.0
 Requires PHP:      5.6
-Stable tag:        2.4.0
+Stable tag:        2.4.1
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -207,13 +207,13 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 
 The **one exception** to this is the Screen Size block controls. Visibility by screen size requires the use of CSS, which is loaded to the frontend of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary yourself. Visit the plugin [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) to learn more.
 
-= The Screen Size controls aren't working, what's going on? =
-
-The [Screen Size](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control adds CSS classes to each block when enabled. It uses these classes to show or hide blocks. Unfortunately, not all blocks support CSS classes, notably the Shortcode and HTML blocks. Furthermore, many dynamic blocks also do not work as expected with the Screen Size control. For dynamic blocks specifically, we are exploring potential alternative solutions.
-
-If you run into a block that is not working with the Screen Size control, there is a quick and easy workaround that can be applied in most use cases. Simply wrap the block in a Group block. Then apply the screen size settings to the Group block and everything will work as expected. For more information and a live walkthrough, check out [this video](https://www.youtube.com/watch?v=fAn-U4tw3rw).
-
 == Changelog ==
+
+= 2.4.1 - 2022-05-09 =
+
+**Changed**
+
+* The Screen Size CSS classes are now added via PHP allowing the control to be used in dynamic blocks.
 
 = 2.4.0 - 2022-04-10 =
 

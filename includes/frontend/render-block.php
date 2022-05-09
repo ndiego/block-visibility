@@ -16,6 +16,7 @@ defined( 'ABSPATH' ) || exit;
 use function BlockVisibility\Frontend\VisibilityTests\hide_block_test as hide_block_test;
 use function BlockVisibility\Frontend\VisibilityTests\visibility_presets_test as visibility_presets_test;
 use function BlockVisibility\Frontend\VisibilityTests\control_sets_test as control_sets_test;
+use function BlockVisibility\Frontend\VisibilityTests\control_sets_custom_classes as control_sets_custom_classes;
 
 /**
  * Check if the given block type is disabled via the visibility settings.
@@ -23,8 +24,8 @@ use function BlockVisibility\Frontend\VisibilityTests\control_sets_test as contr
  * @since 1.0.0
  *
  * @param array $settings The plugin settings.
- * @param array $block The block info and attributes.
- * @return boolean Is the block disabled or not.
+ * @param array $block    The block info and attributes.
+ * @return boolean        Is the block disabled or not.
  */
 function is_block_type_disabled( $settings, $block ) {
 	$disabled_blocks = isset( $settings['disabled_blocks'] )
@@ -48,7 +49,7 @@ function is_block_type_disabled( $settings, $block ) {
  * @since 1.0.0
  *
  * @param array $block The block info and attributes.
- * @return boolean Are there visibility settings or not.
+ * @return boolean     Are there visibility settings or not.
  */
 function has_visibility_settings( $block ) {
 	if ( isset( $block['attrs']['blockVisibility'] ) ) {
@@ -63,9 +64,9 @@ function has_visibility_settings( $block ) {
  *
  * @since 2.3.1
  *
- * @param array $settings The plugin settings.
+ * @param array $settings   The plugin settings.
  * @param array $attributes The block attributes.
- * @return boolean Should the block be visible or not.
+ * @return boolean          Should the block be visible or not.
  */
 function is_visible( $settings, $attributes ) {
 
@@ -98,13 +99,108 @@ function is_visible( $settings, $attributes ) {
 }
 
 /**
+ * Add custom block classes.
+ *
+ * @since 2.4.1
+ *
+ * @param array $settings   The plugin settings.
+ * @param array $attributes The block attributes.
+ * @return array            Custom classes to be added on render.
+ */
+function add_custom_classes( $settings, $attributes ) {
+
+	// Apply all visibility tests.
+	$custom_classes = apply_filters(
+		'block_visibility_add_custom_classes',
+		array(),
+		$settings,
+		$attributes
+	);
+
+	// If Pro is active, allow local controls to be disabled in Pro.
+	$enable_local_controls =
+		isset( $settings['visibility_controls']['general']['enable_local_controls'] ) && class_exists( 'Block_Visibility_Pro' )
+			? $settings['visibility_controls']['general']['enable_local_controls']
+			: true;
+
+	// If there're "local" control sets applied to the block, add custom classes.
+	if ( $enable_local_controls && isset( $attributes['controlSets'] ) ) {
+		$custom_classes = control_sets_custom_classes(
+			$custom_classes,
+			$settings,
+			$attributes['controlSets'],
+			'local'
+		);
+	}
+
+	return $custom_classes;
+}
+
+/**
+ * Append custom classes to the block frontend content. This is used primarily
+ * by the Screen Size control.
+ *
+ * This function is heavily influenced/taken from the WordPress core elements
+ * block supports code: https://github.com/WordPress/wordpress-develop/blob/trunk/src/wp-includes/block-supports/elements.php
+ *
+ * @since 2.4.1
+ *
+ * @param string $block_content   The block frontend output.
+ * @param array  $content_classes Custom classes to be added in array form.
+ * @return string                 Return the $block_content with the custom classes added.
+ */
+function append_content_classes( $block_content, $content_classes ) {
+
+	// If there are no content classes, return the original block content.
+	if ( empty( $content_classes ) ) {
+		return $block_content;
+	}
+
+	// Remove duplicate classes and turn into string.
+	$classes = array_unique( $content_classes );
+	$classes = implode( ' ', $classes );
+
+	// Retrieve the opening tag of the first HTML element.
+	$html_element_matches = array();
+	preg_match( '/<[^>]+>/', $block_content, $html_element_matches, PREG_OFFSET_CAPTURE );
+	$first_element = $html_element_matches[0][0];
+
+	// If the first HTML element has a class attribute just add the new class.
+	if ( strpos( $first_element, 'class="' ) !== false ) {
+		$block_content = preg_replace(
+			'/' . preg_quote( 'class="', '/' ) . '/',
+			'class="' . $classes . ' ',
+			$block_content,
+			1
+		);
+	} elseif ( strpos( $first_element, "class='" ) !== false ) {
+
+		// We also need to take into account markup that uses single quotes.
+		$block_content = preg_replace(
+			'/' . preg_quote( "class='", '/' ) . '/',
+			"class='" . $classes . ' ',
+			$block_content,
+			1
+		);
+	} else {
+
+		// If the first HTML element has no class attribute we should inject the
+		// attribute before the attribute at the end.
+		$first_element_offset = $html_element_matches[0][1];
+		$block_content        = substr_replace( $block_content, ' class="' . $classes . '"', $first_element_offset + strlen( $first_element ) - 1, 0 );
+	}
+
+	return $block_content;
+}
+
+/**
  * Check if the given block has visibility settings.
  *
  * @since 1.0.0
  *
  * @param string $block_content The block frontend output.
- * @param array  $block The block info and attributes.
- * @return mixed Return either the $block_content or nothing depending on visibility settings.
+ * @param array  $block         The block info and attributes.
+ * @return mixed                Return either the $block_content or nothing depending on visibility settings.
  */
 function render_with_visibility( $block_content, $block ) {
 
@@ -129,7 +225,15 @@ function render_with_visibility( $block_content, $block ) {
 		return '';
 	}
 
+	// If the block is visible, add custom classes as needed.
 	if ( is_visible( $settings, $attributes ) ) {
+
+		$content_classes = add_custom_classes( $settings, $attributes );
+
+		if ( ! empty( $content_classes ) ) {
+			$block_content = append_content_classes( $block_content, $content_classes );
+		}
+
 		return $block_content;
 	} else {
 		return '';
@@ -148,7 +252,7 @@ add_filter( 'render_block', __NAMESPACE__ . '\render_with_visibility', 10, 3 );
  * @since 2.3.1
  *
  * @param array $instance The widget instance.
- * @return mixed Return either the widget $instance or nothing depending on visibility settings.
+ * @return mixed          Return either the widget $instance or nothing depending on visibility settings.
  */
 function render_block_widget_with_visibility( $instance ) {
 

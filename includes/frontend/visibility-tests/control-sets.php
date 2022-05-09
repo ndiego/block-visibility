@@ -72,3 +72,47 @@ function control_sets_test( $is_visible, $settings, $control_sets, $type = 'loca
 		return true;
 	}
 }
+
+/**
+ * Add the custom classes on render.
+ *
+ * @since 2.4.1
+ *
+ * @param array  $custom_classes Existing custom classes to be added to the block.
+ * @param array  $settings       The core plugin settings.
+ * @param array  $control_sets   All local control sets on the block.
+ * @param string $type           Is the control set "local" or part of a "preset".
+ * @return array                 Return updated array of custom classes.
+ */
+function control_sets_custom_classes( $custom_classes, $settings, $control_sets, $type = 'local' ) { // phpcs:ignore
+
+	// There are no control sets, skip tests.
+	if ( ! is_array( $control_sets ) || 0 === count( $control_sets ) ) {
+		return $custom_classes;
+	}
+
+	foreach ( $control_sets as $control_set ) {
+
+		$enable = isset( $control_set['enable'] )
+			? $control_set['enable']
+			: true;
+
+		$controls = isset( $control_set['controls'] )
+			? $control_set['controls']
+			: array();
+
+		if ( $enable && 0 < count( $controls ) ) {
+
+			// All our custom class tests are run through this filter and this
+			// also gives third-parties access to override a block's classes.
+			$custom_classes = apply_filters(
+				'block_visibility_control_set_add_custom_classes',
+				$custom_classes,
+				$settings,
+				$controls
+			);
+		}
+	}
+
+	return $custom_classes;
+}
