@@ -5,7 +5,7 @@ Tags:              visibility, dynamic content, conditional content, conditional
 Requires at least: 5.5
 Tested up to:      6.0
 Requires PHP:      5.6
-Stable tag:        2.5.0
+Stable tag:        2.4.1
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -215,7 +215,11 @@ If you run into a block that is not working with the Screen Size control, there 
 
 == Changelog ==
 
-= 2.5.0 - 2022-05-TBD =
+= 2.4.1 - 2022-05-09 =
+
+**Changed**
+
+* The Screen Size control CSS classes are now added via PHP allowing the control to be used in dynamic blocks.
 
 = 2.4.0 - 2022-04-10 =
 
