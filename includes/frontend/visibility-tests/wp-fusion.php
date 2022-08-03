@@ -99,7 +99,7 @@ function wp_fusion_test( $is_visible, $settings, $controls ) {
 	$can_access = apply_filters(
 		'wpf_user_can_access_block', // phpcs:ignore
 		$can_access,
-		$attributes
+		$wp_fusion_atts
 	);
 
 	$can_access = apply_filters(
