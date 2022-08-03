@@ -5,7 +5,7 @@ Tags:              visibility, dynamic content, conditional content, conditional
 Requires at least: 5.5
 Tested up to:      6.0
 Requires PHP:      5.6
-Stable tag:        2.4.2
+Stable tag:        2.4.3
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,7 +92,7 @@ While there are countless applications for conditional blocks, here are a few ex
 * Restrict content so it’s only visible to your customers, members or subscribers.
 * Display messaging to logged-out users encouraging them to subscribe to your blog.
 * Create unique marketing campaigns using query string parameters to display personalized messaging ([See it in action](https://www.blockvisibilitywp.com?bv_query=example))
-* Conditionally display elements in the Full Site Editor using advanced visibility logic.
+* Conditionally display elements in the Site Editor using advanced visibility logic.
 * Increase visitor engagement and conversions with dynamic content and personalization.
 
 === Why Choose Block Visibility? ===
@@ -196,8 +196,8 @@ Yup, this plugin is not theme-specific. You just need to be running the latest v
 = Will more conditional visibility controls be added in the future? =
 Yes, and if you have a specific idea of what you would like to see, please submit a feature request in the plugin support forum on WordPress.org.
 
-= Does this plugin work with the Full Site Editing and block-based themes? =
-As of version 1.4.0, Block Visibility is supported in the Site Editor, which is provided by Full Site Editing. Note that you will currently need the Gutenberg plugin and a Full Site Editing theme to make use of this functionality. Full Site Editing is still very much in development and you may find bugs or compatibility issues when using this plugin in the Site Editor. If you do, please let us know in the plugin support forum. We are committed to ensuring 100% compatibility by the time Full Site Editing is included in WordPress core.
+= Does this plugin work with Full Site Editing? =
+As of version 1.4.0, Block Visibility is supported in the Site Editor, which is available when using a block theme. We are committed to ensuring 100% compatibility with all Full Site Editing features. If you find bugs or compatibility issues, please let us know in the plugin support forum.
 
 = Does Block Visibility work with Elementor and other page builders? =
 No. Block Visibility was designed specifically for the WordPress Block Editor (Gutenberg) and therefore does not work on pages that are controlled by the Elementor editor or another page builder. As long as you are editing native WordPress “block” content, Block Visibility will work.
@@ -208,6 +208,12 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 The **one exception** to this is the Screen Size block controls. Visibility by screen size requires the use of CSS, which is loaded to the frontend of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary yourself. Visit the plugin [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) to learn more.
 
 == Changelog ==
+
+= 2.4.3 - 2022-08-02 =
+
+**Fixed**
+
+* Fixed incorrect filter attribute in WP Fusion visibility test.
 
 = 2.4.2 - 2022-05-09 =
 
@@ -576,7 +582,7 @@ This is an unfortunate issue that will occur only once. We apologize for any inc
 
 **Added**
 
-* Preliminary compatibility with Full Site Editing (Requires the Gutenberg plugin and a theme that is Full Site Editing compatible)
+* Preliminary compatibility with Full Site Editing features
 * Hooks and slots to support the upcoming Pro add-on
 
 **Changed**
