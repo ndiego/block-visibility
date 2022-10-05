@@ -129,6 +129,10 @@ export default function ControlSetHeader( props ) {
 				: __( 'Control Set', 'block-visibility' );
 	}
 
+	const canResetAll = [ ...coreControls, ...integrationControls ].some(
+		( control ) => control.active
+	);
+
 	const settingsDropdown = (
 		<DropdownMenu
 			className="settings-dropdown"
@@ -192,6 +196,17 @@ export default function ControlSetHeader( props ) {
 							) ) }
 						</MenuGroup>
 					) }
+					<MenuGroup>
+						<MenuItem
+							aria-disabled={ ! canResetAll }
+							variant={ 'tertiary' }
+							onClick={ () => {
+								resetControls();
+							} }
+						>
+							{ __( 'Reset all', 'block-visibility' ) }
+						</MenuItem>
+					</MenuGroup>
 				</>
 			) }
 		</DropdownMenu>
@@ -223,15 +238,6 @@ export default function ControlSetHeader( props ) {
 						) }
 
 						<Slot name="ControlSetOptionsToolsMiddle" />
-
-						<MenuItem
-							onClick={ () => {
-								resetControls();
-								onClose();
-							} }
-						>
-							{ __( 'Reset all controls', 'block-visibility' ) }
-						</MenuItem>
 
 						<Slot name="ControlSetOptionsToolsBottom" />
 
@@ -342,7 +348,7 @@ function ControlMenuItem( props ) {
 			className={ classnames( {
 				disabled: ! control.active,
 			} ) }
-			icon={ control.active ? check : '' }
+			icon={ control.active && check }
 			onClick={ () => toggleControls( control ) }
 		>
 			{ control.icon && (
