@@ -63,7 +63,7 @@ function Settings() {
 		}
 
 		fetchData( 'settings', setSettings );
-		fetchData( 'variables', setVariables );
+		fetchData( 'variables?type=simplified', setVariables );
 	}, [] );
 
 	function onSetSettings( newSettings ) {
