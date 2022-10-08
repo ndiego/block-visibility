@@ -1,6 +1,6 @@
 {
 	"name": "block-visibility",
-	"version": "2.4.3",
+	"version": "2.4.4",
 	"description": "Provides visibility controls and scheduling functionality to all WordPress blocks.",
 	"author": "Nick Diego",
 	"license": "GPL-2.0-or-later",
@@ -27,18 +27,18 @@
 	},
 	"dependencies": {
 		"@wordpress/block-editor": "^8.5.0",
-		"@wordpress/block-library": "^7.3.0",
-		"@wordpress/blocks": "^11.5.0",
+		"@wordpress/block-library": "^7.16.0",
+		"@wordpress/blocks": "^11.18.0",
 		"@wordpress/components": "^19.8.0",
 		"@wordpress/core-data": "^4.4.0",
 		"@wordpress/data": "^6.6.0",
-		"@wordpress/date": "^4.6.0",
-		"@wordpress/edit-post": "^6.3.0",
-		"@wordpress/element": "^4.4.0",
-		"@wordpress/hooks": "^3.6.0",
-		"@wordpress/i18n": "^4.6.0",
+		"@wordpress/date": "^4.19.0",
+		"@wordpress/edit-post": "^6.16.0",
+		"@wordpress/element": "^4.17.0",
+		"@wordpress/hooks": "^3.19.0",
+		"@wordpress/i18n": "^4.19.0",
 		"@wordpress/icons": "^6.3.0",
-		"@wordpress/plugins": "^4.4.0",
+		"@wordpress/plugins": "^4.17.0",
 		"react-select": "^5.2.2"
 	}
 }
