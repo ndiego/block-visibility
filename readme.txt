@@ -5,7 +5,7 @@ Tags:              visibility, dynamic content, conditional content, conditional
 Requires at least: 5.5
 Tested up to:      6.0
 Requires PHP:      5.6
-Stable tag:        2.4.3
+Stable tag:        2.4.4
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -208,6 +208,12 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 The **one exception** to this is the Screen Size block controls. Visibility by screen size requires the use of CSS, which is loaded to the frontend of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary yourself. Visit the plugin [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) to learn more.
 
 == Changelog ==
+
+= 2.4.4 - 2022-10-08 =
+
+**Changed**
+
+* Simplify REST API requests on the plugin settings page to increase performance and attempt to fix edge case fetch errors.
 
 = 2.4.3 - 2022-08-02 =
 

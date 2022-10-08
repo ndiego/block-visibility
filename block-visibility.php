@@ -3,7 +3,7 @@
  * Plugin Name:         Block Visibility
  * Plugin URI:          https://www.blockvisibilitywp.com/
  * Description:         Provides visibility controls and scheduling functionality to all WordPress blocks.
- * Version:             2.4.3
+ * Version:             2.4.4
  * Requires at least:   5.5
  * Requires PHP:        5.6
  * Author:              Nick Diego
