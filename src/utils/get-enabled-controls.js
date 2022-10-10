@@ -163,6 +163,15 @@ export default function getEnabledControls( settings, variables ) {
 		} );
 	}
 
+	const defaultControls = settings?.plugin_settings?.default_controls ?? [];
+
+	// Determine which enable controls are defaults, if any.
+	enabledControls.forEach( function ( control ) {
+		if ( defaultControls.includes( control.settingSlug ) ) {
+			control.isDefault = true;
+		}
+	} );
+
 	enabledControls = applyFilters(
 		'blockVisibility.enabledControls',
 		enabledControls,
