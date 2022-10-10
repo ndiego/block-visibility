@@ -29,13 +29,8 @@ import InformationPopover from './../../../utils/components/information-popover'
  * @return {string}		 Return the rendered JSX
  */
 export default function ScreenSize( props ) {
-	const {
-		name,
-		settings,
-		enabledControls,
-		controlSetAtts,
-		setControlAtts,
-	} = props;
+	const { name, settings, enabledControls, controlSetAtts, setControlAtts } =
+		props;
 
 	const controlEnabled = enabledControls.some(
 		( control ) => control.settingSlug === 'screen_size'

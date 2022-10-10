@@ -20,9 +20,9 @@ import Integrations from './integrations';
 
 // Provides an entry point to slot in additional settings. Must be placed
 // outside of function to avoid unnecessary rerenders.
-const AdditionalControls = withFilters(
-	'blockVisibility.VisibilityControls'
-)( ( props ) => <></> ); // eslint-disable-line
+const AdditionalControls = withFilters( 'blockVisibility.VisibilityControls' )(
+	( props ) => <></>
+); // eslint-disable-line
 
 /**
  * Renders the Visibility Controls tab of the Block Visibility settings page

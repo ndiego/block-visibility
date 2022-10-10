@@ -301,10 +301,11 @@ export default function Rule( props ) {
 								) {
 									const conditionOptions =
 										condition?.options ?? [];
-									const filteredOptions = conditionOptions.filter(
-										( option ) =>
-											option.value === fieldValue
-									);
+									const filteredOptions =
+										conditionOptions.filter(
+											( option ) =>
+												option.value === fieldValue
+										);
 
 									options =
 										filteredOptions[ 0 ]?.valueOptions ??

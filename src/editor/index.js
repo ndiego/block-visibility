@@ -164,8 +164,7 @@ function addAttributes( settings ) {
 																type: 'object',
 																properties: {
 																	field: {
-																		type:
-																			'string',
+																		type: 'string',
 																	},
 																	subField: {
 																		type: [
@@ -175,12 +174,10 @@ function addAttributes( settings ) {
 																		],
 																	},
 																	subFields: {
-																		type:
-																			'object',
+																		type: 'object',
 																	},
 																	operator: {
-																		type:
-																			'string',
+																		type: 'string',
 																	},
 																	value: {
 																		type: [
@@ -286,8 +283,7 @@ function addAttributes( settings ) {
 																type: 'object',
 																properties: {
 																	field: {
-																		type:
-																			'string',
+																		type: 'string',
 																	},
 																	subField: {
 																		type: [
@@ -297,8 +293,7 @@ function addAttributes( settings ) {
 																		],
 																	},
 																	operator: {
-																		type:
-																			'string',
+																		type: 'string',
 																	},
 																	value: {
 																		type: [
@@ -394,16 +389,12 @@ addFilter(
  */
 function addInspectorControls( BlockEdit ) {
 	return ( props ) => {
-		if ( props.isSelected ) {
-			return (
-				<>
-					<BlockEdit { ...props } />
-					<VisibilityInspectorControls { ...props } />
-				</>
-			);
-		}
-
-		return <BlockEdit { ...props } />;
+		return (
+			<>
+				<BlockEdit { ...props } />
+				<VisibilityInspectorControls { ...props } />
+			</>
+		);
 	};
 }
 

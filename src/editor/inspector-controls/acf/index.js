@@ -26,12 +26,8 @@ import InformationPopover from './../../../utils/components/information-popover'
  * @return {string}		 Return the rendered JSX
  */
 export default function ACF( props ) {
-	const {
-		variables,
-		enabledControls,
-		controlSetAtts,
-		setControlAtts,
-	} = props;
+	const { variables, enabledControls, controlSetAtts, setControlAtts } =
+		props;
 	const pluginActive = variables?.integrations?.acf?.active ?? false;
 	const controlEnabled = enabledControls.some(
 		( control ) => control.settingSlug === 'acf'

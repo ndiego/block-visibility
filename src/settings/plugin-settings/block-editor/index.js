@@ -136,7 +136,8 @@ export default function BlockEditor( props ) {
 						onChange={ () => {
 							setPluginSettings( {
 								...pluginSettings,
-								enable_contextual_indicators: ! enableContextualIndicators,
+								enable_contextual_indicators:
+									! enableContextualIndicators,
 							} );
 						} }
 					/>
@@ -190,7 +191,8 @@ export default function BlockEditor( props ) {
 						onChange={ () => {
 							setPluginSettings( {
 								...pluginSettings,
-								enable_toolbar_controls: ! enableToolbarControls,
+								enable_toolbar_controls:
+									! enableToolbarControls,
 							} );
 						} }
 					/>
