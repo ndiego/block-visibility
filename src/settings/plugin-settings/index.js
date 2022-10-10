@@ -17,9 +17,9 @@ import Uninstall from './uninstall';
 
 // Provides an entry point to slot in additional settings. Must be placed
 // outside of function to avoid unnecessary rerenders.
-const AdditionalSettings = withFilters(
-	'blockVisibility.PluginSettings'
-)( ( props ) => <></> ); // eslint-disable-line
+const AdditionalSettings = withFilters( 'blockVisibility.PluginSettings' )(
+	( props ) => <></>
+); // eslint-disable-line
 
 /**
  * Renders the plugin Settings tab of the Block Visibility settings page

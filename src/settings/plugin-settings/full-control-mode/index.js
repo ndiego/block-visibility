@@ -53,7 +53,8 @@ export default function FullControlMode( props ) {
 						onChange={ () => {
 							setPluginSettings( {
 								...pluginSettings,
-								enable_full_control_mode: ! enableFullControlMode,
+								enable_full_control_mode:
+									! enableFullControlMode,
 							} );
 						} }
 					/>

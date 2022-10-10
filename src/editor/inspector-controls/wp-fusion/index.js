@@ -26,12 +26,8 @@ import InformationPopover from './../../../utils/components/information-popover'
  * @return {string}		 Return the rendered JSX
  */
 export default function WPFusion( props ) {
-	const {
-		variables,
-		enabledControls,
-		controlSetAtts,
-		setControlAtts,
-	} = props;
+	const { variables, enabledControls, controlSetAtts, setControlAtts } =
+		props;
 	const pluginActive = variables?.integrations?.wp_fusion?.active ?? false;
 	const controlEnabled = enabledControls.some(
 		( control ) => control.settingSlug === 'wp_fusion'
