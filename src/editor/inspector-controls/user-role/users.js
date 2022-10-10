@@ -115,7 +115,8 @@ export default function Users( props ) {
 							assign(
 								{ ...userRole },
 								{
-									hideOnRestrictedUsers: ! hideOnRestrictedUsers,
+									hideOnRestrictedUsers:
+										! hideOnRestrictedUsers,
 								}
 							)
 						)

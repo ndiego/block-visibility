@@ -28,9 +28,8 @@ import getEnabledControls from './../../utils/get-enabled-controls';
  * @return {string}      Return the rendered JSX
  */
 function ToolbarControls( props ) {
-	const { flashBlock, updateBlockAttributes } = useDispatch(
-		'core/block-editor'
-	);
+	const { flashBlock, updateBlockAttributes } =
+		useDispatch( 'core/block-editor' );
 	const { createSuccessNotice } = useDispatch( 'core/notices' );
 	const {
 		enableMenuItem,

@@ -30,9 +30,9 @@ import Ads from './ads';
 
 // Provides an entry point to slot in additional settings. Must be placed
 // outside of function to avoid unnecessary rerenders.
-const AdditionalSettings = withFilters(
-	'blockVisibility.MainSettings'
-)( ( props ) => <></> ); // eslint-disable-line
+const AdditionalSettings = withFilters( 'blockVisibility.MainSettings' )(
+	( props ) => <></>
+); // eslint-disable-line
 
 /**
  * Renders the Block Visibility settings page

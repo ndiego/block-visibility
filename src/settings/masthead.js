@@ -37,8 +37,7 @@ export default function Masthead( props ) {
 		},
 		knowledgeBase: {
 			title: __( 'Knowledge Base', 'block-visibility' ),
-			url:
-				'https://www.blockvisibilitywp.com/knowledge-base/?bv_query=knowledge_base&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals',
+			url: 'https://www.blockvisibilitywp.com/knowledge-base/?bv_query=knowledge_base&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals',
 			icon: 'school',
 		},
 	};

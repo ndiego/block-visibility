@@ -87,7 +87,8 @@ export default function ScreenSize( props ) {
 					...visibilityControls,
 					screen_size: {
 						...screenSize,
-						enable_advanced_controls: ! screenSize.enable_advanced_controls,
+						enable_advanced_controls:
+							! screenSize.enable_advanced_controls,
 					},
 				} );
 			} }
