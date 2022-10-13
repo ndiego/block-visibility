@@ -153,7 +153,7 @@ export default function ControlPanelHeader( props ) {
                 disabled: enabledControls.length === 0 
             } }
 		>
-			{ ( onClose ) => (
+			{ ( { onClose } ) => (
 				<>
                     { defaultControls.length !== 0 && (
                         <MenuGroup label={ __( 'Defaults', 'block-visibility' ) }>
@@ -189,9 +189,9 @@ export default function ControlPanelHeader( props ) {
 						</MenuGroup>
 					) }
 					<MenuGroup>
+                        <Slot name="ControlSetOptionsToolsTop" />
 						<MenuItem
 							aria-disabled={ ! canResetAll }
-							variant={ 'tertiary' }
 							onClick={ () => {
 								if ( canResetAll ) {
                                     setAttributes( {
@@ -206,22 +206,20 @@ export default function ControlPanelHeader( props ) {
 									);
 								}
 							} }
+                            variant="tertiary"
 						>
 							{ __( 'Reset all', 'block-visibility' ) }
 						</MenuItem>
-
-                        <Slot name="ControlSetOptionsToolsTop" />
-                        <Slot name="ControlSetOptionsToolsMiddle" />
                         <Slot name="ControlSetOptionsToolsBottom" />
 					</MenuGroup>
                     <AdditionalControlSetOptions
-						modalOpen={ modalOpen }
                         canResetAll={ canResetAll }
+                        coreControls={ coreControls }
+						integrationControls={ integrationControls }
+						modalOpen={ modalOpen }
+                        onClose={ onClose }
 						setModalOpen={ setModalOpen }
 						toggleControls={ toggleControls }
-						coreControls={ coreControls }
-						integrationControls={ integrationControls }
-						onClose={ onClose }
 						{ ...props }
 					/>
 				</>
@@ -239,11 +237,11 @@ export default function ControlPanelHeader( props ) {
 			</div>
 			{ modalOpen && (
 				<ControlSetModals
+                    coreControls={ coreControls }
+                    integrationControls={ integrationControls }
 					modalOpen={ modalOpen }
 					setModalOpen={ setModalOpen }
 					toggleControls={ toggleControls }
-					coreControls={ coreControls }
-					integrationControls={ integrationControls }
 					{ ...props }
 				/>
 			) }
@@ -320,8 +318,8 @@ function DefaultControlMenuItem( props ) {
         return (
             <MenuItem
                 key={ control.attributeSlug }
+                disabled={ ! control.hasEdits }
                 className="has-reset"
-                role="menuitem"
                 label={ sprintf(
                     // translators: %s: The name of the control being reset e.g. "Hide Block".
                     __( 'Reset %s' ),
@@ -338,7 +336,7 @@ function DefaultControlMenuItem( props ) {
                         'assertive'
                     );
                 } }
-                disabled={ ! control.hasEdits }
+                role="menuitem"
             >
                 { control.icon && (
                     <Icon className="control-branding-icon" icon={ control.icon } />
@@ -358,10 +356,10 @@ function DefaultControlMenuItem( props ) {
 
 	return (
         <MenuItem
+            aria-disabled
+            isSelected
             key={ control.attributeSlug }
             role="menuitemcheckbox"
-            isSelected
-            aria-disabled
         >
             { control.icon && (
                 <Icon className="control-branding-icon" icon={ control.icon } />

@@ -11,7 +11,7 @@ import { dispatch } from '@wordpress/data';
 import { addFilter, applyFilters } from '@wordpress/hooks';
 import { hasBlockSupport } from '@wordpress/blocks';
 import { registerPlugin } from '@wordpress/plugins';
-import { Fill } from '@wordpress/components';
+import { Slot, Fill } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -20,6 +20,13 @@ import VisibilityInspectorControls from './inspector-controls';
 import ToolbarControls from './toolbar-controls';
 import ControlSet from './inspector-controls/control-set';
 import './contextual-indicators';
+
+import UserRole from './../controls/user-role';
+import DateTime from './../controls/date-time';
+import ScreenSize from './../controls/screen-size';
+import QueryString from './../controls/query-string';
+import ACF from './../controls/acf';
+import WPFusion from './../controls/wp-fusion';
 
 /**
  * Add our custom entities for retreiving external data in the Block Editor.
@@ -417,11 +424,43 @@ registerPlugin( 'block-visibility-toolbar-options-hide-block', {
  */
 function addPresetManagerControlSet() {
 	return ( props ) => {
-		const { index, type } = props;
+		const { controlSetAtts, setControlSetAtts, index, type } = props;
+
+		// There needs to be a unique index for the Slots since we technically have
+		// multiple of the same Slot.
+		const uniqueIndex =
+			type === 'single' ? type : type + '-' + controlSetAtts?.id;
+
+		function setControlAtts( control, values ) {
+			const newControls = controlSetAtts?.controls ?? {};
+			const newControlSetAtts = assign(
+				{ ...controlSetAtts },
+				{
+					controls: assign( { ...newControls }, { [ control ]: values } ),
+				}
+			);
+	
+			setControlSetAtts( newControlSetAtts );
+		}
 
 		return (
 			<Fill name={ 'PresetManagerControlSet-' + type + '-' + index }>
-				<ControlSet { ...props } />
+				test
+				<div className="control-set__controls">
+					<Slot name={ 'ControlSetControlsTop-' + uniqueIndex } />
+
+					<DateTime setControlAtts={ setControlAtts } { ...props } />
+					<UserRole setControlAtts={ setControlAtts } { ...props } />
+					<ScreenSize setControlAtts={ setControlAtts } { ...props } />
+					<QueryString setControlAtts={ setControlAtts } { ...props } />
+
+					<Slot name={ 'ControlSetControlsMiddle-' + uniqueIndex } />
+
+					<ACF setControlAtts={ setControlAtts } { ...props } />
+					<WPFusion setControlAtts={ setControlAtts } { ...props } />
+
+					<Slot name={ 'ControlSetControlsBottom-' + uniqueIndex } />
+				</div>
 			</Fill>
 		);
 	};

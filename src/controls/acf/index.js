@@ -13,10 +13,10 @@ import { Icon } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
-import icons from './../../../utils/icons';
-import RuleSets from './../utils/rule-sets';
+import icons from '../../utils/icons';
+import RuleSets from './../utils/components/rule-sets';
 import { getGroupedFields, getAllFields } from './fields';
-import InformationPopover from './../../../utils/components/information-popover';
+import InformationPopover from './../../utils/components/information-popover';
 
 /**
  * Add the ACF controls

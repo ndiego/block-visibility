@@ -17,8 +17,8 @@ import { createInterpolateElement } from '@wordpress/element';
 import UserRoles from './user-roles';
 import UserRuleSets from './user-rule-sets';
 import Users from './users';
-import { isControlSettingEnabled } from './../../utils/setting-utilities';
-import InformationPopover from './../../../utils/components/information-popover';
+import isControlSettingEnabled from './../utils/is-control-setting-enabled';
+import InformationPopover from './../../utils/components/information-popover';
 
 /**
  * Add the User Role control
