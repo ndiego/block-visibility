@@ -17,8 +17,8 @@ import { createInterpolateElement } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import { isControlSettingEnabled } from './../../utils/setting-utilities';
-import InformationPopover from './../../../utils/components/information-popover';
+import isControlSettingEnabled from './../utils/is-control-setting-enabled';
+import InformationPopover from './../../utils/components/information-popover';
 
 /**
  * Add the screen size vsibility controls

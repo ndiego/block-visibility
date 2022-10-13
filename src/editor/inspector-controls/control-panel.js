@@ -14,13 +14,13 @@ import { createInterpolateElement } from '@wordpress/element';
  * Internal dependencies
  */
 import ControlPanelHeader from './control-panel-header';
-import HideBlock from './hide-block';
-import UserRole from './user-role';
-import DateTime from './date-time';
-import ScreenSize from './screen-size';
-import QueryString from './query-string';
-import ACF from './acf';
-import WPFusion from './wp-fusion';
+import HideBlock from './../../controls/hide-block';
+import UserRole from './../../controls/user-role';
+import DateTime from './../../controls/date-time';
+import ScreenSize from './../../controls/screen-size';
+import QueryString from './../../controls/query-string';
+import ACF from './../../controls/acf';
+import WPFusion from './../../controls/wp-fusion';
 
 // Provides an entry point to slot in additional settings. Must be placed
 // outside of function to avoid unnecessary rerenders.
