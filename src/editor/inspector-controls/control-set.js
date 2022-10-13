@@ -89,6 +89,9 @@ export default function ControlSet( props ) {
 			control.isActive = true;
 		}
 	} );
+	
+
+	console.log( enabledControls );
 
 	console.log( enabledControls );
 
