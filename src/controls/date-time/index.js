@@ -13,7 +13,7 @@ import { Button, Slot, ToggleControl } from '@wordpress/components';
  * Internal dependencies
  */
 import Schedule from './schedule';
-import InformationPopover from './../../../utils/components/information-popover';
+import InformationPopover from './../../utils/components/information-popover';
 
 /**
  * Add the date/time vsibility controls

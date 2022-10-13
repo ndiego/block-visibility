@@ -553,14 +553,21 @@
 /* Control set styles --------------------------------------------------------*/
 .block-visibility__control-popover {
     &.control-set {
+        // Same size as core popovers. 
         .components-popover__content {
-            min-width: 240px; // Same size as core popovers. 
+            min-width: 240px;
         }
 
         .components-menu-item__button {
             &[aria-disabled='true'] {
                 color: #757575;
                 opacity: 1;
+
+                // Fix style bug in WordPress 6.1 and lower.
+                &:focus {
+                    box-shadow: none;
+                    outline: none;
+                }
 
                 .components-menu-item__item {
                     .control-branding-icon {

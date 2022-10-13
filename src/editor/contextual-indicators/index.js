@@ -19,7 +19,7 @@ import hasACF from './has-acf';
 import hasWPFusion from './has-wp-fusion';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import usePluginData from './../utils/use-plugin-data';
-import { isPluginSettingEnabled } from './../utils/setting-utilities';
+import isPluginSettingEnabled from '../utils/is-plugin-setting-enabled';
 import getEnabledControls from './../../utils/get-enabled-controls';
 
 /**

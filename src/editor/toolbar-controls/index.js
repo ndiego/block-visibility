@@ -17,7 +17,7 @@ import { useDispatch, withSelect } from '@wordpress/data';
 import icons from './../../utils/icons';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import hasPermission from './../utils/has-permission';
-import { isPluginSettingEnabled } from './../utils/setting-utilities';
+import isPluginSettingEnabled from '../utils/is-plugin-setting-enabled';
 import getEnabledControls from './../../utils/get-enabled-controls';
 
 /**

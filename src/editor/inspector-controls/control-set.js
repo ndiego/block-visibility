@@ -12,12 +12,12 @@ import { Disabled, Slot, withFilters } from '@wordpress/components';
  * Internal dependencies
  */
 import ControlSetHeader from './control-set-header';
-import UserRole from './user-role';
-import DateTime from './date-time';
-import ScreenSize from './screen-size';
-import QueryString from './query-string';
-import ACF from './acf';
-import WPFusion from './wp-fusion';
+import UserRole from './../../controls/user-role';
+import DateTime from './../../controls/date-time';
+import ScreenSize from './../../controls/screen-size';
+import QueryString from './../../controls/query-string';
+import ACF from './../../controls/acf';
+import WPFusion from './../../controls/wp-fusion';
 import { NoticeBlockControlsDisabled } from './utils/notices-tips';
 
 // Provides an entry point to slot in additional settings. Must be placed
@@ -61,27 +61,42 @@ export default function ControlSet( props ) {
 
 	const controls = [];
 
+	// enabledControls.forEach( ( control ) => {
+	// 	// We don't want to include the hide block control.
+	// 	if ( control.settingSlug !== 'hide_block' ) {
+	// 	controls.push( {
+	// 		active: controlSetAtts?.controls.hasOwnProperty(
+	// 			control.attributeSlug
+	// 		) || control?.isDefault,
+	// 		attributeSlug: control.attributeSlug,
+	// 		icon: control?.icon ?? false,
+	// 		isDefault: control?.isDefault,
+	// 		label: control.label,
+	// 		settingSlug: control.settingSlug,
+	// 		type: control.type,
+	// 	} );
+	// 	}
+	// } );
+
+	// Append the "active" property to all active controls.
 	enabledControls.forEach( ( control ) => {
-		// We don't want to include the hide block control.
-		//if ( control.settingSlug !== 'hide_block' ) {
-		controls.push( {
-			active: controlSetAtts?.controls.hasOwnProperty(
+		if ( 
+			controlSetAtts?.controls.hasOwnProperty(
 				control.attributeSlug
-			),
-			attributeSlug: control.attributeSlug,
-			icon: control?.icon ?? false,
-			isDefault: control?.isDefault,
-			label: control.label,
-			settingSlug: control.settingSlug,
-			type: control.type,
-		} );
-		//}
+			) ||
+			control?.isDefault
+		) {
+			control.isActive = true;
+		}
 	} );
+	
+
+	console.log( enabledControls );
 
 	// setControls are all saved controls on the block, but a block can have
 	// saved settings from controls that have since been disabled.
 	const setControls = Object.keys( controlSetAtts.controls );
-	const activeControls = controls.filter( ( control ) => {
+	const activeControls = enabledControls.filter( ( control ) => {
 		if ( control.active && setControls.includes( control.attributeSlug ) ) {
 			return true;
 		}
@@ -125,7 +140,7 @@ export default function ControlSet( props ) {
 	return (
 		<div className="control-set">
 			<ControlSetHeader
-				controls={ controls }
+				controls={ enabledControls }
 				setControlSetAtts={ setControlSetAtts }
 				{ ...props }
 			/>

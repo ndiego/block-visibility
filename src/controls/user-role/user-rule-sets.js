@@ -12,7 +12,7 @@ import { Button, ToggleControl, Notice } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import RuleSets from './../utils/rule-sets';
+import RuleSets from './../utils/components/rule-sets';
 import { getGroupedFields, GetAllFields } from './fields';
 
 /**

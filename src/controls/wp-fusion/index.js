@@ -15,8 +15,8 @@ import { createInterpolateElement } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import icons from './../../../utils/icons';
-import InformationPopover from './../../../utils/components/information-popover';
+import icons from './../../utils/icons';
+import InformationPopover from './../../utils/components/information-popover';
 
 /**
  * Add the Wp Fusion controls
