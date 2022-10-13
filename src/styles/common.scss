@@ -25,7 +25,6 @@
 }
 
 .information-popover__popover {
-
 	p {
 		font-size: 13px;
 		color: #32373C;
@@ -40,10 +39,15 @@
 	.components-popover__content {
 		font-weight: 400;
 		line-height: 1.4;
-		padding: 4px;
+		padding: 12px;
 		font-size: 13px;
 		text-align: left;
 		min-width: 200px;
 		max-width: 250px;
+
+		// Backward compatibility fix for WordPress 6.0 and lower.
+		&> div {
+			padding: 0;
+		}
 	}
 }
