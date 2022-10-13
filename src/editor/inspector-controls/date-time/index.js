@@ -24,13 +24,11 @@ import InformationPopover from './../../../utils/components/information-popover'
  */
 export default function DateTime( props ) {
 	const { enabledControls, controlSetAtts, setControlAtts } = props;
-	const controlEnabled = enabledControls.some(
-		( control ) => control.settingSlug === 'date_time'
+	const controlActive = enabledControls.some(
+		( control ) => control.settingSlug === 'date_time' && control?.isActive
 	);
-	const controlToggledOn =
-		controlSetAtts?.controls.hasOwnProperty( 'dateTime' ) ?? false;
 
-	if ( ! controlEnabled || ! controlToggledOn ) {
+	if ( ! controlActive  ) {
 		return null;
 	}
 
@@ -64,74 +62,69 @@ export default function DateTime( props ) {
 	};
 
 	return (
-		<>
-			<div className="visibility-control__group date-time-control">
-				<h3 className="visibility-control__group-heading has-icon">
-					<span>{ __( 'Date & Time', 'block-visibility' ) }</span>
-					<InformationPopover
-						message={ __(
-							'The Date & Time control allows you to automatically schedule when the block should be visible on your website.',
-							'block-visibility-pro'
-						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-date-time-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
-						position="bottom center"
-					/>
-				</h3>
-				<div className="visibility-control__help">
-					{ sprintf(
-						// Translators: Whether the block is hidden or visible.
-						__(
-							'%s the block if at least one schedule applies.',
-							'block-visibility'
-						),
-						hideOnSchedules
-							? __( 'Hide', 'block-visibility' )
-							: __( 'Show', 'block-visibility' )
+		<div className="control-panel-item date-time-control">
+			<h3 className="control-panel-item__heading has-icon">
+				<span>{ __( 'Date & Time', 'block-visibility' ) }</span>
+				<InformationPopover
+					message={ __(
+						'The Date & Time control allows you to automatically schedule when the block should be visible on your website.',
+						'block-visibility'
 					) }
-				</div>
-				<div className="date-time-control__schedules">
-					{ schedules.map( ( schedule, scheduleIndex ) => {
-						return (
-							<Schedule
-								key={ scheduleIndex }
-								dateTime={ dateTime }
-								schedules={ schedules }
-								scheduleIndex={ scheduleIndex }
-								scheduleAtts={ schedule }
-								hideOnSchedules={ hideOnSchedules }
-								{ ...props }
-							/>
-						);
-					} ) }
-				</div>
-				<div className="date-time-control__add-schedule">
-					<Button onClick={ () => addSchedule() } isSecondary>
-						{ __( 'Add schedule', 'block-visibility' ) }
-					</Button>
-				</div>
-				<div className="date-time-control__hide-on-schedules">
-					<ToggleControl
-						label={ __(
-							'Hide when schedules apply',
-							'block-visibility'
-						) }
-						checked={ hideOnSchedules }
-						onChange={ () =>
-							setControlAtts(
-								'dateTime',
-								assign(
-									{ ...dateTime },
-									{ hideOnSchedules: ! hideOnSchedules }
-								)
+					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-date-time-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					position="bottom center"
+				/>
+			</h3>
+			<div className="visibility-control__help">
+				{ sprintf(
+					// Translators: Whether the block is hidden or visible.
+					__(
+						'%s the block if at least one schedule applies.',
+						'block-visibility'
+					),
+					hideOnSchedules
+						? __( 'Hide', 'block-visibility' )
+						: __( 'Show', 'block-visibility' )
+				) }
+			</div>
+			<div className="date-time-control__schedules">
+				{ schedules.map( ( schedule, scheduleIndex ) => {
+					return (
+						<Schedule
+							key={ scheduleIndex }
+							dateTime={ dateTime }
+							schedules={ schedules }
+							scheduleIndex={ scheduleIndex }
+							scheduleAtts={ schedule }
+							hideOnSchedules={ hideOnSchedules }
+							{ ...props }
+						/>
+					);
+				} ) }
+			</div>
+			<div className="date-time-control__add-schedule">
+				<Button onClick={ () => addSchedule() } isSecondary>
+					{ __( 'Add schedule', 'block-visibility' ) }
+				</Button>
+			</div>
+			<div className="date-time-control__hide-on-schedules">
+				<ToggleControl
+					label={ __(
+						'Hide when schedules apply',
+						'block-visibility'
+					) }
+					checked={ hideOnSchedules }
+					onChange={ () =>
+						setControlAtts(
+							'dateTime',
+							assign(
+								{ ...dateTime },
+								{ hideOnSchedules: ! hideOnSchedules }
 							)
-						}
-					/>
-				</div>
-				<Slot name="DateTimeControls" />
+						)
+					}
+				/>
 			</div>
-			<div className="control-separator">
-				<span>{ __( 'AND', 'block-visibility' ) }</span>
-			</div>
-		</>
+			<Slot name="DateTimeControls" />
+		</div>
 	);
 }

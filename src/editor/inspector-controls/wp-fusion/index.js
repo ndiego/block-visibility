@@ -29,13 +29,11 @@ export default function WPFusion( props ) {
 	const { variables, enabledControls, controlSetAtts, setControlAtts } =
 		props;
 	const pluginActive = variables?.integrations?.wp_fusion?.active ?? false;
-	const controlEnabled = enabledControls.some(
-		( control ) => control.settingSlug === 'wp_fusion'
+	const controlActive = enabledControls.some(
+		( control ) => control.settingSlug === 'wp_fusion' && control?.isActive
 	);
-	const controlToggledOn =
-		controlSetAtts?.controls.hasOwnProperty( 'wpFusion' ) ?? false;
-
-	if ( ! controlEnabled || ! controlToggledOn || ! pluginActive ) {
+	
+	if ( ! controlActive || ! pluginActive ) {
 		return null;
 	}
 
@@ -155,40 +153,35 @@ export default function WPFusion( props ) {
 	}
 
 	return (
-		<>
-			<div className="visibility-control__group wp-fusion-control">
-				<h3 className="visibility-control__group-heading has-icon">
-					<Icon icon={ icons.wpFusion } />
-					<span>{ __( 'WP Fusion', 'block-visibility' ) }</span>
-					<InformationPopover
-						message={ __(
-							'The WP Fusion control allows you to configure block visibility based on WP Fusion tags.',
-							'block-visibility'
-						) }
-						subMessage={ __(
-							'Note that the available fields depend on the User Role control settings. If the User Role control is disabled, only the Required Tags (Not) field will be available.',
-							'block-visibility'
-						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-wp-fusion-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
-						position="bottom center"
-					/>
-				</h3>
-				<div className="visibility-control__group-fields">
-					{ anyAllFields }
-					{ notField }
-				</div>
-				{ ! hasUserRoles && (
-					<Notice status="warning" isDismissible={ false }>
-						{ __(
-							'The WP Fusion control works best in coordination with the User Role control, which has been disabled. To re-enable, click the eye icon in the Controls Toolbar above.',
-							'block-visibility'
-						) }
-					</Notice>
-				) }
+		<div className="control-panel-item wp-fusion-control">
+			<h3 className="control-panel-item__heading has-icon">
+				<Icon icon={ icons.wpFusion } />
+				<span>{ __( 'WP Fusion', 'block-visibility' ) }</span>
+				<InformationPopover
+					message={ __(
+						'The WP Fusion control allows you to configure block visibility based on WP Fusion tags.',
+						'block-visibility'
+					) }
+					subMessage={ __(
+						'Note that the available fields depend on the User Role control settings. If the User Role control is disabled, only the Required Tags (Not) field will be available.',
+						'block-visibility'
+					) }
+					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-wp-fusion-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					position="bottom center"
+				/>
+			</h3>
+			<div className="visibility-control__group-fields">
+				{ anyAllFields }
+				{ notField }
 			</div>
-			<div className="control-separator">
-				<span>{ __( 'AND', 'block-visibility' ) }</span>
-			</div>
-		</>
+			{ ! hasUserRoles && (
+				<Notice status="warning" isDismissible={ false }>
+					{ __(
+						'The WP Fusion control works best in coordination with the User Role control, which has been disabled. To re-enable, click the eye icon in the Controls Toolbar above.',
+						'block-visibility'
+					) }
+				</Notice>
+			) }
+		</div>
 	);
 }

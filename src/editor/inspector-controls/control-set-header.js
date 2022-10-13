@@ -7,6 +7,7 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies
  */
+import { speak } from '@wordpress/a11y';
 import { __ } from '@wordpress/i18n';
 import {
 	DropdownMenu,
@@ -51,15 +52,17 @@ const AdditionalControlSetModals = withFilters(
  */
 export default function ControlSetHeader( props ) {
 	const [ modalOpen, setModalOpen ] = useState( false );
-	const {
-		type,
-		controls,
-		controlSets,
-		controlSetAtts,
-		defaultControls,
-		setControlSetAtts,
-	} = props;
+	const { type, controls, controlSets, controlSetAtts, setControlSetAtts } =
+		props;
 
+	const defaultControls = controls.filter( ( control ) => control.isDefault );
+	const coreControls = controls.filter(
+		( control ) => control.type === 'core' && ! control.isDefault
+	);
+	const integrationControls = controls.filter(
+		( control ) => control.type === 'integration' && ! control.isDefault
+	);
+	console.log( defaultControls );
 	function toggleControls( control ) {
 		let newControls;
 
@@ -86,7 +89,12 @@ export default function ControlSetHeader( props ) {
 		const newControlSetAtts = assign(
 			{ ...controlSetAtts },
 			{
-				controls: defaultControls,
+				controls: Object.fromEntries(
+					defaultControls.map( ( control ) => [
+						control.attributeSlug,
+						{},
+					] )
+				), //Need to fix needs to be default controls.
 			}
 		);
 
@@ -112,16 +120,28 @@ export default function ControlSetHeader( props ) {
 		} );
 	}
 
-	const coreControls = controls.filter(
-		( control ) => control.type === 'core'
-	);
-	const integrationControls = controls.filter(
-		( control ) => control.type === 'integration'
-	);
+	const DefaultControlGroup = ( { controls } ) => {
+		if ( ! controls.length ) {
+			return null;
+		}
+
+		return (
+			<MenuGroup label={ __( 'Defaults', 'block-visibility' ) }>
+				{ controls.map( ( control, index ) => (
+					<ControlMenuItem
+						key={ index }
+						control={ control }
+						toggleControls={ toggleControls }
+					/>
+				) ) }
+			</MenuGroup>
+		);
+	};
+
 	const title = controlSetAtts?.title ?? '';
 	const enable = controlSetAtts?.enable ?? true;
 	let displayTitle = title;
-
+	console.log( controls );
 	if ( ! displayTitle ) {
 		displayTitle =
 			type === 'single'
@@ -129,9 +149,11 @@ export default function ControlSetHeader( props ) {
 				: __( 'Control Set', 'block-visibility' );
 	}
 
-	const canResetAll = [ ...coreControls, ...integrationControls ].some(
-		( control ) => control.active
-	);
+	const canResetAll = [
+		...defaultControls,
+		...coreControls,
+		...integrationControls,
+	].some( ( control ) => control.active );
 
 	const settingsDropdown = (
 		<DropdownMenu
@@ -174,6 +196,7 @@ export default function ControlSetHeader( props ) {
 		>
 			{ () => (
 				<>
+					<DefaultControlGroup controls={ defaultControls } />
 					<MenuGroup label={ __( 'Controls', 'block-visibility' ) }>
 						{ coreControls.map( ( control, index ) => (
 							<ControlMenuItem
@@ -201,7 +224,16 @@ export default function ControlSetHeader( props ) {
 							aria-disabled={ ! canResetAll }
 							variant={ 'tertiary' }
 							onClick={ () => {
-								resetControls();
+								if ( canResetAll ) {
+									resetControls();
+									speak(
+										__(
+											'All controls reset',
+											'block-visibility'
+										),
+										'assertive'
+									);
+								}
 							} }
 						>
 							{ __( 'Reset all', 'block-visibility' ) }

@@ -31,14 +31,11 @@ import InformationPopover from './../../../utils/components/information-popover'
 export default function ScreenSize( props ) {
 	const { name, settings, enabledControls, controlSetAtts, setControlAtts } =
 		props;
-
-	const controlEnabled = enabledControls.some(
-		( control ) => control.settingSlug === 'screen_size'
+	const controlActive = enabledControls.some(
+		( control ) => control.settingSlug === 'screen_size' && control.isActive
 	);
-	const controlToggledOn =
-		controlSetAtts?.controls.hasOwnProperty( 'screenSize' ) ?? false;
 
-	if ( ! controlEnabled || ! controlToggledOn ) {
+	if ( ! controlActive ) {
 		return null;
 	}
 
@@ -151,13 +148,13 @@ export default function ScreenSize( props ) {
 
 	return (
 		<>
-			<div className="visibility-control__group screen-size-control">
-				<h3 className="visibility-control__group-heading has-icon">
+			<div className="control-panel-item screen-size-control">
+				<h3 className="control-panel-item__heading has-icon">
 					<span>{ __( 'Screen Size', 'block-visibility' ) }</span>
 					<InformationPopover
 						message={ __(
 							'The Screen Size control allows you to conditionally display the block based on the width of the current screen.',
-							'block-visibility-pro'
+							'block-visibility'
 						) }
 						link="https://blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 						position="bottom center"

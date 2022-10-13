@@ -24,13 +24,11 @@ import InformationPopover from './../../../utils/components/information-popover'
  */
 export default function QueryString( props ) {
 	const { enabledControls, controlSetAtts, setControlAtts } = props;
-	const controlEnabled = enabledControls.some(
-		( control ) => control.settingSlug === 'query_string'
+	const controlActive = enabledControls.some(
+		( control ) => control.settingSlug === 'query_string' && control.isActive
 	);
-	const controlToggledOn =
-		controlSetAtts?.controls.hasOwnProperty( 'queryString' ) ?? false;
 
-	if ( ! controlEnabled || ! controlToggledOn ) {
+	if ( ! controlActive ) {
 		return null;
 	}
 
@@ -51,70 +49,65 @@ export default function QueryString( props ) {
 		);
 
 	return (
-		<>
-			<div className="visibility-control__group query-string-control">
-				<h3 className="visibility-control__group-heading has-icon">
-					<span>{ __( 'Query String', 'block-visibility' ) }</span>
-					<InformationPopover
-						message={ __(
-							'The Query String control allows you to configure block visibility based on URL query strings.',
-							'block-visibility-pro'
-						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-query-string-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
-						position="bottom center"
-					/>
-				</h3>
-				<div className="visibility-control__help">
-					{ __(
-						'Enter one URL query string per line.',
+		<div className="control-panel-item query-string-control">
+			<h3 className="control-panel-item__heading has-icon">
+				<span>{ __( 'Query String', 'block-visibility' ) }</span>
+				<InformationPopover
+					message={ __(
+						'The Query String control allows you to configure block visibility based on URL query strings.',
 						'block-visibility'
 					) }
-				</div>
-				<TextareaControl
-					label={ __( 'Required Queries (Any)', 'block-visibility' ) }
-					help={ __(
-						'Only visible when least one of the provided URL query strings is present.',
-						'block-visibility'
-					) }
-					value={ queryStringAny }
-					onChange={ ( value ) =>
-						setAttribute( 'queryStringAny', value )
-					}
-					rows="2"
+					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-query-string-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					position="bottom center"
 				/>
-				<TextareaControl
-					label={ __( 'Required Queries (All)', 'block-visibility' ) }
-					help={ createInterpolateElement(
-						__(
-							'Only visible when <strong>all</strong> of the provided URL query strings are present.',
-							'block-visibility'
-						),
-						{
-							strong: <strong />,
-						}
-					) }
-					value={ queryStringAll }
-					onChange={ ( value ) =>
-						setAttribute( 'queryStringAll', value )
-					}
-					rows="2"
-				/>
-				<TextareaControl
-					label={ __( 'Required Queries (Not)', 'block-visibility' ) }
-					help={ __(
-						'Hide when at least one of the provided URL query strings is present.',
-						'block-visibility'
-					) }
-					value={ queryStringNot }
-					onChange={ ( value ) =>
-						setAttribute( 'queryStringNot', value )
-					}
-					rows="2"
-				/>
+			</h3>
+			<div className="visibility-control__help">
+				{ __(
+					'Enter one URL query string per line.',
+					'block-visibility'
+				) }
 			</div>
-			<div className="control-separator">
-				<span>{ __( 'AND', 'block-visibility' ) }</span>
-			</div>
-		</>
+			<TextareaControl
+				label={ __( 'Required Queries (Any)', 'block-visibility' ) }
+				help={ __(
+					'Only visible when least one of the provided URL query strings is present.',
+					'block-visibility'
+				) }
+				value={ queryStringAny }
+				onChange={ ( value ) =>
+					setAttribute( 'queryStringAny', value )
+				}
+				rows="2"
+			/>
+			<TextareaControl
+				label={ __( 'Required Queries (All)', 'block-visibility' ) }
+				help={ createInterpolateElement(
+					__(
+						'Only visible when <strong>all</strong> of the provided URL query strings are present.',
+						'block-visibility'
+					),
+					{
+						strong: <strong />,
+					}
+				) }
+				value={ queryStringAll }
+				onChange={ ( value ) =>
+					setAttribute( 'queryStringAll', value )
+				}
+				rows="2"
+			/>
+			<TextareaControl
+				label={ __( 'Required Queries (Not)', 'block-visibility' ) }
+				help={ __(
+					'Hide when at least one of the provided URL query strings is present.',
+					'block-visibility'
+				) }
+				value={ queryStringNot }
+				onChange={ ( value ) =>
+					setAttribute( 'queryStringNot', value )
+				}
+				rows="2"
+			/>
+		</div>
 	);
 }
