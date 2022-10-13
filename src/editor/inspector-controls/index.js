@@ -7,19 +7,14 @@ import { assign, isEmpty } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { PanelBody, withFilters, Slot } from '@wordpress/components';
+import { withFilters } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import { withSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
  */
-import HideBlock from './hide-block';
-import ControlSet from './control-set';
-import {
-	NoticeControlsDisabled,
-	NoticeIncompatibleBlock,
-} from './utils/notices-tips';
+import ControlPanel from './control-panel';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import hasPermission from './../utils/has-permission';
 import getEnabledControls from './../../utils/get-enabled-controls';
@@ -38,14 +33,8 @@ const AdditionalInspectorControls = withFilters(
  * @return {string}		 Return the rendered JSX
  */
 function VisibilityInspectorControls( props ) {
-	const {
-		attributes,
-		setAttributes,
-		name,
-		settings,
-		variables,
-		clientId,
-	} = props;
+	const { attributes, setAttributes, name, settings, variables, clientId } =
+		props;
 
 	if ( settings === 'fetching' || variables === 'fetching' ) {
 		return null;
@@ -59,39 +48,34 @@ function VisibilityInspectorControls( props ) {
 	}
 
 	let enabledControls = getEnabledControls( settings, variables );
-
 	const defaultControlSettings =
-		settings?.plugin_settings?.default_controls ?? {};
-	let defaultControls = {};
+		settings?.plugin_settings?.default_controls ?? [];
+	let defaultControls = [];
 
 	if ( ! isEmpty( defaultControlSettings ) ) {
 		enabledControls.forEach( ( control ) => {
 			if ( defaultControlSettings.includes( control.settingSlug ) ) {
-				defaultControls[ control.attributeSlug ] = {};
+				defaultControls.push[ control.attributeSlug ];
 			}
 		} );
-	} else {
-		defaultControls = {
-			dateTime: {},
-			userRole: {},
-			screenSize: {},
-		};
 	}
 
-	const blockAttributes = { ...attributes };
-	let blockAtts = blockAttributes?.blockVisibility;
+	//const blockAttributes = { ...attributes };
+	let blockAtts = attributes?.blockVisibility;
 	let controlSets = blockAtts?.controlSets ?? [];
 
 	// Create the default control set if none exist.
 	if ( controlSets.length === 0 ) {
-		const defaultSet = [
+		const defaultControlSet = [
 			{
 				id: 1,
 				enable: true,
-				controls: defaultControls,
+				controls: Object.fromEntries(
+					defaultControls.map( ( control ) => [ control, {} ] )
+				),
 			},
 		];
-		controlSets = defaultSet;
+		controlSets = defaultControlSet;
 		blockAtts = assign( { ...blockAtts }, { controlSets } );
 	}
 
@@ -109,19 +93,9 @@ function VisibilityInspectorControls( props ) {
 		);
 	}
 
-	const settingsUrl = variables?.plugin_variables?.settings_url ?? ''; // eslint-disable-line
-	const hideBlock = blockAtts?.hideBlock ?? false;
-	const hasHideBlock = enabledControls.some(
-		( control ) => control.settingSlug === 'hide_block'
-	);
-	const blockHidden = hasHideBlock && hideBlock;
-
-	// There are a few core blocks that are not compatible.
-	const incompatibleBlocks = [ 'core/legacy-widget' ];
-	const blockIsIncompatible = incompatibleBlocks.includes( name );
-
+	// Set the control set attributes. This will need to be updated 
+	// if multiple control sets are enabled.
 	function setControlSetAtts( controlSetAtts ) {
-		// This will need to be updated when multiple control sets are enabled.
 		setAttributes( {
 			blockVisibility: assign(
 				{ ...attributes.blockVisibility },
@@ -130,55 +104,30 @@ function VisibilityInspectorControls( props ) {
 		} );
 	}
 
+	// There are a few core blocks that are not compatible.
+	const incompatibleBlocks = [ 'core/legacy-widget' ];
+	const blockIsIncompatible = incompatibleBlocks.includes( name );
+
+	if ( blockIsIncompatible ) {
+		return null;
+	}
+
 	return (
 		// Note that the core InspectorControls component is already making use
 		// of SlotFill, and is "inside" of a <SlotFillProvider> component.
 		// Therefore we can freely use SlofFill without needing to add the
 		// provider ourselves.
 		<InspectorControls>
-			<PanelBody
-				title={ __( 'Visibility', 'block-visibility' ) }
-				className="block-visibility"
-				initialOpen={ false }
-			>
-				<div className="visibility-controls__container">
-					{ enabledControls.length !== 0 && ! blockIsIncompatible && (
-						<>
-							<Slot name="InspectorControlsTop" />
-							<HideBlock
-								enabledControls={ enabledControls }
-								{ ...props }
-							/>
-							<Slot name="InspectorControlsMiddle" />
-							{ ! blockHidden &&
-								enableLocalControls &&
-								controlSets.map( ( controlSet, index ) => {
-									return (
-										<ControlSet
-											key={ clientId + index }
-											type={ 'single' }
-											controlSets={ controlSets }
-											controlSetAtts={ controlSet }
-											setControlSetAtts={
-												setControlSetAtts
-											}
-											enabledControls={ enabledControls }
-											defaultControls={ defaultControls }
-											{ ...props }
-										/>
-									);
-								} ) }
-							<Slot name="InspectorControlsBottom" />
-						</>
-					) }
-					{ enabledControls.length === 0 && ! blockIsIncompatible && (
-						<NoticeControlsDisabled settingsUrl={ settingsUrl } />
-					) }
-					{ blockIsIncompatible && (
-						<NoticeIncompatibleBlock name={ name } />
-					) }
-				</div>
-			</PanelBody>
+			<div className="block-visibility__control-panel">
+				<ControlPanel
+					controlSets={ controlSets }
+					controlSetAtts={ controlSets[ 0 ] } // Ok for now since only one control set available.
+					setControlSetAtts={ setControlSetAtts }
+					enabledControls={ enabledControls }
+					defaultControls={ defaultControls }
+					{ ...props }
+				/>
+			</div>
 			<AdditionalInspectorControls
 				blockAtts={ blockAtts }
 				enabledControls={ enabledControls }

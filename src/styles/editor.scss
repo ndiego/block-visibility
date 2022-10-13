@@ -1,16 +1,49 @@
 @import './common';
 
-.block-visibility {
-    &.is-opened {
-        &>.components-panel__body-title {
-            margin-bottom: 0;
+.block-visibility__control-panel {
+    border-top: 1px solid #dddddd;
+    display: grid;
+    gap: 16px;
+    margin-top: -1px;
+    padding: 16px;
+
+    .control-panel-header {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        gap: calc(8px);
+        grid-column: 1 / -1;
+        justify-content: space-between;
+        width: 100%;
+        -webkit-box-align: center;
+        -webkit-box-pack: justify;
+
+        h2 {
+            margin: 0;
         }
 
-        &>.visibility-controls__container {
-            &>:first-child:not(.control-set) {
-                margin-top: 15px;
+        .control-panel-header__dropdown-menus {
+            line-height: 0;
+            margin: calc(-4px) 0px;
+
+            .components-button {
+                padding: 0px;
+                min-width: 24px;
+            }
+
+            // Fix hover color on buttons when disabled.
+            .components-button:disabled, 
+            .components-button[aria-disabled=true] {
+                color: currentColor;
             }
         }
+    }
+
+    .control-panel-container,
+    // When controls are disabled, we still need gap.
+    .components-disabled {
+        display: grid;
+        gap: 12px;
     }
 }
 
@@ -52,68 +85,41 @@
         }
     }
 
-    .control-separator {
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        padding: 20px 0 30px;
-
-        &:before,
-        &:after {
-            content: "";
-            flex: 1 1;
-            border-bottom: 1px solid #e0e0e0;
-            margin: auto 0;
-        }
-
-        // Hide the last separator in the list.
-        &:last-child {
-            display: none;
-        }
-
-        span {
-            padding: 0 8px;
-            color: #cccccc;
-            font-size: 90%;
-        }
-    }
-
-    .visibility-control__group {
-        margin-bottom: 30px;
-
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }
-
-    .visibility-control__group-heading {
-        font-size: 13px;
-        font-weight: 500;
-        margin-bottom: 16px;
-        text-transform: none;
-
-        &.has-icon {
-            display: flex;
-            align-items: center;
-
-            /* For the integration icons */
-            &>svg {
-                width: 16px;
-                margin-right: 8px;
-            }
-
-            span {
-                display: inline-block;
-                margin-right: 4px;
-            }
-
-            /* Reduce the size of the popover icon. */
-            .information-popover__button {
-                height: 20px;
-                min-width: 20px;
-
-                svg {
-                    width: 18px;
+    .control-panel-item {
+        .control-panel-item__heading {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 16px;
+            text-transform: none;
+            font-size: 11px;
+            font-weight: 500;
+            line-height: 1.4;
+            text-transform: uppercase;
+            display: inline-block;
+    
+            &.has-icon {
+                display: flex;
+                align-items: center;
+    
+                /* For the integration icons */
+                &>svg {
+                    width: 16px;
+                    margin-right: 8px;
+                }
+    
+                span {
+                    display: inline-block;
+                    margin-right: 4px;
+                }
+    
+                /* Reduce the size of the popover icon. */
+                .information-popover__button {
+                    height: 20px;
+                    min-width: 20px;
+    
+                    svg {
+                        width: 18px;
+                    }
                 }
             }
         }
@@ -314,7 +320,7 @@
             }
         }
 
-        .visibility-control__group {
+        .control-panel-item {
             &:not(:last-child) {
                 margin-bottom: 15px;
             }
@@ -548,7 +554,40 @@
 .block-visibility__control-popover {
     &.control-set {
         .components-popover__content {
-            min-width: 260px;
+            min-width: 240px; // Same size as core popovers. 
+        }
+
+        .components-menu-item__button {
+            &[aria-disabled='true'] {
+                color: #757575;
+                opacity: 1;
+
+                .components-menu-item__item {
+                    .control-branding-icon {
+                         opacity: 0.6;
+                    }
+                }
+            }
+
+            &.has-reset {
+                .components-menu-item__item {
+                    min-width: 100%;
+                }
+            }
+
+            .components-menu-item__item {
+                .control-branding-icon {
+                     opacity: 1;
+                }
+                .menu-item-reset {
+                    color: var( --wp-admin-theme-color-darker-10 );
+                    font-size: 11px;
+                    font-weight: 500;
+                    line-height: 1.4;
+                    margin-left: auto;
+                    text-transform: uppercase;
+                }
+            }
         }
     }
 
@@ -662,11 +701,6 @@
             }
         }
     }
-}
-
-// Bit of a hack and applies to all celendar components, should be removed at some point.
-.CalendarDay__today {
-    background: #f5f5f5;
 }
 
 /* Custom styling to make react-select components look more like WordPress. --*/
@@ -789,80 +823,6 @@
     }
 }
 
-.block-visibility__tips-modal {
-    max-width: 600px !important;
-
-    h4 {
-        margin-bottom: .75em;
-    }
-
-    p {
-        margin-top: 0;
-    }
-
-    code {
-        margin-right: 8px;
-    }
-
-    ol {
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-
-    li.tip {
-        padding-left: 5px;
-        margin-bottom: 10px;
-
-        &:last-child {
-            margin-bottom: 0;
-        }
-
-        &::marker {
-            font-weight: bold;
-            font-size: 14px;
-        }
-    }
-
-    .usage {
-        border-bottom: 1px solid #e0e0e0;
-        padding-bottom: 10px;
-        margin-bottom: 20px;
-
-        .flex-table {
-            margin-top: 20px;
-        }
-
-        .components-notice {
-            margin: 0 0 10px;
-        }
-
-        .components-flex {
-            margin-bottom: 1em;
-        }
-
-        .components-flex__item {
-            min-width: auto;
-
-            &:first-child {
-                min-width: 100px;
-            }
-        }
-    }
-
-    .learn-more {
-        border-top: 1px solid #e0e0e0;
-        padding-top: 1.25em;
-        margin-top: 2em;
-        margin-bottom: 0;
-        margin: 2em -32px -24px;
-        padding: 0 32px;
-        height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-}
-
 .block-visibility__confirmation-modal {
     max-width: 400px !important;
 
@@ -878,7 +838,7 @@
 
     .visibility-controls__container {
 
-        h3.visibility-control__group-heading {
+        h3.control-panel-item__heading {
             font-size: 13px !important;
             font-weight: 500 !important;
             margin-bottom: 16px !important;
@@ -892,76 +852,5 @@
                 margin-bottom: 8px !important;
             }
         }
-    }
-}
-
-
-/* Temporary styling until the SearchControl is included in WP core. ---------*/
-.preset-manager .components-search-control {
-	position: relative;
-
-    &.is-disabled {
-        ::placeholder {
-            opacity: .7;
-        }
-        .components-search-control__icon {
-            opacity: .3;
-        }
-    }
-
-	input[type="search"].components-search-control__input {
-		background: #f0f0f0;
-	    border: none;
-	    border-radius: 2px;
-	    box-shadow: 0 0 0 transparent;
-	    display: block;
-	    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;
-	    font-size: 16px;
-	    height: 48px;
-	    line-height: normal;
-	    padding: 16px 48px 16px 16px;
-	    transition: box-shadow .1s linear;
-	    width: 100%;
-
-		/* Fonts smaller than 16px causes mobile safari to zoom. */
-		@media ( min-width: 600px ) {
-			font-size: 13px;
-		}
-
-		&:focus {
-			background: #fff;
-			box-shadow: 0 0 0 var(--wp-admin-border-width-focus) var(--wp-admin-theme-color);
-		}
-
-		&::placeholder {
-			color: rgba(30,30,30,.62);
-		}
-
-		&::-webkit-search-decoration,
-		&::-webkit-search-cancel-button,
-		&::-webkit-search-results-button,
-		&::-webkit-search-results-decoration {
-			-webkit-appearance: none;
-		}
-	}
-
-    .components-search-control__icon {
-    	align-items: center;
-        bottom: 0;
-        display: flex;
-        position: absolute;
-        right: 12px;
-        top: 0;
-
-    	> button {
-    		margin-right: -10px;
-    	}
-    	> svg {
-    		margin: 8px 0;
-    	}
-    }
-
-    .components-search-control__input-wrapper {
-    	position: relative;
     }
 }

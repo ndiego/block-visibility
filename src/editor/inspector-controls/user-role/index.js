@@ -35,13 +35,11 @@ export default function UserRole( props ) {
 		setControlAtts,
 		controlSetAtts,
 	} = props;
-	const controlEnabled = enabledControls.some(
-		( control ) => control.settingSlug === 'visibility_by_role'
+	const controlActive = enabledControls.some(
+		( control ) => control.settingSlug === 'visibility_by_role' && control.isActive
 	);
-	const controlToggledOn =
-		controlSetAtts?.controls.hasOwnProperty( 'userRole' ) ?? false;
 
-	if ( ! controlEnabled || ! controlToggledOn ) {
+	if ( ! controlActive ) {
 		return null;
 	}
 
@@ -140,96 +138,91 @@ export default function UserRole( props ) {
 		)[ 0 ]?.label ?? '';
 
 	return (
-		<>
-			<div className="visibility-control__group user-role-control">
-				<h3 className="visibility-control__group-heading has-icon">
-					<span>{ __( 'User Role', 'block-visibility' ) }</span>
-					<InformationPopover
-						message={ __(
-							"The User Role control allows you to conditionally display the block based on the current user's role and/or specific users.",
-							'block-visibility-pro'
-						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
-						position="bottom center"
-					/>
-				</h3>
-				<div className="visibility-control__group-fields">
-					<div className="visibility-control visibility-by-role">
-						<Select
-							className="block-visibility__react-select"
-							classNamePrefix="react-select"
-							options={ options }
-							value={ selectedOption }
-							onChange={ ( value ) =>
-								setControlAtts(
-									'userRole',
-									assign(
-										{ ...userRole },
-										{ visibilityByRole: value.value }
-									)
+		<div className="control-panel-item user-role-control">
+			<h3 className="control-panel-item__heading has-icon">
+				<span>{ __( 'User Role', 'block-visibility' ) }</span>
+				<InformationPopover
+					message={ __(
+						"The User Role control allows you to conditionally display the block based on the current user's role and/or specific users.",
+						'block-visibility'
+					) }
+					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					position="bottom center"
+				/>
+			</h3>
+			<div className="visibility-control__group-fields">
+				<div className="visibility-control visibility-by-role">
+					<Select
+						className="block-visibility__react-select"
+						classNamePrefix="react-select"
+						options={ options }
+						value={ selectedOption }
+						onChange={ ( value ) =>
+							setControlAtts(
+								'userRole',
+								assign(
+									{ ...userRole },
+									{ visibilityByRole: value.value }
 								)
-							}
-						/>
-						{ helpMessage && (
-							<div className="visibility-control__help">
-								{ helpMessage }
-							</div>
-						) }
-					</div>
-					{ visibilityByRole === 'user-role' && enableUserRoles && (
-						<UserRoles
-							variables={ variables }
-							userRole={ userRole }
-							setControlAtts={ setControlAtts }
-							{ ...props }
-						/>
+							)
+						}
+					/>
+					{ helpMessage && (
+						<div className="visibility-control__help">
+							{ helpMessage }
+						</div>
 					) }
-					{ visibilityByRole === 'users' && enableUsers && (
-						<Users
-							variables={ variables }
-							userRole={ userRole }
-							setControlAtts={ setControlAtts }
-							{ ...props }
-						/>
-					) }
-					{ visibilityByRole === 'user-rule-sets' &&
-						enableUserRuleSets && (
-							<UserRuleSets
-								variables={ variables }
-								userRole={ userRole }
-								setControlAtts={ setControlAtts }
-								{ ...props }
-							/>
-						) }
 				</div>
-				{ ! options.some(
-					( option ) => option.value === visibilityByRole
-				) && (
-					<Notice status="warning" isDismissible={ false }>
-						{ createInterpolateElement(
-							__(
-								'The User Role option that was previously selected has been disabled. Choose another option or update the <a>Visibility Control</a> settings.',
-								'block-visibility'
-							),
-							{
-								a: (
-									<a // eslint-disable-line
-										href={
-											settingsUrl +
-											'&tab=visibility-controls'
-										}
-										target="_blank"
-										rel="noreferrer"
-									/>
-								),
-							}
-						) }
-					</Notice>
+				{ visibilityByRole === 'user-role' && enableUserRoles && (
+					<UserRoles
+						variables={ variables }
+						userRole={ userRole }
+						setControlAtts={ setControlAtts }
+						{ ...props }
+					/>
 				) }
+				{ visibilityByRole === 'users' && enableUsers && (
+					<Users
+						variables={ variables }
+						userRole={ userRole }
+						setControlAtts={ setControlAtts }
+						{ ...props }
+					/>
+				) }
+				{ visibilityByRole === 'user-rule-sets' &&
+					enableUserRuleSets && (
+						<UserRuleSets
+							variables={ variables }
+							userRole={ userRole }
+							setControlAtts={ setControlAtts }
+							{ ...props }
+						/>
+					) }
 			</div>
-			<div className="control-separator">
-				<span>{ __( 'AND', 'block-visibility' ) }</span>
-			</div>
-		</>
+			{ ! options.some(
+				( option ) => option.value === visibilityByRole
+			) && (
+				<Notice status="warning" isDismissible={ false }>
+					{ createInterpolateElement(
+						__(
+							'The User Role option that was previously selected has been disabled. Choose another option or update the <a>Visibility Control</a> settings.',
+							'block-visibility'
+						),
+						{
+							a: (
+								<a // eslint-disable-line
+									href={
+										settingsUrl +
+										'&tab=visibility-controls'
+									}
+									target="_blank"
+									rel="noreferrer"
+								/>
+							),
+						}
+					) }
+				</Notice>
+			) }
+		</div>
 	);
 }

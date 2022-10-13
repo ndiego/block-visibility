@@ -10,6 +10,11 @@ import { __ } from '@wordpress/i18n';
 import { ToggleControl } from '@wordpress/components';
 
 /**
+ * Internal dependencies
+ */
+ import InformationPopover from './../../../utils/components/information-popover';
+
+/**
  * Add the Hide Block control
  *
  * @since 1.0.0
@@ -18,11 +23,11 @@ import { ToggleControl } from '@wordpress/components';
  */
 export default function HideBlock( props ) {
 	const { attributes, setAttributes, enabledControls } = props;
-	const controlEnabled = enabledControls.some(
-		( control ) => control.settingSlug === 'hide_block'
+	const controlActive = enabledControls.some(
+		( control ) => control.settingSlug === 'hide_block' && control.isActive
 	);
 
-	if ( ! controlEnabled ) {
+	if ( ! controlActive ) {
 		return null;
 	}
 
@@ -30,25 +35,30 @@ export default function HideBlock( props ) {
 	const hideBlock = blockVisibility?.hideBlock ?? false;
 
 	return (
-		<div className="visibility-control__group hide-block-control">
-			<div className="visibility-control">
-				<ToggleControl
-					label={ __( 'Hide block', 'block-visibility' ) }
-					checked={ hideBlock }
-					onChange={ () => {
-						setAttributes( {
-							blockVisibility: assign(
-								{ ...blockVisibility },
-								{ hideBlock: ! hideBlock }
-							),
-						} );
-					} }
-					help={ __(
-						'Hide the block from everyone.',
+		<div className="control-panel-item hide-block-control">
+			<h3 className="control-panel-item__heading has-icon">
+				<span>{ __( 'Hide Block', 'block-visibility' ) }</span>
+				<InformationPopover
+					message={ __(
+						'The Hide Block control overrides all other controls when enabled.',
 						'block-visibility'
 					) }
+					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-hide-block-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					position="bottom center"
 				/>
-			</div>
+			</h3>
+			<ToggleControl
+				label={ __( 'Hide the block from everyone', 'block-visibility' ) }
+				checked={ hideBlock }
+				onChange={ () => {
+					setAttributes( {
+						blockVisibility: assign(
+							{ ...blockVisibility },
+							{ hideBlock: ! hideBlock }
+						),
+					} );
+				} }
+			/>
 		</div>
 	);
 }

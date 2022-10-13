@@ -58,15 +58,13 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Get a collection of variables.
+	 * Get a collection of items
 	 *
-	 * @param string $request The request.
 	 * @return WP_Error|WP_REST_Response
 	 */
-	public function get_variables( $request ) {
+	public function get_variables() {
 
-		$request_type = $request->get_param( 'type' );
-		$settings     = get_option( 'block_visibility_settings' );
+		$settings = get_option( 'block_visibility_settings' );
 
 		if ( isset( $settings['plugin_settings']['enable_full_control_mode'] ) ) {
 			$is_full_control_mode = $settings['plugin_settings']['enable_full_control_mode'];
@@ -81,31 +79,28 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 		);
 
 		$variables = array(
+			'current_users_roles'  => get_current_user_role(),
+			'user_roles'           => get_user_roles(),
 			'plugin_variables'     => $plugin_variables,
 			'is_full_control_mode' => $is_full_control_mode,
 			'is_pro'               => defined( 'BVP_VERSION' ), // If the Pro version constant is set, then Block Visibility Pro is active.
 			'integrations'         => array(
 				'acf'       => array(
 					'active' => function_exists( 'acf' ),
-					'fields' => self::get_acf_fields( $request_type ),
+					'fields' => self::get_acf_fields(),
 				),
 				'wp_fusion' => array(
 					'active'         => function_exists( 'wp_fusion' ),
-					'tags'           => self::get_wp_fusion_tags( $request_type ),
+					'tags'           => self::get_wp_fusion_tags(),
 					'exclude_admins' => self::get_wp_fusion_exclude_admins(),
 				),
 			),
 		);
 
-		if ( 'simplified' !== $request_type ) {
-			$variables['current_users_roles'] = get_current_user_role();
-			$variables['user_roles']          = get_user_roles();
-		}
-
 		$variables = apply_filters(
 			'block_visibility_rest_variables',
 			$variables,
-			$request_type
+			'simplified'
 		);
 
 		return new WP_REST_Response( $variables, 200 );
@@ -201,14 +196,9 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 	/**
 	 * Fetch all available tags in ACF field groups and fields.
 	 *
-	 * @param string $request_type The request type.
 	 * @return array
 	 */
-	public static function get_acf_fields( $request_type ) {
-		if ( 'simplified' === $request_type ) {
-			return array();
-		}
-
+	public static function get_acf_fields() {
 		$all_groups_and_fields = array();
 
 		if (
@@ -272,13 +262,9 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 	/**
 	 * Fetch all available tags in WP Fusion.
 	 *
-	 * @param string $request_type The request type.
 	 * @return array
 	 */
-	public static function get_wp_fusion_tags( $request_type ) {
-		if ( 'simplified' === $request_type ) {
-			return array();
-		}
+	public static function get_wp_fusion_tags() {
 
 		$tags_for_select = array();
 
