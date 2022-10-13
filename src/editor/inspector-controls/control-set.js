@@ -63,18 +63,19 @@ export default function ControlSet( props ) {
 
 	enabledControls.forEach( ( control ) => {
 		// We don't want to include the hide block control.
-		if ( control.settingSlug !== 'hide_block' ) {
-			controls.push( {
-				label: control.label,
-				type: control.type,
-				attributeSlug: control.attributeSlug,
-				settingSlug: control.settingSlug,
-				icon: control?.icon ?? false,
-				active: controlSetAtts?.controls.hasOwnProperty(
-					control.attributeSlug
-				),
-			} );
-		}
+		//if ( control.settingSlug !== 'hide_block' ) {
+		controls.push( {
+			active: controlSetAtts?.controls.hasOwnProperty(
+				control.attributeSlug
+			),
+			attributeSlug: control.attributeSlug,
+			icon: control?.icon ?? false,
+			isDefault: control?.isDefault,
+			label: control.label,
+			settingSlug: control.settingSlug,
+			type: control.type,
+		} );
+		//}
 	} );
 
 	// setControls are all saved controls on the block, but a block can have

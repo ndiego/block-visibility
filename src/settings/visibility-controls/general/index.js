@@ -33,20 +33,14 @@ export default function General( props ) {
 	enabledControls.forEach( ( control ) => {
 		defaultControlOptions.push( {
 			label: control.label,
-			value: control.settingSlug,
-			isFixed:
-				control.settingSlug === 'hide_block' ||
-				control.settingSlug === 'visibility_presets',
+			value: control.settingSlug
 		} );
 	} );
-
+console.log( enabledControls );
 	// Manually set defaults, this ensures the main settings function properly
     const defaultControls = pluginSettings?.default_controls ?? []; // eslint-disable-line
 	const selectedControls = defaultControlOptions.filter( ( control ) =>
-		union( defaultControls, [
-			'hide_block',
-			'visibility_presets',
-		] ).includes( control.value )
+		defaultControls.includes( control.value )
 	);
 
 	// Reoder the default control placing the fixed controls first.
