@@ -14,9 +14,6 @@ import {
 	MenuGroup,
 	MenuItem,
 	Slot,
-	TextControl,
-	ToggleControl,
-	VisuallyHidden,
 	withFilters,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
@@ -24,16 +21,8 @@ import {
 	Icon,
 	moreVertical,
 	check,
-	settings,
-	external,
     plus,
-    cog
 } from '@wordpress/icons';
-
-/**
- * Internal dependencies
- */
-import icons from './../../utils/icons';
 
 // Provides an entry point to slot in additional settings. Must be placed
 // outside of function to avoid unnecessary rerenders.
@@ -140,7 +129,6 @@ export default function ControlPanelHeader( props ) {
 
 	const controlsDropdown = (
 		<DropdownMenu
-            key={ 'control-panel--controls'}
 			className="controls-dropdown"
 			icon={ activeControls.length === 0 ? plus : moreVertical }
 			label={ __( 'Visibility Controls', 'block-visibility' ) }
