@@ -3,23 +3,18 @@
 	line-height: 0; /* Correction for button */
 
 	.information-popover__button {
-		color: #c8c8c8;
 	    padding: 0;
 		height: 24px;
 		min-width: 20px;
+		opacity: 0.3;
 
 		svg {
 			width: 22px;
 		}
 		
-		&:hover {
-			background-color: transparent !important;
-			box-shadow: none !important;
-			color: #414141;
-		}
-
-		&:focus {
-			box-shadow: none !important;
+		&:hover,
+		&[aria-expanded=true] {
+			opacity: 1;
 		}
 	}
 }
@@ -51,7 +46,6 @@
 		}
 	}
 }
-
 
 .components-button[aria-disabled=true]:focus {
     box-shadow: none;

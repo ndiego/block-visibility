@@ -36,7 +36,7 @@ export default function HideBlock( props ) {
 
 	return (
 		<div className="control-panel-item hide-block-control">
-			<h3 className="control-panel-item__heading has-icon">
+			<h3 className="control-panel-item-header has-icon">
 				<span>{ __( 'Hide Block', 'block-visibility' ) }</span>
 				<InformationPopover
 					message={ __(

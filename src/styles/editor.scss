@@ -1,4 +1,5 @@
 @import './common';
+@import './react-select';
 
 .block-visibility__control-panel {
     border-top: 1px solid #dddddd;
@@ -86,21 +87,16 @@
     }
 
     .control-panel-item {
-        .control-panel-item__heading {
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 16px;
-            text-transform: none;
+        .control-panel-item-header {
+            align-items: center;
+            display: flex;
             font-size: 11px;
             font-weight: 500;
             line-height: 1.4;
+            margin-bottom: 16px;
             text-transform: uppercase;
-            display: inline-block;
     
-            &.has-icon {
-                display: flex;
-                align-items: center;
-    
+            &.has-icon {    
                 /* For the integration icons */
                 &>svg {
                     width: 16px;
@@ -121,6 +117,10 @@
                         width: 18px;
                     }
                 }
+            }
+
+            .control-panel-item-header__toolbar {
+                margin-left: auto;
             }
         }
     }
@@ -185,8 +185,8 @@
         align-items: center;
         gap: 24px;
         margin-bottom: 16px;
-        border-bottom: 1px solid #e0e0e0;
-        padding-bottom: 6px;
+        //border-bottom: 1px solid #e0e0e0;
+        //padding-bottom: 6px;
 
         &.main {
             margin-bottom: 30px;
@@ -199,8 +199,28 @@
         }
 
         .section-header__title {
+            align-items: center;
+            display: inline-flex;
             font-weight: 500;
+            gap: 6px;
             overflow-wrap: anywhere;
+
+            .components-dropdown {
+                height: 18px;
+
+                .components-button {
+                    height: 18px;
+                    line-height: 16px;
+                    min-width: 18px;
+                    opacity: .3;
+                    width: 18px;
+
+                    &:hover,
+                    &[aria-expanded=true] {
+                        opacity: 1;
+                    }
+                }
+            }
         }
 
         .section-header__toolbar {
@@ -208,17 +228,18 @@
             height: 24px;
             text-align: right;
 
-            .components-button {
-                &.has-icon {
-                    padding: 0;
-                    height: 24px;
-                    width: 24px;
-                    min-width: 24px;
-                }
 
-                &:hover {
-                    color: var( --wp-admin-theme-color );
-                }
+            .components-button {
+                padding: 0;
+                height: 24px;
+                width: 24px;
+                min-width: 24px;
+            }
+
+            // Apply additional styling to Pro buttons added.
+            &> .components-button {
+                margin-left: 4px;
+                padding: 1px;
             }
 
             .controls-dropdown {
@@ -417,8 +438,9 @@
             grid-template-columns: repeat( auto-fit, minmax( 248px, 1fr ) );
             grid-column-gap: 32px;
             grid-row-gap: 20px;
+            margin-top: 20px;
 
-            .schedules__schedule {
+            .schedule-item {
                 &.disabled {
                     .date-time-control__schedule--heading {
                         span {
@@ -427,58 +449,65 @@
                     }
                 }
 
-                .schedule__fields {
-                    &>*:last-child {
-                        margin-bottom: 0;
-                    }
-                }
+                .schedule-fields {
+                    display: grid;
+                    gap: 16px;
 
-                .schedule__date-time-field {
-                    border-radius: 2px;
-                    border: 1px solid #757575;
-                    min-height: 36px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 10px;
+                    .schedule-fields__date-time {
+                        display: grid;
+                        gap: 8px;
 
-                    .components-button {
-                        padding: 0;
+                        .date-time-item {
+                            align-items: center;
+                            display: flex;
+                            gap: 8px;
 
-                        &:first-child {
-                            margin-left: -2px;
-                        }
-
-                        &.is-link {
-                            color: #333;
-                            text-decoration: none;
-                            width: 100%;
-
-                            svg {
-                                margin: 4px 0 4px 8px;
+                            legend {
+                                min-width: 40px;
                             }
 
-                            span {
-                                padding: 8px;
+                            .schedule__date-time-field {
+                                align-items: center;
+                                border-radius: 2px;
+                                border: 1px solid #1e1e1e;
+                                min-height: 36px;
+                                display: flex;
+                                justify-content: space-between;
+                                position: relative;
+                                width: 100%;
+            
+                                .components-button {
+                                    padding: 0;
+            
+                                    &.is-link {
+                                        color: #333;
+                                        text-decoration: none;
+                                        padding-right: 30px;
+                                        width: 100%;
+            
+                                        span {
+                                            padding: 8px;
+                                        }
+            
+                                        &:hover {
+                                            color: var( --wp-admin-theme-color );
+                                        }
+                                    }
+            
+                                    &.clear-date-time {
+                                        position: absolute;
+                                        right: 0;
+                                        max-height: 34px;
+                                        min-width: 24px;
+                                        padding: 2px;
+                                        margin: 5px 4px;
+                                    }
+                                }
                             }
-
-                            &:hover {
-                                color: var( --wp-admin-theme-color );
-                            }
-                        }
-
-                        &.clear-date-time {
-                            max-height: 34px;
-                            min-width: 24px;
-                            padding: 4px;
                         }
                     }
                 }
             }
-        }
-
-        .date-time-control__add-schedule {
-            margin: 20px 0 24px;
         }
     }
 
@@ -534,19 +563,20 @@
 
 /* Date/Time calendar popover styles -----------------------------------------*/
 .block-visibility__date-time-popover {
-
-    &.no-time {
-        .components-datetime__date {
-            border-top: 0;
-        }
+    .components-popover__content {
+        padding: 16px;
     }
 
-    .date-time-header {
-        border-bottom: 1px solid #e0e0e0;
-        font-weight: 600;
-        padding: 16px;
-        display: flex;
-        justify-content: space-between;
+    .date-time-popover__header {
+        margin-bottom: 16px;
+
+        h2 {
+            color: #1e1e1e;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.2;
+            margin: 0;
+        }
     }
 }
 
@@ -560,7 +590,7 @@
 
         .components-menu-item__button {
             &[aria-disabled='true'] {
-                color: #757575;
+                color: #1e1e1e;
                 opacity: 1;
 
                 // Fix style bug in WordPress 6.1 and lower.
@@ -598,68 +628,6 @@
         }
     }
 
-    &.tips>div {
-        min-width: 400px;
-        padding: 24px;
-        cursor: default;
-
-        h3 {
-            margin-top: 0;
-        }
-
-        h4 {
-            margin-bottom: .75em;
-        }
-
-        p {
-            margin-top: 0;
-
-            &.learn-more {
-                border-top: 1px solid #e0e0e0;
-                padding-top: 1.25em;
-                margin-top: 2em;
-                margin-bottom: 0;
-            }
-        }
-
-        code {
-            margin-right: 8px;
-        }
-
-        ol {
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-
-        li.tip {
-            padding-left: 5px;
-            margin-bottom: 10px;
-
-            &:last-child {
-                margin-bottom: 0;
-            }
-
-            &::marker {
-                font-weight: bold;
-                font-size: 14px;
-            }
-        }
-
-        .usage {
-            .components-flex {
-                margin-bottom: 1em;
-            }
-
-            .components-flex__item {
-                min-width: auto;
-
-                &:first-child {
-                    min-width: 100px;
-                }
-            }
-        }
-    }
-
     &.control-settings>div {
         min-width: 300px;
         padding: 6px;
@@ -667,7 +635,7 @@
         h3 {
             margin-top: 0;
             margin-bottom: 18px;
-            color: #757575;
+            color: #1e1e1e;
             text-transform: uppercase;
             font-size: 11px;
             font-weight: 500;
@@ -710,112 +678,6 @@
     }
 }
 
-/* Custom styling to make react-select components look more like WordPress. --*/
-.block-visibility__react-select {
-
-    .react-select__control {
-        border-radius: 2px;
-        border: 1px solid #757575;
-        min-height: 36px;
-
-        &:hover {
-            border: 1px solid #757575;
-        }
-
-        &:focus,
-        &.react-select__control--is-focused {
-            border-color: #007cba;
-            border-color: var(--wp-admin-theme-color);
-            box-shadow: 0 0 0 1px #007cba;
-            box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
-            outline: 2px solid transparent;
-        }
-    }
-
-    // Removes added height on cursor.
-    .react-select__value-container {
-        div:last-child {
-            padding-bottom: 0;
-            padding-top: 0;
-        }
-    }
-
-    .react-select__value-container--is-multi {
-        padding: 2px 4px;
-
-        .react-select__placeholder {
-            margin-left: 5px;
-            margin-right: 5px;
-        }
-
-        div:last-child {
-            margin: 0 2px;
-        }
-    }
-
-    .react-select__multi-value {
-        background-color: #ddd;
-
-        .react-select__multi-value__label {
-            font-size: 90%;
-            white-space: normal;
-        }
-    }
-
-    .react-select__input {
-
-        // Override core WP Editor styles.
-        &:focus {
-            box-shadow: none;
-        }
-
-        input {
-            min-height: auto;
-
-            // Override core WP Editor styles.
-            &:focus {
-                box-shadow: none;
-            }
-        }
-    }
-
-    .react-select__clear-indicator,
-    .react-select__dropdown-indicator {
-        padding: 6px;
-
-        &:hover {
-            color: #007cba;
-            color: var(--wp-admin-theme-color);
-            cursor: pointer;
-        }
-    }
-
-    .react-select__option,
-    .react-select__multi-value__remove {
-        cursor: pointer;
-    }
-
-    .react-select__option--is-focused,
-    .react-select__option--is-selected {
-        background: white;
-        color: #007cba;
-        color: var(--wp-admin-theme-color);
-    }
-
-    .react-select__option--is-selected {
-        background: #eee;
-    }
-
-    .react-select__option--is-disabled {
-        color: #cccccc !important;
-    }
-
-    // Fixes issue where editor footer is above the menu. This shifts the page up.
-    .react-select__menu {
-        margin-bottom: 50px;
-    }
-}
-
 .block-visibility__reset-modal {
     max-width: 400px !important;
 
@@ -845,7 +707,7 @@
 
     .visibility-controls__container {
 
-        h3.control-panel-item__heading {
+        h3.control-panel-item-header {
             font-size: 13px !important;
             font-weight: 500 !important;
             margin-bottom: 16px !important;
