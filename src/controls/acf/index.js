@@ -96,7 +96,7 @@ export default function ACF( props ) {
 
 	return (
 		<div className="control-panel-item acf-control">
-			<h3 className="control-panel-item__heading has-icon">
+			<h3 className="control-panel-item-header has-icon">
 				<Icon icon={ icons.acf } />
 				<span>
 					{ __( 'Advanced Custom Fields', 'block-visibility' ) }

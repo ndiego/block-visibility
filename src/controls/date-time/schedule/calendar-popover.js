@@ -12,7 +12,7 @@ import { __experimentalGetSettings } from '@wordpress/date'; // eslint-disable-l
  * @return {string}		 Return the rendered JSX
  */
 export default function CalendarPopover( props ) {
-	const { label, currentDate, onDateChange, isOpen, highlightedDate } = props;
+	const { label, currentDate, onDateChange, isOpen, setAttribute, pickerType, setPickerType } = props;
 	const dateSettings = __experimentalGetSettings();
 
 	// To know if the current time format is a 12 hour time, look for "a".
@@ -31,15 +31,18 @@ export default function CalendarPopover( props ) {
 			className="block-visibility__date-time-popover"
 			onClose={ isOpen.bind( null, false ) }
 		>
-			<div className="date-time-header">
-				<span>{ label }</span>
+			<div className="date-time-popover__header">
+				<h2>{ label }</h2>
+
 			</div>
 			<DateTimePicker
 				currentDate={ currentDate }
-				onChange={ ( date ) => onDateChange( date ) }
+				onChange={ ( date ) => {
+					setAttribute( pickerType, date );
+				} }
 				is12Hour={ is12Hour }
-				// isDayHighlighted does not appear to work, but this does.
-				events={ [ { date: highlightedDate } ] }
+				__nextRemoveHelpButton={ true }
+				__nextRemoveResetButton={ true }
 			/>
 		</Popover>
 	);

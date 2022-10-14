@@ -8,6 +8,7 @@ import { assign } from 'lodash';
  */
 import { __, sprintf } from '@wordpress/i18n';
 import { Button, Slot, ToggleControl } from '@wordpress/components';
+import { plus } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -63,7 +64,7 @@ export default function DateTime( props ) {
 
 	return (
 		<div className="control-panel-item date-time-control">
-			<h3 className="control-panel-item__heading has-icon">
+			<h3 className="control-panel-item-header has-icon">
 				<span>{ __( 'Date & Time', 'block-visibility' ) }</span>
 				<InformationPopover
 					message={ __(
@@ -73,6 +74,14 @@ export default function DateTime( props ) {
 					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-date-time-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					position="bottom center"
 				/>
+				<div className="control-panel-item-header__toolbar">
+					<Button
+						icon={ plus } 
+						onClick={ () => addSchedule() } 
+						label={ __( 'Add schedule', 'block-visibility' ) }
+						isSmall
+					/>
+				</div>
 			</h3>
 			<div className="visibility-control__help">
 				{ sprintf(
@@ -85,26 +94,6 @@ export default function DateTime( props ) {
 						? __( 'Hide', 'block-visibility' )
 						: __( 'Show', 'block-visibility' )
 				) }
-			</div>
-			<div className="date-time-control__schedules">
-				{ schedules.map( ( schedule, scheduleIndex ) => {
-					return (
-						<Schedule
-							key={ scheduleIndex }
-							dateTime={ dateTime }
-							schedules={ schedules }
-							scheduleIndex={ scheduleIndex }
-							scheduleAtts={ schedule }
-							hideOnSchedules={ hideOnSchedules }
-							{ ...props }
-						/>
-					);
-				} ) }
-			</div>
-			<div className="date-time-control__add-schedule">
-				<Button onClick={ () => addSchedule() } isSecondary>
-					{ __( 'Add schedule', 'block-visibility' ) }
-				</Button>
 			</div>
 			<div className="date-time-control__hide-on-schedules">
 				<ToggleControl
@@ -123,6 +112,21 @@ export default function DateTime( props ) {
 						)
 					}
 				/>
+			</div>
+			<div className="date-time-control__schedules">
+				{ schedules.map( ( schedule, scheduleIndex ) => {
+					return (
+						<Schedule
+							key={ scheduleIndex }
+							dateTime={ dateTime }
+							schedules={ schedules }
+							scheduleIndex={ scheduleIndex }
+							scheduleAtts={ schedule }
+							hideOnSchedules={ hideOnSchedules }
+							{ ...props }
+						/>
+					);
+				} ) }
 			</div>
 			<Slot name="DateTimeControls" />
 		</div>

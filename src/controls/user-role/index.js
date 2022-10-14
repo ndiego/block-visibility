@@ -139,7 +139,7 @@ export default function UserRole( props ) {
 
 	return (
 		<div className="control-panel-item user-role-control">
-			<h3 className="control-panel-item__heading has-icon">
+			<h3 className="control-panel-item-header has-icon">
 				<span>{ __( 'User Role', 'block-visibility' ) }</span>
 				<InformationPopover
 					message={ __(

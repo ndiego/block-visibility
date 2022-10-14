@@ -154,7 +154,7 @@ export default function WPFusion( props ) {
 
 	return (
 		<div className="control-panel-item wp-fusion-control">
-			<h3 className="control-panel-item__heading has-icon">
+			<h3 className="control-panel-item-header has-icon">
 				<Icon icon={ icons.wpFusion } />
 				<span>{ __( 'WP Fusion', 'block-visibility' ) }</span>
 				<InformationPopover

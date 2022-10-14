@@ -149,7 +149,7 @@ export default function ScreenSize( props ) {
 	return (
 		<>
 			<div className="control-panel-item screen-size-control">
-				<h3 className="control-panel-item__heading has-icon">
+				<h3 className="control-panel-item-header has-icon">
 					<span>{ __( 'Screen Size', 'block-visibility' ) }</span>
 					<InformationPopover
 						message={ __(
