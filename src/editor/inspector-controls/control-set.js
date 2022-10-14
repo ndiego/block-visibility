@@ -89,7 +89,6 @@ export default function ControlSet( props ) {
 			control.isActive = true;
 		}
 	} );
-	
 
 	console.log( enabledControls );
 
@@ -120,9 +119,9 @@ export default function ControlSet( props ) {
 			<Slot name={ 'ControlSetControlsTop-' + uniqueIndex } />
 
 			<DateTime setControlAtts={ setControlAtts } { ...props } />
-			<UserRole setControlAtts={ setControlAtts } { ...props } />
-			<ScreenSize setControlAtts={ setControlAtts } { ...props } />
 			<QueryString setControlAtts={ setControlAtts } { ...props } />
+			<ScreenSize setControlAtts={ setControlAtts } { ...props } />
+			<UserRole setControlAtts={ setControlAtts } { ...props } />
 
 			<Slot name={ 'ControlSetControlsMiddle-' + uniqueIndex } />
 

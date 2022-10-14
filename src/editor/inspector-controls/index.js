@@ -33,8 +33,7 @@ const AdditionalInspectorControls = withFilters(
  * @return {string}		 Return the rendered JSX
  */
 function VisibilityInspectorControls( props ) {
-	const { attributes, setAttributes, name, settings, variables, clientId } =
-		props;
+	const { attributes, setAttributes, name, settings, variables } = props;
 
 	if ( settings === 'fetching' || variables === 'fetching' ) {
 		return null;
@@ -60,7 +59,6 @@ function VisibilityInspectorControls( props ) {
 		} );
 	}
 
-	//const blockAttributes = { ...attributes };
 	let blockAtts = attributes?.blockVisibility;
 	let controlSets = blockAtts?.controlSets ?? [];
 

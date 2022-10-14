@@ -424,40 +424,29 @@ registerPlugin( 'block-visibility-toolbar-options-hide-block', {
  */
 function addPresetManagerControlSet() {
 	return ( props ) => {
-		const { controlSetAtts, setControlSetAtts, index, type } = props;
+		const { enabledControls, controlSetAtts, index } = props;
+
+		const type= 'multiple';
 
 		// There needs to be a unique index for the Slots since we technically have
 		// multiple of the same Slot.
 		const uniqueIndex =
 			type === 'single' ? type : type + '-' + controlSetAtts?.id;
 
-		function setControlAtts( control, values ) {
-			const newControls = controlSetAtts?.controls ?? {};
-			const newControlSetAtts = assign(
-				{ ...controlSetAtts },
-				{
-					controls: assign( { ...newControls }, { [ control ]: values } ),
-				}
-			);
-	
-			setControlSetAtts( newControlSetAtts );
-		}
-
 		return (
-			<Fill name={ 'PresetManagerControlSet-' + type + '-' + index }>
-				test
+			<Fill name={ 'PresetManagerControlSet-' + index }>
 				<div className="control-set__controls">
 					<Slot name={ 'ControlSetControlsTop-' + uniqueIndex } />
 
-					<DateTime setControlAtts={ setControlAtts } { ...props } />
-					<UserRole setControlAtts={ setControlAtts } { ...props } />
-					<ScreenSize setControlAtts={ setControlAtts } { ...props } />
-					<QueryString setControlAtts={ setControlAtts } { ...props } />
+					<DateTime { ...props } />
+					<UserRole { ...props } />
+					<ScreenSize { ...props } />
+					<QueryString { ...props } />
 
 					<Slot name={ 'ControlSetControlsMiddle-' + uniqueIndex } />
 
-					<ACF setControlAtts={ setControlAtts } { ...props } />
-					<WPFusion setControlAtts={ setControlAtts } { ...props } />
+					<ACF { ...props } />
+					<WPFusion { ...props } />
 
 					<Slot name={ 'ControlSetControlsBottom-' + uniqueIndex } />
 				</div>
