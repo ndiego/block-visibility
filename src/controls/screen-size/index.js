@@ -183,9 +183,6 @@ export default function ScreenSize( props ) {
 					</Notice>
 				) }
 			</div>
-			<div className="control-separator">
-				<span>{ __( 'AND', 'block-visibility' ) }</span>
-			</div>
 		</>
 	);
 }

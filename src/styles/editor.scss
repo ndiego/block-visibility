@@ -453,20 +453,25 @@
                     display: grid;
                     gap: 16px;
 
+                    // Hide errant span element added by popovers.
+                    &> span {
+                        display: none;
+                    }
+
                     .schedule-fields__date-time {
                         display: grid;
-                        gap: 8px;
+                        grid-gap: 12px;
 
                         .date-time-item {
                             align-items: center;
                             display: flex;
                             gap: 8px;
 
-                            legend {
+                            .date-time-item__label {
                                 min-width: 40px;
                             }
 
-                            .schedule__date-time-field {
+                            .date-time-item__field {
                                 align-items: center;
                                 border-radius: 2px;
                                 border: 1px solid #1e1e1e;
@@ -477,21 +482,9 @@
                                 width: 100%;
             
                                 .components-button {
-                                    padding: 0;
-            
-                                    &.is-link {
-                                        color: #333;
-                                        text-decoration: none;
+                                    &:first-child {
                                         padding-right: 30px;
                                         width: 100%;
-            
-                                        span {
-                                            padding: 8px;
-                                        }
-            
-                                        &:hover {
-                                            color: var( --wp-admin-theme-color );
-                                        }
                                     }
             
                                     &.clear-date-time {
@@ -568,6 +561,9 @@
     }
 
     .date-time-popover__header {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
         margin-bottom: 16px;
 
         h2 {
