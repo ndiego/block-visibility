@@ -18,13 +18,12 @@ export default function formatDateLabel(
 ) {
 	const dateSettings = __experimentalGetSettings();
 	let label = fallback;
-	console.log( dateSettings.formats.time );
+
 	if ( date ) {
-		// label = format(
-		// 	`${ dateSettings.formats.date } ${ dateSettings.formats.time }`,
-		// 	date
-		// );
-		label = format( 'Y-m-d g:i a', date );
+		label = format(
+			`M j, Y ${ dateSettings.formats.time }`,
+			date
+		);
 	}
 
 	return label;

@@ -13,17 +13,24 @@ import { calendar, closeSmall } from '@wordpress/icons';
  * @return {string}		 Return the rendered JSX
  */
 export default function DateTimeField( props ) {
-	const { type, label, title, hasDateTime, onOpenPopover, onClearDateTime, setPickerType, setPickerOpen, setAttribute } = props;
-
+	const { 
+		dateType, 
+		label, 
+		title, 
+		hasDateTime, 
+		setAttribute, 
+		setPickerOpen, 
+		setPickerType,
+	} = props;
+console.log( dateType );
 	return (
-		<div className="schedule__date-time-field">
+		<div className="date-time-item__field">
 			<Button
 				title={ title }
 				onClick={ () => {
-					setPickerType( type );
+					setPickerType( dateType );
 					setPickerOpen( true );
 				} }
-				isLink
 			>
 				<span>{ label }</span>
 			</Button>
@@ -32,7 +39,7 @@ export default function DateTimeField( props ) {
 					icon={ closeSmall }
 					className="clear-date-time"
 					title={ __( 'Clear date/time', 'block-visibility' ) }
-					onClick={ () => setAttribute( type, '' ) }
+					onClick={ () => setAttribute( dateType, '' ) }
 					isSmall
 				/>
 			) }

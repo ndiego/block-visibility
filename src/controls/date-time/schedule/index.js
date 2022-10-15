@@ -239,16 +239,16 @@ export default function Schedule( props ) {
 
 			<div className="schedule-fields__date-time">
 				<div className="date-time-item">
-					<legend>
+					<span className="date-time-item__label">
 						{ __( 'Start', 'block-visibility' ) }
-					</legend>
+					</span>
 					<DateTimeField
 						label={ startDateLabel }
 						title={ __(
 							'Choose a start date/time',
 							'block-visibility'
 						) }
-						type="start"
+						dateType="start"
 						hasDateTime={ start }
 						setAttribute={ setAttribute }
 						setPickerType={ setPickerType }
@@ -257,23 +257,22 @@ export default function Schedule( props ) {
 				</div>
 
 				<div className="date-time-item">
-					<legend>
+					<span className="date-time-item__label">
 						{ __( 'Stop', 'block-visibility' ) }
-					</legend>
+					</span>
 					<DateTimeField
 						label={ endDateLabel }
 						title={ __(
 							'Choose a end date/time',
 							'block-visibility'
 						) }
-						type="end"
+						dateType="end"
 						hasDateTime={ end }
 						setAttribute={ setAttribute }
 						setPickerType={ setPickerType }
 						setPickerOpen={ setPickerOpen }
 					/>
 				</div>
-
 				{ alert && (
 					<Notice status="warning" isDismissible={ false }>
 						{ __(
@@ -284,23 +283,22 @@ export default function Schedule( props ) {
 				) }
 			</div>
 			{ pickerOpen && pickerType && (
-					<CalendarPopover
-						label={ pickerType === 'start' ? __( 'Start Date/Time', 'block-visibility' ) : __( 'End Date/Time', 'block-visibility' ) }
-						currentDate={ pickerType === 'start' ? start : end }
-						isOpen={ setPickerOpen }
-						pickerType={ pickerType }
-						setAttribute={ setAttribute }
-					/>
-				) }
-			{ endPickerOpen && (
-					<CalendarPopover
-						label={ __( 'End Date/Time', 'block-visibility' ) }
-						currentDate={ selectedEnd( start, end, today ) }
-						onDateChange={ ( date ) => setAttribute( 'end', date ) }
-						isOpen={ setEndPickerOpen }
-						highlightedDate={ start }
-					/>
-				) }
+				<CalendarPopover
+					currentDate={ 
+						pickerType === 'start' ? start : end 
+					}
+					label={ 
+						pickerType === 'start' ? 
+							__( 'Start Date/Time', 'block-visibility' ) : 
+							__( 'End Date/Time', 'block-visibility' ) 
+					}
+					isOpen={ setPickerOpen }
+					setAttribute={ setAttribute }
+					setPickerOpen={ setPickerOpen }
+					pickerType={ pickerType }
+				/>
+			) }
+			
 			<Slot name={ 'DateTimeScheduleControlsBottom-' + uniqueIndex } />
 		</div>
 	);
@@ -322,10 +320,13 @@ export default function Schedule( props ) {
 				</div>
 				<div className="section-header__toolbar">
 					<Slot name={ 'DateTimeScheduleToolbar-' + uniqueIndex } />
+
 					{ optionsDropdown }
 				</div>
 			</div>
+
 			{ dateTimeControls }
+
 			<AdditionalScheduleControls
 				uniqueIndex={ uniqueIndex }
 				{ ...props }
