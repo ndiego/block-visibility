@@ -99,8 +99,11 @@ export default function ControlPanel( props ) {
 	);
 
 	// Disable all other controls if the Hide Block control is enabled.
+	// If Hide Block is the only active control, display nothing. Otherwise, 
+	// the grid styling applies gap where it shouldn't.
 	if ( blockAtts?.hideBlock ) {
-		controls = <Disabled>{ controls }</Disabled>;
+		controls = 
+			activeControls.length > 1 ? <Disabled>{ controls }</Disabled> : null;
 	}
 
 	return (
