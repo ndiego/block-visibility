@@ -7,7 +7,7 @@ import { ToggleControl } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import InformationPopover from './../../../utils/components/information-popover';
+import { InformationPopover } from './../../../components';
 
 /**
  * Renders the screen size control toggle settings.

@@ -15,7 +15,7 @@ import {
 /**
  * Internal dependencies
  */
-import InformationPopover from './../../../utils/components/information-popover';
+import { InformationPopover } from './../../../components';
 
 /**
  * Renders the Block Editor visibility settings.

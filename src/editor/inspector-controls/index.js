@@ -6,7 +6,6 @@ import { assign, isEmpty } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
 import { withFilters } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import { withSelect } from '@wordpress/data';
@@ -49,7 +48,7 @@ function VisibilityInspectorControls( props ) {
 	let enabledControls = getEnabledControls( settings, variables );
 	const defaultControlSettings =
 		settings?.plugin_settings?.default_controls ?? [];
-	let defaultControls = [];
+	const defaultControls = [];
 
 	if ( ! isEmpty( defaultControlSettings ) ) {
 		enabledControls.forEach( ( control ) => {
@@ -91,7 +90,7 @@ function VisibilityInspectorControls( props ) {
 		);
 	}
 
-	// Set the control set attributes. This will need to be updated 
+	// Set the control set attributes. This will need to be updated
 	// if multiple control sets are enabled.
 	function setControlSetAtts( controlSetAtts ) {
 		setAttributes( {

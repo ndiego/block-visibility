@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { assign, isEmpty } from 'lodash';
+import { assign } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -37,38 +37,38 @@ const AdditionalControlSetControls = withFilters(
  */
 export default function ControlPanel( props ) {
 	const {
-        attributes,
+		attributes,
 		controlSetAtts,
 		setControlSetAtts,
 		enabledControls,
 		variables,
 	} = props;
-    const blockAtts = attributes?.blockVisibility ?? {};
+	const blockAtts = attributes?.blockVisibility ?? {};
 	const settingsUrl = variables?.plugin_variables?.settings_url ?? '';
 
-	// There needs to be a unique index for the Slots since we technically 
+	// There needs to be a unique index for the Slots since we technically
 	// have multiple of the same Slot.
 	const uniqueIndex = 'panel';
 
-    // Append the "active" property to all active controls.
+	// Append the "active" property to all active controls.
 	enabledControls.forEach( ( control ) => {
-        if ( 
-            blockAtts?.hasOwnProperty(
-                control.attributeSlug
-            ) || 
-            controlSetAtts?.controls.hasOwnProperty(
-                control.attributeSlug
-            ) ||
-            control?.isDefault
-        ) {
-            control.isActive = true;
-        }
+		if (
+			blockAtts?.hasOwnProperty(
+				control.attributeSlug
+			) ||
+			controlSetAtts?.controls.hasOwnProperty(
+				control.attributeSlug
+			) ||
+			control?.isDefault
+		) {
+			control.isActive = true;
+		}
 	} );
 
-    // A simple array of all active controls.
+	// A simple array of all active controls.
 	const activeControls = enabledControls.filter( ( control ) =>
-        control.isActive 
-    );
+		control.isActive
+	);
 
 	function setControlAtts( control, values ) {
 		const newControls = controlSetAtts?.controls ?? {};
@@ -82,65 +82,65 @@ export default function ControlPanel( props ) {
 		setControlSetAtts( newControlSetAtts );
 	}
 
-    let controls = (
+	let controls = (
 		<>
 			<Slot name="ControlPanelContainer" />
-                    
-            <Slot name={ 'ControlSetControlsTop-' + uniqueIndex } />
-            <DateTime setControlAtts={ setControlAtts } { ...props } />
-            <UserRole setControlAtts={ setControlAtts } { ...props } />
-            <ScreenSize setControlAtts={ setControlAtts } { ...props } />
-            <QueryString setControlAtts={ setControlAtts } { ...props } />
-            <Slot name={ 'ControlSetControlsMiddle-' + uniqueIndex } />
-            <ACF setControlAtts={ setControlAtts } { ...props } />
-            <WPFusion setControlAtts={ setControlAtts } { ...props } />
-            <Slot name={ 'ControlSetControlsBottom-' + uniqueIndex } />
+
+			<Slot name={ 'ControlSetControlsTop-' + uniqueIndex } />
+			<DateTime setControlAtts={ setControlAtts } { ...props } />
+			<UserRole setControlAtts={ setControlAtts } { ...props } />
+			<ScreenSize setControlAtts={ setControlAtts } { ...props } />
+			<QueryString setControlAtts={ setControlAtts } { ...props } />
+			<Slot name={ 'ControlSetControlsMiddle-' + uniqueIndex } />
+			<ACF setControlAtts={ setControlAtts } { ...props } />
+			<WPFusion setControlAtts={ setControlAtts } { ...props } />
+			<Slot name={ 'ControlSetControlsBottom-' + uniqueIndex } />
 		</>
 	);
 
-    // Disable all other controls if the Hide Block control is enabled.
+	// Disable all other controls if the Hide Block control is enabled.
 	if ( blockAtts?.hideBlock ) {
 		controls = <Disabled>{ controls }</Disabled>;
 	}
 
-    return (
+	return (
 		<>
 			<ControlPanelHeader
-                activeControls={ activeControls }
+				activeControls={ activeControls }
 				enabledControls={ enabledControls }
 				setControlSetAtts={ setControlSetAtts }
 				{ ...props }
 			/>
-            { activeControls.length !== 0 && ( 
-                <div className="control-panel-container visibility-controls__container">
-                    <HideBlock { ...props } />
-                    { controls }
-                    <AdditionalControlSetControls
-                        uniqueIndex={ uniqueIndex }
-                        setControlAtts={ setControlAtts }
-                        { ...props }
-                    />
-                </div>
-            ) }
-            { enabledControls.length === 0 && (
-                <Notice status="warning" isDismissible={ false }>
-                    { createInterpolateElement(
-                        __(
-                            'All controls are disabled. Visit the <a>plugin settings</a> to enable.',
-                            'block-visibility'
-                        ),
-                        {
-                            a: (
-                                <a // eslint-disable-line
-                                    href={ settingsUrl + '&tab=visibility-controls' }
-                                    target="_blank"
-                                    rel="noreferrer"
-                                />
-                            ),
-                        }
-                    ) }
-                </Notice>
-            ) }
+			{ activeControls.length !== 0 && (
+				<div className="control-panel-container visibility-controls__container">
+					<HideBlock { ...props } />
+					{ controls }
+					<AdditionalControlSetControls
+						uniqueIndex={ uniqueIndex }
+						setControlAtts={ setControlAtts }
+						{ ...props }
+					/>
+				</div>
+			) }
+			{ enabledControls.length === 0 && (
+				<Notice status="warning" isDismissible={ false }>
+					{ createInterpolateElement(
+						__(
+							'All controls are disabled. Visit the <a>plugin settings</a> to enable.',
+							'block-visibility'
+						),
+						{
+							a: (
+								<a // eslint-disable-line
+									href={ settingsUrl + '&tab=visibility-controls' }
+									target="_blank"
+									rel="noreferrer"
+								/>
+							),
+						}
+					) }
+				</Notice>
+			) }
 		</>
 	);
 }

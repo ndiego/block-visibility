@@ -2,13 +2,12 @@
  * External dependencies
  */
 import { assign, omit } from 'lodash';
-import classnames from 'classnames';
 
 /**
  * WordPress dependencies
  */
 import { speak } from '@wordpress/a11y';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import {
 	DropdownMenu,
 	MenuGroup,
@@ -21,7 +20,7 @@ import {
 	Icon,
 	moreVertical,
 	check,
-    plus,
+	plus,
 } from '@wordpress/icons';
 
 // Provides an entry point to slot in additional settings. Must be placed
@@ -46,23 +45,23 @@ export default function ControlPanelHeader( props ) {
 	const { activeControls, attributes, setAttributes, enabledControls, controlSetAtts, setControlSetAtts } =
 		props;
 
-    const blockAtts = attributes?.blockVisibility ?? {};
+	const blockAtts = attributes?.blockVisibility ?? {};
 	const defaultControls = enabledControls.filter( ( control ) => control.isDefault );
 
-    // Detect whether default controls have edits. Used to determine 
-    // whether the reset button should be enabled.
-    defaultControls.forEach( ( control ) => {
-        if ( 
-            control.attributeSlug === 'hideBlock' || 
-            control.attributeSlug === 'visibilityPresets' 
-        ) {
-            control.hasEdits = 
+	// Detect whether default controls have edits. Used to determine
+	// whether the reset button should be enabled.
+	defaultControls.forEach( ( control ) => {
+		if (
+			control.attributeSlug === 'hideBlock' ||
+            control.attributeSlug === 'visibilityPresets'
+		) {
+			control.hasEdits =
                 blockAtts.hasOwnProperty( control.attributeSlug );
-        } else {
-            control.hasEdits = 
+		} else {
+			control.hasEdits =
                 controlSetAtts?.controls?.hasOwnProperty( control.attributeSlug );
-        }
-    } );
+		}
+	} );
 
 	const coreControls = enabledControls.filter(
 		( control ) => control.type !== 'integration' && ! control.isDefault
@@ -71,61 +70,61 @@ export default function ControlPanelHeader( props ) {
 		( control ) => control.type === 'integration' && ! control.isDefault
 	);
 
-    function toggleControls( control, type ) {
-        if ( control.attributeSlug === 'hideBlock' || control.attributeSlug === 'visibilityPresets' ) {
-            // Handle the Hide Block and Visibility Preset separately.
-            if ( control.hasEdits || ( control.isActive && ! control.isDefault ) ) {
-                setAttributes( {
-                    blockVisibility: omit(
-                        { ...blockAtts },
-                        [ control.attributeSlug ]
-                    ),
-                } );
-            } else {
-                setAttributes( {
-                    blockVisibility: assign(
-                        { ...blockAtts },
-                        { [ control.attributeSlug ]: control.attributeSlug === 'hideBlock' ? false : {} }
-                    ),
-                } );
-            }
-        } else if ( type === 'reset' ) {
-            setControlSetAtts( 
-                assign(
-                    { ...controlSetAtts },
-                    { controls: { ...omit( { ...controlSetAtts.controls }, [
-                        control.attributeSlug,
-                    ] ) } }
-                )
-            );
-        } else {
-            let newControls;
+	function toggleControls( control, type ) {
+		if ( control.attributeSlug === 'hideBlock' || control.attributeSlug === 'visibilityPresets' ) {
+			// Handle the Hide Block and Visibility Preset separately.
+			if ( control.hasEdits || ( control.isActive && ! control.isDefault ) ) {
+				setAttributes( {
+					blockVisibility: omit(
+						{ ...blockAtts },
+						[ control.attributeSlug ]
+					),
+				} );
+			} else {
+				setAttributes( {
+					blockVisibility: assign(
+						{ ...blockAtts },
+						{ [ control.attributeSlug ]: control.attributeSlug === 'hideBlock' ? false : {} }
+					),
+				} );
+			}
+		} else if ( type === 'reset' ) {
+			setControlSetAtts(
+				assign(
+					{ ...controlSetAtts },
+					{ controls: { ...omit( { ...controlSetAtts.controls }, [
+						control.attributeSlug,
+					] ) } }
+				)
+			);
+		} else {
+			let newControls;
 
-            if ( control.isActive ) {
-                newControls = omit( { ...controlSetAtts.controls }, [
-                    control.attributeSlug,
-                ] );
-            } else {
-                newControls = assign(
-                    { ...controlSetAtts.controls },
-                    { [ control.attributeSlug ]: {} }
-                );
-            }
-    
-            setControlSetAtts( 
-                assign(
-                    { ...controlSetAtts },
-                    { controls: { ...newControls } }
-                ) 
-            );
-        }
+			if ( control.isActive ) {
+				newControls = omit( { ...controlSetAtts.controls }, [
+					control.attributeSlug,
+				] );
+			} else {
+				newControls = assign(
+					{ ...controlSetAtts.controls },
+					{ [ control.attributeSlug ]: {} }
+				);
+			}
+
+			setControlSetAtts(
+				assign(
+					{ ...controlSetAtts },
+					{ controls: { ...newControls } }
+				)
+			);
+		}
 	}
 
 	const canResetAll = [
 		...defaultControls,
 		...coreControls,
 		...integrationControls,
-	].some( ( control ) => control.isActive && ! control.isDefault || control.isDefault && control.hasEdits );
+	].some( ( control ) => ( control.isActive && ! control.isDefault ) || ( control.isDefault && control.hasEdits ) );
 
 	const controlsDropdown = (
 		<DropdownMenu
@@ -136,24 +135,24 @@ export default function ControlPanelHeader( props ) {
 				className: 'block-visibility__control-popover control-set',
 				focusOnMount: 'container',
 			} }
-			toggleProps={ { 
-                isSmall: true, 
-                disabled: enabledControls.length === 0 
-            } }
+			toggleProps={ {
+				isSmall: true,
+				disabled: enabledControls.length === 0,
+			} }
 		>
 			{ ( { onClose } ) => (
 				<>
-                    { defaultControls.length !== 0 && (
-                        <MenuGroup label={ __( 'Defaults', 'block-visibility' ) }>
-                            { defaultControls.map( ( control, index ) => (
-                                <DefaultControlMenuItem
-                                    key={ index }
-                                    control={ control }
-                                    toggleControls={ toggleControls }
-                                />
-                            ) ) }
-                        </MenuGroup>
-                    ) }
+					{ defaultControls.length !== 0 && (
+						<MenuGroup label={ __( 'Defaults', 'block-visibility' ) }>
+							{ defaultControls.map( ( control, index ) => (
+								<DefaultControlMenuItem
+									key={ index }
+									control={ control }
+									toggleControls={ toggleControls }
+								/>
+							) ) }
+						</MenuGroup>
+					) }
 					<MenuGroup label={ __( 'Controls', 'block-visibility' ) }>
 						{ coreControls.map( ( control, index ) => (
 							<ControlMenuItem
@@ -177,14 +176,14 @@ export default function ControlPanelHeader( props ) {
 						</MenuGroup>
 					) }
 					<MenuGroup>
-                        <Slot name="ControlSetOptionsToolsTop" />
+						<Slot name="ControlSetOptionsToolsTop" />
 						<MenuItem
 							aria-disabled={ ! canResetAll }
 							onClick={ () => {
 								if ( canResetAll ) {
-                                    setAttributes( {
-                                        blockVisibility: undefined,
-                                    } );
+									setAttributes( {
+										blockVisibility: undefined,
+									} );
 									speak(
 										__(
 											'All controls reset',
@@ -194,18 +193,18 @@ export default function ControlPanelHeader( props ) {
 									);
 								}
 							} }
-                            variant="tertiary"
+							variant="tertiary"
 						>
 							{ __( 'Reset all', 'block-visibility' ) }
 						</MenuItem>
-                        <Slot name="ControlSetOptionsToolsBottom" />
+						<Slot name="ControlSetOptionsToolsBottom" />
 					</MenuGroup>
-                    <AdditionalControlSetOptions
-                        canResetAll={ canResetAll }
-                        coreControls={ coreControls }
+					<AdditionalControlSetOptions
+						canResetAll={ canResetAll }
+						coreControls={ coreControls }
 						integrationControls={ integrationControls }
 						modalOpen={ modalOpen }
-                        onClose={ onClose }
+						onClose={ onClose }
 						setModalOpen={ setModalOpen }
 						toggleControls={ toggleControls }
 						{ ...props }
@@ -225,8 +224,8 @@ export default function ControlPanelHeader( props ) {
 			</div>
 			{ modalOpen && (
 				<ControlSetModals
-                    coreControls={ coreControls }
-                    integrationControls={ integrationControls }
+					coreControls={ coreControls }
+					integrationControls={ integrationControls }
 					modalOpen={ modalOpen }
 					setModalOpen={ setModalOpen }
 					toggleControls={ toggleControls }
@@ -263,33 +262,33 @@ function ControlSetModals( props ) {
 function ControlMenuItem( props ) {
 	const { control, toggleControls } = props;
 
-    return (
-        <MenuItem
-            key={ control.attributeSlug }
-            icon={ control.isActive && check }
-            label={ sprintf(
-                // translators: %s: The name of the control being toggled e.g. "Hide Block".
-                __( 'Toggle %s' ),
-                control.label
-            ) }
-            onClick={ () => {
-                toggleControls( control );
-                speak(
-                    sprintf(
-                        // translators: %s: The name of the control being toggled e.g. "Hide Block".
-                        __( '%s toggled' ),
-                        control.label
-                    ),
-                    'assertive'
-                );
-            } }
-        >
-            { control.icon && (
-                <Icon className="control-branding-icon" icon={ control.icon } />
-            ) }
-            { control.label }
-        </MenuItem>
-    );
+	return (
+		<MenuItem
+			key={ control.attributeSlug }
+			icon={ control.isActive && check }
+			label={ sprintf(
+				// translators: %s: The name of the control being toggled e.g. "Hide Block".
+				__( 'Toggle %s' ),
+				control.label
+			) }
+			onClick={ () => {
+				toggleControls( control );
+				speak(
+					sprintf(
+						// translators: %s: The name of the control being toggled e.g. "Hide Block".
+						__( '%s toggled' ),
+						control.label
+					),
+					'assertive'
+				);
+			} }
+		>
+			{ control.icon && (
+				<Icon className="control-branding-icon" icon={ control.icon } />
+			) }
+			{ control.label }
+		</MenuItem>
+	);
 }
 
 /**
@@ -302,57 +301,57 @@ function ControlMenuItem( props ) {
 function DefaultControlMenuItem( props ) {
 	const { control, toggleControls } = props;
 
-    if ( control.hasEdits ) {
-        return (
-            <MenuItem
-                key={ control.attributeSlug }
-                disabled={ ! control.hasEdits }
-                className="has-reset"
-                label={ sprintf(
-                    // translators: %s: The name of the control being reset e.g. "Hide Block".
-                    __( 'Reset %s' ),
-                    control.label
-                ) }
-                onClick={ () => {
-                    toggleControls( control, 'reset' );
-                    speak(
-                        sprintf(
-                            // translators: %s: The name of the control being reset e.g. "Hide Block".
-                            __( '%s reset to default' ),
-                            control.label
-                        ),
-                        'assertive'
-                    );
-                } }
-                role="menuitem"
-            >
-                { control.icon && (
-                    <Icon className="control-branding-icon" icon={ control.icon } />
-                ) }
-                { control.label }
-                { control.hasEdits && (
-                    <span 
-                        aria-hidden="true"
-                        className="menu-item-reset"
-                    >
-                        { __( 'Reset', 'block-visibility' ) }
-                    </span>
-                ) }
-            </MenuItem>
-        );
-    }
+	if ( control.hasEdits ) {
+		return (
+			<MenuItem
+				key={ control.attributeSlug }
+				disabled={ ! control.hasEdits }
+				className="has-reset"
+				label={ sprintf(
+					// translators: %s: The name of the control being reset e.g. "Hide Block".
+					__( 'Reset %s' ),
+					control.label
+				) }
+				onClick={ () => {
+					toggleControls( control, 'reset' );
+					speak(
+						sprintf(
+							// translators: %s: The name of the control being reset e.g. "Hide Block".
+							__( '%s reset to default' ),
+							control.label
+						),
+						'assertive'
+					);
+				} }
+				role="menuitem"
+			>
+				{ control.icon && (
+					<Icon className="control-branding-icon" icon={ control.icon } />
+				) }
+				{ control.label }
+				{ control.hasEdits && (
+					<span
+						aria-hidden="true"
+						className="menu-item-reset"
+					>
+						{ __( 'Reset', 'block-visibility' ) }
+					</span>
+				) }
+			</MenuItem>
+		);
+	}
 
 	return (
-        <MenuItem
-            aria-disabled
-            isSelected
-            key={ control.attributeSlug }
-            role="menuitemcheckbox"
-        >
-            { control.icon && (
-                <Icon className="control-branding-icon" icon={ control.icon } />
-            ) }
-            { control.label }
-        </MenuItem>
+		<MenuItem
+			aria-disabled
+			isSelected
+			key={ control.attributeSlug }
+			role="menuitemcheckbox"
+		>
+			{ control.icon && (
+				<Icon className="control-branding-icon" icon={ control.icon } />
+			) }
+			{ control.label }
+		</MenuItem>
 	);
 }

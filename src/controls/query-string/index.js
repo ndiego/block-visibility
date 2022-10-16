@@ -13,7 +13,7 @@ import { createInterpolateElement } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import InformationPopover from './../../utils/components/information-popover';
+import { InformationPopover } from './../../components';
 
 /**
  * Add the Query String controls
@@ -50,7 +50,7 @@ export default function QueryString( props ) {
 
 	return (
 		<div className="control-panel-item query-string-control">
-			<h3 className="control-panel-item-header has-icon">
+			<h3 className="control-panel-item__header has-icon">
 				<span>{ __( 'Query String', 'block-visibility' ) }</span>
 				<InformationPopover
 					message={ __(

@@ -1,9 +1,8 @@
 /**
  * WordPress dependencies
  */
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import { Notice } from '@wordpress/components';
-import { createInterpolateElement } from '@wordpress/element';
 
 /**
  * Helper function for printing a notice when all controls have been disabled

@@ -8,12 +8,12 @@ import { useState } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import UpdateSettings from './../utils/update-settings';
-import InformationPopover from './../../utils/components/information-popover';
 import BlockEditor from './block-editor';
 import UserPermissions from './user-permissions';
 import FullControlMode from './full-control-mode';
 import Uninstall from './uninstall';
+import UpdateSettings from './../update-settings';
+import { InformationPopover } from './../../components';
 
 // Provides an entry point to slot in additional settings. Must be placed
 // outside of function to avoid unnecessary rerenders.

@@ -7,7 +7,7 @@ import { ToggleControl, Disabled, Slot } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import InformationPopover from './../../../utils/components/information-popover';
+import { InformationPopover } from './../../../components';
 import EnabledUserRoles from './enabled-user-roles';
 
 /**

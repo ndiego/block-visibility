@@ -8,8 +8,9 @@ import Select from 'react-select';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Notice } from '@wordpress/components';
+import { Button, Notice } from '@wordpress/components';
 import { createInterpolateElement } from '@wordpress/element';
+import { plus } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -17,8 +18,8 @@ import { createInterpolateElement } from '@wordpress/element';
 import UserRoles from './user-roles';
 import UserRuleSets from './user-rule-sets';
 import Users from './users';
-import isControlSettingEnabled from './../utils/is-control-setting-enabled';
-import InformationPopover from './../../utils/components/information-popover';
+import isControlSettingEnabled from '../../utils/is-control-setting-enabled';
+import { InformationPopover } from './../../components';
 
 /**
  * Add the User Role control
@@ -137,20 +138,55 @@ export default function UserRole( props ) {
 			( option ) => option.value === visibilityByRole
 		)[ 0 ]?.label ?? '';
 
+	const ruleSetsActive = enableUserRuleSets && visibilityByRole === 'user-rule-sets';
+	const ruleSets = userRole?.ruleSets ?? [];
+
+	if ( ruleSets.length === 0 ) {
+		ruleSets.push( {
+			enable: true,
+			rules: [ { field: '' } ],
+		} );
+	}
+
+	const addRuleSet = () => {
+		const newRuleSets = [
+			...ruleSets,
+			{
+				enable: true,
+				rules: [ { field: '' } ],
+			},
+		];
+
+		setControlAtts(
+			'userRole',
+			assign( { ...userRole }, { ruleSets: [ ...newRuleSets ] } )
+		);
+	};
+
 	return (
 		<div className="control-panel-item user-role-control">
-			<h3 className="control-panel-item-header has-icon">
+			<h3 className="control-panel-item__header has-icon">
 				<span>{ __( 'User Role', 'block-visibility' ) }</span>
 				<InformationPopover
 					message={ __(
-						"The User Role control allows you to conditionally display the block based on the current user's role and/or specific users.",
+						"The User Role control allows you to configure block visibility based on the current user's role and/or specific users.",
 						'block-visibility'
 					) }
 					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					position="bottom center"
 				/>
+				{ ruleSetsActive && (
+					<div className="control-panel-item__header-toolbar">
+						<Button
+							icon={ plus }
+							onClick={ () => addRuleSet() }
+							label={ __( 'Add rule set', 'block-visibility' ) }
+							isSmall
+						/>
+					</div>
+				) }
 			</h3>
-			<div className="visibility-control__group-fields">
+			<div className="control-panel-item__fields">
 				<div className="visibility-control visibility-by-role">
 					<Select
 						className="block-visibility__react-select"
@@ -191,13 +227,14 @@ export default function UserRole( props ) {
 				) }
 				{ visibilityByRole === 'user-rule-sets' &&
 					enableUserRuleSets && (
-						<UserRuleSets
-							variables={ variables }
-							userRole={ userRole }
-							setControlAtts={ setControlAtts }
-							{ ...props }
-						/>
-					) }
+					<UserRuleSets
+						ruleSets={ ruleSets }
+						setControlAtts={ setControlAtts }
+						userRole={ userRole }
+						variables={ variables }
+						{ ...props }
+					/>
+				) }
 			</div>
 			{ ! options.some(
 				( option ) => option.value === visibilityByRole

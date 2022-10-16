@@ -8,7 +8,7 @@ import { createInterpolateElement } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import InformationPopover from './../../../utils/components/information-popover';
+import { InformationPopover } from './../../../components';
 
 /**
  * Renders the full control mode settings.

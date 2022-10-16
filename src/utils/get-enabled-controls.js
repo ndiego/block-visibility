@@ -129,7 +129,7 @@ export default function getEnabledControls( settings, variables ) {
 	};
 
 	// If the plugin that provides this control is not active, disable.
-	controls.forEach( function ( control ) {
+	controls.forEach( function( control ) {
 		if (
 			'integration' === control.type &&
 			! isPluginActive( control.settingSlug )
@@ -143,7 +143,7 @@ export default function getEnabledControls( settings, variables ) {
 	const visibilityControls = settings?.visibility_controls ?? {};
 
 	if ( ! isEmpty( visibilityControls ) ) {
-		controls.forEach( function ( control ) {
+		controls.forEach( function( control ) {
 			const hasControl = has( visibilityControls, control.settingSlug );
 			let addControl = false;
 
@@ -166,7 +166,7 @@ export default function getEnabledControls( settings, variables ) {
 	const defaultControls = settings?.plugin_settings?.default_controls ?? [];
 
 	// Determine which enable controls are defaults, if any.
-	enabledControls.forEach( function ( control ) {
+	enabledControls.forEach( function( control ) {
 		if ( defaultControls.includes( control.settingSlug ) ) {
 			control.isDefault = true;
 		}

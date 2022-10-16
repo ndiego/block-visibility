@@ -7,12 +7,12 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
-import { Button, ToggleControl, Notice } from '@wordpress/components';
+import { Notice, ToggleControl } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import RuleSets from './../utils/components/rule-sets';
+import { RuleSets } from './../../components';
 import { getGroupedFields, GetAllFields } from './fields';
 
 /**
@@ -23,31 +23,8 @@ import { getGroupedFields, GetAllFields } from './fields';
  * @return {string}		 Return the rendered JSX
  */
 export default function UserRuleSets( props ) {
-	const { variables, userRole, setControlAtts } = props;
+	const { ruleSets, setControlAtts, userRole, variables } = props;
 	const hideOnRuleSets = userRole?.hideOnRuleSets ?? false;
-	const ruleSets = userRole?.ruleSets ?? [];
-
-	if ( ruleSets.length === 0 ) {
-		ruleSets.push( {
-			enable: true,
-			rules: [ { field: '' } ],
-		} );
-	}
-
-	const addRuleSet = () => {
-		const newRuleSets = [
-			...ruleSets,
-			{
-				enable: true,
-				rules: [ { field: '' } ],
-			},
-		];
-
-		setControlAtts(
-			'userRole',
-			assign( { ...userRole }, { ruleSets: [ ...newRuleSets ] } )
-		);
-	};
 
 	const groupedFields = getGroupedFields();
 	const allFields = GetAllFields( variables );
@@ -99,12 +76,7 @@ export default function UserRuleSets( props ) {
 						);
 					} ) }
 				</div>
-				<div className="rule-sets__add-rule-set">
-					<Button onClick={ () => addRuleSet() } isSecondary>
-						{ __( 'Add rule set', 'block-visibility' ) }
-					</Button>
-				</div>
-				<div className="hide-on-rule-sets">
+				<div className="control-panel-item__hide-when">
 					<ToggleControl
 						label={ __(
 							'Hide when rules apply',

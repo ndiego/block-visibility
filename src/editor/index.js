@@ -16,16 +16,15 @@ import { Slot, Fill } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import VisibilityInspectorControls from './inspector-controls';
-import ToolbarControls from './toolbar-controls';
-import ControlSet from './inspector-controls/control-set';
 import './contextual-indicators';
+import ToolbarControls from './toolbar-controls';
+import VisibilityInspectorControls from './inspector-controls';
 
-import UserRole from './../controls/user-role';
-import DateTime from './../controls/date-time';
-import ScreenSize from './../controls/screen-size';
-import QueryString from './../controls/query-string';
 import ACF from './../controls/acf';
+import DateTime from './../controls/date-time';
+import QueryString from './../controls/query-string';
+import ScreenSize from './../controls/screen-size';
+import UserRole from './../controls/user-role';
 import WPFusion from './../controls/wp-fusion';
 
 /**
@@ -424,14 +423,11 @@ registerPlugin( 'block-visibility-toolbar-options-hide-block', {
  */
 function addPresetManagerControlSet() {
 	return ( props ) => {
-		const { enabledControls, controlSetAtts, index } = props;
-
-		const type= 'multiple';
+		const { controlSetAtts, index } = props;
 
 		// There needs to be a unique index for the Slots since we technically have
 		// multiple of the same Slot.
-		const uniqueIndex =
-			type === 'single' ? type : type + '-' + controlSetAtts?.id;
+		const uniqueIndex = 'multiple-' + controlSetAtts?.id;
 
 		return (
 			<Fill name={ 'PresetManagerControlSet-' + index }>

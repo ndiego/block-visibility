@@ -8,15 +8,14 @@ import { assign } from 'lodash';
  */
 import { __, sprintf } from '@wordpress/i18n';
 import { Button, Notice, ToggleControl } from '@wordpress/components';
-import { Icon } from '@wordpress/icons';
+import { Icon, plus } from '@wordpress/icons';
 
 /**
  * Internal dependencies
  */
 import icons from '../../utils/icons';
-import RuleSets from './../utils/components/rule-sets';
 import { getGroupedFields, getAllFields } from './fields';
-import InformationPopover from './../../utils/components/information-popover';
+import { InformationPopover, RuleSets } from './../../components';
 
 /**
  * Add the ACF controls
@@ -32,7 +31,7 @@ export default function ACF( props ) {
 	const controlActive = enabledControls.some(
 		( control ) => control.settingSlug === 'acf' && control?.isActive
 	);
-	
+
 	if ( ! controlActive || ! pluginActive ) {
 		return null;
 	}
@@ -96,19 +95,27 @@ export default function ACF( props ) {
 
 	return (
 		<div className="control-panel-item acf-control">
-			<h3 className="control-panel-item-header has-icon">
+			<h3 className="control-panel-item__header has-icon">
 				<Icon icon={ icons.acf } />
 				<span>
 					{ __( 'Advanced Custom Fields', 'block-visibility' ) }
 				</span>
 				<InformationPopover
 					message={ __(
-						'The Advanced Custom Fields (ACF) control allows you configure block visibility based on a variety of field-related rules, which form rule sets.',
+						'The Advanced Custom Fields (ACF) control allows you to configure block visibility based on a variety of field-related rules, which form rule sets.',
 						'block-visibility'
 					) }
 					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-advanced-custom-fields-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					position="bottom center"
 				/>
+				<div className="control-panel-item__header-toolbar">
+					<Button
+						icon={ plus }
+						onClick={ () => addRuleSet() }
+						label={ __( 'Add rule set', 'block-visibility' ) }
+						isSmall
+					/>
+				</div>
 			</h3>
 			<div className="visibility-control__help">
 				{ sprintf(
@@ -152,12 +159,7 @@ export default function ACF( props ) {
 					);
 				} ) }
 			</div>
-			<div className="rule-sets__add-rule-set">
-				<Button onClick={ () => addRuleSet() } isSecondary>
-					{ __( 'Add rule set', 'block-visibility' ) }
-				</Button>
-			</div>
-			<div className="hide-on-rule-sets">
+			<div className="control-panel-item__hide-when">
 				<ToggleControl
 					label={ __(
 						'Hide when rules apply',
