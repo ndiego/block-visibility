@@ -14,7 +14,7 @@ import { plus } from '@wordpress/icons';
  * Internal dependencies
  */
 import Schedule from './schedule';
-import InformationPopover from './../../utils/components/information-popover';
+import { InformationPopover } from './../../components';
 
 /**
  * Add the date/time vsibility controls
@@ -29,7 +29,7 @@ export default function DateTime( props ) {
 		( control ) => control.settingSlug === 'date_time' && control?.isActive
 	);
 
-	if ( ! controlActive  ) {
+	if ( ! controlActive ) {
 		return null;
 	}
 
@@ -64,20 +64,20 @@ export default function DateTime( props ) {
 
 	return (
 		<div className="control-panel-item date-time-control">
-			<h3 className="control-panel-item-header has-icon">
+			<h3 className="control-panel-item__header has-icon">
 				<span>{ __( 'Date & Time', 'block-visibility' ) }</span>
 				<InformationPopover
 					message={ __(
-						'The Date & Time control allows you to automatically schedule when the block should be visible on your website.',
+						'The Date & Time control allows you to schedule when the block should be visible.',
 						'block-visibility'
 					) }
 					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-date-time-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					position="bottom center"
 				/>
-				<div className="control-panel-item-header__toolbar">
+				<div className="control-panel-item__header-toolbar">
 					<Button
-						icon={ plus } 
-						onClick={ () => addSchedule() } 
+						icon={ plus }
+						onClick={ () => addSchedule() }
 						label={ __( 'Add schedule', 'block-visibility' ) }
 						isSmall
 					/>
@@ -95,7 +95,23 @@ export default function DateTime( props ) {
 						: __( 'Show', 'block-visibility' )
 				) }
 			</div>
-			<div className="date-time-control__hide-on-schedules">
+			<div className="date-time-control__schedules">
+				{ schedules.map( ( schedule, scheduleIndex ) => {
+					return (
+						<Schedule
+							key={ scheduleIndex }
+							dateTime={ dateTime }
+							schedules={ schedules }
+							scheduleIndex={ scheduleIndex }
+							scheduleAtts={ schedule }
+							hideOnSchedules={ hideOnSchedules }
+							{ ...props }
+						/>
+					);
+				} ) }
+			</div>
+			<Slot name="DateTimeControls" />
+			<div className="control-panel-item__hide-when">
 				<ToggleControl
 					label={ __(
 						'Hide when schedules apply',
@@ -113,22 +129,6 @@ export default function DateTime( props ) {
 					}
 				/>
 			</div>
-			<div className="date-time-control__schedules">
-				{ schedules.map( ( schedule, scheduleIndex ) => {
-					return (
-						<Schedule
-							key={ scheduleIndex }
-							dateTime={ dateTime }
-							schedules={ schedules }
-							scheduleIndex={ scheduleIndex }
-							scheduleAtts={ schedule }
-							hideOnSchedules={ hideOnSchedules }
-							{ ...props }
-						/>
-					);
-				} ) }
-			</div>
-			<Slot name="DateTimeControls" />
 		</div>
 	);
 }

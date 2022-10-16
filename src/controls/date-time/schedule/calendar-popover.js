@@ -39,7 +39,7 @@ export default function CalendarPopover( props ) {
 				<Button
 					label={ __(
 						'Close',
-						'block-visibility-pro'
+						'block-visibility'
 					) }
 					onClick={ () => setPickerOpen( false ) }
 					icon={ closeSmall }

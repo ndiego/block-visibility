@@ -16,7 +16,7 @@ import { createInterpolateElement } from '@wordpress/element';
  * Internal dependencies
  */
 import icons from './../../utils/icons';
-import InformationPopover from './../../utils/components/information-popover';
+import { InformationPopover } from './../../components';
 
 /**
  * Add the Wp Fusion controls
@@ -32,7 +32,7 @@ export default function WPFusion( props ) {
 	const controlActive = enabledControls.some(
 		( control ) => control.settingSlug === 'wp_fusion' && control?.isActive
 	);
-	
+
 	if ( ! controlActive || ! pluginActive ) {
 		return null;
 	}
@@ -154,7 +154,7 @@ export default function WPFusion( props ) {
 
 	return (
 		<div className="control-panel-item wp-fusion-control">
-			<h3 className="control-panel-item-header has-icon">
+			<h3 className="control-panel-item__header has-icon">
 				<Icon icon={ icons.wpFusion } />
 				<span>{ __( 'WP Fusion', 'block-visibility' ) }</span>
 				<InformationPopover
@@ -170,7 +170,7 @@ export default function WPFusion( props ) {
 					position="bottom center"
 				/>
 			</h3>
-			<div className="visibility-control__group-fields">
+			<div className="control-panel-item__fields">
 				{ anyAllFields }
 				{ notField }
 			</div>

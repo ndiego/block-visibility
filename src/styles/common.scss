@@ -46,8 +46,3 @@
 		}
 	}
 }
-
-.components-button[aria-disabled=true]:focus {
-    box-shadow: none;
-    outline: none;
-}

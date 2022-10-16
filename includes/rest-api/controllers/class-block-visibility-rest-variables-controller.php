@@ -100,7 +100,7 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 		$variables = apply_filters(
 			'block_visibility_rest_variables',
 			$variables,
-			'simplified'
+			$request_type
 		);
 
 		return new WP_REST_Response( $variables, 200 );

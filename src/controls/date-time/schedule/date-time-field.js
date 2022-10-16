@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
-import { calendar, closeSmall } from '@wordpress/icons';
+import { closeSmall } from '@wordpress/icons';
 
 /**
  * Renders the date/time field (buttons)
@@ -13,16 +13,16 @@ import { calendar, closeSmall } from '@wordpress/icons';
  * @return {string}		 Return the rendered JSX
  */
 export default function DateTimeField( props ) {
-	const { 
-		dateType, 
-		label, 
-		title, 
-		hasDateTime, 
-		setAttribute, 
-		setPickerOpen, 
+	const {
+		dateType,
+		label,
+		title,
+		hasDateTime,
+		setAttribute,
+		setPickerOpen,
 		setPickerType,
 	} = props;
-console.log( dateType );
+
 	return (
 		<div className="date-time-item__field">
 			<Button

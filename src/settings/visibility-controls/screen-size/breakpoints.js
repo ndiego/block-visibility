@@ -7,7 +7,7 @@ import { __experimentalUnitControl as UnitControl } from '@wordpress/components'
 /**
  * Internal dependencies
  */
-import InformationPopover from './../../../utils/components/information-popover';
+import { InformationPopover } from './../../../components';
 
 /**
  * Renders the breakpoint input settings.

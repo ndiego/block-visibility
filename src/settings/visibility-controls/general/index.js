@@ -2,7 +2,6 @@
  * External dependencies
  */
 import Select from 'react-select';
-import { union } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -14,7 +13,7 @@ import { Slot } from '@wordpress/components';
  * Internal dependencies
  */
 import getEnabledControls from './../../../utils/get-enabled-controls';
-import InformationPopover from './../../../utils/components/information-popover';
+import { InformationPopover } from './../../../components';
 
 /**
  * Renders the general visibility control settings.
@@ -33,12 +32,12 @@ export default function General( props ) {
 	enabledControls.forEach( ( control ) => {
 		defaultControlOptions.push( {
 			label: control.label,
-			value: control.settingSlug
+			value: control.settingSlug,
 		} );
 	} );
-console.log( enabledControls );
+
 	// Manually set defaults, this ensures the main settings function properly
-    const defaultControls = pluginSettings?.default_controls ?? []; // eslint-disable-line
+	const defaultControls = pluginSettings?.default_controls ?? []; // eslint-disable-line
 	const selectedControls = defaultControlOptions.filter( ( control ) =>
 		defaultControls.includes( control.value )
 	);
@@ -103,11 +102,11 @@ console.log( enabledControls );
 		multiValueLabel: ( base, state ) => {
 			return state.data.isFixed
 				? {
-						...base,
-						backgroundColor: '#757575',
-						color: '#ffffff',
-						paddingRight: 6,
-				  }
+					...base,
+					backgroundColor: '#757575',
+					color: '#ffffff',
+					paddingRight: 6,
+				}
 				: base;
 		},
 		multiValueRemove: ( base, state ) => {

@@ -8,8 +8,6 @@ import { withFilters, Slot } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import UpdateSettings from './../utils/update-settings';
-import InformationPopover from './../../utils/components/information-popover';
 import General from './general';
 import HideBlock from './hide-block';
 import DateTime from './date-time';
@@ -17,6 +15,8 @@ import UserRole from './user-role';
 import ScreenSize from './screen-size';
 import QueryString from './query-string';
 import Integrations from './integrations';
+import UpdateSettings from './../update-settings';
+import { InformationPopover } from './../../components';
 
 // Provides an entry point to slot in additional settings. Must be placed
 // outside of function to avoid unnecessary rerenders.

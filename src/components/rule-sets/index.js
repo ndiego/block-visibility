@@ -16,9 +16,8 @@ import {
 	MenuItem,
 	Slot,
 	TextControl,
-	ToggleControl,
 } from '@wordpress/components';
-import { moreVertical, settings } from '@wordpress/icons';
+import { moreVertical, pencil } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -43,7 +42,9 @@ export default function RuleSets( props ) {
 	} = props;
 
 	const title = ruleSet?.title ?? '';
-	const displayTitle = title ? title : __( 'Rule Set', 'block-visibility' );
+	const displayTitle = title
+		? title
+		: __( 'Rule Set', 'block-visibility' );
 	const enable = ruleSet?.enable ?? true;
 	const rules = ruleSet?.rules ?? [];
 
@@ -99,31 +100,22 @@ export default function RuleSets( props ) {
 		);
 	};
 
-	const settingsDropdown = (
+	const editTitleDropdown = (
 		<DropdownMenu
-			className="settings-dropdown"
-			label={ __( 'Settings', 'block-visibility' ) }
-			icon={ settings }
+			label={ __( 'Edit', 'block-visibility' ) }
+			icon={ pencil }
 			popoverProps={ {
-				className: 'block-visibility__control-popover control-settings',
+				className: 'block-visibility__control-popover edit-title',
 				focusOnMount: 'container',
 			} }
 		>
 			{ () => (
-				<>
-					<h3>{ __( 'Settings', 'block-visibility' ) }</h3>
-					<TextControl
-						value={ title }
-						label={ __( 'Rule set title', 'block-visibility' ) }
-						placeholder={ __( 'Rule Set', 'block-visibility' ) }
-						onChange={ ( value ) => setAttribute( 'title', value ) }
-					/>
-					<ToggleControl
-						label={ __( 'Enable rule set', 'block-visibility' ) }
-						checked={ enable }
-						onChange={ () => setAttribute( 'enable', ! enable ) }
-					/>
-				</>
+				<TextControl
+					value={ title }
+					label={ __( 'Rule set title', 'block-visibility' ) }
+					placeholder={ __( 'Rule Set', 'block-visibility' ) }
+					onChange={ ( value ) => setAttribute( 'title', value ) }
+				/>
 			) }
 		</DropdownMenu>
 	);
@@ -146,6 +138,13 @@ export default function RuleSets( props ) {
 
 					<MenuGroup label={ __( 'Tools', 'block-visibility' ) }>
 						<Slot name="RuleSetMoreSettingsTools" />
+						<MenuItem
+							onClick={ () =>
+								setAttribute( 'enable', ! enable )
+							}
+						>
+							{ enable ? __( 'Disable', 'block-visibility' ) : __( 'Enable', 'block-visibility' ) }
+						</MenuItem>
 						<MenuItem
 							className="more-settings__tools-duplicate"
 							onClick={ () => {
@@ -213,9 +212,11 @@ export default function RuleSets( props ) {
 			} ) }
 		>
 			<div className="rule-set__header section-header">
-				<span className="section-header__title">{ displayTitle }</span>
+				<div className="section-header__title">
+					<span>{ displayTitle }</span>
+					{ editTitleDropdown }
+				</div>
 				<div className="section-header__toolbar">
-					{ settingsDropdown }
 					{ optionsDropdown }
 				</div>
 			</div>

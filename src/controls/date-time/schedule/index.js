@@ -7,7 +7,7 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import {
 	Disabled,
 	DropdownMenu,
@@ -16,10 +16,9 @@ import {
 	Notice,
 	Slot,
 	TextControl,
-	ToggleControl,
 	withFilters,
 } from '@wordpress/components';
-import { cog, pencil, moreVertical } from '@wordpress/icons';
+import { pencil, moreVertical } from '@wordpress/icons';
 import { useState } from '@wordpress/element';
 
 /**
@@ -54,7 +53,6 @@ export default function Schedule( props ) {
 		hideOnSchedules,
 	} = props;
 	const [ pickerOpen, setPickerOpen ] = useState( false );
-	const [ endPickerOpen, setEndPickerOpen ] = useState( false );
 	const [ pickerType, setPickerType ] = useState( null );
 
 	// There needs to be a unique index for the Slots since we technically have
@@ -69,8 +67,6 @@ export default function Schedule( props ) {
 	const start = scheduleAtts?.start ?? null;
 	const end = scheduleAtts?.end ?? null;
 
-	const today = new Date( new Date().setHours( 0, 0, 0, 0 ) );
-
 	const scheduleTitle = title ? title : __( 'Schedule', 'block-visibility' );
 	const startDateLabel = formatDateLabel(
 		start,
@@ -78,39 +74,8 @@ export default function Schedule( props ) {
 	);
 	const endDateLabel = formatDateLabel(
 		end,
-		__( 'Never', 'block-visibility' )
+		__( 'Forever', 'block-visibility' )
 	);
-
-	// If there is no start date/time selected, but there is an end, default the
-	// starting selection in the calendar to the day prior.
-	const selectedStart = ( _start, _end, _today ) => {
-		if ( _start ) {
-			return _start;
-		}
-
-		const startAlt = _end ? new Date( _end ) : new Date( _today );
-
-		if ( _end ) {
-			startAlt.setHours( 0, 0, 0, 0 );
-			startAlt.setDate( startAlt.getDate() - 1 );
-		}
-
-		return startAlt;
-	};
-
-	// If there is no end date/time selected, but there is a start, default the
-	// starting selection in the calendar to the next day.
-	const selectedEnd = ( _start, _end, _today ) => {
-		if ( _end ) {
-			return _end;
-		}
-
-		const endAlt = _start ? new Date( _start ) : new Date( _today );
-		endAlt.setHours( 0, 0, 0, 0 );
-		endAlt.setDate( endAlt.getDate() + 1 );
-
-		return endAlt;
-	};
 
 	// If the start time is greater or equal to the end time, display a warning.
 	let alert = false;
@@ -151,44 +116,30 @@ export default function Schedule( props ) {
 		);
 	};
 
-	const settingsDropdown = (
+	const editTitleDropdown = (
 		<DropdownMenu
-			className="settings-dropdown"
-			label={ __( 'Settings', 'block-visibility' ) }
+			label={ __( 'Edit', 'block-visibility' ) }
 			icon={ pencil }
 			popoverProps={ {
-				className: 'block-visibility__control-popover control-settings',
+				className: 'block-visibility__control-popover edit-title',
 				focusOnMount: 'container',
 			} }
-			toggleProps={ {  isSmall: true } }
+			toggleProps={ { isSmall: true } }
 		>
 			{ () => (
-				<>
-					<h3>{ __( 'Settings', 'block-visibility' ) }</h3>
-					<TextControl
-						value={ title }
-						label={ __( 'Schedule title', 'block-visibility' ) }
-						placeholder={ __( 'Schedule', 'block-visibility' ) }
-						onChange={ ( value ) => setAttribute( 'title', value ) }
-					/>
-					<ToggleControl
-						label={ __( 'Enable schedule', 'block-visibility' ) }
-						checked={ enable }
-						onChange={ () => setAttribute( 'enable', ! enable ) }
-					/>
-					<Slot
-						name={
-							'DateTimeScheduleControlsSettings-' + uniqueIndex
-						}
-					/>
-				</>
+				<TextControl
+					value={ title }
+					label={ __( 'Schedule title', 'block-visibility' ) }
+					placeholder={ __( 'Schedule', 'block-visibility' ) }
+					onChange={ ( value ) => setAttribute( 'title', value ) }
+				/>
 			) }
 		</DropdownMenu>
 	);
 
 	const removeLabel =
 		schedules.length <= 1
-			? __( 'Clear schedule', 'block-visibility' )
+			? __( 'Remove schedule', 'block-visibility' )
 			: __( 'Delete schedule', 'block-visibility' );
 
 	const optionsDropdown = (
@@ -204,6 +155,13 @@ export default function Schedule( props ) {
 
 					<MenuGroup label={ __( 'Tools', 'block-visibility' ) }>
 						<Slot name="ScheduleOptionsTools" />
+						<MenuItem
+							onClick={ () =>
+								setAttribute( 'enable', ! enable )
+							}
+						>
+							{ enable ? __( 'Disable', 'block-visibility' ) : __( 'Enable', 'block-visibility' ) }
+						</MenuItem>
 						<MenuItem
 							onClick={ () => {
 								duplicateSchedule();
@@ -238,9 +196,18 @@ export default function Schedule( props ) {
 			<Slot name={ 'DateTimeScheduleControlsTop-' + uniqueIndex } />
 
 			<div className="schedule-fields__date-time">
+				<div className="visibility-control__label">
+					{ sprintf(
+						// Translators: Whether the block is hidden or visible.
+						__( '%s the block', 'block-visibility' ),
+						hideOnSchedules
+							? __( 'Hide', 'block-visibility' )
+							: __( 'Show', 'block-visibility' )
+					) }
+				</div>
 				<div className="date-time-item">
-					<span className="date-time-item__label">
-						{ __( 'Start', 'block-visibility' ) }
+					<span className="visibility-control__sub-label">
+						{ __( 'From', 'block-visibility' ) }
 					</span>
 					<DateTimeField
 						label={ startDateLabel }
@@ -255,10 +222,9 @@ export default function Schedule( props ) {
 						setPickerOpen={ setPickerOpen }
 					/>
 				</div>
-
 				<div className="date-time-item">
-					<span className="date-time-item__label">
-						{ __( 'Stop', 'block-visibility' ) }
+					<span className="visibility-control__sub-label">
+						{ __( 'To', 'block-visibility' ) }
 					</span>
 					<DateTimeField
 						label={ endDateLabel }
@@ -284,13 +250,13 @@ export default function Schedule( props ) {
 			</div>
 			{ pickerOpen && pickerType && (
 				<CalendarPopover
-					currentDate={ 
-						pickerType === 'start' ? start : end 
+					currentDate={
+						pickerType === 'start' ? start : end
 					}
-					label={ 
-						pickerType === 'start' ? 
-							__( 'Start Date/Time', 'block-visibility' ) : 
-							__( 'End Date/Time', 'block-visibility' ) 
+					label={
+						pickerType === 'start'
+							? __( 'Start Date/Time', 'block-visibility' )
+							: __( 'End Date/Time', 'block-visibility' )
 					}
 					isOpen={ setPickerOpen }
 					setAttribute={ setAttribute }
@@ -298,7 +264,7 @@ export default function Schedule( props ) {
 					pickerType={ pickerType }
 				/>
 			) }
-			
+
 			<Slot name={ 'DateTimeScheduleControlsBottom-' + uniqueIndex } />
 		</div>
 	);
@@ -316,7 +282,7 @@ export default function Schedule( props ) {
 			<div className="schedule-header section-header">
 				<div className="section-header__title">
 					<span>{ scheduleTitle }</span>
-					{ settingsDropdown }
+					{ editTitleDropdown }
 				</div>
 				<div className="section-header__toolbar">
 					<Slot name={ 'DateTimeScheduleToolbar-' + uniqueIndex } />

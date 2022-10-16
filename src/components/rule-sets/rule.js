@@ -42,6 +42,12 @@ export default function Rule( props ) {
 
 	let selectedRule = allFields.filter( ( v ) => v.value === rule.field );
 
+	// If we do not have grouped fields, then the ruleField should be
+	// automatically selected.
+	if ( ! groupedFields ) {
+		selectedRule = allFields.filter( ( v ) => v.type === 'ruleField' );
+	}
+
 	if ( selectedRule.length !== 0 ) {
 		selectedRule = selectedRule[ 0 ];
 	}
@@ -88,19 +94,6 @@ export default function Rule( props ) {
 		};
 	}
 
-	const deleteRuleButton = (
-		<Button
-			label={
-				ruleSet.rules.length <= 1
-					? __( 'Clear Rule', 'block-visibility' )
-					: __( 'Delete Rule', 'block-visibility' )
-			}
-			icon={ closeSmall }
-			className="toolbar__delete"
-			onClick={ () => removeRule() }
-		/>
-	);
-
 	const handleRuleChange = (
 		value,
 		valueType,
@@ -128,7 +121,11 @@ export default function Rule( props ) {
 		const newRules = [ ...ruleSet.rules ];
 
 		if ( fieldType === 'ruleField' ) {
-			newRules[ ruleIndex ] = { field: newValue };
+			// If we have grouped field, reset the all fields when the
+			// ruleField is reset. This isn't need when fields aren't grouped.
+			newRules[ ruleIndex ] = groupedFields
+				? { field: newValue }
+				: assign( { ...newRules[ ruleIndex ] }, { field: newValue } );
 		} else if ( fieldType === 'subField' ) {
 			if ( hasMultipleSubFields ) {
 				newRules[ ruleIndex ] = assign(
@@ -177,7 +174,14 @@ export default function Rule( props ) {
 		<div key={ ruleIndex } className="rule">
 			<div className="rule__header">
 				<span>{ defaultRuleLabel( ruleIndex ) }</span>
-				{ deleteRuleButton }
+				{ ruleSet.rules.length > 1 && (
+					<Button
+						label={ __( 'Delete Rule', 'block-visibility' ) }
+						icon={ closeSmall }
+						className="toolbar__delete"
+						onClick={ () => removeRule() }
+					/>
+				) }
 			</div>
 			<div className="rule__fields">
 				<div

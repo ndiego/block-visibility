@@ -15,7 +15,7 @@ import { Icon } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
-import icons from './../../utils/icons';
+import icons from './../utils/icons';
 
 /**
  * Renders the update settings buttons and animation

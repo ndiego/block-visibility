@@ -15,8 +15,8 @@ import { TextControl, Icon } from '@wordpress/components';
  * Internal dependencies
  */
 import BlockCategory from './block-category';
-import UpdateSettings from './../utils/update-settings';
-import InformationPopover from './../../utils/components/information-popover';
+import UpdateSettings from './../update-settings';
+import { InformationPopover } from './../../components';
 import icons from './../../utils/icons';
 
 /**
