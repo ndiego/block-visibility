@@ -73,8 +73,8 @@ export default function WPFusion( props ) {
 
 	let anyAllFields = (
 		<>
-			<div className="visibility-control wp-fusion__tags-any">
-				<div className="visibility-control__label">
+			<div className="control-fields-item">
+				<div className="control-fields-item__label">
 					{ __( 'Required Tags (Any)', 'block-visibility' ) }
 				</div>
 				<Select
@@ -86,15 +86,15 @@ export default function WPFusion( props ) {
 					onChange={ ( value ) => handleOnChange( 'tagsAny', value ) }
 					isMulti
 				/>
-				<div className="visibility-control__help">
+				<div className="components-base-control__help">
 					{ __(
 						'Only visible to logged-in users with at least one of the selected tags.',
 						'block-visibility'
 					) }
 				</div>
 			</div>
-			<div className="visibility-control wp-fusion__tags-all">
-				<div className="visibility-control__label">
+			<div className="control-fields-item">
+				<div className="control-fields-item__label">
 					{ __( 'Required Tags (All)', 'block-visibility' ) }
 				</div>
 				<Select
@@ -106,7 +106,7 @@ export default function WPFusion( props ) {
 					onChange={ ( value ) => handleOnChange( 'tagsAll', value ) }
 					isMulti
 				/>
-				<div className="visibility-control__help">
+				<div className="components-base-control__help">
 					{ createInterpolateElement(
 						__(
 							'Only visible to logged-in users with <strong>all</strong> of the selected tags.',
@@ -126,8 +126,8 @@ export default function WPFusion( props ) {
 	}
 
 	let notField = (
-		<div className="visibility-control wp-fusion__tags-not">
-			<div className="visibility-control__label">
+		<div className="control-fields-item">
+			<div className="control-fields-item__label">
 				{ __( 'Required Tags (Not)', 'block-visibility' ) }
 			</div>
 			<Select
@@ -139,7 +139,7 @@ export default function WPFusion( props ) {
 				onChange={ ( value ) => handleOnChange( 'tagsNot', value ) }
 				isMulti
 			/>
-			<div className="visibility-control__help">
+			<div className="components-base-control__help">
 				{ __(
 					'Hide from logged-in users with at least one of the selected tags.',
 					'block-visibility'
@@ -153,8 +153,8 @@ export default function WPFusion( props ) {
 	}
 
 	return (
-		<div className="control-panel-item wp-fusion-control">
-			<h3 className="control-panel-item__header has-icon">
+		<div className="controls-panel-item wp-fusion-control">
+			<h3 className="controls-panel-item__header has-icon">
 				<Icon icon={ icons.wpFusion } />
 				<span>{ __( 'WP Fusion', 'block-visibility' ) }</span>
 				<InformationPopover
@@ -170,18 +170,18 @@ export default function WPFusion( props ) {
 					position="bottom center"
 				/>
 			</h3>
-			<div className="control-panel-item__fields">
+			<div className="controls-panel-item__control-fields">
 				{ anyAllFields }
 				{ notField }
+				{ ! hasUserRoles && (
+					<Notice status="warning" isDismissible={ false }>
+						{ __(
+							'The WP Fusion control works best in coordination with the User Role control, which has been disabled.',
+							'block-visibility'
+						) }
+					</Notice>
+				) }
 			</div>
-			{ ! hasUserRoles && (
-				<Notice status="warning" isDismissible={ false }>
-					{ __(
-						'The WP Fusion control works best in coordination with the User Role control, which has been disabled. To re-enable, click the eye icon in the Controls Toolbar above.',
-						'block-visibility'
-					) }
-				</Notice>
-			) }
 		</div>
 	);
 }

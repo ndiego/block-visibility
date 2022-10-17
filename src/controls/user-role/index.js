@@ -164,8 +164,8 @@ export default function UserRole( props ) {
 	};
 
 	return (
-		<div className="control-panel-item user-role-control">
-			<h3 className="control-panel-item__header has-icon">
+		<div className="controls-panel-item user-role-control">
+			<h3 className="controls-panel-item__header has-icon">
 				<span>{ __( 'User Role', 'block-visibility' ) }</span>
 				<InformationPopover
 					message={ __(
@@ -176,7 +176,7 @@ export default function UserRole( props ) {
 					position="bottom center"
 				/>
 				{ ruleSetsActive && (
-					<div className="control-panel-item__header-toolbar">
+					<div className="controls-panel-item__header-toolbar">
 						<Button
 							icon={ plus }
 							onClick={ () => addRuleSet() }
@@ -186,8 +186,8 @@ export default function UserRole( props ) {
 					</div>
 				) }
 			</h3>
-			<div className="control-panel-item__fields">
-				<div className="visibility-control visibility-by-role">
+			<div className="controls-panel-item__control-fields">
+				<div className="control-fields-item">
 					<Select
 						className="block-visibility__react-select"
 						classNamePrefix="react-select"
@@ -204,7 +204,7 @@ export default function UserRole( props ) {
 						}
 					/>
 					{ helpMessage && (
-						<div className="visibility-control__help">
+						<div className="control-fields-item__help">
 							{ helpMessage }
 						</div>
 					) }
@@ -235,31 +235,31 @@ export default function UserRole( props ) {
 						{ ...props }
 					/>
 				) }
-			</div>
-			{ ! options.some(
-				( option ) => option.value === visibilityByRole
-			) && (
-				<Notice status="warning" isDismissible={ false }>
-					{ createInterpolateElement(
-						__(
-							'The User Role option that was previously selected has been disabled. Choose another option or update the <a>Visibility Control</a> settings.',
-							'block-visibility'
-						),
-						{
-							a: (
-								<a // eslint-disable-line
-									href={
-										settingsUrl +
-										'&tab=visibility-controls'
-									}
-									target="_blank"
-									rel="noreferrer"
-								/>
+				{ ! options.some(
+					( option ) => option.value === visibilityByRole
+				) && (
+					<Notice status="warning" isDismissible={ false }>
+						{ createInterpolateElement(
+							__(
+								'The User Role option that was previously selected has been disabled. Choose another option or update the <a>Visibility Control</a> settings.',
+								'block-visibility'
 							),
-						}
-					) }
-				</Notice>
-			) }
+							{
+								a: (
+									<a // eslint-disable-line
+										href={
+											settingsUrl +
+											'&tab=visibility-controls'
+										}
+										target="_blank"
+										rel="noreferrer"
+									/>
+								),
+							}
+						) }
+					</Notice>
+				) }
+			</div>
 		</div>
 	);
 }

@@ -63,8 +63,8 @@ export default function DateTime( props ) {
 	};
 
 	return (
-		<div className="control-panel-item date-time-control">
-			<h3 className="control-panel-item__header has-icon">
+		<div className="controls-panel-item date-time-control">
+			<h3 className="controls-panel-item__header has-icon">
 				<span>{ __( 'Date & Time', 'block-visibility' ) }</span>
 				<InformationPopover
 					message={ __(
@@ -74,7 +74,7 @@ export default function DateTime( props ) {
 					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-date-time-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					position="bottom center"
 				/>
-				<div className="control-panel-item__header-toolbar">
+				<div className="controls-panel-item__header-toolbar">
 					<Button
 						icon={ plus }
 						onClick={ () => addSchedule() }
@@ -83,7 +83,7 @@ export default function DateTime( props ) {
 					/>
 				</div>
 			</h3>
-			<div className="visibility-control__help">
+			<div className="controls-panel-item__description">
 				{ sprintf(
 					// Translators: Whether the block is hidden or visible.
 					__(
@@ -95,39 +95,41 @@ export default function DateTime( props ) {
 						: __( 'Show', 'block-visibility' )
 				) }
 			</div>
-			<div className="date-time-control__schedules">
-				{ schedules.map( ( schedule, scheduleIndex ) => {
-					return (
-						<Schedule
-							key={ scheduleIndex }
-							dateTime={ dateTime }
-							schedules={ schedules }
-							scheduleIndex={ scheduleIndex }
-							scheduleAtts={ schedule }
-							hideOnSchedules={ hideOnSchedules }
-							{ ...props }
-						/>
-					);
-				} ) }
-			</div>
-			<Slot name="DateTimeControls" />
-			<div className="control-panel-item__hide-when">
-				<ToggleControl
-					label={ __(
-						'Hide when schedules apply',
-						'block-visibility'
-					) }
-					checked={ hideOnSchedules }
-					onChange={ () =>
-						setControlAtts(
-							'dateTime',
-							assign(
-								{ ...dateTime },
-								{ hideOnSchedules: ! hideOnSchedules }
+			<div className="controls-panel-item__control-fields">
+				<div className="control-fields-item__schedules">
+					{ schedules.map( ( schedule, scheduleIndex ) => {
+						return (
+							<Schedule
+								key={ scheduleIndex }
+								dateTime={ dateTime }
+								schedules={ schedules }
+								scheduleIndex={ scheduleIndex }
+								scheduleAtts={ schedule }
+								hideOnSchedules={ hideOnSchedules }
+								{ ...props }
+							/>
+						);
+					} ) }
+				</div>
+				<Slot name="DateTimeControls" />
+				<div className="control-fields-item__hide-when">
+					<ToggleControl
+						label={ __(
+							'Hide when schedules apply',
+							'block-visibility'
+						) }
+						checked={ hideOnSchedules }
+						onChange={ () =>
+							setControlAtts(
+								'dateTime',
+								assign(
+									{ ...dateTime },
+									{ hideOnSchedules: ! hideOnSchedules }
+								)
 							)
-						)
-					}
-				/>
+						}
+					/>
+				</div>
 			</div>
 		</div>
 	);

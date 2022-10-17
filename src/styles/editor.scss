@@ -1,7 +1,7 @@
 @import './common';
 @import './react-select';
 
-.block-visibility__control-panel {
+.block-visibility__controls-panel {
     border-top: 1px solid #dddddd;
     display: grid;
     gap: 16px;
@@ -40,15 +40,15 @@
         }
     }
 
-    .control-panel-container,
-    // When controls are disabled, we still need gap.
-    .components-disabled {
+    .controls-panel-container,
+    // When controls are disabled due to the Hide Block control, we still need gap.
+    .components-disabled.hide-block-enabled {
         display: grid;
-        gap: 20px;
+        gap: 28px;
     }
 }
 
-.visibility-controls__container,
+.controls-panel-container,
 .preset-manager__content {
 
     .components-disabled {
@@ -56,10 +56,6 @@
 
         * {
             opacity: 1 !important;
-        }
-
-        .visibility-control {
-            margin-bottom: 18px !important;
         }
     }
 
@@ -86,8 +82,18 @@
         }
     }
 
-    .control-panel-item {
-        .control-panel-item__header {
+    .components-base-control__label-hint {
+        color: #757575;
+    }
+
+    .controls-panel-item {
+
+        // The last control in the control panel/set.
+        &:last-child {
+            margin-bottom: 12px;
+        }
+
+        .controls-panel-item__header {
             align-items: center;
             display: flex;
             font-size: 11px;
@@ -121,7 +127,7 @@
                 }
             }
 
-            .control-panel-item__header-toolbar {
+            .controls-panel-item__header-toolbar {
                 margin-left: auto;
 
                 // Reduce the size of some icons.
@@ -131,19 +137,42 @@
             }
         }
 
-        .control-panel-item__fields {
-            .components-base-control__help {
-                margin-top: 0;
+        .controls-panel-item__description {
+            font-size: 12px;
+            font-style: normal;
+            color: rgb(117, 117, 117);
+            margin-bottom: 16px;
+    
+            strong {
+                font-weight: 700;
             }
         }
 
-        // Common styles for all hide when toggles.
-        .control-panel-item__hide-when {
-            margin-top: 20px;
+        .controls-panel-item__control-fields {
+            .components-base-control {
+                margin-bottom: 20px;
+
+                &.components-toggle-control {
+                    margin-bottom: 12px;
+                }
+
+                &:last-child {
+                    margin-bottom: 0px;
+                }
+
+                .components-base-control__help {
+                    margin-bottom: 0;
+                }
+            }
+
+            // Common styles for all "hide when" toggles.
+            .control-fields-item__hide-when {
+                margin-top: 20px;
+            }
         }
     }
 
-    .visibility-control {
+    .control-fields-item {
         margin-bottom: 18px;
 
         &.is-open {
@@ -163,18 +192,33 @@
         }
     }
 
-    .visibility-control__label {
+    .control-fields-item__label {
         margin-bottom: 8px;
     }
 
-    .visibility-control__sub-label {
+    .control-fields-item__sub-label {
         font-size: 11px;
         font-weight: 500;
         line-height: 1.4;
         text-transform: uppercase;
     }
 
-    .visibility-control__help {
+    .control-fields-item__help {
+        color: #757575;
+        font-size: 12px;
+        font-style: normal;
+        margin-top: 8px;
+
+        a {
+            cursor: pointer;
+        }
+
+        strong {
+            font-weight: 700;
+        }
+    }
+
+    .components-base-control__help {
         font-size: 12px;
         font-style: normal;
         color: rgb(117, 117, 117);
@@ -185,13 +229,16 @@
         }
     }
 
-    .components-base-control__help {
-        a {
-            cursor: pointer;
-        }
+    .components-notice {
+        margin: 10px 0;
 
-        strong {
-            font-weight: 700;
+        .components-notice__content {
+            margin: 2px 0;
+
+            .components-base-control__help {
+                display: inline-block;
+                margin: 4px 0 0;
+            }
         }
     }
 
@@ -329,12 +376,6 @@
                 }
             }
         }
-
-        .control-panel-item {
-            &:not(:last-child) {
-                margin-bottom: 15px;
-            }
-        }
     }
 
     /* Rule Set styling ----------------------------------------------------- */
@@ -388,13 +429,18 @@
                             }
                         }
 
-                        .visibility-control__help {
+                        .components-base-control__help {
                             margin-top: 10px;
                             margin-bottom: 0;
                         }
 
                         .components-base-control__field {
                             margin-bottom: 0;
+                        }
+
+                        // Add a bit more space for toggles between select fields.
+                        .components-toggle-control {
+                            margin: 4px 0;
                         }
                     }
 
@@ -415,21 +461,17 @@
         }
     }
 
-    .rule-sets__add-rule-set {
-        margin: 20px 0 24px;
-    }
-
-    /* Specific styles for the Date Time visibility control ------------------*/
+    /* Specific styles for the Date Time control -----------------------------*/
     .date-time-control {
 
-        .date-time-control__schedules {
+        .control-fields-item__schedules {
             display: grid;
             /* autoprefixer: ignore next */
             grid-template-columns: repeat( auto-fit, minmax( 248px, 1fr ) );
             grid-column-gap: 32px;
             grid-row-gap: 20px;
 
-            .schedule-item {
+            .schedules-item {
                 &.disabled {
                     .date-time-control__schedule--heading {
                         span {
@@ -438,7 +480,7 @@
                     }
                 }
 
-                .schedule-fields {
+                .schedules-item__fields {
                     display: grid;
                     gap: 16px;
 
@@ -447,8 +489,8 @@
                         display: none;
                     }
 
-                    .schedule-fields__date-time {
-                        .visibility-control__label {
+                    .schedules-item__fields__date-time {
+                        .control-fields-item__label {
                             margin-bottom: 12px;
                         }
 
@@ -458,7 +500,7 @@
                             gap: 8px;
                             margin-top: 8px;
 
-                            .visibility-control__sub-label {
+                            .control-fields-item__sub-label {
                                 min-width: 40px;
                             }
 
@@ -495,17 +537,10 @@
         }
     }
 
-    /* Specific styles for the User Role visibility control ----------------*/
-    .user-role-control {
-        .visibility-control__container {
-            margin-top: -10px;
-        }
-    }
-
-    /* Specific styles for the Screen Size visibility control ----------------*/
+    /* Specific styles for the Screen Size control ---------------------------*/
     .screen-size-control {
         .components-base-control {
-            margin-bottom: 18px;
+            margin-bottom: 12px;
         }
 
         .components-notice {
@@ -513,31 +548,23 @@
         }
     }
 
-    .components-notice {
-        margin: 10px 0;
+    /* Specific styles for the User Role control -----------------------------*/
+    .user-role-control {
 
-        .components-notice__content {
-            margin: 2px 0;
-
-            .visibility-control__help {
-                display: inline-block;
-                margin: 4px 0 0;
-            }
+        // Fix margin on field help text.
+        .control-fields-item:nth-child(2) {
+            margin-top: -8px
         }
     }
 
-    /* Specific styles for the Query String visibility control ---------------*/
+    /* Specific styles for the Query String control --------------------------*/
     .query-string-control {
-        .visibility-control__help {
-            margin-bottom: 18px;
-        }
-
         textarea {
             white-space: nowrap;
         }
     }
 
-    /* Specific styles for the ACF visibility control ------------------------*/
+    /* Specific styles for the ACF control -----------------------------------*/
     .acf-control {
         .components-notice {
             margin-bottom: 20px;
@@ -678,7 +705,7 @@
         .components-notice__content {
             margin: 2px 0;
 
-            .visibility-control__help {
+            .components-base-control__help {
                 display: inline-block;
                 margin: 4px 0 0;
             }
@@ -713,9 +740,8 @@
 /* Specific styles for the Customizer Widgets screen -------------------------*/
 #customize-theme-controls {
 
-    .visibility-controls__container {
-
-        h3.control-panel-item__header {
+    .controls-panel-container {
+        h3.controls-panel-item__header {
             font-size: 13px !important;
             font-weight: 500 !important;
             margin-bottom: 16px !important;

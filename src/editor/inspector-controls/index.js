@@ -13,7 +13,7 @@ import { withSelect } from '@wordpress/data';
 /**
  * Internal dependencies
  */
-import ControlPanel from './control-panel';
+import ControlsPanel from './controls-panel';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import hasPermission from './../utils/has-permission';
 import getEnabledControls from './../../utils/get-enabled-controls';
@@ -115,8 +115,8 @@ function VisibilityInspectorControls( props ) {
 		// Therefore we can freely use SlofFill without needing to add the
 		// provider ourselves.
 		<InspectorControls>
-			<div className="block-visibility__control-panel">
-				<ControlPanel
+			<div className="block-visibility__controls-panel">
+				<ControlsPanel
 					controlSets={ controlSets }
 					controlSetAtts={ controlSets[ 0 ] } // Ok for now since only one control set available.
 					setControlSetAtts={ setControlSetAtts }

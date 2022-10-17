@@ -49,8 +49,8 @@ export default function QueryString( props ) {
 		);
 
 	return (
-		<div className="control-panel-item query-string-control">
-			<h3 className="control-panel-item__header has-icon">
+		<div className="controls-panel-item query-string-control">
+			<h3 className="controls-panel-item__header has-icon">
 				<span>{ __( 'Query String', 'block-visibility' ) }</span>
 				<InformationPopover
 					message={ __(
@@ -61,53 +61,79 @@ export default function QueryString( props ) {
 					position="bottom center"
 				/>
 			</h3>
-			<div className="visibility-control__help">
+			<div className="controls-panel-item__description">
 				{ __(
 					'Enter one URL query string per line.',
 					'block-visibility'
 				) }
 			</div>
-			<TextareaControl
-				label={ __( 'Required Queries (Any)', 'block-visibility' ) }
-				help={ __(
-					'Only visible when least one of the provided URL query strings is present.',
-					'block-visibility'
-				) }
-				value={ queryStringAny }
-				onChange={ ( value ) =>
-					setAttribute( 'queryStringAny', value )
-				}
-				rows="2"
-			/>
-			<TextareaControl
-				label={ __( 'Required Queries (All)', 'block-visibility' ) }
-				help={ createInterpolateElement(
-					__(
-						'Only visible when <strong>all</strong> of the provided URL query strings are present.',
+			<div className="controls-panel-item__control-fields">
+				<TextareaControl
+					label={ createInterpolateElement(
+						__(
+							'Required Queries <span>(Any)</span>',
+							'block-visibility'
+						),
+						{
+							span: <span className="components-base-control__label-hint" />,
+						}
+					) }
+					help={ __(
+						'Show the block if at least one of the provided URL query strings is present.',
 						'block-visibility'
-					),
-					{
-						strong: <strong />,
+					) }
+					value={ queryStringAny }
+					onChange={ ( value ) =>
+						setAttribute( 'queryStringAny', value )
 					}
-				) }
-				value={ queryStringAll }
-				onChange={ ( value ) =>
-					setAttribute( 'queryStringAll', value )
-				}
-				rows="2"
-			/>
-			<TextareaControl
-				label={ __( 'Required Queries (Not)', 'block-visibility' ) }
-				help={ __(
-					'Hide when at least one of the provided URL query strings is present.',
-					'block-visibility'
-				) }
-				value={ queryStringNot }
-				onChange={ ( value ) =>
-					setAttribute( 'queryStringNot', value )
-				}
-				rows="2"
-			/>
+					rows="2"
+				/>
+				<TextareaControl
+					label={ createInterpolateElement(
+						__(
+							'Required Queries <span>(All)</span>',
+							'block-visibility'
+						),
+						{
+							span: <span className="components-base-control__label-hint" />,
+						}
+					) }
+					help={ createInterpolateElement(
+						__(
+							'Show the block if <strong>all</strong> of the provided URL query strings are present.',
+							'block-visibility'
+						),
+						{
+							strong: <strong />,
+						}
+					) }
+					value={ queryStringAll }
+					onChange={ ( value ) =>
+						setAttribute( 'queryStringAll', value )
+					}
+					rows="2"
+				/>
+				<TextareaControl
+					label={ createInterpolateElement(
+						__(
+							'Required Queries <span>(Not)</span>',
+							'block-visibility'
+						),
+						{
+							span: <span className="components-base-control__label-hint" />,
+						}
+					) }
+					help={ __(
+						'Hide the block if at least one of the provided URL query strings is present.',
+						'block-visibility'
+					) }
+					value={ queryStringNot }
+					onChange={ ( value ) =>
+						setAttribute( 'queryStringNot', value )
+					}
+					rows="2"
+				/>
+			</div>
 		</div>
 	);
 }

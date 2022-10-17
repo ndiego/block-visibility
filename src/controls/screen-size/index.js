@@ -148,8 +148,8 @@ export default function ScreenSize( props ) {
 
 	return (
 		<>
-			<div className="control-panel-item screen-size-control">
-				<h3 className="control-panel-item__header has-icon">
+			<div className="controls-panel-item screen-size-control">
+				<h3 className="controls-panel-item__header has-icon">
 					<span>{ __( 'Screen Size', 'block-visibility' ) }</span>
 					<InformationPopover
 						message={ __(
@@ -160,28 +160,30 @@ export default function ScreenSize( props ) {
 						position="bottom center"
 					/>
 				</h3>
-				{ allScreenSizeFields }
-				{ isNotCompatible && (
-					<Notice status="warning" isDismissible={ false }>
-						{ createInterpolateElement(
-							__(
-								'The Screen Size control is unfortunately not compatible with this block type. For more information, and a workaround, visit the <a>Knowledge Base</a>.',
-								'block-visibility'
-							),
-							{
-								a: (
-            						<ExternalLink // eslint-disable-line
-										href={
-											'https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=editor&utm_campaign=plugin_referrals#limitations'
-										}
-										target="_blank"
-										rel="noreferrer"
-									/>
+				<div className="controls-panel-item__control-fields">
+					{ allScreenSizeFields }
+					{ isNotCompatible && (
+						<Notice status="warning" isDismissible={ false }>
+							{ createInterpolateElement(
+								__(
+									'The Screen Size control is unfortunately not compatible with this block type. For more information, and a workaround, visit the <a>Knowledge Base</a>.',
+									'block-visibility'
 								),
-							}
-						) }
-					</Notice>
-				) }
+								{
+									a: (
+										<ExternalLink // eslint-disable-line
+											href={
+												'https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=editor&utm_campaign=plugin_referrals#limitations'
+											}
+											target="_blank"
+											rel="noreferrer"
+										/>
+									),
+								}
+							) }
+						</Notice>
+					) }
+				</div>
 			</div>
 		</>
 	);
