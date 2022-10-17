@@ -40,7 +40,7 @@ const AdditionalControlSetModals = withFilters(
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
-export default function ControlPanelHeader( props ) {
+export default function ControlsPanelHeader( props ) {
 	const [ modalOpen, setModalOpen ] = useState( false );
 	const { activeControls, attributes, setAttributes, enabledControls, controlSetAtts, setControlSetAtts } =
 		props;

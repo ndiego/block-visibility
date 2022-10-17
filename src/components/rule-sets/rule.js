@@ -348,7 +348,7 @@ export default function Rule( props ) {
 					} ) }
 				</div>
 				{ hasHelp && (
-					<div className="visibility-control__help">
+					<div className="components-base-control__help">
 						{ selectedRule.help }
 					</div>
 				) }

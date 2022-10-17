@@ -35,8 +35,8 @@ export default function HideBlock( props ) {
 	const hideBlock = blockVisibility?.hideBlock ?? false;
 
 	return (
-		<div className="control-panel-item hide-block-control">
-			<h3 className="control-panel-item__header has-icon">
+		<div className="controls-panel-item hide-block-control">
+			<h3 className="controls-panel-item__header has-icon">
 				<span>{ __( 'Hide Block', 'block-visibility' ) }</span>
 				<InformationPopover
 					message={ __(
@@ -47,18 +47,20 @@ export default function HideBlock( props ) {
 					position="bottom center"
 				/>
 			</h3>
-			<ToggleControl
-				label={ __( 'Hide the block from everyone', 'block-visibility' ) }
-				checked={ hideBlock }
-				onChange={ () => {
-					setAttributes( {
-						blockVisibility: assign(
-							{ ...blockVisibility },
-							{ hideBlock: ! hideBlock }
-						),
-					} );
-				} }
-			/>
+			<div className="controls-panel-item__control-fields">
+				<ToggleControl
+					label={ __( 'Hide the block from everyone', 'block-visibility' ) }
+					checked={ hideBlock }
+					onChange={ () => {
+						setAttributes( {
+							blockVisibility: assign(
+								{ ...blockVisibility },
+								{ hideBlock: ! hideBlock }
+							),
+						} );
+					} }
+				/>
+			</div>
 		</div>
 	);
 }

@@ -26,7 +26,7 @@ export default function Users( props ) {
 
 	const users = useSelect( ( select ) => {
 		// Requires `list_users` capability, will fail if user is not admin.
-		const data = select( coreStore ).getUsers( { per_page: -1 } );
+		const data = select( 'core' ).getUsers( { per_page: -1 } );
 		const allUsers = [];
 
 		if ( data && data.length !== 0 ) {
@@ -82,27 +82,25 @@ export default function Users( props ) {
 	};
 
 	return (
-		<div className="visibility-control__container">
-			<div className="visibility-control restricted-users">
-				<div className="visibility-control__help">
-					{ sprintf(
-						// Translators: Whether the block is hidden or visible.
-						__( '%s the selected users.', 'block-visibility' ),
-						label
-					) }
-				</div>
-				<Select
-					className="block-visibility__react-select"
-					classNamePrefix="react-select"
-					options={ users }
-					value={ selectedUsers }
-					placeholder={ __( 'Select Users…', 'block-visibility' ) }
-					onChange={ ( value ) => handleOnChange( value ) }
-					isMulti
-					isLoading={ users.length === 0 }
-				/>
+		<div className="control-fields-item">
+			<div className="components-base-control__help">
+				{ sprintf(
+					// Translators: Whether the block is hidden or visible.
+					__( '%s the selected users.', 'block-visibility' ),
+					label
+				) }
 			</div>
-			<div className="visibility-control hide-on-restricted-users">
+			<Select
+				className="block-visibility__react-select"
+				classNamePrefix="react-select"
+				options={ users }
+				value={ selectedUsers }
+				placeholder={ __( 'Select Users…', 'block-visibility' ) }
+				onChange={ ( value ) => handleOnChange( value ) }
+				isMulti
+				isLoading={ users.length === 0 }
+			/>
+			<div className="control-fields-item__hide-when">
 				<ToggleControl
 					label={ __(
 						'Hide from selected users',

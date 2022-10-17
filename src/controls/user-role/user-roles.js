@@ -50,29 +50,27 @@ export default function UserRoles( props ) {
 	};
 
 	return (
-		<div className="visibility-control__container">
-			<div className="visibility-control restricted-roles">
-				<div className="visibility-control__help">
-					{ sprintf(
-						// Translators: Whether the block is hidden or visible.
-						__(
-							'%s users with at least one of the selected roles.',
-							'block-visibility'
-						),
-						label
-					) }
-				</div>
-				<Select
-					className="block-visibility__react-select"
-					classNamePrefix="react-select"
-					options={ roles }
-					value={ selectedRoles }
-					placeholder={ __( 'Select Role…', 'block-visibility' ) }
-					onChange={ ( value ) => handleOnChange( value ) }
-					isMulti
-				/>
+		<div className="control-fields-item">
+			<div className="components-base-control__help">
+				{ sprintf(
+					// Translators: Whether the block is hidden or visible.
+					__(
+						'%s users with at least one of the selected roles.',
+						'block-visibility'
+					),
+					label
+				) }
 			</div>
-			<div className="visibility-control hide-on-restricted-roles">
+			<Select
+				className="block-visibility__react-select"
+				classNamePrefix="react-select"
+				options={ roles }
+				value={ selectedRoles }
+				placeholder={ __( 'Select Role…', 'block-visibility' ) }
+				onChange={ ( value ) => handleOnChange( value ) }
+				isMulti
+			/>
+			<div className="control-fields-item__hide-when">
 				<ToggleControl
 					label={ __(
 						'Hide from selected roles',

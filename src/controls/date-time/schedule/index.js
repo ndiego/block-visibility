@@ -61,7 +61,7 @@ export default function Schedule( props ) {
 		type === 'single'
 			? type + '-' + scheduleIndex
 			: type + '-' + controlSetAtts?.id + '-' + scheduleIndex;
-
+console.log( uniqueIndex );
 	const title = scheduleAtts?.title ?? '';
 	const enable = scheduleAtts?.enable ?? true;
 	const start = scheduleAtts?.start ?? null;
@@ -192,11 +192,11 @@ export default function Schedule( props ) {
 	);
 
 	let dateTimeControls = (
-		<div className="schedule-fields">
+		<div className="schedules-item__fields">
 			<Slot name={ 'DateTimeScheduleControlsTop-' + uniqueIndex } />
 
-			<div className="schedule-fields__date-time">
-				<div className="visibility-control__label">
+			<div className="schedules-item__fields__date-time">
+				<div className="control-fields-item__label">
 					{ sprintf(
 						// Translators: Whether the block is hidden or visible.
 						__( '%s the block', 'block-visibility' ),
@@ -206,7 +206,7 @@ export default function Schedule( props ) {
 					) }
 				</div>
 				<div className="date-time-item">
-					<span className="visibility-control__sub-label">
+					<span className="control-fields-item__sub-label">
 						{ __( 'From', 'block-visibility' ) }
 					</span>
 					<DateTimeField
@@ -223,7 +223,7 @@ export default function Schedule( props ) {
 					/>
 				</div>
 				<div className="date-time-item">
-					<span className="visibility-control__sub-label">
+					<span className="control-fields-item__sub-label">
 						{ __( 'To', 'block-visibility' ) }
 					</span>
 					<DateTimeField
@@ -275,11 +275,11 @@ export default function Schedule( props ) {
 
 	return (
 		<div
-			className={ classnames( 'schedule-item', {
+			className={ classnames( 'schedules-item', {
 				disabled: ! enable,
 			} ) }
 		>
-			<div className="schedule-header section-header">
+			<div className="section-header">
 				<div className="section-header__title">
 					<span>{ scheduleTitle }</span>
 					{ editTitleDropdown }

@@ -94,8 +94,8 @@ export default function ACF( props ) {
 	const allFields = getAllFields( variables );
 
 	return (
-		<div className="control-panel-item acf-control">
-			<h3 className="control-panel-item__header has-icon">
+		<div className="controls-panel-item acf-control">
+			<h3 className="controls-panel-item__header has-icon">
 				<Icon icon={ icons.acf } />
 				<span>
 					{ __( 'Advanced Custom Fields', 'block-visibility' ) }
@@ -108,7 +108,7 @@ export default function ACF( props ) {
 					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-advanced-custom-fields-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					position="bottom center"
 				/>
-				<div className="control-panel-item__header-toolbar">
+				<div className="controls-panel-item__header-toolbar">
 					<Button
 						icon={ plus }
 						onClick={ () => addRuleSet() }
@@ -117,7 +117,7 @@ export default function ACF( props ) {
 					/>
 				</div>
 			</h3>
-			<div className="visibility-control__help">
+			<div className="controls-panel-item__description">
 				{ sprintf(
 					// Translators: Whether the block is hidden or visible.
 					__(
@@ -129,53 +129,55 @@ export default function ACF( props ) {
 						: __( 'Show', 'block-visibility' )
 				) }
 			</div>
-			{ fields.length === 0 && (
-				<Notice status="warning" isDismissible={ false }>
-					{ __(
-						'It does not appear that your website contains any published fields yet.',
-						'block-visibility'
-					) }
-				</Notice>
-			) }
-			<div className="rule-sets">
-				{ ruleSets.map( ( ruleSet, ruleSetIndex ) => {
-					return (
-						<RuleSets
-							key={ ruleSetIndex }
-							ruleSet={ ruleSet }
-							ruleSetIndex={ ruleSetIndex }
-							ruleSets={ ruleSets }
-							groupedFields={ groupedFields }
-							allFields={ allFields }
-							controlName="acf"
-							controlAtts={ acf }
-							hideOnRuleSets={ hideOnRuleSets }
-							rulePlaceholder={ __(
-								'Select Field…',
-								'block-visibility'
-							) }
-							{ ...props }
-						/>
-					);
-				} ) }
-			</div>
-			<div className="control-panel-item__hide-when">
-				<ToggleControl
-					label={ __(
-						'Hide when rules apply',
-						'block-visibility'
-					) }
-					checked={ hideOnRuleSets }
-					onChange={ () =>
-						setControlAtts(
-							'acf',
-							assign(
-								{ ...acf },
-								{ hideOnRuleSets: ! hideOnRuleSets }
+			<div className="controls-panel-item__control-fields">
+				{ fields.length === 0 && (
+					<Notice status="warning" isDismissible={ false }>
+						{ __(
+							'It does not appear that your website contains any published fields yet.',
+							'block-visibility'
+						) }
+					</Notice>
+				) }
+				<div className="rule-sets">
+					{ ruleSets.map( ( ruleSet, ruleSetIndex ) => {
+						return (
+							<RuleSets
+								key={ ruleSetIndex }
+								ruleSet={ ruleSet }
+								ruleSetIndex={ ruleSetIndex }
+								ruleSets={ ruleSets }
+								groupedFields={ groupedFields }
+								allFields={ allFields }
+								controlName="acf"
+								controlAtts={ acf }
+								hideOnRuleSets={ hideOnRuleSets }
+								rulePlaceholder={ __(
+									'Select Field…',
+									'block-visibility'
+								) }
+								{ ...props }
+							/>
+						);
+					} ) }
+				</div>
+				<div className="control-fields-item__hide-when">
+					<ToggleControl
+						label={ __(
+							'Hide when rules apply',
+							'block-visibility'
+						) }
+						checked={ hideOnRuleSets }
+						onChange={ () =>
+							setControlAtts(
+								'acf',
+								assign(
+									{ ...acf },
+									{ hideOnRuleSets: ! hideOnRuleSets }
+								)
 							)
-						)
-					}
-				/>
+						}
+					/>
+				</div>
 			</div>
 		</div>
 	);

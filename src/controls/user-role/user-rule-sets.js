@@ -44,9 +44,9 @@ export default function UserRuleSets( props ) {
 	}
 
 	return (
-		<div className="visibility-control__container">
-			<div className="visibility-control user-rule-sets">
-				<div className="visibility-control__help">
+		<>
+			<div className="control-fields-item">
+				<div className="components-base-control__help">
 					{ sprintf(
 						// Translators: Whether the block is hidden or visible.
 						__(
@@ -76,7 +76,7 @@ export default function UserRuleSets( props ) {
 						);
 					} ) }
 				</div>
-				<div className="control-panel-item__hide-when">
+				<div className="control-fields-item__hide-when">
 					<ToggleControl
 						label={ __(
 							'Hide when rules apply',
@@ -95,6 +95,6 @@ export default function UserRuleSets( props ) {
 					/>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }

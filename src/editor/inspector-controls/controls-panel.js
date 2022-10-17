@@ -13,14 +13,16 @@ import { createInterpolateElement } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import ControlPanelHeader from './control-panel-header';
-import HideBlock from './../../controls/hide-block';
-import UserRole from './../../controls/user-role';
-import DateTime from './../../controls/date-time';
-import ScreenSize from './../../controls/screen-size';
-import QueryString from './../../controls/query-string';
-import ACF from './../../controls/acf';
-import WPFusion from './../../controls/wp-fusion';
+import ControlsPanelHeader from './controls-panel-header';
+import { 
+	HideBlock,
+	UserRole,
+	DateTime,
+	ScreenSize,
+	QueryString,
+	ACF, 
+	WPFusion,
+} from './../../controls';
 
 // Provides an entry point to slot in additional settings. Must be placed
 // outside of function to avoid unnecessary rerenders.
@@ -35,7 +37,7 @@ const AdditionalControlSetControls = withFilters(
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
-export default function ControlPanel( props ) {
+export default function ControlsPanel( props ) {
 	const {
 		attributes,
 		controlSetAtts,
@@ -46,9 +48,8 @@ export default function ControlPanel( props ) {
 	const blockAtts = attributes?.blockVisibility ?? {};
 	const settingsUrl = variables?.plugin_variables?.settings_url ?? '';
 
-	// There needs to be a unique index for the Slots since we technically
-	// have multiple of the same Slot.
-	const uniqueIndex = 'panel';
+	// Needed to ensure each Slot is unique.
+	const uniqueIndex = 'inspector-controls-panel';
 
 	// Append the "active" property to all active controls.
 	enabledControls.forEach( ( control ) => {
@@ -87,7 +88,7 @@ export default function ControlPanel( props ) {
 			<Slot name="ControlPanelContainer" />
 
 			<Slot name={ 'ControlSetControlsTop-' + uniqueIndex } />
-			<DateTime setControlAtts={ setControlAtts } { ...props } />
+			<DateTime setControlAtts={ setControlAtts } type={ uniqueIndex } { ...props } />
 			<UserRole setControlAtts={ setControlAtts } { ...props } />
 			<ScreenSize setControlAtts={ setControlAtts } { ...props } />
 			<QueryString setControlAtts={ setControlAtts } { ...props } />
@@ -103,19 +104,21 @@ export default function ControlPanel( props ) {
 	// the grid styling applies gap where it shouldn't.
 	if ( blockAtts?.hideBlock ) {
 		controls = 
-			activeControls.length > 1 ? <Disabled>{ controls }</Disabled> : null;
+			activeControls.length > 1 ? 
+				<Disabled className="hide-block-enabled">{ controls }</Disabled> : 
+				null;
 	}
 
 	return (
 		<>
-			<ControlPanelHeader
+			<ControlsPanelHeader
 				activeControls={ activeControls }
 				enabledControls={ enabledControls }
 				setControlSetAtts={ setControlSetAtts }
 				{ ...props }
 			/>
 			{ activeControls.length !== 0 && (
-				<div className="control-panel-container visibility-controls__container">
+				<div className="controls-panel-container visibility-controls__container">
 					<HideBlock { ...props } />
 					{ controls }
 					<AdditionalControlSetControls
