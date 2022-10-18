@@ -20,6 +20,7 @@
         -webkit-box-pack: justify;
 
         h2 {
+            font-weight: 500;
             margin: 0;
         }
 
@@ -328,52 +329,6 @@
 
             .components-disabled {
                 display: inline-block;
-            }
-        }
-    }
-
-    /* Control Set styling -------------------------------------------------- */
-    .control-set {
-        margin-bottom: 30px;
-
-        .control-set__header {
-            margin-bottom: 30px;
-            border-bottom: 1px solid #e0e0e0;
-            border-top: 1px solid #e0e0e0;
-            margin-left: -16px;
-            margin-right: -16px;
-            width: calc(100% + 32px);
-            padding: 8px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            min-height: 50px;
-
-            .control-set__header-title {
-                font-weight: 500;
-                margin: 0;
-            }
-
-            .control-set__header-toolbar {
-                height: 24px;
-                min-width: 100px;
-                text-align: right;
-
-                button {
-                    height: 24px;
-                    min-width: 24px;
-                    padding: 0;
-
-                    svg {
-                        width: 20px;
-                    }
-                }
-
-                .configure-controls {
-                    button {
-                        min-width: 28px;
-                    }
-                }
             }
         }
     }

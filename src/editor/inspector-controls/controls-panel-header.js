@@ -132,7 +132,7 @@ export default function ControlsPanelHeader( props ) {
 			icon={ activeControls.length === 0 ? plus : moreVertical }
 			label={ __( 'Visibility Controls', 'block-visibility' ) }
 			popoverProps={ {
-				className: 'block-visibility__control-popover control-set',
+				className: 'block-visibility__control-popover',
 				focusOnMount: 'container',
 			} }
 			toggleProps={ {
