@@ -10,7 +10,6 @@ import Select from 'react-select';
 import { __, sprintf } from '@wordpress/i18n';
 import { ToggleControl, Notice } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
 
 /**
  * Add the Selected Users control to the main Visibility By User Role control

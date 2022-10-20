@@ -49,7 +49,7 @@ export default function QueryString( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							'The Query String control allows you to conditionally display blocks based on URL query strings. Visit the plugin Knowledge Base for more information.',
+							'The Query String control allows you to conditionally display blocks based on URL query strings.',
 							'block-visibility'
 						) }
 						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-query-string-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"

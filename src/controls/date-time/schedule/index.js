@@ -61,7 +61,7 @@ export default function Schedule( props ) {
 		type === 'single'
 			? type + '-' + scheduleIndex
 			: type + '-' + controlSetAtts?.id + '-' + scheduleIndex;
-console.log( uniqueIndex );
+	console.log( uniqueIndex );
 	const title = scheduleAtts?.title ?? '';
 	const enable = scheduleAtts?.enable ?? true;
 	const start = scheduleAtts?.start ?? null;
@@ -139,8 +139,8 @@ console.log( uniqueIndex );
 
 	const removeLabel =
 		schedules.length <= 1
-			? __( 'Remove schedule', 'block-visibility' )
-			: __( 'Delete schedule', 'block-visibility' );
+			? __( 'Clear schedule', 'block-visibility' )
+			: __( 'Remove schedule', 'block-visibility' );
 
 	const optionsDropdown = (
 		<DropdownMenu

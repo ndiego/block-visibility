@@ -14,13 +14,13 @@ import { createInterpolateElement } from '@wordpress/element';
  * Internal dependencies
  */
 import ControlsPanelHeader from './controls-panel-header';
-import { 
+import {
 	HideBlock,
 	UserRole,
 	DateTime,
 	ScreenSize,
 	QueryString,
-	ACF, 
+	ACF,
 	WPFusion,
 } from './../../controls';
 
@@ -100,13 +100,13 @@ export default function ControlsPanel( props ) {
 	);
 
 	// Disable all other controls if the Hide Block control is enabled.
-	// If Hide Block is the only active control, display nothing. Otherwise, 
+	// If Hide Block is the only active control, display nothing. Otherwise,
 	// the grid styling applies gap where it shouldn't.
 	if ( blockAtts?.hideBlock ) {
-		controls = 
-			activeControls.length > 1 ? 
-				<Disabled className="hide-block-enabled">{ controls }</Disabled> : 
-				null;
+		controls =
+			activeControls.length > 1
+				? <Disabled className="hide-block-enabled">{ controls }</Disabled>
+				: null;
 	}
 
 	return (
@@ -118,7 +118,7 @@ export default function ControlsPanel( props ) {
 				{ ...props }
 			/>
 			{ activeControls.length !== 0 && (
-				<div className="controls-panel-container visibility-controls__container">
+				<div className="controls-panel-container">
 					<HideBlock { ...props } />
 					{ controls }
 					<AdditionalControlSetControls
@@ -129,23 +129,25 @@ export default function ControlsPanel( props ) {
 				</div>
 			) }
 			{ enabledControls.length === 0 && (
-				<Notice status="warning" isDismissible={ false }>
-					{ createInterpolateElement(
-						__(
-							'All controls are disabled. Visit the <a>plugin settings</a> to enable.',
-							'block-visibility'
-						),
-						{
-							a: (
-								<a // eslint-disable-line
-									href={ settingsUrl + '&tab=visibility-controls' }
-									target="_blank"
-									rel="noreferrer"
-								/>
+				<div className="controls-panel-notices">
+					<Notice status="warning" isDismissible={ false }>
+						{ createInterpolateElement(
+							__(
+								'All visibility controls have been manually disabled. Visit the <a>plugin settings</a> to re-enable.',
+								'block-visibility'
 							),
-						}
-					) }
-				</Notice>
+							{
+								a: (
+									<a // eslint-disable-line
+										href={ settingsUrl + '&tab=visibility-controls' }
+										target="_blank"
+										rel="noreferrer"
+									/>
+								),
+							}
+						) }
+					</Notice>
+				</div>
 			) }
 		</>
 	);

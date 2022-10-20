@@ -57,7 +57,7 @@ export default function WPFusion( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							'The WP Fusion control allows you to conditionally display blocks based on WP Fusion tags. Visit the plugin Knowledge Base for more information.',
+							'The WP Fusion control allows you to conditionally display blocks based on WP Fusion tags.',
 							'block-visibility'
 						) }
 						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-wp-fusion-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
