@@ -8,7 +8,7 @@
     margin-top: -1px;
     padding: 16px;
 
-    .control-panel-header {
+    .controls-panel-header {
         align-items: center;
         display: flex;
         flex-direction: row;
@@ -24,19 +24,13 @@
             margin: 0;
         }
 
-        .control-panel-header__dropdown-menus {
+        .controls-panel-header__dropdown-menus {
             line-height: 0;
             margin: calc(-4px) 0px;
 
             .components-button {
                 padding: 0px;
                 min-width: 24px;
-            }
-
-            // Fix hover color on buttons when disabled.
-            .components-button:disabled, 
-            .components-button[aria-disabled=true] {
-                color: currentColor;
             }
         }
     }
@@ -46,6 +40,19 @@
     .components-disabled.hide-block-enabled {
         display: grid;
         gap: 28px;
+    }
+
+    .controls-panel-notices {
+
+        .components-notice {
+            margin: 0;
+        }
+    }
+
+    // Fix hover color on buttons when disabled.
+    .components-button:not(.is-primary):disabled, 
+    .components-button[aria-disabled=true]:not(.is-primary) {
+        color: currentColor;
     }
 }
 
@@ -58,6 +65,12 @@
         * {
             opacity: 1 !important;
         }
+    }
+
+    // Fix hover color on buttons when disabled.
+    .components-button:not(.is-primary):disabled, 
+    .components-button[aria-disabled=true]:not(.is-primary) {
+        color: currentColor;
     }
 
     .components-button.control-tips {
@@ -556,7 +569,7 @@
 
 /* Control set styles --------------------------------------------------------*/
 .block-visibility__control-popover {
-    &.control-set {
+    &.visibility-controls {
         // Same size as core popovers. 
         .components-popover__content {
             min-width: 240px;

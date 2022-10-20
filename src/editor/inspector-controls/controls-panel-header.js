@@ -132,7 +132,7 @@ export default function ControlsPanelHeader( props ) {
 			icon={ activeControls.length === 0 ? plus : moreVertical }
 			label={ __( 'Visibility Controls', 'block-visibility' ) }
 			popoverProps={ {
-				className: 'block-visibility__control-popover',
+				className: 'block-visibility__control-popover visibility-controls',
 				focusOnMount: 'container',
 			} }
 			toggleProps={ {
@@ -216,9 +216,9 @@ export default function ControlsPanelHeader( props ) {
 
 	return (
 		<>
-			<div className="control-panel-header">
+			<div className="controls-panel-header">
 				<h2>{ __( 'Visibility', 'block-visibility' ) }</h2>
-				<div className="control-panel-header__dropdown-menus">
+				<div className="controls-panel-header__dropdown-menus">
 					{ controlsDropdown }
 				</div>
 			</div>

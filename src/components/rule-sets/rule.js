@@ -176,9 +176,8 @@ export default function Rule( props ) {
 				<span>{ defaultRuleLabel( ruleIndex ) }</span>
 				{ ruleSet.rules.length > 1 && (
 					<Button
-						label={ __( 'Delete Rule', 'block-visibility' ) }
+						label={ __( 'Remove Rule', 'block-visibility' ) }
 						icon={ closeSmall }
-						className="toolbar__delete"
 						onClick={ () => removeRule() }
 					/>
 				) }

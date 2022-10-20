@@ -119,7 +119,7 @@ export default function UserRole( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							'The User Role control allows you to conditionally display blocks based on whether a user is logged-in, logged-out, and more. Visit the plugin Knowledge Base for more information.',
+							'The User Role control allows you to conditionally display blocks based on whether a user is logged-in, logged-out, and more.',
 							'block-visibility'
 						) }
 						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"

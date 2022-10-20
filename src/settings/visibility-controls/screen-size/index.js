@@ -149,7 +149,7 @@ export default function ScreenSize( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							"The Screen Size control allows you to conditionally display blocks on the current width of the browser window, or in other words, the screen size of a user's device. Visit the plugin Knowledge Base for more information.",
+							"The Screen Size control allows you to conditionally display blocks on the current width of the browser window, or in other words, the screen size of a user's device.",
 							'block-visibility'
 						) }
 						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
