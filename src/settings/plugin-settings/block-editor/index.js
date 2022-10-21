@@ -105,7 +105,7 @@ export default function BlockEditor( props ) {
 	}
 
 	return (
-		<div className="setting-tabs__settings-panel">
+		<div className="settings-panel">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'Block Editor', 'block-visibility' ) }

@@ -72,52 +72,54 @@ export default function VisibilityControls( props ) {
 						{ ...props }
 					/>
 				</div>
-				<Slot name="VisibilityControlsTop" />
-				<General
-					visibilityControls={ visibilityControls }
-					setVisibilityControls={ setVisibilityControls }
-					setHasUpdates={ setHasUpdates }
-					{ ...props }
-				/>
-				<HideBlock
-					visibilityControls={ visibilityControls }
-					setVisibilityControls={ setVisibilityControls }
-					{ ...props }
-				/>
-				<QueryString
-					visibilityControls={ visibilityControls }
-					setVisibilityControls={ setVisibilityControls }
-					{ ...props }
-				/>
-				<DateTime
-					visibilityControls={ visibilityControls }
-					setVisibilityControls={ setVisibilityControls }
-					{ ...props }
-				/>
-				<UserRole
-					visibilityControls={ visibilityControls }
-					setVisibilityControls={ setVisibilityControls }
-					{ ...props }
-				/>
-				<ScreenSize
-					visibilityControls={ visibilityControls }
-					setVisibilityControls={ setVisibilityControls }
-					{ ...props }
-				/>
-				<Slot name="VisibilityControlsMiddle" />
-				<Integrations
-					visibilityControls={ visibilityControls }
-					setVisibilityControls={ setVisibilityControls }
-					hasUpdates={ hasUpdates }
-					setHasUpdates={ setHasUpdates }
-					{ ...props }
-				/>
-				<Slot name="VisibilityControlsBottom" />
-				<AdditionalControls
-					visibilityControls={ visibilityControls }
-					setVisibilityControls={ setVisibilityControls }
-					{ ...props }
-				/>
+				<div className="setting-tabs__setting-panels">
+					<Slot name="VisibilityControlsTop" />
+					<General
+						visibilityControls={ visibilityControls }
+						setVisibilityControls={ setVisibilityControls }
+						setHasUpdates={ setHasUpdates }
+						{ ...props }
+					/>
+					<HideBlock
+						visibilityControls={ visibilityControls }
+						setVisibilityControls={ setVisibilityControls }
+						{ ...props }
+					/>
+					<QueryString
+						visibilityControls={ visibilityControls }
+						setVisibilityControls={ setVisibilityControls }
+						{ ...props }
+					/>
+					<DateTime
+						visibilityControls={ visibilityControls }
+						setVisibilityControls={ setVisibilityControls }
+						{ ...props }
+					/>
+					<UserRole
+						visibilityControls={ visibilityControls }
+						setVisibilityControls={ setVisibilityControls }
+						{ ...props }
+					/>
+					<ScreenSize
+						visibilityControls={ visibilityControls }
+						setVisibilityControls={ setVisibilityControls }
+						{ ...props }
+					/>
+					<Slot name="VisibilityControlsMiddle" />
+					<Integrations
+						visibilityControls={ visibilityControls }
+						setVisibilityControls={ setVisibilityControls }
+						hasUpdates={ hasUpdates }
+						setHasUpdates={ setHasUpdates }
+						{ ...props }
+					/>
+					<Slot name="VisibilityControlsBottom" />
+					<AdditionalControls
+						visibilityControls={ visibilityControls }
+						setVisibilityControls={ setVisibilityControls }
+						{ ...props }
+					/>
+				</div>
 			</div>
 			<Slot name="SettingsTabPanelBottom" />
 		</>

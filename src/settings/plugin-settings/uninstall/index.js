@@ -23,7 +23,7 @@ export default function FullControlMode( props ) {
 	const removeOnUninstall = pluginSettings?.remove_on_uninstall ?? false; // eslint-disable-line
 
 	return (
-		<div className="setting-tabs__settings-panel">
+		<div className="settings-panel">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'Uninstall', 'block-visibility' ) }

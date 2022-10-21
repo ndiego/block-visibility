@@ -24,7 +24,7 @@ export default function FullControlMode( props ) {
 	const enableFullControlMode = pluginSettings?.enable_full_control_mode ?? false; // eslint-disable-line
 
 	return (
-		<div className="setting-tabs__settings-panel">
+		<div className="settings-panel">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'Full Control Mode', 'block-visibility' ) }

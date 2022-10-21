@@ -15,7 +15,7 @@ $mobile: 426px;
 	display: none;
 }
 
-#block-visibility-settings-container {
+#block-visibility__plugin-settings {
 	margin-left: -20px;
 
 	@media ( max-width: $tablet ) {
@@ -270,7 +270,7 @@ $mobile: 426px;
 					background: #ffffff;
 					box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
 					padding: 18px 24px;
-					margin-bottom: 20px;
+					margin-bottom: 24px;
 
 					&>*:last-child {
 						margin-bottom: 0;
@@ -419,11 +419,11 @@ $mobile: 426px;
 			flex-wrap: wrap;
 			justify-content: space-between;
 			align-items: center;
-			margin-bottom: 20px;
+			margin-bottom: 24px;
 			min-height: 36px;
 
 			&.integrations {
-				margin-top: 50px;
+				margin-top: 24px;
 			}
 
 			.setting-controls__title {
@@ -496,191 +496,215 @@ $mobile: 426px;
 			}
 		}
 
-		.setting-tabs__settings-panel {
-			font-size: 15px;
-			margin-bottom: 20px;
+		.setting-tabs__setting-panels {
+			display: grid;
+			grid-gap: 24px;
 
-			.settings-panel__header {
-				background: #fff;
-				padding: 16px 16px 16px 24px;
+			&__sub-panel {
 				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
-				margin-bottom: 1px;
-
-				.settings-panel__header-title {
-					font-weight: 500;
-					display: flex;
-    				align-items: center;
-
-					&>svg {
-						width: 18px;
-						margin-right: 10px;
-					}
-				}
+				flex-direction: column;
+				gap: 24px;
 			}
 
-			.settings-panel__container {
-				background: #fff;
-				padding: 24px 16px 24px 24px;
-				box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
-
-				.settings-type__toggle {
-					margin-bottom: 18px;
-
-					&.has-info-popover {
+			.settings-panel {
+				.settings-panel__header {
+					align-items: center;
+					background: #fff;
+					box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
+					box-sizing: border-box;
+					display: flex;
+					font-size: 14px;
+					justify-content: space-between;
+					margin-bottom: 1px;
+					min-height: 54px;
+					padding: 16px 24px;
+	
+					.settings-panel__header-title {
+						font-weight: 500;
 						display: flex;
 						align-items: center;
-						justify-content: space-between;
-					}
-
-					&.first {
-						margin-top: 24px;
-					}
-
-					&:last-child {
-						margin-bottom: 0;
-					}
-
-					.components-toggle-control {
-						.components-base-control__field {
-							margin: 4px 0;
+	
+						&>svg {
+							width: 18px;
+							margin-right: 10px;
 						}
 					}
-
-					label {
-						margin-bottom: 0;
-					}
 				}
+	
+				.settings-panel__container {
+					background: #fff;
+					padding: 24px;
+					box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
+	
+					.settings-type__toggle {
+						margin-bottom: 18px;
+	
+						&.has-info-popover {
+							align-items: center;
+							display: flex;
+							gap: 12px;
+							justify-content: space-between;
+						}
+	
+						&.first {
+							margin-top: 24px;
+						}
+	
+						&:last-child {
+							margin-bottom: 0;
+						}
+	
+						.components-toggle-control {
+							margin-bottom: 0;
 
-				.settings-type__select {
-					margin-bottom: 18px;
+							// Fix gap between toggle and label on small screens.
+							.components-form-toggle {
+								min-width: 36px;
+							}
 
-					&:last-child {
-						margin-bottom: 0;
+							.components-base-control__help {
+								margin-left: 48px;
+							}
+						}
 					}
+	
+					.settings-type__select {
+						margin-bottom: 24px;
 
-					&.has-info-popover {
+						.select-control-container {
+							min-width: 50%;
+						}
+	
+						&:last-child {
+							margin-bottom: 0;
+						}
+	
+						&.has-info-popover {
+							align-items: center;
+							display: flex;
+							gap: 12px;
+							justify-content: space-between;
+						}
+	
+						.block-visibility__react-select {
+							margin-top: 12px;
+							width: 100%;
+						}
+					}
+	
+					.settings-type__color {
 						display: flex;
-						align-items: center;
+						align-items: flex-start;
 						justify-content: space-between;
-					}
-
-					.block-visibility__react-select {
-						margin-top: 12px;
-						width: 100%;
-					}
-				}
-
-				.settings-type__color {
-					display: flex;
-					align-items: flex-start;
-					justify-content: space-between;
-
-					.settings-type__color-selected {
-						.components-base-control__field {
+	
+						.settings-type__color-selected {
+							.components-base-control__field {
+								display: flex;
+								align-items: center;
+								margin-bottom: 20px;
+								margin-top: 5px;
+							}
+						}
+	
+						.components-base-control__label {
+							margin-bottom: 2px;
+						}
+	
+						/* Fix needed for Gutenberg 12.7+ */
+						.component-color-indicator {
+							margin-left: 0.5rem;
+						}
+	
+						.components-circular-option-picker {
 							display: flex;
 							align-items: center;
-							margin-bottom: 20px;
-							margin-top: 5px;
+	
+							@media ( max-width: $tablet ) {
+								display: block;
+							}
 						}
-					}
-
-					.components-base-control__label {
-    					margin-bottom: 2px;
-					}
-
-					/* Fix needed for Gutenberg 12.7+ */
-					.component-color-indicator {
-						margin-left: 0.5rem;
-					}
-
-					.components-circular-option-picker {
-						display: flex;
-						align-items: center;
-
-						@media ( max-width: $tablet ) {
-							display: block;
+	
+						.components-circular-option-picker__custom-clear-wrapper {
+							justify-content: flex-start;
+							margin: 10px 0 10px 20px;
+	
+							@media ( max-width: $tablet ) {
+								margin: 10px 0;
+							}
 						}
-					}
-
-					.components-circular-option-picker__custom-clear-wrapper {
-						justify-content: flex-start;
-						margin: 10px 0 10px 20px;
-
-						@media ( max-width: $tablet ) {
-							margin: 10px 0;
+	
+						.components-circular-option-picker__option:focus:after {
+							top: -4px;
+							left: -4px;
 						}
-					}
-
-					.components-circular-option-picker__option:focus:after {
-					    top: -4px;
-					    left: -4px;
-					}
-
-					.components-button.is-pressed:focus:not(:disabled) {
-					    box-shadow: none;
-					    outline: none;
-					}
-
-					/* Fix for incorrect tooltip formatting */
-					.components-circular-option-picker__option-wrapper {
-						button {
-							&>span {
-								position: absolute;
-
-								* {
+	
+						.components-button.is-pressed:focus:not(:disabled) {
+							box-shadow: none;
+							outline: none;
+						}
+	
+						/* Fix for incorrect tooltip formatting */
+						.components-circular-option-picker__option-wrapper {
+							button {
+								&>span {
 									position: absolute;
-									font-size: 10px !important;
+	
+									* {
+										position: absolute;
+										font-size: 10px !important;
+									}
 								}
 							}
 						}
 					}
-				}
-
-				/* Align the range control with the color picker. */
-				.settings-type__range {
-					max-width: 410px;
-				}
-
-				.subsetting {
-					margin-left: 20px;
-				}
-
-				label {
-					font-size: 14px;
-					margin-bottom: 8px;
-				}
-
-				.settings-label {
-					font-size: 14px;
-					font-weight: 500;
-					display: flex;
-					align-items: center;
-					margin-bottom: 15px;
-					margin-top: 30px;
-
-					&:first-child {
-						margin-top: 0;
+	
+					/* Align the range control with the color picker. */
+					.settings-type__range {
+						max-width: 410px;
 					}
-				}
+	
+					.subsetting {
+						margin-left: 24px;
+					}
+	
+					.settings-label {
+						align-items: center;
+						display: flex;
+						font-size: 11px;
+						font-weight: 500;
+						margin-bottom: 15px;
+						margin-top: 30px;
+						text-transform: uppercase;
+	
+						&:first-child {
+							margin-top: 0;
+						}
+					}
+	
+					.settings-panel__help {
+						font-size: 12px;
+						font-style: normal;
+						color: rgb(117, 117, 117);
+					}
 
-				.settings-panel__help {
-					font-size: 12px;
-					font-style: normal;
-					color: rgb(117, 117, 117);
-				}
-
-				.components-disabled {
-					opacity: .4;
-
-					.components-form-toggle {
-						opacity: 1;
+					.components-input-control {
+						input {
+							min-height: 40px;
+						}
+					}
+	
+					.components-disabled {
+						opacity: .4;
+	
+						.components-form-toggle {
+							opacity: 1;
+						}
 					}
 				}
 			}
 		}
+
+
 	}
 
 	/* Specific styles for Screen Size visibility controls */
@@ -736,10 +760,6 @@ $mobile: 426px;
 			label {
 				margin-bottom: 0 !important;
 			}
-
-			.components-base-control__help {
-				margin-top: -4px;
-			}
 		}
 
 		@media ( max-width: $tablet ) {
@@ -756,10 +776,10 @@ $mobile: 426px;
 			}
 		}
 
-		div.setting-tabs__visibility-controls {
+		.setting-tabs__setting-panels {
 		   display: grid;
 		   grid-template-columns: 1fr 1fr;
-		   gap: 32px;
+		   gap: 24px;
 
 		   @media ( max-width: $tablet ) {
 			   grid-template-columns: 1fr;
@@ -775,7 +795,7 @@ $mobile: 426px;
 			   }
 		   }
 
-		   .setting-tabs__settings-panel {
+		   .settings-panel {
 			   margin-bottom: 0;
 		   }
 	   }
@@ -787,8 +807,7 @@ $mobile: 426px;
 		.block-manager__category-container {
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);
-			column-gap: 20px;
-			row-gap: 20px;
+			grid-gap: 24px;
 
 			@media ( max-width: $desktop ) {
 				grid-template-columns: repeat(2, 1fr);

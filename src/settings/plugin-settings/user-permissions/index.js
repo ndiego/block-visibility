@@ -35,7 +35,7 @@ export default function UserPermissions( props ) {
 	}
 
 	return (
-		<div className="setting-tabs__settings-panel">
+		<div className="settings-panel">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'User Permissions', 'block-visibility' ) }
