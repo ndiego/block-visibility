@@ -424,6 +424,7 @@ $mobile: 426px;
 
 			&.integrations {
 				margin-top: 24px;
+				margin-bottom: 0;
 			}
 
 			.setting-controls__title {
@@ -607,7 +608,7 @@ $mobile: 426px;
 						}
 	
 						.components-base-control__label {
-							margin-bottom: 2px;
+							margin-bottom: 0;
 						}
 	
 						/* Fix needed for Gutenberg 12.7+ */
@@ -660,7 +661,11 @@ $mobile: 426px;
 	
 					/* Align the range control with the color picker. */
 					.settings-type__range {
-						max-width: 410px;
+						max-width: 200px;
+
+						.components-range-control__root {
+							align-items: center;
+						}
 					}
 	
 					.subsetting {
@@ -788,7 +793,6 @@ $mobile: 426px;
 		   .setting-tabs__setting-controls,
 		   .two-columns {
 			   grid-column: 1 / span 2;
-			   margin-bottom: 0;
 
 			   @media ( max-width: $tablet ) {
 				   grid-column: 1;
