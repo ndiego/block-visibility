@@ -64,33 +64,37 @@ export default function PluginSettings( props ) {
 					{ ...props }
 				/>
 			</div>
-			<Slot name="PluginSettingsTop" />
-			<BlockEditor
-				pluginSettings={ pluginSettings }
-				setPluginSettings={ setPluginSettings }
-				setHasUpdates={ setHasUpdates }
-				{ ...props }
-			/>
-			<UserPermissions
-				pluginSettings={ pluginSettings }
-				setPluginSettings={ setPluginSettings }
-				setHasUpdates={ setHasUpdates }
-				{ ...props }
-			/>
-			<Slot name="PluginSettingsMiddle" />
-			<FullControlMode
-				pluginSettings={ pluginSettings }
-				setPluginSettings={ setPluginSettings }
-				setHasUpdates={ setHasUpdates }
-				{ ...props }
-			/>
-			<Uninstall
-				pluginSettings={ pluginSettings }
-				setPluginSettings={ setPluginSettings }
-				setHasUpdates={ setHasUpdates }
-				{ ...props }
-			/>
-			<Slot name="PluginSettingsBottom" />
+			<div className="setting-tabs__setting-panels">
+				<Slot name="PluginSettingsTop" />
+				<BlockEditor
+					pluginSettings={ pluginSettings }
+					setPluginSettings={ setPluginSettings }
+					setHasUpdates={ setHasUpdates }
+					{ ...props }
+				/>
+				<Slot name="PluginSettingsMiddle" />
+				<div className="setting-tabs__setting-panels__sub-panel">
+					<UserPermissions
+						pluginSettings={ pluginSettings }
+						setPluginSettings={ setPluginSettings }
+						setHasUpdates={ setHasUpdates }
+						{ ...props }
+					/>
+					<FullControlMode
+						pluginSettings={ pluginSettings }
+						setPluginSettings={ setPluginSettings }
+						setHasUpdates={ setHasUpdates }
+						{ ...props }
+					/>
+					<Uninstall
+						pluginSettings={ pluginSettings }
+						setPluginSettings={ setPluginSettings }
+						setHasUpdates={ setHasUpdates }
+						{ ...props }
+					/>
+				</div>
+				<Slot name="PluginSettingsBottom" />
+			</div>
 			<AdditionalSettings
 				pluginSettings={ pluginSettings }
 				setPluginSettings={ setPluginSettings }

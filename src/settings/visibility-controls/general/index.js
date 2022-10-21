@@ -115,7 +115,7 @@ export default function General( props ) {
 	};
 
 	return (
-		<div className="setting-tabs__settings-panel two-columns">
+		<div className="settings-panel two-columns">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'General', 'block-visibility' ) }
@@ -124,13 +124,15 @@ export default function General( props ) {
 			<Slot name="VisibilityControlsGeneralTop" />
 			<div className="settings-panel__container">
 				<div className="settings-type__select has-info-popover">
-					<div>
-						<span>
-							{ __(
-								'Default visibility controls',
-								'block-visibility'
-							) }
-						</span>
+					<div className="select-control-container">
+						<div className="settings-label">
+							<span>
+								{ __(
+									'Default visibility controls',
+									'block-visibility'
+								) }
+							</span>
+						</div>
 						<Select
 							className="block-visibility__react-select"
 							classNamePrefix="react-select"

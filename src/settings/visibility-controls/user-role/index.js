@@ -93,7 +93,7 @@ export default function UserRole( props ) {
 	}
 
 	return (
-		<div className="setting-tabs__settings-panel">
+		<div className="settings-panel">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'User Role', 'block-visibility' ) }
@@ -125,7 +125,6 @@ export default function UserRole( props ) {
 						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
-				<hr />
 				<div className="settings-type__toggle first has-info-popover subsetting">
 					{ enableUserRolesElement }
 					<InformationPopover

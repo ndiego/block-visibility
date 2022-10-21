@@ -204,6 +204,6 @@ wp.domReady( () => {
 	registerCoreBlocks();
 	render(
 		<Settings />,
-		document.getElementById( 'block-visibility-settings-container' )
+		document.getElementById( 'block-visibility__plugin-settings' )
 	);
 } );

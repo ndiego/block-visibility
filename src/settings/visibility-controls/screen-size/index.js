@@ -123,7 +123,7 @@ export default function ScreenSize( props ) {
 	}
 
 	return (
-		<div className="setting-tabs__settings-panel two-columns">
+		<div className="settings-panel two-columns">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'Screen Size', 'block-visibility' ) }
@@ -155,7 +155,6 @@ export default function ScreenSize( props ) {
 						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
 					/>
 				</div>
-				<hr />
 				{ screenSizeControls }
 				<div className="settings-type__toggle has-info-popover subsetting">
 					{ enableAdvancedControls }
