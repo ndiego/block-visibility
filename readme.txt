@@ -209,6 +209,12 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ==
 
+= 2.5.0 - 2022-10-08 =
+
+**Changed**
+
+* The visibility panel and toolbar controls have been removed on Custom HTML blocks in the block-based Widget Area due to incompatibility. Visibility controls are still available for the Custom HTML block in the post/page Editor as well as the Site Editor.
+
 = 2.4.4 - 2022-10-08 =
 
 **Changed**
