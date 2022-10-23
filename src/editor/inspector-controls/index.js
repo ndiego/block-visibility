@@ -32,15 +32,34 @@ const AdditionalInspectorControls = withFilters(
  * @return {string}		 Return the rendered JSX
  */
 function VisibilityInspectorControls( props ) {
-	const { attributes, setAttributes, name, settings, variables } = props;
+	const { 
+		attributes, 
+		globallyRestricted,
+		name,
+		setAttributes, 
+		settings, 
+		variables, 
+		widgetAreaRestricted,  
+	} = props;
 
 	if ( settings === 'fetching' || variables === 'fetching' ) {
 		return null;
 	}
 
+	// There are a few core blocks that are not compatible either globally or 
+	// specifically in the block-based Widget Editor.
+	if ( 
+		( widgetAreaRestricted.includes( name ) && variables?.isWidgetEditor ) ||
+		globallyRestricted.includes( name )
+	) {
+		return null;
+	}
+
+	// Does the user haver permission to edit visibility settings and
+	// does the block type have visibility controls?
 	if (
-		! hasPermission( settings, variables ) || // Does the user haver permission to edit visibility settings?
-		! hasVisibilityControls( settings, name ) // Does the block type have visibility controls?
+		! hasPermission( settings, variables ) || 
+		! hasVisibilityControls( settings, name ) 
 	) {
 		return null;
 	}
@@ -101,14 +120,6 @@ function VisibilityInspectorControls( props ) {
 		} );
 	}
 
-	// There are a few core blocks that are not compatible.
-	const incompatibleBlocks = [ 'core/legacy-widget' ];
-	const blockIsIncompatible = incompatibleBlocks.includes( name );
-
-	if ( blockIsIncompatible ) {
-		return null;
-	}
-
 	return (
 		// Note that the core InspectorControls component is already making use
 		// of SlotFill, and is "inside" of a <SlotFillProvider> component.
@@ -136,10 +147,21 @@ function VisibilityInspectorControls( props ) {
 
 export default withSelect( ( select ) => {
 	const { getEntityRecord } = select( 'core' );
+	const { getBlocks } = select( 'core/block-editor' );
+
 	const settings =
 		getEntityRecord( 'block-visibility/v1', 'settings' ) ?? 'fetching';
-	const variables =
+	let variables =
 		getEntityRecord( 'block-visibility/v1', 'variables' ) ?? 'fetching';
 
+	// Determine if we are in the Widget Editor (Not the best but all we got).
+	const widgetAreas = 
+		getBlocks().filter( ( block ) => block.name === 'core/widget-area' );
+
+	// If variables have been fetched, append the Widget Area flag.
+	if ( variables !== 'fetching' ) {
+		variables = { ...variables, isWidgetEditor: widgetAreas.length > 0 };
+	}
+	
 	return { settings, variables };
 } )( VisibilityInspectorControls );

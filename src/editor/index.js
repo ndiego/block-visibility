@@ -19,13 +19,14 @@ import { Slot, Fill } from '@wordpress/components';
 import './contextual-indicators';
 import ToolbarControls from './toolbar-controls';
 import VisibilityInspectorControls from './inspector-controls';
-
-import ACF from './../controls/acf';
-import DateTime from './../controls/date-time';
-import QueryString from './../controls/query-string';
-import ScreenSize from './../controls/screen-size';
-import UserRole from './../controls/user-role';
-import WPFusion from './../controls/wp-fusion';
+import { 
+	ACF, 
+	DateTime, 
+	QueryString, 
+	ScreenSize, 
+	UserRole, 
+	WPFusion 
+}from './../controls';
 
 /**
  * Add our custom entities for retreiving external data in the Block Editor.
@@ -47,6 +48,18 @@ dispatch( 'core' ).addEntities( [
 	},
 ] );
 
+// Blocks that are not compatible at all with visibility controls.
+const globallyRestricted = [
+	'core/freeform',
+	'core/legacy-widget',
+	'core/widget-area',
+]
+
+// Blocks that are not compatible with visibility controls when used as Widgets.
+const widgetAreaRestricted = [
+	'core/html',
+];
+
 /**
  * Add the visibility setting sttribute to selected blocks.
  *
@@ -57,7 +70,7 @@ dispatch( 'core' ).addEntities( [
 function addAttributes( settings ) {
 	// The freeform (Classic Editor) block is incompatible because it does not
 	// support custom attributes.
-	if ( settings.name === 'core/freeform' ) {
+	if ( globallyRestricted.includes( settings.name ) ) {
 		return settings;
 	}
 
@@ -398,7 +411,11 @@ function addInspectorControls( BlockEdit ) {
 		return (
 			<>
 				<BlockEdit { ...props } />
-				<VisibilityInspectorControls { ...props } />
+				<VisibilityInspectorControls 
+					globallyRestricted={ globallyRestricted }
+					widgetAreaRestricted={ widgetAreaRestricted }
+					{ ...props } 
+				/>
 			</>
 		);
 	};
@@ -410,13 +427,6 @@ addFilter(
 	addInspectorControls,
 	100 // We want Visibility to appear right above Advanced controls
 );
-
-/**
- * Register all Block Visibility related plugins to the editor.
- */
-registerPlugin( 'block-visibility-toolbar-options-hide-block', {
-	render: ToolbarControls,
-} );
 
 /**
  * Add the control set component to the preset manager in Block Visibility Pro.
@@ -456,3 +466,18 @@ addFilter(
 	'block-visibility/preset-manager-control-set',
 	addPresetManagerControlSet
 );
+
+/**
+ * Register all Block Visibility toolbar controls.
+ */
+ const getToolbarControls = ( props ) => (
+	<ToolbarControls 					
+		globallyRestricted={ globallyRestricted }
+		widgetAreaRestricted={ widgetAreaRestricted } 
+		{...props }
+	/>
+);
+
+registerPlugin( 'block-visibility-toolbar-options-hide-block', {
+	render: getToolbarControls
+} );
