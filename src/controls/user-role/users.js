@@ -9,7 +9,11 @@ import Select from 'react-select';
  */
 import { __, sprintf } from '@wordpress/i18n';
 import { ToggleControl, Notice } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
+
+/**
+ * Internal dependencies
+ */
+import getAllUsers from './utils/get-all-users';
 
 /**
  * Add the Selected Users control to the main Visibility By User Role control
@@ -22,22 +26,6 @@ export default function Users( props ) {
 	const { variables, userRole, setControlAtts } = props;
 	const restrictedUsers = userRole?.restrictedUsers ?? [];
 	const hideOnRestrictedUsers = userRole?.hideOnRestrictedUsers ?? false;
-
-	const users = useSelect( ( select ) => {
-		// Requires `list_users` capability, will fail if user is not admin.
-		const data = select( 'core' ).getUsers( { per_page: -1 } );
-		const allUsers = [];
-
-		if ( data && data.length !== 0 ) {
-			data.forEach( ( user ) => {
-				const value = { value: user.id, label: user.name };
-				allUsers.push( value );
-			} );
-		}
-
-		return allUsers;
-	}, [] );
-
 	const currentUsersRoles = variables?.current_users_roles ?? [];
 	const isAdmin = currentUsersRoles.includes( 'administrator' ) ?? false;
 
@@ -52,13 +40,14 @@ export default function Users( props ) {
 		);
 	}
 
-	const label = hideOnRestrictedUsers
-		? __( 'Hide the block from', 'block-visibility' )
-		: __( 'Show the block to', 'block-visibility' );
-
+	const users = getAllUsers();
 	const selectedUsers = users.filter( ( user ) =>
 		restrictedUsers.includes( user.value )
 	);
+
+	const label = hideOnRestrictedUsers
+		? __( 'Hide the block from', 'block-visibility' )
+		: __( 'Show the block to', 'block-visibility' );
 
 	const handleOnChange = ( _users ) => {
 		const newUsers = [];

@@ -2,8 +2,11 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+
+/**
+ * Internal dependencies
+ */
+import getAllUsers from './utils/get-all-users';
 
 /**
  * Get all available field groups.
@@ -29,26 +32,12 @@ export function getFieldGroups() {
  * @param {Object} variables All plugin variables available via the REST API
  * @return {string}          All fields
  */
-export function GetAllFields( variables ) {
+export function getAllFields( variables ) {
+	const users = getAllUsers();
 	let roles = variables?.user_roles ?? [];
 
 	// We don't need the 'logged-out in this context.
 	roles = roles.filter( ( role ) => role.value !== 'logged-out' );
-
-	const users = useSelect( ( select ) => {
-		// Requires `list_users` capability, will fail if user is not admin.
-		const data = select( coreStore ).getUsers( { per_page: -1 } );
-		const allUsers = [];
-
-		if ( data && data.length !== 0 ) {
-			data.forEach( ( user ) => {
-				const value = { value: user.id, label: user.name };
-				allUsers.push( value );
-			} );
-		}
-
-		return allUsers;
-	}, [] );
 
 	const anyOperators = [
 		{
@@ -144,7 +133,7 @@ export function GetAllFields( variables ) {
  */
 export function getGroupedFields( variables ) {
 	const groups = getFieldGroups( variables );
-	const fields = GetAllFields( variables );
+	const fields = getAllFields( variables );
 	const groupedFields = [];
 
 	groups.forEach( ( group ) => {
