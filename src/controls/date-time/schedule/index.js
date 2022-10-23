@@ -61,7 +61,7 @@ export default function Schedule( props ) {
 		type === 'single'
 			? type + '-' + scheduleIndex
 			: type + '-' + controlSetAtts?.id + '-' + scheduleIndex;
-	console.log( uniqueIndex );
+
 	const title = scheduleAtts?.title ?? '';
 	const enable = scheduleAtts?.enable ?? true;
 	const start = scheduleAtts?.start ?? null;
