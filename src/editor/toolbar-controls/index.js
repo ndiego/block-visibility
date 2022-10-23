@@ -32,12 +32,14 @@ function ToolbarControls( props ) {
 		useDispatch( 'core/block-editor' );
 	const { createSuccessNotice } = useDispatch( 'core/notices' );
 	const {
-		enableMenuItem,
-		clientId,
-		blockType,
 		blockAttributes,
+		blockType,
+		clientId,
+		enableMenuItem,
+		globallyRestricted,
 		settings,
 		variables,
+		widgetAreaRestricted,
 	} = props;
 
 	if ( settings === 'fetching' || variables === 'fetching' ) {
@@ -53,11 +55,12 @@ function ToolbarControls( props ) {
 		return null;
 	}
 
-	// There are a few core blocks that are not compatible.
-	const incompatibleBlocks = [ 'core/legacy-widget' ];
-	const blockIsIncompatible = incompatibleBlocks.includes( blockType.name );
-
-	if ( blockIsIncompatible ) {
+	// There are a few core blocks that are not compatible either globally or 
+	// specifically in the block-based Widget Editor.
+	if ( 
+		( widgetAreaRestricted.includes( blockType.name ) && variables?.isWidgetEditor ) ||
+		globallyRestricted.includes( blockType.name )
+	) {
 		return null;
 	}
 
@@ -127,6 +130,7 @@ function ToolbarControls( props ) {
 export default withSelect( ( select ) => {
 	const { getEntityRecord } = select( 'core' );
 	const {
+		getBlocks,
 		getBlockName,
 		getSelectedBlockClientIds,
 		getBlockAttributes,
@@ -148,8 +152,17 @@ export default withSelect( ( select ) => {
 	// Fetch the plugin settings and variables.
 	const settings =
 		getEntityRecord( 'block-visibility/v1', 'settings' ) ?? 'fetching';
-	const variables =
+	let variables =
 		getEntityRecord( 'block-visibility/v1', 'variables' ) ?? 'fetching';
+
+	// Determine if we are in the Widget Editor (Not the best but all we got).
+	const widgetAreas = 
+		getBlocks().filter( ( block ) => block.name === 'core/widget-area' );
+
+	// If variables have been fetched, append the Widget Area flag.
+	if ( variables !== 'fetching' ) {
+		variables = { ...variables, isWidgetEditor: widgetAreas.length > 0 };
+	}
 
 	return {
 		enableMenuItem,
