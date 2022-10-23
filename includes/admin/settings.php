@@ -61,7 +61,9 @@ function enqueue_settings_assets() {
 	wp_enqueue_script(
 		'block-visibility-setting-scripts',
 		BLOCK_VISIBILITY_PLUGIN_URL . 'build/block-visibility-settings.js',
-		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
+		// wp-api and wp-core-data are both needed even though they are not
+		// automatically picked up as dependencies.
+		array_merge( $asset_file['dependencies'], array( 'wp-api', 'wp-core-data' ) ),
 		$asset_file['version'],
 		true
 	);
