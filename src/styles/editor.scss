@@ -417,8 +417,9 @@
                     }
 
                     .components-text-control__input {
+                        border: 1px solid #1e1e1e;
+                        min-height: 40px;
                         padding: 8px;
-                        min-height: 36px;
                     }
                 }
             }
