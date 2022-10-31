@@ -8,14 +8,14 @@ import { useSelect } from '@wordpress/data';
  * Requires `list_users` capability, will fail if user is not admin.
  *
  * @since 2.5.0
- * @return {array} All users.
+ * @return {Array} All users.
  */
-export default function getAllUsers() {
+export default function GetAllUsers() {
 	const users = useSelect( ( select ) => {
 		const query = {
-			per_page: -1, 
+			per_page: -1,
 			_fields: 'id,name',
-		}
+		};
 
 		const data = select( 'core' ).getUsers( query );
 		const allUsers = [];

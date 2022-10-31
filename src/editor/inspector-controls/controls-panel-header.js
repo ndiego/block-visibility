@@ -16,12 +16,7 @@ import {
 	withFilters,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-import {
-	Icon,
-	moreVertical,
-	check,
-	plus,
-} from '@wordpress/icons';
+import { Icon, moreVertical, check, plus } from '@wordpress/icons';
 
 // Provides an entry point to slot in additional settings. Must be placed
 // outside of function to avoid unnecessary rerenders.
@@ -42,24 +37,34 @@ const AdditionalControlSetModals = withFilters(
  */
 export default function ControlsPanelHeader( props ) {
 	const [ modalOpen, setModalOpen ] = useState( false );
-	const { activeControls, attributes, setAttributes, enabledControls, controlSetAtts, setControlSetAtts } =
-		props;
+	const {
+		activeControls,
+		attributes,
+		setAttributes,
+		enabledControls,
+		controlSetAtts,
+		setControlSetAtts,
+	} = props;
 
 	const blockAtts = attributes?.blockVisibility ?? {};
-	const defaultControls = enabledControls.filter( ( control ) => control.isDefault );
+	const defaultControls = enabledControls.filter(
+		( control ) => control.isDefault
+	);
 
 	// Detect whether default controls have edits. Used to determine
 	// whether the reset button should be enabled.
 	defaultControls.forEach( ( control ) => {
 		if (
 			control.attributeSlug === 'hideBlock' ||
-            control.attributeSlug === 'visibilityPresets'
+			control.attributeSlug === 'visibilityPresets'
 		) {
-			control.hasEdits =
-                blockAtts.hasOwnProperty( control.attributeSlug );
+			control.hasEdits = blockAtts.hasOwnProperty(
+				control.attributeSlug
+			);
 		} else {
-			control.hasEdits =
-                controlSetAtts?.controls?.hasOwnProperty( control.attributeSlug );
+			control.hasEdits = controlSetAtts?.controls?.hasOwnProperty(
+				control.attributeSlug
+			);
 		}
 	} );
 
@@ -71,20 +76,30 @@ export default function ControlsPanelHeader( props ) {
 	);
 
 	function toggleControls( control, type ) {
-		if ( control.attributeSlug === 'hideBlock' || control.attributeSlug === 'visibilityPresets' ) {
+		if (
+			control.attributeSlug === 'hideBlock' ||
+			control.attributeSlug === 'visibilityPresets'
+		) {
 			// Handle the Hide Block and Visibility Preset separately.
-			if ( control.hasEdits || ( control.isActive && ! control.isDefault ) ) {
+			if (
+				control.hasEdits ||
+				( control.isActive && ! control.isDefault )
+			) {
 				setAttributes( {
-					blockVisibility: omit(
-						{ ...blockAtts },
-						[ control.attributeSlug ]
-					),
+					blockVisibility: omit( { ...blockAtts }, [
+						control.attributeSlug,
+					] ),
 				} );
 			} else {
 				setAttributes( {
 					blockVisibility: assign(
 						{ ...blockAtts },
-						{ [ control.attributeSlug ]: control.attributeSlug === 'hideBlock' ? false : {} }
+						{
+							[ control.attributeSlug ]:
+								control.attributeSlug === 'hideBlock'
+									? false
+									: {},
+						}
 					),
 				} );
 			}
@@ -92,9 +107,13 @@ export default function ControlsPanelHeader( props ) {
 			setControlSetAtts(
 				assign(
 					{ ...controlSetAtts },
-					{ controls: { ...omit( { ...controlSetAtts.controls }, [
-						control.attributeSlug,
-					] ) } }
+					{
+						controls: {
+							...omit( { ...controlSetAtts.controls }, [
+								control.attributeSlug,
+							] ),
+						},
+					}
 				)
 			);
 		} else {
@@ -124,7 +143,11 @@ export default function ControlsPanelHeader( props ) {
 		...defaultControls,
 		...coreControls,
 		...integrationControls,
-	].some( ( control ) => ( control.isActive && ! control.isDefault ) || ( control.isDefault && control.hasEdits ) );
+	].some(
+		( control ) =>
+			( control.isActive && ! control.isDefault ) ||
+			( control.isDefault && control.hasEdits )
+	);
 
 	const controlsDropdown = (
 		<DropdownMenu
@@ -132,7 +155,8 @@ export default function ControlsPanelHeader( props ) {
 			icon={ activeControls.length === 0 ? plus : moreVertical }
 			label={ __( 'Visibility Controls', 'block-visibility' ) }
 			popoverProps={ {
-				className: 'block-visibility__control-popover visibility-controls',
+				className:
+					'block-visibility__control-popover visibility-controls',
 				focusOnMount: 'container',
 			} }
 			toggleProps={ {
@@ -143,7 +167,9 @@ export default function ControlsPanelHeader( props ) {
 			{ ( { onClose } ) => (
 				<>
 					{ defaultControls.length !== 0 && (
-						<MenuGroup label={ __( 'Defaults', 'block-visibility' ) }>
+						<MenuGroup
+							label={ __( 'Defaults', 'block-visibility' ) }
+						>
 							{ defaultControls.map( ( control, index ) => (
 								<DefaultControlMenuItem
 									key={ index }
@@ -326,14 +352,14 @@ function DefaultControlMenuItem( props ) {
 				role="menuitem"
 			>
 				{ control.icon && (
-					<Icon className="control-branding-icon" icon={ control.icon } />
+					<Icon
+						className="control-branding-icon"
+						icon={ control.icon }
+					/>
 				) }
 				{ control.label }
 				{ control.hasEdits && (
-					<span
-						aria-hidden="true"
-						className="menu-item-reset"
-					>
+					<span aria-hidden="true" className="menu-item-reset">
 						{ __( 'Reset', 'block-visibility' ) }
 					</span>
 				) }
