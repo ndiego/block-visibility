@@ -5,11 +5,6 @@ import { __ } from '@wordpress/i18n';
 import { ToggleControl } from '@wordpress/components';
 
 /**
- * Internal dependencies
- */
-import { InformationPopover } from './../../../components';
-
-/**
  * Renders the uninstall settings.
  *
  * @since 1.4.0
@@ -28,12 +23,6 @@ export default function FullControlMode( props ) {
 				<span className="settings-panel__header-title">
 					{ __( 'Uninstall', 'block-visibility' ) }
 				</span>
-				<InformationPopover
-					message={ __(
-						'Settings that impact what happens when the Block Visibility plugin is uninstalled.',
-						'block-visibility'
-					) }
-				/>
 			</div>
 			<div className="settings-panel__container">
 				<div className="settings-type__toggle">
