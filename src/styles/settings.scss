@@ -106,23 +106,23 @@ $mobile: 426px;
 		}
 
 		.masthead__plugin-links {
-			font-size: 15px;
+			font-size: 13px;
 		    display: flex;
 		    justify-content: flex-end;
 		    align-items: center;
 
 			a {
+				align-items: center;
 				color: #23282d;
 				cursor: pointer;
-				display: inline-block;
+				display: inline-flex;
+				gap: 4px;
 				margin-left: 16px;
 				text-decoration: none;
 
 				svg {
-					width: 20px;
 					fill: currentColor;
 					vertical-align: middle;
-					margin: 0px 6px 4px 0;
 				}
 
 				&:hover {
@@ -138,15 +138,10 @@ $mobile: 426px;
 
 			@media ( max-width: $tablet ) {
 				a {
-					margin: 0 8px 0 0;
+					margin-left: 8px;
 
 					span {
 						display: none;
-					}
-
-					svg {
-						width: 24px;
-						margin: 0 2px;
 					}
 				}
 			}
@@ -155,10 +150,6 @@ $mobile: 426px;
 				justify-content: center;
 				margin-top: 10px;
 				width: 100%;
-
-				a {
-					margin: 0 8px;
-				}
 			}
 		}
 
@@ -206,15 +197,13 @@ $mobile: 426px;
 	.setting-tabs {
 
 		.message {
-			color: #777;
+			align-items: center;
+			color: #999;
 			display: flex;
+			gap: 6px;
 
 			svg {
-				fill: #777;
-				vertical-align: middle;
-				margin: 0px 6px;
-				width: 20px;
-				height: 20px;
+				opacity: 0.3;
 			}
 		}
 
@@ -690,6 +679,10 @@ $mobile: 426px;
 						font-size: 12px;
 						font-style: normal;
 						color: rgb(117, 117, 117);
+
+						&.has-top-margin {
+							margin-top: 12px;
+						}
 					}
 
 					.components-input-control {
@@ -706,10 +699,53 @@ $mobile: 426px;
 						}
 					}
 				}
+
+				// Make panels with upsells look a bit better.
+				&.has-upsell {
+					.settings-panel__container {
+						padding-bottom: 32px;
+					}
+				}
+
+				.settings-panel__upsell {
+					align-items: center;
+					background-color: var(--wp-admin-theme-color);
+					box-shadow: 0 0 0 1px var(--wp-admin-theme-color-darker-20), 0 1px 1px 1px rgba(0, 0, 0, 0.04);
+					color: #fff;
+					display: flex;
+					gap: 32px;
+					justify-content: space-between;
+					padding: 16px 24px;
+
+					.settings-panel__upsell-message {
+						align-items: center;
+						display: flex;
+						gap: 8px;
+
+						svg {
+							fill: #fff;
+							opacity: 0.6;
+							height: 24px;
+							width: 24px;
+						}
+					}
+
+					a {
+						color: #fff;
+						white-space: nowrap;
+
+						&:hover {
+							opacity: 0.8;
+						}
+					}
+
+					.components-external-link__icon {
+						width: 1.2em;
+						margin: 0 0.2em 0;
+					}
+				}
 			}
 		}
-
-
 	}
 
 	/* Specific styles for Screen Size visibility controls */
