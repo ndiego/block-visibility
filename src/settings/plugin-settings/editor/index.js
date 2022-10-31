@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import classnames from 'classnames';
+
+/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -7,25 +12,28 @@ import {
 	ColorIndicator,
 	ColorPalette,
 	Disabled,
+	ExternalLink,
 	ToggleControl,
 	RangeControl,
 	Slot,
 } from '@wordpress/components';
+import { Icon, ungroup } from '@wordpress/icons';
 
 /**
  * Internal dependencies
  */
+import links from './../../../utils/links';
 import { InformationPopover } from './../../../components';
 
 /**
- * Renders the Block Editor visibility settings.
+ * Renders the Editor visibility settings.
  *
  * @since 1.4.0
  * @param {Object} props All the props passed to this function
  * @return {string}		 Return the rendered JSX
  */
-export default function BlockEditor( props ) {
-	const { pluginSettings, setPluginSettings } = props;
+export default function Editor( props ) {
+	const { pluginSettings, setPluginSettings, variables } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
 	const enableContextualIndicators = pluginSettings?.enable_contextual_indicators ?? true; // eslint-disable-line
@@ -105,22 +113,25 @@ export default function BlockEditor( props ) {
 	}
 
 	return (
-		<div className="settings-panel">
+		<div
+			className={ classnames( 'settings-panel', {
+				'has-upsell': ! variables?.is_pro,
+			} ) }
+		>
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
-					{ __( 'Block Editor', 'block-visibility' ) }
+					{ __( 'Editor', 'block-visibility' ) }
 				</span>
 				<InformationPopover
 					message={ __(
-						'Settings that impact the Block Editor, such as contextual indicators for when a block has visibility controls, as well as additional toolbar options. Click the link below for complete details.',
+						'Settings that impact the Editor, such as contextual indicators for when a block has visibility controls, as well as additional toolbar options.',
 						'block-visibility'
 					) }
-					link={
-						'https://www.blockvisibilitywp.com/knowledge-base/how-to-configure-the-general-settings/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals'
-					}
+					link={ links.settingsGeneral }
 				/>
 			</div>
 			<div className="settings-panel__container">
+				<Slot name="PluginSettingsEditorTop" />
 				<div className="settings-label">
 					<span>
 						{ __( 'Contextual Indicators', 'block-visibility' ) }
@@ -143,7 +154,7 @@ export default function BlockEditor( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							'Contextual indicators allow users to quickly tell which blocks in the Block Editor have active visibility controls.',
+							'Contextual indicators assist users in quickly determining which blocks have active visibility controls.',
 							'block-visibility'
 						) }
 					/>
@@ -170,7 +181,7 @@ export default function BlockEditor( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							'Reducing block opacity, coupled with contextual indicators, can further help users quickly tell which blocks in the Block Editor have active visibility controls.',
+							'Combining contextual indicators with reduced block opacity can assist users in quickly determining which blocks have active visibility controls.',
 							'block-visibility'
 						) }
 					/>
@@ -198,13 +209,29 @@ export default function BlockEditor( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							'Some visibility controls (currently just the Hide Block control) can be made available in the toolbar of each block. This provides a more streamlined workflow and can improve content management.',
+							'Some visibility controls (currently just the Hide Block control) can be made available in the toolbar of each block.',
 							'block-visibility'
 						) }
 					/>
 				</div>
-				<Slot name="BlockEditorSettings" />
+				<Slot name="PluginSettingsEditorBottom" />
 			</div>
+			{ ! variables?.is_pro && (
+				<div className="settings-panel__upsell">
+					<div className="settings-panel__upsell-message">
+						<Icon icon={ ungroup } />
+						<span>
+							{ __(
+								'Upgrade to enable utilities for managing visibility settings (copy, import, etc.)',
+								'block-visibility'
+							) }
+						</span>
+					</div>
+					<ExternalLink href={ links.settingsProUpgrade }>
+						{ __( 'Get Pro', 'block-visibility' ) }
+					</ExternalLink>
+				</div>
+			) }
 		</div>
 	);
 }
