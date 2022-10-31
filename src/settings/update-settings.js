@@ -10,12 +10,7 @@ import { assign } from 'lodash';
 import { __ } from '@wordpress/i18n';
 import { Animate, Button, Modal, Spinner } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-import { Icon } from '@wordpress/icons';
-
-/**
- * Internal dependencies
- */
-import icons from './../utils/icons';
+import { cloud, Icon } from '@wordpress/icons';
 
 /**
  * Renders the update settings buttons and animation
@@ -97,7 +92,7 @@ export default function UpdateSettings( props ) {
 										animateClassName
 									) }
 								>
-									<Icon icon={ icons.cloud } />
+									<Icon icon={ cloud } />
 									{ __( 'Saving', 'block-visibility' ) }
 								</span>
 							) }

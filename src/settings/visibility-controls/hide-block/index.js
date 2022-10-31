@@ -7,6 +7,7 @@ import { ToggleControl } from '@wordpress/components';
 /**
  * Internal dependencies
  */
+import links from './../../../utils/links';
 import { InformationPopover } from './../../../components';
 
 /**
@@ -52,7 +53,7 @@ export default function HideBlock( props ) {
 							'The Hide Block control allows you easily hide blocks on the frontend of your website. This control overrides all other controls when enabled on a block.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-hide-block-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsHideBlock }
 					/>
 				</div>
 			</div>

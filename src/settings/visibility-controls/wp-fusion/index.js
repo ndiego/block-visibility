@@ -8,7 +8,8 @@ import { Icon } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
-import icons from './../../../utils/icons';
+import links from './../../../utils/links';
+import { wpFusion } from './../../../utils/icons';
 import { InformationPopover } from './../../../components';
 
 /**
@@ -33,7 +34,7 @@ export default function WPFusion( props ) {
 		<div className="settings-panel">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
-					<Icon icon={ icons.wpFusion } />
+					<Icon icon={ wpFusion } />
 					{ __( 'WP Fusion', 'block-visibility' ) }
 				</span>
 			</div>
@@ -60,7 +61,7 @@ export default function WPFusion( props ) {
 							'The WP Fusion control allows you to conditionally display blocks based on WP Fusion tags.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-wp-fusion-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsWpFusion }
 					/>
 				</div>
 			</div>

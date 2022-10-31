@@ -13,6 +13,7 @@ import { createInterpolateElement } from '@wordpress/element';
 /**
  * Internal dependencies
  */
+import links from './../../utils/links';
 import { InformationPopover } from './../../components';
 
 /**
@@ -25,7 +26,8 @@ import { InformationPopover } from './../../components';
 export default function QueryString( props ) {
 	const { enabledControls, controlSetAtts, setControlAtts } = props;
 	const controlActive = enabledControls.some(
-		( control ) => control.settingSlug === 'query_string' && control.isActive
+		( control ) =>
+			control.settingSlug === 'query_string' && control.isActive
 	);
 
 	if ( ! controlActive ) {
@@ -57,7 +59,7 @@ export default function QueryString( props ) {
 						'The Query String control allows you to configure block visibility based on URL query strings.',
 						'block-visibility'
 					) }
-					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-query-string-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					link={ links.editorQueryString }
 					position="bottom center"
 				/>
 			</h3>
@@ -75,7 +77,9 @@ export default function QueryString( props ) {
 							'block-visibility'
 						),
 						{
-							span: <span className="components-base-control__label-hint" />,
+							span: (
+								<span className="components-base-control__label-hint" />
+							),
 						}
 					) }
 					help={ __(
@@ -95,7 +99,9 @@ export default function QueryString( props ) {
 							'block-visibility'
 						),
 						{
-							span: <span className="components-base-control__label-hint" />,
+							span: (
+								<span className="components-base-control__label-hint" />
+							),
 						}
 					) }
 					help={ createInterpolateElement(
@@ -120,7 +126,9 @@ export default function QueryString( props ) {
 							'block-visibility'
 						),
 						{
-							span: <span className="components-base-control__label-hint" />,
+							span: (
+								<span className="components-base-control__label-hint" />
+							),
 						}
 					) }
 					help={ __(

@@ -18,6 +18,7 @@ import { plus } from '@wordpress/icons';
 import UserRoles from './user-roles';
 import UserRuleSets from './user-rule-sets';
 import Users from './users';
+import links from './../../utils/links';
 import isControlSettingEnabled from '../../utils/is-control-setting-enabled';
 import { InformationPopover } from './../../components';
 
@@ -37,7 +38,8 @@ export default function UserRole( props ) {
 		controlSetAtts,
 	} = props;
 	const controlActive = enabledControls.some(
-		( control ) => control.settingSlug === 'visibility_by_role' && control.isActive
+		( control ) =>
+			control.settingSlug === 'visibility_by_role' && control.isActive
 	);
 
 	if ( ! controlActive ) {
@@ -138,7 +140,8 @@ export default function UserRole( props ) {
 			( option ) => option.value === visibilityByRole
 		)[ 0 ]?.label ?? '';
 
-	const ruleSetsActive = enableUserRuleSets && visibilityByRole === 'user-rule-sets';
+	const ruleSetsActive =
+		enableUserRuleSets && visibilityByRole === 'user-rule-sets';
 	const ruleSets = userRole?.ruleSets ?? [];
 
 	if ( ruleSets.length === 0 ) {
@@ -172,7 +175,7 @@ export default function UserRole( props ) {
 						"The User Role control allows you to configure block visibility based on the current user's role and/or specific users.",
 						'block-visibility'
 					) }
-					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					link={ links.editorUserRole }
 					position="bottom center"
 				/>
 				{ ruleSetsActive && (
@@ -227,14 +230,14 @@ export default function UserRole( props ) {
 				) }
 				{ visibilityByRole === 'user-rule-sets' &&
 					enableUserRuleSets && (
-					<UserRuleSets
-						ruleSets={ ruleSets }
-						setControlAtts={ setControlAtts }
-						userRole={ userRole }
-						variables={ variables }
-						{ ...props }
-					/>
-				) }
+						<UserRuleSets
+							ruleSets={ ruleSets }
+							setControlAtts={ setControlAtts }
+							userRole={ userRole }
+							variables={ variables }
+							{ ...props }
+						/>
+					) }
 				{ ! options.some(
 					( option ) => option.value === visibilityByRole
 				) && (

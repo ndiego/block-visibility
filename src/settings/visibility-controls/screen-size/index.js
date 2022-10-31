@@ -7,10 +7,11 @@ import { ToggleControl, Disabled, Slot } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { InformationPopover } from './../../../components';
 import PreviewStyles from './preview-styles';
 import Breakpoints from './breakpoints';
 import ScreenSizeControls from './screen-size-controls';
+import links from './../../../utils/links';
+import { InformationPopover } from './../../../components';
 
 /**
  * Renders the screen size (responsive design) control settings.
@@ -152,7 +153,7 @@ export default function ScreenSize( props ) {
 							"The Screen Size control allows you to conditionally display blocks on the current width of the browser window, or in other words, the screen size of a user's device.",
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsScreenSize }
 					/>
 				</div>
 				{ screenSizeControls }
@@ -167,7 +168,7 @@ export default function ScreenSize( props ) {
 							'Note that once enabled, any block that is only using the advanced controls to hide at extra large, or extra small, breakpoints will become visible again if this setting is ever disabled in the future.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsScreenSize }
 					/>
 				</div>
 				<div className="settings-type__toggle has-info-popover subsetting">
@@ -177,7 +178,7 @@ export default function ScreenSize( props ) {
 							'By default, the CSS needed for the Screen Size controls is loaded on the frontend of your website. If disabled, you will need to add the CSS manually to your theme in order for the Screen Size controls to work properly. This CSS code is available via the "Preview Frontend CSS" button on this page.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsScreenSize }
 					/>
 				</div>
 				<Slot name="ScreenSizeControls" />

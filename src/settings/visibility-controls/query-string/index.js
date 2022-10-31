@@ -7,6 +7,7 @@ import { ToggleControl } from '@wordpress/components';
 /**
  * Internal dependencies
  */
+import links from './../../../utils/links';
 import { InformationPopover } from './../../../components';
 
 /**
@@ -52,7 +53,7 @@ export default function QueryString( props ) {
 							'The Query String control allows you to conditionally display blocks based on URL query strings.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-query-string-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsQueryString }
 					/>
 				</div>
 			</div>
