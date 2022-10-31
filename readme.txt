@@ -209,11 +209,22 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ==
 
-= 2.5.0 - 2022-10-08 =
+= 2.5.0 - 2022-11-TBD =
+
+**Added**
+
+* Added subtle upsell messaging in plugin settings dashboard. 
 
 **Changed**
 
-* The visibility panel and toolbar controls have been removed on Custom HTML blocks in the block-based Widget Area due to incompatibility. Visibility controls are still available for the Custom HTML block in the post/page Editor as well as the Site Editor.
+* Optimized all custom SVG icons including those used in contextual indicators. Indicator stylesheet is now 50% smaller.
+* Consolidate all external plugin links into single directory. 
+
+**Removed**
+
+* Removed visibility panel and toolbar controls on Custom HTML blocks in the block-based Widget Area due to incompatibility. Visibility controls are still available for the Custom HTML block in the post/page Editor as well as the Site Editor.
+* Removed unnessessary custom icons. 
+* Removed support url from variables endpoint.
 
 = 2.4.4 - 2022-10-08 =
 
