@@ -56,7 +56,7 @@ function add_plugin_row_meta( $plugin_meta, $plugin_file ) {
 	$getting_started .= __( 'Getting Started', 'block-visibility' );
 	$getting_started .= '</a>';
 
-	$review_link  = '<a href="' . esc_url( BLOCK_VISIBILITY_SUPPORT_URL ) . 'reviews/?filter=5" aria-label="' . esc_attr( __( 'Review Block Visibility on WordPress.org', 'block-visibility' ) ) . '" target="_blank">';
+	$review_link  = '<a href="https://wordpress.org/support/plugin/block-visibility/reviews/?filter=5" aria-label="' . esc_attr( __( 'Review Block Visibility on WordPress.org', 'block-visibility' ) ) . '" target="_blank">';
 	$review_link .= __( 'Leave a Review', 'block-visibility' );
 	$review_link .= '</a>';
 

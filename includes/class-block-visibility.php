@@ -120,7 +120,6 @@ final class Block_Visibility {
 		$this->define( 'BLOCK_VISIBILITY_VERSION', get_file_data( BLOCK_VISIBILITY_PLUGIN_FILE, [ 'Version' ] )[0] ); // phpcs:ignore
 		$this->define( 'BLOCK_VISIBILITY_PLUGIN_URL', plugin_dir_url( BLOCK_VISIBILITY_PLUGIN_FILE ) );
 		$this->define( 'BLOCK_VISIBILITY_PLUGIN_BASENAME', plugin_basename( BLOCK_VISIBILITY_PLUGIN_FILE ) );
-		$this->define( 'BLOCK_VISIBILITY_SUPPORT_URL', 'https://wordpress.org/support/plugin/block-visibility/' );
 		$this->define( 'BLOCK_VISIBILITY_SETTINGS_URL', admin_url( 'options-general.php?page=block-visibility-settings' ) );
 	}
 
