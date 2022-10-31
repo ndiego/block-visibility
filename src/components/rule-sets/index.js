@@ -42,9 +42,7 @@ export default function RuleSets( props ) {
 	} = props;
 
 	const title = ruleSet?.title ?? '';
-	const displayTitle = title
-		? title
-		: __( 'Rule Set', 'block-visibility' );
+	const displayTitle = title ? title : __( 'Rule Set', 'block-visibility' );
 	const enable = ruleSet?.enable ?? true;
 	const rules = ruleSet?.rules ?? [];
 
@@ -139,11 +137,11 @@ export default function RuleSets( props ) {
 					<MenuGroup label={ __( 'Tools', 'block-visibility' ) }>
 						<Slot name="RuleSetMoreSettingsTools" />
 						<MenuItem
-							onClick={ () =>
-								setAttribute( 'enable', ! enable )
-							}
+							onClick={ () => setAttribute( 'enable', ! enable ) }
 						>
-							{ enable ? __( 'Disable', 'block-visibility' ) : __( 'Enable', 'block-visibility' ) }
+							{ enable
+								? __( 'Disable', 'block-visibility' )
+								: __( 'Enable', 'block-visibility' ) }
 						</MenuItem>
 						<MenuItem
 							className="more-settings__tools-duplicate"

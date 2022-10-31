@@ -142,7 +142,8 @@ function withContextualIndicators( BlockListBlock ) {
 
 		// If Pro is active, allow local controls to be disabled in Pro.
 		const enableLocalControls = variables?.is_pro
-			? ( settings?.visibility_controls?.general?.enable_local_controls ?? true )
+			? settings?.visibility_controls?.general?.enable_local_controls ??
+			  true
 			: true;
 
 		// If local controls have been disabled, remove them from the array.

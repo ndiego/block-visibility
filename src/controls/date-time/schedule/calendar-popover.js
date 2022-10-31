@@ -14,7 +14,8 @@ import { __experimentalGetSettings } from '@wordpress/date'; // eslint-disable-l
  * @return {string}		 Return the rendered JSX
  */
 export default function CalendarPopover( props ) {
-	const { currentDate, label, setAttribute, setPickerOpen, pickerType } = props;
+	const { currentDate, label, setAttribute, setPickerOpen, pickerType } =
+		props;
 	const dateSettings = __experimentalGetSettings();
 
 	// To know if the current time format is a 12 hour time, look for "a".
@@ -37,10 +38,7 @@ export default function CalendarPopover( props ) {
 			<div className="date-time-popover__header">
 				<h2>{ label }</h2>
 				<Button
-					label={ __(
-						'Close',
-						'block-visibility'
-					) }
+					label={ __( 'Close', 'block-visibility' ) }
 					onClick={ () => setPickerOpen( false ) }
 					icon={ closeSmall }
 					isSmall

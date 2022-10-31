@@ -19,14 +19,14 @@ import { Slot, Fill } from '@wordpress/components';
 import './contextual-indicators';
 import ToolbarControls from './toolbar-controls';
 import VisibilityInspectorControls from './inspector-controls';
-import { 
-	ACF, 
-	DateTime, 
-	QueryString, 
-	ScreenSize, 
-	UserRole, 
-	WPFusion 
-}from './../controls';
+import {
+	ACF,
+	DateTime,
+	QueryString,
+	ScreenSize,
+	UserRole,
+	WPFusion,
+} from './../controls';
 
 /**
  * Add our custom entities for retreiving external data in the Block Editor.
@@ -53,12 +53,10 @@ const globallyRestricted = [
 	'core/freeform',
 	'core/legacy-widget',
 	'core/widget-area',
-]
+];
 
 // Blocks that are not compatible with visibility controls when used as Widgets.
-const widgetAreaRestricted = [
-	'core/html',
-];
+const widgetAreaRestricted = [ 'core/html' ];
 
 /**
  * Add the visibility setting sttribute to selected blocks.
@@ -411,10 +409,10 @@ function addInspectorControls( BlockEdit ) {
 		return (
 			<>
 				<BlockEdit { ...props } />
-				<VisibilityInspectorControls 
+				<VisibilityInspectorControls
 					globallyRestricted={ globallyRestricted }
 					widgetAreaRestricted={ widgetAreaRestricted }
-					{ ...props } 
+					{ ...props }
 				/>
 			</>
 		);
@@ -469,15 +467,19 @@ addFilter(
 
 /**
  * Register all Block Visibility toolbar controls.
+ *
+ * @since 1.5.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
  */
- const getToolbarControls = ( props ) => (
-	<ToolbarControls 					
+const getToolbarControls = ( props ) => (
+	<ToolbarControls
 		globallyRestricted={ globallyRestricted }
-		widgetAreaRestricted={ widgetAreaRestricted } 
-		{...props }
+		widgetAreaRestricted={ widgetAreaRestricted }
+		{ ...props }
 	/>
 );
 
 registerPlugin( 'block-visibility-toolbar-options-hide-block', {
-	render: getToolbarControls
+	render: getToolbarControls,
 } );

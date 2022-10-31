@@ -16,10 +16,7 @@ export default function formatDateLabel( date, label ) {
 	let printedlabel = label;
 
 	if ( date ) {
-		printedlabel = format(
-			`M j, Y ${ dateSettings.formats.time }`,
-			date
-		);
+		printedlabel = format( `M j, Y ${ dateSettings.formats.time }`, date );
 	}
 
 	return printedlabel;

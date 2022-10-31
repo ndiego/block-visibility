@@ -54,12 +54,8 @@ export default function ControlsPanel( props ) {
 	// Append the "active" property to all active controls.
 	enabledControls.forEach( ( control ) => {
 		if (
-			blockAtts?.hasOwnProperty(
-				control.attributeSlug
-			) ||
-			controlSetAtts?.controls.hasOwnProperty(
-				control.attributeSlug
-			) ||
+			blockAtts?.hasOwnProperty( control.attributeSlug ) ||
+			controlSetAtts?.controls.hasOwnProperty( control.attributeSlug ) ||
 			control?.isDefault
 		) {
 			control.isActive = true;
@@ -67,8 +63,8 @@ export default function ControlsPanel( props ) {
 	} );
 
 	// A simple array of all active controls.
-	const activeControls = enabledControls.filter( ( control ) =>
-		control.isActive
+	const activeControls = enabledControls.filter(
+		( control ) => control.isActive
 	);
 
 	function setControlAtts( control, values ) {
@@ -88,7 +84,11 @@ export default function ControlsPanel( props ) {
 			<Slot name="ControlPanelContainer" />
 
 			<Slot name={ 'ControlSetControlsTop-' + uniqueIndex } />
-			<DateTime setControlAtts={ setControlAtts } type={ uniqueIndex } { ...props } />
+			<DateTime
+				setControlAtts={ setControlAtts }
+				type={ uniqueIndex }
+				{ ...props }
+			/>
 			<UserRole setControlAtts={ setControlAtts } { ...props } />
 			<ScreenSize setControlAtts={ setControlAtts } { ...props } />
 			<QueryString setControlAtts={ setControlAtts } { ...props } />
@@ -104,9 +104,9 @@ export default function ControlsPanel( props ) {
 	// the grid styling applies gap where it shouldn't.
 	if ( blockAtts?.hideBlock ) {
 		controls =
-			activeControls.length > 1
-				? <Disabled className="hide-block-enabled">{ controls }</Disabled>
-				: null;
+			activeControls.length > 1 ? (
+				<Disabled className="hide-block-enabled">{ controls }</Disabled>
+			) : null;
 	}
 
 	return (
@@ -139,7 +139,10 @@ export default function ControlsPanel( props ) {
 							{
 								a: (
 									<a // eslint-disable-line
-										href={ settingsUrl + '&tab=visibility-controls' }
+										href={
+											settingsUrl +
+											'&tab=visibility-controls'
+										}
 										target="_blank"
 										rel="noreferrer"
 									/>
