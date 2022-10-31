@@ -8,7 +8,8 @@ import { Icon } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
-import icons from './../../../utils/icons';
+import links from './../../../utils/links';
+import { acf } from './../../../utils/icons';
 import { InformationPopover } from './../../../components';
 
 /**
@@ -33,7 +34,7 @@ export default function ACF( props ) {
 		<div className="settings-panel">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
-					<Icon icon={ icons.acf } />
+					<Icon icon={ acf } />
 					{ __( 'Advanced Custom Fields', 'block-visibility' ) }
 				</span>
 			</div>
@@ -60,7 +61,7 @@ export default function ACF( props ) {
 							'The Advanced Custom Fields (ACF) control allows you to conditionally display blocks, including ACF blocks, based on ACF fields.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-advanced-custom-fields-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsACF }
 					/>
 				</div>
 			</div>

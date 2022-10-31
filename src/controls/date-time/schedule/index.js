@@ -156,11 +156,11 @@ export default function Schedule( props ) {
 					<MenuGroup label={ __( 'Tools', 'block-visibility' ) }>
 						<Slot name="ScheduleOptionsTools" />
 						<MenuItem
-							onClick={ () =>
-								setAttribute( 'enable', ! enable )
-							}
+							onClick={ () => setAttribute( 'enable', ! enable ) }
 						>
-							{ enable ? __( 'Disable', 'block-visibility' ) : __( 'Enable', 'block-visibility' ) }
+							{ enable
+								? __( 'Disable', 'block-visibility' )
+								: __( 'Enable', 'block-visibility' ) }
 						</MenuItem>
 						<MenuItem
 							onClick={ () => {
@@ -250,9 +250,7 @@ export default function Schedule( props ) {
 			</div>
 			{ pickerOpen && pickerType && (
 				<CalendarPopover
-					currentDate={
-						pickerType === 'start' ? start : end
-					}
+					currentDate={ pickerType === 'start' ? start : end }
 					label={
 						pickerType === 'start'
 							? __( 'Start Date/Time', 'block-visibility' )

@@ -14,6 +14,7 @@ import { plus } from '@wordpress/icons';
  * Internal dependencies
  */
 import Schedule from './schedule';
+import links from './../../utils/links';
 import { InformationPopover } from './../../components';
 
 /**
@@ -71,7 +72,7 @@ export default function DateTime( props ) {
 						'The Date & Time control allows you to schedule when the block should be visible.',
 						'block-visibility'
 					) }
-					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-date-time-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					link={ links.editorDateTime }
 					position="bottom center"
 				/>
 				<div className="controls-panel-item__header-toolbar">

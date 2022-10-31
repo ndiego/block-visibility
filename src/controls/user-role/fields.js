@@ -6,7 +6,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import getAllUsers from './utils/get-all-users';
+import GetAllUsers from './utils/get-all-users';
 
 /**
  * Get all available field groups.
@@ -33,7 +33,7 @@ export function getFieldGroups() {
  * @return {string}          All fields
  */
 export function getAllFields( variables ) {
-	const users = getAllUsers();
+	const users = GetAllUsers();
 	let roles = variables?.user_roles ?? [];
 
 	// We don't need the 'logged-out in this context.

@@ -15,7 +15,8 @@ import { createInterpolateElement } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import icons from './../../utils/icons';
+import { wpFusion as wpFusionIcon } from './../../utils/icons';
+import links from './../../utils/links';
 import { InformationPopover } from './../../components';
 
 /**
@@ -155,7 +156,7 @@ export default function WPFusion( props ) {
 	return (
 		<div className="controls-panel-item wp-fusion-control">
 			<h3 className="controls-panel-item__header has-icon">
-				<Icon icon={ icons.wpFusion } />
+				<Icon icon={ wpFusionIcon } />
 				<span>{ __( 'WP Fusion', 'block-visibility' ) }</span>
 				<InformationPopover
 					message={ __(
@@ -166,7 +167,7 @@ export default function WPFusion( props ) {
 						'Note that the available fields depend on the User Role control settings. If the User Role control is disabled, only the Required Tags (Not) field will be available.',
 						'block-visibility'
 					) }
-					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-wp-fusion-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					link={ links.editorWpFusion }
 					position="bottom center"
 				/>
 			</h3>

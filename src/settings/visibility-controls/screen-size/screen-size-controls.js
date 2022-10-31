@@ -7,6 +7,7 @@ import { ToggleControl } from '@wordpress/components';
 /**
  * Internal dependencies
  */
+import links from './../../../utils/links';
 import { InformationPopover } from './../../../components';
 
 /**
@@ -50,7 +51,7 @@ export default function ScreenSizeControls( props ) {
 						'The default controls are Desktop, Tablet, and Mobile. Advanced screen size controls add Large Desktop and Mobile (portrait).',
 						'block-visibility'
 					) }
-					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					link={ links.settingsScreenSize }
 				/>
 			</div>
 			{ enableAdvancedControls && (

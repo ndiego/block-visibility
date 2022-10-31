@@ -14,11 +14,11 @@ import { useDispatch, withSelect } from '@wordpress/data';
 /**
  * Internal dependencies
  */
-import icons from './../../utils/icons';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import hasPermission from './../utils/has-permission';
 import isPluginSettingEnabled from './../../utils/is-plugin-setting-enabled';
 import getEnabledControls from './../../utils/get-enabled-controls';
+import { visibilityAlt, visibilityHiddenAlt } from './../../utils/icons';
 
 /**
  * Adds the toolbar control for showing/hiding the selected block.
@@ -55,10 +55,11 @@ function ToolbarControls( props ) {
 		return null;
 	}
 
-	// There are a few core blocks that are not compatible either globally or 
+	// There are a few core blocks that are not compatible either globally or
 	// specifically in the block-based Widget Editor.
-	if ( 
-		( widgetAreaRestricted.includes( blockType.name ) && variables?.isWidgetEditor ) ||
+	if (
+		( widgetAreaRestricted.includes( blockType.name ) &&
+			variables?.isWidgetEditor ) ||
 		globallyRestricted.includes( blockType.name )
 	) {
 		return null;
@@ -84,7 +85,7 @@ function ToolbarControls( props ) {
 
 	const { blockVisibility } = blockAttributes;
 	const hideBlock = blockVisibility?.hideBlock ?? false;
-	const icon = hideBlock ? icons.visibilityAlt : icons.visibilityHiddenAlt;
+	const icon = hideBlock ? visibilityAlt : visibilityHiddenAlt;
 	const label = hideBlock
 		? __( 'Enable block', 'block-visibility' )
 		: __( 'Hide block', 'block-visibility' );

@@ -30,9 +30,9 @@ import Ads from './ads';
 
 // Provides an entry point to slot in additional settings. Must be placed
 // outside of function to avoid unnecessary rerenders.
-const AdditionalSettings = withFilters( 'blockVisibility.MainSettings' )(
-	( props ) => <></>
-); // eslint-disable-line
+const AdditionalSettingTabs = withFilters(
+	'blockVisibility.SettingTabsContent'
+)( ( props ) => <></> ); // eslint-disable-line
 
 /**
  * Renders the Block Visibility settings page
@@ -143,7 +143,6 @@ function Settings() {
 
 	return (
 		<SlotFillProvider>
-			<AdditionalSettings />
 			<Masthead variables={ variables } />
 			<TabPanel
 				className={ classnames( {
@@ -191,7 +190,14 @@ function Settings() {
 								</>
 							);
 						default:
-							return <Slot name="SettingsTabs" />;
+							return (
+								<>
+									<Slot name="SettingTabs" />
+									<AdditionalSettingTabs
+										tabName={ tab.name }
+									/>
+								</>
+							);
 					}
 				} }
 			</TabPanel>

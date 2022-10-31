@@ -8,18 +8,19 @@ import { useState } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import BlockEditor from './block-editor';
+import Editor from './editor';
 import UserPermissions from './user-permissions';
 import FullControlMode from './full-control-mode';
 import Uninstall from './uninstall';
 import UpdateSettings from './../update-settings';
+import links from './../../utils/links';
 import { InformationPopover } from './../../components';
 
 // Provides an entry point to slot in additional settings. Must be placed
 // outside of function to avoid unnecessary rerenders.
 const AdditionalSettings = withFilters( 'blockVisibility.PluginSettings' )(
-	( props ) => <></>
-); // eslint-disable-line
+	( props ) => <></> // eslint-disable-line
+);
 
 /**
  * Renders the plugin Settings tab of the Block Visibility settings page
@@ -50,10 +51,10 @@ export default function PluginSettings( props ) {
 					</span>
 					<InformationPopover
 						message={ __(
-							'The settings below allow you to configure general functionality of the Block Visibility plugin. To learn more about General Settings, review the plugin documentation using the link below.',
+							'The settings below allow you to configure general functionality for the Block Visibility plugin.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-configure-the-general-settings/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsGeneral }
 					/>
 				</div>
 				<UpdateSettings
@@ -66,7 +67,7 @@ export default function PluginSettings( props ) {
 			</div>
 			<div className="setting-tabs__setting-panels">
 				<Slot name="PluginSettingsTop" />
-				<BlockEditor
+				<Editor
 					pluginSettings={ pluginSettings }
 					setPluginSettings={ setPluginSettings }
 					setHasUpdates={ setHasUpdates }

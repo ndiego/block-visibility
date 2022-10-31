@@ -12,6 +12,7 @@ import { ToggleControl } from '@wordpress/components';
 /**
  * Internal dependencies
  */
+import links from './../../utils/links';
 import { InformationPopover } from './../../components';
 
 /**
@@ -43,13 +44,16 @@ export default function HideBlock( props ) {
 						'The Hide Block control overrides all other visibility controls when enabled.',
 						'block-visibility'
 					) }
-					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-hide-block-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					link={ links.editorHideBlock }
 					position="bottom center"
 				/>
 			</h3>
 			<div className="controls-panel-item__control-fields">
 				<ToggleControl
-					label={ __( 'Hide the block from everyone', 'block-visibility' ) }
+					label={ __(
+						'Hide the block from everyone',
+						'block-visibility'
+					) }
 					checked={ hideBlock }
 					onChange={ () => {
 						setAttributes( {

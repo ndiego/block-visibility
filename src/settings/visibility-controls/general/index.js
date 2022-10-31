@@ -102,11 +102,11 @@ export default function General( props ) {
 		multiValueLabel: ( base, state ) => {
 			return state.data.isFixed
 				? {
-					...base,
-					backgroundColor: '#757575',
-					color: '#ffffff',
-					paddingRight: 6,
-				}
+						...base,
+						backgroundColor: '#757575',
+						color: '#ffffff',
+						paddingRight: 6,
+				  }
 				: base;
 		},
 		multiValueRemove: ( base, state ) => {
@@ -121,8 +121,8 @@ export default function General( props ) {
 					{ __( 'General', 'block-visibility' ) }
 				</span>
 			</div>
-			<Slot name="VisibilityControlsGeneralTop" />
 			<div className="settings-panel__container">
+				<Slot name="VisibilityControlsGeneralTop" />
 				<div className="settings-type__select has-info-popover">
 					<div className="select-control-container">
 						<div className="settings-label">

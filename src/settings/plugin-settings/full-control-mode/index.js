@@ -8,6 +8,7 @@ import { createInterpolateElement } from '@wordpress/element';
 /**
  * Internal dependencies
  */
+import links from './../../../utils/links';
 import { InformationPopover } from './../../../components';
 
 /**
@@ -42,7 +43,7 @@ export default function FullControlMode( props ) {
 								strong: <strong />,
 								a: (
 									<ExternalLink // eslint-disable-line
-										href="https://www.blockvisibilitywp.com/knowledge-base/how-to-configure-the-general-settings/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+										href={ links.settingsGeneral }
 										target="_blank"
 										rel="noreferrer"
 									/>
@@ -60,12 +61,10 @@ export default function FullControlMode( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							"By default, not all blocks are provided with visibility controls. These include child blocks and blocks that may exist in WordPress, but cannot actually be added directly to the editor. Most of the time, you will not need Full Control Mode, but it's there in case you do. Use with caution. Click the link below for complete details.",
+							"Some blocks do not have visibility controls enabled by default. These include child blocks and blocks that may exist in WordPress but cannot be added directly to the Editor. Most of the time, you will not need Full Control Mode, but it's here in case you do.",
 							'block-visibility'
 						) }
-						link={
-							'https://www.blockvisibilitywp.com/knowledge-base/how-to-configure-the-general-settings/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals'
-						}
+						link={ links.settingsGeneral }
 					/>
 				</div>
 			</div>

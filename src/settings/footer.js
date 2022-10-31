@@ -5,6 +5,11 @@ import { __ } from '@wordpress/i18n';
 import { applyFilters } from '@wordpress/hooks';
 
 /**
+ * Internal dependencies
+ */
+import links from './../utils/links';
+
+/**
  * Renders the footer of the Block Visibility settings pages.
  *
  * @since 1.4.0
@@ -16,45 +21,45 @@ export default function Footer( props ) {
 	const pluginVariables = variables?.plugin_variables ?? [];
 
 	// Default footer links.
-	const links = {
+	const displayLinks = {
 		plugin: {
 			title: __( 'Block Visibility', 'block-visibility' ) + ' ' + pluginVariables.version, // eslint-disable-line
-			url: 'https://www.blockvisibilitywp.com/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals', // eslint-disable-line
+			url: links.settingsHome,
 			rel: 'external',
 		},
 		docs: {
 			title: __( 'Knowledge Base', 'block-visibility' ),
-			url: 'https://www.blockvisibilitywp.com/knowledge-base/?bv_query=knowledge_base&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals', // eslint-disable-line
+			url: links.settingsKnowledgeBase,
 			rel: 'external',
 		},
 		support: {
 			title: __( 'Support', 'block-visibility' ),
-			url: pluginVariables.support_url,
+			url: links.blockVisibilityOrgSupport,
 		},
 		repo: {
 			title: __( 'GitHub', 'block-visibility' ),
-			url: 'https://github.com/ndiego/block-visibility',
+			url: links.gitHub,
 		},
 		twitter: {
 			title: __( 'Twitter', 'block-visibility' ),
-			url: 'https://twitter.com/BlockVisibility',
+			url: links.twitter,
 		},
 	};
 
-	applyFilters( 'blockVisibility.FooterLinks', links );
+	applyFilters( 'blockVisibility.FooterLinks', displayLinks );
 
-	const linkMarkup = Object.keys( links ).map( ( link ) => {
-		const rel = links[ link ].rel ?? 'noreferrer';
+	const linkMarkup = Object.keys( displayLinks ).map( ( link ) => {
+		const rel = displayLinks[ link ].rel ?? 'noreferrer';
 
 		return (
 			<a // eslint-disable-line
 				key={ link }
-				href={ links[ link ].url }
+				href={ displayLinks[ link ].url }
 				className={ 'footer-links__' + link }
 				target="_blank"
 				rel={ rel }
 			>
-				{ links[ link ].title }
+				{ displayLinks[ link ].title }
 			</a>
 		);
 	} );

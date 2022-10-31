@@ -16,8 +16,9 @@ import { TextControl, Icon } from '@wordpress/components';
  */
 import BlockCategory from './block-category';
 import UpdateSettings from './../update-settings';
+import links from './../../utils/links';
 import { InformationPopover } from './../../components';
-import icons from './../../utils/icons';
+import { visibilityAlt, visibilityHiddenAlt } from './../../utils/icons';
 
 /**
  * Renders the Block Manager tab of the Block Visibility settings page
@@ -126,14 +127,14 @@ function BlockManager( props ) {
 		map( allowedBlockTypes, 'name' )
 	);
 
-	let visibilityIcon = icons.visibility;
+	let visibilityIcon = visibilityAlt;
 	let visibilityMessage = __(
 		'Visibility is enabled for all blocks',
 		'block-visibility'
 	);
 
 	if ( trueDisabledBlocks.length ) {
-		visibilityIcon = icons.visibilityHidden;
+		visibilityIcon = visibilityHiddenAlt;
 		visibilityMessage = sprintf(
 			/* translators: %s: The total number of visible block types */
 			_n(
@@ -153,14 +154,14 @@ function BlockManager( props ) {
 					<span>{ __( 'Block Manager', 'block-visibility' ) }</span>
 					<InformationPopover
 						message={ __(
-							'Not every block type may need visibility controls. The Block Manager allows you to restrict visibility controls to specific block types. If you are looking for a block, and do not see it listed, you may need to enable Full Control Mode on the General Settings tab.',
+							'Only some block types may need visibility controls. The Block Manager allows you to restrict visibility controls to specific block types.',
 							'block-visibility'
 						) }
 						subMessage={ __(
-							'To learn more about the Block Manager, review the plugin documentation using the link below.',
+							'If you are looking for a block and do not see it listed, you may need to enable Full Control Mode on the General Settings tab.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-configure-the-block-manager/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsBlockManager }
 					/>
 				</div>
 				<UpdateSettings

@@ -14,9 +14,11 @@ import {
 	ToggleControl,
 } from '@wordpress/components';
 import { createInterpolateElement } from '@wordpress/element';
+
 /**
  * Internal dependencies
  */
+import links from './../../utils/links';
 import isControlSettingEnabled from '../../utils/is-control-setting-enabled';
 import { InformationPopover } from './../../components';
 
@@ -156,7 +158,7 @@ export default function ScreenSize( props ) {
 							'The Screen Size control allows you to configure block visibility based on the width of the current screen.',
 							'block-visibility'
 						) }
-						link="https://blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.editorScreenSize }
 						position="bottom center"
 					/>
 				</h3>
@@ -172,9 +174,7 @@ export default function ScreenSize( props ) {
 								{
 									a: (
 										<ExternalLink // eslint-disable-line
-											href={
-												'https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=editor&utm_campaign=plugin_referrals#limitations'
-											}
+											href={ links.editorScreenSize }
 											target="_blank"
 											rel="noreferrer"
 										/>

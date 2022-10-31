@@ -13,8 +13,9 @@ import { Icon, plus } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
-import icons from '../../utils/icons';
 import { getGroupedFields, getAllFields } from './fields';
+import links from './../../utils/links';
+import { acf as acfIcon } from './../../utils/icons';
 import { InformationPopover, RuleSets } from './../../components';
 
 /**
@@ -96,7 +97,7 @@ export default function ACF( props ) {
 	return (
 		<div className="controls-panel-item acf-control">
 			<h3 className="controls-panel-item__header has-icon">
-				<Icon icon={ icons.acf } />
+				<Icon icon={ acfIcon } />
 				<span>
 					{ __( 'Advanced Custom Fields', 'block-visibility' ) }
 				</span>
@@ -105,7 +106,7 @@ export default function ACF( props ) {
 						'The Advanced Custom Fields (ACF) control allows you to configure block visibility based on a variety of field-related rules, which form rule sets.',
 						'block-visibility'
 					) }
-					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-advanced-custom-fields-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					link={ links.editorACF }
 					position="bottom center"
 				/>
 				<div className="controls-panel-item__header-toolbar">

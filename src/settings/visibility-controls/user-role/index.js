@@ -7,6 +7,7 @@ import { ToggleControl, Disabled, Slot } from '@wordpress/components';
 /**
  * Internal dependencies
  */
+import links from './../../../utils/links';
 import { InformationPopover } from './../../../components';
 
 /**
@@ -122,7 +123,7 @@ export default function UserRole( props ) {
 							'The User Role control allows you to conditionally display blocks based on whether a user is logged-in, logged-out, and more.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsUserRole }
 					/>
 				</div>
 				<div className="settings-type__toggle first has-info-popover subsetting">
@@ -132,7 +133,7 @@ export default function UserRole( props ) {
 							'Restrict visibility by any user role (Administrator, Editor, Subscriber, etc.). Roles that are added by third-party plugins will also be available to choose from.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsUserRole }
 					/>
 				</div>
 				<div className="settings-type__toggle has-info-popover subsetting">
@@ -142,7 +143,7 @@ export default function UserRole( props ) {
 							'Restrict visibility to specific individual users on your website based on user ID. Multiple users can be selected at once.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsUserRole }
 					/>
 				</div>
 				<div className="settings-type__toggle has-info-popover subsetting">
@@ -152,7 +153,7 @@ export default function UserRole( props ) {
 							'This functionality allows you to create user-based rule sets, which provide extensive configuration options and greater flexibilty.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsUserRole }
 					/>
 				</div>
 				<Slot name="VisibilityByRoleControls" />
