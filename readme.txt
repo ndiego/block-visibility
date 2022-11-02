@@ -5,7 +5,7 @@ Tags:              visibility, dynamic content, conditional content, conditional
 Requires at least: 5.5
 Tested up to:      6.1
 Requires PHP:      5.6
-Stable tag:        2.4.5
+Stable tag:        2.4.6
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -208,6 +208,13 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 The **one exception** to this is the Screen Size block controls. Visibility by screen size requires the use of CSS, which is loaded to the frontend of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary yourself. Visit the plugin [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) to learn more.
 
 == Changelog ==
+
+= 2.4.6 - 2022-11-02 =
+
+**Fixed**
+
+* Fixed bug where contextual indicator styles caused issues with Cover blocks when a custom indicator color was chosen in WordPress 6.1.
+* Fixed bug where contextual indicator styles caused issues with hover states in the Site Editor when a custom indicator color was chosen in WordPress 6.1.
 
 = 2.4.5 - 2022-11-02 =
 
