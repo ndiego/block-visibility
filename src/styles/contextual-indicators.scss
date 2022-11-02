@@ -257,6 +257,7 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
         &.block-visibility__has-visibility {
 
             &.is-hovered:not(.is-selected):not(.has-child-selected) {
+                outline-color: var(--wp-admin-theme-color);
                 outline-style: solid;
 
                 &:after {
@@ -268,6 +269,7 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
         &>.block-visibility__has-visibility {
 
             &.is-hovered:not(.is-selected):not(.has-child-selected) {
+                outline-color: var(--wp-admin-theme-color);
                 outline-style: solid;
 
                 &:after {
