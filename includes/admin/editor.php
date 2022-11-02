@@ -104,7 +104,7 @@ function enqueue_editor_styles() {
 
 		if ( $block_opacity ) {
 			$opacity      = intval( $block_opacity ) * 0.01;
-			$inline_style = '.block-visibility__has-visibility:not(.is-selected):not(.has-child-selected) > * { opacity: ' . $opacity . ' }';
+			$inline_style = '.block-visibility__has-visibility:not(.is-selected):not(.has-child-selected) > *:not(.wp-block-cover__background) { opacity: ' . $opacity . ' }';
 
 			wp_add_inline_style(
 				'block-visibility-editor-styles',
