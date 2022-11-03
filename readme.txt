@@ -5,7 +5,7 @@ Tags:              visibility, dynamic content, conditional content, conditional
 Requires at least: 5.5
 Tested up to:      6.1
 Requires PHP:      5.6
-Stable tag:        2.4.6
+Stable tag:        2.5.0
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -208,6 +208,23 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 The **one exception** to this is the Screen Size block controls. Visibility by screen size requires the use of CSS, which is loaded to the frontend of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary yourself. Visit the plugin [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) to learn more.
 
 == Changelog ==
+
+= 2.5.0 - 2022-11-TBD =
+
+**Added**
+
+* Added subtle upsell messaging in plugin settings dashboard. 
+
+**Changed**
+
+* Optimized all custom SVG icons including those used in contextual indicators. Indicator stylesheet is now 50% smaller.
+* Consolidate all external plugin links into single directory. 
+
+**Removed**
+
+* Removed visibility panel and toolbar controls on Custom HTML blocks in the block-based Widget Area due to incompatibility. Visibility controls are still available for the Custom HTML block in the post/page Editor as well as the Site Editor.
+* Removed unnessessary custom icons. 
+* Removed support url from variables endpoint.
 
 = 2.4.6 - 2022-11-02 =
 
