@@ -29,12 +29,9 @@ function enqueue_editor_scripts() {
 	wp_enqueue_script(
 		'block-visibility-editor-scripts',
 		BLOCK_VISIBILITY_PLUGIN_URL . 'build/block-visibility-editor.js',
-		// wp-api and wp-core-data are both needed even though they are not
-		// automatically picked up as dependencies.
-		array_merge( $asset_file['dependencies'], array( 'wp-api', 'wp-core-data' ) ),
+		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
 		$asset_file['version'],
-		// Need false to ensure our filters can target third-party plugins.
-		false 
+		false // Need false to ensure our filters can target third-party plugins.
 	);
 
 	// Create a global variable to indicate whether we are in full control mode
