@@ -29,12 +29,9 @@ function enqueue_editor_scripts() {
 	wp_enqueue_script(
 		'block-visibility-editor-scripts',
 		BLOCK_VISIBILITY_PLUGIN_URL . 'build/block-visibility-editor.js',
-		// wp-api and wp-core-data are both needed even though they are not
-		// automatically picked up as dependencies.
-		array_merge( $asset_file['dependencies'], array( 'wp-api', 'wp-core-data' ) ),
+		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
 		$asset_file['version'],
-		// Need false to ensure our filters can target third-party plugins.
-		false 
+		false // Need false to ensure our filters can target third-party plugins.
 	);
 
 	// Create a global variable to indicate whether we are in full control mode
@@ -91,7 +88,7 @@ function enqueue_editor_styles() {
 		$custom_color = get_plugin_setting( 'contextual_indicator_color' );
 
 		if ( $custom_color ) {
-			$inline_style = '.block-visibility__has-visibility, .block-visibility__has-visibility.components-placeholder.components-placeholder, .block-visibility__has-visibility.components-placeholder { outline-color: ' . $custom_color . ' } .block-visibility__has-visibility::after { background-color: ' . $custom_color . ' }';
+			$inline_style = '.block-visibility__has-visibility:not(.is-selected):not(.has-child-selected), .block-visibility__has-visibility.components-placeholder.components-placeholder:not(.is-selected):not(.has-child-selected), .block-visibility__has-visibility.components-placeholder:not(.is-selected):not(.has-child-selected) { outline-color: ' . $custom_color . ' } .block-visibility__has-visibility:not(.is-selected):not(.has-child-selected)::after { background-color: ' . $custom_color . ' }';
 
 			wp_add_inline_style(
 				'block-visibility-contextual-indicator-styles',
@@ -107,7 +104,7 @@ function enqueue_editor_styles() {
 
 		if ( $block_opacity ) {
 			$opacity      = intval( $block_opacity ) * 0.01;
-			$inline_style = '.block-visibility__has-visibility:not(.is-selected):not(.has-child-selected) > * { opacity: ' . $opacity . ' }';
+			$inline_style = '.block-visibility__has-visibility:not(.is-selected):not(.has-child-selected) > *:not(.wp-block-cover__background) { opacity: ' . $opacity . ' }';
 
 			wp_add_inline_style(
 				'block-visibility-editor-styles',
