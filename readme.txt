@@ -5,7 +5,7 @@ Tags:              visibility, dynamic content, conditional content, conditional
 Requires at least: 5.5
 Tested up to:      6.0
 Requires PHP:      5.6
-Stable tag:        2.4.4
+Stable tag:        2.5.0
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -225,6 +225,20 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 * Removed visibility panel and toolbar controls on Custom HTML blocks in the block-based Widget Area due to incompatibility. Visibility controls are still available for the Custom HTML block in the post/page Editor as well as the Site Editor.
 * Removed unnessessary custom icons. 
 * Removed support url from variables endpoint.
+
+= 2.4.6 - 2022-11-02 =
+
+**Fixed**
+
+* Fixed bug where contextual indicator styles caused issues with Cover blocks when a custom indicator color was chosen in WordPress 6.1.
+* Fixed bug where contextual indicator styles caused issues with hover states in the Site Editor when a custom indicator color was chosen in WordPress 6.1.
+
+= 2.4.5 - 2022-11-02 =
+
+**Fixed**
+
+* Fixed bug where text blocks became nearly impossible to edit when visibility controls were applied in WordPress 6.1.
+* Fixed bug where block contextual opacity was applied incorrectly to Cover blocks with overlay enabled.
 
 = 2.4.4 - 2022-10-08 =
 
