@@ -29,7 +29,7 @@ function enqueue_editor_scripts() {
 	wp_enqueue_script(
 		'block-visibility-editor-scripts',
 		BLOCK_VISIBILITY_PLUGIN_URL . 'build/block-visibility-editor.js',
-		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
+		array_merge( $asset_file['dependencies'], array( 'wp-api', 'wp-core-data' ) ),
 		$asset_file['version'],
 		false // Need false to ensure our filters can target third-party plugins.
 	);
