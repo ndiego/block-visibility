@@ -14,6 +14,7 @@ import {
 	ToggleControl,
 } from '@wordpress/components';
 import { createInterpolateElement } from '@wordpress/element';
+import { applyFilters } from '@wordpress/hooks';
 
 /**
  * Internal dependencies
@@ -142,9 +143,18 @@ export default function ScreenSize( props ) {
 		</>
 	);
 
-	const isNotCompatible = name === 'core/shortcode' || name === 'core/html';
+	// Block types that do not support classes or have been known
+	// to not work with the Screen Size control.
+	const incompatibleBlockTypes = applyFilters( 
+		'blockVisibility.screenSizeIncompatibleBlockTypes', 
+		[ 
+			'core/shortcode',
+			'core/html',
+			'meow-gallery/gallery',
+		] 
+	);
 
-	if ( isNotCompatible ) {
+	if ( incompatibleBlockTypes.includes( name ) ) {
 		allScreenSizeFields = <Disabled>{ allScreenSizeFields }</Disabled>;
 	}
 
@@ -164,7 +174,7 @@ export default function ScreenSize( props ) {
 				</h3>
 				<div className="controls-panel-item__control-fields">
 					{ allScreenSizeFields }
-					{ isNotCompatible && (
+					{ incompatibleBlockTypes.includes( name ) && (
 						<Notice status="warning" isDismissible={ false }>
 							{ createInterpolateElement(
 								__(
