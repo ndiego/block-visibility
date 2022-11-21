@@ -23,7 +23,7 @@ import { getGroupedFields, getAllFields } from './fields';
  * @return {string}		 Return the rendered JSX
  */
 export default function UserRuleSets( props ) {
-	const { ruleSets, setControlAtts, userRole, variables } = props;
+	const { ruleSets, setControlAtts, userRole, variables, enableNotices } = props;
 	const hideOnRuleSets = userRole?.hideOnRuleSets ?? false;
 	const groupedFields = getGroupedFields();
 	const allFields = getAllFields( variables );
@@ -44,18 +44,20 @@ export default function UserRuleSets( props ) {
 	return (
 		<>
 			<div className="control-fields-item">
-				<div className="components-base-control__help">
-					{ sprintf(
-						// Translators: Whether the block is hidden or visible.
-						__(
-							'%s the block if at least one user rule set applies.',
-							'block-visibility'
-						),
-						hideOnRuleSets
-							? __( 'Hide', 'block-visibility' )
-							: __( 'Show', 'block-visibility' )
-					) }
-				</div>
+				{ enableNotices && (
+					<div className="components-base-control__help">
+						{ sprintf(
+							// Translators: Whether the block is hidden or visible.
+							__(
+								'%s the block if at least one user rule set applies.',
+								'block-visibility'
+							),
+							hideOnRuleSets
+								? __( 'Hide', 'block-visibility' )
+								: __( 'Show', 'block-visibility' )
+						) }
+					</div>
+				) }
 				<div className="rule-sets">
 					{ ruleSets.map( ( ruleSet, ruleSetIndex ) => {
 						return (

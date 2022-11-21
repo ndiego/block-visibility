@@ -18,7 +18,7 @@ import { ToggleControl } from '@wordpress/components';
  * @return {string}		 Return the rendered JSX
  */
 export default function UserRoles( props ) {
-	const { variables, userRole, setControlAtts } = props;
+	const { variables, userRole, setControlAtts, enableNotices } = props;
 	const restrictedRoles = userRole?.restrictedRoles ?? [];
 	const hideOnRestrictedRoles = userRole?.hideOnRestrictedRoles ?? false;
 	const roles = variables?.user_roles ?? [];
@@ -51,16 +51,18 @@ export default function UserRoles( props ) {
 
 	return (
 		<div className="control-fields-item">
-			<div className="components-base-control__help">
-				{ sprintf(
-					// Translators: Whether the block is hidden or visible.
-					__(
-						'%s users with at least one of the selected roles.',
-						'block-visibility'
-					),
-					label
-				) }
-			</div>
+			{ enableNotices && (
+				<div className="components-base-control__help">
+					{ sprintf(
+						// Translators: Whether the block is hidden or visible.
+						__(
+							'%s users with at least one of the selected roles.',
+							'block-visibility'
+						),
+						label
+					) }
+				</div>
+			) }
 			<Select
 				className="block-visibility__react-select"
 				classNamePrefix="react-select"

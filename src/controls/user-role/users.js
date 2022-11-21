@@ -23,7 +23,7 @@ import getAllUsers from './utils/get-all-users';
  * @return {string}		 Return the rendered JSX
  */
 export default function Users( props ) {
-	const { variables, userRole, setControlAtts } = props;
+	const { variables, userRole, setControlAtts, enableNotices } = props;
 	const restrictedUsers = userRole?.restrictedUsers ?? [];
 	const hideOnRestrictedUsers = userRole?.hideOnRestrictedUsers ?? false;
 	const currentUsersRoles = variables?.current_users_roles ?? [];
@@ -71,13 +71,15 @@ export default function Users( props ) {
 
 	return (
 		<div className="control-fields-item">
-			<div className="components-base-control__help">
-				{ sprintf(
-					// Translators: Whether the block is hidden or visible.
-					__( '%s the selected users.', 'block-visibility' ),
-					label
-				) }
-			</div>
+			{ enableNotices && (
+				<div className="components-base-control__help">
+					{ sprintf(
+						// Translators: Whether the block is hidden or visible.
+						__( '%s the selected users.', 'block-visibility' ),
+						label
+					) }
+				</div>
+			) }
 			<Select
 				className="block-visibility__react-select"
 				classNamePrefix="react-select"

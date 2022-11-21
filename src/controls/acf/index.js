@@ -26,7 +26,7 @@ import { InformationPopover, RuleSets } from './../../components';
  * @return {string}		 Return the rendered JSX
  */
 export default function ACF( props ) {
-	const { variables, enabledControls, controlSetAtts, setControlAtts } =
+	const { controlSetAtts, enabledControls, setControlAtts, settings, variables } =
 		props;
 	const pluginActive = variables?.integrations?.acf?.active ?? false;
 	const controlActive = enabledControls.some(
@@ -37,6 +37,7 @@ export default function ACF( props ) {
 		return null;
 	}
 
+	const enableNotices = settings?.plugin_settings?.enable_editor_notices ?? true;
 	const fields = variables?.integrations?.acf?.fields ?? [];
 	const acf = controlSetAtts?.controls?.acf ?? {};
 	const hideOnRuleSets = acf?.hideOnRuleSets ?? false;
@@ -101,14 +102,16 @@ export default function ACF( props ) {
 				<span>
 					{ __( 'Advanced Custom Fields', 'block-visibility' ) }
 				</span>
-				<InformationPopover
-					message={ __(
-						'The Advanced Custom Fields (ACF) control allows you to configure block visibility based on a variety of field-related rules, which form rule sets.',
-						'block-visibility'
-					) }
-					link={ links.editorACF }
-					position="bottom center"
-				/>
+				{ enableNotices && (
+					<InformationPopover
+						message={ __(
+							'The Advanced Custom Fields (ACF) control allows you to configure block visibility based on a variety of field-related rules, which form rule sets.',
+							'block-visibility'
+						) }
+						link={ links.editorACF }
+						position="bottom center"
+					/>
+				) }
 				<div className="controls-panel-item__header-toolbar">
 					<Button
 						icon={ plus }
@@ -118,18 +121,20 @@ export default function ACF( props ) {
 					/>
 				</div>
 			</h3>
-			<div className="controls-panel-item__description">
-				{ sprintf(
-					// Translators: Whether the block is hidden or visible.
-					__(
-						'%s the block if at least one rule set applies. Rules targeting user fields will fail if the current user is not logged in.',
-						'block-visibility'
-					),
-					hideOnRuleSets
-						? __( 'Hide', 'block-visibility' )
-						: __( 'Show', 'block-visibility' )
-				) }
-			</div>
+			{ enableNotices && (
+				<div className="controls-panel-item__description">
+					{ sprintf(
+						// Translators: Whether the block is hidden or visible.
+						__(
+							'%s the block if at least one rule set applies. Rules targeting user fields will fail if the current user is not logged in.',
+							'block-visibility'
+						),
+						hideOnRuleSets
+							? __( 'Hide', 'block-visibility' )
+							: __( 'Show', 'block-visibility' )
+					) }
+				</div>
+			) }
 			<div className="controls-panel-item__control-fields">
 				{ fields.length === 0 && (
 					<Notice status="warning" isDismissible={ false }>

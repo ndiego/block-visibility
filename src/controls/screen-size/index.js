@@ -61,6 +61,8 @@ export default function ScreenSize( props ) {
 		extraSmall: true,
 	};
 
+	const enableNotices = settings?.plugin_settings?.enable_editor_notices ?? true;
+
 	const setAttribute = ( attribute, value ) =>
 		setControlAtts(
 			'screenSize',
@@ -163,14 +165,16 @@ export default function ScreenSize( props ) {
 			<div className="controls-panel-item screen-size-control">
 				<h3 className="controls-panel-item__header has-icon">
 					<span>{ __( 'Screen Size', 'block-visibility' ) }</span>
-					<InformationPopover
-						message={ __(
-							'The Screen Size control allows you to configure block visibility based on the width of the current screen.',
-							'block-visibility'
-						) }
-						link={ links.editorScreenSize }
-						position="bottom center"
-					/>
+					{ enableNotices && (
+						<InformationPopover
+							message={ __(
+								'The Screen Size control allows you to configure block visibility based on the width of the current screen.',
+								'block-visibility'
+							) }
+							link={ links.editorScreenSize }
+							position="bottom center"
+						/>
+					) }
 				</h3>
 				<div className="controls-panel-item__control-fields">
 					{ allScreenSizeFields }

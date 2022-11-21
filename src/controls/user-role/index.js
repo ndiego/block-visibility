@@ -50,6 +50,7 @@ export default function UserRole( props ) {
 	const visibilityByRole = userRole?.visibilityByRole ?? 'public';
 
 	const settingsUrl = variables?.plugin_variables.settings_url ?? ''; // eslint-disable-line
+	const enableNotices = settings?.plugin_settings?.enable_editor_notices ?? true; // eslint-disable-line
 	const enableUserRoles = isControlSettingEnabled(
 		settings,
 		'visibility_by_role',
@@ -170,14 +171,16 @@ export default function UserRole( props ) {
 		<div className="controls-panel-item user-role-control">
 			<h3 className="controls-panel-item__header has-icon">
 				<span>{ __( 'User Role', 'block-visibility' ) }</span>
-				<InformationPopover
-					message={ __(
-						"The User Role control allows you to configure block visibility based on the current user's role and/or specific users.",
-						'block-visibility'
-					) }
-					link={ links.editorUserRole }
-					position="bottom center"
-				/>
+				{ enableNotices && (
+					<InformationPopover
+						message={ __(
+							"The User Role control allows you to configure block visibility based on the current user's role and/or specific users.",
+							'block-visibility'
+						) }
+						link={ links.editorUserRole }
+						position="bottom center"
+					/>
+				) }
 				{ ruleSetsActive && (
 					<div className="controls-panel-item__header-toolbar">
 						<Button
@@ -206,7 +209,7 @@ export default function UserRole( props ) {
 							)
 						}
 					/>
-					{ helpMessage && (
+					{ enableNotices && helpMessage && (
 						<div className="control-fields-item__help">
 							{ helpMessage }
 						</div>
@@ -217,6 +220,7 @@ export default function UserRole( props ) {
 						variables={ variables }
 						userRole={ userRole }
 						setControlAtts={ setControlAtts }
+						enableNotices={ enableNotices }
 						{ ...props }
 					/>
 				) }
@@ -225,6 +229,7 @@ export default function UserRole( props ) {
 						variables={ variables }
 						userRole={ userRole }
 						setControlAtts={ setControlAtts }
+						enableNotices={ enableNotices }
 						{ ...props }
 					/>
 				) }
@@ -235,6 +240,7 @@ export default function UserRole( props ) {
 							setControlAtts={ setControlAtts }
 							userRole={ userRole }
 							variables={ variables }
+							enableNotices={ enableNotices }
 							{ ...props }
 						/>
 					) }

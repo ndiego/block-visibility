@@ -24,7 +24,7 @@ import { InformationPopover } from './../../components';
  * @return {string}		 Return the rendered JSX
  */
 export default function QueryString( props ) {
-	const { enabledControls, controlSetAtts, setControlAtts } = props;
+	const { enabledControls, controlSetAtts, setControlAtts, settings } = props;
 	const controlActive = enabledControls.some(
 		( control ) =>
 			control.settingSlug === 'query_string' && control.isActive
@@ -38,6 +38,7 @@ export default function QueryString( props ) {
 	const queryStringAny = queryString?.queryStringAny ?? '';
 	const queryStringAll = queryString?.queryStringAll ?? '';
 	const queryStringNot = queryString?.queryStringNot ?? '';
+	const enableNotices = settings?.plugin_settings?.enable_editor_notices ?? true;
 
 	const setAttribute = ( attribute, value ) =>
 		setControlAtts(
@@ -54,14 +55,16 @@ export default function QueryString( props ) {
 		<div className="controls-panel-item query-string-control">
 			<h3 className="controls-panel-item__header has-icon">
 				<span>{ __( 'Query String', 'block-visibility' ) }</span>
-				<InformationPopover
-					message={ __(
-						'The Query String control allows you to configure block visibility based on URL query strings.',
-						'block-visibility'
-					) }
-					link={ links.editorQueryString }
-					position="bottom center"
-				/>
+				{ enableNotices && ( 
+					<InformationPopover
+						message={ __(
+							'The Query String control allows you to configure block visibility based on URL query strings.',
+							'block-visibility'
+						) }
+						link={ links.editorQueryString }
+						position="bottom center"
+					/>
+				) }
 			</h3>
 			<div className="controls-panel-item__description">
 				{ __(
@@ -82,7 +85,7 @@ export default function QueryString( props ) {
 							),
 						}
 					) }
-					help={ __(
+					help={ enableNotices && __(
 						'Show the block if at least one of the provided URL query strings is present.',
 						'block-visibility'
 					) }
@@ -104,7 +107,7 @@ export default function QueryString( props ) {
 							),
 						}
 					) }
-					help={ createInterpolateElement(
+					help={ enableNotices && createInterpolateElement(
 						__(
 							'Show the block if <strong>all</strong> of the provided URL query strings are present.',
 							'block-visibility'
@@ -131,7 +134,7 @@ export default function QueryString( props ) {
 							),
 						}
 					) }
-					help={ __(
+					help={ enableNotices && __(
 						'Hide the block if at least one of the provided URL query strings is present.',
 						'block-visibility'
 					) }

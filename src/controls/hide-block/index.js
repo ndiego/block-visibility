@@ -23,7 +23,7 @@ import { InformationPopover } from './../../components';
  * @return {string}		 Return the rendered JSX
  */
 export default function HideBlock( props ) {
-	const { attributes, setAttributes, enabledControls } = props;
+	const { attributes, setAttributes, enabledControls, settings } = props;
 	const controlActive = enabledControls.some(
 		( control ) => control.settingSlug === 'hide_block' && control.isActive
 	);
@@ -34,19 +34,22 @@ export default function HideBlock( props ) {
 
 	const { blockVisibility } = attributes;
 	const hideBlock = blockVisibility?.hideBlock ?? false;
+	const enableNotices = settings?.plugin_settings?.enable_editor_notices ?? true;
 
 	return (
 		<div className="controls-panel-item hide-block-control">
 			<h3 className="controls-panel-item__header has-icon">
 				<span>{ __( 'Hide Block', 'block-visibility' ) }</span>
-				<InformationPopover
-					message={ __(
-						'The Hide Block control overrides all other visibility controls when enabled.',
-						'block-visibility'
-					) }
-					link={ links.editorHideBlock }
-					position="bottom center"
-				/>
+				{ enableNotices && (
+					<InformationPopover
+						message={ __(
+							'The Hide Block control overrides all other visibility controls when enabled.',
+							'block-visibility'
+						) }
+						link={ links.editorHideBlock }
+						position="bottom center"
+					/>
+				) }
 			</h3>
 			<div className="controls-panel-item__control-fields">
 				<ToggleControl
