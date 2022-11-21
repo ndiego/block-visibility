@@ -1,11 +1,13 @@
 /**
  * External dependencies
  */
+import classnames from 'classnames';
 import { map, without } from 'lodash';
 
 /**
  * WordPress dependencies
  */
+import { __ } from '@wordpress/i18n';
 import { BlockIcon } from '@wordpress/block-editor';
 import { CheckboxControl } from '@wordpress/components';
 
@@ -13,6 +15,7 @@ import { CheckboxControl } from '@wordpress/components';
  * Internal dependencies
  */
 import BlockType from './block-type';
+import { InformationPopover } from './../../components';
 
 /**
  * Renders the list of BlockType controls for a given block category on the
@@ -63,7 +66,16 @@ export default function BlockCategory( props ) {
 			aria-labelledby={ categoryTitleId }
 			className="block-manager__block-category"
 		>
-			<div className="block-category__title">
+			<div 
+				className={ 
+					classnames( 
+						'block-category__title', 
+						{ 
+							'has-info-popover': category.slug === 'uncategorized'
+						}
+					)
+				}
+			>
 				<CheckboxControl
 					checked={ isAllChecked }
 					onChange={ ( checked ) => onBlockCategoryChange( checked ) }
@@ -77,6 +89,14 @@ export default function BlockCategory( props ) {
 						</span>
 					}
 				/>
+				{ category.slug === 'uncategorized' && (
+					<InformationPopover
+						message={ __(
+							'Some blocks may appear in the Block Manager as uncategorized even though they have an assigned category in the Editor. This is due to how the block is registered in WordPress.',
+							'block-visibility'
+						) }
+					/>
+				) }
 			</div>
 			<ul className="block-category__blocks-list">
 				{ blockTypes.map( ( blockType ) => (
