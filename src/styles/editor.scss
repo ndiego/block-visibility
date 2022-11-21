@@ -96,8 +96,16 @@
         }
     }
 
-    .components-base-control__label-hint {
-        color: #757575;
+    .components-base-control__label {
+        font-size: 11px;
+        font-weight: 500;
+        line-height: 1.4;
+        text-transform: uppercase;
+        display: inline-block;
+
+        .components-base-control__label-hint {
+            color: #757575;
+        }
     }
 
     .controls-panel-item {
@@ -164,7 +172,7 @@
 
         .controls-panel-item__control-fields {
             .components-base-control {
-                margin-bottom: 20px;
+                margin-bottom: 18px;
 
                 &.components-toggle-control {
                     margin-bottom: 12px;
@@ -521,7 +529,7 @@
     .user-role-control {
 
         // Fix margin on field help text.
-        .control-fields-item:nth-child(2) {
+        .control-fields-item > .components-base-control__help {
             margin-top: -8px
         }
     }
@@ -537,6 +545,12 @@
     .acf-control {
         .components-notice {
             margin-bottom: 20px;
+        }
+    }
+
+    .wp-fusion-control {
+        .components-disabled {
+            margin-bottom: 18px;
         }
     }
 }
