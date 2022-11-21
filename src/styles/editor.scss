@@ -39,7 +39,7 @@
     // When controls are disabled due to the Hide Block control, we still need gap.
     .components-disabled.hide-block-enabled {
         display: grid;
-        gap: 28px;
+        gap: 32px;
     }
 
     .controls-panel-notices {
@@ -121,7 +121,7 @@
             font-size: 11px;
             font-weight: 500;
             line-height: 1.4;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             margin-top: 0;
             min-height: 28px;
             text-transform: uppercase;
@@ -170,6 +170,12 @@
             }
         }
 
+        .controls-panel-item__fields {
+            *:last-child {
+                margin-bottom: 0;
+            }
+        }
+
         .controls-panel-item__control-fields {
             .components-base-control {
                 margin-bottom: 18px;
@@ -215,6 +221,8 @@
     }
 
     .control-fields-item__label {
+        color: #757575;
+        font-size: 12px;
         margin-bottom: 8px;
     }
 
@@ -266,20 +274,20 @@
 
     /* Specific styling for section headers ----------------------------------*/
     .section-header {
+        align-items: center;
         display: flex;
         justify-content: space-between;
-        align-items: center;
         gap: 24px;
-        margin-bottom: 16px;
+        margin-bottom: 14px;
 
         &.main {
-            margin-bottom: 30px;
             border-top: 1px solid #e0e0e0;
+            margin-bottom: 30px;
             margin-left: -16px;
             margin-right: -16px;
-            width: calc( 100% + 32px );
-            padding: 8px 16px;
             min-height: 48px;
+            padding: 8px 16px;
+            width: calc( 100% + 32px );
         }
 
         .section-header__title {
@@ -373,9 +381,11 @@
                 .rule {
 
                     .rule__header {
-                        display: flex;
-                        justify-content: space-between;
                         align-items: center;
+                        color: #757575;
+                        display: flex;
+                        font-size: 12px;
+                        justify-content: space-between;
                         margin-bottom: 8px;
                         min-height: 24px;
 
