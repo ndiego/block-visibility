@@ -813,7 +813,11 @@ $mobile: 426px;
 	.is_pro {
 		.setting-tabs__block-manager {
 			.block-manager__category-container {
-				grid-template-columns: repeat(3, 1fr);
+				grid-template-columns: repeat(2, 1fr);
+
+				@media ( max-width: $tablet ) {
+					grid-template-columns: 1fr;
+				}
 			}
 		}
 
@@ -847,14 +851,6 @@ $mobile: 426px;
 		.block-manager__category-container {
 			display: grid;
 			grid-gap: 24px;
-
-		// 	@media ( max-width: $desktop ) {
-		// 		grid-template-columns: repeat(2, 1fr);
-		// 	}
-
-		// 	@media ( max-width: $tablet ) {
-		// 		grid-template-columns: repeat(1, 1fr);
-		// 	}
 		}
 
 		.block-manager__block-category {
