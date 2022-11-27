@@ -34,7 +34,8 @@ export default function DateTime( props ) {
 		return null;
 	}
 
-	const enableNotices = settings?.plugin_settings?.enable_editor_notices ?? true;
+	const enableNotices =
+		settings?.plugin_settings?.enable_editor_notices ?? true;
 	const dateTime = controlSetAtts?.controls?.dateTime ?? {};
 	const hideOnSchedules = dateTime?.hideOnSchedules ?? false;
 	let schedules = dateTime?.schedules ?? [];

@@ -230,8 +230,7 @@ export default function Editor( props ) {
 						onChange={ () => {
 							setPluginSettings( {
 								...pluginSettings,
-								enable_editor_notices:
-									! enableEditorNotices,
+								enable_editor_notices: ! enableEditorNotices,
 							} );
 						} }
 					/>

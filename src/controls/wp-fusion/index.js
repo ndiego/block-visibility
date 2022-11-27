@@ -27,8 +27,13 @@ import { InformationPopover } from './../../components';
  * @return {string}		 Return the rendered JSX
  */
 export default function WPFusion( props ) {
-	const { controlSetAtts, enabledControls, setControlAtts, settings, variables } =
-		props;
+	const {
+		controlSetAtts,
+		enabledControls,
+		setControlAtts,
+		settings,
+		variables,
+	} = props;
 	const pluginActive = variables?.integrations?.wp_fusion?.active ?? false;
 	const controlActive = enabledControls.some(
 		( control ) => control.settingSlug === 'wp_fusion' && control?.isActive
@@ -38,7 +43,7 @@ export default function WPFusion( props ) {
 		return null;
 	}
 
-	const enableNotices = 
+	const enableNotices =
 		settings?.plugin_settings?.enable_editor_notices ?? true;
 	const hasUserRoles =
 		controlSetAtts?.controls.hasOwnProperty( 'userRole' ) ?? false;

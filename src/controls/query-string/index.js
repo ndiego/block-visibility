@@ -38,7 +38,8 @@ export default function QueryString( props ) {
 	const queryStringAny = queryString?.queryStringAny ?? '';
 	const queryStringAll = queryString?.queryStringAll ?? '';
 	const queryStringNot = queryString?.queryStringNot ?? '';
-	const enableNotices = settings?.plugin_settings?.enable_editor_notices ?? true;
+	const enableNotices =
+		settings?.plugin_settings?.enable_editor_notices ?? true;
 
 	const setAttribute = ( attribute, value ) =>
 		setControlAtts(
@@ -55,7 +56,7 @@ export default function QueryString( props ) {
 		<div className="controls-panel-item query-string-control">
 			<h3 className="controls-panel-item__header has-icon">
 				<span>{ __( 'Query String', 'block-visibility' ) }</span>
-				{ enableNotices && ( 
+				{ enableNotices && (
 					<InformationPopover
 						message={ __(
 							'The Query String control allows you to configure block visibility based on URL query strings.',
@@ -85,10 +86,13 @@ export default function QueryString( props ) {
 							),
 						}
 					) }
-					help={ enableNotices && __(
-						'Show the block if at least one of the provided URL query strings is present.',
-						'block-visibility'
-					) }
+					help={
+						enableNotices &&
+						__(
+							'Show the block if at least one of the provided URL query strings is present.',
+							'block-visibility'
+						)
+					}
 					value={ queryStringAny }
 					onChange={ ( value ) =>
 						setAttribute( 'queryStringAny', value )
@@ -107,15 +111,18 @@ export default function QueryString( props ) {
 							),
 						}
 					) }
-					help={ enableNotices && createInterpolateElement(
-						__(
-							'Show the block if <strong>all</strong> of the provided URL query strings are present.',
-							'block-visibility'
-						),
-						{
-							strong: <strong />,
-						}
-					) }
+					help={
+						enableNotices &&
+						createInterpolateElement(
+							__(
+								'Show the block if <strong>all</strong> of the provided URL query strings are present.',
+								'block-visibility'
+							),
+							{
+								strong: <strong />,
+							}
+						)
+					}
 					value={ queryStringAll }
 					onChange={ ( value ) =>
 						setAttribute( 'queryStringAll', value )
@@ -134,10 +141,13 @@ export default function QueryString( props ) {
 							),
 						}
 					) }
-					help={ enableNotices && __(
-						'Hide the block if at least one of the provided URL query strings is present.',
-						'block-visibility'
-					) }
+					help={
+						enableNotices &&
+						__(
+							'Hide the block if at least one of the provided URL query strings is present.',
+							'block-visibility'
+						)
+					}
 					value={ queryStringNot }
 					onChange={ ( value ) =>
 						setAttribute( 'queryStringNot', value )

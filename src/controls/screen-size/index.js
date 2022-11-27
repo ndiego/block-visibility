@@ -61,7 +61,8 @@ export default function ScreenSize( props ) {
 		extraSmall: true,
 	};
 
-	const enableNotices = settings?.plugin_settings?.enable_editor_notices ?? true;
+	const enableNotices =
+		settings?.plugin_settings?.enable_editor_notices ?? true;
 
 	const setAttribute = ( attribute, value ) =>
 		setControlAtts(
@@ -147,13 +148,9 @@ export default function ScreenSize( props ) {
 
 	// Block types that do not support classes or have been known
 	// to not work with the Screen Size control.
-	const incompatibleBlockTypes = applyFilters( 
-		'blockVisibility.screenSizeIncompatibleBlockTypes', 
-		[ 
-			'core/shortcode',
-			'core/html',
-			'meow-gallery/gallery',
-		] 
+	const incompatibleBlockTypes = applyFilters(
+		'blockVisibility.screenSizeIncompatibleBlockTypes',
+		[ 'core/shortcode', 'core/html', 'meow-gallery/gallery' ]
 	);
 
 	if ( incompatibleBlockTypes.includes( name ) ) {

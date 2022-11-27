@@ -26,8 +26,13 @@ import { InformationPopover, RuleSets } from './../../components';
  * @return {string}		 Return the rendered JSX
  */
 export default function ACF( props ) {
-	const { controlSetAtts, enabledControls, setControlAtts, settings, variables } =
-		props;
+	const {
+		controlSetAtts,
+		enabledControls,
+		setControlAtts,
+		settings,
+		variables,
+	} = props;
 	const pluginActive = variables?.integrations?.acf?.active ?? false;
 	const controlActive = enabledControls.some(
 		( control ) => control.settingSlug === 'acf' && control?.isActive
@@ -37,7 +42,8 @@ export default function ACF( props ) {
 		return null;
 	}
 
-	const enableNotices = settings?.plugin_settings?.enable_editor_notices ?? true;
+	const enableNotices =
+		settings?.plugin_settings?.enable_editor_notices ?? true;
 	const fields = variables?.integrations?.acf?.fields ?? [];
 	const acf = controlSetAtts?.controls?.acf ?? {};
 	const hideOnRuleSets = acf?.hideOnRuleSets ?? false;

@@ -66,15 +66,10 @@ export default function BlockCategory( props ) {
 			aria-labelledby={ categoryTitleId }
 			className="block-manager__block-category"
 		>
-			<div 
-				className={ 
-					classnames( 
-						'block-category__title', 
-						{ 
-							'has-info-popover': category.slug === 'uncategorized'
-						}
-					)
-				}
+			<div
+				className={ classnames( 'block-category__title', {
+					'has-info-popover': category.slug === 'uncategorized',
+				} ) }
 			>
 				<CheckboxControl
 					checked={ isAllChecked }

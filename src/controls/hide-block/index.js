@@ -34,7 +34,8 @@ export default function HideBlock( props ) {
 
 	const { blockVisibility } = attributes;
 	const hideBlock = blockVisibility?.hideBlock ?? false;
-	const enableNotices = settings?.plugin_settings?.enable_editor_notices ?? true;
+	const enableNotices =
+		settings?.plugin_settings?.enable_editor_notices ?? true;
 
 	return (
 		<div className="controls-panel-item hide-block-control">

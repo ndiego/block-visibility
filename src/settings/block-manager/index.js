@@ -116,7 +116,9 @@ function BlockManager( props ) {
 
 	// Check if there are any uncategorized block types. It can happen
 	// depending on how the block was registered.
-	const uncategorizedBlockTypes = filteredBlockTypes.filter( ( type ) => ! type?.category );
+	const uncategorizedBlockTypes = filteredBlockTypes.filter(
+		( type ) => ! type?.category
+	);
 
 	// If a plugin with custom blocks is deactivated, we want to keep the
 	// disabled blocks settings, but we should not include them in the UI
@@ -208,9 +210,9 @@ function BlockManager( props ) {
 				{ uncategorizedBlockTypes && (
 					<BlockCategory
 						key={ 'uncategorized' }
-						category={ { 
+						category={ {
 							slug: 'uncategorized',
-							title: 'Uncategorized'
+							title: 'Uncategorized',
 						} }
 						blockTypes={ uncategorizedBlockTypes }
 						disabledBlocks={ disabledBlocksState }

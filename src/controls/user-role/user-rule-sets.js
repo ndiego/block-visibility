@@ -23,7 +23,8 @@ import { getGroupedFields, getAllFields } from './fields';
  * @return {string}		 Return the rendered JSX
  */
 export default function UserRuleSets( props ) {
-	const { ruleSets, setControlAtts, userRole, variables, enableNotices } = props;
+	const { ruleSets, setControlAtts, userRole, variables, enableNotices } =
+		props;
 	const hideOnRuleSets = userRole?.hideOnRuleSets ?? false;
 	const groupedFields = getGroupedFields();
 	const allFields = getAllFields( variables );
