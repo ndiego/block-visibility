@@ -11,6 +11,11 @@ namespace BlockVisibility\Admin;
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * External dependencies
+ */
+use WP_Block_Type_Registry;
+
+/**
  * Internal dependencies
  */
 use function BlockVisibility\Utils\get_asset_file as get_asset_file;
@@ -107,24 +112,20 @@ function enqueue_settings_assets() {
 		'after'
 	);
 
-	// Make sure all custom blocks are registered. This picks up all of the
-	// custom blocks that are added to the site, otherwise you just get the
-	// core blocks.
-	// @codingStandardsIgnoreLine
-	do_action( 'enqueue_block_editor_assets' );
-
 	// Core class used for interacting with block types.
 	// https://developer.wordpress.org/reference/classes/wp_block_type_registry/.
-	$block_registry = \WP_Block_Type_Registry::get_instance();
+	$block_registry = WP_Block_Type_Registry::get_instance();
 
 	foreach ( $block_registry->get_all_registered() as $block_name => $block_type ) {
 
 		// Front-end script.
-		if ( ! empty( $block_type->editor_script ) ) {
-			wp_enqueue_script( $block_type->editor_script );
+		if ( ! empty( $block_type->editor_script_handles ) ) {
+			
+			foreach( $block_type->editor_script_handles as $handle ) {
+				wp_enqueue_script( $handle );
+			}
 		}
 	}
-
 }
 add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_settings_assets' );
 
@@ -142,6 +143,7 @@ function custom_admin_footer() {
 		'</a>'
 	);
 }
+
 // @codingStandardsIgnoreLine
 if ( isset( $_GET['page'] ) && 'block-visibility-settings' === $_GET['page'] ) {
 	add_filter( 'admin_footer_text', __NAMESPACE__ . '\custom_admin_footer' );
