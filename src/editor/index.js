@@ -29,7 +29,7 @@ import {
 } from './../controls';
 
 /**
- * Add our custom entities for retreiving external data in the Block Editor.
+ * Add our custom entities for retrieving external data in the Block Editor.
  *
  * @since 1.3.0
  */
