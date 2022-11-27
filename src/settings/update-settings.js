@@ -9,6 +9,8 @@ import { assign } from 'lodash';
  */
 import { __ } from '@wordpress/i18n';
 import { Animate, Button, Modal, Spinner } from '@wordpress/components';
+import { store as coreStore } from '@wordpress/core-data';
+import { useDispatch } from '@wordpress/data';
 import { useState } from '@wordpress/element';
 import { cloud, Icon } from '@wordpress/icons';
 
@@ -30,6 +32,7 @@ export default function UpdateSettings( props ) {
 		tabSlug,
 		tabSettings,
 	} = props;
+	const { saveEntityRecord } = useDispatch( coreStore );
 
 	const updateButton =
 		status === 'saving'
@@ -38,34 +41,24 @@ export default function UpdateSettings( props ) {
 
 	// Handle all setting changes, and save to the database.
 	async function onSettingsChange( type = 'save' ) {
-		let body = '';
+		let record = '';
 
 		if ( type === 'reset' ) {
 			setStatus( 'resetting' );
-			body = { reset: tabSlug };
+			record = { reset: tabSlug };
 		} else if ( type === 'resetAll' ) {
 			setStatus( 'resetting' );
-			body = { reset: 'all' };
+			record = { reset: 'all' };
 		} else {
 			setStatus( 'saving' );
-			body = assign( { ...settings }, { [ tabSlug ]: tabSettings } );
+			record = assign( { ...settings }, { [ tabSlug ]: tabSettings } );
 		}
 
-		// blockVisibilityRestUrl is provided by wp_add_inline_script.
-		const fetchUrl = `${ blockVisibilityRestUrl }block-visibility/v1/settings`; // eslint-disable-line
+		let response = '';
+		response = await saveEntityRecord( 'block-visibility/v1', 'settings', record );
 
-		const response = await fetch( fetchUrl, { // eslint-disable-line
-			method: 'POST',
-			body: JSON.stringify( body ),
-			headers: {
-				'Content-Type': 'application/json',
-				'X-WP-Nonce': wpApiSettings.nonce, // eslint-disable-line
-			},
-		} );
-
-		if ( response.ok ) {
-			const data = await response.json();
-			setSettings( data );
+		if ( response ) {
+			setSettings( response );
 
 			if ( type === 'reset' || type === 'resetAll' ) {
 				setStatus( 'reset' );
