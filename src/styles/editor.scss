@@ -26,11 +26,15 @@
 
         .controls-panel-header__dropdown-menus {
             line-height: 0;
-            margin: calc(-4px) 0px;
+            margin: -4px 0;
 
             .components-button {
                 padding: 0px;
                 min-width: 24px;
+            }
+
+            .components-spinner {
+                margin: 0 4px;
             }
         }
     }

@@ -6,7 +6,8 @@ import { assign, isEmpty } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { withFilters } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+import { withFilters, Spinner } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import { withSelect } from '@wordpress/data';
 
@@ -42,8 +43,20 @@ function VisibilityInspectorControls( props ) {
 		widgetAreaRestricted,
 	} = props;
 
+	// Display a default panel with spinner when settings and variables are loading.
 	if ( settings === 'fetching' || variables === 'fetching' ) {
-		return null;
+		return (
+			<InspectorControls>
+				<div className="block-visibility__controls-panel">
+					<div className="controls-panel-header">
+						<h2>{ __( 'Visibility', 'block-visibility' ) }</h2>
+						<div className="controls-panel-header__dropdown-menus">
+							<Spinner />
+						</div>
+					</div>
+				</div>
+			</InspectorControls>
+		);
 	}
 
 	// There are a few core blocks that are not compatible either globally or
