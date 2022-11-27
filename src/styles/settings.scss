@@ -939,13 +939,17 @@ $mobile: 426px;
 }
 
 .block-visibility__reset-modal {
+	max-width: 600px;
+
 	.block-visibility__reset-modal--buttons {
 		display: flex;
 		justify-content: space-between;
+		margin-top: 24px;
 
 		div {
-			display: flex;
 			align-items: center;
+			display: flex;
+			gap: 12px;
 		}
 
 		.components-spinner {
