@@ -202,7 +202,8 @@ function run_acf_rule_tests( $operator, $value, $acf_field ) {
 
 		case 'equal':
 			if ( isset( $value ) ) {
-				$test_result = $acf_field['value'] === $value ? true : false;
+				// Don't use === here, otherwise numeric ACF field values will return false.
+				$test_result = $acf_field['value'] == $value ? true : false;
 			}
 			break;
 
@@ -243,7 +244,8 @@ function run_acf_rule_tests( $operator, $value, $acf_field ) {
 
 		case '==':
 			if ( isset( $value ) ) {
-				$test_result = $acf_field['value'] === $value ? true : false;
+				// Don't use === here, otherwise numeric field values will not return true.
+				$test_result = $acf_field['value'] == $value ? true : false;
 			}
 			break;
 
