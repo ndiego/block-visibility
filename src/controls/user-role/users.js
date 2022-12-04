@@ -13,7 +13,7 @@ import { ToggleControl, Notice } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import getAllUsers from './utils/get-all-users';
+import useAllUsers from './utils/use-all-users';
 
 /**
  * Add the Selected Users control to the main Visibility By User Role control
@@ -40,7 +40,7 @@ export default function Users( props ) {
 		);
 	}
 
-	const users = getAllUsers();
+	const users = useAllUsers();
 	const selectedUsers = users.filter( ( user ) =>
 		restrictedUsers.includes( user.value )
 	);
