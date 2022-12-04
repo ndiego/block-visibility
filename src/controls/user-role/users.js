@@ -33,7 +33,7 @@ export default function Users( props ) {
 		return (
 			<Notice status="warning" isDismissible={ false }>
 				{ __(
-					'The Users option can only be configured by website Administrators. Please choose another option.',
+					'Website Administrators can only configure the Users option. Please choose another option.',
 					'block-visibility'
 				) }
 			</Notice>

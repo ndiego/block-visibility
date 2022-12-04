@@ -174,7 +174,7 @@ export default function UserRole( props ) {
 				{ enableNotices && (
 					<InformationPopover
 						message={ __(
-							"The User Role control allows you to configure block visibility based on the current user's role and/or specific users.",
+							"The User Role control allows you to configure block visibility based on the current user's role or specific users.",
 							'block-visibility'
 						) }
 						link={ links.editorUserRole }
@@ -250,7 +250,7 @@ export default function UserRole( props ) {
 					<Notice status="warning" isDismissible={ false }>
 						{ createInterpolateElement(
 							__(
-								'The User Role option that was previously selected has been disabled. Choose another option or update the <a>Visibility Control</a> settings.',
+								'The previously selected User Role option has been disabled. Choose another option or update the <a>Visibility Control</a> settings.',
 								'block-visibility'
 							),
 							{

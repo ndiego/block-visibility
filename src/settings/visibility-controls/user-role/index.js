@@ -130,7 +130,7 @@ export default function UserRole( props ) {
 					{ enableUserRolesElement }
 					<InformationPopover
 						message={ __(
-							'Restrict visibility by any user role (Administrator, Editor, Subscriber, etc.). Roles that are added by third-party plugins will also be available to choose from.',
+							'Restrict visibility by any user role (Administrator, Editor, Subscriber, etc.). Roles added by third-party plugins will also be available to choose from.',
 							'block-visibility'
 						) }
 						link={ links.settingsUserRole }
@@ -140,7 +140,7 @@ export default function UserRole( props ) {
 					{ enableUsersElement }
 					<InformationPopover
 						message={ __(
-							'Restrict visibility to specific individual users on your website based on user ID. Multiple users can be selected at once.',
+							'Restrict visibility to specific individual users on your website based on user ID. You can select multiple users at once.',
 							'block-visibility'
 						) }
 						link={ links.settingsUserRole }
@@ -150,7 +150,7 @@ export default function UserRole( props ) {
 					{ enableUserRuleSetsElement }
 					<InformationPopover
 						message={ __(
-							'This functionality allows you to create user-based rule sets, which provide extensive configuration options and greater flexibilty.',
+							'This functionality allows you to create user-based rule sets, which provide extensive configuration options and greater flexibility.',
 							'block-visibility'
 						) }
 						link={ links.settingsUserRole }

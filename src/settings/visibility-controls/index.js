@@ -54,11 +54,11 @@ export default function VisibilityControls( props ) {
 					</span>
 					<InformationPopover
 						message={ __(
-							'The settings below allow you to configure the visibility controls that power Block Visibility. Pick and choose which controls you would like to enable and how you would like them to function.',
+							'The settings below allow you to configure the visibility controls that power Block Visibility. Pick and choose which controls you want to enable and how you would like them to function.',
 							'block-visibility'
 						) }
 						subMessage={ __(
-							'When a visibility control is disabled, blocks that relied on the disabled control will become visible again unless they are hidden by other enabled controls.',
+							'When a visibility control is disabled, blocks that rely on the disabled control will become visible again unless other enabled controls hide them.',
 							'block-visibility'
 						) }
 						link={ links.settingsVisibilityControls }

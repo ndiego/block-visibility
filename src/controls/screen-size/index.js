@@ -179,7 +179,7 @@ export default function ScreenSize( props ) {
 						<Notice status="warning" isDismissible={ false }>
 							{ createInterpolateElement(
 								__(
-									'The Screen Size control is unfortunately not compatible with this block type. For more information, and a workaround, visit the <a>Knowledge Base</a>.',
+									'The Screen Size control is unfortunately not compatible with this block type. For more information and a workaround, visit the <a>Knowledge Base</a>.',
 									'block-visibility'
 								),
 								{

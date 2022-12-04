@@ -111,7 +111,7 @@ export default function ACF( props ) {
 				{ enableNotices && (
 					<InformationPopover
 						message={ __(
-							'The Advanced Custom Fields (ACF) control allows you to configure block visibility based on a variety of field-related rules, which form rule sets.',
+							'The Advanced Custom Fields (ACF) control allows you to configure block visibility based on various field-related rules, which form rule sets.',
 							'block-visibility'
 						) }
 						link={ links.editorACF }

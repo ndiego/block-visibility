@@ -161,11 +161,11 @@ export default function ScreenSize( props ) {
 					{ enableAdvancedControls }
 					<InformationPopover
 						message={ __(
-							'By default, the Screen Size control includes two breakpoints and three controls for users to hide blocks. There are certain situations where you may need more control over when a block should be visible, for example in the case of very large or small screens. Enabling advanced controls provides these options.',
+							'By default, the Screen Size control includes two breakpoints and three controls for users to hide blocks. There are certain situations where you may need more control over when a block should be visible, for example, in the case of very large or small screens. Enabling advanced controls provides these options.',
 							'block-visibility'
 						) }
 						subMessage={ __(
-							'Note that once enabled, any block that is only using the advanced controls to hide at extra large, or extra small, breakpoints will become visible again if this setting is ever disabled in the future.',
+							'Note that once enabled, any block that is only using the advanced controls to hide at extra large or extra small breakpoints will become visible again if you disable this setting in the future.',
 							'block-visibility'
 						) }
 						link={ links.settingsScreenSize }
@@ -175,7 +175,7 @@ export default function ScreenSize( props ) {
 					{ enableFrontendCSS }
 					<InformationPopover
 						message={ __(
-							'By default, the CSS needed for the Screen Size controls is loaded on the frontend of your website. If disabled, you will need to add the CSS manually to your theme in order for the Screen Size controls to work properly. This CSS code is available via the "Preview Frontend CSS" button on this page.',
+							'By default, the CSS needed for the Screen Size controls is loaded on the front end of your website. If disabled, you will need to add the CSS manually to your theme for the Screen Size controls to work properly. This CSS code is available via the "Preview Frontend CSS" button.',
 							'block-visibility'
 						) }
 						link={ links.settingsScreenSize }

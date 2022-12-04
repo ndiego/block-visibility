@@ -94,7 +94,7 @@ export default function UpdateSettings( props ) {
 					status === 'error' && (
 						<span className="message update-failed">
 							{ __(
-								'Update failed. Try again or contact support.',
+								'Update failed. Try again or get in touch with support.',
 								'block-visibility'
 							) }
 						</span>
@@ -158,7 +158,7 @@ export default function UpdateSettings( props ) {
 					{ status === 'error' && (
 						<div className="message update-failed">
 							{ __(
-								'Reset failed. Try again or contact support.',
+								'Reset failed. Try again or get in touch with support.',
 								'block-visibility'
 							) }
 						</div>

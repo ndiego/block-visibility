@@ -154,7 +154,7 @@ export default function General( props ) {
 					</div>
 					<InformationPopover
 						message={ __(
-							"Optionally set the default controls that will be available when editing a block's visibility for the first time. This can be useful if you find yourself using the same few controls frequently. Controls can also be disabled entirely.",
+							'Default controls are automatically displayed in the Visibility panel when editing a block in the Editor. Defaults can be helpful if you frequently use the same few controls.',
 							'block-visibility'
 						) }
 					/>

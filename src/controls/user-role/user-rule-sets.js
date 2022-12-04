@@ -35,7 +35,7 @@ export default function UserRuleSets( props ) {
 		return (
 			<Notice status="warning" isDismissible={ false }>
 				{ __(
-					'The User rule sets option can only be configured by website Administrators. Please choose another option.',
+					'Website Administrators can only configure the User rule sets option. Please choose another option.',
 					'block-visibility'
 				) }
 			</Notice>
