@@ -77,6 +77,9 @@ final class Block_Visibility {
 		// Specific fixes/work arounds for server-side blocks.
 		add_action( 'wp_loaded', array( $this, 'add_attributes_to_registered_blocks' ), 999 );
 		add_filter( 'rest_pre_dispatch', array( $this, 'conditionally_remove_attributes' ), 10, 3 );
+
+		// Display Pro compatibility message if needed.
+		add_action( 'admin_notices', array( $this, 'pro_compatibility_message' ) );
 	}
 
 	/**
@@ -220,5 +223,41 @@ final class Block_Visibility {
 				BLOCK_VISIBILITY_ABSPATH . '/languages'
 			);
 		}
+	}
+
+	/**
+	 * Display a Pro compatibility warning message if needed.
+	 *
+	 * @since 2.6.0
+	 */
+	public function pro_compatibility_message() {
+
+		if ( ! is_plugin_active( 'block-visibility-pro/block-visibility-pro.php' ) ) {
+			return;
+		}
+
+		$pro_data             = get_plugin_data( WP_PLUGIN_DIR . '/block-visibility-pro/block-visibility-pro.php', false, false );
+		$pro_version          = $pro_data['Version'];
+		$required_pro_version = '1.6.0';
+
+		if ( $pro_version >= $required_pro_version ) {
+			return;
+		}
+
+		$message = sprintf(
+			// Translators: The required version of Block Visibility Pro and the current version of Block Visibility.
+			__(
+				'Version Error: Please upgrade Block Visibility Pro to version %1$s or greater. The current active version (%2$s) is not compatible with Block Visibility %3$s.',
+				'block-visibility-pro'
+			),
+			$required_pro_version,
+			$pro_version,
+			BLOCK_VISIBILITY_VERSION,
+		);
+		?>
+		<div class="notice notice-error">
+			<p><?php echo esc_html( $message ); ?></p>
+		</div>
+		<?php
 	}
 }
