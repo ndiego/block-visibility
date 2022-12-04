@@ -26,11 +26,17 @@ function add_plugin_action_links( $plugin_links, $plugin_file ) {
 		return $plugin_links;
 	}
 
+	https://blockvisibilitywp.com/pro/
+
+	$pro_link  = '<a href="https://blockvisibilitywp.com/pro/" aria-label="' . esc_attr( __( 'Upgrade to Block Visibility Pro.', 'block-visibility' ) ) . '" style="font-weight:bold" target="_blank">';
+	$pro_link .= __( 'Get Pro', 'block-visibility' );
+	$pro_link .= '</a>';
+
 	$settings_link  = '<a href="' . BLOCK_VISIBILITY_SETTINGS_URL . '" aria-label="' . esc_attr( __( 'Navigate to the Block Visibility settings.', 'block-visibility' ) ) . '">';
 	$settings_link .= __( 'Settings', 'block-visibility' );
 	$settings_link .= '</a>';
 
-	array_unshift( $plugin_links, $settings_link );
+	array_unshift( $plugin_links, $pro_link, $settings_link );
 
 	return $plugin_links;
 }
