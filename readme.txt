@@ -212,7 +212,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 **Upgrade Notice**
 
-Block Visibility now requires WordPress 6.0 or greater with version 2.5.0. Furthermore, users of the Pro add-on will need to upgrade to Pro 1.6.0 to take advantage of these latest enhancements. Check out the [release article](https://blockvisibilitywp.com/block-visibility-2-5-0-and-pro-1-6-0-release-notes/ for more information.
+Block Visibility now requires WordPress 6.0+ with version 2.5.0 and users of the Pro add-on will need to upgrade to Pro 1.6.0 to take advantage of these latest enhancements. There have also been updates to the way visibility defaults work. Check out the [release article](https://blockvisibilitywp.com/block-visibility-2-5-0-and-pro-1-6-0-release-notes/ for more information.
 
 **Added**
 
