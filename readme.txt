@@ -235,13 +235,13 @@ Block Visibility now requires WordPress 6.0+ with version 2.5.0 and users of the
 **Removed**
 
 * Removed visibility panel and toolbar controls on Custom HTML blocks in the block-based Widget Area due to incompatibility. Visibility controls are still available for the Custom HTML block in the post/page Editor as well as the Site Editor.
-* Removed unnessessary custom icons. 
+* Removed unnecessary custom icons. 
 * Removed support url from variables endpoint.
 
 **Fixed**
 
 * [Advanced Custom Fields] Fixed bug where numeric ACF fields were not being evaluated correctly. (#50)
-* [Screen Size] Fixed bug where using the Screen Size control and the `meow-gallery/gallery` block. Added better error handling to avoid similar issue in other third-party blocks.
+* [Screen Size] Fixed bug where using the Screen Size control and the `meow-gallery/gallery` block. Added better error handling to avoid a similar issue in other third-party blocks.
 * Fixed bug where resetting settings on a specific tab would reset all plugin settings.
 
 = 2.4.6 - 2022-11-02 =
