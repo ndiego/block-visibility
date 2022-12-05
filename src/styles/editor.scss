@@ -160,6 +160,13 @@
                 button.has-padding {
                     padding: 1px;
                 }
+
+                .components-button {
+                    padding: 0;
+                    height: 24px;
+                    width: 24px;
+                    min-width: 24px;
+                }
             }
         }
 
