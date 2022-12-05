@@ -77,7 +77,6 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 		$plugin_variables = array(
 			'version'      => BLOCK_VISIBILITY_VERSION,
 			'settings_url' => BLOCK_VISIBILITY_SETTINGS_URL,
-			'support_url'  => BLOCK_VISIBILITY_SUPPORT_URL,
 		);
 
 		$variables = array(

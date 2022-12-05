@@ -11,6 +11,11 @@ namespace BlockVisibility\Admin;
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * External dependencies
+ */
+use WP_Block_Type_Registry;
+
+/**
  * Internal dependencies
  */
 use function BlockVisibility\Utils\get_asset_file as get_asset_file;
@@ -39,7 +44,7 @@ add_action( 'admin_menu', __NAMESPACE__ . '\add_settings_page' );
  */
 function print_settings_page() {
 	?>
-		<div id="block-visibility-settings-container"></div>
+		<div id="block-visibility__plugin-settings"></div>
 	<?php
 }
 
@@ -61,20 +66,11 @@ function enqueue_settings_assets() {
 	wp_enqueue_script(
 		'block-visibility-setting-scripts',
 		BLOCK_VISIBILITY_PLUGIN_URL . 'build/block-visibility-settings.js',
-		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
+		// wp-api and wp-core-data are both needed even though they are not
+		// automatically picked up as dependencies.
+		array_merge( $asset_file['dependencies'], array( 'wp-api', 'wp-core-data' ) ),
 		$asset_file['version'],
 		true
-	);
-
-	// The full homepage url for use in fetching data from the REST api. The
-	// full path is needed on websites where WordPress in installed in a
-	// subdirectory. Without the full path, fetch( '/wp-json/...') fails.
-	$home_url = 'const blockVisibilityRestUrl = "' . get_rest_url() . '";';
-
-	wp_add_inline_script(
-		'block-visibility-setting-scripts',
-		$home_url,
-		'before'
 	);
 
 	// Styles.
@@ -105,24 +101,20 @@ function enqueue_settings_assets() {
 		'after'
 	);
 
-	// Make sure all custom blocks are registered. This picks up all of the
-	// custom blocks that are added to the site, otherwise you just get the
-	// core blocks.
-	// @codingStandardsIgnoreLine
-	do_action( 'enqueue_block_editor_assets' );
-
 	// Core class used for interacting with block types.
 	// https://developer.wordpress.org/reference/classes/wp_block_type_registry/.
-	$block_registry = \WP_Block_Type_Registry::get_instance();
+	$block_registry = WP_Block_Type_Registry::get_instance();
 
 	foreach ( $block_registry->get_all_registered() as $block_name => $block_type ) {
 
 		// Front-end script.
-		if ( ! empty( $block_type->editor_script ) ) {
-			wp_enqueue_script( $block_type->editor_script );
+		if ( ! empty( $block_type->editor_script_handles ) ) {
+
+			foreach ( $block_type->editor_script_handles as $handle ) {
+				wp_enqueue_script( $handle );
+			}
 		}
 	}
-
 }
 add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_settings_assets' );
 
@@ -140,6 +132,7 @@ function custom_admin_footer() {
 		'</a>'
 	);
 }
+
 // @codingStandardsIgnoreLine
 if ( isset( $_GET['page'] ) && 'block-visibility-settings' === $_GET['page'] ) {
 	add_filter( 'admin_footer_text', __NAMESPACE__ . '\custom_admin_footer' );

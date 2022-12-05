@@ -8,7 +8,8 @@ import { createInterpolateElement } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import InformationPopover from './../../../utils/components/information-popover';
+import links from './../../../utils/links';
+import { InformationPopover } from './../../../components';
 
 /**
  * Renders the full control mode settings.
@@ -24,7 +25,7 @@ export default function FullControlMode( props ) {
 	const enableFullControlMode = pluginSettings?.enable_full_control_mode ?? false; // eslint-disable-line
 
 	return (
-		<div className="setting-tabs__settings-panel">
+		<div className="settings-panel">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'Full Control Mode', 'block-visibility' ) }
@@ -42,7 +43,7 @@ export default function FullControlMode( props ) {
 								strong: <strong />,
 								a: (
 									<ExternalLink // eslint-disable-line
-										href="https://www.blockvisibilitywp.com/knowledge-base/how-to-configure-the-general-settings/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+										href={ links.settingsGeneral }
 										target="_blank"
 										rel="noreferrer"
 									/>
@@ -53,18 +54,17 @@ export default function FullControlMode( props ) {
 						onChange={ () => {
 							setPluginSettings( {
 								...pluginSettings,
-								enable_full_control_mode: ! enableFullControlMode,
+								enable_full_control_mode:
+									! enableFullControlMode,
 							} );
 						} }
 					/>
 					<InformationPopover
 						message={ __(
-							"By default, not all blocks are provided with visibility controls. These include child blocks and blocks that may exist in WordPress, but cannot actually be added directly to the editor. Most of the time, you will not need Full Control Mode, but it's there in case you do. Use with caution. Click the link below for complete details.",
+							"Some blocks do not have visibility controls enabled by default. These include child blocks and blocks that may exist in WordPress but cannot be added directly to the Editor. You will not need Full Control Mode most of the time, but it's here in case you do.",
 							'block-visibility'
 						) }
-						link={
-							'https://www.blockvisibilitywp.com/knowledge-base/how-to-configure-the-general-settings/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals'
-						}
+						link={ links.settingsGeneral }
 					/>
 				</div>
 			</div>

@@ -1,13 +1,21 @@
 /**
+ * External dependencies
+ */
+import classnames from 'classnames';
+
+/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { ToggleControl, Slot } from '@wordpress/components';
+import { ExternalLink, Slot, ToggleControl } from '@wordpress/components';
+import { Icon } from '@wordpress/icons';
 
 /**
  * Internal dependencies
  */
-import InformationPopover from './../../../utils/components/information-popover';
+import links from './../../../utils/links';
+import { time } from './../../../utils/icons';
+import { InformationPopover } from './../../../components';
 
 /**
  * Renders the date/time control settings.
@@ -17,19 +25,24 @@ import InformationPopover from './../../../utils/components/information-popover'
  * @return {string}		 Return the rendered JSX
  */
 export default function DateTime( props ) {
-	const { visibilityControls, setVisibilityControls } = props;
+	const { visibilityControls, setVisibilityControls, variables } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
 	const enable = visibilityControls?.date_time?.enable ?? true; // eslint-disable-line
 
 	return (
-		<div className="setting-tabs__settings-panel">
+		<div
+			className={ classnames( 'settings-panel', {
+				'has-upsell': ! variables?.is_pro,
+			} ) }
+		>
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'Date & Time', 'block-visibility' ) }
 				</span>
 			</div>
 			<div className="settings-panel__container">
+				<Slot name="VisibilityControlsDateTimeTop" />
 				<div className="settings-type__toggle has-info-popover">
 					<ToggleControl
 						label={ __(
@@ -49,14 +62,30 @@ export default function DateTime( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							'The Date & Time control allows you to conditionally display blocks based on time and date settings, which includes the ability to schedule blocks. Visit the plugin Knowledge Base for more information.',
+							'The Date & Time control allows you to conditionally display blocks based on time and date settings, which includes the ability to schedule blocks.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-date-time-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsDateTime }
 					/>
 				</div>
-				<Slot name="DateTimeControls" />
+				<Slot name="VisibilityControlsDateTimeBottom" />
 			</div>
+			{ ! variables?.is_pro && (
+				<div className="settings-panel__upsell">
+					<div className="settings-panel__upsell-message">
+						<Icon icon={ time } />
+						<span>
+							{ __(
+								'Upgrade to enable day-of-week and time-of-day functionality.',
+								'block-visibility'
+							) }
+						</span>
+					</div>
+					<ExternalLink href={ links.settingsProUpgrade }>
+						{ __( 'Get Pro', 'block-visibility' ) }
+					</ExternalLink>
+				</div>
+			) }
 		</div>
 	);
 }

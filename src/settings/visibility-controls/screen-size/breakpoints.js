@@ -7,7 +7,8 @@ import { __experimentalUnitControl as UnitControl } from '@wordpress/components'
 /**
  * Internal dependencies
  */
-import InformationPopover from './../../../utils/components/information-popover';
+import links from './../../../utils/links';
+import { InformationPopover } from './../../../components';
 
 /**
  * Renders the breakpoint input settings.
@@ -71,14 +72,14 @@ export default function Breakpoints( props ) {
 				<span>{ __( 'Breakpoints', 'block-visibility' ) }</span>
 				<InformationPopover
 					message={ __(
-						'The plugin sets a series of breakpoints which enable the Screen Size control automatically. However for best results, you can configure the breakpoints to correspond with the media breakpoints of your current theme.',
+						'The plugin automatically sets a series of breakpoints that enable the Screen Size control. However, for best results, you can configure the breakpoints to correspond with the media breakpoints of your current theme.',
 						'block-visibility'
 					) }
 					subMessage={ __(
 						'The default breakpoints are Large (992px) and Medium (768px). Advanced screen size controls add Extra Large (1200px) and Small (576px).',
 						'block-visibility'
 					) }
-					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					link={ links.settingsScreenSize }
 				/>
 			</div>
 			{ Object.entries( breakpoints ).map( ( [ breakpoint, labels ] ) => {

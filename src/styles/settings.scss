@@ -15,7 +15,7 @@ $mobile: 426px;
 	display: none;
 }
 
-#block-visibility-settings-container {
+#block-visibility__plugin-settings {
 	margin-left: -20px;
 
 	@media ( max-width: $tablet ) {
@@ -106,23 +106,23 @@ $mobile: 426px;
 		}
 
 		.masthead__plugin-links {
-			font-size: 15px;
+			font-size: 13px;
 		    display: flex;
 		    justify-content: flex-end;
 		    align-items: center;
 
 			a {
+				align-items: center;
 				color: #23282d;
 				cursor: pointer;
-				display: inline-block;
+				display: inline-flex;
+				gap: 4px;
 				margin-left: 16px;
 				text-decoration: none;
 
 				svg {
-					width: 20px;
 					fill: currentColor;
 					vertical-align: middle;
-					margin: 0px 6px 4px 0;
 				}
 
 				&:hover {
@@ -138,15 +138,10 @@ $mobile: 426px;
 
 			@media ( max-width: $tablet ) {
 				a {
-					margin: 0 8px 0 0;
+					margin-left: 8px;
 
 					span {
 						display: none;
-					}
-
-					svg {
-						width: 24px;
-						margin: 0 2px;
 					}
 				}
 			}
@@ -155,10 +150,6 @@ $mobile: 426px;
 				justify-content: center;
 				margin-top: 10px;
 				width: 100%;
-
-				a {
-					margin: 0 8px;
-				}
 			}
 		}
 
@@ -206,15 +197,13 @@ $mobile: 426px;
 	.setting-tabs {
 
 		.message {
-			color: #777;
+			align-items: center;
+			color: #999;
 			display: flex;
+			gap: 6px;
 
 			svg {
-				fill: #777;
-				vertical-align: middle;
-				margin: 0px 6px;
-				width: 20px;
-				height: 20px;
+				opacity: 0.3;
 			}
 		}
 
@@ -270,7 +259,7 @@ $mobile: 426px;
 					background: #ffffff;
 					box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
 					padding: 18px 24px;
-					margin-bottom: 20px;
+					margin-bottom: 24px;
 
 					&>*:last-child {
 						margin-bottom: 0;
@@ -419,11 +408,12 @@ $mobile: 426px;
 			flex-wrap: wrap;
 			justify-content: space-between;
 			align-items: center;
-			margin-bottom: 20px;
+			margin-bottom: 24px;
 			min-height: 36px;
 
 			&.integrations {
-				margin-top: 50px;
+				margin-top: 24px;
+				margin-bottom: 0;
 			}
 
 			.setting-controls__title {
@@ -433,7 +423,6 @@ $mobile: 426px;
 				font-weight: 500;
 
 				.information-popover__button {
-					color: #999;
 					margin-left: 6px;
 				}
 			}
@@ -497,187 +486,262 @@ $mobile: 426px;
 			}
 		}
 
-		.setting-tabs__settings-panel {
-			font-size: 15px;
-			margin-bottom: 20px;
+		.setting-tabs__setting-panels {
+			display: grid;
+			grid-gap: 24px;
 
-			.settings-panel__header {
-				background: #fff;
-				padding: 16px 16px 16px 24px;
+			&__sub-panel {
 				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
-				margin-bottom: 1px;
-
-				.settings-panel__header-title {
-					font-weight: 500;
-					display: flex;
-    				align-items: center;
-
-					&>svg {
-						width: 18px;
-						margin-right: 10px;
-					}
-				}
+				flex-direction: column;
+				gap: 24px;
 			}
 
-			.settings-panel__container {
-				background: #fff;
-				padding: 24px 16px 24px 24px;
-				box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
-
-				.settings-type__toggle {
-					margin-bottom: 18px;
-
-					&.has-info-popover {
+			.settings-panel {
+				.settings-panel__header {
+					align-items: center;
+					background: #fff;
+					box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
+					box-sizing: border-box;
+					display: flex;
+					font-size: 14px;
+					justify-content: space-between;
+					margin-bottom: 1px;
+					min-height: 54px;
+					padding: 16px 24px;
+	
+					.settings-panel__header-title {
+						font-weight: 500;
 						display: flex;
 						align-items: center;
-						justify-content: space-between;
-					}
-
-					&.first {
-						margin-top: 24px;
-					}
-
-					&:last-child {
-						margin-bottom: 0;
-					}
-
-					.components-toggle-control {
-						.components-base-control__field {
-							margin: 4px 0;
+	
+						&>svg {
+							width: 18px;
+							margin-right: 10px;
 						}
 					}
-
-					label {
-						margin-bottom: 0;
-					}
 				}
+	
+				.settings-panel__container {
+					background: #fff;
+					padding: 24px;
+					box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
+	
+					.settings-type__toggle {
+						margin-bottom: 18px;
+	
+						&.has-info-popover {
+							align-items: center;
+							display: flex;
+							gap: 12px;
+							justify-content: space-between;
+						}
+	
+						&.first {
+							margin-top: 24px;
+						}
+	
+						&:last-child {
+							margin-bottom: 0;
+						}
+	
+						.components-toggle-control {
+							margin-bottom: 0;
 
-				.settings-type__select {
-					margin-bottom: 18px;
+							// Fix gap between toggle and label on small screens.
+							.components-form-toggle {
+								min-width: 36px;
+							}
 
-					&:last-child {
-						margin-bottom: 0;
+							.components-base-control__help {
+								margin-left: 48px;
+							}
+						}
 					}
+	
+					.settings-type__select {
+						margin-bottom: 24px;
 
-					&.has-info-popover {
+						.select-control-container {
+							min-width: 50%;
+						}
+	
+						&:last-child {
+							margin-bottom: 0;
+						}
+	
+						&.has-info-popover {
+							align-items: center;
+							display: flex;
+							gap: 12px;
+							justify-content: space-between;
+						}
+	
+						.block-visibility__react-select {
+							margin-top: 12px;
+							width: 100%;
+						}
+					}
+	
+					.settings-type__color {
 						display: flex;
-						align-items: center;
+						align-items: flex-start;
 						justify-content: space-between;
-					}
-
-					.block-visibility__react-select {
-						margin-top: 12px;
-						width: 100%;
-					}
-				}
-
-				.settings-type__color {
-					display: flex;
-					align-items: flex-start;
-					justify-content: space-between;
-
-					.settings-type__color-selected {
-						.components-base-control__field {
+	
+						.settings-type__color-selected {
+							.components-base-control__field {
+								display: flex;
+								align-items: center;
+								margin-bottom: 20px;
+								margin-top: 5px;
+							}
+						}
+	
+						.components-base-control__label {
+							margin-bottom: 0;
+						}
+	
+						/* Fix needed for Gutenberg 12.7+ */
+						.component-color-indicator {
+							margin-left: 0.5rem;
+						}
+	
+						.components-circular-option-picker {
 							display: flex;
 							align-items: center;
-							margin-bottom: 20px;
-							margin-top: 5px;
+	
+							@media ( max-width: $tablet ) {
+								display: block;
+							}
 						}
-					}
-
-					.components-base-control__label {
-    					margin-bottom: 2px;
-					}
-
-					/* Fix needed for Gutenberg 12.7+ */
-					.component-color-indicator {
-						margin-left: 0.5rem;
-					}
-
-					.components-circular-option-picker {
-						display: flex;
-						align-items: center;
-
-						@media ( max-width: $tablet ) {
-							display: block;
+	
+						.components-circular-option-picker__custom-clear-wrapper {
+							justify-content: flex-start;
+							margin: 10px 0 10px 20px;
+	
+							@media ( max-width: $tablet ) {
+								margin: 10px 0;
+							}
 						}
-					}
-
-					.components-circular-option-picker__custom-clear-wrapper {
-						justify-content: flex-start;
-						margin: 10px 0 10px 20px;
-
-						@media ( max-width: $tablet ) {
-							margin: 10px 0;
+	
+						.components-circular-option-picker__option:focus:after {
+							top: -4px;
+							left: -4px;
 						}
-					}
-
-					.components-circular-option-picker__option:focus:after {
-					    top: -4px;
-					    left: -4px;
-					}
-
-					.components-button.is-pressed:focus:not(:disabled) {
-					    box-shadow: none;
-					    outline: none;
-					}
-
-					/* Fix for incorrect tooltip formatting */
-					.components-circular-option-picker__option-wrapper {
-						button {
-							&>span {
-								position: absolute;
-
-								* {
+	
+						.components-button.is-pressed:focus:not(:disabled) {
+							box-shadow: none;
+							outline: none;
+						}
+	
+						/* Fix for incorrect tooltip formatting */
+						.components-circular-option-picker__option-wrapper {
+							button {
+								&>span {
 									position: absolute;
-									font-size: 10px !important;
+	
+									* {
+										position: absolute;
+										font-size: 10px !important;
+									}
 								}
 							}
 						}
 					}
-				}
+	
+					/* Align the range control with the color picker. */
+					.settings-type__range {
+						max-width: 200px;
 
-				/* Align the range control with the color picker. */
-				.settings-type__range {
-					max-width: 410px;
-				}
+						.components-range-control__root {
+							align-items: center;
+						}
+					}
+	
+					.subsetting {
+						margin-left: 24px;
+					}
+	
+					.settings-label {
+						align-items: center;
+						display: flex;
+						font-size: 11px;
+						font-weight: 500;
+						margin-bottom: 15px;
+						margin-top: 30px;
+						text-transform: uppercase;
+	
+						&:first-child {
+							margin-top: 0;
+						}
+					}
+	
+					.settings-panel__help {
+						font-size: 12px;
+						font-style: normal;
+						color: rgb(117, 117, 117);
 
-				.subsetting {
-					margin-left: 20px;
-				}
+						&.has-top-margin {
+							margin-top: 12px;
+						}
+					}
 
-				label {
-					font-size: 14px;
-					margin-bottom: 8px;
-				}
-
-				.settings-label {
-					font-size: 14px;
-					font-weight: 500;
-					display: flex;
-					align-items: center;
-					margin-bottom: 15px;
-					margin-top: 30px;
-
-					&:first-child {
-						margin-top: 0;
+					.components-input-control {
+						input {
+							min-height: 40px;
+						}
+					}
+	
+					.components-disabled {
+						opacity: .4;
+	
+						.components-form-toggle {
+							opacity: 1;
+						}
 					}
 				}
 
-				.settings-panel__help {
-					font-size: 12px;
-					font-style: normal;
-					color: rgb(117, 117, 117);
+				// Make panels with upsells look a bit better.
+				&.has-upsell {
+					.settings-panel__container {
+						padding-bottom: 32px;
+					}
 				}
 
-				.components-disabled {
-					opacity: .4;
+				.settings-panel__upsell {
+					align-items: center;
+					background-color: var(--wp-admin-theme-color);
+					box-shadow: 0 0 0 1px var(--wp-admin-theme-color-darker-20), 0 1px 1px 1px rgba(0, 0, 0, 0.04);
+					color: #fff;
+					display: flex;
+					gap: 32px;
+					justify-content: space-between;
+					padding: 16px 24px;
 
-					.components-form-toggle {
-						opacity: 1;
+					.settings-panel__upsell-message {
+						align-items: center;
+						display: flex;
+						gap: 8px;
+
+						svg {
+							fill: #fff;
+							opacity: 0.6;
+							height: 24px;
+							width: 24px;
+						}
+					}
+
+					a {
+						color: #fff;
+						white-space: nowrap;
+
+						&:hover {
+							opacity: 0.8;
+						}
+					}
+
+					.components-external-link__icon {
+						width: 1.2em;
+						margin: 0 0.2em 0;
 					}
 				}
 			}
@@ -737,10 +801,6 @@ $mobile: 426px;
 			label {
 				margin-bottom: 0 !important;
 			}
-
-			.components-base-control__help {
-				margin-top: -4px;
-			}
 		}
 
 		@media ( max-width: $tablet ) {
@@ -753,14 +813,18 @@ $mobile: 426px;
 	.is_pro {
 		.setting-tabs__block-manager {
 			.block-manager__category-container {
-				grid-template-columns: repeat(3, 1fr);
+				grid-template-columns: repeat(2, 1fr);
+
+				@media ( max-width: $tablet ) {
+					grid-template-columns: 1fr;
+				}
 			}
 		}
 
-		div.setting-tabs__visibility-controls {
+		.setting-tabs__setting-panels {
 		   display: grid;
 		   grid-template-columns: 1fr 1fr;
-		   gap: 32px;
+		   gap: 24px;
 
 		   @media ( max-width: $tablet ) {
 			   grid-template-columns: 1fr;
@@ -769,14 +833,13 @@ $mobile: 426px;
 		   .setting-tabs__setting-controls,
 		   .two-columns {
 			   grid-column: 1 / span 2;
-			   margin-bottom: 0;
 
 			   @media ( max-width: $tablet ) {
 				   grid-column: 1;
 			   }
 		   }
 
-		   .setting-tabs__settings-panel {
+		   .settings-panel {
 			   margin-bottom: 0;
 		   }
 	   }
@@ -787,24 +850,13 @@ $mobile: 426px;
 
 		.block-manager__category-container {
 			display: grid;
-			grid-template-columns: repeat(2, 1fr);
-			column-gap: 20px;
-			row-gap: 20px;
-
-			@media ( max-width: $desktop ) {
-				grid-template-columns: repeat(2, 1fr);
-			}
-
-			@media ( max-width: $tablet ) {
-				grid-template-columns: repeat(1, 1fr);
-			}
+			grid-gap: 24px;
 		}
 
 		.block-manager__block-category {
 			background: #FFFFFF;
 			box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
 			box-sizing: border-box;
-			padding: 16px;
 
 			.components-base-control {
 				flex: 1;
@@ -818,8 +870,15 @@ $mobile: 426px;
 				font-size: 14px;
 				font-weight: bold;
 				letter-spacing: 0.25px;
-				padding: 4px 10px 16px 0;
+				padding: 16px 24px;
 				border-bottom: 1px solid #ccd0d4;
+
+				&.has-info-popover {
+					align-items: center;
+					display: flex;
+					justify-content: space-between;
+					gap: 32px;
+				}
 
 				.components-base-control__field {
 					display: flex;
@@ -839,17 +898,17 @@ $mobile: 426px;
 			}
 
 			.block-category__blocks-list {
+				column-count: 2;
+				column-gap: 40px;
 				margin: 0;
+				padding: 24px 24px 12px;
 			}
 
 			.blocks-category__block {
-				padding: 12px 12px 12px 30px;
+				display: inline-block;
 				margin: 0;
-				border-bottom: 1px solid #ccd0d4;
-
-				&:last-child {
-					border-bottom: none;
-				}
+				margin-bottom: 12px;
+				width: 100%;
 
 				.block-editor-block-icon {
 					width: 22px;
@@ -876,92 +935,21 @@ $mobile: 426px;
 	}
 
 	/* Custom styling to make react-select components look like WordPress. */
-	.block-visibility__react-select {
-	    margin: 10px 0;
-
-	    .react-select__control {
-	        border-radius: 2px;
-	        border: 1px solid #757575;
-	        min-height: 20px;
-
-	        &:hover {
-	            border: 1px solid #757575;
-	        }
-
-	        &:focus,
-	        &.react-select__control--is-focused {
-	            border-color: #007cba;
-	            border-color: var(--wp-admin-theme-color);
-	            box-shadow: 0 0 0 1px #007cba;
-	            box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
-	            outline: 2px solid transparent;
-	        }
-	    }
-
-	    // Removes added height on cursor.
-	    .react-select__value-container {
-	        padding: 2px 4px;
-
-	        .react-select__placeholder {
-	            margin-left: 5px;
-	            margin-right: 5px;
-	        }
-
-	        div:last-child {
-	            margin: 0 2px;
-	            padding-bottom: 0;
-	            padding-top: 0;
-	        }
-	    }
-
-	    .react-select__multi-value {
-	        background-color: #ddd;
-
-	        .react-select__multi-value__label {
-	            font-size: 95%;
-	        }
-	    }
-
-	    .react-select__input {
-	        input {
-	            min-height: auto;
-
-	            &:focus {
-	                box-shadow: none;
-	            }
-	        }
-	    }
-
-	    .react-select__clear-indicator,
-	    .react-select__dropdown-indicator {
-	        &:hover {
-	            color: #007cba;
-	            color: var(--wp-admin-theme-color);
-	            cursor: pointer;
-	        }
-	    }
-
-	    .react-select__option,
-	    .react-select__multi-value__remove {
-	        cursor: pointer;
-	    }
-
-	    .react-select__option--is-focused {
-	        background: white;
-	        color: #007cba;
-	        color: var(--wp-admin-theme-color);
-	    }
-	}
+	@import './react-select';
 }
 
 .block-visibility__reset-modal {
+	max-width: 600px;
+
 	.block-visibility__reset-modal--buttons {
 		display: flex;
 		justify-content: space-between;
+		margin-top: 24px;
 
 		div {
-			display: flex;
 			align-items: center;
+			display: flex;
+			gap: 12px;
 		}
 
 		.components-spinner {

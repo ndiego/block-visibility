@@ -7,7 +7,8 @@ import classnames from 'classnames';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useState, useEffect, render } from '@wordpress/element';
+import { dispatch, useSelect } from '@wordpress/data';
+import { useState, render } from '@wordpress/element';
 import { registerCoreBlocks } from '@wordpress/block-library';
 import {
 	Spinner,
@@ -28,10 +29,30 @@ import BlockManager from './block-manager';
 import PluginSettings from './plugin-settings';
 import Ads from './ads';
 
+/**
+ * Add our custom entities for retrieving external setting and variable data.
+ *
+ * @since 2.5.0
+ */
+dispatch( 'core' ).addEntities( [
+	{
+		label: __( 'Block Visibility Settings', 'block-visibility' ),
+		kind: 'block-visibility/v1',
+		name: 'settings',
+		baseURL: '/block-visibility/v1/settings',
+	},
+	{
+		label: __( 'Block Visibility Variables', 'block-visibility' ),
+		kind: 'block-visibility/v1',
+		name: 'variables',
+		baseURL: '/block-visibility/v1/variables',
+	},
+] );
+
 // Provides an entry point to slot in additional settings. Must be placed
 // outside of function to avoid unnecessary rerenders.
-const AdditionalSettings = withFilters(
-	'blockVisibility.MainSettings'
+const AdditionalSettingTabs = withFilters(
+	'blockVisibility.SettingTabsContent'
 )( ( props ) => <></> ); // eslint-disable-line
 
 /**
@@ -40,57 +61,29 @@ const AdditionalSettings = withFilters(
  * @since 1.0.0
  */
 function Settings() {
-	const [ status, setStatus ] = useState( 'idle' );
 	const [ settings, setSettings ] = useState( null );
-	const [ variables, setVariables ] = useState( null );
-
-	useEffect( () => {
-		// Generic fetch function to retrieve settings and variables on render.
-		async function fetchData( route, setData ) {
-			setStatus( 'fetching' );
-
-			// blockVisibilityRestUrl is provided by wp_add_inline_script.
-			const fetchUrl = `${ blockVisibilityRestUrl }block-visibility/v1/${ route }`; // eslint-disable-line
-			const response = await fetch( fetchUrl, { method: 'GET' } ); // eslint-disable-line
-
-			if ( response.ok ) {
-				const data = await response.json();
-				setData( data );
-				setStatus( 'fetched' );
-			} else {
-				setStatus( 'error' );
-			}
-		}
-
-		fetchData( 'settings', setSettings );
-		fetchData( 'variables?type=simplified', setVariables );
-	}, [] );
+	const [ savedSettings, variables ] = useSelect( ( select ) => {
+		const { getEntityRecord } = select( 'core' );
+		const fetchedSettings =
+			getEntityRecord( 'block-visibility/v1', 'settings' ) ?? null;
+		const fetchedVariables =
+			getEntityRecord( 'block-visibility/v1', 'variables' ) ?? null;
+		return [ fetchedSettings, fetchedVariables ];
+	} );
 
 	function onSetSettings( newSettings ) {
 		setSettings( newSettings );
 	}
 
 	// Display loading/error message while settings are being fetched.
-	if ( ! settings || ! variables || status !== 'fetched' ) {
+	if ( ! savedSettings || ! variables ) {
 		return (
-			<>
-				{ status === 'error' && (
-					<div className="notice notice-error">
-						<p>
-							{ __(
-								'Something went wrong when trying to load the Block Visibility settings. Try refreshing the page. If the error persists, please contact support.',
-								'block-visibility'
-							) }
-						</p>
-					</div>
-				) }
-				<div className="loading-settings">
-					<Spinner />
-					<span className="description">
-						{ __( 'Loading settings…', 'block-visibility' ) }
-					</span>
-				</div>
-			</>
+			<div className="loading-settings">
+				<Spinner />
+				<span className="description">
+					{ __( 'Loading settings…', 'block-visibility' ) }
+				</span>
+			</div>
 		);
 	}
 
@@ -143,7 +136,6 @@ function Settings() {
 
 	return (
 		<SlotFillProvider>
-			<AdditionalSettings />
 			<Masthead variables={ variables } />
 			<TabPanel
 				className={ classnames( {
@@ -162,7 +154,7 @@ function Settings() {
 								<>
 									<Ads variables={ variables } />
 									<VisibilityControls
-										settings={ settings }
+										settings={ settings ?? savedSettings }
 										setSettings={ onSetSettings }
 										variables={ variables }
 									/>
@@ -173,7 +165,7 @@ function Settings() {
 								<>
 									<Ads variables={ variables } />
 									<BlockManager
-										settings={ settings }
+										settings={ settings ?? savedSettings }
 										setSettings={ onSetSettings }
 										variables={ variables }
 									/>
@@ -184,14 +176,24 @@ function Settings() {
 								<>
 									<Ads variables={ variables } />
 									<PluginSettings
-										settings={ settings }
+										settings={ settings ?? savedSettings }
 										setSettings={ onSetSettings }
 										variables={ variables }
 									/>
 								</>
 							);
 						default:
-							return <Slot name="SettingsTabs" />;
+							return (
+								<>
+									<Slot name="SettingTabs" />
+									<AdditionalSettingTabs
+										tabName={ tab.name }
+										settings={ settings ?? savedSettings }
+										setSettings={ onSetSettings }
+										variables={ variables }
+									/>
+								</>
+							);
 					}
 				} }
 			</TabPanel>
@@ -204,6 +206,6 @@ wp.domReady( () => {
 	registerCoreBlocks();
 	render(
 		<Settings />,
-		document.getElementById( 'block-visibility-settings-container' )
+		document.getElementById( 'block-visibility__plugin-settings' )
 	);
 } );

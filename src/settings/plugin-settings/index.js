@@ -8,18 +8,19 @@ import { useState } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import UpdateSettings from './../utils/update-settings';
-import InformationPopover from './../../utils/components/information-popover';
-import BlockEditor from './block-editor';
+import Editor from './editor';
 import UserPermissions from './user-permissions';
 import FullControlMode from './full-control-mode';
 import Uninstall from './uninstall';
+import UpdateSettings from './../update-settings';
+import links from './../../utils/links';
+import { InformationPopover } from './../../components';
 
 // Provides an entry point to slot in additional settings. Must be placed
 // outside of function to avoid unnecessary rerenders.
-const AdditionalSettings = withFilters(
-	'blockVisibility.PluginSettings'
-)( ( props ) => <></> ); // eslint-disable-line
+const AdditionalSettings = withFilters( 'blockVisibility.PluginSettings' )(
+	( props ) => <></> // eslint-disable-line
+);
 
 /**
  * Renders the plugin Settings tab of the Block Visibility settings page
@@ -50,10 +51,10 @@ export default function PluginSettings( props ) {
 					</span>
 					<InformationPopover
 						message={ __(
-							'The settings below allow you to configure general functionality of the Block Visibility plugin. To learn more about General Settings, review the plugin documentation using the link below.',
+							'The settings below allow you to configure general functionality for the Block Visibility plugin.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-configure-the-general-settings/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsGeneral }
 					/>
 				</div>
 				<UpdateSettings
@@ -64,33 +65,37 @@ export default function PluginSettings( props ) {
 					{ ...props }
 				/>
 			</div>
-			<Slot name="PluginSettingsTop" />
-			<BlockEditor
-				pluginSettings={ pluginSettings }
-				setPluginSettings={ setPluginSettings }
-				setHasUpdates={ setHasUpdates }
-				{ ...props }
-			/>
-			<UserPermissions
-				pluginSettings={ pluginSettings }
-				setPluginSettings={ setPluginSettings }
-				setHasUpdates={ setHasUpdates }
-				{ ...props }
-			/>
-			<Slot name="PluginSettingsMiddle" />
-			<FullControlMode
-				pluginSettings={ pluginSettings }
-				setPluginSettings={ setPluginSettings }
-				setHasUpdates={ setHasUpdates }
-				{ ...props }
-			/>
-			<Uninstall
-				pluginSettings={ pluginSettings }
-				setPluginSettings={ setPluginSettings }
-				setHasUpdates={ setHasUpdates }
-				{ ...props }
-			/>
-			<Slot name="PluginSettingsBottom" />
+			<div className="setting-tabs__setting-panels">
+				<Slot name="PluginSettingsTop" />
+				<Editor
+					pluginSettings={ pluginSettings }
+					setPluginSettings={ setPluginSettings }
+					setHasUpdates={ setHasUpdates }
+					{ ...props }
+				/>
+				<Slot name="PluginSettingsMiddle" />
+				<div className="setting-tabs__setting-panels__sub-panel">
+					<UserPermissions
+						pluginSettings={ pluginSettings }
+						setPluginSettings={ setPluginSettings }
+						setHasUpdates={ setHasUpdates }
+						{ ...props }
+					/>
+					<FullControlMode
+						pluginSettings={ pluginSettings }
+						setPluginSettings={ setPluginSettings }
+						setHasUpdates={ setHasUpdates }
+						{ ...props }
+					/>
+					<Uninstall
+						pluginSettings={ pluginSettings }
+						setPluginSettings={ setPluginSettings }
+						setHasUpdates={ setHasUpdates }
+						{ ...props }
+					/>
+				</div>
+				<Slot name="PluginSettingsBottom" />
+			</div>
 			<AdditionalSettings
 				pluginSettings={ pluginSettings }
 				setPluginSettings={ setPluginSettings }

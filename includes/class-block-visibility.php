@@ -77,6 +77,9 @@ final class Block_Visibility {
 		// Specific fixes/work arounds for server-side blocks.
 		add_action( 'wp_loaded', array( $this, 'add_attributes_to_registered_blocks' ), 999 );
 		add_filter( 'rest_pre_dispatch', array( $this, 'conditionally_remove_attributes' ), 10, 3 );
+
+		// Display Pro compatibility message if needed.
+		add_action( 'admin_notices', array( $this, 'pro_compatibility_message' ) );
 	}
 
 	/**
@@ -120,7 +123,6 @@ final class Block_Visibility {
 		$this->define( 'BLOCK_VISIBILITY_VERSION', get_file_data( BLOCK_VISIBILITY_PLUGIN_FILE, [ 'Version' ] )[0] ); // phpcs:ignore
 		$this->define( 'BLOCK_VISIBILITY_PLUGIN_URL', plugin_dir_url( BLOCK_VISIBILITY_PLUGIN_FILE ) );
 		$this->define( 'BLOCK_VISIBILITY_PLUGIN_BASENAME', plugin_basename( BLOCK_VISIBILITY_PLUGIN_FILE ) );
-		$this->define( 'BLOCK_VISIBILITY_SUPPORT_URL', 'https://wordpress.org/support/plugin/block-visibility/' );
 		$this->define( 'BLOCK_VISIBILITY_SETTINGS_URL', admin_url( 'options-general.php?page=block-visibility-settings' ) );
 	}
 
@@ -221,5 +223,41 @@ final class Block_Visibility {
 				BLOCK_VISIBILITY_ABSPATH . '/languages'
 			);
 		}
+	}
+
+	/**
+	 * Display a Pro compatibility warning message if needed.
+	 *
+	 * @since 2.6.0
+	 */
+	public function pro_compatibility_message() {
+
+		if ( ! defined( 'BVP_VERSION' ) ) {
+			return;
+		}
+
+		$required_pro_version = '1.6.0';
+
+		// If the current version is at or above the required version, bail.
+		if ( BVP_VERSION >= $required_pro_version ) {
+			return;
+		}
+
+		$message = sprintf(
+			// Translators: The required version of Block Visibility Pro and the current version of Block Visibility.
+			__(
+				'Version Error: Please upgrade Block Visibility Pro to version %1$s or greater. The current active version (%2$s) is not compatible with Block Visibility %3$s.',
+				'block-visibility-pro'
+			),
+			$required_pro_version,
+			BVP_VERSION,
+			BLOCK_VISIBILITY_VERSION
+		);
+		
+		?>
+		<div class="notice notice-error">
+			<p><?php echo esc_html( $message ); ?></p>
+		</div>
+		<?php
 	}
 }

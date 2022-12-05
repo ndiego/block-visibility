@@ -26,11 +26,20 @@ function add_plugin_action_links( $plugin_links, $plugin_file ) {
 		return $plugin_links;
 	}
 
+	$pro_link = '<a href="https://blockvisibilitywp.com/pro/" aria-label="' . esc_attr( __( 'Upgrade to Block Visibility Pro.', 'block-visibility' ) ) . '" style="font-weight:bold" target="_blank">';
+	$pro_link .= __( 'Get Pro', 'block-visibility' );
+	$pro_link .= '</a>';
+
 	$settings_link  = '<a href="' . BLOCK_VISIBILITY_SETTINGS_URL . '" aria-label="' . esc_attr( __( 'Navigate to the Block Visibility settings.', 'block-visibility' ) ) . '">';
 	$settings_link .= __( 'Settings', 'block-visibility' );
 	$settings_link .= '</a>';
 
 	array_unshift( $plugin_links, $settings_link );
+
+	// Only display the Pro upsell link if the plugin is not active.
+	if ( ! defined( 'BVP_VERSION' ) ) {
+		array_unshift( $plugin_links, $pro_link );
+	}
 
 	return $plugin_links;
 }
@@ -56,7 +65,7 @@ function add_plugin_row_meta( $plugin_meta, $plugin_file ) {
 	$getting_started .= __( 'Getting Started', 'block-visibility' );
 	$getting_started .= '</a>';
 
-	$review_link  = '<a href="' . esc_url( BLOCK_VISIBILITY_SUPPORT_URL ) . 'reviews/?filter=5" aria-label="' . esc_attr( __( 'Review Block Visibility on WordPress.org', 'block-visibility' ) ) . '" target="_blank">';
+	$review_link  = '<a href="https://wordpress.org/support/plugin/block-visibility/reviews/?filter=5" aria-label="' . esc_attr( __( 'Review Block Visibility on WordPress.org', 'block-visibility' ) ) . '" target="_blank">';
 	$review_link .= __( 'Leave a Review', 'block-visibility' );
 	$review_link .= '</a>';
 

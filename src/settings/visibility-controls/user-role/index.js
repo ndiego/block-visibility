@@ -7,7 +7,8 @@ import { ToggleControl, Disabled, Slot } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import InformationPopover from './../../../utils/components/information-popover';
+import links from './../../../utils/links';
+import { InformationPopover } from './../../../components';
 
 /**
  * Renders the visibility control settings.
@@ -93,7 +94,7 @@ export default function UserRole( props ) {
 	}
 
 	return (
-		<div className="setting-tabs__settings-panel">
+		<div className="settings-panel">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'User Role', 'block-visibility' ) }
@@ -119,41 +120,40 @@ export default function UserRole( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							'The User Role control allows you to conditionally display blocks based on whether a user is logged-in, logged-out, and more. Visit the plugin Knowledge Base for more information.',
+							'The User Role control allows you to conditionally display blocks based on whether a user is logged-in, logged-out, and more.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsUserRole }
 					/>
 				</div>
-				<hr />
 				<div className="settings-type__toggle first has-info-popover subsetting">
 					{ enableUserRolesElement }
 					<InformationPopover
 						message={ __(
-							'Restrict visibility by any user role (Administrator, Editor, Subscriber, etc.). Roles that are added by third-party plugins will also be available to choose from.',
+							'Restrict visibility by any user role (Administrator, Editor, Subscriber, etc.). Roles added by third-party plugins will also be available to choose from.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsUserRole }
 					/>
 				</div>
 				<div className="settings-type__toggle has-info-popover subsetting">
 					{ enableUsersElement }
 					<InformationPopover
 						message={ __(
-							'Restrict visibility to specific individual users on your website based on user ID. Multiple users can be selected at once.',
+							'Restrict visibility to specific individual users on your website based on user ID. You can select multiple users at once.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsUserRole }
 					/>
 				</div>
 				<div className="settings-type__toggle has-info-popover subsetting">
 					{ enableUserRuleSetsElement }
 					<InformationPopover
 						message={ __(
-							'This functionality allows you to create user-based rule sets, which provide extensive configuration options and greater flexibilty.',
+							'This functionality allows you to create user-based rule sets, which provide extensive configuration options and greater flexibility.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-user-role-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsUserRole }
 					/>
 				</div>
 				<Slot name="VisibilityByRoleControls" />

@@ -7,7 +7,8 @@ import { ToggleControl } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import InformationPopover from './../../../utils/components/information-popover';
+import links from './../../../utils/links';
+import { InformationPopover } from './../../../components';
 
 /**
  * Renders the screen size control toggle settings.
@@ -43,14 +44,14 @@ export default function ScreenSizeControls( props ) {
 				<span>{ __( 'Controls', 'block-visibility' ) }</span>
 				<InformationPopover
 					message={ __(
-						'The settings below allow you to restrict which controls are available to users in the Block/Site Editor. Disabling controls will remove the corresponding CSS from the frontend of your website.',
+						'The settings below allow you to restrict which controls are available to users in the Block/Site Editor. Disabling controls will remove the corresponding CSS from the front end of your website.',
 						'block-visibility'
 					) }
 					subMessage={ __(
 						'The default controls are Desktop, Tablet, and Mobile. Advanced screen size controls add Large Desktop and Mobile (portrait).',
 						'block-visibility'
 					) }
-					link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+					link={ links.settingsScreenSize }
 				/>
 			</div>
 			{ enableAdvancedControls && (

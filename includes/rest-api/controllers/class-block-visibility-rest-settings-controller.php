@@ -89,6 +89,9 @@ class Block_Visibility_REST_Settings_Controller extends WP_REST_Controller {
 		// large degree, but more could be added.
 		$settings = $request->get_params();
 
+		// The locale is often appended to the request. We don't need this.
+		unset( $settings['_locale'] );
+
 		$error_message = __( 'Something went wrong, the settings could not be updated.', 'block-visibility' );
 
 		if ( ! get_option( 'block_visibility_settings' ) ) {
@@ -114,6 +117,9 @@ class Block_Visibility_REST_Settings_Controller extends WP_REST_Controller {
 				// minus the settings that was wanted to reset.
 				$default_settings = get_option( 'block_visibility_settings' );
 				$new_settings     = array_merge( $default_settings, $old_settings );
+
+				// Update the plugin settings.
+				update_option( 'block_visibility_settings', $new_settings );
 			}
 		} else {
 

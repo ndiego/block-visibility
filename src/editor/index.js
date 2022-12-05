@@ -11,18 +11,25 @@ import { dispatch } from '@wordpress/data';
 import { addFilter, applyFilters } from '@wordpress/hooks';
 import { hasBlockSupport } from '@wordpress/blocks';
 import { registerPlugin } from '@wordpress/plugins';
-import { Fill } from '@wordpress/components';
+import { Slot, Fill } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import VisibilityInspectorControls from './inspector-controls';
-import ToolbarControls from './toolbar-controls';
-import ControlSet from './inspector-controls/control-set';
 import './contextual-indicators';
+import ToolbarControls from './toolbar-controls';
+import VisibilityInspectorControls from './inspector-controls';
+import {
+	ACF,
+	DateTime,
+	QueryString,
+	ScreenSize,
+	UserRole,
+	WPFusion,
+} from './../controls';
 
 /**
- * Add our custom entities for retreiving external data in the Block Editor.
+ * Add our custom entities for retrieving external data in the Block Editor.
  *
  * @since 1.3.0
  */
@@ -41,6 +48,16 @@ dispatch( 'core' ).addEntities( [
 	},
 ] );
 
+// Blocks that are not compatible at all with visibility controls.
+const globallyRestricted = [
+	'core/freeform',
+	'core/legacy-widget',
+	'core/widget-area',
+];
+
+// Blocks that are not compatible with visibility controls when used as Widgets.
+const widgetAreaRestricted = [ 'core/html' ];
+
 /**
  * Add the visibility setting sttribute to selected blocks.
  *
@@ -51,7 +68,7 @@ dispatch( 'core' ).addEntities( [
 function addAttributes( settings ) {
 	// The freeform (Classic Editor) block is incompatible because it does not
 	// support custom attributes.
-	if ( settings.name === 'core/freeform' ) {
+	if ( globallyRestricted.includes( settings.name ) ) {
 		return settings;
 	}
 
@@ -164,8 +181,7 @@ function addAttributes( settings ) {
 																type: 'object',
 																properties: {
 																	field: {
-																		type:
-																			'string',
+																		type: 'string',
 																	},
 																	subField: {
 																		type: [
@@ -175,12 +191,10 @@ function addAttributes( settings ) {
 																		],
 																	},
 																	subFields: {
-																		type:
-																			'object',
+																		type: 'object',
 																	},
 																	operator: {
-																		type:
-																			'string',
+																		type: 'string',
 																	},
 																	value: {
 																		type: [
@@ -286,8 +300,7 @@ function addAttributes( settings ) {
 																type: 'object',
 																properties: {
 																	field: {
-																		type:
-																			'string',
+																		type: 'string',
 																	},
 																	subField: {
 																		type: [
@@ -297,8 +310,7 @@ function addAttributes( settings ) {
 																		],
 																	},
 																	operator: {
-																		type:
-																			'string',
+																		type: 'string',
 																	},
 																	value: {
 																		type: [
@@ -394,16 +406,16 @@ addFilter(
  */
 function addInspectorControls( BlockEdit ) {
 	return ( props ) => {
-		if ( props.isSelected ) {
-			return (
-				<>
-					<BlockEdit { ...props } />
-					<VisibilityInspectorControls { ...props } />
-				</>
-			);
-		}
-
-		return <BlockEdit { ...props } />;
+		return (
+			<>
+				<BlockEdit { ...props } />
+				<VisibilityInspectorControls
+					globallyRestricted={ globallyRestricted }
+					widgetAreaRestricted={ widgetAreaRestricted }
+					{ ...props }
+				/>
+			</>
+		);
 	};
 }
 
@@ -415,22 +427,33 @@ addFilter(
 );
 
 /**
- * Register all Block Visibility related plugins to the editor.
- */
-registerPlugin( 'block-visibility-toolbar-options-hide-block', {
-	render: ToolbarControls,
-} );
-
-/**
  * Add the control set component to the preset manager in Block Visibility Pro.
  */
 function addPresetManagerControlSet() {
 	return ( props ) => {
-		const { index, type } = props;
+		const { controlSetAtts, index } = props;
+
+		// There needs to be a unique index for the Slots since we technically have
+		// multiple of the same Slot.
+		const uniqueIndex = 'multiple-' + controlSetAtts?.id;
 
 		return (
-			<Fill name={ 'PresetManagerControlSet-' + type + '-' + index }>
-				<ControlSet { ...props } />
+			<Fill name={ 'PresetManagerControlSet-' + index }>
+				<div className="control-set__controls">
+					<Slot name={ 'ControlSetControlsTop-' + uniqueIndex } />
+
+					<DateTime { ...props } />
+					<UserRole { ...props } />
+					<ScreenSize { ...props } />
+					<QueryString { ...props } />
+
+					<Slot name={ 'ControlSetControlsMiddle-' + uniqueIndex } />
+
+					<ACF { ...props } />
+					<WPFusion { ...props } />
+
+					<Slot name={ 'ControlSetControlsBottom-' + uniqueIndex } />
+				</div>
 			</Fill>
 		);
 	};
@@ -441,3 +464,22 @@ addFilter(
 	'block-visibility/preset-manager-control-set',
 	addPresetManagerControlSet
 );
+
+/**
+ * Register all Block Visibility toolbar controls.
+ *
+ * @since 1.5.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
+const getToolbarControls = ( props ) => (
+	<ToolbarControls
+		globallyRestricted={ globallyRestricted }
+		widgetAreaRestricted={ widgetAreaRestricted }
+		{ ...props }
+	/>
+);
+
+registerPlugin( 'block-visibility-toolbar-options-hide-block', {
+	render: getToolbarControls,
+} );

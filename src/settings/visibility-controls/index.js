@@ -8,8 +8,6 @@ import { withFilters, Slot } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import UpdateSettings from './../utils/update-settings';
-import InformationPopover from './../../utils/components/information-popover';
 import General from './general';
 import HideBlock from './hide-block';
 import DateTime from './date-time';
@@ -17,12 +15,15 @@ import UserRole from './user-role';
 import ScreenSize from './screen-size';
 import QueryString from './query-string';
 import Integrations from './integrations';
+import UpdateSettings from './../update-settings';
+import links from './../../utils/links';
+import { InformationPopover } from './../../components';
 
 // Provides an entry point to slot in additional settings. Must be placed
 // outside of function to avoid unnecessary rerenders.
-const AdditionalControls = withFilters(
-	'blockVisibility.VisibilityControls'
-)( ( props ) => <></> ); // eslint-disable-line
+const AdditionalControls = withFilters( 'blockVisibility.VisibilityControls' )(
+	( props ) => <></> // eslint-disable-line
+);
 
 /**
  * Renders the Visibility Controls tab of the Block Visibility settings page
@@ -45,33 +46,33 @@ export default function VisibilityControls( props ) {
 	}
 
 	return (
-		<>
-			<div className="setting-tabs__visibility-controls inner-container">
-				<div className="setting-tabs__setting-controls">
-					<div className="setting-controls__title">
-						<span>
-							{ __( 'Visibility Controls', 'block-visibility' ) }
-						</span>
-						<InformationPopover
-							message={ __(
-								'The settings below allow you to configure the visibility controls that power Block Visibility. Pick and choose which controls you would like to enable and how you would like them to function.',
-								'block-visibility'
-							) }
-							subMessage={ __(
-								'When a visibility control is disabled, blocks that relied on the disabled control will become visible again unless they are hidden by other enabled controls. Visit the plugin Knowledge Base for more information on configuring visibility controls.',
-								'block-visibility'
-							) }
-							link="https://www.blockvisibilitywp.com/knowledge-base/guide-to-visibility-controls-in-block-visibility/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
-						/>
-					</div>
-					<UpdateSettings
-						tabSlug="visibility_controls"
-						tabSettings={ visibilityControls }
-						hasUpdates={ hasUpdates }
-						setHasUpdates={ setHasUpdates }
-						{ ...props }
+		<div className="setting-tabs__visibility-controls inner-container">
+			<div className="setting-tabs__setting-controls">
+				<div className="setting-controls__title">
+					<span>
+						{ __( 'Visibility Controls', 'block-visibility' ) }
+					</span>
+					<InformationPopover
+						message={ __(
+							'The settings below allow you to configure the visibility controls that power Block Visibility. Pick and choose which controls you want to enable and how you would like them to function.',
+							'block-visibility'
+						) }
+						subMessage={ __(
+							'When a visibility control is disabled, blocks that rely on the disabled control will become visible again unless other enabled controls hide them.',
+							'block-visibility'
+						) }
+						link={ links.settingsVisibilityControls }
 					/>
 				</div>
+				<UpdateSettings
+					tabSlug="visibility_controls"
+					tabSettings={ visibilityControls }
+					hasUpdates={ hasUpdates }
+					setHasUpdates={ setHasUpdates }
+					{ ...props }
+				/>
+			</div>
+			<div className="setting-tabs__setting-panels">
 				<Slot name="VisibilityControlsTop" />
 				<General
 					visibilityControls={ visibilityControls }
@@ -119,7 +120,6 @@ export default function VisibilityControls( props ) {
 					{ ...props }
 				/>
 			</div>
-			<Slot name="SettingsTabPanelBottom" />
-		</>
+		</div>
 	);
 }

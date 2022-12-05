@@ -11,15 +11,17 @@ import { addFilter, applyFilters } from '@wordpress/hooks';
 /**
  * Internal dependencies
  */
-import hasDateTime from './has-date-time';
-import hasUserRole from './has-user-role';
-import hasScreenSize from './has-screen-size';
-import hasQueryString from './has-query-string';
-import hasACF from './has-acf';
-import hasWPFusion from './has-wp-fusion';
+import {
+	hasDateTime,
+	hasUserRole,
+	hasScreenSize,
+	hasQueryString,
+	hasACF,
+	hasWPFusion,
+} from './indicator-tests';
 import hasVisibilityControls from './../utils/has-visibility-controls';
 import usePluginData from './../utils/use-plugin-data';
-import { isPluginSettingEnabled } from './../utils/setting-utilities';
+import isPluginSettingEnabled from './../../utils/is-plugin-setting-enabled';
 import getEnabledControls from './../../utils/get-enabled-controls';
 
 /**

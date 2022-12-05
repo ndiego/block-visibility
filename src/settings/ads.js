@@ -4,6 +4,18 @@
 import { __ } from '@wordpress/i18n';
 import { Button, ExternalLink } from '@wordpress/components';
 
+/**
+ * Internal dependencies
+ */
+import links from './../utils/links';
+
+/**
+ * Renders the Block Visibility ads if Pro is not active.
+ *
+ * @since 2.0.0
+ * @param {Object} props All the props passed to this function
+ * @return {string}		 Return the rendered JSX
+ */
 export default function Ads( props ) {
 	const { variables } = props;
 
@@ -38,9 +50,7 @@ export default function Ads( props ) {
 					<li>{ __( 'No ads!', 'block-visibility' ) }</li>
 				</ul>
 				<Button
-					href={
-						'https://www.blockvisibilitywp.com/pro/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals'
-					}
+					href={ links.settingsProUpgrade }
 					target="__blank"
 					isPrimary
 				>
@@ -57,7 +67,7 @@ export default function Ads( props ) {
 						'block-visibility'
 					) }
 					<ExternalLink // eslint-disable-line
-						href="https://wordpress.org/support/plugin/block-visibility/"
+						href={ links.blockVisibilityOrgSupport }
 						target="_blank"
 						rel="noreferrer"
 					>
@@ -70,7 +80,7 @@ export default function Ads( props ) {
 						'block-visibility'
 					) }
 					<ExternalLink // eslint-disable-line
-						href="https://www.blockvisibilitywp.com/knowledge-base/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						href={ links.settingsKnowledgeBase }
 						target="_blank"
 					>
 						{ __( 'View Knowledge Base', 'block-visibility' ) }
@@ -87,7 +97,7 @@ export default function Ads( props ) {
 						'block-visibility'
 					) }
 					<ExternalLink // eslint-disable-line
-						href="https://wordpress.org/support/plugin/block-visibility/reviews/?filter=5"
+						href={ links.blockVisibilityOrgReviews }
 						target="_blank"
 						rel="noreferrer"
 					>

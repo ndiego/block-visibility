@@ -7,10 +7,11 @@ import { ToggleControl, Disabled, Slot } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import InformationPopover from './../../../utils/components/information-popover';
 import PreviewStyles from './preview-styles';
 import Breakpoints from './breakpoints';
 import ScreenSizeControls from './screen-size-controls';
+import links from './../../../utils/links';
+import { InformationPopover } from './../../../components';
 
 /**
  * Renders the screen size (responsive design) control settings.
@@ -87,7 +88,8 @@ export default function ScreenSize( props ) {
 					...visibilityControls,
 					screen_size: {
 						...screenSize,
-						enable_advanced_controls: ! screenSize.enable_advanced_controls,
+						enable_advanced_controls:
+							! screenSize.enable_advanced_controls,
 					},
 				} );
 			} }
@@ -122,7 +124,7 @@ export default function ScreenSize( props ) {
 	}
 
 	return (
-		<div className="setting-tabs__settings-panel two-columns">
+		<div className="settings-panel two-columns">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'Screen Size', 'block-visibility' ) }
@@ -148,36 +150,35 @@ export default function ScreenSize( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							"The Screen Size control allows you to conditionally display blocks on the current width of the browser window, or in other words, the screen size of a user's device. Visit the plugin Knowledge Base for more information.",
+							"The Screen Size control allows you to conditionally display blocks on the current width of the browser window, or in other words, the screen size of a user's device.",
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsScreenSize }
 					/>
 				</div>
-				<hr />
 				{ screenSizeControls }
 				<div className="settings-type__toggle has-info-popover subsetting">
 					{ enableAdvancedControls }
 					<InformationPopover
 						message={ __(
-							'By default, the Screen Size control includes two breakpoints and three controls for users to hide blocks. There are certain situations where you may need more control over when a block should be visible, for example in the case of very large or small screens. Enabling advanced controls provides these options.',
+							'By default, the Screen Size control includes two breakpoints and three controls for users to hide blocks. There are certain situations where you may need more control over when a block should be visible, for example, in the case of very large or small screens. Enabling advanced controls provides these options.',
 							'block-visibility'
 						) }
 						subMessage={ __(
-							'Note that once enabled, any block that is only using the advanced controls to hide at extra large, or extra small, breakpoints will become visible again if this setting is ever disabled in the future.',
+							'Note that once enabled, any block that is only using the advanced controls to hide at extra large or extra small breakpoints will become visible again if you disable this setting in the future.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsScreenSize }
 					/>
 				</div>
 				<div className="settings-type__toggle has-info-popover subsetting">
 					{ enableFrontendCSS }
 					<InformationPopover
 						message={ __(
-							'By default, the CSS needed for the Screen Size controls is loaded on the frontend of your website. If disabled, you will need to add the CSS manually to your theme in order for the Screen Size controls to work properly. This CSS code is available via the "Preview Frontend CSS" button on this page.',
+							'By default, the CSS needed for the Screen Size controls is loaded on the front end of your website. If disabled, you will need to add the CSS manually to your theme for the Screen Size controls to work properly. This CSS code is available via the "Preview Frontend CSS" button.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsScreenSize }
 					/>
 				</div>
 				<Slot name="ScreenSizeControls" />

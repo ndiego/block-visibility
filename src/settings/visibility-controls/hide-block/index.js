@@ -7,7 +7,8 @@ import { ToggleControl } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import InformationPopover from './../../../utils/components/information-popover';
+import links from './../../../utils/links';
+import { InformationPopover } from './../../../components';
 
 /**
  * Renders the hide block control settings.
@@ -23,7 +24,7 @@ export default function HideBlock( props ) {
 	const enable = visibilityControls?.hide_block?.enable ?? true; // eslint-disable-line
 
 	return (
-		<div className="setting-tabs__settings-panel">
+		<div className="settings-panel">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'Hide Block', 'block-visibility' ) }
@@ -49,10 +50,10 @@ export default function HideBlock( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							'The Hide Block control allows you easily hide blocks on the frontend of your website. This control overrides all other controls when enabled on a block. Visit the plugin Knowledge Base for more information and examples of how this control can be used for content management.',
+							"The Hide Block control allows you to hide blocks easily on your website's front end. This control overrides all other controls when enabled on a block.",
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-use-the-hide-block-control/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsHideBlock }
 					/>
 				</div>
 			</div>

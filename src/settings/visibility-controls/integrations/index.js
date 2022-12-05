@@ -7,10 +7,11 @@ import { Slot } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import UpdateSettings from './../../utils/update-settings';
-import InformationPopover from './../../../utils/components/information-popover';
-import ACF from './acf';
-import WPFusion from './wp-fusion';
+import ACF from './../acf';
+import WPFusion from './../wp-fusion';
+import UpdateSettings from './../../update-settings';
+import links from './../../../utils/links';
+import { InformationPopover } from './../../../components';
 
 /**
  * Renders all the control settings.
@@ -55,7 +56,7 @@ export default function Integrations( props ) {
 							'Visit the plugin Knowledge Base for more information on configuring third-party integration controls and what integrations are currently available in Block Visibility.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/guide-to-third-party-integrations-in-block-visibility/?utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsVisibilityContolsIntegrations }
 					/>
 				</div>
 				<UpdateSettings

@@ -12,7 +12,7 @@ import { applyFilters } from '@wordpress/hooks';
 /**
  * Internal dependencies
  */
-import icons from './icons';
+import { acf, wpFusion } from './icons';
 
 /**
  * All the available controls in Block Visibility.
@@ -67,14 +67,14 @@ export function getControls() {
 			type: 'integration',
 			attributeSlug: 'acf',
 			settingSlug: 'acf',
-			icon: icons.acf,
+			icon: acf,
 		},
 		{
 			label: __( 'WP Fusion', 'block-visibility' ),
 			type: 'integration',
 			attributeSlug: 'wpFusion',
 			settingSlug: 'wp_fusion',
-			icon: icons.wpFusion,
+			icon: wpFusion,
 		},
 	];
 
@@ -162,6 +162,15 @@ export default function getEnabledControls( settings, variables ) {
 			}
 		} );
 	}
+
+	const defaultControls = settings?.plugin_settings?.default_controls ?? [];
+
+	// Determine which enable controls are defaults, if any.
+	enabledControls.forEach( function ( control ) {
+		if ( defaultControls.includes( control.settingSlug ) ) {
+			control.isDefault = true;
+		}
+	} );
 
 	enabledControls = applyFilters(
 		'blockVisibility.enabledControls',

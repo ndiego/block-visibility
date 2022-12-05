@@ -1,20 +1,66 @@
 @import './common';
+@import './react-select';
 
-.block-visibility {
-    &.is-opened {
-        &>.components-panel__body-title {
-            margin-bottom: 0;
+.block-visibility__controls-panel {
+    border-top: 1px solid #dddddd;
+    display: grid;
+    gap: 16px;
+    margin-top: -1px;
+    padding: 16px;
+
+    .controls-panel-header {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        gap: calc(8px);
+        grid-column: 1 / -1;
+        justify-content: space-between;
+        width: 100%;
+        -webkit-box-align: center;
+        -webkit-box-pack: justify;
+
+        h2 {
+            font-weight: 500;
+            margin: 0;
         }
 
-        &>.visibility-controls__container {
-            &>:first-child:not(.control-set) {
-                margin-top: 15px;
+        .controls-panel-header__dropdown-menus {
+            line-height: 0;
+            margin: -4px 0;
+
+            .components-button {
+                padding: 0px;
+                min-width: 24px;
+            }
+
+            .components-spinner {
+                margin: 0 4px;
             }
         }
     }
+
+    .controls-panel-container,
+    // When controls are disabled due to the Hide Block control, we still need gap.
+    .components-disabled.hide-block-enabled {
+        display: grid;
+        gap: 32px;
+    }
+
+    .controls-panel-notices {
+
+        .components-notice {
+            margin: 0;
+        }
+    }
+
+    // Fix hover color on buttons when disabled.
+    .components-button:not(.is-primary):disabled, 
+    .components-button[aria-disabled=true]:not(.is-primary) {
+        color: currentColor;
+    }
 }
 
-.visibility-controls__container,
+.controls-panel-container,
 .preset-manager__content {
 
     .components-disabled {
@@ -23,10 +69,12 @@
         * {
             opacity: 1 !important;
         }
+    }
 
-        .visibility-control {
-            margin-bottom: 18px !important;
-        }
+    // Fix hover color on buttons when disabled.
+    .components-button:not(.is-primary):disabled, 
+    .components-button[aria-disabled=true]:not(.is-primary) {
+        color: currentColor;
     }
 
     .components-button.control-tips {
@@ -52,74 +100,111 @@
         }
     }
 
-    .control-separator {
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        padding: 20px 0 30px;
-
-        &:before,
-        &:after {
-            content: "";
-            flex: 1 1;
-            border-bottom: 1px solid #e0e0e0;
-            margin: auto 0;
-        }
-
-        // Hide the last separator in the list.
-        &:last-child {
-            display: none;
-        }
-
-        span {
-            padding: 0 8px;
-            color: #cccccc;
-            font-size: 90%;
-        }
-    }
-
-    .visibility-control__group {
-        margin-bottom: 30px;
-
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }
-
-    .visibility-control__group-heading {
-        font-size: 13px;
+    .components-base-control__label {
+        font-size: 11px;
         font-weight: 500;
-        margin-bottom: 16px;
-        text-transform: none;
+        line-height: 1.4;
+        text-transform: uppercase;
+        display: inline-block;
 
-        &.has-icon {
-            display: flex;
+        .components-base-control__label-hint {
+            color: #757575;
+        }
+    }
+
+    .controls-panel-item {
+
+        // The last control in the control panel/set.
+        &:last-child {
+            margin-bottom: 12px;
+        }
+
+        .controls-panel-item__header {
             align-items: center;
-
-            /* For the integration icons */
-            &>svg {
-                width: 16px;
-                margin-right: 8px;
+            display: flex;
+            font-size: 11px;
+            font-weight: 500;
+            line-height: 1.4;
+            margin-bottom: 14px;
+            margin-top: 0;
+            min-height: 28px;
+            text-transform: uppercase;
+    
+            &.has-icon {    
+                // For the integration icons.
+                &>svg {
+                    width: 16px;
+                    margin-right: 8px;
+                }
+    
+                span {
+                    display: inline-block;
+                    margin-right: 4px;
+                }
+    
+                // Reduce the size of the popover icon.
+                .information-popover__button {
+                    height: 20px;
+                    min-width: 20px;
+    
+                    svg {
+                        width: 18px;
+                    }
+                }
             }
 
-            span {
-                display: inline-block;
-                margin-right: 4px;
-            }
+            .controls-panel-item__header-toolbar {
+                margin-left: auto;
 
-            /* Reduce the size of the popover icon. */
-            .information-popover__button {
-                height: 20px;
-                min-width: 20px;
-
-                svg {
-                    width: 18px;
+                // Reduce the size of some icons.
+                button.has-padding {
+                    padding: 1px;
                 }
             }
         }
+
+        .controls-panel-item__description {
+            font-size: 12px;
+            font-style: normal;
+            color: rgb(117, 117, 117);
+            margin-bottom: 16px;
+    
+            strong {
+                font-weight: 700;
+            }
+        }
+
+        .controls-panel-item__fields {
+            *:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        .controls-panel-item__control-fields {
+            .components-base-control {
+                margin-bottom: 18px;
+
+                &.components-toggle-control {
+                    margin-bottom: 12px;
+                }
+
+                &:last-child {
+                    margin-bottom: 0px;
+                }
+
+                .components-base-control__help {
+                    margin-bottom: 0;
+                }
+            }
+
+            // Common styles for all "hide when" toggles.
+            .control-fields-item__hide-when {
+                margin-top: 20px;
+            }
+        }
     }
 
-    .visibility-control {
+    .control-fields-item {
         margin-bottom: 18px;
 
         &.is-open {
@@ -139,11 +224,25 @@
         }
     }
 
-    .visibility-control__label {
+    .control-fields-item__label {
+        color: #757575;
+        font-size: 12px;
         margin-bottom: 8px;
     }
 
-    .components-base-control__help {
+    .control-fields-item__sub-label {
+        font-size: 11px;
+        font-weight: 500;
+        line-height: 1.4;
+        text-transform: uppercase;
+    }
+
+    .control-fields-item__help {
+        color: #757575;
+        font-size: 12px;
+        font-style: normal;
+        margin-top: 8px;
+
         a {
             cursor: pointer;
         }
@@ -153,7 +252,7 @@
         }
     }
 
-    .visibility-control__help {
+    .components-base-control__help {
         font-size: 12px;
         font-style: normal;
         color: rgb(117, 117, 117);
@@ -164,55 +263,83 @@
         }
     }
 
-    .visibility-control__group-fields {
-        margin-bottom: 24px;
+    .components-notice {
+        margin: 18px 0 0;
 
-        .components-base-control__help {
-            margin-top: 0;
+        .components-notice__content {
+            margin: 2px 0;
+
+            .components-base-control__help {
+                display: inline-block;
+                margin: 4px 0 0;
+            }
         }
     }
 
     /* Specific styling for section headers ----------------------------------*/
     .section-header {
+        align-items: center;
         display: flex;
         justify-content: space-between;
-        align-items: center;
         gap: 24px;
-        margin-bottom: 16px;
-        border-bottom: 1px solid #e0e0e0;
-        padding-bottom: 6px;
+        margin-bottom: 14px;
 
         &.main {
-            margin-bottom: 30px;
             border-top: 1px solid #e0e0e0;
+            margin-bottom: 30px;
             margin-left: -16px;
             margin-right: -16px;
-            width: calc( 100% + 32px );
-            padding: 8px 16px;
             min-height: 48px;
+            padding: 8px 16px;
+            width: calc( 100% + 32px );
         }
 
         .section-header__title {
+            align-items: center;
+            display: inline-flex;
+            font-size: 11px;
             font-weight: 500;
+            gap: 6px;
+            line-height: 1.4;
             overflow-wrap: anywhere;
+            text-transform: uppercase;
+
+            .components-dropdown {
+                height: 18px;
+
+                .components-button {
+                    height: 18px;
+                    line-height: 16px;
+                    min-width: 18px;
+                    opacity: .3;
+                    padding: 0;
+                    width: 18px;
+
+                    &:hover,
+                    &[aria-expanded=true] {
+                        opacity: 1;
+                    }
+                }
+            }
         }
 
         .section-header__toolbar {
+            display: flex;
+            gap: 4px;
             flex-shrink: 0;
             height: 24px;
             text-align: right;
 
             .components-button {
-                &.has-icon {
-                    padding: 0;
-                    height: 24px;
-                    width: 24px;
-                    min-width: 24px;
-                }
+                padding: 0;
+                height: 24px;
+                width: 24px;
+                min-width: 24px;
+            }
 
-                &:hover {
-                    color: var( --wp-admin-theme-color );
-                }
+            // Apply additional styling to Pro buttons added.
+            &> .components-button {
+                padding: 1px;
             }
 
             .controls-dropdown {
@@ -239,88 +366,6 @@
         }
     }
 
-    /* Specific styling for radio controls with help text --------------------*/
-    .compound-radio-control {
-        .components-radio-control__option {
-
-            &:not(:last-child) {
-                margin-bottom: 10px;
-            }
-
-            input {
-                vertical-align: top;
-                margin-top: 2px;
-                margin-right: 12px;
-            }
-
-            .compound-radio-label {
-                display: inline-block;
-
-                span {
-                    display: block;
-                    font-weight: 400;
-                    max-width: 200px;
-                    font-size: 12px;
-                    font-style: normal;
-                    color: rgb(117, 117, 117);
-                    margin-top: 2px;
-                }
-            }
-        }
-    }
-
-    /* Control Set styling -------------------------------------------------- */
-    .control-set {
-        margin-bottom: 30px;
-
-        .control-set__header {
-            margin-bottom: 30px;
-            border-bottom: 1px solid #e0e0e0;
-            border-top: 1px solid #e0e0e0;
-            margin-left: -16px;
-            margin-right: -16px;
-            width: calc(100% + 32px);
-            padding: 8px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            min-height: 50px;
-
-            .control-set__header-title {
-                font-weight: 500;
-                margin: 0;
-            }
-
-            .control-set__header-toolbar {
-                height: 24px;
-                min-width: 100px;
-                text-align: right;
-
-                button {
-                    height: 24px;
-                    min-width: 24px;
-                    padding: 0;
-
-                    svg {
-                        width: 20px;
-                    }
-                }
-
-                .configure-controls {
-                    button {
-                        min-width: 28px;
-                    }
-                }
-            }
-        }
-
-        .visibility-control__group {
-            &:not(:last-child) {
-                margin-bottom: 15px;
-            }
-        }
-    }
-
     /* Rule Set styling ----------------------------------------------------- */
     .rule-sets {
         display: grid;
@@ -340,10 +385,13 @@
                 .rule {
 
                     .rule__header {
-                        display: flex;
-                        justify-content: space-between;
                         align-items: center;
+                        color: #757575;
+                        display: flex;
+                        font-size: 12px;
+                        justify-content: space-between;
                         margin-bottom: 8px;
+                        min-height: 24px;
 
                         button {
                             height: 24px;
@@ -357,7 +405,7 @@
 
                         .fields-container {
                             display: grid;
-                            gap: 16px;
+                            gap: 8px;
 
                             &.is-simplified {
                                 display: grid;
@@ -371,13 +419,18 @@
                             }
                         }
 
-                        .visibility-control__help {
+                        .components-base-control__help {
                             margin-top: 10px;
                             margin-bottom: 0;
                         }
 
                         .components-base-control__field {
                             margin-bottom: 0;
+                        }
+
+                        // Add a bit more space for toggles between select fields.
+                        .components-toggle-control {
+                            margin: 4px 0;
                         }
                     }
 
@@ -386,33 +439,30 @@
                     }
 
                     .components-text-control__input {
+                        border: 1px solid #1e1e1e;
+                        min-height: 40px;
                         padding: 8px;
-                        min-height: 36px;
                     }
                 }
             }
 
             .rule-set__add-rule {
-                margin: 16px 0 8px;
+                margin-top: 12px;
             }
         }
     }
 
-    .rule-sets__add-rule-set {
-        margin: 20px 0 24px;
-    }
-
-    /* Specific styles for the Date Time visibility control ------------------*/
+    /* Specific styles for the Date Time control -----------------------------*/
     .date-time-control {
 
-        .date-time-control__schedules {
+        .control-fields-item__schedules {
             display: grid;
             /* autoprefixer: ignore next */
             grid-template-columns: repeat( auto-fit, minmax( 248px, 1fr ) );
             grid-column-gap: 32px;
             grid-row-gap: 20px;
 
-            .schedules__schedule {
+            .schedules-item {
                 &.disabled {
                     .date-time-control__schedule--heading {
                         span {
@@ -421,72 +471,67 @@
                     }
                 }
 
-                .schedule__fields {
-                    &>*:last-child {
-                        margin-bottom: 0;
+                .schedules-item__fields {
+                    display: grid;
+                    gap: 16px;
+
+                    // Hide errant span element added by popovers.
+                    &> span {
+                        display: none;
                     }
-                }
 
-                .schedule__date-time-field {
-                    border-radius: 2px;
-                    border: 1px solid #757575;
-                    min-height: 36px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 10px;
-
-                    .components-button {
-                        padding: 0;
-
-                        &:first-child {
-                            margin-left: -2px;
+                    .schedules-item__fields__date-time {
+                        .control-fields-item__label {
+                            margin-bottom: 12px;
                         }
 
-                        &.is-link {
-                            color: #333;
-                            text-decoration: none;
-                            width: 100%;
+                        .date-time-item {
+                            align-items: center;
+                            display: flex;
+                            gap: 8px;
+                            margin-top: 8px;
 
-                            svg {
-                                margin: 4px 0 4px 8px;
+                            .control-fields-item__sub-label {
+                                min-width: 40px;
                             }
 
-                            span {
-                                padding: 8px;
+                            .date-time-item__field {
+                                align-items: center;
+                                border-radius: 2px;
+                                border: 1px solid #1e1e1e;
+                                min-height: 36px;
+                                display: flex;
+                                justify-content: space-between;
+                                position: relative;
+                                width: 100%;
+            
+                                .components-button {
+                                    &:first-child {
+                                        padding-right: 30px;
+                                        width: 100%;
+                                    }
+            
+                                    &.clear-date-time {
+                                        position: absolute;
+                                        right: 0;
+                                        max-height: 34px;
+                                        min-width: 24px;
+                                        padding: 2px;
+                                        margin: 5px 4px;
+                                    }
+                                }
                             }
-
-                            &:hover {
-                                color: var( --wp-admin-theme-color );
-                            }
-                        }
-
-                        &.clear-date-time {
-                            max-height: 34px;
-                            min-width: 24px;
-                            padding: 4px;
                         }
                     }
                 }
             }
         }
-
-        .date-time-control__add-schedule {
-            margin: 20px 0 24px;
-        }
     }
 
-    /* Specific styles for the User Role visibility control ----------------*/
-    .user-role-control {
-        .visibility-control__container {
-            margin-top: -10px;
-        }
-    }
-
-    /* Specific styles for the Screen Size visibility control ----------------*/
+    /* Specific styles for the Screen Size control ---------------------------*/
     .screen-size-control {
         .components-base-control {
-            margin-bottom: 18px;
+            margin-bottom: 12px;
         }
 
         .components-notice {
@@ -494,121 +539,106 @@
         }
     }
 
-    .components-notice {
-        margin: 10px 0;
+    /* Specific styles for the User Role control -----------------------------*/
+    .user-role-control {
 
-        .components-notice__content {
-            margin: 2px 0;
-
-            .visibility-control__help {
-                display: inline-block;
-                margin: 4px 0 0;
-            }
+        // Fix margin on field help text.
+        .control-fields-item > .components-base-control__help {
+            margin-top: -8px
         }
     }
 
-    /* Specific styles for the Query String visibility control ---------------*/
+    /* Specific styles for the Query String control --------------------------*/
     .query-string-control {
-        .visibility-control__help {
-            margin-bottom: 18px;
-        }
-
         textarea {
             white-space: nowrap;
         }
     }
 
-    /* Specific styles for the ACF visibility control ------------------------*/
+    /* Specific styles for the ACF control -----------------------------------*/
     .acf-control {
         .components-notice {
             margin-bottom: 20px;
+        }
+    }
+
+    .wp-fusion-control {
+        .components-disabled {
+            margin-bottom: 18px;
         }
     }
 }
 
 /* Date/Time calendar popover styles -----------------------------------------*/
 .block-visibility__date-time-popover {
+    .components-popover__content {
+        padding: 16px;
+    }
 
-    &.no-time {
-        .components-datetime__date {
-            border-top: 0;
+    .date-time-popover__header {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 16px;
+
+        h2 {
+            color: #1e1e1e;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.2;
+            margin: 0;
         }
     }
 
-    .date-time-header {
-        border-bottom: 1px solid #e0e0e0;
-        font-weight: 600;
-        padding: 16px;
-        display: flex;
-        justify-content: space-between;
+    // Backward compatibility fix for WordPress 6.0 and lower.
+    .components-datetime {
+        padding: 0
     }
 }
 
 /* Control set styles --------------------------------------------------------*/
 .block-visibility__control-popover {
-    &.control-set {
+    &.visibility-controls {
+        // Same size as core popovers. 
         .components-popover__content {
-            min-width: 260px;
-        }
-    }
-
-    &.tips>div {
-        min-width: 400px;
-        padding: 24px;
-        cursor: default;
-
-        h3 {
-            margin-top: 0;
+            min-width: 240px;
         }
 
-        h4 {
-            margin-bottom: .75em;
-        }
+        .components-menu-item__button {
+            &[aria-disabled='true'] {
+                color: #757575;
+                opacity: 1;
 
-        p {
-            margin-top: 0;
+                // Fix style bug in WordPress 6.1 and lower.
+                &:focus {
+                    box-shadow: none;
+                    outline: none;
+                }
 
-            &.learn-more {
-                border-top: 1px solid #e0e0e0;
-                padding-top: 1.25em;
-                margin-top: 2em;
-                margin-bottom: 0;
-            }
-        }
-
-        code {
-            margin-right: 8px;
-        }
-
-        ol {
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-
-        li.tip {
-            padding-left: 5px;
-            margin-bottom: 10px;
-
-            &:last-child {
-                margin-bottom: 0;
+                .components-menu-item__item {
+                    .control-branding-icon {
+                         opacity: 0.6;
+                    }
+                }
             }
 
-            &::marker {
-                font-weight: bold;
-                font-size: 14px;
-            }
-        }
-
-        .usage {
-            .components-flex {
-                margin-bottom: 1em;
+            &.has-reset {
+                .components-menu-item__item {
+                    min-width: 100%;
+                }
             }
 
-            .components-flex__item {
-                min-width: auto;
-
-                &:first-child {
-                    min-width: 100px;
+            .components-menu-item__item {
+                .control-branding-icon {
+                     opacity: 1;
+                }
+                .menu-item-reset {
+                    color: var( --wp-admin-theme-color-darker-10 );
+                    font-size: 11px;
+                    font-weight: 500;
+                    line-height: 1.4;
+                    margin-left: auto;
+                    text-transform: uppercase;
                 }
             }
         }
@@ -621,7 +651,7 @@
         h3 {
             margin-top: 0;
             margin-bottom: 18px;
-            color: #757575;
+            color: #1e1e1e;
             text-transform: uppercase;
             font-size: 11px;
             font-weight: 500;
@@ -631,6 +661,22 @@
             margin-bottom: 24px;
 
             &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &.edit-title {
+        .components-popover__content {
+            padding: 12px;
+            min-width: 240px;
+    
+            // Backward compatibility fix for WordPress 6.0 and lower.
+            &> div {
+                padding: 0;
+            }
+
+            .components-base-control__field {
                 margin-bottom: 0;
             }
         }
@@ -656,122 +702,11 @@
         .components-notice__content {
             margin: 2px 0;
 
-            .visibility-control__help {
+            .components-base-control__help {
                 display: inline-block;
                 margin: 4px 0 0;
             }
         }
-    }
-}
-
-// Bit of a hack and applies to all celendar components, should be removed at some point.
-.CalendarDay__today {
-    background: #f5f5f5;
-}
-
-/* Custom styling to make react-select components look more like WordPress. --*/
-.block-visibility__react-select {
-
-    .react-select__control {
-        border-radius: 2px;
-        border: 1px solid #757575;
-        min-height: 36px;
-
-        &:hover {
-            border: 1px solid #757575;
-        }
-
-        &:focus,
-        &.react-select__control--is-focused {
-            border-color: #007cba;
-            border-color: var(--wp-admin-theme-color);
-            box-shadow: 0 0 0 1px #007cba;
-            box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
-            outline: 2px solid transparent;
-        }
-    }
-
-    // Removes added height on cursor.
-    .react-select__value-container {
-        div:last-child {
-            padding-bottom: 0;
-            padding-top: 0;
-        }
-    }
-
-    .react-select__value-container--is-multi {
-        padding: 2px 4px;
-
-        .react-select__placeholder {
-            margin-left: 5px;
-            margin-right: 5px;
-        }
-
-        div:last-child {
-            margin: 0 2px;
-        }
-    }
-
-    .react-select__multi-value {
-        background-color: #ddd;
-
-        .react-select__multi-value__label {
-            font-size: 90%;
-            white-space: normal;
-        }
-    }
-
-    .react-select__input {
-
-        // Override core WP Editor styles.
-        &:focus {
-            box-shadow: none;
-        }
-
-        input {
-            min-height: auto;
-
-            // Override core WP Editor styles.
-            &:focus {
-                box-shadow: none;
-            }
-        }
-    }
-
-    .react-select__clear-indicator,
-    .react-select__dropdown-indicator {
-        padding: 6px;
-
-        &:hover {
-            color: #007cba;
-            color: var(--wp-admin-theme-color);
-            cursor: pointer;
-        }
-    }
-
-    .react-select__option,
-    .react-select__multi-value__remove {
-        cursor: pointer;
-    }
-
-    .react-select__option--is-focused,
-    .react-select__option--is-selected {
-        background: white;
-        color: #007cba;
-        color: var(--wp-admin-theme-color);
-    }
-
-    .react-select__option--is-selected {
-        background: #eee;
-    }
-
-    .react-select__option--is-disabled {
-        color: #cccccc !important;
-    }
-
-    // Fixes issue where editor footer is above the menu. This shifts the page up.
-    .react-select__menu {
-        margin-bottom: 50px;
     }
 }
 
@@ -789,80 +724,6 @@
     }
 }
 
-.block-visibility__tips-modal {
-    max-width: 600px !important;
-
-    h4 {
-        margin-bottom: .75em;
-    }
-
-    p {
-        margin-top: 0;
-    }
-
-    code {
-        margin-right: 8px;
-    }
-
-    ol {
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-
-    li.tip {
-        padding-left: 5px;
-        margin-bottom: 10px;
-
-        &:last-child {
-            margin-bottom: 0;
-        }
-
-        &::marker {
-            font-weight: bold;
-            font-size: 14px;
-        }
-    }
-
-    .usage {
-        border-bottom: 1px solid #e0e0e0;
-        padding-bottom: 10px;
-        margin-bottom: 20px;
-
-        .flex-table {
-            margin-top: 20px;
-        }
-
-        .components-notice {
-            margin: 0 0 10px;
-        }
-
-        .components-flex {
-            margin-bottom: 1em;
-        }
-
-        .components-flex__item {
-            min-width: auto;
-
-            &:first-child {
-                min-width: 100px;
-            }
-        }
-    }
-
-    .learn-more {
-        border-top: 1px solid #e0e0e0;
-        padding-top: 1.25em;
-        margin-top: 2em;
-        margin-bottom: 0;
-        margin: 2em -32px -24px;
-        padding: 0 32px;
-        height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-}
-
 .block-visibility__confirmation-modal {
     max-width: 400px !important;
 
@@ -876,9 +737,8 @@
 /* Specific styles for the Customizer Widgets screen -------------------------*/
 #customize-theme-controls {
 
-    .visibility-controls__container {
-
-        h3.visibility-control__group-heading {
+    .controls-panel-container {
+        h3.controls-panel-item__header {
             font-size: 13px !important;
             font-weight: 500 !important;
             margin-bottom: 16px !important;
@@ -892,76 +752,5 @@
                 margin-bottom: 8px !important;
             }
         }
-    }
-}
-
-
-/* Temporary styling until the SearchControl is included in WP core. ---------*/
-.preset-manager .components-search-control {
-	position: relative;
-
-    &.is-disabled {
-        ::placeholder {
-            opacity: .7;
-        }
-        .components-search-control__icon {
-            opacity: .3;
-        }
-    }
-
-	input[type="search"].components-search-control__input {
-		background: #f0f0f0;
-	    border: none;
-	    border-radius: 2px;
-	    box-shadow: 0 0 0 transparent;
-	    display: block;
-	    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;
-	    font-size: 16px;
-	    height: 48px;
-	    line-height: normal;
-	    padding: 16px 48px 16px 16px;
-	    transition: box-shadow .1s linear;
-	    width: 100%;
-
-		/* Fonts smaller than 16px causes mobile safari to zoom. */
-		@media ( min-width: 600px ) {
-			font-size: 13px;
-		}
-
-		&:focus {
-			background: #fff;
-			box-shadow: 0 0 0 var(--wp-admin-border-width-focus) var(--wp-admin-theme-color);
-		}
-
-		&::placeholder {
-			color: rgba(30,30,30,.62);
-		}
-
-		&::-webkit-search-decoration,
-		&::-webkit-search-cancel-button,
-		&::-webkit-search-results-button,
-		&::-webkit-search-results-decoration {
-			-webkit-appearance: none;
-		}
-	}
-
-    .components-search-control__icon {
-    	align-items: center;
-        bottom: 0;
-        display: flex;
-        position: absolute;
-        right: 12px;
-        top: 0;
-
-    	> button {
-    		margin-right: -10px;
-    	}
-    	> svg {
-    		margin: 8px 0;
-    	}
-    }
-
-    .components-search-control__input-wrapper {
-    	position: relative;
     }
 }

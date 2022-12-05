@@ -15,9 +15,10 @@ import { TextControl, Icon } from '@wordpress/components';
  * Internal dependencies
  */
 import BlockCategory from './block-category';
-import UpdateSettings from './../utils/update-settings';
-import InformationPopover from './../../utils/components/information-popover';
-import icons from './../../utils/icons';
+import UpdateSettings from './../update-settings';
+import links from './../../utils/links';
+import { InformationPopover } from './../../components';
+import { visibilityAlt, visibilityHiddenAlt } from './../../utils/icons';
 
 /**
  * Renders the Block Manager tab of the Block Visibility settings page
@@ -113,6 +114,12 @@ function BlockManager( props ) {
 		( blockType ) => ! search || isMatchingSearchTerm( blockType, search )
 	);
 
+	// Check if there are any uncategorized block types. It can happen
+	// depending on how the block was registered.
+	const uncategorizedBlockTypes = filteredBlockTypes.filter(
+		( type ) => ! type?.category
+	);
+
 	// If a plugin with custom blocks is deactivated, we want to keep the
 	// disabled blocks settings, but we should not include them in the UI
 	// of the Block Manager
@@ -126,14 +133,14 @@ function BlockManager( props ) {
 		map( allowedBlockTypes, 'name' )
 	);
 
-	let visibilityIcon = icons.visibility;
+	let visibilityIcon = visibilityAlt;
 	let visibilityMessage = __(
 		'Visibility is enabled for all blocks',
 		'block-visibility'
 	);
 
 	if ( trueDisabledBlocks.length ) {
-		visibilityIcon = icons.visibilityHidden;
+		visibilityIcon = visibilityHiddenAlt;
 		visibilityMessage = sprintf(
 			/* translators: %s: The total number of visible block types */
 			_n(
@@ -153,14 +160,14 @@ function BlockManager( props ) {
 					<span>{ __( 'Block Manager', 'block-visibility' ) }</span>
 					<InformationPopover
 						message={ __(
-							'Not every block type may need visibility controls. The Block Manager allows you to restrict visibility controls to specific block types. If you are looking for a block, and do not see it listed, you may need to enable Full Control Mode on the General Settings tab.',
+							'Only some block types may need visibility controls. The Block Manager allows you to restrict visibility controls to specific block types.',
 							'block-visibility'
 						) }
 						subMessage={ __(
-							'To learn more about the Block Manager, review the plugin documentation using the link below.',
+							'If you are looking for a block and do not see it listed, you may need to enable Full Control Mode on the General Settings tab.',
 							'block-visibility'
 						) }
-						link="https://www.blockvisibilitywp.com/knowledge-base/how-to-configure-the-block-manager/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals"
+						link={ links.settingsBlockManager }
 					/>
 				</div>
 				<UpdateSettings
@@ -200,6 +207,19 @@ function BlockManager( props ) {
 						handleBlockTypeChange={ handleBlockTypeChange }
 					/>
 				) ) }
+				{ uncategorizedBlockTypes && (
+					<BlockCategory
+						key={ 'uncategorized' }
+						category={ {
+							slug: 'uncategorized',
+							title: 'Uncategorized',
+						} }
+						blockTypes={ uncategorizedBlockTypes }
+						disabledBlocks={ disabledBlocksState }
+						handleBlockCategoryChange={ handleBlockCategoryChange }
+						handleBlockTypeChange={ handleBlockTypeChange }
+					/>
+				) }
 			</div>
 		</div>
 	);

@@ -2,13 +2,13 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { ToggleControl, Disabled, Slot } from '@wordpress/components';
+import { ToggleControl, Disabled } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import InformationPopover from './../../../utils/components/information-popover';
 import EnabledUserRoles from './enabled-user-roles';
+import { InformationPopover } from './../../../components';
 
 /**
  * Renders the permission settings.
@@ -35,7 +35,7 @@ export default function UserPermissions( props ) {
 	}
 
 	return (
-		<div className="setting-tabs__settings-panel">
+		<div className="settings-panel">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'User Permissions', 'block-visibility' ) }
@@ -58,16 +58,12 @@ export default function UserPermissions( props ) {
 					/>
 					<InformationPopover
 						message={ __(
-							'By default, all users that can edit blocks in Block Editor will be able to use the visibility settings provided by Block Visibility. You can limit permissions by user role with these settings.',
+							'By default, all users that can edit blocks will be able to use the visibility controls provided by Block Visibility.',
 							'block-visibility'
 						) }
-						link={
-							'https://www.blockvisibilitywp.com/knowledge-base/how-to-configure-the-general-settings/?bv_query=learn_more&utm_source=plugin&utm_medium=settings&utm_campaign=plugin_referrals'
-						}
 					/>
 				</div>
 				{ userRolesElement }
-				<Slot name="UserPermissionSettings" />
 			</div>
 		</div>
 	);

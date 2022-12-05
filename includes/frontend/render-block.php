@@ -163,6 +163,13 @@ function append_content_classes( $block_content, $content_classes ) {
 	// Retrieve the opening tag of the first HTML element.
 	$html_element_matches = array();
 	preg_match( '/<[^>]+>/', $block_content, $html_element_matches, PREG_OFFSET_CAPTURE );
+
+	// In the case that a block is doing something unexpected with rendering
+	// block content, and there are not HTML element matches, bail.
+	if ( empty( $html_element_matches ) ) {
+		return $block_content;
+	}
+
 	$first_element = $html_element_matches[0][0];
 
 	// If the first HTML element has a class attribute just add the new class.
