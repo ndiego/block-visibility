@@ -28,6 +28,7 @@ export default function Users( props ) {
 	const hideOnRestrictedUsers = userRole?.hideOnRestrictedUsers ?? false;
 	const currentUsersRoles = variables?.current_users_roles ?? [];
 	const isAdmin = currentUsersRoles.includes( 'administrator' ) ?? false;
+	const users = useAllUsers( isAdmin );
 
 	if ( ! isAdmin ) {
 		return (
@@ -40,7 +41,6 @@ export default function Users( props ) {
 		);
 	}
 
-	const users = useAllUsers();
 	const selectedUsers = users.filter( ( user ) =>
 		restrictedUsers.includes( user.value )
 	);

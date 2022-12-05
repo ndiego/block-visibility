@@ -32,7 +32,7 @@ export function getFieldGroups() {
  * @param {Object} variables All plugin variables available via the REST API
  * @return {string}          All fields
  */
-export function getAllFields( variables ) {
+export function GetAllFields( variables ) {
 	const users = useAllUsers();
 	let roles = variables?.user_roles ?? [];
 
@@ -133,7 +133,7 @@ export function getAllFields( variables ) {
  */
 export function getGroupedFields( variables ) {
 	const groups = getFieldGroups( variables );
-	const fields = getAllFields( variables );
+	const fields = GetAllFields( variables );
 	const groupedFields = [];
 
 	groups.forEach( ( group ) => {

@@ -8,10 +8,16 @@ import { useSelect } from '@wordpress/data';
  * Requires `list_users` capability, will fail if user is not admin.
  *
  * @since 2.5.0
+ * @param {boolean} isAdmin Is the user an administrator
  * @return {Array} All users.
  */
-export default function useAllUsers() {
+export default function useAllUsers( isAdmin = true ) {
 	const users = useSelect( ( select ) => {
+		// If a non-admin is attempting to fetch users, return an empty array.
+		if ( ! isAdmin ) {
+			return [];
+		}
+
 		const query = {
 			per_page: -1,
 			_fields: 'id,name',

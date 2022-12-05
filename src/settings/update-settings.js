@@ -55,7 +55,11 @@ export default function UpdateSettings( props ) {
 		}
 
 		let response = '';
-		response = await saveEntityRecord( 'block-visibility/v1', 'settings', record );
+		response = await saveEntityRecord(
+			'block-visibility/v1',
+			'settings',
+			record
+		);
 
 		if ( response ) {
 			setSettings( response );
