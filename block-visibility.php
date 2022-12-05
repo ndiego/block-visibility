@@ -4,7 +4,7 @@
  * Plugin URI:          https://www.blockvisibilitywp.com/
  * Description:         Provides visibility controls and scheduling functionality to all WordPress blocks.
  * Version:             2.5.0
- * Requires at least:   5.5
+ * Requires at least:   6.0
  * Requires PHP:        5.6
  * Author:              Nick Diego
  * Author URI:          https://www.nickdiego.com
