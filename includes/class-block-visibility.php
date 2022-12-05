@@ -232,15 +232,14 @@ final class Block_Visibility {
 	 */
 	public function pro_compatibility_message() {
 
-		if ( ! is_plugin_active( 'block-visibility-pro/block-visibility-pro.php' ) ) {
+		if ( ! defined( 'BVP_VERSION' ) ) {
 			return;
 		}
 
-		$pro_data             = get_plugin_data( WP_PLUGIN_DIR . '/block-visibility-pro/block-visibility-pro.php', false, false );
-		$pro_version          = $pro_data['Version'];
 		$required_pro_version = '1.6.0';
 
-		if ( $pro_version >= $required_pro_version ) {
+		// If the current version is at or above the required version, bail.
+		if ( BVP_VERSION >= $required_pro_version ) {
 			return;
 		}
 
@@ -251,9 +250,10 @@ final class Block_Visibility {
 				'block-visibility-pro'
 			),
 			$required_pro_version,
-			$pro_version,
+			BVP_VERSION,
 			BLOCK_VISIBILITY_VERSION
 		);
+		
 		?>
 		<div class="notice notice-error">
 			<p><?php echo esc_html( $message ); ?></p>
