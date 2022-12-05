@@ -109,8 +109,8 @@ function enqueue_settings_assets() {
 
 		// Front-end script.
 		if ( ! empty( $block_type->editor_script_handles ) ) {
-			
-			foreach( $block_type->editor_script_handles as $handle ) {
+
+			foreach ( $block_type->editor_script_handles as $handle ) {
 				wp_enqueue_script( $handle );
 			}
 		}

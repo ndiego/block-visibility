@@ -252,7 +252,7 @@ final class Block_Visibility {
 			),
 			$required_pro_version,
 			$pro_version,
-			BLOCK_VISIBILITY_VERSION,
+			BLOCK_VISIBILITY_VERSION
 		);
 		?>
 		<div class="notice notice-error">

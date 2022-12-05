@@ -90,7 +90,7 @@ class Block_Visibility_REST_Settings_Controller extends WP_REST_Controller {
 		$settings = $request->get_params();
 
 		// The locale is often appended to the request. We don't need this.
-		unset( $settings[ '_locale' ] );
+		unset( $settings['_locale'] );
 
 		$error_message = __( 'Something went wrong, the settings could not be updated.', 'block-visibility' );
 
