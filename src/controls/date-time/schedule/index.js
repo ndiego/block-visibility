@@ -247,21 +247,22 @@ export default function Schedule( props ) {
 						) }
 					</Notice>
 				) }
+
+				{ pickerOpen && pickerType && (
+					<CalendarPopover
+						currentDate={ pickerType === 'start' ? start : end }
+						label={
+							pickerType === 'start'
+								? __( 'Start Date/Time', 'block-visibility' )
+								: __( 'End Date/Time', 'block-visibility' )
+						}
+						isOpen={ setPickerOpen }
+						setAttribute={ setAttribute }
+						setPickerOpen={ setPickerOpen }
+						pickerType={ pickerType }
+					/>
+				) }
 			</div>
-			{ pickerOpen && pickerType && (
-				<CalendarPopover
-					currentDate={ pickerType === 'start' ? start : end }
-					label={
-						pickerType === 'start'
-							? __( 'Start Date/Time', 'block-visibility' )
-							: __( 'End Date/Time', 'block-visibility' )
-					}
-					isOpen={ setPickerOpen }
-					setAttribute={ setAttribute }
-					setPickerOpen={ setPickerOpen }
-					pickerType={ pickerType }
-				/>
-			) }
 
 			<Slot name={ 'DateTimeScheduleControlsBottom-' + uniqueIndex } />
 		</div>
