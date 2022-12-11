@@ -103,8 +103,27 @@ function enqueue_editor_styles() {
 		$block_opacity = get_plugin_setting( 'block_opacity' );
 
 		if ( $block_opacity ) {
-			$opacity      = intval( $block_opacity ) * 0.01;
-			$inline_style = '.block-visibility__has-visibility:not(.is-selected):not(.has-child-selected) > *:not(.wp-block-cover__background) { opacity: ' . $opacity . ' }';
+			$opacity = intval( $block_opacity ) * 0.01;
+
+			// Not all blocks can support contextual opacity.
+			$excluded_blocks = array( 
+				'paragraph',
+				'heading',
+				'verse'
+			);
+
+			$excluded_blocks = apply_filters( 
+				'block_visibility_exclude_blocks_from_contextual_opacity', 
+				$excluded_blocks 
+			);
+
+			$excluded_blocks_selectors = '';
+
+			foreach ( $excluded_blocks as $block ) {
+				$excluded_blocks_selectors .= ':not(.wp-block-' . $block . ')';
+			}
+
+			$inline_style = '.block-visibility__has-visibility:not(.is-selected):not(.has-child-selected)' . $excluded_blocks_selectors . ' > *:not(.wp-block-cover__background) { opacity: ' . $opacity . ' }';
 
 			wp_add_inline_style(
 				'block-visibility-editor-styles',
