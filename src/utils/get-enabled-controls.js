@@ -75,9 +75,7 @@ export function getControls() {
 	controls = applyFilters( 'blockVisibility.integrationControls', controls );
 
 	// Sort controls in ASC order.
-	controls.sort( ( a, b ) =>
-		a.label.localeCompare( b.label )
-	);
+	controls.sort( ( a, b ) => a.label.localeCompare( b.label ) );
 
 	return controls;
 }
