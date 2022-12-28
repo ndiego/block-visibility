@@ -24,31 +24,26 @@ export function getControls() {
 	const coreControls = [
 		{
 			label: __( 'Hide Block', 'block-visibility' ),
-			type: 'core',
 			attributeSlug: 'hideBlock',
 			settingSlug: 'hide_block',
 		},
 		{
 			label: __( 'Date & Time', 'block-visibility' ),
-			type: 'core',
 			attributeSlug: 'dateTime',
 			settingSlug: 'date_time',
 		},
 		{
 			label: __( 'User Role', 'block-visibility' ),
-			type: 'core',
 			attributeSlug: 'userRole',
 			settingSlug: 'visibility_by_role',
 		},
 		{
 			label: __( 'Screen Size', 'block-visibility' ),
-			type: 'core',
 			attributeSlug: 'screenSize',
 			settingSlug: 'screen_size',
 		},
 		{
 			label: __( 'Query String', 'block-visibility' ),
-			type: 'core',
 			attributeSlug: 'queryString',
 			settingSlug: 'query_string',
 		},
