@@ -78,7 +78,7 @@ function withContextualIndicators( BlockListBlock ) {
 			}
 		}
 
-		let activeCoreControls = {
+		let activeControls = {
 			'date-time': hasDateTime(
 				controls,
 				hasControlSets,
@@ -100,19 +100,6 @@ function withContextualIndicators( BlockListBlock ) {
 				hasControlSets,
 				enabledControls
 			),
-		};
-
-		activeCoreControls = applyFilters(
-			'blockVisibility.conditionalIndicatorActiveCoreControls',
-			activeCoreControls,
-			blockVisibility,
-			controls,
-			hasControlSets,
-			enabledControls,
-			variables
-		);
-
-		let activeIntegrationControls = {
 			acf: hasACF( controls, hasControlSets, enabledControls, variables ),
 			'wp-fusion': hasWPFusion(
 				controls,
@@ -122,19 +109,26 @@ function withContextualIndicators( BlockListBlock ) {
 			),
 		};
 
-		activeIntegrationControls = applyFilters(
-			'blockVisibility.conditionalIndicatorActiveIntegrationControls',
-			activeIntegrationControls,
+		activeControls = applyFilters(
+			'blockVisibility.contextualIndicatorActiveControls',
+			activeControls,
+			blockVisibility,
 			controls,
 			hasControlSets,
 			enabledControls,
 			variables
 		);
 
-		let activeControls = {
-			...activeCoreControls,
-			...activeIntegrationControls,
-		};
+		// Deprecated filter as of v2.5.1, use contextualIndicatorActiveControls instead.
+		activeControls = applyFilters(
+			'blockVisibility.conditionalIndicatorActiveCoreControls',
+			activeControls,
+			blockVisibility,
+			controls,
+			hasControlSets,
+			enabledControls,
+			variables
+		);
 
 		activeControls = Object.keys( activeControls ).filter(
 			( control ) => activeControls[ control ] === true
@@ -178,6 +172,12 @@ function withContextualIndicators( BlockListBlock ) {
 			classes = classes + ' block-visibility__has-visibility';
 		}
 
+		classes = applyFilters(
+			'blockVisibility.contextualIndicatorClasses',
+			classes
+		);
+
+		// Deprecated filter as of v2.5.1, use contextualIndicatorClasses instead.
 		classes = applyFilters(
 			'blockVisibility.conditionalIndicatorClasses',
 			classes
