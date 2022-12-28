@@ -21,7 +21,7 @@ import { acf, wpFusion } from './icons';
  * @return {Object} Return the available controls
  */
 export function getControls() {
-	let coreControls = [
+	const coreControls = [
 		{
 			label: __( 'Hide Block', 'block-visibility' ),
 			type: 'core',
@@ -54,14 +54,7 @@ export function getControls() {
 		},
 	];
 
-	coreControls = applyFilters( 'blockVisibility.coreControls', coreControls );
-
-	// Sort controls in ASC order.
-	coreControls.sort( ( a, b ) =>
-		a.attributeSlug.localeCompare( b.attributeSlug )
-	);
-
-	let integrationControls = [
+	const integrationControls = [
 		{
 			label: __( 'Advanced Custom Fields', 'block-visibility' ),
 			type: 'integration',
@@ -78,19 +71,18 @@ export function getControls() {
 		},
 	];
 
-	integrationControls = applyFilters(
-		'blockVisibility.integrationControls',
-		integrationControls
-	);
-
-	// Sort controls in ASC order.
-	integrationControls.sort( ( a, b ) =>
-		a.attributeSlug.localeCompare( b.attributeSlug )
-	);
-
 	let controls = [ ...coreControls, ...integrationControls ];
 
 	controls = applyFilters( 'blockVisibility.controls', controls );
+
+	// Deprecated filters as of v2.5.1, use blockVisibility.controls instead.
+	controls = applyFilters( 'blockVisibility.coreControls', controls );
+	controls = applyFilters( 'blockVisibility.integrationControls', controls );
+
+	// Sort controls in ASC order.
+	controls.sort( ( a, b ) =>
+		a.label.localeCompare( b.label )
+	);
 
 	return controls;
 }
