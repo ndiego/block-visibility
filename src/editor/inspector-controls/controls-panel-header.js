@@ -294,7 +294,7 @@ function ControlMenuItem( props ) {
 			icon={ control.isActive && check }
 			label={ sprintf(
 				// translators: %s: The name of the control being toggled e.g. "Hide Block".
-				__( 'Toggle %s' ),
+				__( 'Toggle %s', 'block-visibility' ),
 				control.label
 			) }
 			onClick={ () => {
@@ -302,7 +302,7 @@ function ControlMenuItem( props ) {
 				speak(
 					sprintf(
 						// translators: %s: The name of the control being toggled e.g. "Hide Block".
-						__( '%s toggled' ),
+						__( '%s toggled', 'block-visibility' ),
 						control.label
 					),
 					'assertive'
@@ -335,7 +335,7 @@ function DefaultControlMenuItem( props ) {
 				className="has-reset"
 				label={ sprintf(
 					// translators: %s: The name of the control being reset e.g. "Hide Block".
-					__( 'Reset %s' ),
+					__( 'Reset %s', 'block-visibility' ),
 					control.label
 				) }
 				onClick={ () => {
@@ -343,7 +343,7 @@ function DefaultControlMenuItem( props ) {
 					speak(
 						sprintf(
 							// translators: %s: The name of the control being reset e.g. "Hide Block".
-							__( '%s reset to default' ),
+							__( '%s reset to default', 'block-visibility' ),
 							control.label
 						),
 						'assertive'
