@@ -612,7 +612,7 @@
         }
 
         .components-menu-item__button {
-            &[aria-disabled='true'] {
+            &[aria-disabled='true']:not(.is-tertiary) {
                 color: #757575;
                 opacity: 1;
 
