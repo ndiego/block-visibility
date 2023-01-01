@@ -282,7 +282,10 @@ export default function Schedule( props ) {
 							}
 							label={
 								pickerType === 'start'
-									? __( 'Start Date/Time', 'block-visibility' )
+									? __(
+											'Start Date/Time',
+											'block-visibility'
+									  )
 									: __( 'End Date/Time', 'block-visibility' )
 							}
 							isOpen={ setPickerOpen }

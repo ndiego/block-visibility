@@ -34,7 +34,7 @@ export default function CalendarPopover( props ) {
 			className="block-visibility__date-time-popover"
 			focusOnMount={ true }
 			onClose={ () => setPickerOpen( false ) }
-			placement='left-start'
+			placement="left-start"
 			offset={ 8 }
 		>
 			<div className="date-time-popover__header">
