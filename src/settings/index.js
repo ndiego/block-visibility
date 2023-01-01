@@ -46,6 +46,9 @@ dispatch( 'core' ).addEntities( [
 		kind: 'block-visibility/v1',
 		name: 'variables',
 		baseURL: '/block-visibility/v1/variables',
+		baseURLParams: {
+			type: 'simplified',
+		},
 	},
 ] );
 
