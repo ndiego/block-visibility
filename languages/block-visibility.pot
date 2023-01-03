@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-01-01T21:52:25+00:00\n"
+"POT-Creation-Date: 2023-01-03T21:45:54+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: block-visibility\n"
@@ -17,10 +17,7 @@ msgstr ""
 #. Plugin Name of the plugin
 #: includes/admin/settings.php:31
 #: includes/admin/settings.php:32
-#: build/block-visibility-settings.js:3692
-#: build/block-visibility-settings.js:4024
-#: build/block-visibility-settings.js:3375
-#: build/block-visibility-settings.js:3706
+#: build/block-visibility-settings.js:1
 msgid "Block Visibility"
 msgstr ""
 
@@ -45,10 +42,8 @@ msgid "Upgrade to Block Visibility Pro."
 msgstr ""
 
 #: includes/admin/plugin-action-links.php:30
-#: build/block-visibility-settings.js:4251
-#: build/block-visibility-settings.js:5033
-#: build/block-visibility-settings.js:3976
-#: build/block-visibility-settings.js:4677
+#: build/block-visibility-settings.js:1
+#: build/block-visibility-settings.js:16
 msgid "Get Pro"
 msgstr ""
 
@@ -105,1584 +100,1195 @@ msgstr ""
 msgid "None (Logged-out users)"
 msgstr ""
 
-#: build/block-visibility-editor.js:2268
-#: build/block-visibility-settings.js:2359
-#: build/block-visibility-editor.js:1902
-#: build/block-visibility-settings.js:1948
-msgid "Select Date and Time…"
-msgstr ""
-
-#: build/block-visibility-editor.js:2268
-#: build/block-visibility-settings.js:2359
-#: build/block-visibility-editor.js:1903
-#: build/block-visibility-settings.js:1949
-msgid "Select Date…"
-msgstr ""
-
-#: build/block-visibility-editor.js:2281
-#: build/block-visibility-settings.js:2372
-#: build/block-visibility-editor.js:1924
-#: build/block-visibility-settings.js:1970
-msgid "Select date/time"
-msgstr ""
-
-#: build/block-visibility-editor.js:2287
-#: build/block-visibility-editor.js:3699
-#: build/block-visibility-settings.js:2378
-#: build/block-visibility-editor.js:1934
-#: build/block-visibility-editor.js:3407
-#: build/block-visibility-settings.js:1980
-msgid "Clear date/time"
-msgstr ""
-
-#: build/block-visibility-editor.js:2418
-#: build/block-visibility-settings.js:2509
-#: build/block-visibility-editor.js:2009
-#: build/block-visibility-settings.js:2055
-msgid "More Information"
-msgstr ""
-
-#: build/block-visibility-editor.js:2431
-#: build/block-visibility-settings.js:2522
-#: build/block-visibility-editor.js:2027
-#: build/block-visibility-settings.js:2073
-msgid "Learn More"
-msgstr ""
-
-#: build/block-visibility-editor.js:2499
-#: build/block-visibility-editor.js:2562
-#: build/block-visibility-settings.js:2590
-#: build/block-visibility-settings.js:2653
-#: build/block-visibility-editor.js:2081
-#: build/block-visibility-editor.js:2150
-#: build/block-visibility-settings.js:2127
-#: build/block-visibility-settings.js:2196
-msgid "Rule Set"
-msgstr ""
-
-#: build/block-visibility-editor.js:2553
-#: build/block-visibility-editor.js:3893
-#: build/block-visibility-settings.js:2644
-#: build/block-visibility-editor.js:2139
-#: build/block-visibility-editor.js:3593
-#: build/block-visibility-settings.js:2185
-msgid "Edit"
-msgstr ""
-
-#: build/block-visibility-editor.js:2561
-#: build/block-visibility-settings.js:2652
-#: build/block-visibility-editor.js:2149
-#: build/block-visibility-settings.js:2195
-msgid "Rule set title"
-msgstr ""
-
-#: build/block-visibility-editor.js:2565
-#: build/block-visibility-settings.js:2656
-#: build/block-visibility-editor.js:2159
-#: build/block-visibility-settings.js:2205
-msgid "Clear rule set"
-msgstr ""
-
-#: build/block-visibility-editor.js:2565
-#: build/block-visibility-settings.js:2656
-#: build/block-visibility-editor.js:2160
-#: build/block-visibility-settings.js:2206
-msgid "Remove rule set"
-msgstr ""
-
-#: build/block-visibility-editor.js:2568
-#: build/block-visibility-editor.js:3911
-#: build/block-visibility-settings.js:2659
-#: build/block-visibility-editor.js:2165
-#: build/block-visibility-editor.js:3620
-#: build/block-visibility-settings.js:2211
-msgid "Options"
-msgstr ""
-
-#: build/block-visibility-editor.js:2580
-#: build/block-visibility-editor.js:3923
-#: build/block-visibility-settings.js:2671
-#: build/block-visibility-editor.js:2173
-#: build/block-visibility-editor.js:3628
-#: build/block-visibility-settings.js:2219
-msgid "Tools"
-msgstr ""
-
-#: build/block-visibility-editor.js:2585
-#: build/block-visibility-editor.js:3928
-#: build/block-visibility-settings.js:2676
-#: build/block-visibility-editor.js:2179
-#: build/block-visibility-editor.js:3634
-#: build/block-visibility-settings.js:2225
-msgid "Disable"
-msgstr ""
-
-#: build/block-visibility-editor.js:2585
-#: build/block-visibility-editor.js:3928
-#: build/block-visibility-settings.js:2676
-#: build/block-visibility-editor.js:2180
-#: build/block-visibility-editor.js:3635
-#: build/block-visibility-settings.js:2226
-msgid "Enable"
-msgstr ""
-
-#: build/block-visibility-editor.js:2591
-#: build/block-visibility-editor.js:3933
-#: build/block-visibility-settings.js:2682
-#: build/block-visibility-editor.js:2189
-#: build/block-visibility-editor.js:3643
-#: build/block-visibility-settings.js:2235
-msgid "Duplicate"
-msgstr ""
-
-#: build/block-visibility-editor.js:2620
-#: build/block-visibility-settings.js:2711
-#: build/block-visibility-editor.js:2231
-#: build/block-visibility-settings.js:2277
-msgid "Add rule"
-msgstr ""
-
-#: build/block-visibility-editor.js:2753
-#: build/block-visibility-settings.js:2844
-#: build/block-visibility-editor.js:2363
-#: build/block-visibility-settings.js:2409
-msgid "Select…"
-msgstr ""
-
-#. Translators: Whether the block is hidden or visible.
-#: build/block-visibility-editor.js:2890
-#: build/block-visibility-settings.js:2981
-#: build/block-visibility-editor.js:2528
-#: build/block-visibility-settings.js:2574
-msgid "%s the block if"
-msgstr ""
-
-#. Translators: Whether the block is hidden or visible.
-#: build/block-visibility-editor.js:2890
-#: build/block-visibility-editor.js:3392
-#: build/block-visibility-editor.js:3536
-#: build/block-visibility-editor.js:3954
-#: build/block-visibility-editor.js:4941
-#: build/block-visibility-settings.js:2981
-#: build/block-visibility-editor.js:2530
-#: build/block-visibility-editor.js:3103
-#: build/block-visibility-editor.js:3261
-#: build/block-visibility-editor.js:3676
-#: build/block-visibility-editor.js:4812
-#: build/block-visibility-settings.js:2576
-msgid "Hide"
-msgstr ""
-
-#: build/block-visibility-editor.js:2890
-#: build/block-visibility-editor.js:3392
-#: build/block-visibility-editor.js:3536
-#: build/block-visibility-editor.js:3954
-#: build/block-visibility-editor.js:4941
-#: build/block-visibility-settings.js:2981
-#: build/block-visibility-editor.js:2531
-#: build/block-visibility-editor.js:3104
-#: build/block-visibility-editor.js:3262
-#: build/block-visibility-editor.js:3677
-#: build/block-visibility-editor.js:4813
-#: build/block-visibility-settings.js:2577
-msgid "Show"
-msgstr ""
-
-#: build/block-visibility-editor.js:2892
-#: build/block-visibility-settings.js:2983
-#: build/block-visibility-editor.js:2535
-#: build/block-visibility-settings.js:2581
-msgid "And if"
-msgstr ""
-
-#: build/block-visibility-editor.js:2972
-#: build/block-visibility-settings.js:3063
-#: build/block-visibility-editor.js:2621
-#: build/block-visibility-settings.js:2667
-msgid "Remove Rule"
-msgstr ""
-
-#: build/block-visibility-editor.js:2986
-#: build/block-visibility-settings.js:3077
-#: build/block-visibility-editor.js:2640
-#: build/block-visibility-settings.js:2686
-msgid "Select Rule…"
-msgstr ""
-
-#: build/block-visibility-editor.js:3157
-#: build/block-visibility-editor.js:2846
-msgid "Has any value"
-msgstr ""
-
-#: build/block-visibility-editor.js:3161
-#: build/block-visibility-editor.js:2851
-msgid "Has no value"
-msgstr ""
-
-#: build/block-visibility-editor.js:3165
-#: build/block-visibility-editor.js:2856
-msgid "Value is equal to"
-msgstr ""
-
-#: build/block-visibility-editor.js:3168
-#: build/block-visibility-editor.js:2860
-msgid "Value is not equal to"
-msgstr ""
-
-#: build/block-visibility-editor.js:3171
-#: build/block-visibility-editor.js:2864
-msgid "Value contains"
-msgstr ""
-
-#: build/block-visibility-editor.js:3174
-#: build/block-visibility-editor.js:2868
-msgid "Value does not contain"
-msgstr ""
-
-#: build/block-visibility-editor.js:3194
-#: build/block-visibility-editor.js:2891
-msgid "Evaluate as user field"
-msgstr ""
-
-#: build/block-visibility-editor.js:3199
-#: build/block-visibility-editor.js:4487
-#: build/block-visibility-editor.js:2900
-#: build/block-visibility-editor.js:4293
-msgid "Select Condition…"
-msgstr ""
-
-#: build/block-visibility-editor.js:3203
-#: build/block-visibility-editor.js:2908
-msgid "Enter Value…"
-msgstr ""
-
-#: build/block-visibility-editor.js:3377
-#: build/block-visibility-editor.js:7308
-#: build/block-visibility-settings.js:4909
-#: build/block-visibility-settings.js:6464
-#: build/block-visibility-editor.js:3073
-#: build/block-visibility-editor.js:7418
-#: build/block-visibility-settings.js:4559
-#: build/block-visibility-settings.js:6164
-msgid "Advanced Custom Fields"
-msgstr ""
-
-#: build/block-visibility-editor.js:3378
-#: build/block-visibility-editor.js:3077
-msgid "The Advanced Custom Fields (ACF) control allows you to configure block visibility based on various field-related rules, which form rule sets."
-msgstr ""
-
-#: build/block-visibility-editor.js:3386
-#: build/block-visibility-editor.js:4723
-#: build/block-visibility-editor.js:3089
-#: build/block-visibility-editor.js:4570
-msgid "Add rule set"
-msgstr ""
-
-#. Translators: Whether the block is hidden or visible.
-#: build/block-visibility-editor.js:3392
-#: build/block-visibility-editor.js:3098
-msgid "%s the block if at least one rule set applies. Rules targeting user fields will fail if the current user is not logged in."
-msgstr ""
-
-#: build/block-visibility-editor.js:3397
-#: build/block-visibility-editor.js:3111
-msgid "It does not appear that your website contains any published fields yet."
-msgstr ""
-
-#: build/block-visibility-editor.js:3410
-#: build/block-visibility-editor.js:3130
-msgid "Select Field…"
-msgstr ""
-
-#: build/block-visibility-editor.js:3415
-#: build/block-visibility-editor.js:4958
-#: build/block-visibility-editor.js:3141
-#: build/block-visibility-editor.js:4837
-msgid "Hide when rules apply"
-msgstr ""
-
-#: build/block-visibility-editor.js:3521
-#: build/block-visibility-editor.js:7291
-#: build/block-visibility-settings.js:5002
-#: build/block-visibility-settings.js:6447
-#: build/block-visibility-editor.js:3232
-#: build/block-visibility-editor.js:7395
-#: build/block-visibility-settings.js:4633
-#: build/block-visibility-settings.js:6141
-msgid "Date & Time"
-msgstr ""
-
-#: build/block-visibility-editor.js:3522
-#: build/block-visibility-editor.js:3235
-msgid "The Date & Time control allows you to schedule when the block should be visible."
-msgstr ""
-
-#: build/block-visibility-editor.js:3530
-#: build/block-visibility-editor.js:3247
-msgid "Add schedule"
-msgstr ""
-
-#. Translators: Whether the block is hidden or visible.
-#: build/block-visibility-editor.js:3536
-#: build/block-visibility-editor.js:3256
-msgid "%s the block if at least one schedule applies."
-msgstr ""
-
-#: build/block-visibility-editor.js:3554
-#: build/block-visibility-editor.js:3285
-msgid "Hide when schedules apply"
-msgstr ""
-
-#: build/block-visibility-editor.js:3628
-#: build/block-visibility-editor.js:3348
-msgid "Close"
-msgstr ""
-
-#: build/block-visibility-editor.js:3828
-#: build/block-visibility-editor.js:3905
-#: build/block-visibility-editor.js:3511
-#: build/block-visibility-editor.js:3605
-msgid "Schedule"
-msgstr ""
-
-#: build/block-visibility-editor.js:3829
-#: build/block-visibility-editor.js:3514
-msgid "Now"
-msgstr ""
-
-#: build/block-visibility-editor.js:3830
-#: build/block-visibility-editor.js:3518
-msgid "Forever"
-msgstr ""
-
-#: build/block-visibility-editor.js:3904
-#: build/block-visibility-editor.js:3604
-msgid "Schedule title"
-msgstr ""
-
-#: build/block-visibility-editor.js:3908
-#: build/block-visibility-editor.js:3614
-msgid "Clear schedule"
-msgstr ""
-
-#: build/block-visibility-editor.js:3908
-#: build/block-visibility-editor.js:3615
-msgid "Remove schedule"
-msgstr ""
-
-#. Translators: Whether the block is hidden or visible.
-#: build/block-visibility-editor.js:3954
-#: build/block-visibility-editor.js:3674
-msgid "%s the block"
-msgstr ""
-
-#: build/block-visibility-editor.js:3960
-#: build/block-visibility-editor.js:3683
-msgid "From"
-msgstr ""
-
-#: build/block-visibility-editor.js:3962
-#: build/block-visibility-editor.js:3687
-msgid "Choose a start date/time"
-msgstr ""
-
-#: build/block-visibility-editor.js:3972
-#: build/block-visibility-editor.js:3700
-msgid "To"
-msgstr ""
-
-#: build/block-visibility-editor.js:3974
-#: build/block-visibility-editor.js:3704
-msgid "Choose a end date/time"
-msgstr ""
-
-#: build/block-visibility-editor.js:3982
-#: build/block-visibility-editor.js:3724
-msgid "Start Date/Time"
-msgstr ""
-
-#: build/block-visibility-editor.js:3982
-#: build/block-visibility-editor.js:3725
-msgid "End Date/Time"
-msgstr ""
-
-#: build/block-visibility-editor.js:3990
-#: build/block-visibility-editor.js:3736
-msgid "The start time is after the stop time. Please fix for date/time settings to function properly."
-msgstr ""
-
-#: build/block-visibility-editor.js:4082
-#: build/block-visibility-editor.js:7287
-#: build/block-visibility-settings.js:5259
-#: build/block-visibility-settings.js:6443
-#: build/block-visibility-editor.js:3822
-#: build/block-visibility-editor.js:7390
-#: build/block-visibility-settings.js:4881
-#: build/block-visibility-settings.js:6136
+#: build/block-visibility-editor.js:1
+#: build/block-visibility-editor.js:21
+#: build/block-visibility-settings.js:1
 msgid "Hide Block"
 msgstr ""
 
-#: build/block-visibility-editor.js:4083
-#: build/block-visibility-editor.js:3825
-msgid "The Hide Block control overrides all other visibility controls when enabled."
+#: build/block-visibility-editor.js:1
+#: build/block-visibility-editor.js:19
+#: build/block-visibility-settings.js:1
+msgid "Date & Time"
 msgstr ""
 
-#: build/block-visibility-editor.js:4089
-#: build/block-visibility-editor.js:3836
-msgid "Hide the block from everyone"
-msgstr ""
-
-#: build/block-visibility-editor.js:4212
-#: build/block-visibility-editor.js:7303
-#: build/block-visibility-settings.js:5553
-#: build/block-visibility-settings.js:6459
-#: build/block-visibility-editor.js:3920
-#: build/block-visibility-editor.js:7410
-#: build/block-visibility-settings.js:5145
-#: build/block-visibility-settings.js:6156
-msgid "Query String"
-msgstr ""
-
-#: build/block-visibility-editor.js:4213
-#: build/block-visibility-editor.js:3923
-msgid "The Query String control allows you to configure block visibility based on URL query strings."
-msgstr ""
-
-#: build/block-visibility-editor.js:4218
-#: build/block-visibility-editor.js:3933
-msgid "Enter one URL query string per line."
-msgstr ""
-
-#: build/block-visibility-editor.js:4221
-#: build/block-visibility-editor.js:3941
-msgid "Required Queries <span>(Any)</span>"
-msgstr ""
-
-#: build/block-visibility-editor.js:4226
-#: build/block-visibility-editor.js:3953
-msgid "Show the block if at least one of the provided URL query strings is present."
-msgstr ""
-
-#: build/block-visibility-editor.js:4231
-#: build/block-visibility-editor.js:3966
-msgid "Required Queries <span>(All)</span>"
-msgstr ""
-
-#: build/block-visibility-editor.js:4236
-#: build/block-visibility-editor.js:3979
-msgid "Show the block if <strong>all</strong> of the provided URL query strings are present."
-msgstr ""
-
-#: build/block-visibility-editor.js:4243
-#: build/block-visibility-editor.js:3996
-msgid "Required Queries <span>(Not)</span>"
-msgstr ""
-
-#: build/block-visibility-editor.js:4248
-#: build/block-visibility-editor.js:4008
-msgid "Hide the block if at least one of the provided URL query strings is present."
-msgstr ""
-
-#: build/block-visibility-editor.js:4354
-#: build/block-visibility-editor.js:4115
-msgid "Hide on large desktop"
-msgstr ""
-
-#: build/block-visibility-editor.js:4360
-#: build/block-visibility-editor.js:4124
-msgid "Hide on desktop"
-msgstr ""
-
-#: build/block-visibility-editor.js:4366
-#: build/block-visibility-editor.js:4133
-msgid "Hide on tablet"
-msgstr ""
-
-#: build/block-visibility-editor.js:4372
-#: build/block-visibility-editor.js:4144
-msgid "Hide on mobile"
-msgstr ""
-
-#: build/block-visibility-editor.js:4372
-#: build/block-visibility-editor.js:4146
-msgid "Hide on mobile (landscape)"
-msgstr ""
-
-#: build/block-visibility-editor.js:4378
-#: build/block-visibility-editor.js:4159
-msgid "Hide on mobile (portrait)"
-msgstr ""
-
-#: build/block-visibility-editor.js:4395
-#: build/block-visibility-editor.js:7299
-#: build/block-visibility-settings.js:5816
-#: build/block-visibility-settings.js:6455
-#: build/block-visibility-editor.js:4187
-#: build/block-visibility-editor.js:7405
-#: build/block-visibility-settings.js:5425
-#: build/block-visibility-settings.js:6151
-msgid "Screen Size"
-msgstr ""
-
-#: build/block-visibility-editor.js:4396
-#: build/block-visibility-editor.js:4190
-msgid "The Screen Size control allows you to configure block visibility based on the width of the current screen."
-msgstr ""
-
-#: build/block-visibility-editor.js:4404
-#: build/block-visibility-editor.js:4204
-msgid "The Screen Size control is unfortunately not compatible with this block type. For more information and a workaround, visit the <a>Knowledge Base</a>."
-msgstr ""
-
-#: build/block-visibility-editor.js:4451
-#: build/block-visibility-editor.js:4246
-msgid "User Rule Type"
-msgstr ""
-
-#: build/block-visibility-editor.js:4472
-#: build/block-visibility-editor.js:4270
-msgid "Is any of the selected"
-msgstr ""
-
-#: build/block-visibility-editor.js:4475
-#: build/block-visibility-editor.js:4485
-#: build/block-visibility-editor.js:4274
-#: build/block-visibility-editor.js:4289
-msgid "Is none of the selected"
-msgstr ""
-
-#: build/block-visibility-editor.js:4479
-#: build/block-visibility-editor.js:4281
-msgid "Is at least one of the selected"
-msgstr ""
-
-#: build/block-visibility-editor.js:4482
-#: build/block-visibility-editor.js:4285
-msgid "Is all of the selected"
-msgstr ""
-
-#: build/block-visibility-editor.js:4490
-#: build/block-visibility-editor.js:4298
-msgid "User is logged-out"
-msgstr ""
-
-#: build/block-visibility-editor.js:4494
-#: build/block-visibility-editor.js:4303
-msgid "User is logged-in"
-msgstr ""
-
-#: build/block-visibility-editor.js:4498
-#: build/block-visibility-editor.js:4308
-msgid "User's role"
-msgstr ""
-
-#: build/block-visibility-editor.js:4509
-#: build/block-visibility-editor.js:4321
-msgid "Select User Roles…"
-msgstr ""
-
-#: build/block-visibility-editor.js:4514
-#: build/block-visibility-editor.js:4328
-msgid "User"
-msgstr ""
-
-#: build/block-visibility-editor.js:4525
-#: build/block-visibility-editor.js:5061
-#: build/block-visibility-editor.js:4341
-#: build/block-visibility-editor.js:4945
-msgid "Select Users…"
-msgstr ""
-
-#: build/block-visibility-editor.js:4642
-#: build/block-visibility-editor.js:4453
-msgid "Public"
-msgstr ""
-
-#: build/block-visibility-editor.js:4645
-#: build/block-visibility-editor.js:4457
-msgid "Logged-out"
-msgstr ""
-
-#: build/block-visibility-editor.js:4648
-#: build/block-visibility-editor.js:4461
-msgid "Logged-in"
-msgstr ""
-
-#: build/block-visibility-editor.js:4651
-#: build/block-visibility-editor.js:4465
-msgid "User roles"
-msgstr ""
-
-#: build/block-visibility-editor.js:4654
-#: build/block-visibility-editor.js:4469
-msgid "Users"
-msgstr ""
-
-#: build/block-visibility-editor.js:4657
-#: build/block-visibility-editor.js:4473
-msgid "User rule sets"
-msgstr ""
-
-#: build/block-visibility-editor.js:4661
-#: build/block-visibility-editor.js:4480
-msgid "Block is visible to everyone."
-msgstr ""
-
-#: build/block-visibility-editor.js:4664
-#: build/block-visibility-editor.js:4484
-msgid "Block is only visible to logged-out users."
-msgstr ""
-
-#: build/block-visibility-editor.js:4667
-#: build/block-visibility-editor.js:4491
-msgid "Block is only visible to logged-in users."
-msgstr ""
-
-#: build/block-visibility-editor.js:4714
-#: build/block-visibility-editor.js:7295
-#: build/block-visibility-settings.js:6269
-#: build/block-visibility-settings.js:6451
-#: build/block-visibility-editor.js:4554
-#: build/block-visibility-editor.js:7400
-#: build/block-visibility-settings.js:5975
-#: build/block-visibility-settings.js:6146
+#: build/block-visibility-editor.js:1
+#: build/block-visibility-editor.js:27
+#: build/block-visibility-settings.js:1
 msgid "User Role"
 msgstr ""
 
-#: build/block-visibility-editor.js:4715
-#: build/block-visibility-editor.js:4557
-msgid "The User Role control allows you to configure block visibility based on the current user's role or specific users."
+#: build/block-visibility-editor.js:1
+#: build/block-visibility-editor.js:21
+#: build/block-visibility-settings.js:1
+#: build/block-visibility-settings.js:15
+msgid "Screen Size"
 msgstr ""
 
-#: build/block-visibility-editor.js:4760
-#: build/block-visibility-editor.js:4633
-msgid "The previously selected User Role option has been disabled. Choose another option or update the <a>Visibility Control</a> settings."
+#: build/block-visibility-editor.js:1
+#: build/block-visibility-editor.js:21
+#: build/block-visibility-settings.js:1
+#: build/block-visibility-settings.js:15
+msgid "Query String"
 msgstr ""
 
-#: build/block-visibility-editor.js:4823
-#: build/block-visibility-editor.js:5036
-#: build/block-visibility-editor.js:4682
-#: build/block-visibility-editor.js:4906
-msgid "Hide the block from"
+#: build/block-visibility-editor.js:1
+#: build/block-visibility-editor.js:15
+#: build/block-visibility-settings.js:1
+#: build/block-visibility-settings.js:15
+msgid "Advanced Custom Fields"
 msgstr ""
 
-#: build/block-visibility-editor.js:4823
-#: build/block-visibility-editor.js:5036
-#: build/block-visibility-editor.js:4683
-#: build/block-visibility-editor.js:4907
-msgid "Show the block to"
-msgstr ""
-
-#. Translators: Whether the block is hidden or visible.
-#: build/block-visibility-editor.js:4844
-#: build/block-visibility-editor.js:4714
-msgid "%s users with at least one of the selected roles."
-msgstr ""
-
-#: build/block-visibility-editor.js:4849
-#: build/block-visibility-editor.js:4727
-msgid "Select Role…"
-msgstr ""
-
-#: build/block-visibility-editor.js:4855
-#: build/block-visibility-editor.js:4733
-msgid "Hide from selected roles"
-msgstr ""
-
-#: build/block-visibility-editor.js:4933
-#: build/block-visibility-editor.js:4792
-msgid "Website Administrators can only configure the User rule sets option. Please choose another option."
-msgstr ""
-
-#. Translators: Whether the block is hidden or visible.
-#: build/block-visibility-editor.js:4941
-#: build/block-visibility-editor.js:4807
-msgid "%s the block if at least one user rule set applies."
-msgstr ""
-
-#: build/block-visibility-editor.js:5033
-#: build/block-visibility-editor.js:4893
-msgid "Website Administrators can only configure the Users option. Please choose another option."
-msgstr ""
-
-#. Translators: Whether the block is hidden or visible.
-#: build/block-visibility-editor.js:5056
-#: build/block-visibility-editor.js:4935
-msgid "%s the selected users."
-msgstr ""
-
-#: build/block-visibility-editor.js:5068
-#: build/block-visibility-editor.js:4952
-msgid "Hide from selected users"
-msgstr ""
-
-#: build/block-visibility-editor.js:5233
-#: build/block-visibility-editor.js:5102
-msgid "Required Tags <span>(Any)</span>"
-msgstr ""
-
-#: build/block-visibility-editor.js:5242
-#: build/block-visibility-editor.js:5260
-#: build/block-visibility-editor.js:5284
-#: build/block-visibility-editor.js:5118
-#: build/block-visibility-editor.js:5150
-#: build/block-visibility-editor.js:5195
-msgid "Select Tag…"
-msgstr ""
-
-#: build/block-visibility-editor.js:5247
-#: build/block-visibility-editor.js:5124
-msgid "Only visible to logged-in users with at least one of the selected tags."
-msgstr ""
-
-#: build/block-visibility-editor.js:5251
-#: build/block-visibility-editor.js:5134
-msgid "Required Tags <span>(All)</span>"
-msgstr ""
-
-#: build/block-visibility-editor.js:5265
-#: build/block-visibility-editor.js:5157
-msgid "Only visible to logged-in users with <strong>all</strong> of the selected tags."
-msgstr ""
-
-#: build/block-visibility-editor.js:5275
-#: build/block-visibility-editor.js:5179
-msgid "Required Tags <span>(Not)</span>"
-msgstr ""
-
-#: build/block-visibility-editor.js:5289
-#: build/block-visibility-editor.js:5201
-msgid "Hide from logged-in users with at least one of the selected tags."
-msgstr ""
-
-#: build/block-visibility-editor.js:5299
-#: build/block-visibility-editor.js:7314
-#: build/block-visibility-settings.js:6376
-#: build/block-visibility-settings.js:6470
-#: build/block-visibility-editor.js:5218
-#: build/block-visibility-editor.js:7425
-#: build/block-visibility-settings.js:6077
-#: build/block-visibility-settings.js:6171
+#: build/block-visibility-editor.js:1
+#: build/block-visibility-editor.js:27
+#: build/block-visibility-settings.js:1
+#: build/block-visibility-settings.js:15
 msgid "WP Fusion"
 msgstr ""
 
-#: build/block-visibility-editor.js:5300
-#: build/block-visibility-editor.js:5221
-msgid "The WP Fusion control allows you to configure block visibility based on WP Fusion tags."
+#: build/block-visibility-editor.js:1
+msgid "Enable block"
 msgstr ""
 
-#: build/block-visibility-editor.js:5301
-#: build/block-visibility-editor.js:5225
-msgid "Note that the available fields depend on the User Role control settings. If the User Role control is disabled, only the Required Tags (Not) field will be available."
+#: build/block-visibility-editor.js:1
+msgid "Hide block"
 msgstr ""
 
-#: build/block-visibility-editor.js:5309
-#: build/block-visibility-editor.js:5239
-msgid "The WP Fusion control works best in coordination with the User Role control, which has been disabled."
-msgstr ""
-
-#: build/block-visibility-editor.js:5907
-#: build/block-visibility-settings.js:3799
-#: build/block-visibility-editor.js:5921
-#: build/block-visibility-settings.js:3461
-msgid "Block Visibility Settings"
-msgstr ""
-
-#: build/block-visibility-editor.js:5912
-#: build/block-visibility-settings.js:3804
-#: build/block-visibility-editor.js:5927
-#: build/block-visibility-settings.js:3467
-msgid "Block Visibility Variables"
-msgstr ""
-
-#: build/block-visibility-editor.js:6426
-#: build/block-visibility-settings.js:3851
-#: build/block-visibility-settings.js:5367
-#: build/block-visibility-editor.js:6525
-#: build/block-visibility-settings.js:3523
-#: build/block-visibility-settings.js:4967
+#. Translators: Name of the block being hidden, e.g. "Paragraph".
+#: build/block-visibility-editor.js:5
+#: build/block-visibility-settings.js:15
+#: build/block-visibility-settings.js:16
 msgid "Visibility Controls"
 msgstr ""
 
-#: build/block-visibility-editor.js:6440
-#: build/block-visibility-editor.js:6540
+#: build/block-visibility-editor.js:5
 msgid "Defaults"
 msgstr ""
 
-#: build/block-visibility-editor.js:6446
-#: build/block-visibility-settings.js:6119
-#: build/block-visibility-editor.js:6551
-#: build/block-visibility-settings.js:5733
+#: build/block-visibility-editor.js:5
+#: build/block-visibility-settings.js:1
 msgid "Controls"
 msgstr ""
 
-#: build/block-visibility-editor.js:6452
-#: build/block-visibility-editor.js:6562
+#: build/block-visibility-editor.js:5
 msgid "Integrations"
 msgstr ""
 
-#: build/block-visibility-editor.js:6466
-#: build/block-visibility-editor.js:6583
+#: build/block-visibility-editor.js:5
 msgid "All controls reset"
 msgstr ""
 
-#: build/block-visibility-editor.js:6470
-#: build/block-visibility-editor.js:6593
+#: build/block-visibility-editor.js:5
 msgid "Reset all"
 msgstr ""
 
-#: build/block-visibility-editor.js:6484
-#: build/block-visibility-editor.js:6811
-#: build/block-visibility-editor.js:6615
-#: build/block-visibility-editor.js:6963
+#: build/block-visibility-editor.js:5
+#: build/block-visibility-editor.js:27
 msgid "Visibility"
 msgstr ""
 
 #. translators: %s: The name of the control being toggled e.g. "Hide Block".
-#: build/block-visibility-editor.js:6525
-#: build/block-visibility-editor.js:6666
+#: build/block-visibility-editor.js:7
 msgid "Toggle %s"
 msgstr ""
 
 #. translators: %s: The name of the control being toggled e.g. "Hide Block".
-#: build/block-visibility-editor.js:6530
-#: build/block-visibility-editor.js:6674
+#: build/block-visibility-editor.js:9
 msgid "%s toggled"
 msgstr ""
 
 #. translators: %s: The name of the control being reset e.g. "Hide Block".
-#: build/block-visibility-editor.js:6557
-#: build/block-visibility-editor.js:6707
+#: build/block-visibility-editor.js:11
 msgid "Reset %s"
 msgstr ""
 
 #. translators: %s: The name of the control being reset e.g. "Hide Block".
-#: build/block-visibility-editor.js:6562
-#: build/block-visibility-editor.js:6715
+#: build/block-visibility-editor.js:13
 msgid "%s reset to default"
 msgstr ""
 
-#: build/block-visibility-editor.js:6571
-#: build/block-visibility-settings.js:4830
-#: build/block-visibility-editor.js:6732
-#: build/block-visibility-settings.js:4491
+#. translators: %s: The name of the control being reset e.g. "Hide Block".
+#: build/block-visibility-editor.js:13
+#: build/block-visibility-settings.js:15
 msgid "Reset"
 msgstr ""
 
-#: build/block-visibility-editor.js:6722
-#: build/block-visibility-editor.js:6888
+#: build/block-visibility-editor.js:13
+msgid "Has any value"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Has no value"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Value is equal to"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Value is not equal to"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Value contains"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Value does not contain"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Evaluate as user field"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+#: build/block-visibility-editor.js:23
+msgid "Select Condition…"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Enter Value…"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Select Date and Time…"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Select Date…"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Select date/time"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+#: build/block-visibility-editor.js:17
+msgid "Clear date/time"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+#: build/block-visibility-settings.js:1
+msgid "More Information"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+#: build/block-visibility-settings.js:1
+msgid "Learn More"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Select…"
+msgstr ""
+
+#. Translators: Whether the block is hidden or visible.
+#: build/block-visibility-editor.js:15
+msgid "%s the block if"
+msgstr ""
+
+#. Translators: Whether the block is hidden or visible.
+#: build/block-visibility-editor.js:15
+#: build/block-visibility-editor.js:17
+#: build/block-visibility-editor.js:19
+#: build/block-visibility-editor.js:21
+#: build/block-visibility-editor.js:25
+msgid "Hide"
+msgstr ""
+
+#: build/block-visibility-editor.js:15
+#: build/block-visibility-editor.js:17
+#: build/block-visibility-editor.js:19
+#: build/block-visibility-editor.js:21
+#: build/block-visibility-editor.js:25
+msgid "Show"
+msgstr ""
+
+#: build/block-visibility-editor.js:15
+msgid "And if"
+msgstr ""
+
+#: build/block-visibility-editor.js:15
+msgid "Remove Rule"
+msgstr ""
+
+#: build/block-visibility-editor.js:15
+msgid "Select Rule…"
+msgstr ""
+
+#: build/block-visibility-editor.js:15
+msgid "Rule Set"
+msgstr ""
+
+#: build/block-visibility-editor.js:15
+#: build/block-visibility-editor.js:17
+msgid "Edit"
+msgstr ""
+
+#: build/block-visibility-editor.js:15
+msgid "Rule set title"
+msgstr ""
+
+#: build/block-visibility-editor.js:15
+msgid "Clear rule set"
+msgstr ""
+
+#: build/block-visibility-editor.js:15
+msgid "Remove rule set"
+msgstr ""
+
+#: build/block-visibility-editor.js:15
+#: build/block-visibility-editor.js:17
+msgid "Options"
+msgstr ""
+
+#: build/block-visibility-editor.js:15
+#: build/block-visibility-editor.js:17
+msgid "Tools"
+msgstr ""
+
+#: build/block-visibility-editor.js:15
+#: build/block-visibility-editor.js:17
+msgid "Disable"
+msgstr ""
+
+#: build/block-visibility-editor.js:15
+#: build/block-visibility-editor.js:17
+msgid "Enable"
+msgstr ""
+
+#: build/block-visibility-editor.js:15
+#: build/block-visibility-editor.js:17
+msgid "Duplicate"
+msgstr ""
+
+#: build/block-visibility-editor.js:15
+msgid "Add rule"
+msgstr ""
+
+#: build/block-visibility-editor.js:15
+msgid "The Advanced Custom Fields (ACF) control allows you to configure block visibility based on various field-related rules, which form rule sets."
+msgstr ""
+
+#: build/block-visibility-editor.js:15
+#: build/block-visibility-editor.js:27
+msgid "Add rule set"
+msgstr ""
+
+#. Translators: Whether the block is hidden or visible.
+#: build/block-visibility-editor.js:17
+msgid "%s the block if at least one rule set applies. Rules targeting user fields will fail if the current user is not logged in."
+msgstr ""
+
+#: build/block-visibility-editor.js:17
+msgid "It does not appear that your website contains any published fields yet."
+msgstr ""
+
+#: build/block-visibility-editor.js:17
+msgid "Select Field…"
+msgstr ""
+
+#: build/block-visibility-editor.js:17
+#: build/block-visibility-editor.js:25
+msgid "Hide when rules apply"
+msgstr ""
+
+#: build/block-visibility-editor.js:17
+msgid "Close"
+msgstr ""
+
+#: build/block-visibility-editor.js:17
+msgid "Schedule"
+msgstr ""
+
+#: build/block-visibility-editor.js:17
+msgid "Now"
+msgstr ""
+
+#: build/block-visibility-editor.js:17
+msgid "Forever"
+msgstr ""
+
+#: build/block-visibility-editor.js:17
+msgid "Schedule title"
+msgstr ""
+
+#: build/block-visibility-editor.js:17
+msgid "Clear schedule"
+msgstr ""
+
+#: build/block-visibility-editor.js:17
+msgid "Remove schedule"
+msgstr ""
+
+#. Translators: Whether the block is hidden or visible.
+#: build/block-visibility-editor.js:19
+msgid "%s the block"
+msgstr ""
+
+#: build/block-visibility-editor.js:19
+msgid "From"
+msgstr ""
+
+#: build/block-visibility-editor.js:19
+msgid "Choose a start date/time"
+msgstr ""
+
+#: build/block-visibility-editor.js:19
+msgid "To"
+msgstr ""
+
+#: build/block-visibility-editor.js:19
+msgid "Choose a end date/time"
+msgstr ""
+
+#: build/block-visibility-editor.js:19
+msgid "Start Date/Time"
+msgstr ""
+
+#: build/block-visibility-editor.js:19
+msgid "End Date/Time"
+msgstr ""
+
+#: build/block-visibility-editor.js:19
+msgid "The start time is after the stop time. Please fix for date/time settings to function properly."
+msgstr ""
+
+#: build/block-visibility-editor.js:19
+msgid "The Date & Time control allows you to schedule when the block should be visible."
+msgstr ""
+
+#: build/block-visibility-editor.js:19
+msgid "Add schedule"
+msgstr ""
+
+#. Translators: Whether the block is hidden or visible.
+#: build/block-visibility-editor.js:21
+msgid "%s the block if at least one schedule applies."
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "Hide when schedules apply"
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "The Hide Block control overrides all other visibility controls when enabled."
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "Hide the block from everyone"
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "The Query String control allows you to configure block visibility based on URL query strings."
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "Enter one URL query string per line."
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "Required Queries <span>(Any)</span>"
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "Show the block if at least one of the provided URL query strings is present."
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "Required Queries <span>(All)</span>"
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "Show the block if <strong>all</strong> of the provided URL query strings are present."
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "Required Queries <span>(Not)</span>"
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "Hide the block if at least one of the provided URL query strings is present."
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "Hide on large desktop"
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "Hide on desktop"
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "Hide on tablet"
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "Hide on mobile"
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "Hide on mobile (landscape)"
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "Hide on mobile (portrait)"
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "The Screen Size control allows you to configure block visibility based on the width of the current screen."
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+msgid "The Screen Size control is unfortunately not compatible with this block type. For more information and a workaround, visit the <a>Knowledge Base</a>."
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+#: build/block-visibility-editor.js:25
+msgid "Hide the block from"
+msgstr ""
+
+#: build/block-visibility-editor.js:21
+#: build/block-visibility-editor.js:25
+msgid "Show the block to"
+msgstr ""
+
+#. Translators: Whether the block is hidden or visible.
+#: build/block-visibility-editor.js:23
+msgid "%s users with at least one of the selected roles."
+msgstr ""
+
+#. Translators: Whether the block is hidden or visible.
+#: build/block-visibility-editor.js:23
+msgid "Select Role…"
+msgstr ""
+
+#: build/block-visibility-editor.js:23
+msgid "Hide from selected roles"
+msgstr ""
+
+#: build/block-visibility-editor.js:23
+msgid "Is any of the selected"
+msgstr ""
+
+#: build/block-visibility-editor.js:23
+msgid "Is none of the selected"
+msgstr ""
+
+#: build/block-visibility-editor.js:23
+msgid "Is at least one of the selected"
+msgstr ""
+
+#: build/block-visibility-editor.js:23
+msgid "Is all of the selected"
+msgstr ""
+
+#: build/block-visibility-editor.js:23
+msgid "User is logged-out"
+msgstr ""
+
+#: build/block-visibility-editor.js:23
+msgid "User is logged-in"
+msgstr ""
+
+#: build/block-visibility-editor.js:23
+msgid "User's role"
+msgstr ""
+
+#: build/block-visibility-editor.js:23
+msgid "Select User Roles…"
+msgstr ""
+
+#: build/block-visibility-editor.js:23
+msgid "User"
+msgstr ""
+
+#. Translators: Whether the block is hidden or visible.
+#: build/block-visibility-editor.js:23
+#: build/block-visibility-editor.js:27
+msgid "Select Users…"
+msgstr ""
+
+#: build/block-visibility-editor.js:23
+msgid "User Rule Type"
+msgstr ""
+
+#. Translators: Whether the block is hidden or visible.
+#: build/block-visibility-editor.js:25
+msgid "%s the block if at least one user rule set applies."
+msgstr ""
+
+#: build/block-visibility-editor.js:25
+msgid "Website Administrators can only configure the User rule sets option. Please choose another option."
+msgstr ""
+
+#: build/block-visibility-editor.js:25
+msgid "Website Administrators can only configure the Users option. Please choose another option."
+msgstr ""
+
+#. Translators: Whether the block is hidden or visible.
+#: build/block-visibility-editor.js:27
+msgid "%s the selected users."
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "Hide from selected users"
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "Public"
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "Logged-out"
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "Logged-in"
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "User roles"
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "Users"
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "User rule sets"
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "Block is visible to everyone."
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "Block is only visible to logged-out users."
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "Block is only visible to logged-in users."
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "The User Role control allows you to configure block visibility based on the current user's role or specific users."
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "The previously selected User Role option has been disabled. Choose another option or update the <a>Visibility Control</a> settings."
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "Required Tags <span>(Any)</span>"
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "Select Tag…"
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "Only visible to logged-in users with at least one of the selected tags."
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "Required Tags <span>(All)</span>"
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "Only visible to logged-in users with <strong>all</strong> of the selected tags."
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "Required Tags <span>(Not)</span>"
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "Hide from logged-in users with at least one of the selected tags."
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "The WP Fusion control allows you to configure block visibility based on WP Fusion tags."
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "Note that the available fields depend on the User Role control settings. If the User Role control is disabled, only the Required Tags (Not) field will be available."
+msgstr ""
+
+#: build/block-visibility-editor.js:27
+msgid "The WP Fusion control works best in coordination with the User Role control, which has been disabled."
+msgstr ""
+
+#: build/block-visibility-editor.js:27
 msgid "All visibility controls have been manually disabled. Visit the <a>plugin settings</a> to re-enable."
 msgstr ""
 
-#: build/block-visibility-editor.js:7029
-#: build/block-visibility-editor.js:7184
-msgid "Enable block"
+#: build/block-visibility-editor.js:27
+#: build/block-visibility-settings.js:16
+msgid "Block Visibility Settings"
 msgstr ""
 
-#: build/block-visibility-editor.js:7029
-#: build/block-visibility-editor.js:7185
-msgid "Hide block"
+#: build/block-visibility-editor.js:27
+#: build/block-visibility-settings.js:16
+msgid "Block Visibility Variables"
 msgstr ""
 
-#: build/block-visibility-settings.js:3240
-#: build/block-visibility-settings.js:2876
-msgid "Upgrade to Pro"
-msgstr ""
-
-#: build/block-visibility-settings.js:3240
-#: build/block-visibility-settings.js:2879
-msgid "Enhance the power of Block Visibility with the Pro add-on."
-msgstr ""
-
-#: build/block-visibility-settings.js:3240
-#: build/block-visibility-settings.js:2885
-msgid "Location control"
-msgstr ""
-
-#: build/block-visibility-settings.js:3240
-#: build/block-visibility-settings.js:2886
-msgid "Advanced scheduling"
-msgstr ""
-
-#: build/block-visibility-settings.js:3240
-#: build/block-visibility-settings.js:2888
-msgid "Referral Source control"
-msgstr ""
-
-#: build/block-visibility-settings.js:3240
-#: build/block-visibility-settings.js:2891
-msgid "eCommerce integrations"
-msgstr ""
-
-#: build/block-visibility-settings.js:3240
-#: build/block-visibility-settings.js:2894
-msgid "Premium email support"
-msgstr ""
-
-#: build/block-visibility-settings.js:3240
-#: build/block-visibility-settings.js:2896
-msgid "No ads!"
-msgstr ""
-
-#: build/block-visibility-settings.js:3244
-#: build/block-visibility-settings.js:2903
-msgid "Get Block Visibility Pro"
-msgstr ""
-
-#: build/block-visibility-settings.js:3248
-#: build/block-visibility-settings.js:2908
-msgid "Need Support?"
-msgstr ""
-
-#: build/block-visibility-settings.js:3248
-#: build/block-visibility-settings.js:2911
-msgid "Whether you need help or have a new feature request, please create a topic in the support forum on WordPress.org."
-msgstr ""
-
-#: build/block-visibility-settings.js:3253
-#: build/block-visibility-settings.js:2920
-msgid "Support Forum"
-msgstr ""
-
-#: build/block-visibility-settings.js:3253
-#: build/block-visibility-settings.js:2924
-msgid "Detailed documentation is also available on the plugin website."
-msgstr ""
-
-#: build/block-visibility-settings.js:3257
-#: build/block-visibility-settings.js:2932
-msgid "View Knowledge Base"
-msgstr ""
-
-#: build/block-visibility-settings.js:3261
-#: build/block-visibility-settings.js:2938
-msgid "Share Your Feedback"
-msgstr ""
-
-#: build/block-visibility-settings.js:3261
-#: build/block-visibility-settings.js:2941
-msgid "If you are enjoying Block Visibility and find it useful, please consider leaving a ★★★★★ review on WordPress.org. Your feedback is greatly appreciated and helps others discover the plugin."
-msgstr ""
-
-#: build/block-visibility-settings.js:3266
-#: build/block-visibility-settings.js:2950
-msgid "Submit a Review"
-msgstr ""
-
-#: build/block-visibility-settings.js:3373
-#: build/block-visibility-settings.js:3046
-msgid "Some blocks may appear in the Block Manager as uncategorized even though they have an assigned category in the Editor. This is due to how the block is registered in WordPress."
-msgstr ""
-
-#: build/block-visibility-settings.js:3572
-#: build/block-visibility-settings.js:3243
-msgid "Visibility is enabled for all blocks"
-msgstr ""
-
-#: build/block-visibility-settings.js:3584
-#: build/block-visibility-settings.js:3855
-#: build/block-visibility-settings.js:3266
-#: build/block-visibility-settings.js:3528
-msgid "Block Manager"
-msgstr ""
-
-#: build/block-visibility-settings.js:3585
-#: build/block-visibility-settings.js:3268
-msgid "Only some block types may need visibility controls. The Block Manager allows you to restrict visibility controls to specific block types."
-msgstr ""
-
-#: build/block-visibility-settings.js:3586
-#: build/block-visibility-settings.js:3272
-msgid "If you are looking for a block and do not see it listed, you may need to enable Full Control Mode on the General Settings tab."
-msgstr ""
-
-#: build/block-visibility-settings.js:3598
-#: build/block-visibility-settings.js:3291
-msgid "Search for a block"
-msgstr ""
-
-#: build/block-visibility-settings.js:3698
-#: build/block-visibility-settings.js:3998
-#: build/block-visibility-settings.js:3380
-#: build/block-visibility-settings.js:3674
-msgid "Knowledge Base"
-msgstr ""
-
-#: build/block-visibility-settings.js:3703
-#: build/block-visibility-settings.js:3993
-#: build/block-visibility-settings.js:3385
-#: build/block-visibility-settings.js:3669
-msgid "Support"
-msgstr ""
-
-#: build/block-visibility-settings.js:3707
-#: build/block-visibility-settings.js:3389
-msgid "GitHub"
-msgstr ""
-
-#: build/block-visibility-settings.js:3711
-#: build/block-visibility-settings.js:3393
-msgid "Twitter"
-msgstr ""
-
-#: build/block-visibility-settings.js:3843
-#: build/block-visibility-settings.js:3509
-msgid "Loading settings…"
-msgstr ""
-
-#: build/block-visibility-settings.js:3847
-#: build/block-visibility-settings.js:4419
-#: build/block-visibility-settings.js:3518
-#: build/block-visibility-settings.js:4107
-msgid "General Settings"
-msgstr ""
-
-#: build/block-visibility-settings.js:3988
-#: build/block-visibility-settings.js:3664
+#: build/block-visibility-settings.js:1
 msgid "Review"
 msgstr ""
 
-#: build/block-visibility-settings.js:4099
-#: build/block-visibility-settings.js:3765
-msgid "Black"
+#: build/block-visibility-settings.js:1
+msgid "Support"
 msgstr ""
 
-#: build/block-visibility-settings.js:4102
-#: build/block-visibility-settings.js:3766
-msgid "Light Grey"
+#: build/block-visibility-settings.js:1
+msgid "Knowledge Base"
 msgstr ""
 
-#: build/block-visibility-settings.js:4105
-#: build/block-visibility-settings.js:3767
-msgid "Red"
+#: build/block-visibility-settings.js:1
+msgid "GitHub"
 msgstr ""
 
-#: build/block-visibility-settings.js:4108
-#: build/block-visibility-settings.js:3768
-msgid "Orange"
+#: build/block-visibility-settings.js:1
+msgid "Twitter"
 msgstr ""
 
-#: build/block-visibility-settings.js:4111
-#: build/block-visibility-settings.js:3769
-msgid "Yellow"
-msgstr ""
-
-#: build/block-visibility-settings.js:4114
-#: build/block-visibility-settings.js:3770
-msgid "Green"
-msgstr ""
-
-#: build/block-visibility-settings.js:4117
-#: build/block-visibility-settings.js:3771
-msgid "Medium Blue"
-msgstr ""
-
-#: build/block-visibility-settings.js:4120
-#: build/block-visibility-settings.js:3772
-msgid "WordPress Blue"
-msgstr ""
-
-#: build/block-visibility-settings.js:4123
-#: build/block-visibility-settings.js:3773
-msgid "Purple"
-msgstr ""
-
-#: build/block-visibility-settings.js:4132
-#: build/block-visibility-settings.js:3786
-msgid "Indicator color"
-msgstr ""
-
-#: build/block-visibility-settings.js:4151
-#: build/block-visibility-settings.js:3813
-msgid "Block Opacity"
-msgstr ""
-
-#: build/block-visibility-settings.js:4174
-#: build/block-visibility-settings.js:3842
-msgid "Editor"
-msgstr ""
-
-#: build/block-visibility-settings.js:4175
-#: build/block-visibility-settings.js:3845
-msgid "Settings that impact the Editor, such as contextual indicators for when a block has visibility controls, as well as additional toolbar options."
-msgstr ""
-
-#: build/block-visibility-settings.js:4183
-#: build/block-visibility-settings.js:3856
-msgid "Contextual Indicators"
-msgstr ""
-
-#: build/block-visibility-settings.js:4186
-#: build/block-visibility-settings.js:3861
-msgid "Enable contextual indicators."
-msgstr ""
-
-#: build/block-visibility-settings.js:4195
-#: build/block-visibility-settings.js:3875
-msgid "Contextual indicators assist users in quickly determining which blocks have active visibility controls."
-msgstr ""
-
-#: build/block-visibility-settings.js:4198
-#: build/block-visibility-settings.js:3884
-msgid "Contextual Block Opacity"
-msgstr ""
-
-#: build/block-visibility-settings.js:4201
-#: build/block-visibility-settings.js:3889
-msgid "Reduce block opacity when visibility controls are applied."
-msgstr ""
-
-#: build/block-visibility-settings.js:4210
-#: build/block-visibility-settings.js:3902
-msgid "Combining contextual indicators with reduced block opacity can assist users in quickly determining which blocks have active visibility controls."
-msgstr ""
-
-#: build/block-visibility-settings.js:4213
-#: build/block-visibility-settings.js:3911
-msgid "Toolbar Controls"
-msgstr ""
-
-#: build/block-visibility-settings.js:4216
-#: build/block-visibility-settings.js:3916
-msgid "Enable block toolbar controls for visibility settings."
-msgstr ""
-
-#: build/block-visibility-settings.js:4225
-#: build/block-visibility-settings.js:3930
-msgid "Some visibility controls (currently just the Hide Block control) can be made available in the toolbar of each block."
-msgstr ""
-
-#: build/block-visibility-settings.js:4228
-#: build/block-visibility-settings.js:3938
-msgid "Help Notices & Popovers"
-msgstr ""
-
-#: build/block-visibility-settings.js:4231
-#: build/block-visibility-settings.js:3943
-msgid "Enable help notices and popovers in the Editor."
-msgstr ""
-
-#: build/block-visibility-settings.js:4240
-#: build/block-visibility-settings.js:3956
-msgid "By default, help notices and popovers display in the Editor providing additional information about how to use Block Visibility. Disable for a more simplified interface."
-msgstr ""
-
-#: build/block-visibility-settings.js:4249
-#: build/block-visibility-settings.js:3969
-msgid "Upgrade to enable utilities for managing visibility settings (copy, import, etc.)"
-msgstr ""
-
-#: build/block-visibility-settings.js:4312
-#: build/block-visibility-settings.js:4014
-msgid "Full Control Mode"
-msgstr ""
-
-#: build/block-visibility-settings.js:4317
-#: build/block-visibility-settings.js:4021
-msgid "Enable Full Control Mode to add visibility controls to <strong>every</strong> block. <a>Use with caution</a>."
-msgstr ""
-
-#: build/block-visibility-settings.js:4334
-#: build/block-visibility-settings.js:4046
-msgid "Some blocks do not have visibility controls enabled by default. These include child blocks and blocks that may exist in WordPress but cannot be added directly to the Editor. You will not need Full Control Mode most of the time, but it's here in case you do."
-msgstr ""
-
-#: build/block-visibility-settings.js:4420
-#: build/block-visibility-settings.js:4110
-msgid "The settings below allow you to configure general functionality for the Block Visibility plugin."
-msgstr ""
-
-#: build/block-visibility-settings.js:4509
-#: build/block-visibility-settings.js:4189
-msgid "Uninstall"
-msgstr ""
-
-#: build/block-visibility-settings.js:4514
-#: build/block-visibility-settings.js:4195
-msgid "Remove all plugin settings when Block Visibility is uninstalled."
-msgstr ""
-
-#: build/block-visibility-settings.js:4602
-#: build/block-visibility-settings.js:4267
-msgid "Choose which user roles should be allowed to control visibility settings in the Editor. Administrators will always have permission."
-msgstr ""
-
-#: build/block-visibility-settings.js:4669
-#: build/block-visibility-settings.js:4316
-msgid "User Permissions"
-msgstr ""
-
-#: build/block-visibility-settings.js:4674
-#: build/block-visibility-settings.js:4322
-msgid "Restrict block visibility controls to selected user roles."
-msgstr ""
-
-#: build/block-visibility-settings.js:4683
-#: build/block-visibility-settings.js:4335
-msgid "By default, all users that can edit blocks will be able to use the visibility controls provided by Block Visibility."
-msgstr ""
-
-#: build/block-visibility-settings.js:4754
-#: build/block-visibility-settings.js:4385
-msgid "Updating…"
-msgstr ""
-
-#: build/block-visibility-settings.js:4754
-#: build/block-visibility-settings.js:4386
-msgid "Update"
-msgstr ""
-
-#: build/block-visibility-settings.js:4805
-#: build/block-visibility-settings.js:4439
-msgid "Saving"
-msgstr ""
-
-#: build/block-visibility-settings.js:4808
-#: build/block-visibility-settings.js:4446
-msgid "Update failed. Try again or get in touch with support."
-msgstr ""
-
-#: build/block-visibility-settings.js:4812
-#: build/block-visibility-settings.js:4821
-#: build/block-visibility-settings.js:4459
-#: build/block-visibility-settings.js:4476
-msgid "Reset Settings"
-msgstr ""
-
-#: build/block-visibility-settings.js:4823
-#: build/block-visibility-settings.js:4480
-msgid "Resetting will restore all configured settings on the current tab to their default values. To restore all plugin settings, choose Reset All."
-msgstr ""
-
-#: build/block-visibility-settings.js:4833
-#: build/block-visibility-settings.js:4497
-msgid "Reset All"
-msgstr ""
-
-#: build/block-visibility-settings.js:4836
-#: build/block-visibility-settings.js:4505
-msgid "Cancel"
-msgstr ""
-
-#: build/block-visibility-settings.js:4838
-#: build/block-visibility-settings.js:4510
-msgid "Reset failed. Try again or get in touch with support."
-msgstr ""
-
-#: build/block-visibility-settings.js:4914
-#: build/block-visibility-settings.js:4565
-msgid "Enable the Advanced Custom Fields control."
-msgstr ""
-
-#: build/block-visibility-settings.js:4926
-#: build/block-visibility-settings.js:4581
-msgid "The Advanced Custom Fields (ACF) control allows you to conditionally display blocks, including ACF blocks, based on ACF fields."
-msgstr ""
-
-#: build/block-visibility-settings.js:5009
-#: build/block-visibility-settings.js:4640
-msgid "Enable the Date & Time controls."
-msgstr ""
-
-#: build/block-visibility-settings.js:5021
-#: build/block-visibility-settings.js:4656
-msgid "The Date & Time control allows you to conditionally display blocks based on time and date settings, which includes the ability to schedule blocks."
-msgstr ""
-
-#: build/block-visibility-settings.js:5031
-#: build/block-visibility-settings.js:4670
-msgid "Upgrade to enable day-of-week and time-of-day functionality."
-msgstr ""
-
-#: build/block-visibility-settings.js:5175
-#: build/block-visibility-settings.js:4805
+#: build/block-visibility-settings.js:1
 msgid "General"
 msgstr ""
 
-#: build/block-visibility-settings.js:5185
-#: build/block-visibility-settings.js:4814
+#: build/block-visibility-settings.js:1
 msgid "Default visibility controls"
 msgstr ""
 
-#: build/block-visibility-settings.js:5190
-#: build/block-visibility-settings.js:4827
+#: build/block-visibility-settings.js:1
 msgid "Select Controls…"
 msgstr ""
 
-#: build/block-visibility-settings.js:5196
-#: build/block-visibility-settings.js:4840
+#: build/block-visibility-settings.js:1
 msgid "Default controls are automatically displayed in the Visibility panel when editing a block in the Editor. Defaults can be helpful if you frequently use the same few controls."
 msgstr ""
 
-#: build/block-visibility-settings.js:5264
-#: build/block-visibility-settings.js:4887
+#: build/block-visibility-settings.js:1
 msgid "Enable the Hide Block control."
 msgstr ""
 
-#: build/block-visibility-settings.js:5276
-#: build/block-visibility-settings.js:4903
+#: build/block-visibility-settings.js:1
 msgid "The Hide Block control allows you to hide blocks easily on your website's front end. This control overrides all other controls when enabled on a block."
 msgstr ""
 
-#: build/block-visibility-settings.js:5368
-#: build/block-visibility-settings.js:4970
-msgid "The settings below allow you to configure the visibility controls that power Block Visibility. Pick and choose which controls you want to enable and how you would like them to function."
+#: build/block-visibility-settings.js:1
+msgid "Enable the Date & Time controls."
 msgstr ""
 
-#: build/block-visibility-settings.js:5369
-#: build/block-visibility-settings.js:4974
-msgid "When a visibility control is disabled, blocks that rely on the disabled control will become visible again unless other enabled controls hide them."
+#: build/block-visibility-settings.js:1
+msgid "The Date & Time control allows you to conditionally display blocks based on time and date settings, which includes the ability to schedule blocks."
 msgstr ""
 
-#: build/block-visibility-settings.js:5483
-#: build/block-visibility-settings.js:5085
-msgid "Third-Party Integration Controls"
+#: build/block-visibility-settings.js:1
+msgid "Upgrade to enable day-of-week and time-of-day functionality."
 msgstr ""
 
-#: build/block-visibility-settings.js:5484
-#: build/block-visibility-settings.js:5091
-msgid "The settings below allow you to configure all third-party integration controls for Block Visibility. If you are looking for an integration, and do not see it below, make sure the respective third-party plugin is installed and activated on your website."
+#: build/block-visibility-settings.js:1
+msgid "Enable individual user role restrictions (Administrator, Editor, Subscriber, etc.)"
 msgstr ""
 
-#: build/block-visibility-settings.js:5485
-#: build/block-visibility-settings.js:5095
-msgid "Visit the plugin Knowledge Base for more information on configuring third-party integration controls and what integrations are currently available in Block Visibility."
+#: build/block-visibility-settings.js:1
+msgid "Enable individual user restrictions."
 msgstr ""
 
-#: build/block-visibility-settings.js:5558
-#: build/block-visibility-settings.js:5151
-msgid "Enable the Query String control."
+#: build/block-visibility-settings.js:1
+msgid "Enable advanced user role restrictions (User rule sets)"
 msgstr ""
 
-#: build/block-visibility-settings.js:5570
-#: build/block-visibility-settings.js:5167
-msgid "The Query String control allows you to conditionally display blocks based on URL query strings."
+#: build/block-visibility-settings.js:1
+msgid "Enable the User Role controls."
 msgstr ""
 
-#: build/block-visibility-settings.js:5625
-#: build/block-visibility-settings.js:5208
-msgid "Extra Large"
+#: build/block-visibility-settings.js:1
+msgid "The User Role control allows you to conditionally display blocks based on whether a user is logged-in, logged-out, and more."
 msgstr ""
 
-#: build/block-visibility-settings.js:5629
-#: build/block-visibility-settings.js:5212
-msgid "Large"
+#: build/block-visibility-settings.js:1
+msgid "Restrict visibility by any user role (Administrator, Editor, Subscriber, etc.). Roles added by third-party plugins will also be available to choose from."
 msgstr ""
 
-#: build/block-visibility-settings.js:5630
-#: build/block-visibility-settings.js:5213
-msgid "Desktop and tablet (landscape) screen sizes."
+#: build/block-visibility-settings.js:1
+msgid "Restrict visibility to specific individual users on your website based on user ID. You can select multiple users at once."
 msgstr ""
 
-#: build/block-visibility-settings.js:5633
-#: build/block-visibility-settings.js:5219
-msgid "Medium"
+#: build/block-visibility-settings.js:1
+msgid "This functionality allows you to create user-based rule sets, which provide extensive configuration options and greater flexibility."
 msgstr ""
 
-#: build/block-visibility-settings.js:5634
-#: build/block-visibility-settings.js:5220
-msgid "Tablet (portrait) screen sizes."
-msgstr ""
-
-#: build/block-visibility-settings.js:5637
-#: build/block-visibility-settings.js:5226
-msgid "Small"
-msgstr ""
-
-#: build/block-visibility-settings.js:5638
-#: build/block-visibility-settings.js:5227
-msgid "Mobile (landscape) screen sizes."
-msgstr ""
-
-#: build/block-visibility-settings.js:5657
-#: build/block-visibility-settings.js:5250
-msgid "Breakpoints"
-msgstr ""
-
-#: build/block-visibility-settings.js:5658
-#: build/block-visibility-settings.js:5252
-msgid "The plugin automatically sets a series of breakpoints that enable the Screen Size control. However, for best results, you can configure the breakpoints to correspond with the media breakpoints of your current theme."
-msgstr ""
-
-#: build/block-visibility-settings.js:5659
-#: build/block-visibility-settings.js:5256
-msgid "The default breakpoints are Large (992px) and Medium (768px). Advanced screen size controls add Extra Large (1200px) and Small (576px)."
-msgstr ""
-
-#: build/block-visibility-settings.js:5780
-#: build/block-visibility-settings.js:5376
-msgid "Enable advanced screen size controls."
-msgstr ""
-
-#: build/block-visibility-settings.js:5793
-#: build/block-visibility-settings.js:5396
-msgid "Load screen size CSS on the frontend of this website."
-msgstr ""
-
-#: build/block-visibility-settings.js:5821
-#: build/block-visibility-settings.js:5431
-msgid "Enable the Screen Size controls."
-msgstr ""
-
-#: build/block-visibility-settings.js:5833
-#: build/block-visibility-settings.js:5447
-msgid "The Screen Size control allows you to conditionally display blocks on the current width of the browser window, or in other words, the screen size of a user's device."
-msgstr ""
-
-#: build/block-visibility-settings.js:5838
-#: build/block-visibility-settings.js:5458
-msgid "By default, the Screen Size control includes two breakpoints and three controls for users to hide blocks. There are certain situations where you may need more control over when a block should be visible, for example, in the case of very large or small screens. Enabling advanced controls provides these options."
-msgstr ""
-
-#: build/block-visibility-settings.js:5839
-#: build/block-visibility-settings.js:5462
-msgid "Note that once enabled, any block that is only using the advanced controls to hide at extra large or extra small breakpoints will become visible again if you disable this setting in the future."
-msgstr ""
-
-#: build/block-visibility-settings.js:5844
-#: build/block-visibility-settings.js:5472
-msgid "By default, the CSS needed for the Screen Size controls is loaded on the front end of your website. If disabled, you will need to add the CSS manually to your theme for the Screen Size controls to work properly. This CSS code is available via the \"Preview Frontend CSS\" button."
-msgstr ""
-
-#: build/block-visibility-settings.js:5905
-#: build/block-visibility-settings.js:5515
+#: build/block-visibility-settings.js:1
 msgid "Preview Frontend CSS"
 msgstr ""
 
-#: build/block-visibility-settings.js:5905
-#: build/block-visibility-settings.js:5516
+#: build/block-visibility-settings.js:1
 msgid "Hide Preview"
 msgstr ""
 
-#: build/block-visibility-settings.js:6120
-#: build/block-visibility-settings.js:5735
+#: build/block-visibility-settings.js:1
+msgid "Extra Large"
+msgstr ""
+
+#: build/block-visibility-settings.js:1
+msgid "Large"
+msgstr ""
+
+#: build/block-visibility-settings.js:1
+msgid "Desktop and tablet (landscape) screen sizes."
+msgstr ""
+
+#: build/block-visibility-settings.js:1
+msgid "Medium"
+msgstr ""
+
+#: build/block-visibility-settings.js:1
+msgid "Tablet (portrait) screen sizes."
+msgstr ""
+
+#: build/block-visibility-settings.js:1
+msgid "Small"
+msgstr ""
+
+#: build/block-visibility-settings.js:1
+msgid "Mobile (landscape) screen sizes."
+msgstr ""
+
+#: build/block-visibility-settings.js:1
+msgid "Breakpoints"
+msgstr ""
+
+#: build/block-visibility-settings.js:1
+msgid "The plugin automatically sets a series of breakpoints that enable the Screen Size control. However, for best results, you can configure the breakpoints to correspond with the media breakpoints of your current theme."
+msgstr ""
+
+#: build/block-visibility-settings.js:1
+msgid "The default breakpoints are Large (992px) and Medium (768px). Advanced screen size controls add Extra Large (1200px) and Small (576px)."
+msgstr ""
+
+#: build/block-visibility-settings.js:1
 msgid "The settings below allow you to restrict which controls are available to users in the Block/Site Editor. Disabling controls will remove the corresponding CSS from the front end of your website."
 msgstr ""
 
-#: build/block-visibility-settings.js:6121
-#: build/block-visibility-settings.js:5739
+#: build/block-visibility-settings.js:1
 msgid "The default controls are Desktop, Tablet, and Mobile. Advanced screen size controls add Large Desktop and Mobile (portrait)."
 msgstr ""
 
-#: build/block-visibility-settings.js:6124
-#: build/block-visibility-settings.js:5748
+#: build/block-visibility-settings.js:1
 msgid "Enable large desktop control"
 msgstr ""
 
 #. translators: %s: extra large breakpoint
-#: build/block-visibility-settings.js:6127
-#: build/block-visibility-settings.js:5754
+#: build/block-visibility-settings.js:3
 msgid "Allows users to hide blocks on extra large screen sizes, %s and up."
 msgstr ""
 
-#: build/block-visibility-settings.js:6131
-#: build/block-visibility-settings.js:5770
+#. translators: %s: extra large breakpoint
+#: build/block-visibility-settings.js:3
 msgid "Enable desktop control"
 msgstr ""
 
 #. translators: %s large breakpoint
-#: build/block-visibility-settings.js:6134
-#: build/block-visibility-settings.js:5775
+#: build/block-visibility-settings.js:5
 msgid "Allows users to hide blocks on large screen sizes, %s and up."
 msgstr ""
 
 #. translators: %1$s: large breakpoint %2$s: extra large breakpoint
-#: build/block-visibility-settings.js:6136
-#: build/block-visibility-settings.js:5784
+#: build/block-visibility-settings.js:7
 msgid "Allows users to hide blocks on large screen sizes, between %1$s and %2$s."
 msgstr ""
 
-#: build/block-visibility-settings.js:6140
-#: build/block-visibility-settings.js:5798
+#. translators: %1$s: large breakpoint %2$s: extra large breakpoint
+#: build/block-visibility-settings.js:7
 msgid "Enable tablet control"
 msgstr ""
 
 #. translators: %1$s: medium breakpoint %2$s: large breakpoint
-#: build/block-visibility-settings.js:6143
-#: build/block-visibility-settings.js:5801
+#: build/block-visibility-settings.js:9
 msgid "Allows users to hide blocks on medium screen sizes, between %1$s and %2$s."
 msgstr ""
 
-#: build/block-visibility-settings.js:6147
-#: build/block-visibility-settings.js:5816
+#. translators: %1$s: medium breakpoint %2$s: large breakpoint
+#: build/block-visibility-settings.js:9
 msgid "Enable mobile control"
 msgstr ""
 
-#: build/block-visibility-settings.js:6147
-#: build/block-visibility-settings.js:5818
+#: build/block-visibility-settings.js:9
 msgid "Enable mobile (landscape) control"
 msgstr ""
 
 #. translators: %s: medium breakpoint
-#: build/block-visibility-settings.js:6150
-#: build/block-visibility-settings.js:5827
+#: build/block-visibility-settings.js:11
 msgid "Allows users to hide blocks on small screen sizes, less than %s."
 msgstr ""
 
 #. translators: %1$s: small breakpoint %2$s: medium breakpoint
-#: build/block-visibility-settings.js:6152
-#: build/block-visibility-settings.js:5836
+#: build/block-visibility-settings.js:13
 msgid "Allows users to hide blocks on small screen sizes, between %1$s and %2$s."
 msgstr ""
 
-#: build/block-visibility-settings.js:6156
-#: build/block-visibility-settings.js:5851
+#. translators: %1$s: small breakpoint %2$s: medium breakpoint
+#: build/block-visibility-settings.js:13
 msgid "Enable mobile (portrait) control"
 msgstr ""
 
 #. translators: %s: small breakpoint
-#: build/block-visibility-settings.js:6159
-#: build/block-visibility-settings.js:5857
+#: build/block-visibility-settings.js:15
 msgid "Allows users to hide blocks on extra small screen sizes, less than %s."
 msgstr ""
 
-#: build/block-visibility-settings.js:6220
-#: build/block-visibility-settings.js:5906
-msgid "Enable individual user role restrictions (Administrator, Editor, Subscriber, etc.)"
+#. translators: %s: small breakpoint
+#: build/block-visibility-settings.js:15
+msgid "Enable advanced screen size controls."
 msgstr ""
 
-#: build/block-visibility-settings.js:6233
-#: build/block-visibility-settings.js:5925
-msgid "Enable individual user restrictions."
+#: build/block-visibility-settings.js:15
+msgid "Load screen size CSS on the frontend of this website."
 msgstr ""
 
-#: build/block-visibility-settings.js:6246
-#: build/block-visibility-settings.js:5944
-msgid "Enable advanced user role restrictions (User rule sets)"
+#: build/block-visibility-settings.js:15
+msgid "Enable the Screen Size controls."
 msgstr ""
 
-#: build/block-visibility-settings.js:6274
-#: build/block-visibility-settings.js:5981
-msgid "Enable the User Role controls."
+#: build/block-visibility-settings.js:15
+msgid "The Screen Size control allows you to conditionally display blocks on the current width of the browser window, or in other words, the screen size of a user's device."
 msgstr ""
 
-#: build/block-visibility-settings.js:6286
-#: build/block-visibility-settings.js:5997
-msgid "The User Role control allows you to conditionally display blocks based on whether a user is logged-in, logged-out, and more."
+#: build/block-visibility-settings.js:15
+msgid "By default, the Screen Size control includes two breakpoints and three controls for users to hide blocks. There are certain situations where you may need more control over when a block should be visible, for example, in the case of very large or small screens. Enabling advanced controls provides these options."
 msgstr ""
 
-#: build/block-visibility-settings.js:6291
-#: build/block-visibility-settings.js:6007
-msgid "Restrict visibility by any user role (Administrator, Editor, Subscriber, etc.). Roles added by third-party plugins will also be available to choose from."
+#: build/block-visibility-settings.js:15
+msgid "Note that once enabled, any block that is only using the advanced controls to hide at extra large or extra small breakpoints will become visible again if you disable this setting in the future."
 msgstr ""
 
-#: build/block-visibility-settings.js:6296
-#: build/block-visibility-settings.js:6017
-msgid "Restrict visibility to specific individual users on your website based on user ID. You can select multiple users at once."
+#: build/block-visibility-settings.js:15
+msgid "By default, the CSS needed for the Screen Size controls is loaded on the front end of your website. If disabled, you will need to add the CSS manually to your theme for the Screen Size controls to work properly. This CSS code is available via the \"Preview Frontend CSS\" button."
 msgstr ""
 
-#: build/block-visibility-settings.js:6301
-#: build/block-visibility-settings.js:6027
-msgid "This functionality allows you to create user-based rule sets, which provide extensive configuration options and greater flexibility."
+#: build/block-visibility-settings.js:15
+msgid "Enable the Query String control."
 msgstr ""
 
-#: build/block-visibility-settings.js:6381
-#: build/block-visibility-settings.js:6083
+#: build/block-visibility-settings.js:15
+msgid "The Query String control allows you to conditionally display blocks based on URL query strings."
+msgstr ""
+
+#: build/block-visibility-settings.js:15
+msgid "Enable the Advanced Custom Fields control."
+msgstr ""
+
+#: build/block-visibility-settings.js:15
+msgid "The Advanced Custom Fields (ACF) control allows you to conditionally display blocks, including ACF blocks, based on ACF fields."
+msgstr ""
+
+#: build/block-visibility-settings.js:15
 msgid "Enable the WP Fusion control."
 msgstr ""
 
-#: build/block-visibility-settings.js:6393
-#: build/block-visibility-settings.js:6099
+#: build/block-visibility-settings.js:15
 msgid "The WP Fusion control allows you to conditionally display blocks based on WP Fusion tags."
+msgstr ""
+
+#: build/block-visibility-settings.js:15
+msgid "Updating…"
+msgstr ""
+
+#: build/block-visibility-settings.js:15
+msgid "Update"
+msgstr ""
+
+#: build/block-visibility-settings.js:15
+msgid "Saving"
+msgstr ""
+
+#: build/block-visibility-settings.js:15
+msgid "Update failed. Try again or get in touch with support."
+msgstr ""
+
+#: build/block-visibility-settings.js:15
+msgid "Reset Settings"
+msgstr ""
+
+#: build/block-visibility-settings.js:15
+msgid "Resetting will restore all configured settings on the current tab to their default values. To restore all plugin settings, choose Reset All."
+msgstr ""
+
+#: build/block-visibility-settings.js:15
+msgid "Reset All"
+msgstr ""
+
+#: build/block-visibility-settings.js:15
+msgid "Cancel"
+msgstr ""
+
+#: build/block-visibility-settings.js:15
+msgid "Reset failed. Try again or get in touch with support."
+msgstr ""
+
+#: build/block-visibility-settings.js:15
+msgid "Third-Party Integration Controls"
+msgstr ""
+
+#: build/block-visibility-settings.js:15
+msgid "The settings below allow you to configure all third-party integration controls for Block Visibility. If you are looking for an integration, and do not see it below, make sure the respective third-party plugin is installed and activated on your website."
+msgstr ""
+
+#: build/block-visibility-settings.js:15
+msgid "Visit the plugin Knowledge Base for more information on configuring third-party integration controls and what integrations are currently available in Block Visibility."
+msgstr ""
+
+#: build/block-visibility-settings.js:15
+msgid "The settings below allow you to configure the visibility controls that power Block Visibility. Pick and choose which controls you want to enable and how you would like them to function."
+msgstr ""
+
+#: build/block-visibility-settings.js:15
+msgid "When a visibility control is disabled, blocks that rely on the disabled control will become visible again unless other enabled controls hide them."
+msgstr ""
+
+#: build/block-visibility-settings.js:15
+msgid "Some blocks may appear in the Block Manager as uncategorized even though they have an assigned category in the Editor. This is due to how the block is registered in WordPress."
+msgstr ""
+
+#: build/block-visibility-settings.js:15
+msgid "Visibility is enabled for all blocks"
+msgstr ""
+
+#. translators: %s: The total number of visible block types
+#: build/block-visibility-settings.js:16
+msgid "Block Manager"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Only some block types may need visibility controls. The Block Manager allows you to restrict visibility controls to specific block types."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "If you are looking for a block and do not see it listed, you may need to enable Full Control Mode on the General Settings tab."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Search for a block"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Black"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Light Grey"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Red"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Orange"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Yellow"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Green"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Medium Blue"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "WordPress Blue"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Purple"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Indicator color"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Block Opacity"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Editor"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Settings that impact the Editor, such as contextual indicators for when a block has visibility controls, as well as additional toolbar options."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Contextual Indicators"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Enable contextual indicators."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Contextual indicators assist users in quickly determining which blocks have active visibility controls."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Contextual Block Opacity"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Reduce block opacity when visibility controls are applied."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Combining contextual indicators with reduced block opacity can assist users in quickly determining which blocks have active visibility controls."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Toolbar Controls"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Enable block toolbar controls for visibility settings."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Some visibility controls (currently just the Hide Block control) can be made available in the toolbar of each block."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Help Notices & Popovers"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Enable help notices and popovers in the Editor."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "By default, help notices and popovers display in the Editor providing additional information about how to use Block Visibility. Disable for a more simplified interface."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Upgrade to enable utilities for managing visibility settings (copy, import, etc.)"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Choose which user roles should be allowed to control visibility settings in the Editor. Administrators will always have permission."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "User Permissions"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Restrict block visibility controls to selected user roles."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "By default, all users that can edit blocks will be able to use the visibility controls provided by Block Visibility."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Full Control Mode"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Enable Full Control Mode to add visibility controls to <strong>every</strong> block. <a>Use with caution</a>."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Some blocks do not have visibility controls enabled by default. These include child blocks and blocks that may exist in WordPress but cannot be added directly to the Editor. You will not need Full Control Mode most of the time, but it's here in case you do."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Uninstall"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Remove all plugin settings when Block Visibility is uninstalled."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "General Settings"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "The settings below allow you to configure general functionality for the Block Visibility plugin."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Enhance the power of Block Visibility with the Pro add-on."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Location control"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Advanced scheduling"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Referral Source control"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "eCommerce integrations"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Premium email support"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "No ads!"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Get Block Visibility Pro"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Need Support?"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Whether you need help or have a new feature request, please create a topic in the support forum on WordPress.org."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Support Forum"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Detailed documentation is also available on the plugin website."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "View Knowledge Base"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Share Your Feedback"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "If you are enjoying Block Visibility and find it useful, please consider leaving a ★★★★★ review on WordPress.org. Your feedback is greatly appreciated and helps others discover the plugin."
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Submit a Review"
+msgstr ""
+
+#: build/block-visibility-settings.js:16
+msgid "Loading settings…"
 msgstr ""
