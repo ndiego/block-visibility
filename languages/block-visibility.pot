@@ -1,15 +1,15 @@
-# Copyright (C) 2022 Nick Diego
+# Copyright (C) 2023 Nick Diego
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Block Visibility 2.5.0\n"
+"Project-Id-Version: Block Visibility 2.5.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/block-visibility\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-12-05T02:52:33+00:00\n"
+"POT-Creation-Date: 2023-01-03T21:45:54+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: block-visibility\n"
@@ -185,6 +185,26 @@ msgstr ""
 #: build/block-visibility-editor.js:5
 #: build/block-visibility-editor.js:27
 msgid "Visibility"
+msgstr ""
+
+#. translators: %s: The name of the control being toggled e.g. "Hide Block".
+#: build/block-visibility-editor.js:7
+msgid "Toggle %s"
+msgstr ""
+
+#. translators: %s: The name of the control being toggled e.g. "Hide Block".
+#: build/block-visibility-editor.js:9
+msgid "%s toggled"
+msgstr ""
+
+#. translators: %s: The name of the control being reset e.g. "Hide Block".
+#: build/block-visibility-editor.js:11
+msgid "Reset %s"
+msgstr ""
+
+#. translators: %s: The name of the control being reset e.g. "Hide Block".
+#: build/block-visibility-editor.js:13
+msgid "%s reset to default"
 msgstr ""
 
 #. translators: %s: The name of the control being reset e.g. "Hide Block".
@@ -422,15 +442,15 @@ msgid "Choose a end date/time"
 msgstr ""
 
 #: build/block-visibility-editor.js:19
-msgid "The start time is after the stop time. Please fix for date/time settings to function properly."
-msgstr ""
-
-#: build/block-visibility-editor.js:19
 msgid "Start Date/Time"
 msgstr ""
 
 #: build/block-visibility-editor.js:19
 msgid "End Date/Time"
+msgstr ""
+
+#: build/block-visibility-editor.js:19
+msgid "The start time is after the stop time. Please fix for date/time settings to function properly."
 msgstr ""
 
 #: build/block-visibility-editor.js:19

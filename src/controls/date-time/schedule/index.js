@@ -67,6 +67,8 @@ export default function Schedule( props ) {
 	const start = scheduleAtts?.start ?? null;
 	const end = scheduleAtts?.end ?? null;
 
+	const today = new Date( new Date().setHours( 0, 0, 0, 0 ) );
+
 	const scheduleTitle = title ? title : __( 'Schedule', 'block-visibility' );
 	const startDateLabel = formatDateLabel(
 		start,
@@ -76,6 +78,37 @@ export default function Schedule( props ) {
 		end,
 		__( 'Forever', 'block-visibility' )
 	);
+
+	// If there is no start date/time selected, but there is an end, default the
+	// starting selection in the calendar to the day prior.
+	const selectedStart = ( _start, _end, _today ) => {
+		if ( _start ) {
+			return _start;
+		}
+
+		const startAlt = _end ? new Date( _end ) : new Date( _today );
+
+		if ( _end ) {
+			startAlt.setHours( 0, 0, 0, 0 );
+			startAlt.setDate( startAlt.getDate() - 1 );
+		}
+
+		return startAlt;
+	};
+
+	// If there is no end date/time selected, but there is a start, default the
+	// starting selection in the calendar to the next day.
+	const selectedEnd = ( _start, _end, _today ) => {
+		if ( _end ) {
+			return _end;
+		}
+
+		const endAlt = _start ? new Date( _start ) : new Date( _today );
+		endAlt.setHours( 0, 0, 0, 0 );
+		endAlt.setDate( endAlt.getDate() + 1 );
+
+		return endAlt;
+	};
 
 	// If the start time is greater or equal to the end time, display a warning.
 	let alert = false;
@@ -205,39 +238,62 @@ export default function Schedule( props ) {
 							: __( 'Show', 'block-visibility' )
 					) }
 				</div>
-				<div className="date-time-item">
-					<span className="control-fields-item__sub-label">
-						{ __( 'From', 'block-visibility' ) }
-					</span>
-					<DateTimeField
-						label={ startDateLabel }
-						title={ __(
-							'Choose a start date/time',
-							'block-visibility'
-						) }
-						dateType="start"
-						hasDateTime={ start }
-						setAttribute={ setAttribute }
-						setPickerType={ setPickerType }
-						setPickerOpen={ setPickerOpen }
-					/>
-				</div>
-				<div className="date-time-item">
-					<span className="control-fields-item__sub-label">
-						{ __( 'To', 'block-visibility' ) }
-					</span>
-					<DateTimeField
-						label={ endDateLabel }
-						title={ __(
-							'Choose a end date/time',
-							'block-visibility'
-						) }
-						dateType="end"
-						hasDateTime={ end }
-						setAttribute={ setAttribute }
-						setPickerType={ setPickerType }
-						setPickerOpen={ setPickerOpen }
-					/>
+				<div className="date-time-items">
+					<div className="date-time-item">
+						<span className="control-fields-item__sub-label">
+							{ __( 'From', 'block-visibility' ) }
+						</span>
+						<DateTimeField
+							label={ startDateLabel }
+							title={ __(
+								'Choose a start date/time',
+								'block-visibility'
+							) }
+							dateType="start"
+							hasDateTime={ start }
+							setAttribute={ setAttribute }
+							setPickerType={ setPickerType }
+							setPickerOpen={ setPickerOpen }
+						/>
+					</div>
+					<div className="date-time-item">
+						<span className="control-fields-item__sub-label">
+							{ __( 'To', 'block-visibility' ) }
+						</span>
+						<DateTimeField
+							label={ endDateLabel }
+							title={ __(
+								'Choose a end date/time',
+								'block-visibility'
+							) }
+							dateType="end"
+							hasDateTime={ end }
+							setAttribute={ setAttribute }
+							setPickerType={ setPickerType }
+							setPickerOpen={ setPickerOpen }
+						/>
+					</div>
+					{ pickerOpen && pickerType && (
+						<CalendarPopover
+							currentDate={
+								pickerType === 'start'
+									? selectedStart( start, end, today )
+									: selectedEnd( start, end, today )
+							}
+							label={
+								pickerType === 'start'
+									? __(
+											'Start Date/Time',
+											'block-visibility'
+									  )
+									: __( 'End Date/Time', 'block-visibility' )
+							}
+							isOpen={ setPickerOpen }
+							setAttribute={ setAttribute }
+							setPickerOpen={ setPickerOpen }
+							pickerType={ pickerType }
+						/>
+					) }
 				</div>
 				{ alert && (
 					<Notice status="warning" isDismissible={ false }>
@@ -246,21 +302,6 @@ export default function Schedule( props ) {
 							'block-visibility'
 						) }
 					</Notice>
-				) }
-
-				{ pickerOpen && pickerType && (
-					<CalendarPopover
-						currentDate={ pickerType === 'start' ? start : end }
-						label={
-							pickerType === 'start'
-								? __( 'Start Date/Time', 'block-visibility' )
-								: __( 'End Date/Time', 'block-visibility' )
-						}
-						isOpen={ setPickerOpen }
-						setAttribute={ setAttribute }
-						setPickerOpen={ setPickerOpen }
-						pickerType={ pickerType }
-					/>
 				) }
 			</div>
 

@@ -86,7 +86,7 @@ function VisibilityInspectorControls( props ) {
 	if ( ! isEmpty( defaultControlSettings ) ) {
 		enabledControls.forEach( ( control ) => {
 			if ( defaultControlSettings.includes( control.settingSlug ) ) {
-				defaultControls.push[ control.attributeSlug ];
+				defaultControls.push[ control.attributeSlug ]; // eslint-disable-line
 			}
 		} );
 	}
