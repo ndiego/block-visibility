@@ -83,6 +83,7 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 			'plugin_variables'     => $plugin_variables,
 			'is_full_control_mode' => $is_full_control_mode,
 			'is_pro'               => defined( 'BVP_VERSION' ), // If the Pro version constant is set, then Block Visibility Pro is active.
+			'current_users_roles'  => get_current_user_role(),
 			'integrations'         => array(
 				'acf'       => array(
 					'active' => function_exists( 'acf' ),
@@ -97,8 +98,7 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 		);
 
 		if ( 'simplified' !== $request_type ) {
-			$variables['current_users_roles'] = get_current_user_role();
-			$variables['user_roles']          = get_user_roles();
+			$variables['user_roles'] = get_user_roles();
 		}
 
 		$variables = apply_filters(
