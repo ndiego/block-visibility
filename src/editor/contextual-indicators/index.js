@@ -165,6 +165,7 @@ function withContextualIndicators( BlockListBlock ) {
 			{
 				'block-visibility__is-hidden': isHidden,
 			},
+			props.className,
 			controlsClass
 		);
 
