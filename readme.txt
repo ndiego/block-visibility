@@ -5,7 +5,7 @@ Tags:              visibility, dynamic content, conditional content, conditional
 Requires at least: 6.0
 Tested up to:      6.1
 Requires PHP:      5.6
-Stable tag:        2.5.2
+Stable tag:        2.5.3
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -208,6 +208,12 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ==
 
+= 2.5.3 - 2023-01-24 =
+
+**Fixed**
+
+* Fixed bug in contextual indicators that would override custom block classes added by third-party plugins. ([#61](https://github.com/ndiego/block-visibility/issues/61))
+
 = 2.5.2 - 2023-01-03 =
 
 **Fixed**
@@ -223,7 +229,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 **Fixed**
 
-* Fixed conditional opacity CSS for text-only blocks. (#54)
+* Fixed conditional opacity CSS for text-only blocks. ([#54](https://github.com/ndiego/block-visibility/issues/54))
 * Fixed data fetching method to only return simplified variables in plugin settings. 
 * Fixed incorrect translation strings.
 * Fixed styling on control reset button to match Core tools panels.
@@ -260,7 +266,7 @@ Block Visibility now requires WordPress 6.0+ with version 2.5.0 and users of the
 
 **Fixed**
 
-* [Advanced Custom Fields] Fixed bug where numeric ACF fields were not being evaluated correctly. (#50)
+* [Advanced Custom Fields] Fixed bug where numeric ACF fields were not being evaluated correctly. ([#50](https://github.com/ndiego/block-visibility/issues/50))
 * [Screen Size] Fixed bug where using the Screen Size control and the `meow-gallery/gallery` block. Added better error handling to avoid a similar issue in other third-party blocks.
 * Fixed bug where resetting settings on a specific tab would reset all plugin settings.
 

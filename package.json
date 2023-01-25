@@ -1,6 +1,6 @@
 {
 	"name": "block-visibility",
-	"version": "2.5.2",
+	"version": "2.5.3",
 	"description": "Provides visibility controls and scheduling functionality to all WordPress blocks.",
 	"author": "Nick Diego",
 	"license": "GPL-2.0-or-later",
@@ -16,7 +16,8 @@
 		"lint:js:src": "wp-scripts lint-js ./src",
 		"lint:js:src:fix": "wp-scripts lint-js ./src --fix",
 		"start": "wp-scripts start",
-		"packages-update": "wp-scripts packages-update"
+		"packages-update": "wp-scripts packages-update",
+		"update-pot": "wp i18n make-pot . languages/block-visibility.pot --exclude=src"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^24.6.0",
