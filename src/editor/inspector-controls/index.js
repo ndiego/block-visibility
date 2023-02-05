@@ -46,7 +46,7 @@ function VisibilityInspectorControls( props ) {
 	// Display a default panel with spinner when settings and variables are loading.
 	if ( settings === 'fetching' || variables === 'fetching' ) {
 		return (
-			<InspectorControls>
+			<InspectorControls group="settings">
 				<div className="block-visibility__controls-panel">
 					<div className="controls-panel-header">
 						<h2>{ __( 'Visibility', 'block-visibility' ) }</h2>
@@ -139,7 +139,7 @@ function VisibilityInspectorControls( props ) {
 		// of SlotFill, and is "inside" of a <SlotFillProvider> component.
 		// Therefore we can freely use SlofFill without needing to add the
 		// provider ourselves.
-		<InspectorControls>
+		<InspectorControls group="settings">
 			<div className="block-visibility__controls-panel">
 				<ControlsPanel
 					controlSets={ controlSets }
