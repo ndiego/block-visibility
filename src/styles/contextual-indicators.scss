@@ -50,7 +50,7 @@ $icon__three-controls: $svg-start + $three-controls + $svg-end;
 $icon__four-controls: $svg-start + $four-controls + $svg-end;
 $icon__five-controls: $svg-start + $five-controls + $svg-end;
 
-/* Contextual indicator styles */
+// Contextual indicator styles
 .block-visibility__has-visibility {
 
     // Ensure no indicator styling is applied when a block is selected.
@@ -130,7 +130,7 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
             }
         }
     
-        /* Pro controls */
+        // Pro control styles.
         &.block-visibility__has-location {
             &:after {
                 mask-image: url( $icon__location );
@@ -187,7 +187,7 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
             }
         }
     
-        // When multiple controls are enabled
+        // When multiple controls are enabled.
         &.block-visibility__has-2-controls {
             &:after {
                 mask-image: url( $icon__two-controls );
