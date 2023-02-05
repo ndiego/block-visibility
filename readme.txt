@@ -208,6 +208,12 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ==
 
+= 2.6.0 - 2023-TBD =
+
+**Changed**
+
+* Explicitly set the InspectorControls group to "settings" for new tabbed interface in WordPress 6.2.
+
 = 2.5.3 - 2023-01-24 =
 
 **Fixed**
