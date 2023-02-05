@@ -1,6 +1,7 @@
 @import './common';
 @import './react-select';
 
+// Visibility controls panel styles.
 .block-visibility__controls-panel {
     border-top: 1px solid #dddddd;
     display: grid;
@@ -60,6 +61,7 @@
     }
 }
 
+// Shared styles between the main controls panel and the preset manager in Pro.
 .controls-panel-container,
 .preset-manager__content {
 
@@ -576,7 +578,7 @@
     }
 }
 
-/* Date/Time calendar popover styles -----------------------------------------*/
+// Date/Time calendar popover styles.
 .block-visibility__date-time-popover {
     .components-popover__content {
         padding: 16px;
@@ -603,7 +605,7 @@
     }
 }
 
-/* Control set styles --------------------------------------------------------*/
+// Control set popover styles.
 .block-visibility__control-popover {
     &.visibility-controls {
         // Same size as core popovers. 
@@ -717,6 +719,7 @@
     }
 }
 
+// Specific styles for reset modal.
 .block-visibility__reset-modal {
     max-width: 400px !important;
 
@@ -731,6 +734,7 @@
     }
 }
 
+// Specific styles for confirmation modal.
 .block-visibility__confirmation-modal {
     max-width: 400px !important;
 
@@ -741,9 +745,8 @@
     }
 }
 
-/* Specific styles for the Customizer Widgets screen -------------------------*/
+// Specific styles for the Customizer Widgets screen.
 #customize-theme-controls {
-
     .controls-panel-container {
         h3.controls-panel-item__header {
             font-size: 13px !important;
@@ -760,4 +763,10 @@
             }
         }
     }
+}
+
+// Kadence Blocks support styles.
+[data-kadence-active-tab="general"] .block-visibility__controls-panel, 
+[data-kadence-active-tab="style"] .block-visibility__controls-panel {
+    display: none; // Hide visibility panel if not on "Advanced" tab.
 }
