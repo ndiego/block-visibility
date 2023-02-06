@@ -165,7 +165,6 @@ function withContextualIndicators( BlockListBlock ) {
 			{
 				'block-visibility__is-hidden': isHidden,
 			},
-			props?.className,
 			controlsClass
 		);
 
@@ -184,7 +183,10 @@ function withContextualIndicators( BlockListBlock ) {
 			classes
 		);
 
-		return <BlockListBlock { ...props } className={ classes } />;
+		// Add any other classes that might have been added using the same filter.
+		const finalClasses = classnames( props?.className, classes );
+
+		return <BlockListBlock { ...props } className={ finalClasses } />;
 	};
 }
 
