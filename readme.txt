@@ -5,7 +5,7 @@ Tags:              visibility, dynamic content, conditional content, conditional
 Requires at least: 6.0
 Tested up to:      6.1
 Requires PHP:      5.6
-Stable tag:        2.5.3
+Stable tag:        2.5.4
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -208,12 +208,16 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ==
 
-= 2.6.0 - 2023-TBD =
+= 2.5.4 - 2023-02-05 =
 
 **Changed**
 
 * Improve Kadence Blocks support by only displaying the Visibility panel on the Advanced tab. (Requires Kadence Block 3.0+)
 * Explicitly set the InspectorControls group to "settings" for new tabbed interface in WordPress 6.2.
+
+**Fixed**
+
+* Fixed bug in contextual indicators that would incorrectly add visibility classes to blocks.
 
 = 2.5.3 - 2023-01-24 =
 
