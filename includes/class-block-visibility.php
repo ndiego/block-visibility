@@ -72,7 +72,7 @@ final class Block_Visibility {
 	 */
 	public function actions() {
 		add_action( 'init', array( $this, 'load_textdomain' ) );
-		add_action( 'enqueue_block_editor_assets', array( $this, 'block_localization' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'block_localization' ) );
 
 		// Specific fixes/work arounds for server-side blocks.
 		add_action( 'wp_loaded', array( $this, 'add_attributes_to_registered_blocks' ), 999 );
