@@ -208,6 +208,12 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ==
 
+= 2.5.5 - 2023-02-05 =
+
+**Fixed**
+
+* Fixed translations not working on the plugin settings page. Thanks @webaxones for discovering this issue and also for translating the plugin into French! 
+
 = 2.5.4 - 2023-02-05 =
 
 **Changed**
