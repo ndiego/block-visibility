@@ -188,89 +188,58 @@ function run_acf_rule_tests( $operator, $value, $acf_field ) {
 		return false;
 	}
 
+	// Used to detect "choice" field type values.
+	$is_array = is_array( $acf_field['value'] );
+
 	// Assume error and try to disprove.
 	$test_result = 'error';
 
 	switch ( $operator ) {
 		case 'notEmpty':
-			$test_result = ! empty( $acf_field['value'] ) ? true : false;
+			$test_result = ! empty( $acf_field['value'] );
 			break;
 
 		case 'empty':
-			$test_result = empty( $acf_field['value'] ) ? true : false;
+			$test_result = empty( $acf_field['value'] );
 			break;
 
 		case 'equal':
 			if ( isset( $value ) ) {
-				// Don't use === here, otherwise numeric ACF field values will return false.
-				$test_result = $acf_field['value'] == $value ? true : false;
+				if ( $is_array ) {
+					$test_result = in_array( $value, $acf_field['value'] ) && count( $acf_field['value'] ) === 1;
+				} else {
+					// Don't use === here, otherwise numeric ACF field values will return false.
+					$test_result = $acf_field['value'] == $value;
+				}
 			}
 			break;
 
 		case 'notEqual':
 			if ( isset( $value ) ) {
-				$test_result = $acf_field['value'] !== $value ? true : false;
+				if ( $is_array ) {
+					$test_result = ! in_array( $value, $acf_field['value'] );
+				} else {
+					$test_result = $acf_field['value'] !== $value;
+				}
 			}
 			break;
 
 		case 'contains':
 			if ( isset( $value ) ) {
-				if ( strpos( $acf_field['value'], $value ) !== false ) {
-					$test_result = true;
+				if ( $is_array ) {
+					$test_result = in_array( $value, $acf_field['value'] );
 				} else {
-					$test_result = false;
+					$test_result = strpos( $acf_field['value'], $value ) !== false;
 				}
 			}
 			break;
 
 		case 'notContain':
 			if ( isset( $value ) ) {
-				if ( strpos( $acf_field['value'], $value ) === false ) {
-					$test_result = true;
+				if ( $is_array ) {
+					$test_result = ! in_array( $value, $acf_field['value'] );
 				} else {
-					$test_result = false;
-				}
-			}
-			break;
-
-		// Deprecated values.
-		case '!=empty':
-			$test_result = ! empty( $acf_field['value'] ) ? true : false;
-			break;
-
-		case '==empty':
-			$test_result = empty( $acf_field['value'] ) ? true : false;
-			break;
-
-		case '==':
-			if ( isset( $value ) ) {
-				// Don't use === here, otherwise numeric field values will not return true.
-				$test_result = $acf_field['value'] == $value ? true : false;
-			}
-			break;
-
-		case '!=':
-			if ( isset( $value ) ) {
-				$test_result = $acf_field['value'] !== $value ? true : false;
-			}
-			break;
-
-		case '==contains':
-			if ( isset( $value ) ) {
-				if ( strpos( $acf_field['value'], $value ) !== false ) {
-					$test_result = true;
-				} else {
-					$test_result = false;
-				}
-			}
-			break;
-
-		case '!=contains':
-			if ( isset( $value ) ) {
-				if ( strpos( $acf_field['value'], $value ) === false ) {
-					$test_result = true;
-				} else {
-					$test_result = false;
+					$test_result = strpos( $acf_field['value'], $value ) === false;
 				}
 			}
 			break;
