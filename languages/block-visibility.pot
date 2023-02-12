@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Block Visibility 2.5.4\n"
+"Project-Id-Version: Block Visibility 2.6.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/block-visibility\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-02-06T02:43:12+00:00\n"
+"POT-Creation-Date: 2023-02-12T17:15:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: block-visibility\n"
@@ -214,6 +214,164 @@ msgid "Reset"
 msgstr ""
 
 #: build/block-visibility-editor.js:13
+msgid "Text"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Text Area"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Number"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Range"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Email"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Url"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Password"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Image"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "File"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Wysiwyg Editor"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "oEmbed"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Select"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Checkbox"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Radio Button"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Button Group"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "True / False"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Link"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Post Object"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Page Link"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Relationship"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Taxonomy"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+#: build/block-visibility-editor.js:23
+msgid "User"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Google Map"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Date Picker"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Date Time Picker"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Time Picker"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Color Picker"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Message"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Accordion"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Tab"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Group"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Repeater"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Flexible Content"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Clone"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Evaluate as user field"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+#: build/block-visibility-editor.js:23
+msgid "Select Condition…"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Enter Value…"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "True"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "False"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
 msgid "Has any value"
 msgstr ""
 
@@ -230,24 +388,27 @@ msgid "Value is not equal to"
 msgstr ""
 
 #: build/block-visibility-editor.js:13
+msgid "Value is greater than"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Value is greater or equal to"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Value is less than"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
+msgid "Value is less than or equal to"
+msgstr ""
+
+#: build/block-visibility-editor.js:13
 msgid "Value contains"
 msgstr ""
 
 #: build/block-visibility-editor.js:13
 msgid "Value does not contain"
-msgstr ""
-
-#: build/block-visibility-editor.js:13
-msgid "Evaluate as user field"
-msgstr ""
-
-#: build/block-visibility-editor.js:13
-#: build/block-visibility-editor.js:23
-msgid "Select Condition…"
-msgstr ""
-
-#: build/block-visibility-editor.js:13
-msgid "Enter Value…"
 msgstr ""
 
 #: build/block-visibility-editor.js:13
@@ -596,10 +757,6 @@ msgstr ""
 
 #: build/block-visibility-editor.js:23
 msgid "Select User Roles…"
-msgstr ""
-
-#: build/block-visibility-editor.js:23
-msgid "User"
 msgstr ""
 
 #. Translators: Whether the block is hidden or visible.
