@@ -106,15 +106,15 @@ function enqueue_editor_styles() {
 			$opacity = intval( $block_opacity ) * 0.01;
 
 			// Not all blocks can support contextual opacity.
-			$excluded_blocks = array( 
+			$excluded_blocks = array(
 				'paragraph',
 				'heading',
-				'verse'
+				'verse',
 			);
 
-			$excluded_blocks = apply_filters( 
-				'block_visibility_exclude_blocks_from_contextual_opacity', 
-				$excluded_blocks 
+			$excluded_blocks = apply_filters(
+				'block_visibility_exclude_blocks_from_contextual_opacity',
+				$excluded_blocks
 			);
 
 			$excluded_blocks_selectors = '';

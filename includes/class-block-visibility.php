@@ -253,7 +253,7 @@ final class Block_Visibility {
 			BVP_VERSION,
 			BLOCK_VISIBILITY_VERSION
 		);
-		
+
 		?>
 		<div class="notice notice-error">
 			<p><?php echo esc_html( $message ); ?></p>
