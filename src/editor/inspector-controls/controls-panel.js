@@ -35,7 +35,6 @@ const AdditionalControlSetControls = withFilters(
  *
  * @since 2.5.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function ControlsPanel( props ) {
 	const {

@@ -10,7 +10,6 @@ import { closeSmall } from '@wordpress/icons';
  *
  * @since 1.1.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function DateTimeField( props ) {
 	const {

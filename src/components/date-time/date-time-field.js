@@ -16,7 +16,6 @@ import { __experimentalGetSettings, format } from '@wordpress/date'; // eslint-d
  *
  * @since 1.1.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function DateTimeField( props ) {
 	const { value, setPopoverOpen, onClearDateTime, includeTime } = props;

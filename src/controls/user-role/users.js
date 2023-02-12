@@ -20,7 +20,6 @@ import useAllUsers from './utils/use-all-users';
  *
  * @since 2.0.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function Users( props ) {
 	const { variables, userRole, setControlAtts, enableNotices } = props;

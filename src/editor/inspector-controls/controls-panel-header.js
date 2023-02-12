@@ -33,7 +33,6 @@ const AdditionalControlSetModals = withFilters(
  *
  * @since 1.6.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function ControlsPanelHeader( props ) {
 	const [ modalOpen, setModalOpen ] = useState( false );
@@ -267,7 +266,6 @@ export default function ControlsPanelHeader( props ) {
  *
  * @since 2.1.1
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 function ControlSetModals( props ) {
 	return (
@@ -283,7 +281,6 @@ function ControlSetModals( props ) {
  *
  * @since 1.9.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 function ControlMenuItem( props ) {
 	const { control, toggleControls } = props;
@@ -322,7 +319,6 @@ function ControlMenuItem( props ) {
  *
  * @since 2.5.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 function DefaultControlMenuItem( props ) {
 	const { control, toggleControls } = props;

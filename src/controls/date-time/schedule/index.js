@@ -39,7 +39,6 @@ const AdditionalScheduleControls = withFilters(
  *
  * @since 1.8.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function Schedule( props ) {
 	const {

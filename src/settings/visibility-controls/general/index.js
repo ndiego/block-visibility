@@ -20,7 +20,6 @@ import { InformationPopover } from './../../../components';
  *
  * @since 2.3.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function General( props ) {
 	const { settings, setSettings, setHasUpdates, variables } = props;

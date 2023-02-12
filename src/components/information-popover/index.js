@@ -10,7 +10,6 @@ import { info } from '@wordpress/icons';
  *
  * @since 1.0.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function InformationPopover( props ) {
 	const { message, subMessage, link, position } = props;

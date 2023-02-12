@@ -29,7 +29,6 @@ import Rule from './rule';
  *
  * @since 1.9.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function RuleSets( props ) {
 	const {

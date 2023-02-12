@@ -10,7 +10,6 @@ import { CheckboxControl } from '@wordpress/components';
  *
  * @since 1.0.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function BlockType( props ) {
 	const { blockType, disabledBlocks, handleBlockTypeChange } = props;

@@ -11,7 +11,6 @@ import { __experimentalGetSettings } from '@wordpress/date'; // eslint-disable-l
  *
  * @since 1.1.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function CalendarPopover( props ) {
 	const { currentDate, label, setAttribute, setPickerOpen, pickerType } =

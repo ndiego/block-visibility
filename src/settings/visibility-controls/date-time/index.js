@@ -22,7 +22,6 @@ import { InformationPopover } from './../../../components';
  *
  * @since 1.4.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function DateTime( props ) {
 	const { visibilityControls, setVisibilityControls, variables } = props;

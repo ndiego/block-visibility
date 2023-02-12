@@ -27,7 +27,6 @@ const AdditionalSettings = withFilters( 'blockVisibility.PluginSettings' )(
  *
  * @since 1.0.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function PluginSettings( props ) {
 	const [ hasUpdates, setHasUpdates ] = useState( false );

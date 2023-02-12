@@ -15,7 +15,6 @@ import { Button } from '@wordpress/components';
  *
  * @since 1.5.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function PreviewStyles( props ) {
 	const [ preview, setPreview ] = useState( false );

@@ -9,7 +9,6 @@ import { ToggleControl } from '@wordpress/components';
  *
  * @since 1.4.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function FullControlMode( props ) {
 	const { pluginSettings, setPluginSettings } = props;
