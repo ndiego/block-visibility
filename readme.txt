@@ -5,7 +5,7 @@ Tags:              visibility, dynamic content, conditional content, conditional
 Requires at least: 6.0
 Tested up to:      6.1
 Requires PHP:      5.6
-Stable tag:        2.5.4
+Stable tag:        2.6.0
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -208,11 +208,28 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ==
 
-= 2.5.5 - 2023-02-05 =
+= 2.6.0 - 2023-02-13 =
+
+**Added**
+
+* [ACF] Added support for "greater than", "greater than or equal", "less than", and "less than or equal" operators for numeric and date/time fields.
+* [ACF] Added field type help message.
+
+**Changed**
+
+* [ACF] Improved support for numeric and date/time fields.
+* [ACF] Improved support for "choice" fields.
+* Improved help message support in rule set fields.
+
+**Removed**
+
+* [ACF] Removed frontend tests that were deprecated in v1.9.0.
 
 **Fixed**
 
+* [ACF] Fix information popover position.
 * Fixed translations not working on the plugin settings page. Thanks @webaxones for discovering this issue and also for translating the plugin into French! 
+* Fixed incorrect JSDoc tags throughout the plugin.
 
 = 2.5.4 - 2023-02-05 =
 
