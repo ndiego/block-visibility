@@ -3,6 +3,151 @@
  */
 import { __ } from '@wordpress/i18n';
 
+const acfFields = [
+	{
+		type: 'text',
+		label: __( 'Text', 'block-visibility' ),
+	},
+	{
+		type: 'textarea',
+		label: __( 'Text Area', 'block-visibility' ),
+	},
+	{
+		type: 'number',
+		label: __( 'Number', 'block-visibility' ),
+		options: 'numeric',
+	},
+	{
+		type: 'range',
+		label: __( 'Range', 'block-visibility' ),
+		options: 'numeric',
+	},
+	{
+		type: 'email',
+		label: __( 'Email', 'block-visibility' ),
+	},
+	{
+		type: 'url',
+		label: __( 'Url', 'block-visibility' ),
+	},
+	{
+		type: 'password',
+		label: __( 'Password', 'block-visibility' ),
+	},
+	{
+		type: 'image',
+		label: __( 'Image', 'block-visibility' ),
+	},
+	{
+		type: 'file',
+		label: __( 'File', 'block-visibility' ),
+	},
+	{
+		type: 'wysiwyg',
+		label: __( 'Wysiwyg Editor', 'block-visibility' ),
+	},
+	{
+		type: 'oembed',
+		label: __( 'oEmbed', 'block-visibility' ),
+	},
+	{
+		type: 'select',
+		label: __( 'Select', 'block-visibility' ),
+	},
+	{
+		type: 'checkbox',
+		label: __( 'Checkbox', 'block-visibility' ),
+	},
+	{
+		type: 'radio',
+		label: __( 'Radio Button', 'block-visibility' ),
+	},
+	{
+		type: 'button_group',
+		label: __( 'Button Group', 'block-visibility' ),
+	},
+	{
+		type: 'true_false',
+		label: __( 'True / False', 'block-visibility' ),
+		options: 'boolean',
+	},
+	{
+		type: 'link',
+		label: __( 'Link', 'block-visibility' ),
+	},
+	{
+		type: 'post_object',
+		label: __( 'Post Object', 'block-visibility' ),
+	},
+	{
+		type: 'page_link',
+		label: __( 'Page Link', 'block-visibility' ),
+	},
+	{
+		type: 'relationship',
+		label: __( 'Relationship', 'block-visibility' ),
+	},
+	{
+		type: 'taxonomy',
+		label: __( 'Taxonomy', 'block-visibility' ),
+	},
+	{
+		type: 'user',
+		label: __( 'User', 'block-visibility' ),
+	},
+	{
+		type: 'google_map',
+		label: __( 'Google Map', 'block-visibility' ),
+	},
+	{
+		type: 'date_picker',
+		label: __( 'Date Picker', 'block-visibility' ),
+		options: 'dateTime',
+	},
+	{
+		type: 'date_time_picker',
+		label: __( 'Date Time Picker', 'block-visibility' ),
+		options: 'dateTime',
+	},
+	{
+		type: 'time_picker',
+		label: __( 'Time Picker', 'block-visibility' ),
+		options: 'dateTime',
+	},
+	{
+		type: 'color_picker',
+		label: __( 'Color Picker', 'block-visibility' ),
+	},
+	{
+		type: 'message',
+		label: __( 'Message', 'block-visibility' ),
+	},
+	{
+		type: 'accordion',
+		label: __( 'Accordion', 'block-visibility' ),
+	},
+	{
+		type: 'tab',
+		label: __( 'Tab', 'block-visibility' ),
+	},
+	{
+		type: 'group',
+		label: __( 'Group', 'block-visibility' ),
+	},
+	{
+		type: 'repeater',
+		label: __( 'Repeater', 'block-visibility' ),
+	},
+	{
+		type: 'flexible_content',
+		label: __( 'Flexible Content', 'block-visibility' ),
+	},
+	{
+		type: 'clone',
+		label: __( 'Clone', 'block-visibility' ),
+	},
+];
+
 /**
  * Get all available field groups.
  *
@@ -40,35 +185,6 @@ export function getAllFields( variables ) {
 	const fields = variables?.integrations?.acf?.fields ?? [];
 	const allFields = [];
 
-	const valueOperators = [
-		{
-			value: 'notEmpty',
-			label: __( 'Has any value', 'block-visibility' ),
-			disableValue: true,
-		},
-		{
-			value: 'empty',
-			label: __( 'Has no value', 'block-visibility' ),
-			disableValue: true,
-		},
-		{
-			value: 'equal',
-			label: __( 'Value is equal to', 'block-visibility' ),
-		},
-		{
-			value: 'notEqual',
-			label: __( 'Value is not equal to', 'block-visibility' ),
-		},
-		{
-			value: 'contains',
-			label: __( 'Value contains', 'block-visibility' ),
-		},
-		{
-			value: 'notContain',
-			label: __( 'Value does not contain', 'block-visibility' ),
-		},
-	];
-
 	if ( fields.length !== 0 ) {
 		fields.forEach( ( group ) => {
 			const groupKey = group?.key ?? '';
@@ -83,6 +199,11 @@ export function getAllFields( variables ) {
 						value: fieldKey,
 						label: fieldLabel,
 						group: groupKey,
+						help:
+							'Field type: ' +
+							acfFields.filter(
+								( acfField ) => acfField?.type === field?.type
+							)[ 0 ]?.label,
 						fields: [
 							{
 								type: 'subField',
@@ -96,7 +217,7 @@ export function getAllFields( variables ) {
 							{
 								type: 'operatorField',
 								valueType: 'select',
-								options: valueOperators,
+								options: getFieldTypeOperators( field ),
 								placeholder: __(
 									'Select Condition…',
 									'block-visibility'
@@ -115,6 +236,10 @@ export function getAllFields( variables ) {
 										dependencyValues: [
 											'equal',
 											'notEqual',
+											'greaterThan',
+											'greaterThanEqual',
+											'lessThan',
+											'lessThanEqual',
 											'contains',
 											'notContain',
 										],
@@ -160,4 +285,107 @@ export function getGroupedFields( variables ) {
 	} );
 
 	return groupedFields;
+}
+
+/**
+ * Get the options accociated with the selected ACF field.
+ *
+ * @since 2.6.0
+ * @param {Object} field The selected field
+ * @return {Object} The options for the selected field
+ */
+function getFieldTypeOperators( field ) {
+	const fieldOperators = acfFields.filter(
+		( acfField ) => acfField?.type === field?.type
+	)[ 0 ]?.options;
+
+	const booleanOperators = [
+		{
+			value: 'notEmpty',
+			label: __( 'True', 'block-visibility' ),
+			disableValue: true,
+		},
+		{
+			value: 'empty',
+			label: __( 'False', 'block-visibility' ),
+			disableValue: true,
+		},
+	];
+
+	const numericDateTimeOperators = [
+		{
+			value: 'notEmpty',
+			label: __( 'Has any value', 'block-visibility' ),
+			disableValue: true,
+		},
+		{
+			value: 'empty',
+			label: __( 'Has no value', 'block-visibility' ),
+			disableValue: true,
+		},
+		{
+			value: 'equal',
+			label: __( 'Value is equal to', 'block-visibility' ),
+		},
+		{
+			value: 'notEqual',
+			label: __( 'Value is not equal to', 'block-visibility' ),
+		},
+		{
+			value: 'greaterThan',
+			label: __( 'Value is greater than', 'block-visibility' ),
+		},
+		{
+			value: 'greaterThanEqual',
+			label: __( 'Value is greater or equal to', 'block-visibility' ),
+		},
+		{
+			value: 'lessThan',
+			label: __( 'Value is less than', 'block-visibility' ),
+		},
+		{
+			value: 'lessThanEqual',
+			label: __( 'Value is less than or equal to', 'block-visibility' ),
+		},
+	];
+
+	const defaultOperators = [
+		{
+			value: 'notEmpty',
+			label: __( 'Has any value', 'block-visibility' ),
+			disableValue: true,
+		},
+		{
+			value: 'empty',
+			label: __( 'Has no value', 'block-visibility' ),
+			disableValue: true,
+		},
+		{
+			value: 'equal',
+			label: __( 'Value is equal to', 'block-visibility' ),
+		},
+		{
+			value: 'notEqual',
+			label: __( 'Value is not equal to', 'block-visibility' ),
+		},
+		{
+			value: 'contains',
+			label: __( 'Value contains', 'block-visibility' ),
+		},
+		{
+			value: 'notContain',
+			label: __( 'Value does not contain', 'block-visibility' ),
+		},
+	];
+
+	if ( fieldOperators === 'boolean' ) {
+		return booleanOperators;
+	} else if (
+		fieldOperators === 'dateTime' ||
+		fieldOperators === 'numeric'
+	) {
+		return numericDateTimeOperators;
+	}
+
+	return defaultOperators;
 }
