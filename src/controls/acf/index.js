@@ -114,7 +114,7 @@ export default function ACF( props ) {
 							'block-visibility'
 						) }
 						link={ links.editorACF }
-						position="bottom center"
+						position="bottom right"
 					/>
 				) }
 				<div className="controls-panel-item__header-toolbar">
