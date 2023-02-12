@@ -29,6 +29,7 @@ export default function RuleField( props ) {
 		valueType,
 		options,
 		placeholder,
+		help,
 		handleRuleChange,
 		triggerReset,
 		hasGroupedOptions,
@@ -100,7 +101,7 @@ export default function RuleField( props ) {
 			? placeholder
 			: __( 'Select…', 'block-visibility' );
 
-		return (
+		const selectField = (
 			<Select
 				className={ classnames(
 					'block-visibility__react-select',
@@ -122,6 +123,18 @@ export default function RuleField( props ) {
 				isMulti={ valueType === 'multiSelect' }
 			/>
 		);
+
+		if ( help ) {
+			return (
+				<div className="block-visibility__react-select-wrapper">
+					{ selectField }
+					<div className="components-base-control__help">
+						{ help }
+					</div>
+				</div>
+			);
+		}
+		return selectField;
 	} else if ( valueType === 'date' || valueType === 'dateTime' ) {
 		return (
 			<DateTime
@@ -145,6 +158,7 @@ export default function RuleField( props ) {
 				className={ className }
 				label={ placeholder }
 				checked={ value }
+				help={ help }
 				onChange={ () =>
 					handleRuleChange(
 						! value,
@@ -165,6 +179,7 @@ export default function RuleField( props ) {
 			min={ valueType === 'number' ? 0 : '' }
 			value={ value }
 			placeholder={ placeholder }
+			help={ help }
 			onChange={ ( v ) =>
 				handleRuleChange(
 					v,

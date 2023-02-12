@@ -53,7 +53,6 @@ export default function Rule( props ) {
 
 	const ruleFields = selectedRule?.fields ?? [];
 
-	const hasHelp = selectedRule?.help ?? false;
 	const hasMultipleSubFields = selectedRule?.hasMultipleSubFields ?? false;
 	const hasSimplifiedLayout = selectedRule?.hasSimplifiedLayout ?? false;
 
@@ -198,6 +197,7 @@ export default function Rule( props ) {
 						}
 						handleRuleChange={ handleRuleChange }
 						hasGroupedOptions={ true }
+						help={ selectedRule?.help }
 					/>
 					{ ruleFields.map( ( field ) => {
 						const displayConditions =
@@ -336,6 +336,7 @@ export default function Rule( props ) {
 								valueType={ field?.valueType ?? 'text' }
 								options={ options }
 								placeholder={ placeholder }
+								help={ field?.help }
 								handleRuleChange={ handleRuleChange }
 								triggerReset={ field?.triggerReset ?? false }
 								hasGroupedOptions={
@@ -345,11 +346,6 @@ export default function Rule( props ) {
 						);
 					} ) }
 				</div>
-				{ hasHelp && (
-					<div className="components-base-control__help">
-						{ selectedRule.help }
-					</div>
-				) }
 			</div>
 		</div>
 	);

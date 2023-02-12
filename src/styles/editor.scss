@@ -285,7 +285,7 @@
         }
     }
 
-    /* Specific styling for section headers ----------------------------------*/
+    // Specific styling for section headers.
     .section-header {
         align-items: center;
         display: flex;
@@ -375,7 +375,7 @@
         }
     }
 
-    /* Rule Set styling ----------------------------------------------------- */
+    // Rule Set styling.
     .rule-sets {
         display: grid;
         /* autoprefixer: ignore next */
@@ -461,7 +461,7 @@
         }
     }
 
-    /* Specific styles for the Date Time control -----------------------------*/
+    // Specific styles for the Date Time control.
     .date-time-control {
 
         .control-fields-item__schedules {
@@ -537,7 +537,7 @@
         }
     }
 
-    /* Specific styles for the Screen Size control ---------------------------*/
+    // Specific styles for the Screen Size control.
     .screen-size-control {
         .components-base-control {
             margin-bottom: 12px;
@@ -548,7 +548,7 @@
         }
     }
 
-    /* Specific styles for the User Role control -----------------------------*/
+    // Specific styles for the User Role control.
     .user-role-control {
 
         // Fix margin on field help text.
@@ -557,20 +557,29 @@
         }
     }
 
-    /* Specific styles for the Query String control --------------------------*/
+    // Specific styles for the Query String control.
     .query-string-control {
         textarea {
             white-space: nowrap;
         }
     }
 
-    /* Specific styles for the ACF control -----------------------------------*/
+    // Specific styles for the ACF control.
     .acf-control {
         .components-notice {
             margin-bottom: 20px;
         }
+
+        .rule__fields {
+            .fields-container {
+                .components-base-control__help {
+                    margin-top: 8px !important;
+                }
+            }   
+        }
     }
 
+    // Specific styles for the ACF control.
     .wp-fusion-control {
         .components-disabled {
             margin-bottom: 18px;
