@@ -188,65 +188,83 @@ function run_acf_rule_tests( $operator, $value, $acf_field ) {
 		return false;
 	}
 
+	$field_value = $acf_field['value'];
+
 	// Used to detect "choice" field type values.
-	$is_array = is_array( $acf_field['value'] );
+	$is_array = is_array( $field_value );
 
 	// Assume error and try to disprove.
 	$test_result = 'error';
 
-	switch ( $operator ) {
-		case 'notEmpty':
-			$test_result = ! empty( $acf_field['value'] );
-			break;
+	if ( 'notEmpty' === $operator ) {
+		$test_result = ! empty( $field_value );
+	} elseif ( 'empty' === $operator ) {
+		$test_result = empty( $field_value );
+	} elseif ( isset( $value ) ) {
 
-		case 'empty':
-			$test_result = empty( $acf_field['value'] );
-			break;
+		// Choice values are generally arrays and need to be treated differently.
+		// Allow for type juggling here since array can include strings or numbers.
+		if ( is_array( $field_value ) ) {
+			switch ( $operator ) {
+				case 'equal':
+					$test_result = in_array( $value, $field_value ) && count( $field_value ) === 1; // phpcs:ignore
+					break;
 
-		case 'equal':
-			if ( isset( $value ) ) {
-				if ( $is_array ) {
-					$test_result = in_array( $value, $acf_field['value'] ) && count( $acf_field['value'] ) === 1;
-				} else {
-					// Don't use === here, otherwise numeric ACF field values will return false.
-					$test_result = $acf_field['value'] == $value;
-				}
+				case 'notEqual':
+					$test_result = ! in_array( $value, $field_value ); // phpcs:ignore
+					break;
+
+				case 'contains':
+					$test_result = in_array( $value, $field_value ); // phpcs:ignore
+					break;
+
+				case 'notContain':
+					$test_result = ! in_array( $value, $field_value ); // phpcs:ignore
+					break;
+
+				default:
+					$test_result = 'error';  // We don't have a valid operator, so throw error.
+					break;
 			}
-			break;
+		} else {
 
-		case 'notEqual':
-			if ( isset( $value ) ) {
-				if ( $is_array ) {
-					$test_result = ! in_array( $value, $acf_field['value'] );
-				} else {
-					$test_result = $acf_field['value'] !== $value;
-				}
+			// Use "equal" instead of "identical" to allow for type juggling.
+			switch ( $operator ) {
+				case 'equal':
+					$test_result = $field_value == $value; // phpcs:ignore
+					break;
+
+				case 'notEqual':
+					$test_result = $field_value != $value; // phpcs:ignore
+					break;
+
+				case 'greaterThan':
+					$test_result = $field_value > $value;
+					break;
+
+				case 'greaterThanEqual':
+					$test_result = $field_value >= $value;
+					break;
+
+				case 'lessThan':
+					$test_result = $field_value < $value;
+					break;
+
+				case 'lessThanEqual':
+					$test_result = $field_value <= $value;
+					break;
+
+				case 'contains':
+					$test_result = strpos( $field_value, $value ) !== false;
+					break;
+
+				case 'notContain':
+					$test_result = strpos( $field_value, $value ) === false;
+					break;
 			}
-			break;
-
-		case 'contains':
-			if ( isset( $value ) ) {
-				if ( $is_array ) {
-					$test_result = in_array( $value, $acf_field['value'] );
-				} else {
-					$test_result = strpos( $acf_field['value'], $value ) !== false;
-				}
-			}
-			break;
-
-		case 'notContain':
-			if ( isset( $value ) ) {
-				if ( $is_array ) {
-					$test_result = ! in_array( $value, $acf_field['value'] );
-				} else {
-					$test_result = strpos( $acf_field['value'], $value ) === false;
-				}
-			}
-			break;
-
-		default:
-			$test_result = 'error';  // We don't have a valid operator, so throw error.
-			break;
+		}
+	} else {
+		$test_result = 'error';  // We don't have a valid operator, so throw error.
 	}
 
 	return $test_result;
