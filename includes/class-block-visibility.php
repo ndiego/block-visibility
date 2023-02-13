@@ -72,7 +72,10 @@ final class Block_Visibility {
 	 */
 	public function actions() {
 		add_action( 'init', array( $this, 'load_textdomain' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'block_localization' ) );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'editor_scripts_localization' ) );
+
+		// Use admin_enqueue_scripts here, otherwise the settings page will not be translated.
+		add_action( 'admin_enqueue_scripts', array( $this, 'setting_scripts_localization' ) );
 
 		// Specific fixes/work arounds for server-side blocks.
 		add_action( 'wp_loaded', array( $this, 'add_attributes_to_registered_blocks' ), 999 );
@@ -205,18 +208,27 @@ final class Block_Visibility {
 	}
 
 	/**
-	 * Enqueue localization data for our blocks.
+	 * Enqueue localization data for editor scripts.
 	 *
 	 * @since 1.0.0
 	 */
-	public function block_localization() {
+	public function editor_scripts_localization() {
 		if ( function_exists( 'wp_set_script_translations' ) ) {
 			wp_set_script_translations(
 				'block-visibility-editor-scripts',
 				'block-visibility',
 				BLOCK_VISIBILITY_ABSPATH . '/languages'
 			);
+		}
+	}
 
+	/**
+	 * Enqueue localization data for setting page scripts.
+	 *
+	 * @since 2.6.0
+	 */
+	public function setting_scripts_localization() {
+		if ( function_exists( 'wp_set_script_translations' ) ) {
 			wp_set_script_translations(
 				'block-visibility-setting-scripts',
 				'block-visibility',
