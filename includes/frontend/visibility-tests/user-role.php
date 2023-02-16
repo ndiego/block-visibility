@@ -167,7 +167,7 @@ function user_role_test( $is_visible, $settings, $controls ) {
 					return true;
 				}
 			}
-		} elseif ( empty( $restricted_users ) && $hide_on_resticted_users ) {
+		} elseif ( empty( $restricted_users ) && $hide_on_restricted_users ) {
 			return true;
 		}
 	} elseif ( 'user-rule-sets' === $visibility_by_role ) {
