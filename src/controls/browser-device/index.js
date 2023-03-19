@@ -20,7 +20,7 @@ import { InformationPopover, RuleSets } from './../../components';
 /**
  * Add the Browser & Device controls
  *
- * @since 1.0.0
+ * @since 3.0.0
  * @param {Object} props All the props passed to this function
  * @return {string}      Return the rendered JSX
  */
