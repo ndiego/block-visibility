@@ -10,6 +10,7 @@ import { withFilters, Slot } from '@wordpress/components';
  */
 import General from './general';
 import HideBlock from './hide-block';
+import BrowserDevice from './browser-device';
 import DateTime from './date-time';
 import UserRole from './user-role';
 import ScreenSize from './screen-size';
@@ -84,7 +85,7 @@ export default function VisibilityControls( props ) {
 					setVisibilityControls={ setVisibilityControls }
 					{ ...props }
 				/>
-				<QueryString
+				<BrowserDevice
 					visibilityControls={ visibilityControls }
 					setVisibilityControls={ setVisibilityControls }
 					{ ...props }
@@ -94,12 +95,17 @@ export default function VisibilityControls( props ) {
 					setVisibilityControls={ setVisibilityControls }
 					{ ...props }
 				/>
-				<UserRole
+				<QueryString
 					visibilityControls={ visibilityControls }
 					setVisibilityControls={ setVisibilityControls }
 					{ ...props }
 				/>
 				<ScreenSize
+					visibilityControls={ visibilityControls }
+					setVisibilityControls={ setVisibilityControls }
+					{ ...props }
+				/>
+				<UserRole
 					visibilityControls={ visibilityControls }
 					setVisibilityControls={ setVisibilityControls }
 					{ ...props }

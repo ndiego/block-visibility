@@ -12,6 +12,7 @@ import { addFilter, applyFilters } from '@wordpress/hooks';
  * Internal dependencies
  */
 import {
+	hasBrowserDevice,
 	hasDateTime,
 	hasUserRole,
 	hasScreenSize,
@@ -79,6 +80,11 @@ function withContextualIndicators( BlockListBlock ) {
 		}
 
 		let activeControls = {
+			'browser-device': hasBrowserDevice(
+				controls,
+				hasControlSets,
+				enabledControls
+			),
 			'date-time': hasDateTime(
 				controls,
 				hasControlSets,

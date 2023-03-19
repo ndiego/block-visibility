@@ -46,6 +46,14 @@ function register_settings() {
 						),
 					),
 				),
+				'browser_device'     => array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable' => array(
+							'type' => 'boolean',
+						),
+					),
+				),
 				'date_time'          => array(
 					'type'       => 'object',
 					'properties' => array(
@@ -206,6 +214,9 @@ function register_settings() {
 				'enable_user_roles'     => true,
 				'enable_users'          => true,
 				'enable_user_rule_sets' => true,
+			),
+			'browser_device'     => array(
+				'enable' => true,
 			),
 			'date_time'          => array(
 				'enable'             => true,

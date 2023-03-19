@@ -1,3 +1,4 @@
+export { default as hasBrowserDevice } from './has-browser-device';
 export { default as hasDateTime } from './has-date-time';
 export { default as hasUserRole } from './has-user-role';
 export { default as hasScreenSize } from './has-screen-size';

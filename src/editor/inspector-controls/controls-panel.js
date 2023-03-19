@@ -15,12 +15,13 @@ import { createInterpolateElement } from '@wordpress/element';
  */
 import ControlsPanelHeader from './controls-panel-header';
 import {
-	HideBlock,
-	UserRole,
-	DateTime,
-	ScreenSize,
-	QueryString,
 	ACF,
+	BrowserDevice,
+	DateTime,
+	HideBlock,
+	QueryString,
+	ScreenSize,
+	UserRole,
 	WPFusion,
 } from './../../controls';
 
@@ -81,19 +82,19 @@ export default function ControlsPanel( props ) {
 	let controls = (
 		<>
 			<Slot name="ControlPanelContainer" />
-
 			<Slot name={ 'ControlSetControlsTop-' + uniqueIndex } />
-			<DateTime
-				setControlAtts={ setControlAtts }
-				type={ uniqueIndex }
-				{ ...props }
-			/>
-			<UserRole setControlAtts={ setControlAtts } { ...props } />
-			<ScreenSize setControlAtts={ setControlAtts } { ...props } />
+
+			<BrowserDevice setControlAtts={ setControlAtts } { ...props } />
+			<DateTime setControlAtts={ setControlAtts } { ...props } />
 			<QueryString setControlAtts={ setControlAtts } { ...props } />
+			<ScreenSize setControlAtts={ setControlAtts } { ...props } />
+			<UserRole setControlAtts={ setControlAtts } { ...props } />
+
 			<Slot name={ 'ControlSetControlsMiddle-' + uniqueIndex } />
+
 			<ACF setControlAtts={ setControlAtts } { ...props } />
 			<WPFusion setControlAtts={ setControlAtts } { ...props } />
+
 			<Slot name={ 'ControlSetControlsBottom-' + uniqueIndex } />
 		</>
 	);

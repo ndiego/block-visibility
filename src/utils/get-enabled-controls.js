@@ -28,14 +28,20 @@ export function getControls() {
 			settingSlug: 'hide_block',
 		},
 		{
+			label: __( 'Browser & Device', 'block-visibility' ),
+			type: 'core',
+			attributeSlug: 'browserDevice',
+			settingSlug: 'browser_device',
+		},
+		{
 			label: __( 'Date & Time', 'block-visibility' ),
 			attributeSlug: 'dateTime',
 			settingSlug: 'date_time',
 		},
 		{
-			label: __( 'User Role', 'block-visibility' ),
-			attributeSlug: 'userRole',
-			settingSlug: 'visibility_by_role',
+			label: __( 'Query String', 'block-visibility' ),
+			attributeSlug: 'queryString',
+			settingSlug: 'query_string',
 		},
 		{
 			label: __( 'Screen Size', 'block-visibility' ),
@@ -43,9 +49,9 @@ export function getControls() {
 			settingSlug: 'screen_size',
 		},
 		{
-			label: __( 'Query String', 'block-visibility' ),
-			attributeSlug: 'queryString',
-			settingSlug: 'query_string',
+			label: __( 'User Role', 'block-visibility' ),
+			attributeSlug: 'userRole',
+			settingSlug: 'visibility_by_role',
 		},
 	];
 
@@ -73,6 +79,13 @@ export function getControls() {
 	// Deprecated filters as of v2.5.1, use blockVisibility.controls instead.
 	controls = applyFilters( 'blockVisibility.coreControls', controls );
 	controls = applyFilters( 'blockVisibility.integrationControls', controls );
+
+	// Remove any duplicate controls.
+	controls = controls.filter( ( value, index, self ) =>
+		index === self.findIndex( ( control ) => (
+			control.attributeSlug === value.attributeSlug && control.settingSlug === value.settingSlug
+		) )
+	);
 
 	// Sort controls in ASC order.
 	controls.sort( ( a, b ) => a.label.localeCompare( b.label ) );

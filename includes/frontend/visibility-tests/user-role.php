@@ -382,32 +382,3 @@ function run_users_test( $rule ) {
 
 	return $test_result;
 }
-
-/**
- * Helper function for determining if an array contains all 'true's, at least
- * one 'true' or no 'true's.
- *
- * @since 2.3.0
- *
- * @param string $operator The rule operator.
- * @param string $results  An array of 'true' and 'false' to compare agains the operator.
- * @return string          Returns 'visible', 'hidden', or 'error'.
- */
-function contains_value_compare( $operator, $results ) {
-
-	if ( empty( $results ) || ! is_array( $results ) ) {
-		return 'error';
-	}
-
-	$test_result = 'error';
-
-	if ( 'atLeastOne' === $operator ) {
-		$test_result = in_array( 'true', $results, true ) ? 'visible' : 'hidden';
-	} elseif ( 'all' === $operator ) {
-		$test_result = ! in_array( 'false', $results, true ) ? 'visible' : 'hidden';
-	} elseif ( 'none' === $operator ) {
-		$test_result = ! in_array( 'true', $results, true ) ? 'visible' : 'hidden';
-	}
-
-	return $test_result;
-}
