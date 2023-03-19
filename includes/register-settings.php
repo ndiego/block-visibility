@@ -54,6 +54,14 @@ function register_settings() {
 						),
 					),
 				),
+				'cookie'             => array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable' => array(
+							'type' => 'boolean',
+						),
+					),
+				),
 				'date_time'          => array(
 					'type'       => 'object',
 					'properties' => array(
@@ -216,6 +224,9 @@ function register_settings() {
 				'enable_user_rule_sets' => true,
 			),
 			'browser_device'     => array(
+				'enable' => true,
+			),
+			'cookie'             => array(
 				'enable' => true,
 			),
 			'date_time'          => array(

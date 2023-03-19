@@ -65,6 +65,62 @@ export const blockVisibilityProps = {
 								},
 							},
 						},
+                        cookie: {
+                            type: 'object',
+                            properties: {
+                                enable: {
+                                    type: 'boolean',
+                                },
+                                hideOnRuleSets: {
+                                    type: 'boolean',
+                                },
+                                ruleSets: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            id: {
+                                                type: 'number',
+                                            },
+                                            title: {
+                                                type: 'string',
+                                            },
+                                            enable: {
+                                                type: 'boolean',
+                                            },
+                                            rules: {
+                                                type: 'array',
+                                                items: {
+                                                    type: 'object',
+                                                    properties: {
+                                                        field: {
+                                                            type: 'string',
+                                                        },
+                                                        subField: {
+                                                            type: [
+                                                                'string',
+                                                                'integer',
+                                                                'array',
+                                                            ],
+                                                        },
+                                                        operator: {
+                                                            type: 'string',
+                                                        },
+                                                        value: {
+                                                            type: [
+                                                                'string',
+                                                                'integer',
+                                                                'array',
+                                                            ],
+                                                        },
+                                                    },
+                                                },
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                        },
 						dateTime: {
 							type: 'object',
 							properties: {

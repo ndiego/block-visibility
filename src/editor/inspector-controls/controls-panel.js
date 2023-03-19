@@ -17,6 +17,7 @@ import ControlsPanelHeader from './controls-panel-header';
 import {
 	ACF,
 	BrowserDevice,
+	Cookie,
 	DateTime,
 	HideBlock,
 	QueryString,
@@ -85,6 +86,7 @@ export default function ControlsPanel( props ) {
 			<Slot name={ 'ControlSetControlsTop-' + uniqueIndex } />
 
 			<BrowserDevice setControlAtts={ setControlAtts } { ...props } />
+			<Cookie setControlAtts={ setControlAtts } { ...props } />
 			<DateTime setControlAtts={ setControlAtts } { ...props } />
 			<QueryString setControlAtts={ setControlAtts } { ...props } />
 			<ScreenSize setControlAtts={ setControlAtts } { ...props } />

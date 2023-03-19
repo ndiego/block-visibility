@@ -34,6 +34,11 @@ export function getControls() {
 			settingSlug: 'browser_device',
 		},
 		{
+			label: __( 'Cookie', 'block-visibility' ),
+			attributeSlug: 'cookie',
+			settingSlug: 'cookie',
+		},
+		{
 			label: __( 'Date & Time', 'block-visibility' ),
 			attributeSlug: 'dateTime',
 			settingSlug: 'date_time',

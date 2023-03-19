@@ -13,6 +13,7 @@ import { addFilter, applyFilters } from '@wordpress/hooks';
  */
 import {
 	hasBrowserDevice,
+	hasCookie,
 	hasDateTime,
 	hasUserRole,
 	hasScreenSize,
@@ -81,6 +82,11 @@ function withContextualIndicators( BlockListBlock ) {
 
 		let activeControls = {
 			'browser-device': hasBrowserDevice(
+				controls,
+				hasControlSets,
+				enabledControls
+			),
+			'cookie': hasCookie(
 				controls,
 				hasControlSets,
 				enabledControls
