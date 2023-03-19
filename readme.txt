@@ -208,6 +208,22 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ==
 
+= 3.0.0 - 2023-03-TBD =
+
+**Added**
+
+* [Date & Time] Added **Day of Week** and **Time of Day** controls.
+* Added Pro icons.
+
+**Removed**
+
+* Removed Pro upgrade link on plugins admin page.
+* Removed Pro upsells from settings pages.
+* [Date & Time] Removed the `block_visibility_frontend_test_date_time_schedule` filter.
+* [Date & Time] Removed the `VisibilityControlsDateTimeTop` and `VisibilityControlsDateTimeBottom` slots.
+* [Date & Time] Removed the `DateTimeScheduleToolbar-` and `DateTimeScheduleControlsTop-`, and `DateTimeScheduleControlsBottom-` slots.
+* [Date & Time] Removed the `ScheduleOptionsTop`, `ScheduleOptionsMiddle`, and `ScheduleOptionsBottom` slots.
+
 = 2.6.0 - 2023-02-13 =
 
 **Added**
