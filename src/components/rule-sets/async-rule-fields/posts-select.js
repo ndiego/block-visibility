@@ -62,9 +62,8 @@ export default function PostsSelect( props ) {
 
 	const { availablePosts, loadingAvailablePosts } = useSelect(
 		( select ) => {
-			const { getPostType, getEntityRecords, isResolving } = select(
-				'core'
-			);
+			const { getPostType, getEntityRecords, isResolving } =
+				select( 'core' );
 
 			// Change the way each post type is displayed depending on
 			// whether it is hierarchical or not. This mirrors the WP admin.
@@ -189,10 +188,7 @@ export default function PostsSelect( props ) {
 		const inputLength = input?.inputValue.length ?? 0;
 		return inputLength === 0 || inputLength >= 3
 			? __( 'No options found', 'block-visibility' )
-			: __(
-					'Enter 3 characters to begin search',
-					'block-visibility'
-			  );
+			: __( 'Enter 3 characters to begin search', 'block-visibility' );
 	};
 
 	return (

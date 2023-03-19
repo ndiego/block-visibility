@@ -86,11 +86,7 @@ function withContextualIndicators( BlockListBlock ) {
 				hasControlSets,
 				enabledControls
 			),
-			'cookie': hasCookie(
-				controls,
-				hasControlSets,
-				enabledControls
-			),
+			cookie: hasCookie( controls, hasControlSets, enabledControls ),
 			'date-time': hasDateTime(
 				controls,
 				hasControlSets,
