@@ -81,10 +81,14 @@ export function getControls() {
 	controls = applyFilters( 'blockVisibility.integrationControls', controls );
 
 	// Remove any duplicate controls.
-	controls = controls.filter( ( value, index, self ) =>
-		index === self.findIndex( ( control ) => (
-			control.attributeSlug === value.attributeSlug && control.settingSlug === value.settingSlug
-		) )
+	controls = controls.filter(
+		( value, index, self ) =>
+			index ===
+			self.findIndex(
+				( control ) =>
+					control.attributeSlug === value.attributeSlug &&
+					control.settingSlug === value.settingSlug
+			)
 	);
 
 	// Sort controls in ASC order.

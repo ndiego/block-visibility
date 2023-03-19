@@ -81,7 +81,7 @@ function addAttributes( settings ) {
 		blockVisibility: {
 			type: 'object',
 			properties: blockVisibilityProps,
-		}
+		},
 	};
 
 	// Filter allows the pro plugin to add Block Visibility attributes.

@@ -7,7 +7,7 @@
  * @param {Array}   enabledControls Array of all enabled visibility controls
  * @return {boolean}		        Does the block have Browser & Device settings
  */
- export default function hasBrowserDevice(
+export default function hasBrowserDevice(
 	controls,
 	hasControlSets,
 	enabledControls

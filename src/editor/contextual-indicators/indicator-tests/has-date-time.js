@@ -58,7 +58,14 @@ export default function hasDateTime(
 			scheduleTest = false;
 		}
 
-		if ( ! hideOnSchedules && enable && ! start && ! end && ! dowEnable && ! todEnable ) {
+		if (
+			! hideOnSchedules &&
+			enable &&
+			! start &&
+			! end &&
+			! dowEnable &&
+			! todEnable
+		) {
 			scheduleTest = false;
 		}
 
