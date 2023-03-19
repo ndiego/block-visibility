@@ -9,7 +9,6 @@ import {
 	Disabled,
 	ToggleControl,
 	RangeControl,
-	Slot,
 } from '@wordpress/components';
 
 /**
@@ -34,6 +33,7 @@ export default function Editor( props ) {
 	const blockOpacity = pluginSettings?.block_opacity ?? 100; // eslint-disable-line
 	const enableToolbarControls = pluginSettings?.enable_toolbar_controls ?? true; // eslint-disable-line
 	const enableEditorNotices = pluginSettings?.enable_editor_notices ?? true; // eslint-disable-line
+	const enableControlSetUtilities = pluginSettings?.enable_control_set_utilities ?? true; // eslint-disable-line
 
 	const colors = [
 		{ name: __( 'Black', 'block-visibility' ), color: '#121212' },
@@ -120,7 +120,6 @@ export default function Editor( props ) {
 				/>
 			</div>
 			<div className="settings-panel__container">
-				<Slot name="PluginSettingsEditorTop" />
 				<div className="settings-label">
 					<span>
 						{ __( 'Contextual Indicators', 'block-visibility' ) }
@@ -229,7 +228,31 @@ export default function Editor( props ) {
 						) }
 					/>
 				</div>
-				<Slot name="PluginSettingsEditorBottom" />
+				<div className="settings-label">
+					<span>{ __( 'Utilities', 'block-visibility' ) }</span>
+				</div>
+				<div className="settings-type__toggle has-info-popover">
+					<ToggleControl
+						label={ __(
+							'Enable utilities for managing visibility settings (copy, import, etc.)',
+							'block-visibility'
+						) }
+						checked={ enableControlSetUtilities }
+						onChange={ () => {
+							setPluginSettings( {
+								...pluginSettings,
+								enable_control_set_utilities:
+									! enableControlSetUtilities,
+							} );
+						} }
+					/>
+					<InformationPopover
+						message={ __(
+							'Control set utilities allow you to copy and import visibility settings. This functionality is useful when advanced setting configurations need to be applied to multiple blocks.',
+							'block-visibility'
+						) }
+					/>
+				</div>
 			</div>
 		</div>
 	);

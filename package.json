@@ -41,6 +41,7 @@
 		"@wordpress/icons": "^9.15.0",
 		"@wordpress/plugins": "^4.20.0",
 		"moment": "^2.29.4",
+		"react-copy-to-clipboard": "^5.1.0",
 		"react-select": "^5.7.0"
 	}
 }

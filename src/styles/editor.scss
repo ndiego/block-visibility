@@ -532,7 +532,7 @@
                             }
                         }
                     }
-                    
+
                     .schedules-item__fields__day-of-week {
                         max-width: 260px;
             
@@ -862,6 +862,45 @@
                 margin-right: 10px;
             }
         }
+    }
+}
+
+// Specific styles for import modal.
+.block-visibility__import-modal {
+    max-width: 600px !important;
+	width: 600px;
+
+	.components-notice {
+		margin: 0 0 20px;
+
+		// Needed to fix color error in Notice component
+		&.is-error {
+			background-color: #f8ebea;
+		}
+	}
+
+	.block-visibility__import-modal--input {
+		position: relative;
+
+		.components-button {
+			position: absolute;
+    		right: 6px;
+    		top: 6px;
+			width: 30px !important;
+		    padding: 3px !important;
+    		min-width: 24px;
+    		height: 30px;
+		}
+
+		.components-base-control__help {
+			margin-top: 0;
+		}
+	}
+
+    .block-visibility__import-modal--buttons {
+        display: flex;
+        gap: 12px;
+        margin-top: 24px;
     }
 }
 

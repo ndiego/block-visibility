@@ -8,25 +8,15 @@ import { assign, omit } from 'lodash';
  */
 import { speak } from '@wordpress/a11y';
 import { __, sprintf } from '@wordpress/i18n';
-import {
-	DropdownMenu,
-	MenuGroup,
-	MenuItem,
-	Slot,
-	withFilters,
-} from '@wordpress/components';
+import { DropdownMenu, MenuGroup, MenuItem } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { Icon, moreVertical, check, plus } from '@wordpress/icons';
 
-// Provides an entry point to slot in additional settings. Must be placed
-// outside of function to avoid unnecessary rerenders.
-const AdditionalControlSetOptions = withFilters(
-	'blockVisibility.addControlSetOptions'
-)( ( props ) => <></> ); // eslint-disable-line
-
-const AdditionalControlSetModals = withFilters(
-	'blockVisibility.addControlSetModals'
-)( ( props ) => <></> ); // eslint-disable-line
+/**
+ * Internal dependencies
+ */
+import { CopyButton, ImportButton, ImportModal } from './../../components';
+import isPluginSettingEnabled from './../../utils/is-plugin-setting-enabled';
 
 /**
  * Render the control set header.
@@ -43,11 +33,17 @@ export default function ControlsPanelHeader( props ) {
 		enabledControls,
 		controlSetAtts,
 		setControlSetAtts,
+		settings,
 	} = props;
 
 	const blockAtts = attributes?.blockVisibility ?? {};
 	const defaultControls = enabledControls.filter(
 		( control ) => control.isDefault
+	);
+
+	const hasUtilities = isPluginSettingEnabled(
+		settings,
+		'enable_control_set_utilities'
 	);
 
 	// Detect whether default controls have edits. Used to determine
@@ -201,7 +197,19 @@ export default function ControlsPanelHeader( props ) {
 						</MenuGroup>
 					) }
 					<MenuGroup>
-						<Slot name="ControlSetOptionsToolsTop" />
+						{ hasUtilities && (
+							<>
+								<CopyButton
+									canResetAll={ canResetAll }
+									{ ...props }
+								/>
+								<ImportButton
+									modalOpen={ modalOpen }
+									onClose={ onClose }
+									setModalOpen={ setModalOpen }
+								/>
+							</>
+						) }
 						<MenuItem
 							aria-disabled={ ! canResetAll }
 							onClick={ () => {
@@ -222,18 +230,7 @@ export default function ControlsPanelHeader( props ) {
 						>
 							{ __( 'Reset all', 'block-visibility' ) }
 						</MenuItem>
-						<Slot name="ControlSetOptionsToolsBottom" />
 					</MenuGroup>
-					<AdditionalControlSetOptions
-						canResetAll={ canResetAll }
-						coreControls={ coreControls }
-						integrationControls={ integrationControls }
-						modalOpen={ modalOpen }
-						onClose={ onClose }
-						setModalOpen={ setModalOpen }
-						toggleControls={ toggleControls }
-						{ ...props }
-					/>
 				</>
 			) }
 		</DropdownMenu>
@@ -247,8 +244,8 @@ export default function ControlsPanelHeader( props ) {
 					{ controlsDropdown }
 				</div>
 			</div>
-			{ modalOpen && (
-				<ControlSetModals
+			{ modalOpen && hasUtilities && (
+				<ImportModal
 					coreControls={ coreControls }
 					integrationControls={ integrationControls }
 					modalOpen={ modalOpen }
@@ -257,21 +254,6 @@ export default function ControlsPanelHeader( props ) {
 					{ ...props }
 				/>
 			) }
-		</>
-	);
-}
-
-/**
- * Render all Control Set modals.
- *
- * @since 2.1.1
- * @param {Object} props All the props passed to this function
- */
-function ControlSetModals( props ) {
-	return (
-		<>
-			<Slot name="ControlSetModals" />
-			<AdditionalControlSetModals { ...props } />
 		</>
 	);
 }
