@@ -24,38 +24,6 @@ export default function Ads( props ) {
 
 	return (
 		<div className="ads-container">
-			<div className="ads-container__pro">
-				<span className="ads-container__header">
-					{ __( 'Upgrade to Pro', 'block-visibility' ) }
-				</span>
-				<p>
-					{ __(
-						'Enhance the power of Block Visibility with the Pro add-on.',
-						'block-visibility'
-					) }
-				</p>
-				<ul>
-					<li>{ __( 'Location control', 'block-visibility' ) }</li>
-					<li>{ __( 'Advanced scheduling', 'block-visibility' ) }</li>
-					<li>
-						{ __( 'Referral Source control', 'block-visibility' ) }
-					</li>
-					<li>
-						{ __( 'eCommerce integrations', 'block-visibility' ) }
-					</li>
-					<li>
-						{ __( 'Premium email support', 'block-visibility' ) }
-					</li>
-					<li>{ __( 'No ads!', 'block-visibility' ) }</li>
-				</ul>
-				<Button
-					href={ links.settingsProUpgrade }
-					target="__blank"
-					isPrimary
-				>
-					{ __( 'Get Block Visibility Pro', 'block-visibility' ) } →
-				</Button>
-			</div>
 			<div className="ads-container__support">
 				<span className="ads-container__header">
 					{ __( 'Need Support?', 'block-visibility' ) }

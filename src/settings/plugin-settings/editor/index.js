@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import classnames from 'classnames';
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -12,12 +7,10 @@ import {
 	ColorIndicator,
 	ColorPalette,
 	Disabled,
-	ExternalLink,
 	ToggleControl,
 	RangeControl,
 	Slot,
 } from '@wordpress/components';
-import { Icon, ungroup } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -32,7 +25,7 @@ import { InformationPopover } from './../../../components';
  * @param {Object} props All the props passed to this function
  */
 export default function Editor( props ) {
-	const { pluginSettings, setPluginSettings, variables } = props;
+	const { pluginSettings, setPluginSettings } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
 	const enableContextualIndicators = pluginSettings?.enable_contextual_indicators ?? true; // eslint-disable-line
@@ -113,11 +106,7 @@ export default function Editor( props ) {
 	}
 
 	return (
-		<div
-			className={ classnames( 'settings-panel', {
-				'has-upsell': ! variables?.is_pro,
-			} ) }
-		>
+		<div className="settings-panel">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'Editor', 'block-visibility' ) }
@@ -242,22 +231,6 @@ export default function Editor( props ) {
 				</div>
 				<Slot name="PluginSettingsEditorBottom" />
 			</div>
-			{ ! variables?.is_pro && (
-				<div className="settings-panel__upsell">
-					<div className="settings-panel__upsell-message">
-						<Icon icon={ ungroup } />
-						<span>
-							{ __(
-								'Upgrade to enable utilities for managing visibility settings (copy, import, etc.)',
-								'block-visibility'
-							) }
-						</span>
-					</div>
-					<ExternalLink href={ links.settingsProUpgrade }>
-						{ __( 'Get Pro', 'block-visibility' ) }
-					</ExternalLink>
-				</div>
-			) }
 		</div>
 	);
 }

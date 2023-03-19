@@ -1,14 +1,8 @@
 /**
- * External dependencies
- */
-import classnames from 'classnames';
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { ExternalLink, Slot, ToggleControl } from '@wordpress/components';
-import { Icon } from '@wordpress/icons';
+import { Slot, ToggleControl } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -24,17 +18,13 @@ import { InformationPopover } from './../../../components';
  * @param {Object} props All the props passed to this function
  */
 export default function DateTime( props ) {
-	const { visibilityControls, setVisibilityControls, variables } = props;
+	const { visibilityControls, setVisibilityControls } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
 	const enable = visibilityControls?.date_time?.enable ?? true; // eslint-disable-line
 
 	return (
-		<div
-			className={ classnames( 'settings-panel', {
-				'has-upsell': ! variables?.is_pro,
-			} ) }
-		>
+		<div className="settings-panel">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'Date & Time', 'block-visibility' ) }
@@ -69,22 +59,6 @@ export default function DateTime( props ) {
 				</div>
 				<Slot name="VisibilityControlsDateTimeBottom" />
 			</div>
-			{ ! variables?.is_pro && (
-				<div className="settings-panel__upsell">
-					<div className="settings-panel__upsell-message">
-						<Icon icon={ time } />
-						<span>
-							{ __(
-								'Upgrade to enable day-of-week and time-of-day functionality.',
-								'block-visibility'
-							) }
-						</span>
-					</div>
-					<ExternalLink href={ links.settingsProUpgrade }>
-						{ __( 'Get Pro', 'block-visibility' ) }
-					</ExternalLink>
-				</div>
-			) }
 		</div>
 	);
 }
