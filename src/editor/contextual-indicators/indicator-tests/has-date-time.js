@@ -49,21 +49,18 @@ export default function hasDateTime(
 		const enable = schedule?.enable ?? false;
 		const start = schedule?.start ?? '';
 		const end = schedule?.end ?? '';
+		const dowEnable = schedule?.dayOfWeek?.enable ?? false;
+		const todEnable = schedule?.timeOfDay?.enable ?? false;
+
 		let scheduleTest = true;
 
 		if ( ! enable ) {
 			scheduleTest = false;
 		}
 
-		if ( ! hideOnSchedules && enable && ! start && ! end ) {
+		if ( ! hideOnSchedules && enable && ! start && ! end && ! dowEnable && ! todEnable ) {
 			scheduleTest = false;
 		}
-
-		scheduleTest = applyFilters(
-			'blockVisibility.hasDateTimeScheduleIndicator',
-			scheduleTest,
-			schedule
-		);
 
 		// This test needs to go last to check for config error.
 		if ( enable ) {
