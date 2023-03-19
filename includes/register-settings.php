@@ -206,6 +206,9 @@ function register_settings() {
 				'remove_on_uninstall'           => array(
 					'type' => 'boolean',
 				),
+				'enable_control_set_utilities' => array(
+					'type' => 'boolean',
+				),
 			),
 		),
 	);
@@ -274,6 +277,7 @@ function register_settings() {
 			'enabled_user_roles'            => array(),
 			'enable_full_control_mode'      => false,
 			'remove_on_uninstall'           => false,
+			'enable_control_set_utilities'  => true,
 		),
 	);
 
