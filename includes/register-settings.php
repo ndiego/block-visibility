@@ -49,11 +49,17 @@ function register_settings() {
 				'date_time'          => array(
 					'type'       => 'object',
 					'properties' => array(
-						'enable'            => array(
+						'enable'             => array(
+							'type' => 'boolean',
+						),
+						'enable_day_of_week' => array(
+							'type' => 'boolean',
+						),
+						'enable_time_of_day' => array(
 							'type' => 'boolean',
 						),
 						// Deprecated in 1.8.0.
-						'enable_scheduling' => array(
+						'enable_scheduling'  => array(
 							'type' => 'boolean',
 						),
 					),
@@ -202,8 +208,11 @@ function register_settings() {
 				'enable_user_rule_sets' => true,
 			),
 			'date_time'          => array(
-				'enable'            => true,
-				'enable_scheduling' => true,
+				'enable'             => true,
+				'enable_day_of_week' => true,
+				'enable_time_of_day' => true,
+				// Deprecated in 1.8.0.
+				'enable_scheduling'  => true,
 			),
 			'screen_size'        => array(
 				'enable'                   => true,

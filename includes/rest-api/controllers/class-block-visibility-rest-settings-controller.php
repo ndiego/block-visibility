@@ -189,7 +189,13 @@ class Block_Visibility_REST_Settings_Controller extends WP_REST_Controller {
 						'date_time'          => array(
 							'type'       => 'object',
 							'properties' => array(
-								'enable' => array(
+								'enable'             => array(
+									'type' => 'boolean',
+								),
+								'enable_day_of_week' => array(
+									'type' => 'boolean',
+								),
+								'enable_time_of_day' => array(
 									'type' => 'boolean',
 								),
 							),

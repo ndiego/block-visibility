@@ -9,6 +9,7 @@ import classnames from 'classnames';
  */
 import { __, sprintf } from '@wordpress/i18n';
 import {
+	Button,
 	Disabled,
 	DropdownMenu,
 	MenuGroup,
@@ -16,23 +17,20 @@ import {
 	Notice,
 	Slot,
 	TextControl,
-	withFilters,
 } from '@wordpress/components';
-import { pencil, moreVertical } from '@wordpress/icons';
+import { calendar, pencil, moreVertical } from '@wordpress/icons';
 import { useState } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
-import CalendarPopover from './calendar-popover';
+import DayOfWeek from './../day-of-week';
+import TimeOfDay from './../time-of-day';
 import DateTimeField from './date-time-field';
 import formatDateLabel from './format-date-label';
-
-// Provides an entry point to slot in additional settings. Must be placed
-// outside of function to avoid unnecessary rerenders.
-const AdditionalScheduleControls = withFilters(
-	'blockVisibility.addDateTimeScheduleControls'
-)( ( props ) => <></> ); // eslint-disable-line
+import CalendarPopover from './calendar-popover';
+import isControlSettingEnabled from './../../../utils/is-control-setting-enabled';
+import { time } from './../../../utils/icons';
 
 /**
  * Add the block Schedule component.
@@ -42,29 +40,34 @@ const AdditionalScheduleControls = withFilters(
  */
 export default function Schedule( props ) {
 	const {
-		type,
 		dateTime,
 		schedules,
 		scheduleIndex,
 		scheduleAtts,
-		controlSetAtts,
 		setControlAtts,
 		hideOnSchedules,
+		settings,
 	} = props;
 	const [ pickerOpen, setPickerOpen ] = useState( false );
 	const [ pickerType, setPickerType ] = useState( null );
 
-	// There needs to be a unique index for the Slots since we technically have
-	// multiple of the same Slot.
-	const uniqueIndex =
-		type === 'single'
-			? type + '-' + scheduleIndex
-			: type + '-' + controlSetAtts?.id + '-' + scheduleIndex;
+	const dowSettingEnabled = isControlSettingEnabled(
+		settings,
+		'date_time',
+		'enable_day_of_week'
+	);
+	const todSettingEnabled = isControlSettingEnabled(
+		settings,
+		'date_time',
+		'enable_time_of_day'
+	);
 
 	const title = scheduleAtts?.title ?? '';
 	const enable = scheduleAtts?.enable ?? true;
 	const start = scheduleAtts?.start ?? null;
 	const end = scheduleAtts?.end ?? null;
+	const dowEnabled = scheduleAtts?.dayOfWeek?.enable ?? false;
+	const todEnabled = scheduleAtts?.timeOfDay?.enable ?? false;
 
 	const today = new Date( new Date().setHours( 0, 0, 0, 0 ) );
 
@@ -135,11 +138,19 @@ export default function Schedule( props ) {
 		);
 	}
 
-	const setAttribute = ( attribute, value ) => {
+	const setAttribute = ( attribute, subAttribute, value ) => {
 		const newScheduleAtts = { ...scheduleAtts };
 		const newSchedules = [ ...schedules ];
 
-		newScheduleAtts[ attribute ] = value;
+		if ( subAttribute ) {
+			newScheduleAtts[ attribute ] = assign(
+				{ ...newScheduleAtts[ attribute ] },
+				{ [ subAttribute ]: value }
+			);
+		} else {
+			newScheduleAtts[ attribute ] = value;
+		}
+
 		newSchedules[ scheduleIndex ] = newScheduleAtts;
 
 		setControlAtts(
@@ -163,7 +174,9 @@ export default function Schedule( props ) {
 					value={ title }
 					label={ __( 'Schedule title', 'block-visibility' ) }
 					placeholder={ __( 'Schedule', 'block-visibility' ) }
-					onChange={ ( value ) => setAttribute( 'title', value ) }
+					onChange={ ( value ) =>
+						setAttribute( 'title', false, value )
+					}
 				/>
 			) }
 		</DropdownMenu>
@@ -183,12 +196,12 @@ export default function Schedule( props ) {
 		>
 			{ ( { onClose } ) => (
 				<>
-					<Slot name="ScheduleOptionsTop" />
-
 					<MenuGroup label={ __( 'Tools', 'block-visibility' ) }>
 						<Slot name="ScheduleOptionsTools" />
 						<MenuItem
-							onClick={ () => setAttribute( 'enable', ! enable ) }
+							onClick={ () =>
+								setAttribute( 'enable', false, ! enable )
+							}
 						>
 							{ enable
 								? __( 'Disable', 'block-visibility' )
@@ -225,8 +238,6 @@ export default function Schedule( props ) {
 
 	let dateTimeControls = (
 		<div className="schedules-item__fields">
-			<Slot name={ 'DateTimeScheduleControlsTop-' + uniqueIndex } />
-
 			<div className="schedules-item__fields__date-time">
 				<div className="control-fields-item__label">
 					{ sprintf(
@@ -303,8 +314,12 @@ export default function Schedule( props ) {
 					</Notice>
 				) }
 			</div>
-
-			<Slot name={ 'DateTimeScheduleControlsBottom-' + uniqueIndex } />
+			{ dowSettingEnabled && dowEnabled && (
+				<DayOfWeek setAttribute={ setAttribute } { ...props } />
+			) }
+			{ todSettingEnabled && todEnabled && (
+				<TimeOfDay setAttribute={ setAttribute } { ...props } />
+			) }
 		</div>
 	);
 
@@ -324,18 +339,46 @@ export default function Schedule( props ) {
 					{ editTitleDropdown }
 				</div>
 				<div className="section-header__toolbar">
-					<Slot name={ 'DateTimeScheduleToolbar-' + uniqueIndex } />
-
+					{ todSettingEnabled && (
+						<Button
+							icon={ time }
+							isPressed={ todEnabled }
+							onClick={ () =>
+								setAttribute(
+									'timeOfDay',
+									'enable',
+									! todEnabled
+								)
+							}
+							isSmall
+							label={ __(
+								'Set time of day controls',
+								'block-visibility-pro'
+							) }
+						/>
+					) }
+					{ dowSettingEnabled && (
+						<Button
+							icon={ calendar }
+							isPressed={ dowEnabled }
+							onClick={ () =>
+								setAttribute(
+									'dayOfWeek',
+									'enable',
+									! dowEnabled
+								)
+							}
+							isSmall
+							label={ __(
+								'Set day of week controls',
+								'block-visibility-pro'
+							) }
+						/>
+					) }
 					{ optionsDropdown }
 				</div>
 			</div>
-
 			{ dateTimeControls }
-
-			<AdditionalScheduleControls
-				uniqueIndex={ uniqueIndex }
-				{ ...props }
-			/>
 		</div>
 	);
 }

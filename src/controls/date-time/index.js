@@ -71,7 +71,7 @@ export default function DateTime( props ) {
 				{ enableNotices && (
 					<InformationPopover
 						message={ __(
-							'The Date & Time control allows you to schedule when the block should be visible.',
+							"The Date & Time control allows you to schedule when the block should be visible. Dates and times are relative to the timezone set in your website's General settings.",
 							'block-visibility'
 						) }
 						link={ links.editorDateTime }

@@ -2,13 +2,12 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Slot, ToggleControl } from '@wordpress/components';
+import { Disabled, ToggleControl } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
 import links from './../../../utils/links';
-import { time } from './../../../utils/icons';
 import { InformationPopover } from './../../../components';
 
 /**
@@ -21,7 +20,52 @@ export default function DateTime( props ) {
 	const { visibilityControls, setVisibilityControls } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enable = visibilityControls?.date_time?.enable ?? true; // eslint-disable-line
+	const enable = visibilityControls?.date_time?.enable ?? true;
+	const enableDOW = visibilityControls?.date_time?.enable_day_of_week ?? true;
+	const enableTOD = visibilityControls?.date_time?.enable_time_of_day ?? true;
+
+	let dowControl = (
+		<ToggleControl
+			label={ __(
+				'Enable the Day of Week control.',
+				'block-visibility'
+			) }
+			checked={ enableDOW }
+			onChange={ () => {
+				setVisibilityControls( {
+					...visibilityControls,
+					date_time: {
+						...visibilityControls.date_time,
+						enable_day_of_week: ! enableDOW,
+					},
+				} );
+			} }
+		/>
+	);
+
+	let todControl = (
+		<ToggleControl
+			label={ __(
+				'Enable the Time of Day control.',
+				'block-visibility'
+			) }
+			checked={ enableTOD }
+			onChange={ () => {
+				setVisibilityControls( {
+					...visibilityControls,
+					date_time: {
+						...visibilityControls.date_time,
+						enable_time_of_day: ! enableTOD,
+					},
+				} );
+			} }
+		/>
+	);
+
+	if ( ! enable ) {
+		dowControl = <Disabled>{ dowControl }</Disabled>;
+		todControl = <Disabled>{ todControl }</Disabled>;
+	}
 
 	return (
 		<div className="settings-panel">
@@ -31,7 +75,6 @@ export default function DateTime( props ) {
 				</span>
 			</div>
 			<div className="settings-panel__container">
-				<Slot name="VisibilityControlsDateTimeTop" />
 				<div className="settings-type__toggle has-info-popover">
 					<ToggleControl
 						label={ __(
@@ -57,7 +100,26 @@ export default function DateTime( props ) {
 						link={ links.settingsDateTime }
 					/>
 				</div>
-				<Slot name="VisibilityControlsDateTimeBottom" />
+				<div className="settings-type__toggle has-info-popover first subsetting">
+					{ dowControl }
+					<InformationPopover
+						message={ __(
+							'The Day of Week control adds functionality to the main Date & Time control. It allows you to conditionally display blocks based on specific days of the week within a given schedule.',
+							'block-visibility'
+						) }
+						link={ links.settingsDateTime }
+					/>
+				</div>
+				<div className="settings-type__toggle has-info-popover subsetting">
+					{ todControl }
+					<InformationPopover
+						message={ __(
+							'The Time of Day adds functionality to the main Date & Time control. It allows you to conditionally display blocks at specific time intervals on each day of a given schedule.',
+							'block-visibility'
+						) }
+						link={ links.settingsDateTime }
+					/>
+				</div>
 			</div>
 		</div>
 	);

@@ -66,12 +66,15 @@ function date_time_test( $is_visible, $settings, $controls ) {
 				$test_result =
 					run_schedule_test( $start, $end );
 
-				$test_result = apply_filters(
-					'block_visibility_frontend_test_date_time_schedule',
-					$test_result,
-					$schedule,
-					$settings
-				);
+				// Run the day of week test if enabled.
+				if ( is_control_enabled( $settings, 'date_time', 'enable_day_of_week' ) ) {
+					$test_result = run_day_of_week_test( $test_result, $schedule );
+				}
+
+				// Run the time of day test if enabled.
+				if ( is_control_enabled( $settings, 'date_time', 'enable_time_of_day' ) ) {
+					$test_result = run_time_of_day_test( $test_result, $schedule );
+				}
 
 				// Reverse the test result if hide_on_schedules is active.
 				if ( $hide_on_schedules && 'error' !== $test_result ) {
@@ -138,4 +141,127 @@ function run_schedule_test( $start, $end ) {
 	}
 
 	return 'visible';
+}
+
+/**
+ * Run the day of week test for the given schedule.
+ *
+ * @since 3.0.0
+ *
+ * @param string $test_result The current value of the visibility test.
+ * @param array  $schedule    The settings of the current schedule.
+ * @return string              Return true is the block should be 'visible', 'hidden' or there is an 'error'.
+ */
+function run_day_of_week_test( $test_result, $schedule ) {
+
+	if ( 'visible' !== $test_result ) {
+		return $test_result;
+	}
+
+	$enable =
+		isset( $schedule['dayOfWeek']['enable'] ) ?
+		$schedule['dayOfWeek']['enable'] :
+		false;
+
+	if ( ! $enable ) {
+		return $test_result;
+	}
+
+	$days =
+		isset( $schedule['dayOfWeek']['days'] ) ?
+		$schedule['dayOfWeek']['days'] :
+		array();
+
+	// Current time based on the date/time settings set in the WP admin.
+	$current = current_datetime()->format( 'D' );
+
+	if ( in_array( $current, $days, true ) ) {
+		return 'visible';
+	}
+
+	return 'hidden';
+}
+
+/**
+ * Run the time of day test for the given schedule.
+ *
+ * @since 3.0.0
+ *
+ * @param string $test_result The current value of the visibility test.
+ * @param array  $schedule    The settings of the current schedule.
+ * @return string              Return true is the block should be 'visible', 'hidden' or there is an 'error'.
+ */
+function run_time_of_day_test( $test_result, $schedule ) {
+
+	if ( 'visible' !== $test_result ) {
+		return $test_result;
+	}
+
+	$enable =
+		isset( $schedule['timeOfDay']['enable'] ) ?
+		$schedule['timeOfDay']['enable'] :
+		false;
+
+	if ( ! $enable ) {
+		return $test_result;
+	}
+
+	$intervals =
+		isset( $schedule['timeOfDay']['intervals'] ) ?
+		$schedule['timeOfDay']['intervals'] :
+		array();
+
+	$interval_test_results = array();
+
+	if ( 0 < count( $intervals ) ) {
+
+		$current      = current_datetime();
+		$current_date = $current->format( 'Y-m-d' );
+
+		foreach ( $intervals as $interval ) {
+			$start_raw =
+				isset( $interval['start'] ) ? $interval['start'] : null;
+			$end_raw   = isset( $interval['end'] ) ? $interval['end'] : null;
+
+			// We need to have both a start and an end time to proceed.
+			if ( ! $start_raw || ! $end_raw ) {
+				$interval_test_result = 'error';
+			} else {
+
+				$start =
+					create_date_time( $current_date . 'T' . $start_raw, false );
+				$end   =
+					create_date_time( $current_date . 'T' . $end_raw, false );
+
+				// If the start time is after the end time, skip test and throw error.
+				if ( $start > $end ) {
+					$interval_test_result = 'error';
+				} else {
+					if (
+						( $start && $start > $current ) ||
+						( $end && $end < $current
+					) ) {
+						$interval_test_result = 'hidden';
+					} else {
+						$interval_test_result = 'visible';
+					}
+				}
+			}
+
+			// If there is an error in the interval, default to showing the block.
+			$interval_test_result =
+				'error' === $interval_test_result ?
+				'visible' :
+				$interval_test_result;
+
+			$interval_test_results[] = $interval_test_result;
+		}
+	}
+
+	// As long as the current time satifies at least one interval show the block.
+	if ( in_array( 'visible', $interval_test_results, true ) ) {
+		return 'visible';
+	} else {
+		return 'hidden';
+	}
 }

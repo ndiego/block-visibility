@@ -48,7 +48,7 @@ export default function CalendarPopover( props ) {
 			<DateTimePicker
 				currentDate={ currentDate }
 				onChange={ ( date ) => {
-					setAttribute( pickerType, date );
+					setAttribute( pickerType, false, date );
 				} }
 				is12Hour={ is12Hour }
 				__nextRemoveHelpButton={ true }

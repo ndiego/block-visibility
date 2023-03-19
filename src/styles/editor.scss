@@ -532,6 +532,128 @@
                             }
                         }
                     }
+                    
+                    .schedules-item__fields__day-of-week {
+                        max-width: 260px;
+            
+                        .day-of-week__checkbox-controls {
+                            display: flex;
+                            justify-content: space-between;
+                            margin-top: 12px;
+            
+                            .components-base-control {
+                                margin-bottom: 0;
+                            }
+            
+                            .components-base-control__field {
+                                display: flex;
+                                flex-direction: column;
+                                margin-bottom: 0;
+            
+                                .components-checkbox-control__input-container {
+                                    margin: 0 0 3px 0;
+                                }
+                            }
+            
+                            label {
+                                display: inline-block;
+                                width: 100%;
+                                text-align: center;
+                            }
+                        }
+                    }
+            
+                    .schedules-item__fields__time-of-day {
+                        .time-of-day__intervals {
+                            display: grid;
+                            grid-template-columns: repeat( auto-fit, 248px );
+                            grid-gap: 12px;
+                            margin-top: 12px;
+                        }
+            
+                        .time-of-day__interval-control {
+                            display: flex;
+                            flex-wrap: wrap;
+            
+                            .components-notice {
+                                flex-basis: 100%;
+                                margin-top: 16px !important;
+                            }
+                        }
+            
+                        .time-of-day__interval-control__wrapper {
+                            display: grid;
+                            grid-gap: 8px;
+            
+                            .time-picker {
+                                align-items: center;
+                                display: flex;
+                                gap: 8px;
+                                justify-content: space-between;
+            
+                                .control-fields-item__sub-label {
+                                    min-width: 40px;
+                                }
+            
+                                .time-picker__fields-wrapper {
+                                    align-items: center;
+                                    display: flex;
+                                    gap: 4px;
+            
+                                    .time-picker__fields-inputs {
+                                        align-items: center;
+                                        display: flex;
+                                        gap: 4px;
+                                    }
+            
+                                    input {
+                                        border-color: #1e1e1e;
+                                        text-align: center;
+                                        width: 35px;
+            
+                                        &::-webkit-outer-spin-button,
+                                        &::-webkit-inner-spin-button {
+                                            -webkit-appearance: none;
+                                            margin: 0;
+                                        }
+            
+                                        &[type=number] {
+                                            -moz-appearance:textfield; /* Firefox */
+                                        }
+                                    }
+            
+                                    input,
+                                    button {
+                                        border-radius: 2px;
+                                        font-size: 13px;
+                                        height: 30px;
+                                        margin-top: 0;
+                                        margin-bottom: 0;
+                                        padding: 6px 8px;
+                                    }
+            
+                                    .time-picker__fields-am-pm {
+                                        margin-left: 2px;
+                                    }
+                                }
+                            }
+                        }
+            
+                        .time-of-day__interval-control__remove {
+                            margin-left: auto;
+            
+                            button {
+                                height: 24px;
+                                min-width: 24px;
+                                width: 24px;
+                                padding: 0;
+                            }
+                        }
+            
+                        .time-of-day__add-interval {
+                            margin-top: 12px;
+                        }
+                    }
                 }
             }
         }
