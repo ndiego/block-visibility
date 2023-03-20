@@ -23,7 +23,7 @@ export default function QueryString( props ) {
 	const enable = visibilityControls?.query_string?.enable ?? true;
 
 	return (
-		<div className="settings-panel">
+		<div className="settings-panel control-query-string">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'Query String', 'block-visibility' ) }

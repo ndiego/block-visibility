@@ -24,7 +24,7 @@ export default function ReferralSource( props ) {
 	const enable = visibilityControls?.referral_source?.enable ?? true;
 
 	return (
-		<div className="settings-panel">
+		<div className="settings-panel control-referral-source">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'Referral Source', 'block-visibility' ) }

@@ -93,7 +93,7 @@ export default function UserRole( props ) {
 	}
 
 	return (
-		<div className="settings-panel">
+		<div className="settings-panel control-user-role">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'User Role', 'block-visibility' ) }

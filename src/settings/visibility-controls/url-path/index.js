@@ -24,7 +24,7 @@ export default function UrlPath( props ) {
 	const enable = visibilityControls?.url_path?.enable ?? true;
 
 	return (
-		<div className="settings-panel">
+		<div className="settings-panel control-url-path">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'URL Path', 'block-visibility' ) }

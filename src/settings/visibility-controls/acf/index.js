@@ -30,7 +30,7 @@ export default function ACF( props ) {
 	const enable = visibilityControls?.acf?.enable ?? true; // eslint-disable-line
 
 	return (
-		<div className="settings-panel">
+		<div className="settings-panel control-acf">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					<Icon icon={ acf } />

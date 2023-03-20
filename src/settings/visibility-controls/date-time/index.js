@@ -68,7 +68,7 @@ export default function DateTime( props ) {
 	}
 
 	return (
-		<div className="settings-panel">
+		<div className="settings-panel control-date-time">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'Date & Time', 'block-visibility' ) }

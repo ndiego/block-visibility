@@ -24,7 +24,7 @@ export default function Metadata( props ) {
 	const enable = visibilityControls?.metadata?.enable ?? true;
 
 	return (
-		<div className="settings-panel">
+		<div className="settings-panel control-metadata">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'Metadata (Custom Fields)', 'block-visibility' ) }

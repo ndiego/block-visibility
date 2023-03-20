@@ -24,7 +24,7 @@ export default function Location( props ) {
 	const enable = visibilityControls?.location?.enable ?? true;
 
 	return (
-		<div className="settings-panel">
+		<div className="settings-panel control-location">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'Location', 'block-visibility' ) }

@@ -24,7 +24,7 @@ export default function Cookie( props ) {
 	const enable = visibilityControls?.cookie?.enable ?? true;
 
 	return (
-		<div className="settings-panel">
+		<div className="settings-panel control-cookie">
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					{ __( 'Cookie', 'block-visibility' ) }
