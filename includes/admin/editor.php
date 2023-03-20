@@ -26,10 +26,22 @@ function enqueue_editor_scripts() {
 	// Scripts.
 	$asset_file = get_asset_file( 'build/block-visibility-editor' );
 
+	$dependencies = $asset_file['dependencies'];
+
+	// Remove wp-edit-post if on the Widgets screen, otherwise WordPress will throw an error.
+	if ( 'widgets' === get_current_screen()->id ) {
+		$dependencies = array_filter(
+			$dependencies,
+			function ( $dep ) {
+				return ( 'wp-edit-post' !== $dep );
+			}
+		);
+	}
+
 	wp_enqueue_script(
 		'block-visibility-editor-scripts',
 		BLOCK_VISIBILITY_PLUGIN_URL . 'build/block-visibility-editor.js',
-		array_merge( $asset_file['dependencies'], array( 'wp-api', 'wp-core-data' ) ),
+		array_merge( $dependencies, array( 'wp-api', 'wp-core-data' ) ),
 		$asset_file['version'],
 		false // Need false to ensure our filters can target third-party plugins.
 	);
@@ -45,13 +57,7 @@ function enqueue_editor_scripts() {
 		'before'
 	);
 }
-/**
- * Need to add at admin_init instead of the normal enqueue_block_editor_assets
- * so that our attributes load for third-party blocks. Hopefully this will be
- * resolved in future releases of WP. Using enqueue_block_editor_assets is the
- * ideal implementation. The primary culprit is Jetpack blocks.
- */
-add_action( 'admin_init', __NAMESPACE__ . '\enqueue_editor_scripts', 10000 );
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_scripts', 10001 );
 
 /**
  * Enqueue plugin specific editor styles
@@ -133,65 +139,6 @@ function enqueue_editor_styles() {
 	}
 }
 add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_styles' );
-
-/**
- * Enqueue editor scripts in the customizer to work with new block based Widgets
- * panel in Gutenberg and in WordPress v5.8.
- *
- * Note that this implementation is not ideal since it does not work for some
- * blocks, notably Jetpack blocks. We hope for a more permanent solution in the
- * future which will also resolve the need to use admin_init above.
- *
- * @since 1.9.1
- */
-function enqueue_customizer_assets() {
-
-	// Scripts.
-	$asset_file = get_asset_file( 'build/block-visibility-editor' );
-
-	wp_enqueue_script(
-		'block-visibility-editor-scripts',
-		BLOCK_VISIBILITY_PLUGIN_URL . 'build/block-visibility-editor.js',
-		array_merge( $asset_file['dependencies'], array( 'wp-api' ) ),
-		$asset_file['version'],
-		false // Need false to ensure our filters can target third-party plugins.
-	);
-}
-add_action( 'customize_controls_enqueue_scripts', __NAMESPACE__ . '\enqueue_customizer_assets' );
-
-/**
- * Dequeue our editor assets on pages without the Block Editor.
- *
- * Since we are forced to use admin_init to enqueue our editor assets, this
- * causes the files to be loaded on admin pages without the Block Editor, which
- * can cause conflicts with other plugins, notably ACF. This fixes that.
- *
- * We have to do this at admin_enqueue_scripts because get_current_screen() is
- * not available yet at admin_init.
- *
- * @since 1.4.2
- */
-function dequeue_editor_assets_on_pages_without_block_editor() {
-
-	$should_dequeue = true;
-
-	if ( is_callable( 'get_current_screen' ) ) {
-
-		if (
-			get_current_screen()->is_block_editor ||
-			'appearance_page_gutenberg-widgets' === get_current_screen()->base || // The block-based widgets screen added by Gutenberg.
-			'gutenberg_page_gutenberg-navigation' === get_current_screen()->base || // The block-based navigation screen added by Gutenberg.
-			'customize' === get_current_screen()->base // The customizer, which includes block-based widgets.
-		) {
-			$should_dequeue = false;
-		}
-	}
-
-	if ( $should_dequeue ) {
-		wp_dequeue_script( 'block-visibility-editor-scripts' );
-	}
-}
-add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\dequeue_editor_assets_on_pages_without_block_editor' );
 
 /**
  * Fetch the value of the given plugin setting.
