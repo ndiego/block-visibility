@@ -65,9 +65,9 @@ export default function Integrations( props ) {
 				/>
 			</div>
 			<div className="setting-tabs__setting-panels">
-				<Slot name="VisibilityControlsIntegrationsTop" />
 				<ACF { ...props } />
 				<WPFusion { ...props } />
+				<Slot name="VisibilityControlsIntegrations" />
 				<Slot name="VisibilityControlsIntegrationsBottom" />
 			</div>
 		</>
