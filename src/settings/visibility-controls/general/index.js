@@ -7,7 +7,7 @@ import Select from 'react-select';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Slot } from '@wordpress/components';
+import { Slot, ToggleControl } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -22,7 +22,14 @@ import { InformationPopover } from './../../../components';
  * @param {Object} props All the props passed to this function
  */
 export default function General( props ) {
-	const { settings, setSettings, setHasUpdates, variables } = props;
+	const {
+		settings,
+		setSettings,
+		setHasUpdates,
+		visibilityControls,
+		setVisibilityControls,
+		variables,
+	} = props;
 	const pluginSettings = settings?.plugin_settings ?? {};
 
 	const enabledControls = getEnabledControls( settings, variables );
@@ -36,6 +43,7 @@ export default function General( props ) {
 	} );
 
 	// Manually set defaults, this ensures the main settings function properly
+	const enableLocalControls = visibilityControls?.general?.enable_local_controls ?? true; // eslint-disable-line
 	const defaultControls = pluginSettings?.default_controls ?? []; // eslint-disable-line
 	const selectedControls = defaultControlOptions.filter( ( control ) =>
 		defaultControls.includes( control.value )
@@ -121,7 +129,6 @@ export default function General( props ) {
 				</span>
 			</div>
 			<div className="settings-panel__container">
-				<Slot name="VisibilityControlsGeneralTop" />
 				<div className="settings-type__select has-info-popover">
 					<div className="select-control-container">
 						<div className="settings-label">
@@ -158,7 +165,32 @@ export default function General( props ) {
 						) }
 					/>
 				</div>
-				<Slot name="VisibilityControlsGeneralBottom" />
+				<div className="settings-type__toggle has-info-popover">
+					<ToggleControl
+						label={ __(
+							'Enable local block controls.',
+							'block-visibility'
+						) }
+						checked={ enableLocalControls }
+						onChange={ () => {
+							setVisibilityControls( {
+								...visibilityControls,
+								general: {
+									...visibilityControls.general,
+									enable_local_controls:
+										! enableLocalControls,
+								},
+							} );
+						} }
+					/>
+					<InformationPopover
+						message={ __(
+							'"Local" refers to the visibility controls available on each block. When disabled, only Visibility Presets and the Hide Block control will be available. Presets are then used to manage all other enabled controls.',
+							'block-visibility'
+						) }
+					/>
+				</div>
+				<Slot name="VisibilityControlsGeneral" />
 			</div>
 		</div>
 	);

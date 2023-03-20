@@ -78,9 +78,9 @@ function is_visible( $settings, $attributes ) {
 		$attributes
 	);
 
-	// If Pro is active, allow local controls to be disabled in Pro.
+	// Check if local controls are enabled.
 	$enable_local_controls =
-		isset( $settings['visibility_controls']['general']['enable_local_controls'] ) && class_exists( 'Block_Visibility_Pro' )
+		isset( $settings['visibility_controls']['general']['enable_local_controls'] )
 			? $settings['visibility_controls']['general']['enable_local_controls']
 			: true;
 
@@ -117,13 +117,13 @@ function add_custom_classes( $settings, $attributes ) {
 		$attributes
 	);
 
-	// If Pro is active, allow local controls to be disabled in Pro.
+	// Check if local controls are enabled.
 	$enable_local_controls =
-		isset( $settings['visibility_controls']['general']['enable_local_controls'] ) && class_exists( 'Block_Visibility_Pro' )
+		isset( $settings['visibility_controls']['general']['enable_local_controls'] )
 			? $settings['visibility_controls']['general']['enable_local_controls']
 			: true;
 
-	// If there're "local" control sets applied to the block, add custom classes.
+	// If there are "local" control sets applied to the block, add custom classes.
 	if ( $enable_local_controls && isset( $attributes['controlSets'] ) ) {
 		$custom_classes = control_sets_custom_classes(
 			$custom_classes,
