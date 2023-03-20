@@ -89,8 +89,6 @@ export default function ControlsPanel( props ) {
 		<>
 			<VisibilityPresets { ...props } />
 
-			<Slot name={ 'ControlSetControlsTop-' + uniqueIndex } />
-
 			<BrowserDevice setControlAtts={ setControlAtts } { ...props } />
 			<Cookie setControlAtts={ setControlAtts } { ...props } />
 			<DateTime setControlAtts={ setControlAtts } { ...props } />
@@ -102,11 +100,14 @@ export default function ControlsPanel( props ) {
 			<UrlPath setControlAtts={ setControlAtts } { ...props } />
 			<UserRole setControlAtts={ setControlAtts } { ...props } />
 
-			<Slot name={ 'ControlSetControlsMiddle-' + uniqueIndex } />
+			<Slot name={ 'ControlSetControls-' + uniqueIndex } />
 
 			<ACF setControlAtts={ setControlAtts } { ...props } />
 			<WPFusion setControlAtts={ setControlAtts } { ...props } />
 
+			<Slot name={ 'ControlSetControlsIntegrations-' + uniqueIndex } />
+			
+			{ /* Deprecated in version 3.0.0 */ }
 			<Slot name={ 'ControlSetControlsBottom-' + uniqueIndex } />
 		</>
 	);

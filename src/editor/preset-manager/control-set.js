@@ -94,8 +94,6 @@ export default function ControlSet( props ) {
 
 	let controlSetControls = (
 		<div className="control-set__controls">
-			<Slot name={ 'ControlSetControlsTop-' + uniqueIndex } />
-
 			<BrowserDevice
 				{ ...props }
 				enabledControls={ enabledSetControls }
@@ -147,7 +145,7 @@ export default function ControlSet( props ) {
 				setControlAtts={ setControlAtts }
 			/>
 
-			<Slot name={ 'ControlSetControlsMiddle-' + uniqueIndex } />
+			<Slot name={ 'ControlSetControls-' + uniqueIndex } />
 
 			<ACF
 				{ ...props }
@@ -160,6 +158,9 @@ export default function ControlSet( props ) {
 				setControlAtts={ setControlAtts }
 			/>
 
+			<Slot name={ 'ControlSetControlsIntegrations-' + uniqueIndex } />
+
+			{ /* Deprecated in version 3.0.0 */ }
 			<Slot name={ 'ControlSetControlsBottom-' + uniqueIndex } />
 		</div>
 	);
