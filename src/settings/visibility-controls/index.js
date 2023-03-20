@@ -117,20 +117,20 @@ export default function VisibilityControls( props ) {
 					{ ...props }
 				/>
 				<Slot name="VisibilityControlsMiddle" />
-				<Integrations
-					visibilityControls={ visibilityControls }
-					setVisibilityControls={ setVisibilityControls }
-					hasUpdates={ hasUpdates }
-					setHasUpdates={ setHasUpdates }
-					{ ...props }
-				/>
-				<Slot name="VisibilityControlsBottom" />
-				<AdditionalControls
-					visibilityControls={ visibilityControls }
-					setVisibilityControls={ setVisibilityControls }
-					{ ...props }
-				/>
 			</div>
+			<Integrations
+				visibilityControls={ visibilityControls }
+				setVisibilityControls={ setVisibilityControls }
+				hasUpdates={ hasUpdates }
+				setHasUpdates={ setHasUpdates }
+				{ ...props }
+			/>
+			<Slot name="VisibilityControlsBottom" />
+			<AdditionalControls
+				visibilityControls={ visibilityControls }
+				setVisibilityControls={ setVisibilityControls }
+				{ ...props }
+			/>
 		</div>
 	);
 }
