@@ -140,6 +140,7 @@ function VisibilityInspectorControls( props ) {
 		<InspectorControls group="settings">
 			<div className="block-visibility__controls-panel">
 				<ControlsPanel
+					blockAtts={ blockAtts }
 					controlSets={ controlSets }
 					controlSetAtts={ controlSets[ 0 ] } // Ok for now since only one control set available.
 					setControlSetAtts={ setControlSetAtts }
