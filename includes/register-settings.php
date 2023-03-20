@@ -21,31 +21,6 @@ function register_settings() {
 		'visibility_controls' => array(
 			'type'       => 'object',
 			'properties' => array(
-				'hide_block'         => array(
-					'type'       => 'object',
-					'properties' => array(
-						'enable' => array(
-							'type' => 'boolean',
-						),
-					),
-				),
-				'visibility_by_role' => array(
-					'type'       => 'object',
-					'properties' => array(
-						'enable'                => array(
-							'type' => 'boolean',
-						),
-						'enable_user_roles'     => array(
-							'type' => 'boolean',
-						),
-						'enable_users'          => array(
-							'type' => 'boolean',
-						),
-						'enable_user_rule_sets' => array(
-							'type' => 'boolean',
-						),
-					),
-				),
 				'browser_device'     => array(
 					'type'       => 'object',
 					'properties' => array(
@@ -76,6 +51,46 @@ function register_settings() {
 						),
 						// Deprecated in 1.8.0.
 						'enable_scheduling'  => array(
+							'type' => 'boolean',
+						),
+					),
+				),
+				'hide_block'         => array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable' => array(
+							'type' => 'boolean',
+						),
+					),
+				),
+				'location'           => array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable' => array(
+							'type' => 'boolean',
+						),
+					),
+				),
+				'metadata'           => array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable' => array(
+							'type' => 'boolean',
+						),
+					),
+				),
+				'query_string'       => array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable' => array(
+							'type' => 'boolean',
+						),
+					),
+				),
+				'referral_source'    => array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable' => array(
 							'type' => 'boolean',
 						),
 					),
@@ -131,26 +146,27 @@ function register_settings() {
 						),
 					),
 				),
-				'query_string'       => array(
-					'type'       => 'object',
-					'properties' => array(
-						'enable' => array(
-							'type' => 'boolean',
-						),
-					),
-				),
-				'referral_source'    => array(
-					'type'       => 'object',
-					'properties' => array(
-						'enable' => array(
-							'type' => 'boolean',
-						),
-					),
-				),
 				'url_path'           => array(
 					'type'       => 'object',
 					'properties' => array(
 						'enable' => array(
+							'type' => 'boolean',
+						),
+					),
+				),
+				'visibility_by_role' => array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable'                => array(
+							'type' => 'boolean',
+						),
+						'enable_user_roles'     => array(
+							'type' => 'boolean',
+						),
+						'enable_users'          => array(
+							'type' => 'boolean',
+						),
+						'enable_user_rule_sets' => array(
 							'type' => 'boolean',
 						),
 					),
@@ -233,15 +249,6 @@ function register_settings() {
 
 	$defaults = array(
 		'visibility_controls' => array(
-			'hide_block'         => array(
-				'enable' => true,
-			),
-			'visibility_by_role' => array(
-				'enable'                => true,
-				'enable_user_roles'     => true,
-				'enable_users'          => true,
-				'enable_user_rule_sets' => true,
-			),
 			'browser_device'     => array(
 				'enable' => true,
 			),
@@ -254,6 +261,21 @@ function register_settings() {
 				'enable_time_of_day' => true,
 				// Deprecated in 1.8.0.
 				'enable_scheduling'  => true,
+			),
+			'hide_block'         => array(
+				'enable' => true,
+			),
+			'location'           => array(
+				'enable' => true,
+			),
+			'metadata'           => array(
+				'enable' => true,
+			),
+			'query_string'       => array(
+				'enable' => true,
+			),
+			'referral_source'    => array(
+				'enable' => true,
 			),
 			'screen_size'        => array(
 				'enable'                   => true,
@@ -273,13 +295,17 @@ function register_settings() {
 				'enable_advanced_controls' => false,
 				'enable_frontend_css'      => true,
 			),
-			'query_string'       => array(
-				'enable' => true,
-			),
-			'referral_source'    => array(
-				'enable' => true,
-			),
 			'url_path'           => array(
+				'enable' => true,
+			),
+			'visibility_by_role' => array(
+				'enable'                => true,
+				'enable_user_roles'     => true,
+				'enable_users'          => true,
+				'enable_user_rule_sets' => true,
+			),
+			// Third-party Integrations.
+			'acf'                => array(
 				'enable' => true,
 			),
 			'wp_fusion'          => array(

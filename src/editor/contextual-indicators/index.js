@@ -12,15 +12,17 @@ import { addFilter, applyFilters } from '@wordpress/hooks';
  * Internal dependencies
  */
 import {
+	hasACF,
 	hasBrowserDevice,
 	hasCookie,
 	hasDateTime,
-	hasUserRole,
-	hasScreenSize,
+	hasLocation,
+	hasMetadata,
 	hasQueryString,
 	hasReferralSource,
+	hasScreenSize,
 	hasUrlPath,
-	hasACF,
+	hasUserRole,
 	hasWPFusion,
 } from './indicator-tests';
 import hasVisibilityControls from './../utils/has-visibility-controls';
@@ -83,6 +85,7 @@ function withContextualIndicators( BlockListBlock ) {
 		}
 
 		let activeControls = {
+			acf: hasACF( controls, hasControlSets, enabledControls, variables ),
 			'browser-device': hasBrowserDevice(
 				controls,
 				hasControlSets,
@@ -94,6 +97,8 @@ function withContextualIndicators( BlockListBlock ) {
 				hasControlSets,
 				enabledControls
 			),
+			location: hasLocation( controls, hasControlSets, enabledControls ),
+			metadata: hasMetadata( controls, hasControlSets, enabledControls ),
 			'query-string': hasQueryString(
 				controls,
 				hasControlSets,
@@ -116,7 +121,6 @@ function withContextualIndicators( BlockListBlock ) {
 				hasControlSets,
 				enabledControls
 			),
-			acf: hasACF( controls, hasControlSets, enabledControls, variables ),
 			'wp-fusion': hasWPFusion(
 				controls,
 				hasControlSets,

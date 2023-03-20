@@ -44,6 +44,16 @@ export function getControls() {
 			settingSlug: 'date_time',
 		},
 		{
+			label: __( 'Location', 'block-visibility' ),
+			attributeSlug: 'location',
+			settingSlug: 'location',
+		},
+		{
+			label: __( 'Metadata', 'block-visibility' ),
+			attributeSlug: 'metadata',
+			settingSlug: 'metadata',
+		},
+		{
 			label: __( 'Query String', 'block-visibility' ),
 			attributeSlug: 'queryString',
 			settingSlug: 'query_string',

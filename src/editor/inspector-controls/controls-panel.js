@@ -20,6 +20,8 @@ import {
 	Cookie,
 	DateTime,
 	HideBlock,
+	Location,
+	Metadata,
 	QueryString,
 	ReferralSource,
 	ScreenSize,
@@ -90,6 +92,8 @@ export default function ControlsPanel( props ) {
 			<BrowserDevice setControlAtts={ setControlAtts } { ...props } />
 			<Cookie setControlAtts={ setControlAtts } { ...props } />
 			<DateTime setControlAtts={ setControlAtts } { ...props } />
+			<Location setControlAtts={ setControlAtts } { ...props } />
+			<Metadata setControlAtts={ setControlAtts } { ...props } />
 			<QueryString setControlAtts={ setControlAtts } { ...props } />
 			<ReferralSource setControlAtts={ setControlAtts } { ...props } />
 			<ScreenSize setControlAtts={ setControlAtts } { ...props } />
