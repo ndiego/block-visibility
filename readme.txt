@@ -212,13 +212,21 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 **Added**
 
-* [Date & Time] Added **Day of Week** and **Time of Day** controls.
+* Added the [Browser & Device](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-browser-device-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
+* Added the [Cookie](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-cookie-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
+* Added the [Referral Source](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-referral-source-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
+* Added the [URL Path](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-url-path-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
+* Added Day of Week and Time of Day controls.
+* Added control set utility support.
+* Added local block support.
 * Added Pro icons.
 
 **Removed**
 
 * Removed Pro upgrade link on plugins admin page.
 * Removed Pro upsells from settings pages.
+* Removed the `blockVisibility.addControlSetModals` and `blockVisibility.addControlSetOptions` filters.
+* Removed the `PluginSettingsEditorTop` and `PluginSettingsEditorTop` slots.
 * [Date & Time] Removed the `block_visibility_frontend_test_date_time_schedule` filter.
 * [Date & Time] Removed the `VisibilityControlsDateTimeTop` and `VisibilityControlsDateTimeBottom` slots.
 * [Date & Time] Removed the `DateTimeScheduleToolbar-` and `DateTimeScheduleControlsTop-`, and `DateTimeScheduleControlsBottom-` slots.
