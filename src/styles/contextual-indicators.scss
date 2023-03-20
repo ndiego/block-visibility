@@ -31,16 +31,16 @@ $icon__date-time: $svg-start + $date-time + $svg-end;
 $icon__user-role: $svg-start + $user-role + $svg-end;
 $icon__screen-size: $svg-start + $screen-size + $svg-end;
 $icon__query-string: $svg-start + $query-string + $svg-end;
-$icon__acf: $svg-start + $acf + $svg-end;
-$icon__wp-fusion: $svg-start + $wp-fusion + $svg-end;
-
-// Pro Single Icons
 $icon__location: $svg-start + $location + $svg-end;
 $icon__referral-source: $svg-start + $referral-source + $svg-end;
 $icon__url-path: $svg-start + $url-path + $svg-end;
 $icon__browser-device: $svg-start + $browser-device + $svg-end;
 $icon__metadata: $svg-start + $metadata + $svg-end;
 $icon__cookie: $svg-start + $cookie + $svg-end;
+
+// Integration Icons
+$icon__acf: $svg-start + $acf + $svg-end;
+$icon__wp-fusion: $svg-start + $wp-fusion + $svg-end;
 $icon__edd: $svg-start + $edd + $svg-end;
 $icon__woocommerce: $svg-start + $woocommerce + $svg-end;
 
@@ -116,21 +116,6 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
             }
         }
     
-        &.block-visibility__has-wp-fusion {
-            &:after {
-                mask-image: url( $icon__wp-fusion );
-                -webkit-mask-image: url( $icon__wp-fusion );
-            }
-        }
-    
-        &.block-visibility__has-acf {
-            &:after {
-                mask-image: url( $icon__acf );
-                -webkit-mask-image: url( $icon__acf );
-            }
-        }
-    
-        // Pro control styles.
         &.block-visibility__has-location {
             &:after {
                 mask-image: url( $icon__location );
@@ -173,6 +158,21 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
             }
         }
     
+        &.block-visibility__has-wp-fusion {
+            &:after {
+                mask-image: url( $icon__wp-fusion );
+                -webkit-mask-image: url( $icon__wp-fusion );
+            }
+        }
+    
+        // Integration styles.
+        &.block-visibility__has-acf {
+            &:after {
+                mask-image: url( $icon__acf );
+                -webkit-mask-image: url( $icon__acf );
+            }
+        }
+
         &.block-visibility__has-edd {
             &:after {
                 mask-image: url( $icon__edd );

@@ -61,7 +61,7 @@
     }
 }
 
-// Shared styles between the main controls panel and the preset manager in Pro.
+// Shared styles between the main controls panel and the preset manager.
 .controls-panel-container,
 .preset-manager__content {
 
@@ -346,7 +346,7 @@
                 min-width: 24px;
             }
 
-            // Apply additional styling to Pro buttons added.
+            // Apply additional styling to buttons added.
             &> .components-button {
                 padding: 1px;
             }

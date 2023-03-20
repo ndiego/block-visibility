@@ -19,10 +19,11 @@ const links = {
     
     // Settings links
     settingsHome: bvHome + '?' + query.learnMore + '&' + campaigns.pluginReferralsSettings,
-    settingsProUpgrade: bvHome + 'pro/?' + query.getPro + '&'  + campaigns.pluginUpsellsSettings,
     settingsKnowledgeBase: bvknowledgeBase + '?' + query.learnMore + '&' + campaigns.pluginReferralsSettings,
+    
     // General Settings tab
     settingsGeneral: bvknowledgeBase + 'how-to-configure-the-general-settings/?' + query.learnMore + '&' + campaigns.pluginReferralsSettings,
+   
     // Block Manager tab
     settingsBlockManager: bvknowledgeBase + 'how-to-configure-the-block-manager/?' + query.learnMore + '&' + campaigns.pluginReferralsSettings,
     
