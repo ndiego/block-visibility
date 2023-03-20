@@ -106,7 +106,7 @@ export default function ControlsPanel( props ) {
 			<WPFusion setControlAtts={ setControlAtts } { ...props } />
 
 			<Slot name={ 'ControlSetControlsIntegrations-' + uniqueIndex } />
-			
+
 			{ /* Deprecated in version 3.0.0 */ }
 			<Slot name={ 'ControlSetControlsBottom-' + uniqueIndex } />
 		</>
