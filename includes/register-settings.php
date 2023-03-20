@@ -139,6 +139,22 @@ function register_settings() {
 						),
 					),
 				),
+				'referral_source'    => array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable' => array(
+							'type' => 'boolean',
+						),
+					),
+				),
+				'url_path'           => array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable' => array(
+							'type' => 'boolean',
+						),
+					),
+				),
 				// Third-party Integrations.
 				'acf'                => array(
 					'type'       => 'object',
@@ -258,6 +274,12 @@ function register_settings() {
 				'enable_frontend_css'      => true,
 			),
 			'query_string'       => array(
+				'enable' => true,
+			),
+			'referral_source'    => array(
+				'enable' => true,
+			),
+			'url_path'           => array(
 				'enable' => true,
 			),
 			'wp_fusion'          => array(

@@ -18,6 +18,8 @@ import {
 	hasUserRole,
 	hasScreenSize,
 	hasQueryString,
+	hasReferralSource,
+	hasUrlPath,
 	hasACF,
 	hasWPFusion,
 } from './indicator-tests';
@@ -92,7 +94,12 @@ function withContextualIndicators( BlockListBlock ) {
 				hasControlSets,
 				enabledControls
 			),
-			'user-role': hasUserRole(
+			'query-string': hasQueryString(
+				controls,
+				hasControlSets,
+				enabledControls
+			),
+			'referral-source': hasReferralSource(
 				controls,
 				hasControlSets,
 				enabledControls
@@ -103,7 +110,8 @@ function withContextualIndicators( BlockListBlock ) {
 				enabledControls,
 				settings
 			),
-			'query-string': hasQueryString(
+			'url-path': hasUrlPath( controls, hasControlSets, enabledControls ),
+			'user-role': hasUserRole(
 				controls,
 				hasControlSets,
 				enabledControls

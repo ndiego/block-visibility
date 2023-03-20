@@ -49,9 +49,19 @@ export function getControls() {
 			settingSlug: 'query_string',
 		},
 		{
+			label: __( 'Referral Source', 'block-visibility' ),
+			attributeSlug: 'referralSource',
+			settingSlug: 'referral_source',
+		},
+		{
 			label: __( 'Screen Size', 'block-visibility' ),
 			attributeSlug: 'screenSize',
 			settingSlug: 'screen_size',
+		},
+		{
+			label: __( 'URL Path', 'block-visibility' ),
+			attributeSlug: 'urlPath',
+			settingSlug: 'url_path',
 		},
 		{
 			label: __( 'User Role', 'block-visibility' ),

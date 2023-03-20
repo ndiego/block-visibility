@@ -21,7 +21,9 @@ import {
 	DateTime,
 	HideBlock,
 	QueryString,
+	ReferralSource,
 	ScreenSize,
+	UrlPath,
 	UserRole,
 	WPFusion,
 } from './../../controls';
@@ -89,7 +91,9 @@ export default function ControlsPanel( props ) {
 			<Cookie setControlAtts={ setControlAtts } { ...props } />
 			<DateTime setControlAtts={ setControlAtts } { ...props } />
 			<QueryString setControlAtts={ setControlAtts } { ...props } />
+			<ReferralSource setControlAtts={ setControlAtts } { ...props } />
 			<ScreenSize setControlAtts={ setControlAtts } { ...props } />
+			<UrlPath setControlAtts={ setControlAtts } { ...props } />
 			<UserRole setControlAtts={ setControlAtts } { ...props } />
 
 			<Slot name={ 'ControlSetControlsMiddle-' + uniqueIndex } />

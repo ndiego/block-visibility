@@ -188,6 +188,82 @@ export const blockVisibilityProps = {
 								},
 							},
 						},
+						queryString: {
+							type: 'object',
+							properties: {
+								enable: {
+									type: 'boolean',
+								},
+								queryStringAny: {
+									type: 'string',
+								},
+								queryStringAll: {
+									type: 'string',
+								},
+								queryStringNot: {
+									type: 'string',
+								},
+							},
+						},
+						referralSource: {
+							type: 'object',
+							properties: {
+								enable: {
+									type: 'boolean',
+								},
+								contains: {
+									type: 'string',
+								},
+								doesNotContain: {
+									type: 'string',
+								},
+								showIfNoReferral: {
+									type: 'boolean',
+								},
+							},
+						},
+						screenSize: {
+							type: 'object',
+							properties: {
+								enable: {
+									type: 'boolean',
+								},
+								hideOnScreenSize: {
+									type: 'object',
+									properties: {
+										extraLarge: {
+											type: 'boolean',
+										},
+										large: {
+											type: 'boolean',
+										},
+										medium: {
+											type: 'boolean',
+										},
+										small: {
+											type: 'boolean',
+										},
+										extraSmall: {
+											type: 'boolean',
+										},
+									},
+								},
+							},
+						},
+						urlPath: {
+							type: 'object',
+							properties: {
+								enable: {
+									type: 'boolean',
+								},
+								contains: {
+									type: 'string',
+								},
+								doesNotContain: {
+									type: 'string',
+								},
+							},
+						},
 						userRole: {
 							type: 'object',
 							properties: {
@@ -265,51 +341,6 @@ export const blockVisibilityProps = {
 											},
 										},
 									},
-								},
-							},
-						},
-						screenSize: {
-							type: 'object',
-							properties: {
-								enable: {
-									type: 'boolean',
-								},
-								hideOnScreenSize: {
-									type: 'object',
-									properties: {
-										extraLarge: {
-											type: 'boolean',
-										},
-										large: {
-											type: 'boolean',
-										},
-										medium: {
-											type: 'boolean',
-										},
-										small: {
-											type: 'boolean',
-										},
-										extraSmall: {
-											type: 'boolean',
-										},
-									},
-								},
-							},
-						},
-						queryString: {
-							type: 'object',
-							properties: {
-								enable: {
-									type: 'boolean',
-								},
-								queryStringAny: {
-									type: 'string',
-								},
-								queryStringAll: {
-									type: 'string',
-								},
-								queryStringNot: {
-									type: 'string',
 								},
 							},
 						},

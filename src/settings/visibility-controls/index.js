@@ -13,9 +13,11 @@ import HideBlock from './hide-block';
 import BrowserDevice from './browser-device';
 import Cookie from './cookie';
 import DateTime from './date-time';
-import UserRole from './user-role';
+import ReferralSource from './referral-source';
 import ScreenSize from './screen-size';
 import QueryString from './query-string';
+import UrlPath from './url-path';
+import UserRole from './user-role';
 import Integrations from './integrations';
 import UpdateSettings from './../update-settings';
 import links from './../../utils/links';
@@ -106,7 +108,17 @@ export default function VisibilityControls( props ) {
 					setVisibilityControls={ setVisibilityControls }
 					{ ...props }
 				/>
+				<ReferralSource
+					visibilityControls={ visibilityControls }
+					setVisibilityControls={ setVisibilityControls }
+					{ ...props }
+				/>
 				<ScreenSize
+					visibilityControls={ visibilityControls }
+					setVisibilityControls={ setVisibilityControls }
+					{ ...props }
+				/>
+				<UrlPath
 					visibilityControls={ visibilityControls }
 					setVisibilityControls={ setVisibilityControls }
 					{ ...props }
