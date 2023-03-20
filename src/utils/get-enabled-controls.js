@@ -29,7 +29,6 @@ export function getControls() {
 		},
 		{
 			label: __( 'Browser & Device', 'block-visibility' ),
-			type: 'core',
 			attributeSlug: 'browserDevice',
 			settingSlug: 'browser_device',
 		},
