@@ -27,6 +27,7 @@ import {
 	ScreenSize,
 	UrlPath,
 	UserRole,
+	VisibilityPresets,
 	WPFusion,
 } from './../../controls';
 
@@ -86,7 +87,8 @@ export default function ControlsPanel( props ) {
 
 	let controls = (
 		<>
-			<Slot name="ControlPanelContainer" />
+			<VisibilityPresets { ...props } />
+
 			<Slot name={ 'ControlSetControlsTop-' + uniqueIndex } />
 
 			<BrowserDevice setControlAtts={ setControlAtts } { ...props } />

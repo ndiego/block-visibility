@@ -171,6 +171,14 @@ function register_settings() {
 						),
 					),
 				),
+				'visibility_presets' => array(
+					'type'       => 'object',
+					'properties' => array(
+						'enable' => array(
+							'type' => 'boolean',
+						),
+					),
+				),
 				// Third-party Integrations.
 				'acf'                => array(
 					'type'       => 'object',
@@ -303,6 +311,9 @@ function register_settings() {
 				'enable_user_roles'     => true,
 				'enable_users'          => true,
 				'enable_user_rule_sets' => true,
+			),
+			'visibility_presets' => array(
+				'enable' => true,
 			),
 			// Third-party Integrations.
 			'acf'                => array(

@@ -10,4 +10,5 @@ export { default as ReferralSource } from './referral-source';
 export { default as UrlPath } from './url-path';
 export { default as ScreenSize } from './screen-size';
 export { default as UserRole } from './user-role';
+export { default as VisibilityPresets } from './visibility-presets';
 export { default as WPFusion } from './wp-fusion';

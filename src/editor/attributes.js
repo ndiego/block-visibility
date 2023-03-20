@@ -188,121 +188,121 @@ export const blockVisibilityProps = {
 								},
 							},
 						},
-                        location: {
-                            type: 'object',
-                            properties: {
-                                enable: {
-                                    type: 'boolean',
-                                },
-                                hideOnRuleSets: {
-                                    type: 'boolean',
-                                },
-                                ruleSets: {
-                                    type: 'array',
-                                    items: {
-                                        type: 'object',
-                                        properties: {
-                                            id: {
-                                                type: 'number',
-                                            },
-                                            title: {
-                                                type: 'string',
-                                            },
-                                            enable: {
-                                                type: 'boolean',
-                                            },
-                                            rules: {
-                                                type: 'array',
-                                                items: {
-                                                    type: 'object',
-                                                    properties: {
-                                                        field: {
-                                                            type: 'string',
-                                                        },
-                                                        subField: {
-                                                            type: [
-                                                                'string',
-                                                                'integer',
-                                                                'array',
-                                                            ],
-                                                        },
-                                                        subFields: {
-                                                            type: 'object',
-                                                        },
-                                                        operator: {
-                                                            type: 'string',
-                                                        },
-                                                        value: {
-                                                            type: [
-                                                                'string',
-                                                                'integer',
-                                                                'array',
-                                                            ],
-                                                        },
-                                                    },
-                                                },
-                                            },
-                                        },
-                                    },
-                                },
-                            },
-                        },
-                        metadata: {
-                            type: 'object',
-                            properties: {
-                                enable: {
-                                    type: 'boolean',
-                                },
-                                hideOnRuleSets: {
-                                    type: 'boolean',
-                                },
-                                ruleSets: {
-                                    type: 'array',
-                                    items: {
-                                        type: 'object',
-                                        properties: {
-                                            id: {
-                                                type: 'number',
-                                            },
-                                            title: {
-                                                type: 'string',
-                                            },
-                                            enable: {
-                                                type: 'boolean',
-                                            },
-                                            rules: {
-                                                type: 'array',
-                                                items: {
-                                                    type: 'object',
-                                                    properties: {
-                                                        field: {
-                                                            type: 'string',
-                                                        },
-                                                        subField: {
-                                                            type: [
-                                                                'string',
-                                                                'integer',
-                                                                'array',
-                                                            ],
-                                                        },
-                                                        operator: {
-                                                            type: 'string',
-                                                        },
-                                                        value: {
-                                                            type: [
-                                                                'string',
-                                                                'integer',
-                                                                'array',
-                                                            ],
-                                                        },
-                                                    },
-                                                },
-                                            },
-                                        },
-                                    },
-                                },
-                            },
-                        },
+						location: {
+							type: 'object',
+							properties: {
+								enable: {
+									type: 'boolean',
+								},
+								hideOnRuleSets: {
+									type: 'boolean',
+								},
+								ruleSets: {
+									type: 'array',
+									items: {
+										type: 'object',
+										properties: {
+											id: {
+												type: 'number',
+											},
+											title: {
+												type: 'string',
+											},
+											enable: {
+												type: 'boolean',
+											},
+											rules: {
+												type: 'array',
+												items: {
+													type: 'object',
+													properties: {
+														field: {
+															type: 'string',
+														},
+														subField: {
+															type: [
+																'string',
+																'integer',
+																'array',
+															],
+														},
+														subFields: {
+															type: 'object',
+														},
+														operator: {
+															type: 'string',
+														},
+														value: {
+															type: [
+																'string',
+																'integer',
+																'array',
+															],
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+						metadata: {
+							type: 'object',
+							properties: {
+								enable: {
+									type: 'boolean',
+								},
+								hideOnRuleSets: {
+									type: 'boolean',
+								},
+								ruleSets: {
+									type: 'array',
+									items: {
+										type: 'object',
+										properties: {
+											id: {
+												type: 'number',
+											},
+											title: {
+												type: 'string',
+											},
+											enable: {
+												type: 'boolean',
+											},
+											rules: {
+												type: 'array',
+												items: {
+													type: 'object',
+													properties: {
+														field: {
+															type: 'string',
+														},
+														subField: {
+															type: [
+																'string',
+																'integer',
+																'array',
+															],
+														},
+														operator: {
+															type: 'string',
+														},
+														value: {
+															type: [
+																'string',
+																'integer',
+																'array',
+															],
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+						},
 						queryString: {
 							type: 'object',
 							properties: {
@@ -456,6 +456,26 @@ export const blockVisibilityProps = {
 											},
 										},
 									},
+								},
+							},
+						},
+						visibilityPresets: {
+							type: 'object',
+							properties: {
+								enable: {
+									type: 'boolean',
+								},
+								hideOnPresets: {
+									type: 'boolean',
+								},
+								presets: {
+									type: 'array',
+									items: {
+										type: 'string',
+									},
+								},
+								operator: {
+									type: 'string',
 								},
 							},
 						},

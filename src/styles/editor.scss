@@ -461,6 +461,29 @@
         }
     }
 
+    // Specific styles for the Visibility Presets control.
+    .visibility-presets-control {
+		.fields-container {
+			display: grid;
+			grid-gap: 8px;
+			margin-top: 12px;
+		}
+
+        .manage-presets {
+			margin-top: 12px;
+		}
+
+		.hide-on-presets {
+			margin-top: 24px;
+		}
+
+        .controls-panel-item__header-toolbar {
+            .components-spinner {
+                margin: 0 4px;
+            }
+        }
+	}
+
     // Specific styles for the Date Time control.
     .date-time-control {
 
@@ -912,6 +935,431 @@
         margin-top: 24px;
         display: flex;
         justify-content: space-between;
+    }
+}
+
+/* Styles for the Preset Manager modal */
+.block-visibility__preset-manager-modal {
+
+    .components-modal__content {
+        flex: 1 1 0%;
+        overflow: auto;
+        padding: 0;
+    }
+
+    .components-modal__header {
+        background: #fff;
+        position: absolute;
+        width: 100%;
+        margin: 0;
+    }
+
+    .components-notice {
+        margin: 0 !important;
+
+        // Needed to fix color error in Notice component
+        &.is-error {
+            background-color: #f8ebea;
+        }
+    }
+
+	.components-base-control {
+		margin-bottom: 24px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+    .preset-manager {
+        height: 100%;
+
+        .preset-manager__sidebar {
+            bottom: 0;
+            left: 0;
+            overflow-x: visible;
+            overflow-y: scroll;
+            padding: 24px 32px 32px;
+            position: absolute;
+            top: 76px;
+            width: 280px;
+
+            .components-search-control {
+                margin-bottom: 0;
+            }
+
+            .sidebar__presets-title {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 16px;
+                padding: 16px 12px;
+
+                span {
+                    color: #757575;
+                    font-size: 11px;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    white-space: nowrap;
+                }
+
+                .components-button {
+                    padding: 0;
+                    height: 24px;
+                    width: 24px;
+                    min-width: 24px;
+                }
+            }
+
+            .components-spinner {
+                margin: 32px auto;
+                display: block;
+            }
+
+            .sidebar__presets-no-results {
+                margin-top: 32px;
+                padding: 32px;
+                text-align: center;
+
+                svg {
+                    fill: #949494;
+                }
+            }
+
+            .sidebar__presets-placeholder {
+                margin-top: 18px;
+
+                span {
+                    background: #f1f1f1;
+                    border-radius: 2px;
+                    display: inline-block;
+                    height: 16px;
+                    margin-bottom: 8px;
+                    width: 80%;
+
+                    &:nth-child(even) {
+                        width: 70%;
+                    }
+                }
+            }
+
+            .components-menu-group {
+                margin-bottom: 16px;
+
+                .components-button {
+                    .components-menu-item__item {
+                        align-items: center;
+                        display: flex;
+                        justify-content: space-between;
+                        width: 100%;
+
+                        .title {
+                            display: inline-block;
+                            overflow: hidden;
+                            text-align: left;
+                            text-overflow: ellipsis;
+                        }
+
+                        .is-disabled {
+                            display: flex;
+                            padding: 9px;
+
+                            svg {
+                                width: 6px;
+                                height: 6px;
+                                fill: #cc1818;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .preset-manager__content {
+            height: 100%;
+            margin-left: 280px;
+
+            .preset-manager__content-placeholder {
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                position: absolute;
+                width: calc(100% - 280px);
+                top: 0;
+                bottom: 0;
+            }
+
+            .preset-manager__preset-header {
+                .preset-header__toolbar {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 24px 24px 0 32px;
+
+                    .toolbar__control-set-tools {
+                        display: flex;
+
+                        .components-button:first-child {
+                            height: 32px;
+                            margin-right: 8px;
+                            min-width: 32px;
+                            padding: 0;
+                            width: 32px;
+                        }
+
+                        .components-button.is-pressed {
+                            background: #fff;
+                            color: var( --wp-admin-theme-color );
+                        }
+                    }
+
+                    .toolbar__publish-tools {
+                        align-items: center;
+                        display: flex;
+                        gap: 4px;
+                        justify-content: flex-end;
+                    }
+                }
+
+                .preset-header__notices {
+    				padding: 24px 24px 0px 32px;
+                }
+
+                .preset-header__settings {
+                    padding: 32px 24px 32px 32px;
+
+					@media ( min-width: 1024px ) {
+						display: flex;
+						justify-content: space-between;
+					}
+
+                    .preset-title {
+                        width: 100%;
+
+                        .preset-title__label {
+                            color: #1e1e1e;
+                            font-size: 15px;
+                            font-weight: 500;
+                            margin-bottom: 12px;
+                        }
+
+                        .components-base-control {
+                            margin-bottom: 12px;
+                        }
+
+                        .preset-title__meta {
+                            display: flex;
+                            justify-content: space-between;
+                            color: #757575;
+                            font-size: 11px;
+                        }
+                    }
+
+                    .preset-controls {
+						margin-top: 32px;
+
+						@media ( min-width: 1024px ) {
+							width: 230px;
+							flex-shrink: 0;
+							margin-left: 64px;
+							margin-top: 0;
+						}
+
+                        .components-toggle-control {
+                            margin-bottom: 16px;
+
+                            &:last-child {
+                                margin-bottom: 0;
+                            }
+                        }
+
+                        .components-base-control__help {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+            }
+
+            .control-sets {
+                // Need a specific height so select menus don't get cut off. 
+                height: calc(100% - 216px);
+
+                .control-sets__header {
+                    padding: 0 32px;
+    
+                    .control-sets__header-title {
+                        align-items: center;
+                        display: flex;
+                        gap: 4px;
+                        margin-bottom: 12px;
+    
+                        h2 {
+                            color: #1e1e1e;
+                            font-size: 15px;
+                            font-weight: 500;
+                            margin: 0;
+                        }
+    
+                        .information-popover {
+                            .information-popover__button {
+                                svg {
+                                    width: 18px;
+                                }
+                            }
+                        } 
+                    }
+    
+                    .control-sets__description {
+                        font-size: 12px;
+                        font-style: normal;
+                        color: rgb(117, 117, 117);
+                    }
+                }
+            }
+
+            // A special div needed for horizontal scrolling.
+            .control-sets__container-outer {
+                min-height: calc(100% - 54px);
+                overflow-x: scroll;
+            }
+
+            .control-sets__container {
+                display: flex;
+                flex-wrap: nowrap;
+                gap: 32px;
+                padding: 24px 32px 64px;
+
+                // Styles for the "Add control set" button.
+                .control-set__inserter-button {
+                    padding-right: 32px; 
+                    
+                    button {
+                        background: #1e1e1e;
+                        color: #fff;
+                        height: 24px;
+                        min-width: 24px;
+    
+                        &:hover {
+                            background: var(--wp-admin-theme-color);
+                        }
+                    }
+                }
+
+                .control-set {
+                    border: 1px solid #e0e0e0;
+                    border-radius: 2px;
+                    flex: 0 0 auto;
+                    width: 282px;
+
+                    &> .components-notice {
+                        margin: 16px !important;
+                    }
+
+                    .control-set__header {
+                        align-items: center;
+                        background-color: #f0f0f0;
+                        border-bottom: 1px solid #e0e0e0;
+                        border-top: 0;
+                        display: flex;
+                        justify-content: space-between;
+                        margin: 0;
+                        width: 100%;
+
+                        h2 {
+                            font-size: 13px;
+                            font-weight: 500;
+                            margin: 0;
+                            text-transform: none;
+                        }
+                    }
+
+                    .control-set__controls {
+                        display: grid;
+                        gap: 28px;
+                        padding: 24px 16px;
+                    }
+                }
+
+                &.is-rows {
+					display: grid;
+					gap: 32px;
+
+                    // Styles for the "Add control set" button.
+                    &> button {
+                        margin-left: auto;
+                    }
+
+					.control-set__container {
+						padding-right: 0;
+					}
+
+                    .control-set {
+                        width: 100%;
+                        max-width: 100%;
+
+                        .date-time-control__schedules {
+                            grid-template-columns: repeat( auto-fit, minmax( 460px, 1fr ) );
+                            grid-row-gap: 24px;
+
+                            .fields__date-time {
+                                display: grid;
+                                grid-template-columns: repeat( auto-fit, minmax( 248px, 1fr ) );
+                                grid-column-gap: 16px;
+
+								/* Correct for span element that gets added when opening date/time picker */
+								&>span {
+									display: none;
+								}
+                            }
+                        }
+
+                        .rule-sets {
+                            grid-template-columns: repeat( auto-fit, minmax( 460px, 1fr ) );
+                            grid-row-gap: 24px;
+                        }
+
+                        .fields-container {
+                            grid-template-columns: repeat( auto-fit, minmax( 248px, .5fr ) );
+
+                            &.is-simplified {
+                                grid-template-columns: repeat( auto-fit, minmax( 248px, .5fr ) ) !important;
+
+                                .field__ruleField,
+                                .field__subField {
+                                    grid-column-start: unset !important;
+                                    grid-column-end: unset !important;
+                                }
+                            }
+
+                            .components-toggle-control {
+                                align-items: center;
+                                display: flex;
+                                height: 36px;
+                            }
+                        }
+
+                        .rule-set__rules {
+                            grid-template-columns: repeat( auto-fit, minmax( 345px, 1fr ) );
+                        }
+
+						.controls-panel-item__fields {
+
+							@media ( min-width: 1024px ) {
+								display: grid;
+							    grid-template-columns: repeat(auto-fit, minmax(248px, 1fr));
+							    grid-column-gap: 32px;
+								margin-bottom: 0;
+							}
+						}
+                    }
+                }
+            }
+
+            .control-sets__notices {
+                padding: 24px 32px;     
+            }
+        }
     }
 }
 

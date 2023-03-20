@@ -319,6 +319,7 @@ require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/refe
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/screen-size.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/url-path.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/user-role.php';
+require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/visibility-presets.php';
 
 // Run our integration tests.
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/acf.php';

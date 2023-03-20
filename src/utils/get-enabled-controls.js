@@ -78,6 +78,11 @@ export function getControls() {
 			attributeSlug: 'userRole',
 			settingSlug: 'visibility_by_role',
 		},
+		{
+			label: __( 'Visibility Presets', 'block-visibility-pro' ),
+			attributeSlug: 'visibilityPresets',
+			settingSlug: 'visibility_presets',
+		},
 	];
 
 	const integrationControls = [

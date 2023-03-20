@@ -96,6 +96,9 @@ final class Block_Visibility {
 		include_once BLOCK_VISIBILITY_ABSPATH . 'includes/register-settings.php';
 		include_once BLOCK_VISIBILITY_ABSPATH . 'includes/rest-api/register-routes.php';
 
+		// Visibility presets.
+		include_once BLOCK_VISIBILITY_ABSPATH . 'includes/presets/register-presets.php';
+
 		// Utility functions that are also used by register-routes.php so
 		// needs to be included at all times.
 		include_once BLOCK_VISIBILITY_ABSPATH . 'includes/utils/user-functions.php';

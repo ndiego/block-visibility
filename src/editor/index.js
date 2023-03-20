@@ -7,27 +7,28 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { dispatch } from '@wordpress/data';
+import { dispatch, useSelect } from '@wordpress/data';
+import { store as coreStore } from '@wordpress/core-data';
+import { useState } from '@wordpress/element';
 import { addFilter, applyFilters } from '@wordpress/hooks';
 import { hasBlockSupport } from '@wordpress/blocks';
-import { registerPlugin } from '@wordpress/plugins';
-import { Slot, Fill } from '@wordpress/components';
+import {
+	getPlugins,
+	registerPlugin,
+	unregisterPlugin,
+} from '@wordpress/plugins';
+import { Modal } from '@wordpress/components';
+import { PluginMoreMenuItem } from '@wordpress/edit-post';
 
 /**
  * Internal dependencies
  */
 import './contextual-indicators';
 import ToolbarControls from './toolbar-controls';
+import PresetManager from './preset-manager';
 import VisibilityInspectorControls from './inspector-controls';
 import { blockVisibilityProps } from './attributes';
-import {
-	ACF,
-	DateTime,
-	QueryString,
-	ScreenSize,
-	UserRole,
-	WPFusion,
-} from './../controls';
+import { visibilityAlt } from './../utils/icons';
 
 /**
  * Add our custom entities for retrieving external data in the Block Editor.
@@ -140,45 +141,6 @@ addFilter(
 );
 
 /**
- * Add the control set component to the preset manager in Block Visibility Pro.
- */
-function addPresetManagerControlSet() {
-	return ( props ) => {
-		const { controlSetAtts, index } = props;
-
-		// There needs to be a unique index for the Slots since we technically have
-		// multiple of the same Slot.
-		const uniqueIndex = 'multiple-' + controlSetAtts?.id;
-
-		return (
-			<Fill name={ 'PresetManagerControlSet-' + index }>
-				<div className="control-set__controls">
-					<Slot name={ 'ControlSetControlsTop-' + uniqueIndex } />
-
-					<DateTime { ...props } />
-					<UserRole { ...props } />
-					<ScreenSize { ...props } />
-					<QueryString { ...props } />
-
-					<Slot name={ 'ControlSetControlsMiddle-' + uniqueIndex } />
-
-					<ACF { ...props } />
-					<WPFusion { ...props } />
-
-					<Slot name={ 'ControlSetControlsBottom-' + uniqueIndex } />
-				</div>
-			</Fill>
-		);
-	};
-}
-
-addFilter(
-	'blockVisibilityPro.addPresetManagerControlSet',
-	'block-visibility/preset-manager-control-set',
-	addPresetManagerControlSet
-);
-
-/**
  * Register all Block Visibility toolbar controls.
  *
  * @since 1.5.0
@@ -195,3 +157,79 @@ const getToolbarControls = ( props ) => (
 registerPlugin( 'block-visibility-toolbar-options-hide-block', {
 	render: getToolbarControls,
 } );
+
+/**
+ * Add the visibility presets manager button to Block Editor more menu.
+ */
+function PresetManagerButton() {
+	const [ isModalOpen, setModalOpen ] = useState( false );
+
+	const { variables } = useSelect( ( select ) => {
+		const { getEntityRecord } = select( coreStore );
+
+		return {
+			variables: getEntityRecord( 'block-visibility/v1', 'variables' ),
+		};
+	}, [] );
+
+	const roles = variables?.current_users_roles ?? [];
+	let canEdit = false;
+
+	// While roles should always be an array, double check.
+	if ( Array.isArray( roles ) ) {
+		const allowedRoles = [ 'super-admin', 'administrator', 'editor' ];
+		canEdit = roles.some( ( role ) => allowedRoles.includes( role ) );
+	} else {
+		// Temporary patch to correct for third-party plugin conflict.
+		// @TODO remove once conflict is resolved.
+		canEdit = true;
+	}
+
+	if ( ! canEdit ) {
+		return null;
+	}
+
+	// Editor plugins are not supported in the block-based Widget Editor.
+	// Note: pagenow is a global variable provided by WordPress.
+	if ( pagenow === 'widgets' ) { // eslint-disable-line
+		return null;
+	}
+
+	return (
+		<>
+			<PluginMoreMenuItem
+				icon={ visibilityAlt }
+				onClick={ () => setModalOpen( true ) }
+			>
+				{ __( 'Block Visibility Presets', 'block-visibility' ) }
+			</PluginMoreMenuItem>
+			{ isModalOpen && (
+				<Modal
+					className="block-visibility__preset-manager-modal"
+					title={ __(
+						'Block Visibility Presets',
+						'block-visibility'
+					) }
+					onRequestClose={ () => setModalOpen( false ) }
+					shouldCloseOnClickOutside={ false }
+					isFullScreen
+				>
+					<PresetManager />
+				</Modal>
+			) }
+		</>
+	);
+}
+
+registerPlugin( 'block-visibility-preset-manager', {
+	render: PresetManagerButton,
+} );
+
+// Unregister the presets button added by the Pro add-on.
+if (
+	getPlugins().filter(
+		( plugin ) => plugin.name === 'block-visibility-pro-preset-manager'
+	).length !== 0
+) {
+	unregisterPlugin( 'block-visibility-pro-preset-manager' );
+}

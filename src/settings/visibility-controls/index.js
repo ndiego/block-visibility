@@ -20,6 +20,7 @@ import ReferralSource from './referral-source';
 import ScreenSize from './screen-size';
 import UrlPath from './url-path';
 import UserRole from './user-role';
+import VisibilityPresets from './visibility-presets';
 import Integrations from './integrations';
 import UpdateSettings from './../update-settings';
 import links from './../../utils/links';
@@ -78,7 +79,6 @@ export default function VisibilityControls( props ) {
 				/>
 			</div>
 			<div className="setting-tabs__setting-panels">
-				<Slot name="VisibilityControlsTop" />
 				<General
 					visibilityControls={ visibilityControls }
 					setVisibilityControls={ setVisibilityControls }
@@ -86,6 +86,11 @@ export default function VisibilityControls( props ) {
 					{ ...props }
 				/>
 				<HideBlock
+					visibilityControls={ visibilityControls }
+					setVisibilityControls={ setVisibilityControls }
+					{ ...props }
+				/>
+				<VisibilityPresets
 					visibilityControls={ visibilityControls }
 					setVisibilityControls={ setVisibilityControls }
 					{ ...props }
@@ -140,7 +145,7 @@ export default function VisibilityControls( props ) {
 					setVisibilityControls={ setVisibilityControls }
 					{ ...props }
 				/>
-				<Slot name="VisibilityControlsMiddle" />
+				<Slot name="VisibilityControls" />
 			</div>
 			<Integrations
 				visibilityControls={ visibilityControls }
@@ -149,7 +154,6 @@ export default function VisibilityControls( props ) {
 				setHasUpdates={ setHasUpdates }
 				{ ...props }
 			/>
-			<Slot name="VisibilityControlsBottom" />
 			<AdditionalControls
 				visibilityControls={ visibilityControls }
 				setVisibilityControls={ setVisibilityControls }

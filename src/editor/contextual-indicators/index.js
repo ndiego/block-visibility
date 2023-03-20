@@ -23,6 +23,7 @@ import {
 	hasScreenSize,
 	hasUrlPath,
 	hasUserRole,
+	hasVisibilityPresets,
 	hasWPFusion,
 } from './indicator-tests';
 import hasVisibilityControls from './../utils/has-visibility-controls';
@@ -119,6 +120,10 @@ function withContextualIndicators( BlockListBlock ) {
 			'user-role': hasUserRole(
 				controls,
 				hasControlSets,
+				enabledControls
+			),
+			'visibility-presets': hasVisibilityPresets(
+				blockVisibility,
 				enabledControls
 			),
 			'wp-fusion': hasWPFusion(
