@@ -168,7 +168,7 @@ export default function General( props ) {
 				<div className="settings-type__toggle has-info-popover">
 					<ToggleControl
 						label={ __(
-							'Enable local block controls.',
+							'Enable local visibility controls.',
 							'block-visibility'
 						) }
 						checked={ enableLocalControls }
