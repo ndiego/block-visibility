@@ -156,10 +156,7 @@ export function GetAllFields() {
 	const taxonomyOperators = [
 		{
 			value: 'atLeastOne',
-			label: __(
-				'Is at least one of the selected',
-				'block-visibility'
-			),
+			label: __( 'Is at least one of the selected', 'block-visibility' ),
 		},
 		{
 			value: 'all',
@@ -197,15 +194,9 @@ export function GetAllFields() {
 		},
 	];
 
-	const operatorPlaceholder = __(
-		'Select Condition…',
-		'block-visibility'
-	);
+	const operatorPlaceholder = __( 'Select Condition…', 'block-visibility' );
 	const selectTypePlaceholder = __( 'Select Type…', 'block-visibility' );
-	const selectPostsPlaceholder = __(
-		'Select Posts…',
-		'block-visibility'
-	);
+	const selectPostsPlaceholder = __( 'Select Posts…', 'block-visibility' );
 
 	const fields = [
 		{
@@ -239,10 +230,7 @@ export function GetAllFields() {
 						},
 						{
 							value: 'singular',
-							label: __(
-								'Singular Page',
-								'block-visibility'
-							),
+							label: __( 'Singular Page', 'block-visibility' ),
 						},
 						{
 							value: 'archive',
@@ -293,10 +281,7 @@ export function GetAllFields() {
 					type: 'subField',
 					valueType: 'select',
 					options: taxonomiesByPostType,
-					placeholder: __(
-						'Select Taxonomy…',
-						'block-visibility'
-					),
+					placeholder: __( 'Select Taxonomy…', 'block-visibility' ),
 					hasGroupedOptions: true,
 					triggerReset: true,
 					isLoading: taxonomiesByPostType.length === 0,
@@ -341,10 +326,7 @@ export function GetAllFields() {
 					type: 'subField',
 					valueType: 'select',
 					options: postTypes,
-					placeholder: __(
-						'Select Post Type…',
-						'block-visibility'
-					),
+					placeholder: __( 'Select Post Type…', 'block-visibility' ),
 					isLoading: postTypes.length === 0,
 					triggerReset: true,
 				},
@@ -517,10 +499,7 @@ export function GetAllFields() {
 						},
 						{
 							value: 'isNot',
-							label: __(
-								'Post is not a',
-								'block-visibility'
-							),
+							label: __( 'Post is not a', 'block-visibility' ),
 						},
 					],
 					placeholder: operatorPlaceholder,
@@ -563,10 +542,7 @@ export function GetAllFields() {
 					type: 'subField',
 					valueType: 'select',
 					options: postTypesHierarchical,
-					placeholder: __(
-						'Select Post Type…',
-						'block-visibility'
-					),
+					placeholder: __( 'Select Post Type…', 'block-visibility' ),
 					isLoading: postTypesHierarchical.length === 0,
 					triggerReset: true,
 				},
@@ -576,10 +552,7 @@ export function GetAllFields() {
 					options: [
 						{
 							value: 'parentOf',
-							label: __(
-								'Is a parent of',
-								'block-visibility'
-							),
+							label: __( 'Is a parent of', 'block-visibility' ),
 						},
 						{
 							value: 'notParentOf',
@@ -590,10 +563,7 @@ export function GetAllFields() {
 						},
 						{
 							value: 'childOf',
-							label: __(
-								'Is a child of',
-								'block-visibility'
-							),
+							label: __( 'Is a child of', 'block-visibility' ),
 						},
 						{
 							value: 'notChildOf',
@@ -673,10 +643,7 @@ export function GetAllFields() {
 						},
 						{
 							value: 'hierarchical',
-							label: __(
-								'Post Hierarchy',
-								'block-visibility'
-							),
+							label: __( 'Post Hierarchy', 'block-visibility' ),
 						},
 					],
 				},
@@ -710,10 +677,7 @@ export function GetAllFields() {
 							options: [
 								{
 									value: 'author',
-									label: __(
-										'Author',
-										'block-visibility'
-									),
+									label: __( 'Author', 'block-visibility' ),
 								},
 								{
 									value: 'date',
@@ -746,10 +710,7 @@ export function GetAllFields() {
 							options: [
 								{
 									value: 'author',
-									label: __(
-										'Author',
-										'block-visibility'
-									),
+									label: __( 'Author', 'block-visibility' ),
 								},
 							],
 						},

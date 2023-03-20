@@ -56,10 +56,7 @@ export function getAllFields() {
 		},
 	];
 
-	const operatorPlaceholder = __(
-		'Select Condition…',
-		'block-visibility'
-	);
+	const operatorPlaceholder = __( 'Select Condition…', 'block-visibility' );
 
 	const fields = [
 		{
@@ -84,10 +81,7 @@ export function getAllFields() {
 				{
 					type: 'valueField',
 					valueType: 'text',
-					placeholder: __(
-						'Enter Meta Value…',
-						'block-visibility'
-					),
+					placeholder: __( 'Enter Meta Value…', 'block-visibility' ),
 					displayConditions: [
 						{
 							dependencyType: 'operatorField',
@@ -124,10 +118,7 @@ export function getAllFields() {
 				{
 					type: 'valueField',
 					valueType: 'text',
-					placeholder: __(
-						'Enter Meta Value…',
-						'block-visibility'
-					),
+					placeholder: __( 'Enter Meta Value…', 'block-visibility' ),
 					displayConditions: [
 						{
 							dependencyType: 'operatorField',
