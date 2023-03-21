@@ -29,7 +29,6 @@ export default function Metadata( props ) {
 				<span className="settings-panel__header-title">
 					{ __( 'Metadata (Custom Fields)', 'block-visibility' ) }
 				</span>
-				<span className="pro-badge">Pro</span>
 			</div>
 			<div className="settings-panel__container">
 				<div className="settings-type__toggle has-info-popover">

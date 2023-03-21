@@ -78,7 +78,7 @@ export function getControls() {
 			settingSlug: 'visibility_by_role',
 		},
 		{
-			label: __( 'Visibility Presets', 'block-visibility-pro' ),
+			label: __( 'Visibility Presets', 'block-visibility' ),
 			attributeSlug: 'visibilityPresets',
 			settingSlug: 'visibility_presets',
 		},

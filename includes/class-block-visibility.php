@@ -262,7 +262,7 @@ final class Block_Visibility {
 			// Translators: The required version of Block Visibility Pro and the current version of Block Visibility.
 			__(
 				'Version Error: Please upgrade Block Visibility Pro to version %1$s or greater. The current active version (%2$s) is not compatible with Block Visibility %3$s.',
-				'block-visibility-pro'
+				'block-visibility'
 			),
 			$required_pro_version,
 			BVP_VERSION,
