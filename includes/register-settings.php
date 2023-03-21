@@ -246,7 +246,7 @@ function register_settings() {
 				'remove_on_uninstall'           => array(
 					'type' => 'boolean',
 				),
-				'enable_control_set_utilities' => array(
+				'enable_control_set_utilities'  => array(
 					'type' => 'boolean',
 				),
 			),
