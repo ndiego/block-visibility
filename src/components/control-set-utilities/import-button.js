@@ -28,7 +28,6 @@ import { paste } from './../../utils/icons';
  *
  * @since 3.0.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function ImportButton( props ) {
 	const { onClose, setModalOpen } = props;
@@ -51,7 +50,6 @@ export default function ImportButton( props ) {
  *
  * @since 1.2.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export function ImportModal( props ) {
 	const [ input, setInput ] = useState( '' );

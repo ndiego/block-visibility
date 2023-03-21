@@ -265,7 +265,6 @@ export default function ControlSetHeader( props ) {
  *
  * @since 1.5.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 function ControlMenuItem( props ) {
 	const { control, toggleControls } = props;

@@ -44,7 +44,6 @@ function getTitle( post ) {
  *
  * @since 1.6.0
  * @param {Object} props All the props passed to this function
- * @return {string}	     Return the rendered JSX
  */
 export default function PostsSelect( props ) {
 	const {

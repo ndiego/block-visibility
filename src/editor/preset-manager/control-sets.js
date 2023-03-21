@@ -24,7 +24,6 @@ import links from './../../utils/links';
  *
  * @since 3.0.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function ControlSets( props ) {
 	const {

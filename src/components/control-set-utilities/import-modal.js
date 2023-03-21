@@ -22,7 +22,6 @@ import { paste } from './../../utils/icons';
  *
  * @since 3.0.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function ImportModal( props ) {
 	const [ input, setInput ] = useState( '' );

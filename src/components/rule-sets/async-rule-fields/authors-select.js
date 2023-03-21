@@ -29,7 +29,6 @@ const DEFAULT_QUERY = {
  *
  * @since 3.0.0
  * @param {Object} props All the props passed to this function
- * @return {string}		 Return the rendered JSX
  */
 export default function AuthorsSelect( props ) {
 	const {
