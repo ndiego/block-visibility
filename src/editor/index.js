@@ -51,14 +51,16 @@ dispatch( 'core' ).addEntities( [
 ] );
 
 // Blocks that are not compatible at all with visibility controls.
-const globallyRestricted = [
-	'core/freeform',
-	'core/legacy-widget',
-	'core/widget-area',
-];
+const globallyRestricted = applyFilters(
+	'blockVisibility.globallyRestrictedBlockTypes',
+	[ 'core/freeform', 'core/legacy-widget', 'core/widget-area' ]
+);
 
 // Blocks that are not compatible with visibility controls when used as Widgets.
-const widgetAreaRestricted = [ 'core/html' ];
+const widgetAreaRestricted = applyFilters(
+	'blockVisibility.widgetAreaRestrictedBlockTypes',
+	[ 'core/html' ]
+);
 
 /**
  * Add the visibility setting sttribute to selected blocks.
