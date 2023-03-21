@@ -3,21 +3,21 @@ Author URI:        https://www.nickdiego.com/?bv_query=readme
 Contributors:      ndiego, outermostdesign
 Tags:              visibility, dynamic content, conditional content, conditional blocks, restrict blocks
 Requires at least: 6.0
-Tested up to:      6.1
+Tested up to:      6.2
 Requires PHP:      5.6
-Stable tag:        2.6.0
+Stable tag:        3.0.0
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
-Show or hide any WordPress block with ease. Schedule when blocks should be visible. Restrict blocks to specific screen sizes, user roles, and more.
+Show or hide any WordPress block with ease. Schedule when blocks should be visible. Restrict blocks to specific screen sizes, user roles, post types, and more.
 
 == Description ==
 
-Effortlessly create dynamic content in WordPress that will increase conversions, enhance the user experience and improve your workflow.
+Effortlessly create dynamic content in WordPress that will increase conversions, enhance the user experience, and improve your workflow.
 
 With this **no-code** solution, control which blocks are visible on your website and who can see them. Schedule content to show or hide at a specific time. Display exclusive promotions to your customers or members. Restrict blocks to specific user roles, screen sizes, query strings, ACF fields, WP Fusion tags, and more.
 
-Built exclusively for the WordPress Editor (Gutenberg), Block Visibility is designed to work with **any** WordPress block. This includes Core, third-party blocks, and even block-based widgets.
+Block Visibility is built exclusively for the WordPress Editor (Gutenberg) and is designed to work with **any** WordPress block. This includes blocks natively provided by WordPress, third-party blocks, and even block-based widgets.
 
 === See How It Works ===
 
@@ -27,7 +27,7 @@ For more informational videos, visit our [YouTube channel](https://www.youtube.c
 
 === Create Conditional Blocks in Seconds! ===
 
-Work directly in the WordPress Editor with blocks you're already familiar with. There is no external editor or new interface to learn. In a matter of seconds, you can transform static blocks into conditional and personalized content.
+Work directly in the WordPress Editor with blocks you're already familiar with. There is no external editor or new interface to learn. In seconds, you can transform static blocks into conditional and personalized content.
 
 It takes just **3 simple steps**:
 
@@ -35,9 +35,9 @@ It takes just **3 simple steps**:
 2. Select the desired visibility conditions.
 3. Save the page/post and marvel at the results!
 
-=== Free Features ===
+=== Packed With Features ===
 
-**Visibility Controls** determine whether a block should be visible to users on the front end of your website. Free controls include:
+**Visibility Controls** determine whether a block should be visible to users on the front end of your website. Features include:
 
 * **Hide** blocks from all users.
 * **Schedule** when content should be visible using a start and end date/time.
@@ -47,11 +47,16 @@ It takes just **3 simple steps**:
 * Only show blocks to users with **specific roles** (Administrator, Subscriber, Customer, Member, etc.)
 * Only show blocks to **specific users**. Great for personalization.
 * Show or hide dynamic blocks based on **URL query strings**. Great for marketing campaigns!
+* Show or hide blocks based on their **location** and "attributes" of their location (post type, taxonomy, archive, etc.)
+* Display blocks based on a website visitor's **referral source** (domain/URL).
+* Support for all post and user **metadata** (custom fields).
+* Display blocks based on HTML **cookies**.
 * **Advanced Custom Fields (ACF):** Control the visibility of block content based on [ACF](https://wordpress.org/plugins/advanced-custom-fields/) fields.
 * **WP Fusion:** Combine Block Visibility with the power of [WP Fusion](https://wordpress.org/plugins/wp-fusion-lite/) to conditionally show or hide content based on data from your favorite CRM or marketing automation platform.
 
 **PLUS: Powerful Settings** allow you to customize Block Visibility to your needs or those of your clients.
 
+* Visibility Presets allow you to control multiple blocks at once.
 * Globally disable any visibility control.
 * Restrict visibility controls to specific block types.
 * Set permissions so only certain users have access to visibility conditions.
@@ -61,26 +66,6 @@ It takes just **3 simple steps**:
 * Enable Full Control Mode 🚀 (See the FAQs).
 * Remove all plugin settings on uninstall.
 
-=== Pro Features ===
-
-Take Block Visibility to the next level with **[Block Visibility Pro](https://www.blockvisibilitywp.com/pro/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)**. The Pro add-on enhances your marketing capabilities, improves compatibility with new Full Site Editing features, and introduces eCommerce integrations.
-
-Here's a look at what's currently included with Pro:
-
-* Visibility Presets allow you to control multiple blocks at once.
-* Show or hide blocks based on their **location** and "attributes" of their location (post type, taxonomy, archive, etc.)
-* Advanced **day-of-week** and **time-of-day** controls, which include recursion functionality.
-* Display blocks based on a website visitor's **referral source** (domain/URL).
-* Support for all post and user **metadata** (custom fields).
-* Display blocks based on HTML **cookies**.
-* **WooCommerce** conditional block logic for shopping cart contents, product details, customer metrics, and more.
-* **Easy Digital Downloads** conditional block logic for shopping cart contents, customer metrics, and more.
-* eCommerce rules for when customers place their first/last order or purchase specific products.
-* Access to premium email support.
-* More conditions coming soon.
-
-**[Learn More About Pro →](https://www.blockvisibilitywp.com/pro/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)**
-
 === Why Do I Need This? ===
 
 While there are countless applications for conditional blocks, here are a few examples to get you started:
@@ -89,7 +74,7 @@ While there are countless applications for conditional blocks, here are a few ex
 * Temporarily hide seasonal content on your website rather than having to delete it.
 * Schedule time-sensitive promotional content or event information to display automatically.
 * Show or hide specific content on desktops, tablets, or mobile devices.
-* Restrict content, so it's only visible to your customers, members or subscribers.
+* Restrict content so it's only visible to your customers, members, or subscribers.
 * Display messaging to logged-out users, encouraging them to subscribe to your blog.
 * Create unique marketing campaigns using query string parameters to display personalized messaging ([See it in action](https://www.blockvisibilitywp.com?bv_query=example))
 * Conditionally display elements in the Site Editor using advanced visibility logic.
@@ -104,11 +89,10 @@ Block Visibility is the easiest way to create conditional blocks in WordPress. A
 Block Visibility is for you whether you're building a sophisticated time-based promotional campaign for your customers or need to hide a few blocks on mobile. Don't need certain functionality? Toggle it off in the plugin settings.
 
 **3. Helpful Support and Continuous Development**
-Block Visibility and the [Pro add-on](https://www.blockvisibilitywp.com/pro/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) are designed, developed, and supported by Nick and the small team at Outermost. We strongly believe the Block Editor is the future of WordPress and pride ourselves on providing timely support and new features monthly. Have an idea for additional block logic? Let us know in the plugin support forum.
+Block Visibility is designed, developed, and supported by Nick Diego with contributions from the broader Block Visibility community. Have an idea for additional block logic? Let us know in the plugin support forum.
 
-- [Knowledge Base](https://www.blockvisibilitywp.com/knowledge-base/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
-- [Free support (forum)](https://wordpress.org/support/plugin/block-visibility/)
-- [Premium support with Pro (email)](https://www.blockvisibilitywp.com/account/pro-support/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
+- [Knowledge Base (Documentation)](https://www.blockvisibilitywp.com/knowledge-base/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
+- [Support Forum](https://wordpress.org/support/plugin/block-visibility/)
 
 For an **unbiased review**, the plugin was featured on [WordPress Tavern](https://wptavern.com/show-and-hide-content-via-the-block-visibility-wordpress-plugin).
 
@@ -118,10 +102,10 @@ Block Visibility is designed to work with **any** block and is tested with these
 
 **Compatibility + Direct Integration**
 
-* Advanced Custom Fields (Free)
-* WP Fusion (Free)
-* WooCommerce (Pro)
-* Easy Digital Downloads (Pro)
+* Advanced Custom Fields
+* WP Fusion
+* WooCommerce (Integration coming soon)
+* Easy Digital Downloads (Integration coming soon)
 
 **Compatibility**
 
@@ -139,7 +123,7 @@ Block Visibility is designed to work with **any** block and is tested with these
 * EditorsKit
 * Genesis Blocks
 
-Find an issue? Let us know in the plugin support forum, and we will investigate ASAP. Excellent compatibility with the greater WordPress block ecosystem is our top priority.
+Find an issue? Let us know in the plugin support forum, and we will investigate ASAP. Excellent compatibility with the greater WordPress block ecosystem is a top priority.
 
 === Stay Connected ===
 
@@ -154,11 +138,11 @@ Stay up-to-date on Block Visibility using the links below. The plugin is also be
 == Screenshots ==
 
 1. Quickly and easily hide show or hide blocks on your website.
-2. Schedule blocks using start and end date/time settings. The plugin provides complete block scheduling and works with all Gutenberg blocks, including WooCommerce, as seen here. The Pro add-on includes day-of-week and time-of-day recursion functionality.
+2. Schedule blocks using start and end date/time settings. Day-of-week and time-of-day recursion are also available. The plugin provides complete block scheduling and works with all Gutenberg blocks, including WooCommerce, as seen here.
 3. Show or hide blocks on mobile devices, tablets, desktops, and more.
 4. Control who can see each Gutenberg block with user role restrictions. Great for personalization.
 5. Create unique marketing campaigns using query string parameters to display personalized messaging.
-6. Current integrations include Advanced Custom Fields and WP Fusion. Robust eCommerce integrations for WooCommerce and Easy Digital Downloads are available in the Pro add-on.
+6. Current integrations include Advanced Custom Fields, Easy Digital Downloads, WooCommerce, and WP Fusion.
 7. General plugin settings to enable/disable certain functionality, including user permissions and Full Control Mode.
 8. Choose which conditional visibility controls you want to use on your site.
 9. Disable or enable conditional visibility on certain block types with the Block Manager.
@@ -178,9 +162,6 @@ Stay up-to-date on Block Visibility using the links below. The plugin is also be
 Block Visibility is a powerful yet simple plugin that gives marketing agencies, bloggers, eCommerce websites, and small business owners the power to conditionally show or hide blocks on their websites. The need to hide Gutenberg blocks varies. Whether you need to restrict content to specific users like members or launch a promotional campaign at a particular time with block scheduling, the applications are endless.
 
 If you need dynamic content control on your WordPress website, you need Block Visibility.
-
-= Is there a pro/premium version of Block Visibility? =
-Absolutely! [Block Visibility Pro](https://www.blockvisibilitywp.com/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) available as an optional paid add-on and includes advanced functionality and third-party integrations.
 
 = Do conditional visibility controls really work with any block? (What is Full Control Mode?) =
 Yes! However, not all block types are enabled by default. Controls are only provided to blocks that can be added directly to a page/post by the block inserter. Therefore, some specialized blocks, such as child blocks, are not included by default. An example is the individual Column block that is part of the larger Columns block.
@@ -208,29 +189,49 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ==
 
-= 3.0.0 - 2023-03-TBD =
+= 3.0.0 - 2023-03-23 =
 
 **Added**
 
 * Added the [Browser & Device](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-browser-device-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
 * Added the [Cookie](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-cookie-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
+* Added the [Location](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-location-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
+* Added the [Metadata](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-metadata-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
 * Added the [Referral Source](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-referral-source-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
 * Added the [URL Path](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-url-path-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
-* Added Day of Week and Time of Day controls.
+* Added the [Visibility Preset](https://blockvisibilitywp.com/knowledge-base/guide-to-visibility-presets/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
+* Added Day of Week and Time of Day functionality to the [Date & Time](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-date-time-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
 * Added control set utility support.
-* Added local block support.
-* Added Pro icons.
+* Added local visibility control support.
+* Added the `ControlSetControls-` and `ControlSetControlsIntegrations-` slots for adding visibility control editor UI elements.
+* Added the `PluginSettings` slot for adding additional plugin settings.
+* Added the `VisibilityControls`, `VisibilityControlsGeneral`, and `VisibilityControlsIntegrations` slots for adding additional visibility control settings.
+* Added the `blockVisibility.globallyRestrictedBlockTypes` and `blockVisibility.widgetAreaRestrictedBlockTypes` filters to restrict visibility controls on specific block types.
+
+**Changed**
+
+* Plugin scripts are now enqueued with `enqueue_block_editor_assets`, and previous workarounds have been removed.
+* Deprecated the `ControlSetControlsBottom-` slot, use `ControlSetControlsIntegrations-` instead.
+* Deprecated the `VisibilityControlsIntegrationsBottom` slot, use `VisibilityControlsIntegrations` instead.
 
 **Removed**
 
-* Removed Pro upgrade link on plugins admin page.
+* Removed Pro upgrade link on the plugins admin page.
 * Removed Pro upsells from settings pages.
+* Removed block-level contextual indicator filters.
 * Removed the `blockVisibility.addControlSetModals` and `blockVisibility.addControlSetOptions` filters.
+* Removed the `ControlSetControlsTop-` and `ControlSetControlsMiddle-` slots.
 * Removed the `PluginSettingsEditorTop` and `PluginSettingsEditorTop` slots.
+* Removed the `PluginSettingsTop`, `PluginSettingsMiddle`, and `PluginSettingsBottom` slots.
+* Removed the `VisibilityControlsTop`, `VisibilityControlsMiddle`, and `VisibilityControlsBottom` slots.
+* Removed the `VisibilityControlsIntegrationsTop` and `VisibilityControlsIntegrationsBottom` slots.
+* Removed the `RuleSetOptionsTop`, `RuleSetOptionsMiddle`, `RuleSetOptionsBottom`, and `RuleSetMoreSettingsTools` slots.
 * [Date & Time] Removed the `block_visibility_frontend_test_date_time_schedule` filter.
 * [Date & Time] Removed the `VisibilityControlsDateTimeTop` and `VisibilityControlsDateTimeBottom` slots.
 * [Date & Time] Removed the `DateTimeScheduleToolbar-` and `DateTimeScheduleControlsTop-`, and `DateTimeScheduleControlsBottom-` slots.
-* [Date & Time] Removed the `ScheduleOptionsTop`, `ScheduleOptionsMiddle`, and `ScheduleOptionsBottom` slots.
+* [Date & Time] Removed the `ScheduleOptionsTools`, `ScheduleOptionsMiddle`, and `ScheduleOptionsBottom` slots.
+* [Screen Size] Removed the `ScreenSizeControls` slot.
+* [User Role] Removed the `VisibilityByRoleControls` slot.
 
 = 2.6.0 - 2023-02-13 =
 

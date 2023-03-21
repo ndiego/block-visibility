@@ -6,7 +6,7 @@
 
 [Block Visibility](https://wordpress.org/plugins/block-visibility/) allows you to dynamically control which blocks are visible on your WordPress website and who can see them, which includes the ability to schedule blocks.
 
-Built for the Block (Gutenberg) Editor, this plugin was designed to work with **any** WordPress block. This includes blocks natively provided by WordPress as well as third-party blocks.
+Block Visibility is built exclusively for the WordPress Editor (Gutenberg) and is designed to work with **any** WordPress block. This includes blocks natively provided by WordPress, third-party blocks, and even block-based widgets.
 
 Watch the [Plugin Overview](https://www.youtube.com/watch?v=CW1L4vBpXjw) demo video to get started with Block Visibility.
 
