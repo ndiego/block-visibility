@@ -172,13 +172,7 @@ function visibility_presets_add_custom_classes( $custom_classes, $settings, $att
 		return $custom_classes;
 	}
 
-	// Handle the old preset attribute structure introduced in v1.3.
-	// @TODO remove in v2.0.
-	if ( ! isset( $attributes['visibilityPresets']['presets'] ) ) {
-		$presets = $attributes['visibilityPresets'];
-	} else {
-		$presets = $attributes['visibilityPresets']['presets'];
-	}
+	$presets = $attributes['visibilityPresets']['presets'];
 
 	// There are no visibility presets, skip adding custom classes.
 	if ( ! is_array( $presets ) || 0 === count( $presets ) ) {
