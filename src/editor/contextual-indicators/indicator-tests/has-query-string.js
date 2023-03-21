@@ -1,9 +1,4 @@
 /**
- * WordPress dependencies
- */
-import { applyFilters } from '@wordpress/hooks';
-
-/**
  * Determine if Query String controls are enabled for the block.
  *
  * @since 1.7.0
@@ -38,14 +33,6 @@ export default function hasQueryString(
 	if ( ! queryStringAny && ! queryStringAll && ! queryStringNot ) {
 		indicatorTest = false;
 	}
-
-	indicatorTest = applyFilters(
-		'blockVisibility.hasQueryStringIndicator',
-		indicatorTest,
-		controls,
-		hasControlSets,
-		enabledControls
-	);
 
 	return indicatorTest;
 }

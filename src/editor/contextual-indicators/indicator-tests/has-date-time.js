@@ -1,9 +1,4 @@
 /**
- * WordPress dependencies
- */
-import { applyFilters } from '@wordpress/hooks';
-
-/**
  * Determine if date time settings are enabled for the block.
  *
  * @since 1.1.0
@@ -79,15 +74,5 @@ export default function hasDateTime(
 		indicatorTestArray.push( scheduleTest );
 	} );
 
-	let indicatorTest = indicatorTestArray.includes( true );
-
-	indicatorTest = applyFilters(
-		'blockVisibility.hasDateTimeIndicator',
-		indicatorTest,
-		controls,
-		hasControlSets,
-		enabledControls
-	);
-
-	return indicatorTest;
+	return indicatorTestArray.includes( true );
 }

@@ -1,9 +1,4 @@
 /**
- * WordPress dependencies
- */
-import { applyFilters } from '@wordpress/hooks';
-
-/**
  * Determine if Wp Fusion controls are enabled for the block.
  *
  * @since 1.7.0
@@ -61,15 +56,6 @@ export default function hasWPFusion(
 	) {
 		indicatorTest = false;
 	}
-
-	indicatorTest = applyFilters(
-		'blockVisibility.hasWPFusionIndicator',
-		indicatorTest,
-		controls,
-		hasControlSets,
-		enabledControls,
-		variables
-	);
 
 	return indicatorTest;
 }

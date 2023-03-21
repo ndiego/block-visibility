@@ -1,9 +1,4 @@
 /**
- * WordPress dependencies
- */
-import { applyFilters } from '@wordpress/hooks';
-
-/**
  * Determine if ACF controls are enabled for the block.
  *
  * @since 1.8.0
@@ -39,15 +34,6 @@ export default function hasACF(
 	if ( ruleSets.length === 0 ) {
 		indicatorTest = false;
 	}
-
-	indicatorTest = applyFilters(
-		'blockVisibility.hasACFIndicator',
-		indicatorTest,
-		controls,
-		hasControlSets,
-		enabledControls,
-		variables
-	);
 
 	return indicatorTest;
 }

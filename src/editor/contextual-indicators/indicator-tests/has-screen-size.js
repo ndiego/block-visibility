@@ -1,9 +1,4 @@
 /**
- * WordPress dependencies
- */
-import { applyFilters } from '@wordpress/hooks';
-
-/**
  * Determine if screen size settings are enabled for the block.
  *
  * @since 1.1.0
@@ -62,15 +57,6 @@ export default function hasScreenSize(
 	) {
 		indicatorTest = false;
 	}
-
-	indicatorTest = applyFilters(
-		'blockVisibility.hasScreenSizeIndicator',
-		indicatorTest,
-		controls,
-		hasControlSets,
-		enabledControls,
-		settings
-	);
 
 	return indicatorTest;
 }
