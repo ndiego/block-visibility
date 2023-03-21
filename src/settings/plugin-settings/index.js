@@ -65,14 +65,12 @@ export default function PluginSettings( props ) {
 				/>
 			</div>
 			<div className="setting-tabs__setting-panels">
-				<Slot name="PluginSettingsTop" />
 				<Editor
 					pluginSettings={ pluginSettings }
 					setPluginSettings={ setPluginSettings }
 					setHasUpdates={ setHasUpdates }
 					{ ...props }
 				/>
-				<Slot name="PluginSettingsMiddle" />
 				<div className="setting-tabs__setting-panels__sub-panel">
 					<UserPermissions
 						pluginSettings={ pluginSettings }
@@ -93,7 +91,7 @@ export default function PluginSettings( props ) {
 						{ ...props }
 					/>
 				</div>
-				<Slot name="PluginSettingsBottom" />
+				<Slot name="PluginSettings" />
 			</div>
 			<AdditionalSettings
 				pluginSettings={ pluginSettings }

@@ -68,6 +68,8 @@ export default function Integrations( props ) {
 				<ACF { ...props } />
 				<WPFusion { ...props } />
 				<Slot name="VisibilityControlsIntegrations" />
+
+				{ /* Deprecated in version 3.0.0 */ }
 				<Slot name="VisibilityControlsIntegrationsBottom" />
 			</div>
 		</>

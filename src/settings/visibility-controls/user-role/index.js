@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { ToggleControl, Disabled, Slot } from '@wordpress/components';
+import { ToggleControl, Disabled } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -155,7 +155,6 @@ export default function UserRole( props ) {
 						link={ links.settingsUserRole }
 					/>
 				</div>
-				<Slot name="VisibilityByRoleControls" />
 			</div>
 		</div>
 	);

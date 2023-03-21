@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { ToggleControl, Disabled, Slot } from '@wordpress/components';
+import { ToggleControl, Disabled } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -180,7 +180,6 @@ export default function ScreenSize( props ) {
 						link={ links.settingsScreenSize }
 					/>
 				</div>
-				<Slot name="ScreenSizeControls" />
 			</div>
 		</div>
 	);

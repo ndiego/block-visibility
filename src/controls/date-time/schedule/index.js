@@ -15,7 +15,6 @@ import {
 	MenuGroup,
 	MenuItem,
 	Notice,
-	Slot,
 	TextControl,
 } from '@wordpress/components';
 import { calendar, pencil, moreVertical } from '@wordpress/icons';
@@ -197,7 +196,6 @@ export default function Schedule( props ) {
 			{ ( { onClose } ) => (
 				<>
 					<MenuGroup label={ __( 'Tools', 'block-visibility' ) }>
-						<Slot name="ScheduleOptionsTools" />
 						<MenuItem
 							onClick={ () =>
 								setAttribute( 'enable', false, ! enable )
@@ -216,9 +214,6 @@ export default function Schedule( props ) {
 							{ __( 'Duplicate', 'block-visibility' ) }
 						</MenuItem>
 					</MenuGroup>
-
-					<Slot name="ScheduleOptionsMiddle" />
-
 					<MenuGroup>
 						<MenuItem
 							onClick={ () => {
@@ -229,8 +224,6 @@ export default function Schedule( props ) {
 							{ removeLabel }
 						</MenuItem>
 					</MenuGroup>
-
-					<Slot name="ScheduleOptionsBottom" />
 				</>
 			) }
 		</DropdownMenu>
@@ -353,7 +346,7 @@ export default function Schedule( props ) {
 							isSmall
 							label={ __(
 								'Set time of day controls',
-								'block-visibility-pro'
+								'block-visibility'
 							) }
 						/>
 					) }
@@ -371,7 +364,7 @@ export default function Schedule( props ) {
 							isSmall
 							label={ __(
 								'Set day of week controls',
-								'block-visibility-pro'
+								'block-visibility'
 							) }
 						/>
 					) }

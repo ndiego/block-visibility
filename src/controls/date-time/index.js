@@ -7,7 +7,7 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
-import { Button, Slot, ToggleControl } from '@wordpress/components';
+import { Button, ToggleControl } from '@wordpress/components';
 import { plus } from '@wordpress/icons';
 
 /**
@@ -117,7 +117,6 @@ export default function DateTime( props ) {
 						);
 					} ) }
 				</div>
-				<Slot name="DateTimeControls" />
 				<div className="control-fields-item__hide-when">
 					<ToggleControl
 						label={ __(

@@ -14,7 +14,6 @@ import {
 	DropdownMenu,
 	MenuGroup,
 	MenuItem,
-	Slot,
 	TextControl,
 } from '@wordpress/components';
 import { moreVertical, pencil } from '@wordpress/icons';
@@ -131,10 +130,7 @@ export default function RuleSets( props ) {
 		>
 			{ ( { onClose } ) => (
 				<>
-					<Slot name="RuleSetOptionsTop" />
-
 					<MenuGroup label={ __( 'Tools', 'block-visibility' ) }>
-						<Slot name="RuleSetMoreSettingsTools" />
 						<MenuItem
 							onClick={ () => setAttribute( 'enable', ! enable ) }
 						>
@@ -152,9 +148,6 @@ export default function RuleSets( props ) {
 							{ __( 'Duplicate', 'block-visibility' ) }
 						</MenuItem>
 					</MenuGroup>
-
-					<Slot name="RuleSetOptionsMiddle" />
-
 					<MenuGroup>
 						<MenuItem
 							onClick={ () => {
@@ -165,8 +158,6 @@ export default function RuleSets( props ) {
 							{ removeLabel }
 						</MenuItem>
 					</MenuGroup>
-
-					<Slot name="RuleSetOptionsBottom" />
 				</>
 			) }
 		</DropdownMenu>

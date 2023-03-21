@@ -28,14 +28,6 @@ import {
 	WPFusion,
 } from './../../controls';
 
-/**
- * Provides an entry point to slot in the control set component for the preset
- * manager. Must be placed outside of function to avoid unnecessary rerenders.
- */
-const PresetManagerControlSet = withFilters(
-	'blockVisibilityPro.addPresetManagerControlSet'
-)( ( props ) => <></> ); // eslint-disable-line
-
 // Provides an entry point to slot in additional settings. Must be placed
 // outside of function to avoid unnecessary rerenders.
 const AdditionalControlSetControls = withFilters(
@@ -170,38 +162,29 @@ export default function ControlSet( props ) {
 	}
 
 	return (
-		<>
-			<div className="control-set">
-				<ControlSetHeader
-					{ ...props }
-					key={ index }
-					activeSetControls={ activeSetControls }
-					enabledSetControls={ enabledSetControls }
-					setControlSetAtts={ setControlSetAtts }
-				/>
-				{ activeSetControls.length > 0 && controlSetControls }
-				{ activeSetControls.length === 0 && (
-					<Notice status="warning" isDismissible={ false }>
-						{ __(
-							'Add visibility controls using the plus icon in the toolbar above.',
-							'block-visibility'
-						) }
-					</Notice>
-				) }
-				<AdditionalControlSetControls
-					{ ...props }
-					uniqueIndex={ uniqueIndex }
-					setControlAtts={ setControlAtts }
-					enabledControls={ enabledSetControls }
-				/>
-			</div>
-			<PresetManagerControlSet
+		<div className="control-set">
+			<ControlSetHeader
 				{ ...props }
 				key={ index }
-				index={ index }
+				activeSetControls={ activeSetControls }
+				enabledSetControls={ enabledSetControls }
+				setControlSetAtts={ setControlSetAtts }
+			/>
+			{ activeSetControls.length > 0 && controlSetControls }
+			{ activeSetControls.length === 0 && (
+				<Notice status="warning" isDismissible={ false }>
+					{ __(
+						'Add visibility controls using the plus icon in the toolbar above.',
+						'block-visibility'
+					) }
+				</Notice>
+			) }
+			<AdditionalControlSetControls
+				{ ...props }
+				uniqueIndex={ uniqueIndex }
 				setControlAtts={ setControlAtts }
 				enabledControls={ enabledSetControls }
 			/>
-		</>
+		</div>
 	);
 }
