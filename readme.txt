@@ -104,8 +104,8 @@ Block Visibility is designed to work with **any** block and is tested with these
 
 * Advanced Custom Fields
 * WP Fusion
-* WooCommerce (Integration coming soon)
-* Easy Digital Downloads (Integration coming soon)
+* WooCommerce _(Integration coming soon)_
+* Easy Digital Downloads _(Integration coming soon)_
 
 **Compatibility**
 
