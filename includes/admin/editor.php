@@ -57,7 +57,7 @@ function enqueue_editor_scripts() {
 		'before'
 	);
 }
-add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_scripts', 10001 );
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_scripts' );
 
 /**
  * Enqueue plugin specific editor styles
