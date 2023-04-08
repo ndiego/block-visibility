@@ -325,7 +325,7 @@ function register_settings() {
 		),
 		'disabled_blocks'     => array(),
 		'plugin_settings'     => array(
-			'default_controls'              => array( 'hide_block', 'visibility_presets' ),
+			'default_controls'              => array(),
 			'enable_contextual_indicators'  => true,
 			'contextual_indicator_color'    => '',
 			'enable_block_opacity'          => false,
