@@ -88,7 +88,7 @@ export default function ControlSets( props ) {
 		<div className="control-sets">
 			<div className="control-sets__header">
 				<div className="control-sets__header-title">
-					<h2>{ __( 'Control Sets' ) }</h2>
+					<h2>{ __( 'Control Sets', 'block-visibility' ) }</h2>
 					<InformationPopover
 						message={ __(
 							'Each control set represents a group of visibility controls that form “AND” conditions. All controls within a control set must be satisfied for the block to be visible.',
