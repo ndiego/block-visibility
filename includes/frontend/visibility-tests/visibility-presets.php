@@ -40,7 +40,10 @@ function visibility_presets_test( $is_visible, $settings, $attributes ) {
 		return true;
 	}
 
-	$presets = $attributes['visibilityPresets']['presets'];
+	$presets =
+		isset( $attributes['visibilityPresets']['presets'] )
+			? $attributes['visibilityPresets']['presets']
+			: array();
 
 	// There are no visibility presets, skip tests.
 	if ( ! is_array( $presets ) || 0 === count( $presets ) ) {
@@ -172,7 +175,10 @@ function visibility_presets_add_custom_classes( $custom_classes, $settings, $att
 		return $custom_classes;
 	}
 
-	$presets = $attributes['visibilityPresets']['presets'];
+	$presets =
+		isset( $attributes['visibilityPresets']['presets'] )
+			? $attributes['visibilityPresets']['presets']
+			: array();
 
 	// There are no visibility presets, skip adding custom classes.
 	if ( ! is_array( $presets ) || 0 === count( $presets ) ) {
