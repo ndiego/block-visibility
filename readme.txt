@@ -189,6 +189,12 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ===
 
+= 3.0.3 - TBD =
+
+**Fixed**
+
+* [Query String] Fixed bug when using 0 as the value of a query parameter would cause unexpected results.
+
 = 3.0.2 - 2023-04-16 =
 
 **Removed**

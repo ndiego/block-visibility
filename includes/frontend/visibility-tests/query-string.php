@@ -82,7 +82,7 @@ function query_string_test( $is_visible, $settings, $controls ) {
 			$value = $string[ $param ];
 
 			if ( isset( $_REQUEST[ $param ] ) ) { // phpcs:ignore
-				if ( ! $value || '*' === $value ) {
+				if ( is_null( $value ) || '*' === $value ) {
 					$all_matches++;
 				} elseif ( $value === $_REQUEST[ $param ] ) { // phpcs:ignore
 					$all_matches++;
@@ -131,9 +131,11 @@ function prepare_queries( $queries ) {
 	$query_array     = explode( "\n", $queries );
 	$ordered_queries = array();
 
+//echo print_r( $query_array );
 	foreach ( $query_array as $query ) {
 		parse_str( $query, $result );
 		$ordered_queries[] = $result;
 	}
+	echo print_r( $ordered_queries );
 	return $ordered_queries;
 }
