@@ -191,6 +191,10 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 = 3.0.3 - TBD =
 
+**Changed**
+
+* Updated the `blockVisibility.contextualIndicatorClasses` filter to include more variables, which allows for more customization.
+
 **Fixed**
 
 * [Query String] Fixed bug when using 0 as the value of a query parameter would cause unexpected results.
