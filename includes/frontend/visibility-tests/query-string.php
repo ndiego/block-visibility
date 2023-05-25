@@ -131,11 +131,10 @@ function prepare_queries( $queries ) {
 	$query_array     = explode( "\n", $queries );
 	$ordered_queries = array();
 
-//echo print_r( $query_array );
 	foreach ( $query_array as $query ) {
 		parse_str( $query, $result );
 		$ordered_queries[] = $result;
 	}
-	echo print_r( $ordered_queries );
+
 	return $ordered_queries;
 }
