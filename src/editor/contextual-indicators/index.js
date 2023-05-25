@@ -198,7 +198,13 @@ function withContextualIndicators( BlockListBlock ) {
 
 		classes = applyFilters(
 			'blockVisibility.contextualIndicatorClasses',
-			classes
+			classes,
+			activeControls,
+			blockVisibility,
+			controls,
+			hasControlSets,
+			enabledControls,
+			variables
 		);
 
 		// Deprecated filter as of v2.5.1, use contextualIndicatorClasses instead.
