@@ -200,9 +200,7 @@ function withContextualIndicators( BlockListBlock ) {
 			'blockVisibility.contextualIndicatorClasses',
 			classes,
 			activeControls,
-			blockVisibility,
 			controls,
-			hasControlSets,
 			enabledControls,
 			variables
 		);
