@@ -201,6 +201,8 @@ function run_acf_rule_tests( $operator, $value, $acf_field ) {
 	} elseif ( 'empty' === $operator ) {
 		$test_result = empty( $field_value );
 	} elseif ( isset( $value ) ) {
+		// This allows developers to modify $value, including adding support for shortcode value comparisons
+		$value = apply_filters( 'bv_run_acf_rule_tests_value', $value );
 
 		// Choice values are generally arrays and need to be treated differently.
 		// Allow for type juggling here since array can include strings or numbers.
