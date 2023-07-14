@@ -108,7 +108,7 @@ export default function PostsSelect( props ) {
 		// selected values. Otherwise return an empty array.
 		if ( value.length !== 0 && ! selectedValues ) {
 			const selectedQuery = {
-				include: value.join( ',' ),
+				include: Array.isArray( value ) ? value.join( ',' ) : value,
 				per_page: -1,
 				status: 'publish,draft,private,pending',
 				_fields: 'id,title,status',
