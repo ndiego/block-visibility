@@ -55,6 +55,8 @@ export default function PostsSelect( props ) {
 		postType,
 		triggerReset,
 		value,
+		valueType,
+		isMulti,
 	} = props;
 	const [ selectedValues, setSelectedValues ] = useState( false );
 	const [ searchValue, setSearchValue ] = useState( false );
@@ -106,7 +108,7 @@ export default function PostsSelect( props ) {
 		// selected values. Otherwise return an empty array.
 		if ( value.length !== 0 && ! selectedValues ) {
 			const selectedQuery = {
-				include: value.join( ',' ),
+				include: Array.isArray( value ) ? value.join( ',' ) : value,
 				per_page: -1,
 				status: 'publish,draft,private,pending',
 				_fields: 'id,title,status',
@@ -158,10 +160,14 @@ export default function PostsSelect( props ) {
 	}
 
 	const handleChange = ( values ) => {
+		// Need for value handling.
+		const valueHandling =
+			valueType === 'postSelect' ? 'select' : 'multiSelect';
+
 		setSelectedValues( values );
 		handleRuleChange(
 			values,
-			'multiSelect', // Need for value handling.
+			valueHandling,
 			fieldType,
 			fieldName,
 			triggerReset
@@ -205,7 +211,7 @@ export default function PostsSelect( props ) {
 			noOptionsMessage={ noOptionsMessage }
 			placeholder={ placeholder }
 			isLoading={ loadingAvailablePosts || loadingSavedPosts }
-			isMulti
+			isMulti={ isMulti }
 		/>
 	);
 }

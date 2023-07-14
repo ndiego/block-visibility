@@ -582,7 +582,7 @@ export function GetAllFields() {
 							dependencyType: 'subField',
 							dependencyValues: postTypesHierarchicalList,
 							valueTypes: [
-								{ value: 'default', valueType: 'postsSelect' },
+								{ value: 'default', valueType: 'postSelect' },
 							],
 						},
 					],

@@ -189,6 +189,12 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ===
 
+= 3.0.4 - 2023-07-14 =
+
+**Fixed**
+
+* [Location] Fixed bug that prevented the Relative Hierarchy rule from working. The value field was set to multi-select when it should be a single selection.
+
 = 3.0.3 - 2023-06-04 =
 
 **Changed**
