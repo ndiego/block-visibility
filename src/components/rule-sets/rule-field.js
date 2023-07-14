@@ -192,7 +192,7 @@ export default function RuleField( props ) {
 				{ ...props }
 			/>
 		);
-	} else if ( valueType === 'postsSelect' ) {
+	} else if ( valueType === 'postsSelect' || valueType === 'postSelect' ) {
 		let postType;
 
 		// A defined variant will take precedent.
@@ -208,6 +208,8 @@ export default function RuleField( props ) {
 				postType={ postType }
 				className={ className }
 				value={ value }
+				valueType={ valueType }
+				isMulti={ valueType === 'postsSelect' }
 				{ ...props }
 			/>
 		);
