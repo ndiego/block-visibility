@@ -644,7 +644,8 @@ function run_location_relative_hierarchy_test( $rule ) {
 	// Assume error and try to disprove.
 	$test_result = 'error';
 
-	$relative_id = $rule['value'];
+	// Account for a bug in v3 that allowed multiple values to be stored.
+	$relative_id = is_array( $rule['value'] ) ? $rule['value'][0] : $rule['value'];
 	$hierarchy   = $rule['operator'];
 
 	$post_id     = get_the_ID();

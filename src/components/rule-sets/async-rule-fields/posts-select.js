@@ -55,6 +55,8 @@ export default function PostsSelect( props ) {
 		postType,
 		triggerReset,
 		value,
+		valueType,
+		isMulti,
 	} = props;
 	const [ selectedValues, setSelectedValues ] = useState( false );
 	const [ searchValue, setSearchValue ] = useState( false );
@@ -158,10 +160,14 @@ export default function PostsSelect( props ) {
 	}
 
 	const handleChange = ( values ) => {
+		// Need for value handling.
+		const valueHandling =
+			valueType === 'postSelect' ? 'select' : 'multiSelect';
+
 		setSelectedValues( values );
 		handleRuleChange(
 			values,
-			'multiSelect', // Need for value handling.
+			valueHandling,
 			fieldType,
 			fieldName,
 			triggerReset
@@ -205,7 +211,7 @@ export default function PostsSelect( props ) {
 			noOptionsMessage={ noOptionsMessage }
 			placeholder={ placeholder }
 			isLoading={ loadingAvailablePosts || loadingSavedPosts }
-			isMulti
+			isMulti={ isMulti }
 		/>
 	);
 }
