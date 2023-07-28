@@ -138,8 +138,7 @@ function addInspectorControls( BlockEdit ) {
 addFilter(
 	'editor.BlockEdit',
 	'block-visibility/add-inspector-controls',
-	addInspectorControls,
-	100 // We want Visibility to appear right above Advanced controls
+	addInspectorControls
 );
 
 /**
