@@ -7,8 +7,8 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { dispatch, useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+import { dispatch } from '@wordpress/data';
+import { useEntityRecord } from '@wordpress/core-data';
 import { useState } from '@wordpress/element';
 import { addFilter, applyFilters } from '@wordpress/hooks';
 import { hasBlockSupport } from '@wordpress/blocks';
@@ -165,16 +165,8 @@ registerPlugin( 'block-visibility-toolbar-options-hide-block', {
  */
 function PresetManagerButton() {
 	const [ isModalOpen, setModalOpen ] = useState( false );
-
-	const { variables } = useSelect( ( select ) => {
-		const { getEntityRecord } = select( coreStore );
-
-		return {
-			variables: getEntityRecord( 'block-visibility/v1', 'variables' ),
-		};
-	}, [] );
-
-	const roles = variables?.current_users_roles ?? [];
+	const variablesData = useEntityRecord( 'block-visibility/v1', 'variables' );
+	const roles = variablesData?.record?.current_users_roles ?? [];
 	let canEdit = false;
 
 	// While roles should always be an array, double check.

@@ -7,7 +7,7 @@ import { isEmpty } from 'lodash';
  * WordPress dependencies.
  */
 import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
+import { useEntityRecord, useEntityRecords } from '@wordpress/core-data';
 import { useState } from '@wordpress/element';
 import { Button } from '@wordpress/components';
 
@@ -27,20 +27,25 @@ import getEnabledControls from './../../utils/get-enabled-controls';
 export default function PresetManager() {
 	const [ presetAttributes, setPresetAttributes ] = useState( {} );
 	const [ hasUpdates, setHasUpdates ] = useState( false );
+	const presetData = useEntityRecords( 'postType', 'visibility_preset', {
+		per_page: -1,
+		orderby: 'modified',
+	} );
+	const settingsData = useEntityRecord( 'block-visibility/v1', 'settings' );
+	const variablesData = useEntityRecord( 'block-visibility/v1', 'variables' );
 
-	const { presets, settings, variables } = useSelect( ( select ) => {
-		const { getEntityRecords, getEntityRecord } = select( 'core' );
+	// Wait until all data has been fetched.
+	if (
+		presetData.isResolving ||
+		settingsData.isResolving ||
+		variablesData.isResolving
+	) {
+		return null;
+	}
 
-		return {
-			presets:
-				getEntityRecords( 'postType', 'visibility_preset', {
-					per_page: -1,
-					orderby: 'modified',
-				} ) ?? 'fetching',
-			settings: getEntityRecord( 'block-visibility/v1', 'settings' ),
-			variables: getEntityRecord( 'block-visibility/v1', 'variables' ),
-		};
-	}, [] );
+	const presets = presetData.records;
+	const settings = settingsData.record;
+	const variables = variablesData.record;
 
 	// Get all enabled controls and make sure to exclude the Hide Block and
 	// Visibility Presets controls.

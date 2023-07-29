@@ -7,7 +7,8 @@ import classnames from 'classnames';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { dispatch, useSelect } from '@wordpress/data';
+import { dispatch } from '@wordpress/data';
+import { useEntityRecord } from '@wordpress/core-data';
 import { useState, render } from '@wordpress/element';
 import { registerCoreBlocks } from '@wordpress/block-library';
 import {
@@ -65,21 +66,15 @@ const AdditionalSettingTabs = withFilters(
  */
 function Settings() {
 	const [ settings, setSettings ] = useState( null );
-	const [ savedSettings, variables ] = useSelect( ( select ) => {
-		const { getEntityRecord } = select( 'core' );
-		const fetchedSettings =
-			getEntityRecord( 'block-visibility/v1', 'settings' ) ?? null;
-		const fetchedVariables =
-			getEntityRecord( 'block-visibility/v1', 'variables' ) ?? null;
-		return [ fetchedSettings, fetchedVariables ];
-	} );
+	const settingsData = useEntityRecord( 'block-visibility/v1', 'settings' );
+	const variablesData = useEntityRecord( 'block-visibility/v1', 'variables' );
 
 	function onSetSettings( newSettings ) {
 		setSettings( newSettings );
 	}
 
 	// Display loading/error message while settings are being fetched.
-	if ( ! savedSettings || ! variables ) {
+	if ( ! settingsData.hasResolved || ! variablesData.hasResolved ) {
 		return (
 			<div className="loading-settings">
 				<Spinner />
@@ -139,11 +134,11 @@ function Settings() {
 
 	return (
 		<SlotFillProvider>
-			<Masthead variables={ variables } />
+			<Masthead variables={ variablesData.record } />
 			<TabPanel
 				className={ classnames( {
 					'setting-tabs': true,
-					is_pro: variables?.is_pro,
+					is_pro: variablesData.record?.is_pro,
 				} ) }
 				activeClass="active-tab"
 				initialTabName={ initialTab }
@@ -155,33 +150,39 @@ function Settings() {
 						case 'visibility-controls':
 							return (
 								<>
-									<Ads variables={ variables } />
+									<Ads variables={ variablesData.record } />
 									<VisibilityControls
-										settings={ settings ?? savedSettings }
+										settings={
+											settings ?? settingsData.record
+										}
 										setSettings={ onSetSettings }
-										variables={ variables }
+										variables={ variablesData.record }
 									/>
 								</>
 							);
 						case 'block-manager':
 							return (
 								<>
-									<Ads variables={ variables } />
+									<Ads variables={ variablesData.record } />
 									<BlockManager
-										settings={ settings ?? savedSettings }
+										settings={
+											settings ?? settingsData.record
+										}
 										setSettings={ onSetSettings }
-										variables={ variables }
+										variables={ variablesData.record }
 									/>
 								</>
 							);
 						case 'plugin-settings':
 							return (
 								<>
-									<Ads variables={ variables } />
+									<Ads variables={ variablesData.record } />
 									<PluginSettings
-										settings={ settings ?? savedSettings }
+										settings={
+											settings ?? settingsData.record
+										}
 										setSettings={ onSetSettings }
-										variables={ variables }
+										variables={ variablesData.record }
 									/>
 								</>
 							);
@@ -191,16 +192,18 @@ function Settings() {
 									<Slot name="SettingTabs" />
 									<AdditionalSettingTabs
 										tabName={ tab.name }
-										settings={ settings ?? savedSettings }
+										settings={
+											settings ?? settingsData.record
+										}
 										setSettings={ onSetSettings }
-										variables={ variables }
+										variables={ variablesData.record }
 									/>
 								</>
 							);
 					}
 				} }
 			</TabPanel>
-			<Footer variables={ variables } />
+			<Footer variables={ variablesData.record } />
 		</SlotFillProvider>
 	);
 }
