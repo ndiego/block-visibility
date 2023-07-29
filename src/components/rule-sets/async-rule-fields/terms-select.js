@@ -7,7 +7,7 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies
  */
-import { useSelect } from '@wordpress/data';
+import { useEntityRecords } from '@wordpress/core-data';
 import { useMemo } from '@wordpress/element';
 import { decodeEntities } from '@wordpress/html-entities';
 
@@ -40,33 +40,20 @@ export default function TermsSelect( props ) {
 		value,
 	} = props;
 
-	const { availableTerms, loading } = useSelect(
-		( select ) => {
-			const { getEntityRecords, isResolving } = select( 'core' );
-			return {
-				availableTerms: getEntityRecords(
-					'taxonomy',
-					taxonomySlug,
-					DEFAULT_QUERY
-				),
-				loading: isResolving( 'getEntityRecords', [
-					'taxonomy',
-					taxonomySlug,
-					DEFAULT_QUERY,
-				] ),
-			};
-		},
-		[ taxonomySlug ]
+	const availableTerms = useEntityRecords(
+		'taxonomy',
+		taxonomySlug,
+		DEFAULT_QUERY
 	);
 
 	const termsOptions = useMemo( () => {
-		return ( availableTerms ?? [] ).map( ( term ) => {
+		return ( availableTerms.records ?? [] ).map( ( term ) => {
 			return {
 				value: term.id,
 				label: decodeEntities( term.name ),
 			};
 		} );
-	}, [ availableTerms ] );
+	}, [ availableTerms.records ] );
 
 	const selectedTerms = termsOptions.filter( ( term ) =>
 		value.includes( term.value )
@@ -91,7 +78,7 @@ export default function TermsSelect( props ) {
 					triggerReset
 				)
 			}
-			isLoading={ loading }
+			isLoading={ availableTerms.isResolving }
 			isMulti
 		/>
 	);

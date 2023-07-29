@@ -6,10 +6,11 @@ import { assign } from 'lodash';
 /**
  * WordPress dependencies
  */
+import { __, sprintf } from '@wordpress/i18n';
 import { BlockSettingsMenuControls } from '@wordpress/block-editor';
 import { MenuItem } from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
-import { useDispatch, withSelect } from '@wordpress/data';
+import { useEntityRecord } from '@wordpress/core-data';
+import { useDispatch, withSelect, select } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -36,14 +37,27 @@ function ToolbarControls( props ) {
 		clientId,
 		enableMenuItem,
 		globallyRestricted,
-		settings,
-		variables,
 		widgetAreaRestricted,
 	} = props;
+	const settingsData = useEntityRecord( 'block-visibility/v1', 'settings' );
+	const variablesData = useEntityRecord( 'block-visibility/v1', 'variables' );
 
-	if ( settings === 'fetching' || variables === 'fetching' ) {
+	if ( ! settingsData.hasResolved || ! variablesData.hasResolved ) {
 		return null;
 	}
+
+	const settings = settingsData.record;
+	const { getBlocks } = select( 'core/block-editor' );
+
+	// Determine if we are in the Widget Editor (Not the best but all we got).
+	const widgetAreas = getBlocks().filter(
+		( block ) => block.name === 'core/widget-area'
+	);
+
+	const variables = {
+		...variablesData.record,
+		isWidgetEditor: widgetAreas.length > 0,
+	};
 
 	if ( ! hasPermission( settings, variables ) ) {
 		return null;
@@ -128,9 +142,7 @@ function ToolbarControls( props ) {
 }
 
 export default withSelect( ( select ) => {
-	const { getEntityRecord } = select( 'core' );
 	const {
-		getBlocks,
 		getBlockName,
 		getSelectedBlockClientIds,
 		getBlockAttributes,
@@ -149,27 +161,10 @@ export default withSelect( ( select ) => {
 	const blockType = getBlockType( getBlockName( clientId ) );
 	const blockAttributes = getBlockAttributes( clientId );
 
-	// Fetch the plugin settings and variables.
-	const settings =
-		getEntityRecord( 'block-visibility/v1', 'settings' ) ?? 'fetching';
-	let variables =
-		getEntityRecord( 'block-visibility/v1', 'variables' ) ?? 'fetching';
-
-	// Determine if we are in the Widget Editor (Not the best but all we got).
-	const widgetAreas = 
-		getBlocks().filter( ( block ) => block.name === 'core/widget-area' );
-
-	// If variables have been fetched, append the Widget Area flag.
-	if ( variables !== 'fetching' ) {
-		variables = { ...variables, isWidgetEditor: widgetAreas.length > 0 };
-	}
-
 	return {
 		enableMenuItem,
 		clientId,
 		blockType,
 		blockAttributes,
-		settings,
-		variables,
 	};
 } )( ToolbarControls );

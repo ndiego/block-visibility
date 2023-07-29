@@ -8,9 +8,8 @@ import Select from 'react-select';
  * WordPress dependencies.
  */
 import { __, sprintf } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
+import { useEntityRecords } from '@wordpress/core-data';
 import { useState } from '@wordpress/element';
-import { store as coreStore } from '@wordpress/core-data';
 import {
 	Button,
 	Modal,
@@ -37,28 +36,21 @@ export default function VisibilityPresets( props ) {
 	const [ isModalOpen, setModalOpen ] = useState( false );
 	const { attributes, setAttributes, enabledControls, settings, variables } =
 		props;
+	const presetData = useEntityRecords( 'postType', 'visibility_preset', {
+		per_page: -1,
+	} );
 
-	const { presets } = useSelect( ( select ) => {
-		const { getEntityRecords } = select( coreStore );
+	const presets = [];
 
-		const data = getEntityRecords( 'postType', 'visibility_preset', {
-			per_page: -1,
+	if ( presetData.hasResolved && presetData.records.length !== 0 ) {
+		presetData.records.forEach( ( preset ) => {
+			const value = {
+				value: preset.id,
+				label: preset?.title?.raw ?? '',
+			};
+			presets.push( value );
 		} );
-
-		const fetchedPresets = [];
-
-		if ( data && data.length !== 0 ) {
-			data.forEach( ( preset ) => {
-				const value = {
-					value: preset.id,
-					label: preset?.title?.raw ?? '',
-				};
-				fetchedPresets.push( value );
-			} );
-		}
-
-		return { presets: data === null ? null : fetchedPresets };
-	}, [] );
+	}
 
 	const controlActive = enabledControls.some(
 		( control ) =>
@@ -180,7 +172,7 @@ export default function VisibilityPresets( props ) {
 						/>
 					) }
 					<div className="controls-panel-item__header-toolbar">
-						{ presets === null && <Spinner /> }
+						{ presetData.isResolving && <Spinner /> }
 						{ buttonText && canEdit && (
 							<Button
 								icon={
@@ -230,7 +222,7 @@ export default function VisibilityPresets( props ) {
 								handlePresetChange( value )
 							}
 							isMulti
-							isLoading={ presets === null }
+							isLoading={ presetData.isResolving }
 							isDisabled={
 								presets === null || isEmpty( presets )
 							}

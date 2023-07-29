@@ -7,6 +7,7 @@ import classnames from 'classnames';
  * WordPress dependencies
  */
 import { addFilter, applyFilters } from '@wordpress/hooks';
+import { useEntityRecord } from '@wordpress/core-data';
 
 /**
  * Internal dependencies
@@ -27,7 +28,6 @@ import {
 	hasWPFusion,
 } from './indicator-tests';
 import hasVisibilityControls from './../utils/has-visibility-controls';
-import usePluginData from './../utils/use-plugin-data';
 import isPluginSettingEnabled from './../../utils/is-plugin-setting-enabled';
 import getEnabledControls from './../../utils/get-enabled-controls';
 
@@ -39,14 +39,22 @@ import getEnabledControls from './../../utils/get-enabled-controls';
  */
 function withContextualIndicators( BlockListBlock ) {
 	return ( props ) => {
-		const settings = usePluginData( 'settings' );
-		const variables = usePluginData( 'variables' );
+		const settingsData = useEntityRecord(
+			'block-visibility/v1',
+			'settings'
+		);
+		const variablesData = useEntityRecord(
+			'block-visibility/v1',
+			'variables'
+		);
 
-		if ( settings === 'fetching' ) {
+		if ( ! settingsData.hasResolved ) {
 			return <BlockListBlock { ...props } />;
 		}
 
 		const { name, attributes } = props;
+		const settings = settingsData.record;
+		const variables = variablesData.record;
 		const enableIndicators = isPluginSettingEnabled(
 			settings,
 			'enable_contextual_indicators'

@@ -9,7 +9,8 @@ import { assign, isEmpty } from 'lodash';
 import { __ } from '@wordpress/i18n';
 import { withFilters, Spinner } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
-import { withSelect } from '@wordpress/data';
+import { useEntityRecord } from '@wordpress/core-data';
+import { select } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -31,19 +32,20 @@ const AdditionalInspectorControls = withFilters(
  * @since 1.0.0
  * @param {Object} props All the props passed to this function
  */
-function VisibilityInspectorControls( props ) {
+export default function VisibilityInspectorControls( props ) {
 	const {
 		attributes,
 		globallyRestricted,
 		name,
 		setAttributes,
-		settings,
-		variables,
 		widgetAreaRestricted,
 	} = props;
+	const { getBlocks } = select( 'core/block-editor' );
+	const settingsData = useEntityRecord( 'block-visibility/v1', 'settings' );
+	const variablesData = useEntityRecord( 'block-visibility/v1', 'variables' );
 
 	// Display a default panel with spinner when settings and variables are loading.
-	if ( settings === 'fetching' || variables === 'fetching' ) {
+	if ( ! settingsData.hasResolved || ! variablesData.hasResolved ) {
 		return (
 			<InspectorControls group="settings">
 				<div className="block-visibility__controls-panel">
@@ -57,6 +59,18 @@ function VisibilityInspectorControls( props ) {
 			</InspectorControls>
 		);
 	}
+
+	const settings = settingsData.record;
+
+	// Determine if we are in the Widget Editor (Not the best but all we got).
+	const widgetAreas = getBlocks().filter(
+		( block ) => block.name === 'core/widget-area'
+	);
+
+	const variables = {
+		...variablesData.record,
+		isWidgetEditor: widgetAreas.length > 0,
+	};
 
 	// There are a few core blocks that are not compatible either globally or
 	// specifically in the block-based Widget Editor.
@@ -146,36 +160,18 @@ function VisibilityInspectorControls( props ) {
 					setControlSetAtts={ setControlSetAtts }
 					enabledControls={ enabledControls }
 					defaultControls={ defaultControls }
+					settings={ settings }
+					variables={ variables }
 					{ ...props }
 				/>
 			</div>
 			<AdditionalInspectorControls
 				blockAtts={ blockAtts }
 				enabledControls={ enabledControls }
+				settings={ settings }
+				variables={ variables }
 				{ ...props }
 			/>
 		</InspectorControls>
 	);
 }
-
-export default withSelect( ( select ) => {
-	const { getEntityRecord } = select( 'core' );
-	const { getBlocks } = select( 'core/block-editor' );
-
-	const settings =
-		getEntityRecord( 'block-visibility/v1', 'settings' ) ?? 'fetching';
-	let variables =
-		getEntityRecord( 'block-visibility/v1', 'variables' ) ?? 'fetching';
-
-	// Determine if we are in the Widget Editor (Not the best but all we got).
-	const widgetAreas = getBlocks().filter(
-		( block ) => block.name === 'core/widget-area'
-	);
-
-	// If variables have been fetched, append the Widget Area flag.
-	if ( variables !== 'fetching' ) {
-		variables = { ...variables, isWidgetEditor: widgetAreas.length > 0 };
-	}
-
-	return { settings, variables };
-} )( VisibilityInspectorControls );
