@@ -195,6 +195,10 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 * Refactor away from `getEntityRecord` ([#77](https://github.com/ndiego/block-visibility/pull/77)).
 
+**Fixed**
+
+* Fix typo on `hide_on_restricted_users` variable ([#64](https://github.com/ndiego/block-visibility/pull/64)).
+
 = 3.0.4 - 2023-07-14 =
 
 **Fixed**
