@@ -189,6 +189,12 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ===
 
+= 3.1.0 = 2023-08-TBD =
+
+**Changed**
+
+* Refactor away from `getEntityRecord` ([#77](https://github.com/ndiego/block-visibility/pull/77)).
+
 = 3.0.4 - 2023-07-14 =
 
 **Fixed**
