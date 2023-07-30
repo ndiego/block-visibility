@@ -25,6 +25,7 @@ import {
 	ScreenSize,
 	UrlPath,
 	UserRole,
+	WooCommerce,
 	WPFusion,
 } from './../../controls';
 
@@ -140,6 +141,11 @@ export default function ControlSet( props ) {
 			<Slot name={ 'ControlSetControls-' + uniqueIndex } />
 
 			<ACF
+				{ ...props }
+				enabledControls={ enabledSetControls }
+				setControlAtts={ setControlAtts }
+			/>
+			<WooCommerce
 				{ ...props }
 				enabledControls={ enabledSetControls }
 				setControlAtts={ setControlAtts }

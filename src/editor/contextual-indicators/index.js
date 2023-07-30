@@ -25,6 +25,7 @@ import {
 	hasUrlPath,
 	hasUserRole,
 	hasVisibilityPresets,
+	hasWooCommerce,
 	hasWPFusion,
 } from './indicator-tests';
 import hasVisibilityControls from './../utils/has-visibility-controls';
@@ -133,6 +134,12 @@ function withContextualIndicators( BlockListBlock ) {
 			'visibility-presets': hasVisibilityPresets(
 				blockVisibility,
 				enabledControls
+			),
+			'woocommerce': hasWooCommerce(
+				controls,
+				hasControlSets,
+				enabledControls,
+				variables
 			),
 			'wp-fusion': hasWPFusion(
 				controls,

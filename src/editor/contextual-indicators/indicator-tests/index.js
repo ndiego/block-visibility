@@ -10,4 +10,5 @@ export { default as hasScreenSize } from './has-screen-size';
 export { default as hasUrlPath } from './has-url-path';
 export { default as hasUserRole } from './has-user-role';
 export { default as hasVisibilityPresets } from './has-visibility-presets';
+export { default as hasWooCommerce } from './has-woocommerce';
 export { default as hasWPFusion } from './has-wp-fusion';

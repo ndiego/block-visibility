@@ -89,6 +89,10 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 					'active' => function_exists( 'acf' ),
 					'fields' => self::get_acf_fields( $request_type ),
 				),
+				'woocommerce' => array(
+					'active'   => class_exists( 'woocommerce' ),
+					//'products' => get_woocommerce_products( $woo_enabled, $request_type ),
+				),
 				'wp_fusion' => array(
 					'active'         => function_exists( 'wp_fusion' ),
 					'tags'           => self::get_wp_fusion_tags( $request_type ),

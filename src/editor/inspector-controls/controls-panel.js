@@ -28,6 +28,7 @@ import {
 	UrlPath,
 	UserRole,
 	VisibilityPresets,
+	WooCommerce,
 	WPFusion,
 } from './../../controls';
 
@@ -103,6 +104,7 @@ export default function ControlsPanel( props ) {
 			<Slot name={ 'ControlSetControls-' + uniqueIndex } />
 
 			<ACF setControlAtts={ setControlAtts } { ...props } />
+			<WooCommerce setControlAtts={ setControlAtts } { ...props } />
 			<WPFusion setControlAtts={ setControlAtts } { ...props } />
 
 			<Slot name={ 'ControlSetControlsIntegrations-' + uniqueIndex } />

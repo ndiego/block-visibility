@@ -275,6 +275,10 @@
     .components-notice {
         margin: 18px 0 0;
 
+        &.no-products-notice {
+            margin-bottom: 18px;
+        }
+
         .components-notice__content {
             margin: 2px 0;
 
