@@ -51,6 +51,23 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_variables' ),
 					'permission_callback' => '__return_true', // Read only, so anyone can view.
+					'args'                => array(
+						'integration'  => array(
+							'type'        => 'string',
+							'description' => __( 'The integration to search.' ),
+							'required'    => false,
+						),
+						'search_term'  => array(
+							'type'        => 'string',
+							'description' => __( 'Search term.' ),
+							'required'    => false,
+						),
+						'saved_values' => array(
+							'type'        => 'string',
+							'description' => __( 'Saved values.' ),
+							'required'    => false,
+						),
+					),
 				),
 				'schema' => array( $this, 'get_public_item_schema' ),
 			)
@@ -67,6 +84,11 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 
 		$request_type = $request->get_param( 'type' );
 		$settings     = get_option( 'block_visibility_settings' );
+
+		// Get args.
+		$integration  = sanitize_text_field( $request['integration'] );
+		$search_term  = sanitize_text_field( $request['search_term'] );
+		$saved_values = sanitize_text_field( $request['saved_values'] );
 
 		if ( isset( $settings['plugin_settings']['enable_full_control_mode'] ) ) {
 			$is_full_control_mode = $settings['plugin_settings']['enable_full_control_mode'];
@@ -85,23 +107,40 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 			'is_pro'               => defined( 'BVP_VERSION' ), // If the Pro version constant is set, then Block Visibility Pro is active.
 			'current_users_roles'  => get_current_user_role(),
 			'integrations'         => array(
-				'acf'       => array(
+				'acf'         => array(
 					'active' => function_exists( 'acf' ),
-					'fields' => self::get_acf_fields( $request_type ),
+					'fields' => self::get_acf_fields(
+						$request_type,
+						$settings,
+						$integration
+					),
 				),
 				'woocommerce' => array(
 					'active'   => class_exists( 'woocommerce' ),
-					//'products' => get_woocommerce_products( $woo_enabled, $request_type ),
+					'products' => self::get_woocommerce_products(
+						$request_type,
+						$settings,
+						$integration,
+						$search_term,
+						$saved_values
+					),
 				),
-				'wp_fusion' => array(
+				'wp_fusion'   => array(
 					'active'         => function_exists( 'wp_fusion' ),
-					'tags'           => self::get_wp_fusion_tags( $request_type ),
+					'tags'           => self::get_wp_fusion_tags(
+						$request_type,
+						$settings,
+						$integration
+					),
 					'exclude_admins' => self::get_wp_fusion_exclude_admins(),
 				),
 			),
 		);
 
-		if ( 'simplified' !== $request_type ) {
+		if (
+			'simplified' !== $request_type &&
+			! $integration
+		) {
 			$variables['user_roles'] = get_user_roles();
 		}
 
@@ -204,11 +243,19 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 	/**
 	 * Fetch all available tags in ACF field groups and fields.
 	 *
-	 * @param string $request_type The request type.
+	 * @param string $request_type  The request type.
+	 * @param array  $settings      All plugin settings.
+	 * @param string $integration   The specific intregration variables being fetched, if any.
+	 *
 	 * @return array
 	 */
-	public static function get_acf_fields( $request_type ) {
-		if ( 'simplified' === $request_type ) {
+	public static function get_acf_fields( $request_type, $settings, $integration ) {
+
+		if (
+			'simplified' === $request_type ||
+			! self::is_integration_enabled( 'acf', $settings ) ||
+			$integration // ACF does not support search (yet).
+		) {
 			return array();
 		}
 
@@ -275,11 +322,18 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 	/**
 	 * Fetch all available tags in WP Fusion.
 	 *
-	 * @param string $request_type The request type.
+	 * @param string $request_type  The request type.
+	 * @param array  $settings      All plugin settings.
+	 * @param string $integration   The specific intregration variables being fetched, if any.
+	 *
 	 * @return array
 	 */
-	public static function get_wp_fusion_tags( $request_type ) {
-		if ( 'simplified' === $request_type ) {
+	public static function get_wp_fusion_tags( $request_type, $settings, $integration ) {
+		if (
+			'simplified' === $request_type ||
+			! self::is_integration_enabled( 'wp_fusion', $settings ) ||
+			$integration
+		) {
 			return array();
 		}
 
@@ -322,5 +376,114 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 		$exclude_admins = wp_fusion()->settings->get( 'exclude_admins' );
 
 		return $exclude_admins;
+	}
+
+	/**
+	 * WooCommerce: Fetch the available published products.
+	 *
+	 * @param string $request_type  The request type.
+	 * @param array  $settings      All plugin settings.
+	 * @param string $integration   The specific intregration variables being fetched, if any.
+	 * @param string $search_term   The term being searched for.
+	 * @param string $saved_values  Any currently saved values.
+	 *
+	 * @return array                All published products or those returned from search.
+	 */
+	public static function get_woocommerce_products( $request_type, $settings, $integration, $search_term, $saved_values ) {
+
+		if (
+			'simplified' === $request_type ||
+			! class_exists( 'woocommerce' ) ||
+			! function_exists( 'wc_get_products' ) ||
+			! self::is_integration_enabled( 'woocommerce', $settings ) ||
+			( $integration && 'woocommerce' !== $integration )
+		) {
+			return array();
+		}
+
+		$settings = get_option( 'block_visibility_settings' );
+
+		// Check to see if variable pricing is enabled.
+		if ( isset( $settings['visibility_controls']['woocommerce']['enable_variable_pricing'] ) ) {
+			$enable_variable_pricing = $settings['visibility_controls']['woocommerce']['enable_variable_pricing'];
+		} else {
+			$enable_variable_pricing = true;
+		}
+
+		$fetch_limit = 10;
+
+		$args = array(
+			'status'  => 'publish',
+			'limit'   => $fetch_limit,
+			'orderby' => 'name',
+			'order'   => 'ASC',
+		);
+
+		if ( $search_term && 'false' !== $search_term ) {
+			$args['s'] = $search_term;
+		}
+
+		// If there are saved values, make sure to return them.
+		if ( $saved_values ) {
+			$values = explode( ',', $saved_values );
+
+			// This modifies the original array.
+			foreach ( $values as &$product ) {
+				if ( is_string( $product ) && strpos( $product, '_' ) !== false ) {
+					$product = explode( '_', $product )[0];
+				}
+			}
+
+			$args['include'] = $values;
+
+			if ( count( $values ) > $fetch_limit ) {
+				$args['limit'] = count( $values );
+			}
+		}
+
+		$products_raw = wc_get_products( $args );
+		$products     = array();
+
+		foreach ( $products_raw as $product ) {
+			$data       = $product->get_data();
+			$products[] = array(
+				'value' => $data['id'],
+				'label' => $data['name'],
+			);
+
+			// If variable pricing is enabled and the product has variable prices,
+			// add those as well.
+			if ( $enable_variable_pricing & $product->is_type( 'variable' ) ) {
+				$variations = $product->get_children();
+
+				if ( ! empty( $variations ) ) {
+					foreach ( $variations as $variation ) {
+						$var_price_id     = $data['id'] . '_' . $variation;
+						$variation_object = wc_get_product( $variation );
+						$variation_data   = $variation_object->get_data();
+						$products[]       = array(
+							'value' => $var_price_id,
+							'label' => $variation_data['name'],
+						);
+					}
+				}
+			}
+		}
+
+		return $products;
+	}
+
+	/**
+	 * Check if a specific integration is enabled based on settings.
+	 *
+	 * @param string $integration The name or identifier of the integration to check.
+	 * @param array  $settings    An array of plugin settings.
+	 *
+	 * @return bool Whether the integration is enabled (true) or disabled (false).
+	 */
+	public static function is_integration_enabled( $integration, $settings ) {
+		return isset( $settings['visibility_controls'][ $integration ]['enable'] )
+			? $settings['visibility_controls'][ $integration ]['enable']
+			: true;
 	}
 }

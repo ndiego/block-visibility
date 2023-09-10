@@ -40,29 +40,26 @@ export function getFieldGroups() {
  * Get all available fields.
  *
  * @since 3.1.0
- * @param {Object} variables All plugin variables available via the REST API
- * @return {string}          All fields
+ * @return {string} All fields
  */
-export function getAllFields( variables ) {
-	const products = variables?.integrations?.woocommerce?.products ?? [];
-
-	const productsWithDynamic = [ // eslint-disable-line
-		{
-			value: 'dynamic',
-			label: __( 'Dynamic', 'block-visibility' ),
-			options: [
-				{
-					value: 'inherit',
-					label: __( 'Inherit Product', 'block-visibility' ),
-				},
-			],
-		},
-		{
-			value: 'specific',
-			label: __( 'Specific Product', 'block-visibility' ),
-			options: products,
-		},
-	];
+export function getAllFields() {
+	// const productsWithDynamic = [ // eslint-disable-line
+	// 	{
+	// 		value: 'dynamic',
+	// 		label: __( 'Dynamic', 'block-visibility' ),
+	// 		options: [
+	// 			{
+	// 				value: 'inherit',
+	// 				label: __( 'Inherit Product', 'block-visibility' ),
+	// 			},
+	// 		],
+	// 	},
+	// 	{
+	// 		value: 'specific',
+	// 		label: __( 'Specific Product', 'block-visibility' ),
+	// 		options: products,
+	// 	},
+	// ];
 
 	const valueOperators = [
 		{
@@ -144,14 +141,8 @@ export function getAllFields( variables ) {
 		},
 	];
 
-	const operatorPlaceholder = __(
-		'Select Condition…',
-		'block-visibility'
-	);
-	const orderTypePlaceholder = __(
-		'Select Order Type…',
-		'block-visibility'
-	);
+	const operatorPlaceholder = __( 'Select Condition…', 'block-visibility' );
+	const orderTypePlaceholder = __( 'Select Order Type…', 'block-visibility' );
 	const selectCategoryPlaceholder = __(
 		'Select Product Category…',
 		'block-visibility'
@@ -227,8 +218,7 @@ export function getAllFields( variables ) {
 							valueTypes: [
 								{
 									value: 'containsProducts',
-									valueType: 'multiSelect',
-									options: products,
+									valueType: 'wooProductsSelect',
 									placeholder: selectProductPlaceholder,
 								},
 								{
@@ -300,8 +290,7 @@ export function getAllFields( variables ) {
 				{
 					type: 'subField',
 					name: 'products',
-					valueType: 'multiSelect',
-					options: products,
+					valueType: 'wooProductsSelect',
 					placeholder: selectProductPlaceholder,
 				},
 				{
@@ -413,8 +402,7 @@ export function getAllFields( variables ) {
 				{
 					type: 'subField',
 					name: 'products',
-					valueType: 'multiSelect',
-					options: products,
+					valueType: 'wooProductsSelect',
 					placeholder: selectProductPlaceholder,
 				},
 				{
@@ -525,8 +513,7 @@ export function getAllFields( variables ) {
 				{
 					type: 'subField',
 					name: 'products',
-					valueType: 'multiSelect',
-					options: products,
+					valueType: 'wooProductsSelect',
 					placeholder: selectProductPlaceholder,
 				},
 				{
@@ -633,10 +620,7 @@ export function getAllFields( variables ) {
 					options: [
 						{
 							value: 'first',
-							label: __(
-								'First ordered',
-								'block-visibility'
-							),
+							label: __( 'First ordered', 'block-visibility' ),
 						},
 						{
 							value: 'last',
@@ -648,8 +632,7 @@ export function getAllFields( variables ) {
 				{
 					type: 'subField',
 					name: 'products',
-					valueType: 'multiSelect',
-					options: products,
+					valueType: 'wooProductsSelect',
 					placeholder: selectProductPlaceholder,
 				},
 				{
@@ -677,10 +660,7 @@ export function getAllFields( variables ) {
 					options: [
 						{
 							value: 'first',
-							label: __(
-								'First ordered',
-								'block-visibility'
-							),
+							label: __( 'First ordered', 'block-visibility' ),
 						},
 						{
 							value: 'last',
@@ -718,8 +698,7 @@ export function getAllFields( variables ) {
 				{
 					type: 'subField',
 					name: 'products',
-					valueType: 'select',
-					options: products,
+					valueType: 'wooProductSelect',
 					placeholder: selectProductPlaceholder,
 				},
 				{
@@ -732,17 +711,11 @@ export function getAllFields( variables ) {
 						},
 						{
 							value: 'outOfStock',
-							label: __(
-								'Is out of stock',
-								'block-visibility'
-							),
+							label: __( 'Is out of stock', 'block-visibility' ),
 						},
 						{
 							value: 'onBackorder',
-							label: __(
-								'Is on backorder',
-								'block-visibility'
-							),
+							label: __( 'Is on backorder', 'block-visibility' ),
 						},
 					],
 					placeholder: __(
@@ -759,8 +732,7 @@ export function getAllFields( variables ) {
 			fields: [
 				{
 					type: 'subField',
-					valueType: 'select',
-					options: products,
+					valueType: 'wooProductSelect',
 					placeholder: selectProductPlaceholder,
 				},
 				{
@@ -786,12 +758,11 @@ export function getAllFields( variables ) {
  * proper field groups.
  *
  * @since 3.1.0
- * @param {Object} variables All plugin variables available via the REST API
  * @return {string} All fields perpared in their respective field groups
  */
-export function getGroupedFields( variables ) {
+export function getGroupedFields() {
 	const groups = getFieldGroups();
-	const fields = getAllFields( variables );
+	const fields = getAllFields();
 	const preparedFields = [];
 
 	groups.forEach( ( group ) => {

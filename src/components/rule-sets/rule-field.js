@@ -17,6 +17,7 @@ import DateTime from '../date-time';
 import AuthorsSelect from './async-rule-fields/authors-select';
 import TermsSelect from './async-rule-fields/terms-select';
 import PostsSelect from './async-rule-fields/posts-select';
+import WooProductsSelect from './async-rule-fields/woo-products-select';
 
 /**
  * Render the individual rule fields.
@@ -210,6 +211,19 @@ export default function RuleField( props ) {
 				value={ value }
 				valueType={ valueType }
 				isMulti={ valueType === 'postsSelect' }
+				{ ...props }
+			/>
+		);
+	} else if (
+		valueType === 'wooProductsSelect' ||
+		valueType === 'wooProductSelect'
+	) {
+		return (
+			<WooProductsSelect
+				className={ className }
+				value={ value }
+				valueType={ valueType }
+				isMulti={ valueType === 'wooProductsSelect' }
 				{ ...props }
 			/>
 		);
