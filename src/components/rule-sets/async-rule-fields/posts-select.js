@@ -104,7 +104,7 @@ export default function PostsSelect( props ) {
 	// we need to fetch them directly. Saved values will likely not be
 	// in the default availablePosts array.
 	const { savedPosts, loadingSavedPosts } = useSelect( ( select ) => {
-		// Only fetch data if there are no saved values and no
+		// Only fetch data if there are saved values and no
 		// selected values. Otherwise return an empty array.
 		if ( value.length !== 0 && ! selectedValues ) {
 			const selectedQuery = {
