@@ -6,21 +6,14 @@
  * @since   3.1.0
  */
 
-namespace BlockVisibility\Frontend\VisibilityTests\WooCommerce;
+namespace BlockVisibility\Frontend\VisibilityTests;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * External dependencies
- */
-use function BlockVisibility\Utils\create_date_time as create_date_time;
-
-/**
  * Internal dependencies
  */
-use function BlockVisibility\Frontend\VisibilityTests\integer_value_compare as integer_value_compare;
-use function BlockVisibility\Frontend\VisibilityTests\date_value_compare as date_value_compare;
-use function BlockVisibility\Frontend\VisibilityTests\contains_value_compare as contains_value_compare;
+use function BlockVisibility\Utils\create_date_time as create_date_time;
 
 /**
  * Run the WooCommerce cart contents test.
@@ -255,7 +248,7 @@ function run_product_inventory_test( $rule ) {
 		return 'error';
 	}
 
-	$product = wc_get_product( (int) $rule['subField'] );
+	$product = wc_get_product( get_product_ID( $rule ) );
 
 	// If no product is retrieved, throw error.
 	if ( ! $product ) {
@@ -290,7 +283,7 @@ function run_product_quantity_in_stock_test( $rule ) {
 		return 'error';
 	}
 
-	$product = wc_get_product( (int) $rule['subField'] );
+	$product = wc_get_product( get_product_ID( $rule ) );
 
 	// If no product is retrieved, throw error.
 	if ( ! $product ) {

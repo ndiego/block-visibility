@@ -6,18 +6,14 @@
  * @since   3.1.0
  */
 
-namespace BlockVisibility\Frontend\VisibilityTests\WooCommerce;
+namespace BlockVisibility\Frontend\VisibilityTests;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * External dependencies
- */
-use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
-
-/**
  * Internal dependencies
  */
+use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/woocommerce/rule-tests.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/woocommerce/helper-functions.php';
 

@@ -218,12 +218,46 @@ export default function RuleField( props ) {
 		valueType === 'wooProductsSelect' ||
 		valueType === 'wooProductSelect'
 	) {
+		if ( valueType === 'wooProductSelect' ) {
+			const isDynamic = 'dynamicProduct' === value;
+			return (
+				<>
+					<ToggleControl
+						className={ className }
+						label={ __(
+							'Detect current product',
+							'block-visibility'
+						) }
+						checked={ isDynamic }
+						onChange={ () =>
+							handleRuleChange(
+								isDynamic ? '' : 'dynamicProduct',
+								valueType,
+								fieldType,
+								fieldName,
+								triggerReset
+							)
+						}
+					/>
+					{ ! isDynamic && (
+						<WooProductsSelect
+							className={ className }
+							value={ value }
+							valueType={ valueType }
+							isMulti={ false }
+							{ ...props }
+						/>
+					) }
+				</>
+			);
+		}
+
 		return (
 			<WooProductsSelect
 				className={ className }
 				value={ value }
 				valueType={ valueType }
-				isMulti={ valueType === 'wooProductsSelect' }
+				isMulti={ true }
 				{ ...props }
 			/>
 		);

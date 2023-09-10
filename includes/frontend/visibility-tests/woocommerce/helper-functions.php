@@ -6,12 +6,12 @@
  * @since   3.1.0
  */
 
-namespace BlockVisibility\Frontend\VisibilityTests\WooCommerce;
+namespace BlockVisibility\Frontend\VisibilityTests;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * External dependencies
+ * Internal dependencies
  */
 use function BlockVisibility\Utils\create_date_time as create_date_time;
 
@@ -359,4 +359,25 @@ function get_categories_by_payment_date( $payments, $order = 'first' ) {
 	}
 
 	return $cats_by_date;
+}
+
+/**
+ * Get the product ID based on a rule.
+ *
+ * @since 3.1.0
+ * 
+ * @param mixed $rule The rule used to determine the product ID.
+ *                    If 'dynamicProduct' is provided as the rule's 'subField',
+ *                    the current post's ID will be returned. Otherwise, an
+ *                    integer representing the 'subField' will be returned.
+ *
+ * @return int The product ID.
+ */
+function get_product_ID( $rule ) {
+	$product_ID = 
+		'dynamicProduct' === $rule['subField']
+			? get_the_ID()
+			: (int) $rule['subField'];
+	
+	return $product_ID;
 }
