@@ -72,7 +72,7 @@ export default function WooCommerce( props ) {
 	};
 
 	const groupedFields = getGroupedFields();
-	const allFields = getAllFields( variables );
+	const allFields = getAllFields();
 
 	return (
 		<div className="controls-panel-item woocommerce-control">
@@ -114,9 +114,9 @@ export default function WooCommerce( props ) {
 			) }
 			<div className="controls-panel-item__control-fields">
 				{ ! variables?.integrations?.woocommerce?.products && (
-					<Notice 
-						className="no-products-notice" 
-						status="warning" 
+					<Notice
+						className="no-products-notice"
+						status="warning"
 						isDismissible={ false }
 					>
 						{ __(

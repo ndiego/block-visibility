@@ -135,7 +135,7 @@ function withContextualIndicators( BlockListBlock ) {
 				blockVisibility,
 				enabledControls
 			),
-			'woocommerce': hasWooCommerce(
+			woocommerce: hasWooCommerce(
 				controls,
 				hasControlSets,
 				enabledControls,
