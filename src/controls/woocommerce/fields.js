@@ -43,24 +43,6 @@ export function getFieldGroups() {
  * @return {string} All fields
  */
 export function getAllFields() {
-	// const productsWithDynamic = [ // eslint-disable-line
-	// 	{
-	// 		value: 'dynamic',
-	// 		label: __( 'Dynamic', 'block-visibility' ),
-	// 		options: [
-	// 			{
-	// 				value: 'inherit',
-	// 				label: __( 'Inherit Product', 'block-visibility' ),
-	// 			},
-	// 		],
-	// 	},
-	// 	{
-	// 		value: 'specific',
-	// 		label: __( 'Specific Product', 'block-visibility' ),
-	// 		options: products,
-	// 	},
-	// ];
-
 	const valueOperators = [
 		{
 			value: 'equal',
