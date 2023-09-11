@@ -161,13 +161,28 @@ registerPlugin( 'block-visibility-toolbar-options-hide-block', {
 } );
 
 /**
- * Add the visibility presets manager button to Block Editor more menu.
+ * Toggle the Preset Manager.
+ *
+ * Adds a sidebar button in the Post Editor and a Command Palette command.
  */
-function PresetManagerButton() {
+function TogglePresetManager() {
 	const [ isModalOpen, setModalOpen ] = useState( false );
 	const variablesData = useEntityRecord( 'block-visibility/v1', 'variables' );
 	const roles = variablesData?.record?.current_users_roles ?? [];
 	let canEdit = false;
+
+	// Allow the Command Palette to open the Preset Manager.
+	// Check for wp.commands and disable functionality in <6.3.
+	// @TODO remove check when minimum version bumped to 6.3+.
+	if ( wp.commands !== undefined ) {
+		wp.commands.useCommand( {
+			name: 'manage-visibility-presets',
+			label: __( 'Manage Visibility Presets', 'block-visibility' ),
+			icon: visibilityAlt,
+			callback: () => setModalOpen( true ),
+			context: 'block-editor',
+		} );
+	}
 
 	// While roles should always be an array, double check.
 	if ( Array.isArray( roles ) ) {
@@ -216,7 +231,7 @@ function PresetManagerButton() {
 }
 
 registerPlugin( 'block-visibility-preset-manager', {
-	render: PresetManagerButton,
+	render: TogglePresetManager,
 } );
 
 // Unregister the presets button added by the Pro add-on.
