@@ -193,7 +193,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 **Added**
 
-* [Woocommerce] Added Woocommerce visibility control.
+* [Woocommerce] Added the [WooCommerce](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-woocommerce-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
 
 **Changed**
 
