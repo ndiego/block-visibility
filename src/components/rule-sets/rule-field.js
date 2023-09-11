@@ -17,6 +17,7 @@ import DateTime from '../date-time';
 import AuthorsSelect from './async-rule-fields/authors-select';
 import TermsSelect from './async-rule-fields/terms-select';
 import PostsSelect from './async-rule-fields/posts-select';
+import WooProductsSelect from './async-rule-fields/woo-products-select';
 
 /**
  * Render the individual rule fields.
@@ -210,6 +211,53 @@ export default function RuleField( props ) {
 				value={ value }
 				valueType={ valueType }
 				isMulti={ valueType === 'postsSelect' }
+				{ ...props }
+			/>
+		);
+	} else if (
+		valueType === 'wooProductsSelect' ||
+		valueType === 'wooProductSelect'
+	) {
+		if ( valueType === 'wooProductSelect' ) {
+			const isDynamic = 'dynamicProduct' === value;
+			return (
+				<>
+					<ToggleControl
+						className={ className }
+						label={ __(
+							'Detect current product',
+							'block-visibility'
+						) }
+						checked={ isDynamic }
+						onChange={ () =>
+							handleRuleChange(
+								isDynamic ? '' : 'dynamicProduct',
+								valueType,
+								fieldType,
+								fieldName,
+								triggerReset
+							)
+						}
+					/>
+					{ ! isDynamic && (
+						<WooProductsSelect
+							className={ className }
+							value={ value }
+							valueType={ valueType }
+							isMulti={ false }
+							{ ...props }
+						/>
+					) }
+				</>
+			);
+		}
+
+		return (
+			<WooProductsSelect
+				className={ className }
+				value={ value }
+				valueType={ valueType }
+				isMulti={ true }
 				{ ...props }
 			/>
 		);

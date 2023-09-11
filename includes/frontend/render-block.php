@@ -320,6 +320,7 @@ require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/scre
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/url-path.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/user-role.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/visibility-presets.php';
+require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/woocommerce/woocommerce.php';
 
 // Run our integration tests.
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/acf.php';

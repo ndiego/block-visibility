@@ -319,6 +319,17 @@ function register_settings() {
 			'acf'                => array(
 				'enable' => true,
 			),
+			'woocommerce'        => array(
+				'type'       => 'object',
+				'properties' => array(
+					'enable'                  => array(
+						'type' => 'boolean',
+					),
+					'enable_variable_pricing' => array(
+						'type' => 'boolean',
+					),
+				),
+			),
 			'wp_fusion'          => array(
 				'enable' => true,
 			),

@@ -11,4 +11,5 @@ export { default as UrlPath } from './url-path';
 export { default as ScreenSize } from './screen-size';
 export { default as UserRole } from './user-role';
 export { default as VisibilityPresets } from './visibility-presets';
+export { default as WooCommerce } from './woocommerce';
 export { default as WPFusion } from './wp-fusion';

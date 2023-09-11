@@ -12,7 +12,7 @@ import { applyFilters } from '@wordpress/hooks';
 /**
  * Internal dependencies
  */
-import { acf, wpFusion } from './icons';
+import { acf, woocommerce, wpFusion } from './icons';
 
 /**
  * All the available controls in Block Visibility.
@@ -91,6 +91,13 @@ export function getControls() {
 			attributeSlug: 'acf',
 			settingSlug: 'acf',
 			icon: acf,
+		},
+		{
+			label: __( 'WooCommerce', 'block-visibility' ),
+			type: 'integration',
+			attributeSlug: 'woocommerce',
+			settingSlug: 'woocommerce',
+			icon: woocommerce,
 		},
 		{
 			label: __( 'WP Fusion', 'block-visibility' ),
