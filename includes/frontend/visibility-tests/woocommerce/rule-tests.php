@@ -14,9 +14,9 @@ defined( 'ABSPATH' ) || exit;
  * Internal dependencies
  */
 use function BlockVisibility\Utils\create_date_time;
-use function BlockVisibilityPro\Frontend\VisibilityTests\integer_value_compare;
-use function BlockVisibilityPro\Frontend\VisibilityTests\date_value_compare;
-use function BlockVisibilityPro\Frontend\VisibilityTests\contains_value_compare;
+use function BlockVisibility\Frontend\VisibilityTests\integer_value_compare;
+use function BlockVisibility\Frontend\VisibilityTests\date_value_compare;
+use function BlockVisibility\Frontend\VisibilityTests\contains_value_compare;
 
 /**
  * Run the WooCommerce cart contents test.
