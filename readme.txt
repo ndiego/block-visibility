@@ -102,9 +102,9 @@ Block Visibility is designed to work with **any** block and is tested with these
 
 **Compatibility + Direct Integration**
 
+* WooCommerce
 * Advanced Custom Fields
 * WP Fusion
-* WooCommerce _(Integration coming soon)_
 * Easy Digital Downloads _(Integration coming soon)_
 
 **Compatibility**
@@ -189,15 +189,19 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ===
 
-= 3.1.0 = 2023-08-TBD =
+= 3.1.0 = 2023-09-TBD =
+
+**Added**
+
+* [Woocommerce] Added Woocommerce visibility control.
 
 **Changed**
 
-* Refactor away from `getEntityRecord` ([#77](https://github.com/ndiego/block-visibility/pull/77)).
+* Refactored away from `getEntityRecord` ([#77](https://github.com/ndiego/block-visibility/pull/77)).
 
 **Fixed**
 
-* Fix typo on `hide_on_restricted_users` variable ([#64](https://github.com/ndiego/block-visibility/pull/64)).
+* Fixed typo on `hide_on_restricted_users` variable ([#64](https://github.com/ndiego/block-visibility/pull/64)).
 
 = 3.0.4 - 2023-07-14 =
 
