@@ -1,5 +1,6 @@
 @import './common';
-@import './react-select';
+@import './components/react-select';
+@import './components/date-time';
 
 // Visibility controls panel styles.
 .block-visibility__controls-panel {
@@ -735,6 +736,14 @@
             margin-bottom: 18px;
         }
     }
+
+    // Specific styles for the Woo and EDD controls.
+    .woocommerce-control,
+	.edd-control {
+		.components-notice {
+			margin-bottom: 16px;
+		}
+	}
 }
 
 // Date/Time calendar popover styles.

@@ -18,6 +18,7 @@ import {
 	BrowserDevice,
 	Cookie,
 	DateTime,
+	EDD,
 	Location,
 	Metadata,
 	QueryString,
@@ -141,6 +142,11 @@ export default function ControlSet( props ) {
 			<Slot name={ 'ControlSetControls-' + uniqueIndex } />
 
 			<ACF
+				{ ...props }
+				enabledControls={ enabledSetControls }
+				setControlAtts={ setControlAtts }
+			/>
+			<EDD
 				{ ...props }
 				enabledControls={ enabledSetControls }
 				setControlAtts={ setControlAtts }

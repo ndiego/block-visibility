@@ -14,9 +14,9 @@ import { addQueryArgs } from '@wordpress/url';
 import apiFetch from '@wordpress/api-fetch';
 
 /**
- * Render an authors select field.
+ * Render an products select field.
  *
- * @since 3.0.0
+ * @since 3.1.0
  * @param {Object} props All the props passed to this function
  */
 export default function WooProductsSelect( props ) {

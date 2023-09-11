@@ -6,7 +6,7 @@
  * @since   3.1.0
  */
 
-namespace BlockVisibility\Frontend\VisibilityTests\WooCommerce;
+namespace BlockVisibility\Frontend\VisibilityTests\EDD;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -19,7 +19,7 @@ use function BlockVisibilityPro\Frontend\VisibilityTests\date_value_compare;
 use function BlockVisibilityPro\Frontend\VisibilityTests\contains_value_compare;
 
 /**
- * Run the WooCommerce cart contents test.
+ * Run the Easy Digital Downloads cart contents test.
  *
  * @since 3.1.0
  *
@@ -48,32 +48,35 @@ function run_cart_contents_test( $rule ) {
 
 		$test_result = 0 < count( $cart_products ) ? 'visible' : 'hidden';
 
-	} elseif (
-		isset( $rule['operator'] ) &&
-		isset( $rule['value'] ) &&
-		! empty( $rule['value'] ) &&
-		is_array( $rule['value'] )
-	) {
+	} else {
 
-		if ( 'containsProducts' === $sub_field ) {
-			$results = array();
+		if (
+			isset( $rule['operator'] ) &&
+			isset( $rule['value'] ) &&
+			! empty( $rule['value'] ) &&
+			is_array( $rule['value'] )
+		) {
 
-			// Loop through selected products.
-			foreach ( $rule['value'] as $product ) {
-				$results[] = array_key_exists( $product, $cart_products ) ? 'true' : 'false';
+			if ( 'containsProducts' === $sub_field ) {
+				$results = array();
+
+				// Loop through selected products.
+				foreach ( $rule['value'] as $product ) {
+					$results[] = array_key_exists( $product, $cart_products ) ? 'true' : 'false';
+				}
+
+				$test_result = contains_value_compare( $rule['operator'], $results );
+
+			} elseif ( 'containsCategories' === $sub_field ) {
+				$results = array();
+
+				// Loop through selected categories.
+				foreach ( $rule['value'] as $category ) {
+					$results[] = array_key_exists( $category, $cart_categories ) ? 'true' : 'false';
+				}
+
+				$test_result = contains_value_compare( $rule['operator'], $results );
 			}
-
-			$test_result = contains_value_compare( $rule['operator'], $results );
-
-		} elseif ( 'containsCategories' === $sub_field ) {
-			$results = array();
-
-			// Loop through selected categories.
-			foreach ( $rule['value'] as $category ) {
-				$results[] = array_key_exists( $category, $cart_categories ) ? 'true' : 'false';
-			}
-
-			$test_result = contains_value_compare( $rule['operator'], $results );
 		}
 	}
 
@@ -81,7 +84,7 @@ function run_cart_contents_test( $rule ) {
 }
 
 /**
- * Run the WooCommerce cart total test.
+ * Run the Easy Digital Downloads cart total test.
  *
  * @since 3.1.0
  *
@@ -94,19 +97,19 @@ function run_cart_total_quantity_test( $rule ) {
 		return 'error';
 	}
 
-	// The WooCommerce functions are not available, so throw error.
-	if ( ! function_exists( 'WC' ) || ! class_exists( 'woocommerce' ) || ! isset( WC()->cart ) ) {
+	// The required functions are not available, so throw error.
+	if ( ! function_exists( 'edd_get_cart_quantity' ) ) {
 		return 'error';
 	}
 
-	$contents_count = WC()->cart->get_cart_contents_count();
-	$test_result    = integer_value_compare( $rule['operator'], $rule['value'], $contents_count );
+	$cart_quantity = edd_get_cart_quantity();
+	$test_result   = integer_value_compare( $rule['operator'], $rule['value'], $cart_quantity );
 
 	return $test_result ? 'visible' : 'hidden';
 }
 
 /**
- * Run the WooCommerce cart value test.
+ * Run the Easy Digital Downloads cart total test.
  *
  * @since 3.1.0
  *
@@ -119,19 +122,19 @@ function run_cart_total_value_test( $rule ) {
 		return 'error';
 	}
 
-	// The WooCommerce functions are not available, so throw error.
-	if ( ! function_exists( 'WC' ) || ! class_exists( 'woocommerce' ) || ! isset( WC()->cart ) ) {
+	// The required functions are not available, so throw error.
+	if ( ! function_exists( 'edd_get_cart_total' ) ) {
 		return 'error';
 	}
 
-	$cart_total  = WC()->cart->get_cart_contents_total();
+	$cart_total  = edd_get_cart_total();
 	$test_result = integer_value_compare( $rule['operator'], $rule['value'], $cart_total );
 
 	return $test_result ? 'visible' : 'hidden';
 }
 
 /**
- * Run the WooCommerce quantity of product in cart test.
+ * Run the Easy Digital Downloads quantity of product in cart test.
  *
  * @since 3.1.0
  *
@@ -160,6 +163,7 @@ function run_cart_product_quantity_test( $rule, $test_param ) {
 		$results = array();
 
 		foreach ( $sub_field as $field ) {
+
 			if ( $field && array_key_exists( $field, $products ) ) {
 				$qty_ordered = $products[ $field ][ $test_param ];
 			} else {
@@ -180,11 +184,11 @@ function run_cart_product_quantity_test( $rule, $test_param ) {
 }
 
 /**
- * Run the WooCommerce quantity of categories in cart test.
+ * Run the Easy Digital Downloads quantity of categories in cart test.
  *
  * @since 3.1.0
  *
- * @param array  $rule       All rule settings.
+ * @param array  $rule        All rule settings.
  * @param string $test_param The parameter to test, currently support: 'quantity', 'total'.
  * @return string            Returns 'visible', 'hidden', or 'error'.
  */
@@ -230,83 +234,7 @@ function run_cart_category_quantity_test( $rule, $test_param ) {
 }
 
 /**
- * Run the WooCommerce product inventory test.
- *
- * @since 3.1.0
- *
- * @param array $rule All rule settings.
- * @return string     Returns 'visible', 'hidden', or 'error'.
- */
-function run_product_inventory_test( $rule ) {
-
-	if ( ! isset( $rule['subField'] ) || ! isset( $rule['value'] ) ) {
-		return 'error';
-	}
-
-	// The WooCommerce function is not available, so throw error.
-	if ( ! function_exists( 'wc_get_product' ) ) {
-		return 'error';
-	}
-
-	$product = wc_get_product( get_product_id( $rule ) );
-
-	// If no product is retrieved, throw error.
-	if ( ! $product ) {
-		return 'error';
-	}
-
-	$stock_status = $product->get_stock_status();
-
-	return strtolower( $rule['value'] ) === $stock_status ? 'visible' : 'hidden';
-}
-
-/**
- * Run the WooCommerce quantity of product in stock test.
- *
- * @since 3.1.0
- *
- * @param array $rule All rule settings.
- * @return string     Returns 'visible', 'hidden', or 'error'.
- */
-function run_product_quantity_in_stock_test( $rule ) {
-
-	if (
-		! isset( $rule['subField'] ) ||
-		! isset( $rule['operator'] ) ||
-		! isset( $rule['value'] )
-	) {
-		return 'error';
-	}
-
-	// The WooCommerce function is not available, so throw error.
-	if ( ! function_exists( 'wc_get_product' ) ) {
-		return 'error';
-	}
-
-	$product = wc_get_product( get_product_id( $rule ) );
-
-	// If no product is retrieved, throw error.
-	if ( ! $product ) {
-		return 'error';
-	}
-
-	$manage_stock = $product->get_stock_quantity();
-
-	// If the product does not have manage stock enabled, throw an error. Block
-	// will be shown unless other controls apply.
-	if ( ! $manage_stock ) {
-		return 'error';
-	}
-
-	$stock       = $product->get_stock_quantity();
-	$stock       = $stock ? $stock : 0; // If no stock is entered, assume zero.
-	$test_result = integer_value_compare( $rule['operator'], $rule['value'], $stock );
-
-	return $test_result ? 'visible' : 'hidden';
-}
-
-/**
- * Run the WooCommerce customer total spent test.
+ * Run the Easy Digital Downloads customer total spent test.
  *
  * @since 3.1.0
  *
@@ -319,8 +247,8 @@ function run_customer_total_spent_test( $rule ) {
 		return 'error';
 	}
 
-	// The WooCommerce function is not available, so throw error.
-	if ( ! function_exists( 'wc_get_customer_total_spent' ) ) {
+	// The required functions are not available, so throw error.
+	if ( ! function_exists( 'edd_purchase_total_of_user' ) ) {
 		return 'error';
 	}
 
@@ -329,14 +257,18 @@ function run_customer_total_spent_test( $rule ) {
 		return 'hidden';
 	}
 
-	$total_spend = wc_get_customer_total_spent( get_current_user_id() );
-	$test_result = integer_value_compare( $rule['operator'], $rule['value'], $total_spend );
+	$total_spent = edd_purchase_total_of_user( get_current_user_id() );
+	$test_result = integer_value_compare(
+		$rule['operator'],
+		$rule['value'],
+		$total_spent
+	);
 
 	return $test_result ? 'visible' : 'hidden';
 }
 
 /**
- * Run the WooCommerce customer total orders test.
+ * Run the Easy Digital Downloads customer total orders test.
  *
  * @since 3.1.0
  *
@@ -349,8 +281,8 @@ function run_customer_total_orders_test( $rule ) {
 		return 'error';
 	}
 
-	// The WooCommerce functions is not available, so throw error.
-	if ( ! function_exists( 'wc_get_orders' ) ) {
+	// The required functions are not available, so throw error.
+	if ( ! function_exists( 'edd_count_purchases_of_customer' ) ) {
 		return 'error';
 	}
 
@@ -359,28 +291,18 @@ function run_customer_total_orders_test( $rule ) {
 		return 'hidden';
 	}
 
-	$orders =
-		wc_get_orders(
-			array(
-				'customer_id' => get_current_user_id(),
-				'status'      => array( 'wc-completed' ),
-			)
-		);
-
-	$qty_orders = 0;
-
-	if ( ! empty( $orders ) && is_array( $orders ) ) {
-		$qty_orders = count( $orders );
-	}
-
-	$test_result =
-		integer_value_compare( $rule['operator'], $rule['value'], $qty_orders );
+	$orders      = edd_count_purchases_of_customer( get_current_user_id() );
+	$test_result = integer_value_compare(
+		$rule['operator'],
+		$rule['value'],
+		$orders
+	);
 
 	return $test_result ? 'visible' : 'hidden';
 }
 
 /**
- * Run the WooCommerce customer average order value test.
+ * Run the Easy Digital Downloads customer average order value test.
  *
  * @since 3.1.0
  *
@@ -393,10 +315,10 @@ function run_customer_average_order_value_test( $rule ) {
 		return 'error';
 	}
 
-	// The WooCommerce functions are not available, so throw error.
+	// The required functions are not available, so throw error.
 	if (
-		! function_exists( 'wc_get_customer_total_spent' ) ||
-		! function_exists( 'wc_get_orders' )
+		! function_exists( 'edd_count_purchases_of_customer' ) ||
+		! function_exists( 'edd_purchase_total_of_user' )
 	) {
 		return 'error';
 	}
@@ -406,34 +328,30 @@ function run_customer_average_order_value_test( $rule ) {
 		return 'hidden';
 	}
 
-	$total_spend = wc_get_customer_total_spent( get_current_user_id() );
-	$orders      =
-		wc_get_orders(
-			array(
-				'customer_id' => get_current_user_id(),
-				'status'      => array( 'wc-completed' ),
-			)
-		);
-
+	$total_spent         = edd_purchase_total_of_user( get_current_user_id() );
+	$orders              = edd_count_purchases_of_customer( get_current_user_id() );
 	$average_order_value = 0;
 
-	if ( ! empty( $orders ) && is_array( $orders ) ) {
-		$average_order_value = (float) $total_spend / count( $orders );
+	if ( 0 < $total_spent && 0 < $orders ) {
+		$average_order_value = $total_spent / $orders;
 	}
 
-	$test_result =
-		integer_value_compare( $rule['operator'], $rule['value'], $average_order_value );
+	$test_result = integer_value_compare(
+		$rule['operator'],
+		$rule['value'],
+		$average_order_value
+	);
 
 	return $test_result ? 'visible' : 'hidden';
 }
 
 /**
- * Run the WooCommerce customer quantity of product ordered test.
+ * Run the Easy Digital Downloads customer average order value test.
  *
  * @since 3.1.0
  *
- * @param array  $rule        All rule settings.
- * @param string $test_param The parameter to test, currently support: 'quantity', 'total'.
+ * @param array  $rule       All rule settings.
+ * @param string $test_param The parameter to test, currently supports: 'quantity'.
  * @return string            Returns 'visible', 'hidden', or 'error'.
  */
 function run_customer_quantity_product_ordered_test( $rule, $test_param ) {
@@ -447,34 +365,27 @@ function run_customer_quantity_product_ordered_test( $rule, $test_param ) {
 		return 'error';
 	}
 
-	// The WooCommerce functions is not available, so throw error.
-	if ( ! function_exists( 'wc_get_orders' ) ) {
-		return 'error';
-	}
-
 	// If the user is not logged-in and this rule is set, hide the block.
 	if ( ! is_user_logged_in() ) {
 		return 'hidden';
 	}
 
+	$sub_field = $rule['subField'];
+	$products  = get_product_information_from_orders( get_current_user_id() );
+
+	// An error has been encountered.
+	if ( 'error' === $products ) {
+		return 'error';
+	}
+
 	// Assume error and try to disprove.
 	$test_result = 'error';
-
-	$orders =
-		wc_get_orders(
-			array(
-				'customer_id' => get_current_user_id(),
-				'status'      => array( 'wc-completed' ),
-			)
-		);
-
-	$sub_field = $rule['subField'];
-	$products  = get_product_information_from_orders( $orders );
 
 	if ( ! empty( $sub_field ) && is_array( $sub_field ) ) {
 		$results = array();
 
 		foreach ( $sub_field as $field ) {
+
 			if ( $field && array_key_exists( $field, $products ) ) {
 				$qty_ordered = $products[ $field ][ $test_param ];
 			} else {
@@ -495,12 +406,12 @@ function run_customer_quantity_product_ordered_test( $rule, $test_param ) {
 }
 
 /**
- * Run the WooCommerce customer quantity of category ordered test.
+ * Run the Easy Digital Downloads customer quantity of product ordered test.
  *
  * @since 3.1.0
  *
- * @param array  $rule        All rule settings.
- * @param string $test_param The parameter to test, currently support: 'quantity', 'total'.
+ * @param array  $rule       All rule settings.
+ * @param string $test_param The parameter to test, currently supports: 'quantity'.
  * @return string            Returns 'visible', 'hidden', or 'error'.
  */
 function run_customer_quantity_category_ordered_test( $rule, $test_param ) {
@@ -514,35 +425,23 @@ function run_customer_quantity_category_ordered_test( $rule, $test_param ) {
 		return 'error';
 	}
 
-	// The WooCommerce functions is not available, so throw error.
-	if ( ! function_exists( 'wc_get_orders' ) ) {
-		return 'error';
-	}
-
 	// If the user is not logged-in and this rule is set, hide the block.
 	if ( ! is_user_logged_in() ) {
 		return 'hidden';
 	}
 
+	$sub_field  = $rule['subField'];
+	$products   = get_product_information_from_orders( get_current_user_id() );
+	$categories = get_category_information_from_products( $products );
+
 	// Assume error and try to disprove.
 	$test_result = 'error';
-
-	$orders =
-		wc_get_orders(
-			array(
-				'customer_id' => get_current_user_id(),
-				'status'      => array( 'wc-completed' ),
-			)
-		);
-
-	$sub_field  = $rule['subField'];
-	$products   = get_product_information_from_orders( $orders );
-	$categories = get_category_information_from_products( $products );
 
 	if ( ! empty( $sub_field ) && is_array( $sub_field ) ) {
 		$results = array();
 
 		foreach ( $sub_field as $field ) {
+
 			if ( $field && array_key_exists( $field, $categories ) ) {
 				$qty_ordered = $categories[ $field ][ $test_param ];
 			} else {
@@ -563,7 +462,7 @@ function run_customer_quantity_category_ordered_test( $rule, $test_param ) {
 }
 
 /**
- * Run the WooCommerce customer time since last order test.
+ * Run the Easy Digital Downloads customer time since last order test.
  *
  * @since 1.2.0
  *
@@ -588,7 +487,7 @@ function run_customer_time_since_order_test( $rule ) {
 		return 'error';
 	}
 
-	$payments = get_payments_by_date();
+	$payments = get_payments_by_date( get_current_user_id() );
 
 	// If the user hasn't ordered products, fail the test.
 	if ( empty( $payments ) ) {
@@ -617,7 +516,7 @@ function run_customer_time_since_order_test( $rule ) {
 }
 
 /**
- * Run the WooCommerce customer time since product ordered test.
+ * Run the Easy Digital Downloads customer time since product ordered test.
  *
  * @since 1.2.0
  *
@@ -695,7 +594,7 @@ function run_customer_time_since_product_ordered_test( $rule ) {
 }
 
 /**
- * Run the WooCommerce customer time since category ordered test.
+ * Run the Easy Digital Downloads customer time since category ordered test.
  *
  * @since 1.2.0
  *
@@ -772,7 +671,7 @@ function run_customer_time_since_category_ordered_test( $rule ) {
 }
 
 /**
- * Run the WooCommerce customer date of order test.
+ * Run the Easy Digital Downloads customer date of order test.
  *
  * @since 1.2.0
  *
@@ -825,7 +724,7 @@ function run_customer_date_of_order_test( $rule ) {
 }
 
 /**
- * Run the WooCommerce customer date of product ordered test.
+ * Run the Easy Digital Downloads customer date of product ordered test.
  *
  * @since 1.2.0
  *
@@ -899,7 +798,7 @@ function run_customer_date_of_product_ordered_test( $rule ) {
 }
 
 /**
- * Run the WooCommerce customer date of category ordered test.
+ * Run the Easy Digital Downloads customer date of category ordered test.
  *
  * @since 1.2.0
  *
