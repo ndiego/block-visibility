@@ -200,7 +200,7 @@ export function getAllFields() {
 							valueTypes: [
 								{
 									value: 'containsProducts',
-									valueType: 'wooProductsSelect',
+									valueType: 'productsSelect',
 									placeholder: selectProductPlaceholder,
 								},
 								{
@@ -272,7 +272,7 @@ export function getAllFields() {
 				{
 					type: 'subField',
 					name: 'products',
-					valueType: 'wooProductsSelect',
+					valueType: 'productsSelect',
 					placeholder: selectProductPlaceholder,
 				},
 				{
@@ -384,7 +384,7 @@ export function getAllFields() {
 				{
 					type: 'subField',
 					name: 'products',
-					valueType: 'wooProductsSelect',
+					valueType: 'productsSelect',
 					placeholder: selectProductPlaceholder,
 				},
 				{
@@ -495,7 +495,7 @@ export function getAllFields() {
 				{
 					type: 'subField',
 					name: 'products',
-					valueType: 'wooProductsSelect',
+					valueType: 'productsSelect',
 					placeholder: selectProductPlaceholder,
 				},
 				{
@@ -614,7 +614,7 @@ export function getAllFields() {
 				{
 					type: 'subField',
 					name: 'products',
-					valueType: 'wooProductsSelect',
+					valueType: 'productsSelect',
 					placeholder: selectProductPlaceholder,
 				},
 				{
@@ -680,7 +680,7 @@ export function getAllFields() {
 				{
 					type: 'subField',
 					name: 'products',
-					valueType: 'wooProductSelect',
+					valueType: 'productSelect',
 					placeholder: selectProductPlaceholder,
 				},
 				{
@@ -714,7 +714,7 @@ export function getAllFields() {
 			fields: [
 				{
 					type: 'subField',
-					valueType: 'wooProductSelect',
+					valueType: 'productSelect',
 					placeholder: selectProductPlaceholder,
 				},
 				{

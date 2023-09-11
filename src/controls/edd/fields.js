@@ -40,12 +40,9 @@ export function getFieldGroups() {
  * Get all available fields.
  *
  * @since 3.1.0
- * @param {Object} variables All plugin variables available via the REST API
- * @return {string}          All fields
+ * @return {string} All fields
  */
-export function getAllFields( variables ) {
-	const products = variables?.integrations?.edd?.products ?? [];
-
+export function getAllFields() {
 	const valueOperators = [
 		{
 			value: 'equal',
@@ -126,14 +123,8 @@ export function getAllFields( variables ) {
 		},
 	];
 
-	const operatorPlaceholder = __(
-		'Select Condition…',
-		'block-visibility'
-	);
-	const orderTypePlaceholder = __(
-		'Select Order Type…',
-		'block-visibility'
-	);
+	const operatorPlaceholder = __( 'Select Condition…', 'block-visibility' );
+	const orderTypePlaceholder = __( 'Select Order Type…', 'block-visibility' );
 	const selectCategoryPlaceholder = __(
 		'Select Product Category…',
 		'block-visibility'
@@ -209,8 +200,7 @@ export function getAllFields( variables ) {
 							valueTypes: [
 								{
 									value: 'containsProducts',
-									valueType: 'multiSelect',
-									options: products,
+									valueType: 'productsSelect',
 									placeholder: selectProductPlaceholder,
 								},
 								{
@@ -282,8 +272,7 @@ export function getAllFields( variables ) {
 				{
 					type: 'subField',
 					name: 'products',
-					valueType: 'multiSelect',
-					options: products,
+					valueType: 'productsSelect',
 					placeholder: selectProductPlaceholder,
 				},
 				{
@@ -395,8 +384,7 @@ export function getAllFields( variables ) {
 				{
 					type: 'subField',
 					name: 'products',
-					valueType: 'multiSelect',
-					options: products,
+					valueType: 'productsSelect',
 					placeholder: selectProductPlaceholder,
 				},
 				{
@@ -507,8 +495,7 @@ export function getAllFields( variables ) {
 				{
 					type: 'subField',
 					name: 'products',
-					valueType: 'multiSelect',
-					options: products,
+					valueType: 'productsSelect',
 					placeholder: selectProductPlaceholder,
 				},
 				{
@@ -615,10 +602,7 @@ export function getAllFields( variables ) {
 					options: [
 						{
 							value: 'first',
-							label: __(
-								'First ordered',
-								'block-visibility'
-							),
+							label: __( 'First ordered', 'block-visibility' ),
 						},
 						{
 							value: 'last',
@@ -630,8 +614,7 @@ export function getAllFields( variables ) {
 				{
 					type: 'subField',
 					name: 'products',
-					valueType: 'multiSelect',
-					options: products,
+					valueType: 'productsSelect',
 					placeholder: selectProductPlaceholder,
 				},
 				{
@@ -659,10 +642,7 @@ export function getAllFields( variables ) {
 					options: [
 						{
 							value: 'first',
-							label: __(
-								'First ordered',
-								'block-visibility'
-							),
+							label: __( 'First ordered', 'block-visibility' ),
 						},
 						{
 							value: 'last',
@@ -701,12 +681,11 @@ export function getAllFields( variables ) {
  * proper field groups.
  *
  * @since 3.1.0
- * @param {Object} variables All plugin variables available via the REST API
  * @return {string} All fields perpared in their respective field groups
  */
-export function getGroupedFields( variables ) {
+export function getGroupedFields() {
 	const groups = getFieldGroups();
-	const fields = getAllFields( variables );
+	const fields = getAllFields();
 	const preparedFields = [];
 
 	groups.forEach( ( group ) => {

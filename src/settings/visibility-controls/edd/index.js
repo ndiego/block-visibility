@@ -56,10 +56,7 @@ export default function EDD( props ) {
 			<div className="settings-panel__header">
 				<span className="settings-panel__header-title">
 					<Icon icon={ edd } />
-					{ __(
-						'Easy Digital Downloads (EDD)',
-						'block-visibility'
-					) }
+					{ __( 'Easy Digital Downloads (EDD)', 'block-visibility' ) }
 				</span>
 			</div>
 			<div className="settings-panel__container">

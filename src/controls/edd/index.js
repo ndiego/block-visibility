@@ -71,7 +71,7 @@ export default function EDD( props ) {
 	};
 
 	const groupedFields = getGroupedFields();
-	const allFields = getAllFields( variables );
+	const allFields = getAllFields();
 
 	return (
 		<div className="controls-panel-item edd-control">

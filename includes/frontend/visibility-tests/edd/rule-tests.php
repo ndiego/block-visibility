@@ -48,35 +48,32 @@ function run_cart_contents_test( $rule ) {
 
 		$test_result = 0 < count( $cart_products ) ? 'visible' : 'hidden';
 
-	} else {
+	} elseif (
+		isset( $rule['operator'] ) &&
+		isset( $rule['value'] ) &&
+		! empty( $rule['value'] ) &&
+		is_array( $rule['value'] )
+	) {
 
-		if (
-			isset( $rule['operator'] ) &&
-			isset( $rule['value'] ) &&
-			! empty( $rule['value'] ) &&
-			is_array( $rule['value'] )
-		) {
+		if ( 'containsProducts' === $sub_field ) {
+			$results = array();
 
-			if ( 'containsProducts' === $sub_field ) {
-				$results = array();
-
-				// Loop through selected products.
-				foreach ( $rule['value'] as $product ) {
-					$results[] = array_key_exists( $product, $cart_products ) ? 'true' : 'false';
-				}
-
-				$test_result = contains_value_compare( $rule['operator'], $results );
-
-			} elseif ( 'containsCategories' === $sub_field ) {
-				$results = array();
-
-				// Loop through selected categories.
-				foreach ( $rule['value'] as $category ) {
-					$results[] = array_key_exists( $category, $cart_categories ) ? 'true' : 'false';
-				}
-
-				$test_result = contains_value_compare( $rule['operator'], $results );
+			// Loop through selected products.
+			foreach ( $rule['value'] as $product ) {
+				$results[] = array_key_exists( $product, $cart_products ) ? 'true' : 'false';
 			}
+
+			$test_result = contains_value_compare( $rule['operator'], $results );
+
+		} elseif ( 'containsCategories' === $sub_field ) {
+			$results = array();
+
+			// Loop through selected categories.
+			foreach ( $rule['value'] as $category ) {
+				$results[] = array_key_exists( $category, $cart_categories ) ? 'true' : 'false';
+			}
+
+			$test_result = contains_value_compare( $rule['operator'], $results );
 		}
 	}
 

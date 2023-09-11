@@ -14,13 +14,14 @@ import { addQueryArgs } from '@wordpress/url';
 import apiFetch from '@wordpress/api-fetch';
 
 /**
- * Render an products select field.
+ * Render an products select field for EDD and WooCommerce.
  *
  * @since 3.1.0
  * @param {Object} props All the props passed to this function
  */
-export default function WooProductsSelect( props ) {
+export default function ProductsSelect( props ) {
 	const {
+		controlName,
 		className,
 		fieldType,
 		fieldName,
@@ -35,15 +36,15 @@ export default function WooProductsSelect( props ) {
 	const [ availableProducts, setAvailableProducts ] = useState( [] );
 	const [ savedProducts, setSavedProducts ] = useState( [] );
 	const [ isLoading, setIsLoading ] = useState( false );
-	const [ selectedValues, setSelectedValues ] = useState( [] );
+	const [ selectedValues, setSelectedValues ] = useState( false );
 	const [ searchValue, setSearchValue ] = useState( undefined );
 
 	// Fetch any saved products on mount.
 	useEffect( () => {
 		// Only fetched saved products if there are no selected values
-		if ( value.length !== 0 && selectedValues.length === 0 ) {
+		if ( value.length !== 0 && ! selectedValues ) {
 			const path = addQueryArgs( '/block-visibility/v1/variables', {
-				integration: 'woocommerce',
+				integration: controlName,
 				saved_values: Array.isArray( value )
 					? value.join( ',' )
 					: value,
@@ -54,7 +55,7 @@ export default function WooProductsSelect( props ) {
 			apiFetch( { path } )
 				.then( ( response ) => {
 					const fetchedProducts =
-						response?.integrations?.woocommerce?.products ?? [];
+						response?.integrations?.[ controlName ]?.products ?? [];
 
 					// If a product variation is on of the saved values, the fetch will return the
 					// main product and all associated variations. So we need to strip out all
@@ -82,7 +83,7 @@ export default function WooProductsSelect( props ) {
 	// a search is preformed.
 	useEffect( () => {
 		const path = addQueryArgs( '/block-visibility/v1/variables', {
-			integration: 'woocommerce',
+			integration: controlName,
 			search_term: searchValue ?? undefined,
 		} );
 
@@ -91,7 +92,7 @@ export default function WooProductsSelect( props ) {
 		apiFetch( { path } )
 			.then( ( response ) => {
 				setAvailableProducts(
-					response?.integrations?.woocommerce?.products ?? []
+					response?.integrations?.[ controlName ]?.products ?? []
 				);
 				setIsLoading( false );
 			} )
@@ -110,7 +111,7 @@ export default function WooProductsSelect( props ) {
 
 	// If there are no selected values, display the saved values
 	// if there are any.
-	if ( selectedValues.length === 0 ) {
+	if ( ! selectedValues ) {
 		selected = savedProducts;
 	} else {
 		selected = selectedValues;
@@ -119,7 +120,7 @@ export default function WooProductsSelect( props ) {
 	const handleChange = ( values ) => {
 		// Need for value handling.
 		const valueHandling =
-			valueType === 'wooProductSelect' ? 'select' : 'multiSelect';
+			valueType === 'productSelect' ? 'select' : 'multiSelect';
 
 		setSelectedValues( values );
 		handleRuleChange(

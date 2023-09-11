@@ -208,7 +208,7 @@ function get_payments_by_date( $user_id ) {
 		// Ensure the payments are ordered from the oldest to the newest.
 		usort(
 			$payment_dates,
-			function( $a, $b ) {
+			function ( $a, $b ) {
 				return strtotime( $a['date'] ) - strtotime( $b['date'] );
 			}
 		);
