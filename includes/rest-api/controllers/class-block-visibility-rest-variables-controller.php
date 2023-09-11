@@ -13,8 +13,8 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Internal dependencies
  */
-use function BlockVisibility\Utils\get_user_roles as get_user_roles;
-use function BlockVisibility\Utils\get_current_user_role as get_current_user_role;
+use function BlockVisibility\Utils\get_user_roles;
+use function BlockVisibility\Utils\get_current_user_role;
 
 /**
  * REST API Settings Controller Class.

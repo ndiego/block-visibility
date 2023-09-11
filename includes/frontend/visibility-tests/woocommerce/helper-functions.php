@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Internal dependencies
  */
-use function BlockVisibility\Utils\create_date_time as create_date_time;
+use function BlockVisibility\Utils\create_date_time;
 
 /**
  * Helper function to retrieve product information from past orders.
@@ -252,7 +252,7 @@ function get_payments_by_date() {
 		// Ensure the payments are ordered from the oldest to the newest.
 		usort(
 			$payment_dates,
-			function( $a, $b ) {
+			function ( $a, $b ) {
 				return strtotime( $a['date'] ) - strtotime( $b['date'] );
 			}
 		);
@@ -365,7 +365,7 @@ function get_categories_by_payment_date( $payments, $order = 'first' ) {
  * Get the product ID based on a rule.
  *
  * @since 3.1.0
- * 
+ *
  * @param mixed $rule The rule used to determine the product ID.
  *                    If 'dynamicProduct' is provided as the rule's 'subField',
  *                    the current post's ID will be returned. Otherwise, an
@@ -373,11 +373,11 @@ function get_categories_by_payment_date( $payments, $order = 'first' ) {
  *
  * @return int The product ID.
  */
-function get_product_ID( $rule ) {
-	$product_ID = 
+function get_product_id( $rule ) {
+	$product_id =
 		'dynamicProduct' === $rule['subField']
 			? get_the_ID()
 			: (int) $rule['subField'];
-	
-	return $product_ID;
+
+	return $product_id;
 }

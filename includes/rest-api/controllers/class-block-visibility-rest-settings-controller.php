@@ -134,7 +134,6 @@ class Block_Visibility_REST_Settings_Controller extends WP_REST_Controller {
 		} else {
 			return new WP_Error( '404', $error_message, array( 'status' => 404 ) );
 		}
-
 	}
 
 	/**

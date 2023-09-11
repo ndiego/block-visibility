@@ -645,7 +645,8 @@
                                         }
             
                                         &[type=number] {
-                                            -moz-appearance:textfield; /* Firefox */
+                                            appearance: textfield;
+                                            -moz-appearance: textfield; /* Firefox */
                                         }
                                     }
             

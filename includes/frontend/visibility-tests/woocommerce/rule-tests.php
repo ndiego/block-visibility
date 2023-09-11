@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Internal dependencies
  */
-use function BlockVisibility\Utils\create_date_time as create_date_time;
+use function BlockVisibility\Utils\create_date_time;
 
 /**
  * Run the WooCommerce cart contents test.
@@ -45,35 +45,32 @@ function run_cart_contents_test( $rule ) {
 
 		$test_result = 0 < count( $cart_products ) ? 'visible' : 'hidden';
 
-	} else {
+	} elseif (
+		isset( $rule['operator'] ) &&
+		isset( $rule['value'] ) &&
+		! empty( $rule['value'] ) &&
+		is_array( $rule['value'] )
+	) {
 
-		if (
-			isset( $rule['operator'] ) &&
-			isset( $rule['value'] ) &&
-			! empty( $rule['value'] ) &&
-			is_array( $rule['value'] )
-		) {
+		if ( 'containsProducts' === $sub_field ) {
+			$results = array();
 
-			if ( 'containsProducts' === $sub_field ) {
-				$results = array();
-
-				// Loop through selected products.
-				foreach ( $rule['value'] as $product ) {
-					$results[] = array_key_exists( $product, $cart_products ) ? 'true' : 'false';
-				}
-
-				$test_result = contains_value_compare( $rule['operator'], $results );
-
-			} elseif ( 'containsCategories' === $sub_field ) {
-				$results = array();
-
-				// Loop through selected categories.
-				foreach ( $rule['value'] as $category ) {
-					$results[] = array_key_exists( $category, $cart_categories ) ? 'true' : 'false';
-				}
-
-				$test_result = contains_value_compare( $rule['operator'], $results );
+			// Loop through selected products.
+			foreach ( $rule['value'] as $product ) {
+				$results[] = array_key_exists( $product, $cart_products ) ? 'true' : 'false';
 			}
+
+			$test_result = contains_value_compare( $rule['operator'], $results );
+
+		} elseif ( 'containsCategories' === $sub_field ) {
+			$results = array();
+
+			// Loop through selected categories.
+			foreach ( $rule['value'] as $category ) {
+				$results[] = array_key_exists( $category, $cart_categories ) ? 'true' : 'false';
+			}
+
+			$test_result = contains_value_compare( $rule['operator'], $results );
 		}
 	}
 
@@ -248,7 +245,7 @@ function run_product_inventory_test( $rule ) {
 		return 'error';
 	}
 
-	$product = wc_get_product( get_product_ID( $rule ) );
+	$product = wc_get_product( get_product_id( $rule ) );
 
 	// If no product is retrieved, throw error.
 	if ( ! $product ) {
@@ -283,7 +280,7 @@ function run_product_quantity_in_stock_test( $rule ) {
 		return 'error';
 	}
 
-	$product = wc_get_product( get_product_ID( $rule ) );
+	$product = wc_get_product( get_product_id( $rule ) );
 
 	// If no product is retrieved, throw error.
 	if ( ! $product ) {

@@ -13,8 +13,8 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Internal dependencies
  */
-use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
-use function BlockVisibility\Utils\create_date_time as create_date_time;
+use function BlockVisibility\Utils\is_control_enabled;
+use function BlockVisibility\Utils\create_date_time;
 
 /**
  * Run test to see if block visibility should be restricted by date and time.
@@ -236,15 +236,13 @@ function run_time_of_day_test( $test_result, $schedule ) {
 				// If the start time is after the end time, skip test and throw error.
 				if ( $start > $end ) {
 					$interval_test_result = 'error';
+				} elseif (
+					( $start && $start > $current ) ||
+					( $end && $end < $current
+				) ) {
+					$interval_test_result = 'hidden';
 				} else {
-					if (
-						( $start && $start > $current ) ||
-						( $end && $end < $current
-					) ) {
-						$interval_test_result = 'hidden';
-					} else {
-						$interval_test_result = 'visible';
-					}
+					$interval_test_result = 'visible';
 				}
 			}
 

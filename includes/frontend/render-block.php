@@ -13,10 +13,10 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Internal dependencies
  */
-use function BlockVisibility\Frontend\VisibilityTests\hide_block_test as hide_block_test;
-use function BlockVisibility\Frontend\VisibilityTests\visibility_presets_test as visibility_presets_test;
-use function BlockVisibility\Frontend\VisibilityTests\control_sets_test as control_sets_test;
-use function BlockVisibility\Frontend\VisibilityTests\control_sets_custom_classes as control_sets_custom_classes;
+use function BlockVisibility\Frontend\VisibilityTests\hide_block_test;
+use function BlockVisibility\Frontend\VisibilityTests\visibility_presets_test;
+use function BlockVisibility\Frontend\VisibilityTests\control_sets_test;
+use function BlockVisibility\Frontend\VisibilityTests\control_sets_custom_classes;
 
 /**
  * Check if the given block type is disabled via the visibility settings.

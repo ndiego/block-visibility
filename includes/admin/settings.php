@@ -18,7 +18,7 @@ use WP_Block_Type_Registry;
 /**
  * Internal dependencies
  */
-use function BlockVisibility\Utils\get_asset_file as get_asset_file;
+use function BlockVisibility\Utils\get_asset_file;
 
 /**
  * Register the plugin settings page.

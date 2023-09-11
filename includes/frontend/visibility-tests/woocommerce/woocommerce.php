@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Internal dependencies
  */
-use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
+use function BlockVisibility\Utils\is_control_enabled;
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/woocommerce/rule-tests.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/woocommerce/helper-functions.php';
 

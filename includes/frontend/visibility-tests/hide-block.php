@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Internal dependencies
  */
-use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
+use function BlockVisibility\Utils\is_control_enabled;
 
 /**
  * Run test to see if the hide block setting is enabled for the block.

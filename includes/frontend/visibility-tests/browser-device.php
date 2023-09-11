@@ -13,8 +13,8 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Internal dependencies
  */
-use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
-use BlockVisibility\Vendors\Wolfcast\BrowserDetection as BrowserDetection;
+use function BlockVisibility\Utils\is_control_enabled;
+use BlockVisibility\Vendors\Wolfcast\BrowserDetection;
 
 /**
  * Run test to see if block visibility should be restricted by browser & device.

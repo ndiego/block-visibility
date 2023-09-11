@@ -13,8 +13,8 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Internal dependencies
  */
-use function BlockVisibility\Utils\is_control_enabled as is_control_enabled;
-use function BlockVisibility\Utils\get_setting as get_setting;
+use function BlockVisibility\Utils\is_control_enabled;
+use function BlockVisibility\Utils\get_setting;
 
 /**
  * Run test to see if block visibility should be restricted by screen size.

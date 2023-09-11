@@ -41,10 +41,8 @@ function get_setting( $settings, $category, $sub_category, $setting, $sub_settin
 		if ( isset( $category_settings[ $setting ][ $sub_setting ] ) ) {
 			return $category_settings[ $setting ][ $sub_setting ];
 		}
-	} else {
-		if ( isset( $category_settings[ $setting ] ) ) {
-			return $category_settings[ $setting ];
-		}
+	} elseif ( isset( $category_settings[ $setting ] ) ) {
+		return $category_settings[ $setting ];
 	}
 
 	return $default;
