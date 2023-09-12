@@ -264,12 +264,22 @@ function meta_value_compare( $post_meta, $operator, $key_value ) {
 
 		case 'contains':
 			if ( $key_value ) {
-				if ( strpos( $post_meta, $key_value ) !== false ) {
-					$result = true;
-				} else {
-					$result = false;
+				if ( is_array($post_meta) ) {
+				  if ( in_array( $key_value, $post_meta ) !== false ) {
+							  $result = true;
+						  } else {
+							  $result = false;
+						  }
 				}
-			}
+				else {
+				  if ( strpos( $post_meta, $key_value ) !== false ) {
+							  $result = true;
+						  } else {
+							  $result = false;
+						  }
+				}
+		
+					}
 			break;
 
 		case 'notContain':
