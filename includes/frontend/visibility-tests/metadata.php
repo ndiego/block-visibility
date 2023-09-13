@@ -241,59 +241,63 @@ function run_metadata_user_test( $rule ) {
  */
 function meta_value_compare( $post_meta, $operator, $key_value ) {
 
-	switch ( $operator ) {
-		case 'notEmpty':
-			$result = ! empty( $post_meta ) ? true : false;
-			break;
+	if ( 'notEmpty' === $operator ) {
+		$result = ! empty( $post_meta );
+	} elseif ( 'empty' === $operator ) {
+		$result = empty( $post_meta );
+	} elseif ( isset( $key_value ) ) {
 
-		case 'empty':
-			$result = empty( $post_meta ) ? true : false;
-			break;
+		// Allow for type juggling here since array can include strings or numbers.
+		if ( is_array( $post_meta ) ) {
+			switch ( $operator ) {
+				case 'equal':
+					$result = in_array( $key_value, $post_meta ) && count( $post_meta ) === 1; // phpcs:ignore
+					break;
 
-		case 'equal':
-			if ( $key_value ) {
-				$result = $post_meta === $key_value ? true : false;
+				case 'notEqual':
+					$result = ! in_array( $key_value, $post_meta ); // phpcs:ignore
+					break;
+
+				case 'contains':
+					$result = in_array( $key_value, $post_meta ); // phpcs:ignore
+					break;
+
+				case 'notContain':
+					$result = ! in_array( $key_value, $post_meta ); // phpcs:ignore
+					break;
+
+				default:
+					$result = 'error';  // We don't have a valid operator, so throw error.
+					break;
 			}
-			break;
+		} else {
 
-		case 'notEqual':
-			if ( $key_value ) {
-				$result = $post_meta !== $key_value ? true : false;
+			// Convert to json if $post_meta happens to be an object.
+			$post_meta = is_object( $post_meta ) ? json_encode( $post_meta ) : $post_meta;
+
+			// Use "equal" instead of "identical" to allow for type juggling.
+			switch ( $operator ) {
+				case 'equal':
+					$result = $post_meta == $key_value ? true : false;
+					break;
+
+				case 'notEqual':
+					$result = $post_meta != $key_value ? true : false;
+					break;
+
+				case 'contains':
+					$result = strpos( $post_meta, $key_value ) !== false;
+					break;
+
+				case 'notContain':
+					$result = strpos( $post_meta, $key_value ) === false;
+					break;
+
+				default:
+					$result = 'error';  // We don't have a valid operator, so throw error.
+					break;
 			}
-			break;
-
-		case 'contains':
-			if ( $key_value ) {
-				if ( is_array( $post_meta ) ) {
-				  	if ( in_array( $key_value, $post_meta ) !== false ) {
-						$result = true;
-					} else {
-						$result = false;
-					}
-				} else {
-					if ( strpos( $post_meta, $key_value ) !== false ) {
-						$result = true;
-					} else {
-						$result = false;
-					}
-				}
-		
-			}
-			break;
-
-		case 'notContain':
-			if ( $key_value ) {
-				if ( strpos( $post_meta, $key_value ) === false ) {
-					$result = true;
-				} else {
-					$result = false;
-				}
-			}
-			break;
-
-		default:
-			$result = true; // We don't have a valid operator, so default to true.
-			break;
+		}
 	}
 
 	return $result;
