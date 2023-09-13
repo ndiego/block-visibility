@@ -242,9 +242,9 @@ function run_metadata_user_test( $rule ) {
 function meta_value_compare( $post_meta, $operator, $key_value ) {
 
 	if ( 'notEmpty' === $operator ) {
-		$test_result = ! empty( $post_meta );
+		$result = ! empty( $post_meta );
 	} elseif ( 'empty' === $operator ) {
-		$test_result = empty( $post_meta );
+		$result = empty( $post_meta );
 	} elseif ( isset( $key_value ) ) {
 
 		// Allow for type juggling here since array can include strings or numbers.
