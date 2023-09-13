@@ -198,6 +198,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 **Changed**
 
+* [Metadata] Improved support for metadata in array or object format.
 * Refactored away from `getEntityRecord` ([#77](https://github.com/ndiego/block-visibility/pull/77)).
 
 **Fixed**
