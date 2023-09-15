@@ -194,9 +194,11 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 **Added**
 
 * [Woocommerce] Added the [WooCommerce](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-woocommerce-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
+* Added Command Palette command for "Manage Visibility Presets". Requires WordPress 6.3+ or the latest version of Gutenberg.
 
 **Changed**
 
+* [Metadata] Improved support for metadata in array or object format.
 * Refactored away from `getEntityRecord` ([#77](https://github.com/ndiego/block-visibility/pull/77)).
 
 **Fixed**
