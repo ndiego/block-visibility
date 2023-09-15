@@ -2,6 +2,7 @@ export { default as hasACF } from './has-acf';
 export { default as hasBrowserDevice } from './has-browser-device';
 export { default as hasCookie } from './has-cookie';
 export { default as hasDateTime } from './has-date-time';
+export { default as hasEDD } from './has-edd';
 export { default as hasLocation } from './has-location';
 export { default as hasMetadata } from './has-metadata';
 export { default as hasQueryString } from './has-query-string';

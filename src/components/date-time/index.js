@@ -20,7 +20,7 @@ export default function DateTimeControl( props ) {
 	const [ pickerOpen, setPopoverOpen ] = useState( false );
 
 	return (
-		<div className="date-time">
+		<div className="block-visibility__date-time">
 			<DateTimeField
 				value={ value }
 				setPopoverOpen={ setPopoverOpen }

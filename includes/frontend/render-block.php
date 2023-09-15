@@ -320,11 +320,12 @@ require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/scre
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/url-path.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/user-role.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/visibility-presets.php';
-require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/woocommerce/woocommerce.php';
 
 // Run our integration tests.
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/acf.php';
+require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/edd/edd.php';
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/wp-fusion.php';
+require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/woocommerce/woocommerce.php';
 
 // Require utlity functions for tests.
 require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/utils/value-compare-helpers.php';

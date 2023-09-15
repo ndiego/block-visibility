@@ -8,6 +8,7 @@ import { Slot } from '@wordpress/components';
  * Internal dependencies
  */
 import ACF from './../acf';
+import EDD from './../edd';
 import WooCommerce from './../woocommerce';
 import WPFusion from './../wp-fusion';
 import UpdateSettings from './../../update-settings';
@@ -67,6 +68,7 @@ export default function Integrations( props ) {
 			</div>
 			<div className="setting-tabs__setting-panels integrations">
 				<ACF { ...props } />
+				<EDD { ...props } />
 				<WooCommerce { ...props } />
 				<WPFusion { ...props } />
 				<Slot name="VisibilityControlsIntegrations" />

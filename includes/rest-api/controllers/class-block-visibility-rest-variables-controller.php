@@ -115,6 +115,16 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 						$integration
 					),
 				),
+				'edd'         => array(
+					'active'   => class_exists( 'Easy_Digital_Downloads' ),
+					'products' => self::get_edd_products(
+						$request_type,
+						$settings,
+						$integration,
+						$search_term,
+						$saved_values
+					),
+				),
 				'woocommerce' => array(
 					'active'   => class_exists( 'woocommerce' ),
 					'products' => self::get_woocommerce_products(
@@ -381,6 +391,8 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 	/**
 	 * WooCommerce: Fetch the available published products.
 	 *
+	 * @since 3.1.0
+	 *
 	 * @param string $request_type  The request type.
 	 * @param array  $settings      All plugin settings.
 	 * @param string $integration   The specific intregration variables being fetched, if any.
@@ -410,7 +422,7 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 			$enable_variable_pricing = true;
 		}
 
-		$fetch_limit = 10;
+		$fetch_limit = 25;
 
 		$args = array(
 			'status'  => 'publish',
@@ -474,7 +486,103 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 	}
 
 	/**
+	 * Easy Digital Downloads: Fetch the available downloads.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param string $request_type  The request type.
+	 * @param array  $settings      All plugin settings.
+	 * @param string $integration   The specific intregration variables being fetched, if any.
+	 * @param string $search_term   The term being searched for.
+	 * @param string $saved_values  Any currently saved values.
+	 *
+	 * @return array                All published downloads.
+	 */
+	public static function get_edd_products( $request_type, $settings, $integration, $search_term, $saved_values ) {
+		if (
+			'simplified' === $request_type ||
+			! class_exists( 'Easy_Digital_Downloads' ) ||
+			! self::is_integration_enabled( 'edd', $settings ) ||
+			( $integration && 'edd' !== $integration )
+		) {
+			return array();
+		}
+
+		$settings = get_option( 'block_visibility_settings' );
+
+		// Check to see if variable pricing is enabled.
+		if ( isset( $settings['visibility_controls']['edd']['enable_variable_pricing'] ) ) {
+			$enable_variable_pricing = $settings['visibility_controls']['edd']['enable_variable_pricing'];
+		} else {
+			$enable_variable_pricing = true;
+		}
+
+		$fetch_limit = 25;
+
+		$args = array(
+			'post_type'      => 'download',
+			'post_status'    => 'publish',
+			'posts_per_page' => $fetch_limit,
+			'orderby'        => 'name',
+			'order'          => 'ASC',
+			'no_found_rows'  => true,
+		);
+
+		if ( $search_term && 'false' !== $search_term ) {
+			$args['s'] = $search_term;
+		}
+
+		// If there are saved values, make sure to return them.
+		if ( $saved_values ) {
+			$values = explode( ',', $saved_values );
+
+			// This modifies the original array.
+			foreach ( $values as &$product ) {
+				if ( is_string( $product ) && strpos( $product, '_' ) !== false ) {
+					$product = explode( '_', $product )[0];
+				}
+			}
+
+			$args['include'] = $values;
+
+			if ( count( $values ) > $fetch_limit ) {
+				$args['posts_per_page'] = count( $values );
+			}
+		}
+
+		$downloads_raw = get_posts( $args );
+		$downloads     = array();
+
+		foreach ( $downloads_raw as $download ) {
+
+			$downloads[] = array(
+				'value' => $download->ID,
+				'label' => $download->post_title,
+			);
+
+			$has_variable_pricing = edd_has_variable_prices( $download->ID );
+
+			// If variable pricing is enabled and the product has variable prices,
+			// add those as well.
+			if ( $enable_variable_pricing && $has_variable_pricing ) {
+				$prices = edd_get_variable_prices( $download->ID );
+
+				foreach ( $prices as $key => $price ) {
+					$downloads[] = array(
+						'value' => $download->ID . '_' . $key,
+						'label' => $download->post_title . ' - ' . esc_html( $price['name'] ),
+					);
+				}
+			}
+		}
+
+		return $downloads;
+	}
+
+	/**
 	 * Check if a specific integration is enabled based on settings.
+	 *
+	 * @since 3.1.0
 	 *
 	 * @param string $integration The name or identifier of the integration to check.
 	 * @param array  $settings    An array of plugin settings.

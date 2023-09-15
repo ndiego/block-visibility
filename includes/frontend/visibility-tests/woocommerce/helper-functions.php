@@ -6,7 +6,7 @@
  * @since   3.1.0
  */
 
-namespace BlockVisibility\Frontend\VisibilityTests;
+namespace BlockVisibility\Frontend\VisibilityTests\WooCommerce;
 
 defined( 'ABSPATH' ) || exit;
 

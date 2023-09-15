@@ -17,6 +17,7 @@ import {
 	hasBrowserDevice,
 	hasCookie,
 	hasDateTime,
+	hasEDD,
 	hasLocation,
 	hasMetadata,
 	hasQueryString,
@@ -107,6 +108,7 @@ function withContextualIndicators( BlockListBlock ) {
 				hasControlSets,
 				enabledControls
 			),
+			edd: hasEDD( controls, hasControlSets, enabledControls, variables ),
 			location: hasLocation( controls, hasControlSets, enabledControls ),
 			metadata: hasMetadata( controls, hasControlSets, enabledControls ),
 			'query-string': hasQueryString(

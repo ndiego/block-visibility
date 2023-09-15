@@ -17,7 +17,7 @@ import DateTime from '../date-time';
 import AuthorsSelect from './async-rule-fields/authors-select';
 import TermsSelect from './async-rule-fields/terms-select';
 import PostsSelect from './async-rule-fields/posts-select';
-import WooProductsSelect from './async-rule-fields/woo-products-select';
+import ProductsSelect from './async-rule-fields/products-select';
 
 /**
  * Render the individual rule fields.
@@ -215,10 +215,10 @@ export default function RuleField( props ) {
 			/>
 		);
 	} else if (
-		valueType === 'wooProductsSelect' ||
-		valueType === 'wooProductSelect'
+		valueType === 'productsSelect' ||
+		valueType === 'productSelect'
 	) {
-		if ( valueType === 'wooProductSelect' ) {
+		if ( valueType === 'productSelect' ) {
 			const isDynamic = 'dynamicProduct' === value;
 			return (
 				<>
@@ -240,7 +240,8 @@ export default function RuleField( props ) {
 						}
 					/>
 					{ ! isDynamic && (
-						<WooProductsSelect
+						<ProductsSelect
+							controlName={ props.controlName }
 							className={ className }
 							value={ value }
 							valueType={ valueType }
@@ -253,7 +254,8 @@ export default function RuleField( props ) {
 		}
 
 		return (
-			<WooProductsSelect
+			<ProductsSelect
+				controlName={ props.controlName }
 				className={ className }
 				value={ value }
 				valueType={ valueType }

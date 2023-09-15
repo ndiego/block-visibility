@@ -1,0 +1,55 @@
+// Styling for the DateTimeControl. 
+.block-visibility__date-time {
+	.date-time__date-time-field {
+		border-radius: 2px;
+        border: 1px solid #1e1e1e;
+        min-height: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+		color: #808080;
+
+        .components-button {
+            padding: 0;
+
+            &.is-link {
+				color: #808080;
+                justify-content: flex-start;
+                min-height: 40px;
+                text-decoration: none;
+                width: 100%;
+
+                svg {
+                    margin: 4px 0 4px 8px;
+                }
+
+                span {
+                    padding: 8px;
+                }
+            }
+
+            &:first-child {
+                padding-right: 30px;
+                width: 100%;
+            }
+
+            &.clear-date-time {
+                position: absolute;
+                right: 18px;
+                max-height: 34px;
+                min-width: 24px;
+                padding: 2px;
+                margin: 5px 4px;
+            }
+        }
+
+		&.has-value {
+			.components-button {
+				&.is-link {
+					color: #333;
+				}
+			}
+		}
+	}
+}

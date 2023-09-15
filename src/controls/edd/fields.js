@@ -16,6 +16,10 @@ export function getFieldGroups() {
 			label: __( 'Cart', 'block-visibility' ),
 		},
 		{
+			value: 'product',
+			label: __( 'Product', 'block-visibility' ),
+		},
+		{
 			value: 'customer-value',
 			label: __( 'Customer History - Value', 'block-visibility' ),
 		},
@@ -26,10 +30,6 @@ export function getFieldGroups() {
 		{
 			value: 'customer-time',
 			label: __( 'Customer History - Time', 'block-visibility' ),
-		},
-		{
-			value: 'product',
-			label: __( 'Product', 'block-visibility' ),
 		},
 	];
 
@@ -206,7 +206,7 @@ export function getAllFields() {
 								{
 									value: 'containsCategories',
 									valueType: 'termsSelect',
-									valueTypeVariant: 'product_cat',
+									valueTypeVariant: 'download_category',
 									placeholder: selectCategoryPlaceholder,
 								},
 							],
@@ -301,7 +301,7 @@ export function getAllFields() {
 					type: 'subField',
 					name: 'categories',
 					valueType: 'termsSelect',
-					valueTypeVariant: 'product_cat',
+					valueTypeVariant: 'download_category',
 					placeholder: selectCategoryPlaceholder,
 				},
 				{
@@ -413,7 +413,7 @@ export function getAllFields() {
 					type: 'subField',
 					name: 'categories',
 					valueType: 'termsSelect',
-					valueTypeVariant: 'product_cat',
+					valueTypeVariant: 'download_category',
 					placeholder: selectCategoryPlaceholder,
 				},
 				{
@@ -541,7 +541,7 @@ export function getAllFields() {
 					type: 'subField',
 					name: 'categories',
 					valueType: 'termsSelect',
-					valueTypeVariant: 'product_cat',
+					valueTypeVariant: 'download_category',
 					placeholder: selectCategoryPlaceholder,
 				},
 				{
@@ -655,7 +655,7 @@ export function getAllFields() {
 					type: 'subField',
 					name: 'categories',
 					valueType: 'termsSelect',
-					valueTypeVariant: 'product_cat',
+					valueTypeVariant: 'download_category',
 					placeholder: selectCategoryPlaceholder,
 				},
 				{
@@ -670,65 +670,6 @@ export function getAllFields() {
 				},
 			],
 			hasMultipleSubFields: true,
-		},
-		// Product fields
-		{
-			value: 'productInventory',
-			label: __( 'Product Inventory', 'block-visibility' ),
-			group: 'product',
-			fields: [
-				{
-					type: 'subField',
-					name: 'products',
-					valueType: 'productSelect',
-					placeholder: selectProductPlaceholder,
-				},
-				{
-					type: 'valueField',
-					valueType: 'select',
-					options: [
-						{
-							value: 'inStock',
-							label: __( 'Is in stock', 'block-visibility' ),
-						},
-						{
-							value: 'outOfStock',
-							label: __( 'Is out of stock', 'block-visibility' ),
-						},
-						{
-							value: 'onBackorder',
-							label: __( 'Is on backorder', 'block-visibility' ),
-						},
-					],
-					placeholder: __(
-						'Select Inventory Status…',
-						'block-visibility'
-					),
-				},
-			],
-		},
-		{
-			value: 'productQuantityInStock',
-			label: __( 'Quantity of Product in Stock', 'block-visibility' ),
-			group: 'product',
-			fields: [
-				{
-					type: 'subField',
-					valueType: 'productSelect',
-					placeholder: selectProductPlaceholder,
-				},
-				{
-					type: 'operatorField',
-					valueType: 'select',
-					options: valueOperators,
-					placeholder: operatorPlaceholder,
-				},
-				{
-					type: 'valueField',
-					valueType: 'number',
-				},
-			],
-			hasSimplifiedLayout: true,
 		},
 	];
 

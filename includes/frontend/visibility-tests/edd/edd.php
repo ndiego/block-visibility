@@ -1,12 +1,12 @@
 <?php
 /**
- * Adds a filter to the visibility test for the WooCommerce control.
+ * Adds a filter to the visibility test for the Easy Digital Download control.
  *
  * @package block-visibility
  * @since   3.1.0
  */
 
-namespace BlockVisibility\Frontend\VisibilityTests\WooCommerce;
+namespace BlockVisibility\Frontend\VisibilityTests\EDD;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -14,11 +14,11 @@ defined( 'ABSPATH' ) || exit;
  * Internal dependencies
  */
 use function BlockVisibility\Utils\is_control_enabled;
-require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/woocommerce/rule-tests.php';
-require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/woocommerce/helper-functions.php';
+require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/edd/rule-tests.php';
+require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/edd/helper-functions.php';
 
 /**
- * Run test to see if block visibility should be restricted by WooCommerce rules.
+ * Run test to see if block visibility should be restricted by Easy Digital Downloads rules.
  *
  * @since 3.1.0
  *
@@ -27,21 +27,19 @@ require_once BLOCK_VISIBILITY_ABSPATH . 'includes/frontend/visibility-tests/wooc
  * @param array   $controls   The control set controls.
  * @return boolean            Return true if the block should be visible, false if not.
  */
-function woocommerce_test( $is_visible, $settings, $controls ) {
+function edd_test( $is_visible, $settings, $controls ) {
 
 	// If the test is already false, or WooCommerce is not active, skip this test.
-	if ( ! $is_visible || ! class_exists( 'woocommerce' ) ) {
+	if ( ! $is_visible || ! class_exists( 'Easy_Digital_Downloads' ) ) {
 		return $is_visible;
 	}
 
 	// If this control has been disabled, skip test.
-	if ( ! is_control_enabled( $settings, 'woocommerce' ) ) {
+	if ( ! is_control_enabled( $settings, 'edd' ) ) {
 		return true;
 	}
 
-	$control_atts = isset( $controls['woocommerce'] )
-		? $controls['woocommerce']
-		: null;
+	$control_atts = isset( $controls['edd'] ) ? $controls['edd'] : null;
 
 	// There are no control settings, so skip tests.
 	if ( ! $control_atts ) {
@@ -126,7 +124,7 @@ function woocommerce_test( $is_visible, $settings, $controls ) {
 
 // Run all integration tests at "15" priority, which is after the main controls,
 // but before the final "hide block" tests.
-add_filter( 'block_visibility_control_set_is_block_visible', __NAMESPACE__ . '\woocommerce_test', 15, 3 );
+add_filter( 'block_visibility_control_set_is_block_visible', __NAMESPACE__ . '\edd_test', 15, 3 );
 
 /**
  * Run the individual rule tests.
@@ -146,6 +144,7 @@ function run_rule_tests( $rule ) {
 	}
 
 	switch ( $field ) {
+
 		// Cart rule tests.
 		case 'cartContents':
 			$test_result = run_cart_contents_test( $rule );
@@ -165,15 +164,6 @@ function run_rule_tests( $rule ) {
 
 		case 'cartCategoryQuantity':
 			$test_result = run_cart_category_quantity_test( $rule, 'quantity' );
-			break;
-
-		// Product rule tests.
-		case 'productInventory':
-			$test_result = run_product_inventory_test( $rule );
-			break;
-
-		case 'productQuantityInStock':
-			$test_result = run_product_quantity_in_stock_test( $rule );
 			break;
 
 		// Customer rule tests.

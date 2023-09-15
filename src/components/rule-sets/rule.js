@@ -189,6 +189,7 @@ export default function Rule( props ) {
 				>
 					{ groupedFields && (
 						<RuleField
+							controlName={ controlName }
 							rule={ rule }
 							fieldType="ruleField"
 							valueType="select"
@@ -378,6 +379,7 @@ export default function Rule( props ) {
 						return (
 							<RuleField
 								key={ field?.type ?? 'valueField' }
+								controlName={ controlName }
 								rule={ rule }
 								fieldType={ field?.type ?? 'valueField' }
 								fieldName={ field?.name ?? '' }

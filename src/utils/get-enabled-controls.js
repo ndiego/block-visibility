@@ -12,7 +12,7 @@ import { applyFilters } from '@wordpress/hooks';
 /**
  * Internal dependencies
  */
-import { acf, woocommerce, wpFusion } from './icons';
+import { acf, edd, woocommerce, wpFusion } from './icons';
 
 /**
  * All the available controls in Block Visibility.
@@ -91,6 +91,13 @@ export function getControls() {
 			attributeSlug: 'acf',
 			settingSlug: 'acf',
 			icon: acf,
+		},
+		{
+			label: __( 'Easy Digital Downloads', 'block-visibility' ),
+			type: 'integration',
+			attributeSlug: 'edd',
+			settingSlug: 'edd',
+			icon: edd,
 		},
 		{
 			label: __( 'WooCommerce', 'block-visibility' ),

@@ -19,6 +19,7 @@ import {
 	BrowserDevice,
 	Cookie,
 	DateTime,
+	EDD,
 	HideBlock,
 	Location,
 	Metadata,
@@ -104,6 +105,7 @@ export default function ControlsPanel( props ) {
 			<Slot name={ 'ControlSetControls-' + uniqueIndex } />
 
 			<ACF setControlAtts={ setControlAtts } { ...props } />
+			<EDD setControlAtts={ setControlAtts } { ...props } />
 			<WooCommerce setControlAtts={ setControlAtts } { ...props } />
 			<WPFusion setControlAtts={ setControlAtts } { ...props } />
 
