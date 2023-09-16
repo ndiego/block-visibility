@@ -193,11 +193,14 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 **Added**
 
-* [Woocommerce] Added the [WooCommerce](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-woocommerce-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
+* [WooCommerce] Added the [WooCommerce](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-woocommerce-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
+* [Easy Digital Downloads] Added the [Easy Digital Downloads](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-how-to-use-the-easy-digital-downloads-control/-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
 * Added Command Palette command for "Manage Visibility Presets". Requires WordPress 6.3+ or the latest version of Gutenberg.
+* Added a Block Visibility Pro deprecation notice when Pro is installed and active.
 
 **Changed**
 
+* All Block Visibility Pro features have been moved to the base plugin.
 * [Metadata] Improved support for metadata in array or object format.
 * Refactored away from `getEntityRecord` ([#77](https://github.com/ndiego/block-visibility/pull/77)).
 
