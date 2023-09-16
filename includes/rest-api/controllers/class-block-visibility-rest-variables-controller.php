@@ -164,93 +164,6 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Get the Settings schema, conforming to JSON Schema.
-	 *
-	 * @return array
-	 */
-	public function get_item_schema() {
-		if ( $this->schema ) {
-			// Since WordPress 5.3, the schema can be cached in the $schema property.
-			return $this->schema;
-		}
-
-		$schema = array(
-			'$schema'    => 'http://json-schema.org/draft-04/schema#',
-			'title'      => 'variables',
-			'type'       => 'object',
-			'properties' => array(
-				'current_users_roles'  => array(
-					'type'  => 'array',
-					'items' => array(
-						'type' => 'string',
-					),
-				),
-				'user_roles'           => array(
-					'type'  => 'array',
-					'items' => array(
-						'type' => 'string',
-					),
-				),
-				'plugin_variables'     => array(
-					'type'  => 'array',
-					'items' => array(
-						'type' => 'string',
-					),
-				),
-				'is_full_control_mode' => array(
-					'type' => 'boolean',
-				),
-				'is_pro'               => array(
-					'type' => 'boolean',
-				),
-				'integrations'         => array(
-					'type'       => 'object',
-					'properties' => array(
-						'acf'       => array(
-							'type'       => 'object',
-							'properties' => array(
-								'active' => array(
-									'type' => 'boolean',
-								),
-								'fields' => array(
-									'type'  => 'array',
-									'items' => array(
-										'type' => 'string',
-									),
-								),
-							),
-						),
-						'wp_fusion' => array(
-							'type'       => 'object',
-							'properties' => array(
-								'active'         => array(
-									'type' => 'boolean',
-								),
-								'tags'           => array(
-									'type'  => 'array',
-									'items' => array(
-										'type' => 'string',
-									),
-								),
-								'exclude_admins' => array(
-									'type' => 'boolean',
-								),
-							),
-						),
-					),
-				),
-			),
-		);
-
-		$this->schema = apply_filters(
-			'block_visibility_rest_variables_schema',
-			$schema
-		);
-
-		return $this->schema;
-	}
-
-	/**
 	 * Fetch all available tags in ACF field groups and fields.
 	 *
 	 * @param string $request_type  The request type.
@@ -486,7 +399,7 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Easy Digital Downloads: Fetch the available downloads.
+	 * Easy Digital Downloads: Fetch the available published downloads.
 	 *
 	 * @since 3.1.0
 	 *
@@ -593,5 +506,111 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 		return isset( $settings['visibility_controls'][ $integration ]['enable'] )
 			? $settings['visibility_controls'][ $integration ]['enable']
 			: true;
+	}
+
+		/**
+	 * Get the Settings schema, conforming to JSON Schema.
+	 *
+	 * @return array
+	 */
+	public function get_item_schema() {
+		if ( $this->schema ) {
+			// Since WordPress 5.3, the schema can be cached in the $schema property.
+			return $this->schema;
+		}
+
+		$schema = array(
+			'$schema'    => 'http://json-schema.org/draft-04/schema#',
+			'title'      => 'variables',
+			'type'       => 'object',
+			'properties' => array(
+				'current_users_roles'  => array(
+					'description' => __( 'The roles assigned to the current user.', 'block-visibility' ),
+					'type'        => 'array',
+					'readonly'    => true,
+				),
+				'user_roles'           => array(
+					'description' => __( 'The available user roles on the site.', 'block-visibility' ),
+					'type'        => 'array',
+					'readonly'    => true,
+				),
+				'plugin_variables'     => array(
+					'description' => __( 'An array of plugin variables, such as version number.', 'block-visibility' ),
+					'type'        => 'array',
+					'readonly'    => true,
+				),
+				'is_full_control_mode' => array(
+					'description' => __( 'An indicator to determine if full control mode is enabled.', 'block-visibility' ),
+					'type'        => 'boolean',
+					'readonly'    => true,
+				),
+				'is_pro'               => array(
+					'description' => __( 'An indicator to determine if Block Visibility Pro is enabled.', 'block-visibility' ),
+					'type'        => 'boolean',
+					'readonly'    => true,
+				),
+				'integrations'         => array(
+					'description' => __( 'All integration related information.', 'block-visibility' ),
+					'type'        => 'object',
+					'properties'  => array(
+						'acf'         => array(
+							'type'       => 'object',
+							'properties' => array(
+								'active' => array(
+									'type' => 'boolean',
+								),
+								'fields' => array(
+									'type' => 'array',
+								),
+							),
+						),
+						'edd'         => array(
+							'type'       => 'object',
+							'properties' => array(
+								'active' => array(
+									'type' => 'boolean',
+								),
+								'products' => array(
+									'type' => 'array',
+								),
+							),
+						),
+						'woocommerce' => array(
+							'type'       => 'object',
+							'properties' => array(
+								'active' => array(
+									'type' => 'boolean',
+								),
+								'products' => array(
+									'type' => 'array',
+								),
+							),
+						),
+						'wp_fusion'   => array(
+							'type'       => 'object',
+							'properties' => array(
+								'active'         => array(
+									'type' => 'boolean',
+								),
+								'tags'           => array(
+									'type'  => 'array',
+								),
+								'exclude_admins' => array(
+									'type' => 'boolean',
+								),
+							),
+						),
+					),
+					'readonly'    => true,
+				),
+			),
+		);
+
+		$this->schema = apply_filters(
+			'block_visibility_rest_variables_schema',
+			$schema
+		);
+
+		return $this->schema;
 	}
 }
