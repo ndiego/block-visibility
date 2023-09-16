@@ -62,6 +62,7 @@ function get_user_roles() {
 
 /**
  * Retrieves the role(s) of the current user.
+ * v3.1.0: Added check for super admins.
  *
  * @since 1.3.0
  *
@@ -74,7 +75,14 @@ function get_current_user_role() {
 		$user_info = get_userdata( $user_id );
 
 		if ( $user_info ) {
-			return $user_info->roles;
+			$roles = $user_info->roles;
+
+			// Check if the current user is a super admin. Needed for Preset Manager.
+			if ( is_super_admin() ) {
+				array_push( $roles, 'super-admin' );
+			}
+
+			return $roles;
 		}
 	}
 
