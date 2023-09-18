@@ -233,12 +233,3 @@ function TogglePresetManager() {
 registerPlugin( 'block-visibility-preset-manager', {
 	render: TogglePresetManager,
 } );
-
-// Unregister the presets button added by the Pro add-on.
-if (
-	getPlugins().filter(
-		( plugin ) => plugin.name === 'block-visibility-pro-preset-manager'
-	).length !== 0
-) {
-	unregisterPlugin( 'block-visibility-pro-preset-manager' );
-}
