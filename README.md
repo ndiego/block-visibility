@@ -10,6 +10,15 @@ Block Visibility is built exclusively for the WordPress Editor (Gutenberg) and i
 
 Watch the [Plugin Overview](https://www.youtube.com/watch?v=CW1L4vBpXjw) demo video to get started with Block Visibility.
 
+## Integrations
+
+Block Visibility also includes direct integrations for the following third-party services.
+
+* [WooCommerce](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-woocommerce-control/?bv_query=readme&utm_source=block_visibility&utm_medium=github&utm_campaign=readme)
+* [Advanced Custom Fields](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-advanced-custom-fields-control/?bv_query=readme&utm_source=block_visibility&utm_medium=github&utm_campaign=readme)
+* [Easy Digital Downloads](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-how-to-use-the-easy-digital-downloads-control/-control/?bv_query=readme&utm_source=block_visibility&utm_medium=github&utm_campaign=readme)
+* [WP Fusion](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-wp-fusion-control/?bv_query=readme&utm_source=block_visibility&utm_medium=github&utm_campaign=readme)
+
 ## Connect
 - [Learn more at Blockvisibilitywp.com](https://www.blockvisibilitywp.com/)
 - [Download on WordPress.org](https://wordpress.org/plugins/block-visibility/)

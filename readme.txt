@@ -15,7 +15,7 @@ Show or hide any WordPress block with ease. Schedule when blocks should be visib
 
 Effortlessly create dynamic content in WordPress that will increase conversions, enhance the user experience, and improve your workflow.
 
-With this **no-code** solution, control which blocks are visible on your website and who can see them. Schedule content to show or hide at a specific time. Display exclusive promotions to your customers or members. Restrict blocks to specific user roles, screen sizes, query strings, ACF fields, WP Fusion tags, and more.
+With this **no-code** solution, control which blocks are visible on your website and who can see them. Schedule content to show or hide at a specific time. Display exclusive promotions to your customers or members. Restrict blocks to specific user roles, screen sizes, query strings, WooCommerce products, EDD downloads, ACF fields, WP Fusion tags, and more.
 
 Block Visibility is built exclusively for the WordPress Editor (Gutenberg) and is designed to work with **any** WordPress block. This includes blocks natively provided by WordPress, third-party blocks, and even block-based widgets.
 
@@ -51,7 +51,9 @@ It takes just **3 simple steps**:
 * Display blocks based on a website visitor's **referral source** (domain/URL).
 * Support for all post and user **metadata** (custom fields).
 * Display blocks based on HTML **cookies**.
+* **WooCommerce:** Show or hide blocks based on products, cart contents, customer purchase history, and more.
 * **Advanced Custom Fields (ACF):** Control the visibility of block content based on [ACF](https://wordpress.org/plugins/advanced-custom-fields/) fields.
+* **Easy Digital Downloads:** Show or hide blocks based on downloads, cart contents, customer purchase history, and more.
 * **WP Fusion:** Combine Block Visibility with the power of [WP Fusion](https://wordpress.org/plugins/wp-fusion-lite/) to conditionally show or hide content based on data from your favorite CRM or marketing automation platform.
 
 **PLUS: Powerful Settings** allow you to customize Block Visibility to your needs or those of your clients.
@@ -102,10 +104,10 @@ Block Visibility is designed to work with **any** block and is tested with these
 
 **Compatibility + Direct Integration**
 
-* WooCommerce
-* Advanced Custom Fields
-* WP Fusion
-* Easy Digital Downloads _(Integration coming soon)_
+* [WooCommerce](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-woocommerce-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
+* [Advanced Custom Fields](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-advanced-custom-fields-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
+* [Easy Digital Downloads](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-how-to-use-the-easy-digital-downloads-control/-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
+* [WP Fusion](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-wp-fusion-control/)
 
 **Compatibility**
 
