@@ -2,10 +2,10 @@
 Author URI:        https://www.nickdiego.com/?bv_query=readme
 Contributors:      ndiego, outermostdesign
 Tags:              visibility, dynamic content, conditional content, conditional blocks, restrict blocks
-Requires at least: 6.0
-Tested up to:      6.2
-Requires PHP:      5.6
-Stable tag:        3.0.3
+Requires at least: 6.2
+Tested up to:      6.3
+Requires PHP:      7.4
+Stable tag:        3.1.0
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -197,14 +197,15 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 * [WooCommerce] Added the [WooCommerce](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-woocommerce-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
 * [Easy Digital Downloads] Added the [Easy Digital Downloads](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-how-to-use-the-easy-digital-downloads-control/-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
-* Added Command Palette command for "Manage Visibility Presets". Requires WordPress 6.3+ or the latest version of Gutenberg.
+* Added a Command Palette command for "Manage Visibility Presets". Requires WordPress 6.3+ or the latest version of Gutenberg.
 * Added a Block Visibility Pro deprecation notice when Pro is installed and active.
 
 **Changed**
 
-* All Block Visibility Pro features have been moved to the base plugin.
-* [Metadata] Improved support for metadata in array or object format.
+* Increased the minimum WordPress version to 6.2 and the minimum version of PHP to 7.0.
+* Moved all Block Visibility Pro features to the base plugin.
 * Refactored away from `getEntityRecord` ([#77](https://github.com/ndiego/block-visibility/pull/77)).
+* [Metadata] Improved support for metadata in array or object format.
 
 **Fixed**
 
