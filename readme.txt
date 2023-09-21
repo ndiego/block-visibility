@@ -106,7 +106,7 @@ Block Visibility is designed to work with **any** block and is tested with these
 
 * [WooCommerce](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-woocommerce-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
 * [Advanced Custom Fields](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-advanced-custom-fields-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
-* [Easy Digital Downloads](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-how-to-use-the-easy-digital-downloads-control/-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
+* [Easy Digital Downloads](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-how-to-use-the-easy-digital-downloads-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
 * [WP Fusion](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-wp-fusion-control/)
 
 **Compatibility**
@@ -191,13 +191,13 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ===
 
-= 3.1.0 = 2023-09-TBD =
+= 3.1.0 = 2023-09-21 =
 
 **Added**
 
-* [WooCommerce] Added the [WooCommerce](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-woocommerce-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
-* [Easy Digital Downloads] Added the [Easy Digital Downloads](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-how-to-use-the-easy-digital-downloads-control/-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control.
-* Added a Command Palette command for "Manage Visibility Presets". Requires WordPress 6.3+ or the latest version of Gutenberg.
+* [WooCommerce] Added the [WooCommerce](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-woocommerce-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control. ([#83](https://github.com/ndiego/block-visibility/pull/83))
+* [Easy Digital Downloads] Added the [Easy Digital Downloads](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-how-to-use-the-easy-digital-downloads-control/-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) control. ([#87](https://github.com/ndiego/block-visibility/pull/87))
+* Added a Command Palette command for "Manage Visibility Presets". Requires WordPress 6.3+ or the latest version of Gutenberg. ([#84](https://github.com/ndiego/block-visibility/pull/84))
 * Added a Block Visibility Pro deprecation notice when Pro is installed and active.
 
 **Changed**
@@ -205,7 +205,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 * Increased the minimum WordPress version to 6.2 and the minimum version of PHP to 7.0.
 * Moved all Block Visibility Pro features to the base plugin.
 * Refactored away from `getEntityRecord` ([#77](https://github.com/ndiego/block-visibility/pull/77)).
-* [Metadata] Improved support for metadata in array or object format.
+* [Metadata] Improved support for metadata in array or object format. ([#86](https://github.com/ndiego/block-visibility/pull/86))
 
 **Fixed**
 
