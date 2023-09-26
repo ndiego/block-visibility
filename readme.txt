@@ -191,13 +191,13 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ===
 
-= 3.1.1 = 2023-09-21 =
+= 3.1.1 - 2023-09-21 =
 
 **Fixed**
 
 * Fixed missing folders when the plugin was synced to WordPress.org.
 
-= 3.1.0 = 2023-09-21 =
+= 3.1.0 - 2023-09-21 =
 
 **Added**
 
