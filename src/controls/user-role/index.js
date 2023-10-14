@@ -48,7 +48,7 @@ export default function UserRole( props ) {
 	const userRole = controlSetAtts?.controls?.userRole ?? {};
 	const visibilityByRole = userRole?.visibilityByRole ?? 'public';
 
-	const settingsUrl = variables?.plugin_variables.settings_url ?? ''; // eslint-disable-line
+	const settingsUrl = variables?.plugin_variables?.settings_url ?? ''; // eslint-disable-line
 	const enableNotices = settings?.plugin_settings?.enable_editor_notices ?? true; // eslint-disable-line
 	const enableUserRoles = isControlSettingEnabled(
 		settings,
