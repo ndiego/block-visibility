@@ -45,7 +45,7 @@ export default function VisibilityInspectorControls( props ) {
 	const variablesData = useEntityRecord( 'block-visibility/v1', 'variables' );
 
 	// Display a default panel with spinner when settings and variables are loading.
-	if ( ! settingsData.hasResolved || ! variablesData.hasResolved ) {
+	if ( settingsData.isResolving || variablesData.isResolving ) {
 		return (
 			<InspectorControls group="settings">
 				<div className="block-visibility__controls-panel">
