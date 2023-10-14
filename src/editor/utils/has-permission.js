@@ -16,13 +16,17 @@ export default function hasPermission( settings, variables ) {
 		return isPermitted;
 	}
 
-	const permittedRoles = settings?.plugin_settings?.enabled_user_roles ?? [];
-
-	if ( permittedRoles.indexOf( 'administrator' ) === -1 ) {
-		permittedRoles.push( 'administrator' ); // Admins are always permitted.
-	}
-
 	const userRoles = variables?.current_users_roles ?? [];
+	const enabledUserRoles =
+		settings?.plugin_settings?.enabled_user_roles ?? [];
+
+	// Super Admins and Admins are always permitted.
+	const permittedRoles = [
+		...new Set( [
+			...enabledUserRoles,
+			...[ 'administrator', 'super-admin' ],
+		] ),
+	];
 
 	if ( userRoles.length === 0 ) {
 		isPermitted = false;
