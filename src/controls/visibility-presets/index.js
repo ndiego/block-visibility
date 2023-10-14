@@ -42,11 +42,15 @@ export default function VisibilityPresets( props ) {
 
 	const presets = [];
 
-	if ( presetData.hasResolved && presetData.records.length !== 0 ) {
+	if ( presetData.hasResolved && presetData?.records?.length ) {
 		presetData.records.forEach( ( preset ) => {
+			const presetLabel = preset?.title?.raw
+				? preset.title.raw
+				: __( '(no title)', 'block-visibility' );
+
 			const value = {
 				value: preset.id,
-				label: preset?.title?.raw ?? '',
+				label: presetLabel,
 			};
 			presets.push( value );
 		} );
