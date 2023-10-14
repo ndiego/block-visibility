@@ -12,11 +12,7 @@ import { useEntityRecord } from '@wordpress/core-data';
 import { useState } from '@wordpress/element';
 import { addFilter, applyFilters } from '@wordpress/hooks';
 import { hasBlockSupport } from '@wordpress/blocks';
-import {
-	getPlugins,
-	registerPlugin,
-	unregisterPlugin,
-} from '@wordpress/plugins';
+import { registerPlugin } from '@wordpress/plugins';
 import { Modal } from '@wordpress/components';
 import { PluginMoreMenuItem } from '@wordpress/edit-post';
 
