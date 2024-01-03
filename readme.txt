@@ -191,7 +191,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ===
 
-= 3.2.0 - 2024-01-02 =
+= 3.2.0 - 2024-01-03 =
 
 **Added**
 
