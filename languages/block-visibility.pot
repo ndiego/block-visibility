@@ -1,15 +1,15 @@
-# Copyright (C) 2023 Nick Diego
+# Copyright (C) 2024 Nick Diego
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Block Visibility 3.1.2\n"
+"Project-Id-Version: Block Visibility 3.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/block-visibility\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-10-14T20:36:13+00:00\n"
+"POT-Creation-Date: 2024-01-03T03:32:10+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: block-visibility\n"
@@ -1526,6 +1526,14 @@ msgstr ""
 
 #: build/block-visibility-editor.js:29
 msgid "Author"
+msgstr ""
+
+#: build/block-visibility-editor.js:29
+msgid "Is the current user"
+msgstr ""
+
+#: build/block-visibility-editor.js:29
+msgid "Is not the current user"
 msgstr ""
 
 #: build/block-visibility-editor.js:29
