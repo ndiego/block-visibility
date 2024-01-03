@@ -450,36 +450,43 @@ function run_location_post_id_test( $rule ) {
  */
 function run_location_author_test( $rule ) {
 
-	if ( ! isset( $rule['operator'] ) || ! isset( $rule['value'] ) ) {
+	if ( ! isset( $rule['operator'] ) ) {
 		return 'error';
 	}
 
-	// Assume error and try to disprove.
-	$test_result = 'error';
-
 	$operator = $rule['operator'];
-	$authors  = $rule['value'];
 
-	if ( ! empty( $authors ) ) {
-		$post_author_id  = get_the_author_meta( 'ID' );
-		$current_user_id = get_current_user_id();
+	if ( ( 'any' === $operator || 'none' === $operator ) && ! isset( $rule['value'] ) ) {
+		return 'error';
+	}
 
-		if ( 'isCurrentUser' === $operator ) {
-			$test_result = $post_author_id === $current_user_id ? 'visible' : 'hidden';
-		} elseif ( 'isNotCurrentUser' === $operator ) {
-			$test_result = $post_author_id !== $current_user_id ? 'visible' : 'hidden';
-		} elseif ( ( 'any' === $operator || 'none' === $operator ) && is_array( $authors ) ) {
+	$post_author_id  = get_the_author_meta( 'ID' );
+	$current_user_id = get_current_user_id();
+
+	switch ( $operator ) {
+		case 'isCurrentUser':
+			return $post_author_id === $current_user_id ? 'visible' : 'hidden';
+
+		case 'isNotCurrentUser':
+			return $post_author_id !== $current_user_id ? 'visible' : 'hidden';
+
+		case 'any':
+		case 'none':
+			if ( ! is_array( $rule['value'] ) ) {
+				return 'error';
+			}
+
 			$results = array();
 
-			foreach ( $authors as $author ) {
+			foreach ( $rule['value'] as $author ) {
 				$results[] = (int) $author === (int) $post_author_id ? 'true' : 'false';
 			}
 
-			$test_result = any_value_compare( $operator, $results );
-		}
-	}
+			return any_value_compare( $operator, $results );
 
-	return $test_result;
+		default:
+			return 'error';
+	}
 }
 
 /**
