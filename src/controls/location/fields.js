@@ -387,14 +387,51 @@ export function GetAllFields() {
 			fields: [
 				{
 					type: 'operatorField',
+					name: 'authorType',
 					valueType: 'select',
-					options: anyOperators,
+					options: [
+						{
+							value: 'any',
+							label: __(
+								'Is any of the selected',
+								'block-visibility'
+							),
+						},
+						{
+							value: 'none',
+							label: __(
+								'Is none of the selected',
+								'block-visibility'
+							),
+						},
+						{
+							value: 'isCurrentUser',
+							label: __(
+								'Is the current user',
+								'block-visibility'
+							),
+						},
+						{
+							value: 'isNotCurrentUser',
+							label: __(
+								'Is not the current user',
+								'block-visibility'
+							),
+						},
+					],
 					placeholder: operatorPlaceholder,
 				},
 				{
 					type: 'valueField',
 					valueType: 'authorsSelect',
 					placeholder: __( 'Select Author…', 'block-visibility' ),
+					displayConditions: [
+						{
+							dependencyType: 'operatorField',
+							dependencyName: 'authorType',
+							dependencyValues: [ 'any', 'none' ],
+						},
+					],
 				},
 			],
 		},
