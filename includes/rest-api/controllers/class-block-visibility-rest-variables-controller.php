@@ -508,7 +508,7 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 			: true;
 	}
 
-		/**
+	/**
 	 * Get the Settings schema, conforming to JSON Schema.
 	 *
 	 * @return array
@@ -567,7 +567,7 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 						'edd'         => array(
 							'type'       => 'object',
 							'properties' => array(
-								'active' => array(
+								'active'   => array(
 									'type' => 'boolean',
 								),
 								'products' => array(
@@ -578,7 +578,7 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 						'woocommerce' => array(
 							'type'       => 'object',
 							'properties' => array(
-								'active' => array(
+								'active'   => array(
 									'type' => 'boolean',
 								),
 								'products' => array(
@@ -593,7 +593,7 @@ class Block_Visibility_REST_Variables_Controller extends WP_REST_Controller {
 									'type' => 'boolean',
 								),
 								'tags'           => array(
-									'type'  => 'array',
+									'type' => 'array',
 								),
 								'exclude_admins' => array(
 									'type' => 'boolean',
