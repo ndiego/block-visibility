@@ -460,15 +460,23 @@ function run_location_author_test( $rule ) {
 	$operator = $rule['operator'];
 	$authors  = $rule['value'];
 
-	if ( ! empty( $authors ) && is_array( $authors ) ) {
-		$post_author_id = get_the_author_meta( 'ID' );
-		$results        = array();
+	if ( ! empty( $authors ) ) {
+		$post_author_id  = get_the_author_meta( 'ID' );
+		$current_user_id = get_current_user_id();
 
-		foreach ( $authors as $author ) {
-			$results[] = (int) $author === (int) $post_author_id ? 'true' : 'false';
+		if ( 'isCurrentUser' === $operator ) {
+			$test_result = $post_author_id === $current_user_id ? 'visible' : 'hidden';
+		} elseif ( 'isNotCurrentUser' === $operator ) {
+			$test_result = $post_author_id !== $current_user_id ? 'visible' : 'hidden';
+		} elseif ( ( 'any' === $operator || 'none' === $operator ) && is_array( $authors ) ) {
+			$results = array();
+
+			foreach ( $authors as $author ) {
+				$results[] = (int) $author === (int) $post_author_id ? 'true' : 'false';
+			}
+
+			$test_result = any_value_compare( $operator, $results );
 		}
-
-		$test_result = any_value_compare( $operator, $results );
 	}
 
 	return $test_result;
