@@ -191,6 +191,17 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ===
 
+= 3.3.0 - 2024-01-TBD =
+
+**Added**
+
+* [ACF] Added the ability to conditionally display blocks based on fields in options pages.
+* Added support for help descriptions and labels in rule fields.
+
+**Removed**
+
+* [ACF] Removed deprecated rule handling that was introduced in v1.8.0 (2021)
+
 = 3.2.0 - 2024-01-03 =
 
 **Added**
