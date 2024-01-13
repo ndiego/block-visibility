@@ -5,7 +5,7 @@ Tags:              visibility, dynamic content, conditional content, conditional
 Requires at least: 6.2
 Tested up to:      6.4
 Requires PHP:      7.4
-Stable tag:        3.2.0
+Stable tag:        3.3.0
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -182,7 +182,7 @@ Yes, and if you have a specific idea of what you would like to see, please submi
 As of version 1.4.0, Block Visibility is supported in the Site Editor, which is available when using a block theme. We are committed to ensuring 100% compatibility with all Full Site Editing features. Please let us know in the plugin support forum if you find bugs or compatibility issues.
 
 = Does Block Visibility work with Elementor and other page builders? =
-No. Block Visibility is designed specifically for the WordPress block Editor and therefore does not work on pages that the Elementor editor or another page builder controls. So long as you edit native WordPress "block" content, Block Visibility will work.
+No. Block Visibility is designed specifically for the WordPress block Editor and, therefore, does not work on pages that the Elementor editor or another page builder controls. So long as you edit native WordPress "block" content, Block Visibility will work.
 
 = Is block visibility controlled using CSS? =
 Visibility is controlled primarily on the server, so if a block should be hidden based on the set block controls, it will not even be rendered. This functionality ensures the plugin does not load any additional resources on the front end of your site, thereby optimizing performance.
@@ -191,7 +191,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ===
 
-= 3.3.0 - 2024-01-TBD =
+= 3.3.0 - 2024-01-15 =
 
 **Added**
 
