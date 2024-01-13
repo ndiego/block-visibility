@@ -46,41 +46,22 @@ export default function ACF( props ) {
 	const fields = variables?.integrations?.acf?.fields ?? [];
 	const acf = controlSetAtts?.controls?.acf ?? {};
 	const hideOnRuleSets = acf?.hideOnRuleSets ?? false;
-	let ruleSets = acf?.ruleSets ?? [];
+	const ruleSets = acf?.ruleSets ?? [];
 
-	// Hande the deprecated ruleSet structue in v1.8 and lower.
-	if ( ruleSets.length === 0 ) {
-		ruleSets.push( {
-			enable: true,
-			rules: [ { field: '' } ],
+	// Handle the new functionality in v3.3 for field evaluation.
+	ruleSets.forEach( function ( set ) {
+		set.rules.forEach( function ( rule ) {
+			if ( rule.subField === 'true' ) {
+				rule.subField = 'user';
+			} else if (
+				! rule.hasOwnProperty( 'subField' ) ||
+				rule.subField === 'false'
+			) {
+				rule.subField = 'post';
+			}
+			// If subField is neither 'true' nor 'false', its value is retained.
 		} );
-	} else if ( ruleSets.length === 1 && ! ruleSets[ 0 ]?.rules ) {
-		const rules = ruleSets[ 0 ];
-
-		if ( rules.length !== 0 ) {
-			rules.forEach( ( rule ) => {
-				const operator = rule?.operator ?? '';
-
-				if ( operator === '!=empty' ) {
-					rule.operator = 'notEmpty';
-				} else if ( operator === '==empty' ) {
-					rule.operator = 'empty';
-				} else if ( operator === '==' ) {
-					rule.operator = 'equal';
-				} else if ( operator === '!=' ) {
-					rule.operator = 'notEqual';
-				} else if ( operator === '==contains' ) {
-					rule.operator = 'contains';
-				} else if ( operator === '!=contains' ) {
-					rule.operator = 'notContain';
-				} else {
-					rule.operator = '';
-				}
-			} );
-		}
-
-		ruleSets = [ { enable: true, rules } ];
-	}
+	} );
 
 	const addRuleSet = () => {
 		const newRuleSets = [
@@ -131,7 +112,7 @@ export default function ACF( props ) {
 					{ sprintf(
 						// Translators: Whether the block is hidden or visible.
 						__(
-							'%s the block if at least one rule set applies. Rules targeting user fields will fail if the current user is not logged in.',
+							'%s the block if at least one rule set applies. Rules associated with users will fail if the current user is not logged in.',
 							'block-visibility'
 						),
 						hideOnRuleSets

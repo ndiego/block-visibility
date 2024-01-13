@@ -204,16 +204,8 @@ export function getAllFields( variables ) {
 							acfFields.filter(
 								( acfField ) => acfField?.type === field?.type
 							)[ 0 ]?.label,
+						helpPosition: 'top',
 						fields: [
-							{
-								type: 'subField',
-								name: 'isUserField',
-								valueType: 'toggle',
-								placeholder: __(
-									'Evaluate as user field',
-									'block-visibility'
-								),
-							},
 							{
 								type: 'operatorField',
 								valueType: 'select',
@@ -245,6 +237,44 @@ export function getAllFields( variables ) {
 										],
 									},
 								],
+							},
+							{
+								type: 'subField',
+								name: 'fieldLocation',
+								valueType: 'select',
+								options: [
+									{
+										value: 'post',
+										label: __(
+											'The current post',
+											'block-visibility'
+										),
+										disableValue: true,
+									},
+									{
+										value: 'user',
+										label: __(
+											'The current user',
+											'block-visibility'
+										),
+										disableValue: true,
+									},
+									{
+										value: 'option',
+										label: __(
+											'An options page',
+											'block-visibility'
+										),
+									},
+								],
+								label: __(
+									'This field is associated with',
+									'block-visibility'
+								),
+								placeholder: __(
+									'Select…',
+									'block-visibility'
+								),
 							},
 						],
 					} );
