@@ -28,12 +28,15 @@ import ProductsSelect from './async-rule-fields/products-select';
 export default function RuleField( props ) {
 	const {
 		rule,
+		fieldId,
 		fieldType,
 		fieldName,
 		valueType,
 		valueTypeVariant,
 		options,
+		label,
 		placeholder,
+		help,
 		handleRuleChange,
 		triggerReset,
 		isLoading,
@@ -110,27 +113,45 @@ export default function RuleField( props ) {
 			: __( 'Select…', 'block-visibility' );
 
 		return (
-			<Select
-				className={ classnames(
-					'block-visibility__react-select',
-					className
+			<>
+				{ label && (
+					<label
+						id={ `${ fieldId }_label` }
+						htmlFor={ `${ fieldId }_select` }
+						className="field__label"
+					>
+						{ label }
+					</label>
 				) }
-				classNamePrefix="react-select"
-				value={ value }
-				options={ options }
-				placeholder={ selectPlaceholder }
-				onChange={ ( v ) =>
-					handleRuleChange(
-						v,
-						valueType,
-						fieldType,
-						fieldName,
-						triggerReset
-					)
-				}
-				isMulti={ valueType === 'multiSelect' }
-				isLoading={ isLoading }
-			/>
+				<Select
+					aria-labelledby={ `${ fieldId }_label` }
+					inputId={ `${ fieldId }_select` }
+					className={ classnames(
+						'block-visibility__react-select',
+						className
+					) }
+					classNamePrefix="react-select"
+					value={ value }
+					options={ options }
+					placeholder={ selectPlaceholder }
+					onChange={ ( v ) =>
+						handleRuleChange(
+							v,
+							valueType,
+							fieldType,
+							fieldName,
+							triggerReset
+						)
+					}
+					isMulti={ valueType === 'multiSelect' }
+					isLoading={ isLoading }
+				/>
+				{ help && (
+					<div className="control-fields-item__help for-select-component">
+						{ help }
+					</div>
+				) }
+			</>
 		);
 	} else if ( valueType === 'date' || valueType === 'dateTime' ) {
 		return (
@@ -147,6 +168,7 @@ export default function RuleField( props ) {
 					)
 				}
 				includeTime={ valueType === 'dateTime' ? true : false }
+				help={ help }
 			/>
 		);
 	} else if ( valueType === 'toggle' ) {
@@ -164,6 +186,7 @@ export default function RuleField( props ) {
 						triggerReset
 					)
 				}
+				help={ help }
 			/>
 		);
 	} else if ( valueType === 'authorsSelect' ) {
@@ -238,6 +261,7 @@ export default function RuleField( props ) {
 								triggerReset
 							)
 						}
+						help={ help }
 					/>
 					{ ! isDynamic && (
 						<ProductsSelect
@@ -271,7 +295,9 @@ export default function RuleField( props ) {
 			type={ valueType }
 			min={ valueType === 'number' ? 0 : '' }
 			value={ value }
+			label={ label }
 			placeholder={ placeholder }
+			help={ help }
 			onChange={ ( v ) =>
 				handleRuleChange(
 					v,

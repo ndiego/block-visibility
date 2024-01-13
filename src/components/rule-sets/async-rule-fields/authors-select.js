@@ -33,11 +33,14 @@ const DEFAULT_QUERY = {
 export default function AuthorsSelect( props ) {
 	const {
 		className,
+		fieldId,
 		fieldType,
 		fieldName,
 		handleRuleChange,
 		triggerReset,
 		value,
+		label,
+		help,
 	} = props;
 
 	const { authors, loading } = useSelect( ( select ) => {
@@ -62,26 +65,44 @@ export default function AuthorsSelect( props ) {
 	);
 
 	return (
-		<Select
-			className={ classnames(
-				'block-visibility__react-select',
-				className
+		<>
+			{ label && (
+				<label
+					id={ `${ fieldId }_label` }
+					htmlFor={ `${ fieldId }_select` }
+					className="field__label"
+				>
+					{ label }
+				</label>
 			) }
-			classNamePrefix="react-select"
-			value={ selectedAuthors }
-			options={ authorOptions }
-			placeholder={ __( 'Select Author…', 'block-visibility' ) }
-			onChange={ ( values ) =>
-				handleRuleChange(
-					values,
-					'multiSelect', // Need for value handling.
-					fieldType,
-					fieldName,
-					triggerReset
-				)
-			}
-			isLoading={ loading }
-			isMulti
-		/>
+			<Select
+				aria-labelledby={ `${ fieldId }` }
+				inputId={ `${ fieldId }_select` }
+				className={ classnames(
+					'block-visibility__react-select',
+					className
+				) }
+				classNamePrefix="react-select"
+				value={ selectedAuthors }
+				options={ authorOptions }
+				placeholder={ __( 'Select Author…', 'block-visibility' ) }
+				onChange={ ( values ) =>
+					handleRuleChange(
+						values,
+						'multiSelect', // Need for value handling.
+						fieldType,
+						fieldName,
+						triggerReset
+					)
+				}
+				isLoading={ loading }
+				isMulti
+			/>
+			{ help && (
+				<div className="control-fields-item__help for-select-component">
+					{ help }
+				</div>
+			) }
+		</>
 	);
 }

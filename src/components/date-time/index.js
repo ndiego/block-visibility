@@ -16,7 +16,7 @@ import DateTimeField from './date-time-field';
  * @param {Object} props All the props passed to this function
  */
 export default function DateTimeControl( props ) {
-	const { value, onChange, includeTime } = props;
+	const { value, onChange, includeTime, help } = props;
 	const [ pickerOpen, setPopoverOpen ] = useState( false );
 
 	return (
@@ -34,6 +34,11 @@ export default function DateTimeControl( props ) {
 					setPopoverOpen={ setPopoverOpen }
 					includeTime={ includeTime }
 				/>
+			) }
+			{ help && (
+				<div className="control-fields-item__help for-date-time-component">
+					{ help }
+				</div>
 			) }
 		</div>
 	);

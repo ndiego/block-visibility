@@ -253,6 +253,10 @@
         font-style: normal;
         margin-top: 8px;
 
+        &.for-select-component {
+            margin-top: 0;
+        }
+
         a {
             cursor: pointer;
         }
@@ -431,6 +435,15 @@
                                     grid-column-end: 3;
                                 }
                             }
+
+                            .field__label,
+                            .components-base-control__label {
+                                align-items: center;
+                                color: #757575;
+                                font-size: 12px;
+                                font-weight: normal;
+                                text-transform: none;
+                            }
                         }
 
                         .components-base-control__help {
@@ -454,6 +467,7 @@
 
                     .components-text-control__input {
                         border: 1px solid #1e1e1e;
+                        margin: 0;
                         min-height: 40px;
                         padding: 8px;
                     }

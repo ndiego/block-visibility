@@ -54,6 +54,7 @@ export default function Rule( props ) {
 	const ruleFields = groupedFields ? selectedRule?.fields ?? [] : allFields;
 
 	const hasHelp = selectedRule?.help ?? false;
+	const helpPosition = selectedRule?.helpPosition ?? 'bottom';
 	const hasMultipleSubFields = selectedRule?.hasMultipleSubFields ?? false;
 	const hasSimplifiedLayout = selectedRule?.hasSimplifiedLayout ?? false;
 
@@ -191,6 +192,7 @@ export default function Rule( props ) {
 						<RuleField
 							controlName={ controlName }
 							rule={ rule }
+							fieldId={ ruleIndex + '_ruleField_select' }
 							fieldType="ruleField"
 							valueType="select"
 							options={ groupedFields }
@@ -202,12 +204,20 @@ export default function Rule( props ) {
 							hasGroupedOptions={ true }
 						/>
 					) }
-					{ ruleFields.map( ( field ) => {
+					{ hasHelp && helpPosition === 'top' && (
+						<div className="control-fields-item__help for-select-component">
+							{ selectedRule.help }
+						</div>
+					) }
+					{ ruleFields.map( ( field, fieldIndex ) => {
 						let fieldValueType = field?.valueType;
 						let fieldValueTypeVariant = field?.valueTypeVariant;
 						let options = field?.options;
 						let placeholder = field?.placeholder;
 						let dependantFieldValue = '';
+						const fieldId = `${ ruleIndex }${ fieldIndex }_${
+							field?.type ?? 'valueField'
+						}_${ fieldValueType }`;
 
 						const conditionalValueTypes =
 							field?.conditionalValueTypes;
@@ -378,9 +388,10 @@ export default function Rule( props ) {
 
 						return (
 							<RuleField
-								key={ field?.type ?? 'valueField' }
+								key={ fieldId }
 								controlName={ controlName }
 								rule={ rule }
+								fieldId={ fieldId }
 								fieldType={ field?.type ?? 'valueField' }
 								fieldName={ field?.name ?? '' }
 								valueType={ fieldValueType ?? 'text' }
@@ -394,14 +405,16 @@ export default function Rule( props ) {
 								hasGroupedOptions={
 									field?.hasGroupedOptions ?? false
 								}
+								label={ field?.label ?? '' }
 								placeholder={ placeholder ?? '' }
+								help={ field?.help ?? '' }
 								isLoading={ field?.isLoading }
 								triggerReset={ field?.triggerReset ?? false }
 							/>
 						);
 					} ) }
 				</div>
-				{ hasHelp && (
+				{ hasHelp && helpPosition === 'bottom' && (
 					<div className="control-fields-item__help">
 						{ selectedRule.help }
 					</div>

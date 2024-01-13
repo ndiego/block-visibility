@@ -23,10 +23,13 @@ export default function ProductsSelect( props ) {
 	const {
 		controlName,
 		className,
+		fieldId,
 		fieldType,
 		fieldName,
 		handleRuleChange,
+		label,
 		placeholder,
+		help,
 		triggerReset,
 		value,
 		valueType,
@@ -155,21 +158,39 @@ export default function ProductsSelect( props ) {
 	};
 
 	return (
-		<Select
-			className={ classnames(
-				'block-visibility__react-select',
-				className
+		<>
+			{ label && (
+				<label
+					id={ `${ fieldId }_label` }
+					htmlFor={ `${ fieldId }_select` }
+					className="field__label"
+				>
+					{ label }
+				</label>
 			) }
-			classNamePrefix="react-select"
-			value={ selected }
-			options={ options }
-			onChange={ handleChange }
-			onInputChange={ debounce( handleInputChange, 300 ) }
-			filterOption={ filterOption }
-			noOptionsMessage={ noOptionsMessage }
-			placeholder={ placeholder }
-			isLoading={ isLoading }
-			isMulti={ isMulti }
-		/>
+			<Select
+				aria-labelledby={ `${ fieldId }` }
+				inputId={ `${ fieldId }_select` }
+				className={ classnames(
+					'block-visibility__react-select',
+					className
+				) }
+				classNamePrefix="react-select"
+				value={ selected }
+				options={ options }
+				onChange={ handleChange }
+				onInputChange={ debounce( handleInputChange, 300 ) }
+				filterOption={ filterOption }
+				noOptionsMessage={ noOptionsMessage }
+				placeholder={ placeholder }
+				isLoading={ isLoading }
+				isMulti={ isMulti }
+			/>
+			{ help && (
+				<div className="control-fields-item__help for-select-component">
+					{ help }
+				</div>
+			) }
+		</>
 	);
 }
