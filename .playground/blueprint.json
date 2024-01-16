@@ -1,10 +1,5 @@
 {
-	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
 	"landingPage": "/wp-admin/plugins.php",
-	"preferredVersions": {
-		"php": "8.0",
-		"wp": "6.4"
-	},
 	"features": {
 		"networking": true
 	},
@@ -12,9 +7,9 @@
 		{
 			"step": "installPlugin",
 			"pluginZipFile": {
-                "resource": "wordpress.org/plugins",
-                "slug": "block-visibility"
-            },
+				"resource": "wordpress.org/plugins",
+				"slug": "block-visibility"
+			},
 			"options": {
 				"activate": true
 			}
