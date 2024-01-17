@@ -191,7 +191,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ===
 
-= 3.3.0 - 2024-01-15 =
+= 3.3.0 - 2024-01-18 =
 
 **Added**
 
@@ -201,6 +201,10 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 **Removed**
 
 * [ACF] Removed deprecated rule handling that was introduced in v1.8.0 (2021)
+
+**Fix**
+
+* [Screen Size] Fix fatal error caused by deleting a breakpoint and saving an empty value.
 
 = 3.2.0 - 2024-01-03 =
 
