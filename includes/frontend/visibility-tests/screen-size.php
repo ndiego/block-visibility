@@ -189,8 +189,8 @@ function get_screen_size_styles( $settings ) {
 function get_default_styles( $settings ) {
 
 	// Breakpoints.
-	$large  = get_setting( $settings, 'visibility_controls', 'screen_size', 'breakpoints', 'large', '992px' );
-	$medium = get_setting( $settings, 'visibility_controls', 'screen_size', 'breakpoints', 'medium', '768px' );
+	$large  = check_width( get_setting( $settings, 'visibility_controls', 'screen_size', 'breakpoints', 'large', '992px' ), '992px' );
+	$medium = check_width( get_setting( $settings, 'visibility_controls', 'screen_size', 'breakpoints', 'medium', '768px' ), '768px' );
 
 	// Screen size controls.
 	$large_enabled  = get_setting( $settings, 'visibility_controls', 'screen_size', 'controls', 'large', true );
@@ -223,7 +223,7 @@ function get_default_styles( $settings ) {
 }';
 	}
 
-	if ( $small_enabled ) {
+	if ( $small_enabled && set_max_width( $medium ) ) {
 		$prev_styles = $styles ? $styles . $spacer : $styles;
 		$styles      = $prev_styles . "/* Small screens (mobile devices, less than {$medium}) */
 @media ( max-width: " . set_max_width( $medium ) . ' ) {
@@ -251,10 +251,10 @@ function get_default_styles( $settings ) {
 function get_advanced_styles( $settings ) {
 
 	// Breakpoints.
-	$extra_large = get_setting( $settings, 'visibility_controls', 'screen_size', 'breakpoints', 'extra_large', '1200px' );
-	$large       = get_setting( $settings, 'visibility_controls', 'screen_size', 'breakpoints', 'large', '992px' );
-	$medium      = get_setting( $settings, 'visibility_controls', 'screen_size', 'breakpoints', 'medium', '768px' );
-	$small       = get_setting( $settings, 'visibility_controls', 'screen_size', 'breakpoints', 'small', '576px' );
+	$extra_large = check_width( get_setting( $settings, 'visibility_controls', 'screen_size', 'breakpoints', 'extra_large', '1200px' ), '1200px' );
+	$large       = check_width( get_setting( $settings, 'visibility_controls', 'screen_size', 'breakpoints', 'large', '992px' ), '992px' );
+	$medium      = check_width( get_setting( $settings, 'visibility_controls', 'screen_size', 'breakpoints', 'medium', '768px' ), '768px' );
+	$small       = check_width( get_setting( $settings, 'visibility_controls', 'screen_size', 'breakpoints', 'small', '576px' ), '576px' );
 
 	// Screen size controls.
 	$extra_large_enabled = get_setting( $settings, 'visibility_controls', 'screen_size', 'controls', 'extra_large', true );
@@ -326,6 +326,32 @@ function get_advanced_styles( $settings ) {
 }
 
 /**
+ * Validates and returns a width value or a default value.
+ *
+ * This function checks whether a given width is set, is of the string type,
+ * and is not an empty string. If the width does not meet these criteria,
+ * the function returns a default value. If it does, the original width value
+ * is returned.
+ *
+ * @since 3.3.0
+ *
+ * @param string $width   The width value to be validated. This should be a
+ *                        non-empty string to be considered valid.
+ * @param mixed  $default The default value to return if the width is invalid.
+ *                        This can be of any type.
+ *
+ * @return mixed Returns the original width if valid; otherwise, returns
+ *               the default value.
+ */
+function check_width( $width, $default ) {
+	if ( ! isset( $width ) || ! is_string( $width ) || ! $width ) {
+		return $default;
+	}
+
+	return $width;
+}
+
+/**
  * Takes a given width string and subracts 0.02. The width string includes 'px'
  * so need to remove that first to do calculation, then add it back.
  *
@@ -335,7 +361,17 @@ function get_advanced_styles( $settings ) {
  * @return string       The width string minus 0.02.
  */
 function set_max_width( $width ) {
-	$max_width = trim( $width, 'px' ) - 0.02;
+
+	// Remove 'px' and check if the remaining is numeric.
+	$numeric_width = trim( $width, 'px' );
+	if ( ! is_numeric( $numeric_width ) ) {
+		return null;
+	}
+
+	// Subtract 0.02 from the numeric value.
+	$max_width = $numeric_width - 0.02;
+
+	// Return the new width with 'px' appended.
 	return (string) $max_width . 'px';
 }
 
