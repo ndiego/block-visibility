@@ -48,20 +48,27 @@ export default function ACF( props ) {
 	const hideOnRuleSets = acf?.hideOnRuleSets ?? false;
 	const ruleSets = acf?.ruleSets ?? [];
 
-	// Handle the new functionality in v3.3 for field evaluation.
-	ruleSets.forEach( function ( set ) {
-		set.rules.forEach( function ( rule ) {
-			if ( rule.subField === 'true' ) {
-				rule.subField = 'user';
-			} else if (
-				! rule.hasOwnProperty( 'subField' ) ||
-				rule.subField === 'false'
-			) {
-				rule.subField = 'post';
-			}
-			// If subField is neither 'true' nor 'false', its value is retained.
+	if ( ruleSets.length === 0 ) {
+		ruleSets.push( {
+			enable: true,
+			rules: [ { field: '' } ],
 		} );
-	} );
+	} else {
+		// Handle the new functionality in v3.3 for field evaluation.
+		ruleSets.forEach( function ( set ) {
+			set.rules.forEach( function ( rule ) {
+				if ( rule.subField === 'true' ) {
+					rule.subField = 'user';
+				} else if (
+					! rule.hasOwnProperty( 'subField' ) ||
+					rule.subField === 'false'
+				) {
+					rule.subField = 'post';
+				}
+				// If subField is neither 'true' nor 'false', its value is retained.
+			} );
+		} );
+	}
 
 	const addRuleSet = () => {
 		const newRuleSets = [
