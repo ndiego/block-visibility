@@ -126,7 +126,11 @@ export default function RuleSets( props ) {
 			className="options-dropdown"
 			label={ __( 'Options', 'block-visibility' ) }
 			icon={ moreVertical }
-			popoverProps={ { focusOnMount: 'container' } }
+			popoverProps={ { 
+				focusOnMount: 'container',
+				placement: 'left-start',
+				offset: 259,
+			} }
 		>
 			{ ( { onClose } ) => (
 				<>
