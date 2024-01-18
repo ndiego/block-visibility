@@ -28,15 +28,15 @@ export default function Breakpoints( props ) {
 		extra_large: {
 			title: __( 'Extra Large', 'block-visibility' ),
 			description: __( 'Large desktop screen sizes.' ),
-			placeholder: '1200'
+			placeholder: '1200',
 		},
 		large: {
 			title: __( 'Large', 'block-visibility' ),
 			description: __(
 				'Desktop and tablet (landscape) screen sizes.',
-				'block-visibility',
+				'block-visibility'
 			),
-			placeholder: '992'
+			placeholder: '992',
 		},
 		medium: {
 			title: __( 'Medium', 'block-visibility' ),
@@ -44,7 +44,7 @@ export default function Breakpoints( props ) {
 				'Tablet (portrait) screen sizes.',
 				'block-visibility'
 			),
-			placeholder: '768'
+			placeholder: '768',
 		},
 		small: {
 			title: __( 'Small', 'block-visibility' ),
@@ -52,7 +52,7 @@ export default function Breakpoints( props ) {
 				'Mobile (landscape) screen sizes.',
 				'block-visibility'
 			),
-			placeholder: '576'
+			placeholder: '576',
 		},
 	};
 

@@ -191,7 +191,7 @@ export default function Schedule( props ) {
 			className="options-dropdown"
 			label={ __( 'Options', 'block-visibility' ) }
 			icon={ moreVertical }
-			popoverProps={ { 
+			popoverProps={ {
 				focusOnMount: 'container',
 				placement: 'left-start',
 				offset: 259,

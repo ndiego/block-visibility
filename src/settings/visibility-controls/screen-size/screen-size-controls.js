@@ -24,7 +24,8 @@ export default function ScreenSizeControls( props ) {
 		enableAdvancedControls,
 	} = props;
 
-	const extraLargeBreakpoint = screenSize.breakpoints?.extra_large || '1200px';
+	const extraLargeBreakpoint =
+		screenSize.breakpoints?.extra_large || '1200px';
 	const largeBreakpoint = screenSize.breakpoints?.large || '992px';
 	const mediumBreakpoint = screenSize.breakpoints?.medium || '768px';
 	const smallBreakpoint = screenSize.breakpoints?.small || '576px';
