@@ -24,6 +24,11 @@ export default function ScreenSizeControls( props ) {
 		enableAdvancedControls,
 	} = props;
 
+	const extraLargeBreakpoint = screenSize.breakpoints?.extra_large || '1200px';
+	const largeBreakpoint = screenSize.breakpoints?.large || '992px';
+	const mediumBreakpoint = screenSize.breakpoints?.medium || '768px';
+	const smallBreakpoint = screenSize.breakpoints?.small || '576px';
+
 	function onControlChange( control, value ) {
 		setVisibilityControls( {
 			...visibilityControls,
@@ -65,7 +70,7 @@ export default function ScreenSizeControls( props ) {
 							'Allows users to hide blocks on extra large screen sizes, %s and up.',
 							'block-visibility'
 						),
-						screenSize.breakpoints.extra_large
+						extraLargeBreakpoint
 					) }
 					checked={ screenSize.controls.extra_large }
 					onChange={ () =>
@@ -86,7 +91,7 @@ export default function ScreenSizeControls( props ) {
 								'Allows users to hide blocks on large screen sizes, %s and up.',
 								'block-visibility'
 							),
-							screenSize.breakpoints.large
+							largeBreakpoint
 						),
 					enableAdvancedControls &&
 						sprintf(
@@ -95,8 +100,8 @@ export default function ScreenSizeControls( props ) {
 								'Allows users to hide blocks on large screen sizes, between %1$s and %2$s.',
 								'block-visibility'
 							),
-							screenSize.breakpoints.large,
-							screenSize.breakpoints.extra_large
+							largeBreakpoint,
+							extraLargeBreakpoint
 						),
 				] }
 				checked={ screenSize.controls.large }
@@ -112,8 +117,8 @@ export default function ScreenSizeControls( props ) {
 						'Allows users to hide blocks on medium screen sizes, between %1$s and %2$s.',
 						'block-visibility'
 					),
-					screenSize.breakpoints.medium,
-					screenSize.breakpoints.large
+					mediumBreakpoint,
+					largeBreakpoint
 				) }
 				checked={ screenSize.controls.medium }
 				onChange={ () =>
@@ -147,8 +152,8 @@ export default function ScreenSizeControls( props ) {
 								'Allows users to hide blocks on small screen sizes, between %1$s and %2$s.',
 								'block-visibility'
 							),
-							screenSize.breakpoints.small,
-							screenSize.breakpoints.medium
+							smallBreakpoint,
+							mediumBreakpoint
 						),
 				] }
 				checked={ screenSize.controls.small }
@@ -168,7 +173,7 @@ export default function ScreenSizeControls( props ) {
 							'Allows users to hide blocks on extra small screen sizes, less than %s.',
 							'block-visibility'
 						),
-						screenSize.breakpoints.small
+						smallBreakpoint
 					) }
 					checked={ screenSize.controls.extra_small }
 					onChange={ () =>
