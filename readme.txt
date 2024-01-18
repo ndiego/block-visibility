@@ -198,13 +198,19 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 * [ACF] Added the ability to conditionally display blocks based on fields in options pages.
 * Added support for help descriptions and labels in rule fields.
 
+**Changed**
+
+* [Screen Size] Breakpoint defaults are now displayed as placeholders in the plugin settings.
+* Improve the placement of the controls dropdown in the Visibility panel to match Core.
+
 **Removed**
 
 * [ACF] Removed deprecated rule handling that was introduced in v1.8.0 (2021)
 
-**Fix**
+**Fixed**
 
-* [Screen Size] Fix fatal error caused by deleting a breakpoint and saving an empty value.
+* [ACF] Fixed the broken rule set UI when cleared.
+* [Screen Size] Fixed fatal error caused by deleting a breakpoint and saving an empty value.
 
 = 3.2.0 - 2024-01-03 =
 
