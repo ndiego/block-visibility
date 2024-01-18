@@ -8,7 +8,7 @@
 
 Block Visibility is built exclusively for the WordPress Editor (Gutenberg) and is designed to work with **any** WordPress block. This includes blocks natively provided by WordPress, third-party blocks, and even block-based widgets.
 
-Watch the [Plugin Overview](https://www.youtube.com/watch?v=CW1L4vBpXjw) demo video to get started with Block Visibility. You can also [test the plugin in the browser](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/ndiego/block-visibility/main/.playground/blueprint.json) using Playground.
+Watch the [Plugin Overview](https://www.youtube.com/watch?v=CW1L4vBpXjw) demo video to get started with Block Visibility. You can also [test the plugin in your browser](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/ndiego/block-visibility/main/.playground/blueprint.json) using Playground.
 
 ## Integrations
 
