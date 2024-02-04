@@ -27,6 +27,7 @@ export default function hasScreenSize(
 		medium: false,
 		small: false,
 		extraSmall: false,
+		print: '',
 	};
 
 	// Get the screen size control settings.
@@ -38,13 +39,16 @@ export default function hasScreenSize(
 		extra_small: true,
 	};
 
+	const enablePrintControls = settings?.visibility_controls?.screen_size?.enable_print_controls;
+
 	// @TODO: Refactor in future to identify the specific active restrictions.
 	const hasSizeRestrictions = [
-		screenSize.extraLarge && screenSizeControls.extra_large ? true : false,
-		screenSize.large && screenSizeControls.large ? true : false,
-		screenSize.medium && screenSizeControls.medium ? true : false,
-		screenSize.small && screenSizeControls.small ? true : false,
-		screenSize.extraSmall && screenSizeControls.extra_small ? true : false,
+		screenSize.extraLarge && screenSizeControls.extra_large,
+		screenSize.large && screenSizeControls.large,
+		screenSize.medium && screenSizeControls.medium,
+		screenSize.small && screenSizeControls.small,
+		screenSize.extraSmall && screenSizeControls.extra_small,
+		enablePrintControls && (screenSize.print === 'noPrint' || screenSize.print === 'printOnly'),
 	];
 
 	let indicatorTest = true;

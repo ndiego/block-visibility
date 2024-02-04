@@ -18,9 +18,9 @@ import { Button } from '@wordpress/components';
  */
 export default function PreviewStyles( props ) {
 	const [ preview, setPreview ] = useState( false );
-	const { screenSize, enableAdvancedControls } = props;
-	const defaultStyles = getDefaultStyles( screenSize );
-	const advancedStyles = getAdvancedStyles( screenSize );
+	const { screenSize, enableAdvancedControls, enablePrintControls } = props;
+	const defaultStyles = getDefaultStyles( screenSize, enablePrintControls );
+	const advancedStyles = getAdvancedStyles( screenSize, enablePrintControls );
 
 	return (
 		<div className="breakpoint-css-preview subsetting">
@@ -47,10 +47,11 @@ export default function PreviewStyles( props ) {
  * Generate the default styles
  *
  * @since 1.5.0
- * @param {Object} screenSize All the screen size settings
- * @return {string}		      Return the default styles
+ * @param {Object}  screenSize          All the screen size settings
+ * @param {boolean} enablePrintControls Whether print controls are enabled
+ * @return {string}		                Return the default styles
  */
-function getDefaultStyles( screenSize ) {
+function getDefaultStyles( screenSize, enablePrintControls ) {
 	// Breakpoints.
 	const large = screenSize.breakpoints.large;
 	const medium = screenSize.breakpoints.medium;
@@ -95,6 +96,21 @@ function getDefaultStyles( screenSize ) {
 	}
 }`;
 	}
+
+	if ( enablePrintControls ) {
+		const prevStyles = styles ? styles + spacer : styles;
+		styles = prevStyles + `/* Print */
+@media print {
+	.block-visibility-no-print {
+		display: none !important;
+	}
+}
+@media screen {
+	.block-visibility-print-only {
+		display: none !important;
+	}
+}`;
+	}
 	/* eslint-enable */
 
 	if ( ! styles ) {
@@ -108,10 +124,11 @@ function getDefaultStyles( screenSize ) {
  * Generate the advanced styles
  *
  * @since 1.5.0
- * @param {Object} screenSize All the screen size settings
- * @return {string}		      Return the advanced styles
+ * @param {Object}  screenSize          All the screen size settings
+ * @param {boolean} enablePrintControls Whether print controls are enabled
+ * @return {string}		                Return the default styles
  */
-function getAdvancedStyles( screenSize ) {
+function getAdvancedStyles( screenSize, enablePrintControls ) {
 	// Breakpoints.
 	const extraLarge = screenSize.breakpoints.extra_large;
 	const large = screenSize.breakpoints.large;
@@ -176,6 +193,21 @@ function getAdvancedStyles( screenSize ) {
 		styles = prevStyles + `/* Extra small screens (portrait mobile devices, less than ${ small }) */
 @media ( max-width: ${ setMaxWidth( small ) } ) {
 	.block-visibility-hide-extra-small-screen {
+		display: none !important;
+	}
+}`;
+	}
+
+	if ( enablePrintControls ) {
+		const prevStyles = styles ? styles + spacer : styles;
+		styles = prevStyles + `/* Print */
+@media print {
+	.block-visibility-no-print {
+		display: none !important;
+	}
+}
+@media screen {
+	.block-visibility-print-only {
 		display: none !important;
 	}
 }`;

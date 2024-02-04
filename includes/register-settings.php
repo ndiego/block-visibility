@@ -138,6 +138,9 @@ function register_settings() {
 								),
 							),
 						),
+						'enable_print_controls'    => array(
+							'type' => 'boolean',
+						),
 						'enable_advanced_controls' => array(
 							'type' => 'boolean',
 						),
@@ -322,6 +325,7 @@ function register_settings() {
 					'small'       => true,
 					'extra_small' => true,
 				),
+				'enable_print_controls'    => false,
 				'enable_advanced_controls' => false,
 				'enable_frontend_css'      => true,
 			),

@@ -71,53 +71,62 @@ add_filter( 'block_visibility_control_set_is_block_visible', __NAMESPACE__ . '\s
  * @return array                Updated array of classes.
  */
 function add_screen_size_classes( $custom_classes, $settings, $controls ) {
+    $control_atts = isset( $controls['screenSize'] ) ? $controls['screenSize'] : null;
 
-	$control_atts = isset( $controls['screenSize'] )
-		? $controls['screenSize']
-		: null;
+    $has_advanced_controls = get_setting(
+        $settings,
+        'visibility_controls',
+        'screen_size',
+        'enable_advanced_controls',
+        null,
+        false
+    );
 
-	$has_advanced_controls = get_setting(
-		$settings,
-		'visibility_controls',
-		'screen_size',
-		'enable_advanced_controls',
-		null,
-		false
-	);
+    $has_print_controls = get_setting(
+        $settings,
+        'visibility_controls',
+        'screen_size',
+        'enable_print_controls',
+        null,
+        false
+    );
 
-	$sizes = array( 'extra_large', 'large', 'medium', 'small', 'extra_small' );
+    $sizes = array( 'extra_large', 'large', 'medium', 'small', 'extra_small', 'print' );
 
-	foreach ( $sizes as $size ) {
-		$enabled = get_setting(
-			$settings,
-			'visibility_controls',
-			'screen_size',
-			'controls',
-			$size,
-			true
-		);
-		$is_set  = isset( $control_atts['hideOnScreenSize'][ snake_to_camel_case( $size ) ] )
-			? $control_atts['hideOnScreenSize'][ snake_to_camel_case( $size ) ]
-			: false;
+    foreach ( $sizes as $size ) {
+        if ( ! $has_advanced_controls && in_array( $size, array( 'extra_large', 'extra_small' ), true ) ) {
+            continue;
+        }
 
-		// If advanced controls are not enabled, don't print the corresponding
-		// classes.
-		if (
-			! $has_advanced_controls &&
-			( 'extra_large' === $size || 'extra_small' === $size )
-		) {
-			continue;
-		}
+        if ( ! $has_print_controls && 'print' === $size ) {
+            continue;
+        }
 
-		if ( $enabled && $is_set ) {
-			array_push(
-				$custom_classes,
-				'block-visibility-hide-' . str_replace( '_', '-', $size ) . '-screen'
-			);
-		}
-	}
+        $enabled = get_setting(
+            $settings,
+            'visibility_controls',
+            'screen_size',
+            'controls',
+            $size,
+            true
+        );
 
-	return $custom_classes;
+        $is_set = isset( $control_atts['hideOnScreenSize'][ snake_to_camel_case( $size ) ] ) ? $control_atts['hideOnScreenSize'][ snake_to_camel_case( $size ) ] : false;
+
+        if ( $enabled && $is_set ) {
+            if ( 'print' === $size ) {
+                if ( 'noPrint' === $is_set ) {
+                    $custom_classes[] = 'block-visibility-no-print';
+                } elseif ( 'printOnly' === $is_set ) {
+                    $custom_classes[] = 'block-visibility-print-only';
+                }
+            } else {
+                $custom_classes[] = 'block-visibility-hide-' . str_replace( '_', '-', $size ) . '-screen';
+            }
+        }
+    }
+
+    return $custom_classes;
 }
 add_filter( 'block_visibility_control_set_add_custom_classes', __NAMESPACE__ . '\add_screen_size_classes', 10, 3 );
 
@@ -196,6 +205,7 @@ function get_default_styles( $settings ) {
 	$large_enabled  = get_setting( $settings, 'visibility_controls', 'screen_size', 'controls', 'large', true );
 	$medium_enabled = get_setting( $settings, 'visibility_controls', 'screen_size', 'controls', 'medium', true );
 	$small_enabled  = get_setting( $settings, 'visibility_controls', 'screen_size', 'controls', 'small', true );
+	$print_enabled  = get_setting( $settings, 'visibility_controls', 'screen_size', 'enable_print_controls', null, false );
 
 	// Render styles.
 	$spacer = '
@@ -233,6 +243,21 @@ function get_default_styles( $settings ) {
 }';
 	}
 
+	if ( $print_enabled ) {
+		$prev_styles = $styles ? $styles . $spacer : $styles;
+		$styles      = $prev_styles . '/* Print */
+@media print {
+	.block-visibility-no-print {
+		display: none !important;
+	}
+}
+@media screen {
+	.block-visibility-print-only {
+		display: none !important;
+	}
+}';
+	}
+
 	if ( ! $styles ) {
 		$styles = '/* All screen size controls have been disabled. */';
 	}
@@ -262,6 +287,7 @@ function get_advanced_styles( $settings ) {
 	$medium_enabled      = get_setting( $settings, 'visibility_controls', 'screen_size', 'controls', 'medium', true );
 	$small_enabled       = get_setting( $settings, 'visibility_controls', 'screen_size', 'controls', 'small', true );
 	$extra_small_enabled = get_setting( $settings, 'visibility_controls', 'screen_size', 'controls', 'extra_small', true );
+	$print_enabled       = get_setting( $settings, 'visibility_controls', 'screen_size', 'enable_print_controls', null, false );
 
 	// Render styles.
 	$spacer = '

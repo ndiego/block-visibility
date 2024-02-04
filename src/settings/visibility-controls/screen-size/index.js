@@ -42,6 +42,7 @@ export default function ScreenSize( props ) {
 				extra_small: true,
 			},
 			enable_advanced_controls: false,
+			enable_print_controls: false,
 			enable_frontend_css: true,
 		};
 	} else {
@@ -56,7 +57,7 @@ export default function ScreenSize( props ) {
 					setVisibilityControls={ setVisibilityControls }
 					screenSize={ screenSize }
 					enableAdvancedControls={
-						screenSize.enable_advanced_controls
+						screenSize?.enable_advanced_controls
 					}
 				/>
 				<ScreenSizeControls
@@ -64,13 +65,14 @@ export default function ScreenSize( props ) {
 					setVisibilityControls={ setVisibilityControls }
 					screenSize={ screenSize }
 					enableAdvancedControls={
-						screenSize.enable_advanced_controls
+						screenSize?.enable_advanced_controls
 					}
 				/>
 			</div>
 			<PreviewStyles
 				screenSize={ screenSize }
-				enableAdvancedControls={ screenSize.enable_advanced_controls }
+				enableAdvancedControls={ screenSize?.enable_advanced_controls }
+				enablePrintControls={ screenSize?.enable_print_controls }
 			/>
 		</>
 	);
@@ -81,14 +83,33 @@ export default function ScreenSize( props ) {
 				'Enable advanced screen size controls.',
 				'block-visibility'
 			) }
-			checked={ screenSize.enable_advanced_controls }
+			checked={ screenSize?.enable_advanced_controls }
 			onChange={ () => {
 				setVisibilityControls( {
 					...visibilityControls,
 					screen_size: {
 						...screenSize,
 						enable_advanced_controls:
-							! screenSize.enable_advanced_controls,
+							! screenSize?.enable_advanced_controls,
+					},
+				} );
+			} }
+		/>
+	);
+
+	let enablePrintControls = (
+		<ToggleControl
+			label={ __(
+				'Enable print controls.',
+				'block-visibility'
+			) }
+			checked={ screenSize?.enable_print_controls }
+			onChange={ () => {
+				setVisibilityControls( {
+					...visibilityControls,
+					screen_size: {
+						...screenSize,
+						enable_print_controls: ! screenSize?.enable_print_controls,
 					},
 				} );
 			} }
@@ -101,13 +122,13 @@ export default function ScreenSize( props ) {
 				'Load screen size CSS on the frontend of this website.',
 				'block-visibility'
 			) }
-			checked={ screenSize.enable_frontend_css }
+			checked={ screenSize?.enable_frontend_css }
 			onChange={ () => {
 				setVisibilityControls( {
 					...visibilityControls,
 					screen_size: {
 						...screenSize,
-						enable_frontend_css: ! screenSize.enable_frontend_css,
+						enable_frontend_css: ! screenSize?.enable_frontend_css,
 					},
 				} );
 			} }
@@ -136,13 +157,13 @@ export default function ScreenSize( props ) {
 							'Enable the Screen Size controls.',
 							'block-visibility'
 						) }
-						checked={ screenSize.enable }
+						checked={ screenSize?.enable }
 						onChange={ () => {
 							setVisibilityControls( {
 								...visibilityControls,
 								screen_size: {
 									...screenSize,
-									enable: ! screenSize.enable,
+									enable: ! screenSize?.enable,
 								},
 							} );
 						} }
@@ -165,6 +186,16 @@ export default function ScreenSize( props ) {
 						) }
 						subMessage={ __(
 							'Note that once enabled, any block that is only using the advanced controls to hide at extra large or extra small breakpoints will become visible again if you disable this setting in the future.',
+							'block-visibility'
+						) }
+						link={ links.settingsScreenSize }
+					/>
+				</div>
+				<div className="settings-type__toggle has-info-popover subsetting">
+					{ enablePrintControls }
+					<InformationPopover
+						message={ __(
+							'Enable the ability to restrict block visibility when the page is printed. You can also specify blocks that are only visible when printed.',
 							'block-visibility'
 						) }
 						link={ links.settingsScreenSize }

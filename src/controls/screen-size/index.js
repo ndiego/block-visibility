@@ -11,6 +11,7 @@ import {
 	Disabled,
 	ExternalLink,
 	Notice,
+	SelectControl,
 	ToggleControl,
 } from '@wordpress/components';
 import { createInterpolateElement } from '@wordpress/element';
@@ -51,6 +52,13 @@ export default function ScreenSize( props ) {
 		false // Default to false if there are no saved settings.
 	);
 
+	const enablePrintControls = isControlSettingEnabled(
+		settings,
+		'screen_size',
+		'enable_print_controls',
+		false // Default to false if there are no saved settings.
+	);
+
 	// Get the screen size control settings.
 	const controls = settings?.visibility_controls?.screen_size?.controls ?? {
 		extraLarge: true,
@@ -83,6 +91,7 @@ export default function ScreenSize( props ) {
 	const medium = hideOnScreenSize?.medium ?? false;
 	const small = hideOnScreenSize?.small ?? false;
 	const extraSmall = hideOnScreenSize?.extraSmall ?? false;
+	const print = hideOnScreenSize?.print ?? '';
 
 	let allScreenSizeFields = (
 		<>
@@ -174,6 +183,19 @@ export default function ScreenSize( props ) {
 				</h3>
 				<div className="controls-panel-item__control-fields">
 					{ allScreenSizeFields }
+					{ enablePrintControls && (
+						<SelectControl
+							className='components-print-control'
+							label={ __( 'Print visibility', 'block-visibility' ) }
+							value={ print }
+							options={[
+								{ label: __( 'Always visible', 'block-visibility' ), value: '' },
+								{ label: __( 'Hide when printed', 'block-visibility' ), value: 'noPrint' },
+								{ label: __( 'Only show when printed', 'block-visibility' ), value: 'printOnly' },
+							]}
+							onChange={ ( value ) => setAttribute( 'print', value ) }
+						/>
+					) }
 					{ incompatibleBlockTypes.includes( name ) && (
 						<Notice status="warning" isDismissible={ false }>
 							{ createInterpolateElement(

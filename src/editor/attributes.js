@@ -361,6 +361,9 @@ export const blockVisibilityProps = {
 										extraSmall: {
 											type: 'boolean',
 										},
+										print: {
+											type: 'string',
+										}
 									},
 								},
 							},
