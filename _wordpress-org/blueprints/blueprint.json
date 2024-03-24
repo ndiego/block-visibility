@@ -1,0 +1,29 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"features": {
+		"networking": true
+	},
+	"steps": [
+		{
+			"step": "login"
+		},
+		{
+			"step": "installPlugin",
+			"pluginZipFile": {
+				"resource": "wordpress.org/plugins",
+				"slug": "block-visibility"
+			},
+			"options": {
+				"activate": true
+			}
+		},
+		{
+			"step": "importFile",
+			"file": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/ndiego/block-visibility/main/_playground/demo-content.xml"
+			}
+		}
+	],
+	"landingPage": "/wp-admin/post.php?post=6&action=edit"
+}
