@@ -1,14 +1,14 @@
 # Block Visibility
 
-[![License](https://img.shields.io/badge/license-GPL--2.0%2B-green.svg)](https://github.com/ndiego/block-visibility/blob/master/LICENSE.txt) ![WordPress Plugin Active Installs](https://img.shields.io/wordpress/plugin/installs/block-visibility?color=%23007cba&label=Active%20Installs&logo=wordpress&style=flat-square)
+![Block Visibility](https://github.com/ndiego/block-visibility/blob/main/.wordpress-org/banner-1544x500.png)
 
-<img width="1544" alt="banner-1544x500" src="https://github.com/ndiego/block-visibility/blob/main/.wordpress-org/banner-1544x500.png?raw=true">
+[![Active Installs](https://img.shields.io/wordpress/plugin/installs/block-visibility?logo=wordpress&logoColor=%23fff&label=Active%20Installs&labelColor=%230F172A&color=%230F172A)](https://wordpress.org/plugins/social-sharing-block/) [![Playground Demo Link](https://img.shields.io/wordpress/plugin/v/block-visibility?logo=wordpress&logoColor=%23fff&label=Playground%20Demo&labelColor=%233858e9&color=%233858e9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/ndiego/block-visibility/main/_playground/blueprint.json)
 
 [Block Visibility](https://wordpress.org/plugins/block-visibility/) allows you to dynamically control which blocks are visible on your WordPress website and who can see them, which includes the ability to schedule blocks.
 
 Block Visibility is built exclusively for the WordPress Editor (Gutenberg) and is designed to work with **any** WordPress block. This includes blocks natively provided by WordPress, third-party blocks, and even block-based widgets.
 
-Watch the [Plugin Overview](https://www.youtube.com/watch?v=CW1L4vBpXjw) demo video to get started with Block Visibility. You can also [test the plugin in your browser](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/ndiego/block-visibility/main/.playground/blueprint.json) using Playground.
+Watch the [Plugin Overview](https://www.youtube.com/watch?v=CW1L4vBpXjw) demo video to get started with Block Visibility.
 
 ## Integrations
 
