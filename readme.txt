@@ -2,8 +2,8 @@
 Author URI:        https://www.nickdiego.com/?bv_query=readme
 Contributors:      ndiego, outermostdesign
 Tags:              visibility, dynamic content, conditional content, conditional blocks, restrict blocks
-Requires at least: 6.2
-Tested up to:      6.4
+Requires at least: 6.3
+Tested up to:      6.5
 Requires PHP:      7.4
 Stable tag:        3.3.0
 License:           GPL-2.0
@@ -190,6 +190,14 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 The **one exception** to this is the Screen Size block controls. Visibility by screen size requires the use of CSS. This CSS is loaded to the front end of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary styles yourself. Visit the plugin [Knowledge Base](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) to learn more.
 
 == Changelog ===
+
+= 3.4.0 - 2024-01-18 =
+
+**Changed**
+
+* Update Playground blueprint with improved demo content.
+* Update "Tested up to" to WordPress 6.5. 
+* Update "Requires at least" to WordPress 6.3.
 
 = 3.3.0 - 2024-01-18 =
 
