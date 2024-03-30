@@ -659,7 +659,7 @@ $mobile: 426px;
 					.subsetting {
 						margin-left: 24px;
 					}
-	
+					
 					.settings-label {
 						align-items: center;
 						display: flex;
@@ -668,9 +668,13 @@ $mobile: 426px;
 						margin-bottom: 15px;
 						margin-top: 30px;
 						text-transform: uppercase;
-	
-						&:first-child {
-							margin-top: 0;
+					}
+
+					&> {
+						.settings-label {
+							&:first-child {
+								margin-top: 0;
+							}
 						}
 					}
 	

@@ -105,6 +105,45 @@ export default function Editor( props ) {
 		);
 	}
 
+	let contextualBlockOpacitySetting = (
+		<>
+			<div className="settings-label">
+				<span>
+					{ __( 'Contextual Block Opacity', 'block-visibility' ) }
+				</span>
+			</div>
+			<div className="settings-type__toggle has-info-popover">
+				<ToggleControl
+					label={ __(
+						'Reduce block opacity when visibility controls are applied.',
+						'block-visibility'
+					) }
+					checked={ enableBlockOpacity }
+					onChange={ () => {
+						setPluginSettings( {
+							...pluginSettings,
+							enable_block_opacity: ! enableBlockOpacity,
+						} );
+					} }
+				/>
+				<InformationPopover
+					message={ __(
+						'Combining contextual indicators with reduced block opacity can assist users in quickly determining which blocks have active visibility controls.',
+						'block-visibility'
+					) }
+				/>
+			</div>
+			{ contextualBlockOpacity }
+		</>
+	);
+
+	// Contextual opacity requires contextual indicators to be enabled.
+	if ( ! enableContextualIndicators ) {
+		contextualBlockOpacitySetting = (
+			<Disabled>{ contextualBlockOpacitySetting }</Disabled>
+		);
+	}
+
 	return (
 		<div className="settings-panel">
 			<div className="settings-panel__header">
@@ -148,33 +187,7 @@ export default function Editor( props ) {
 					/>
 				</div>
 				{ contextualIndicatorColorPicker }
-				<div className="settings-label">
-					<span>
-						{ __( 'Contextual Block Opacity', 'block-visibility' ) }
-					</span>
-				</div>
-				<div className="settings-type__toggle has-info-popover">
-					<ToggleControl
-						label={ __(
-							'Reduce block opacity when visibility controls are applied.',
-							'block-visibility'
-						) }
-						checked={ enableBlockOpacity }
-						onChange={ () => {
-							setPluginSettings( {
-								...pluginSettings,
-								enable_block_opacity: ! enableBlockOpacity,
-							} );
-						} }
-					/>
-					<InformationPopover
-						message={ __(
-							'Combining contextual indicators with reduced block opacity can assist users in quickly determining which blocks have active visibility controls.',
-							'block-visibility'
-						) }
-					/>
-				</div>
-				{ contextualBlockOpacity }
+				{ contextualBlockOpacitySetting }
 				<div className="settings-label">
 					<span>
 						{ __( 'Toolbar Controls', 'block-visibility' ) }
