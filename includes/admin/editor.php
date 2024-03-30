@@ -60,9 +60,7 @@ function enqueue_editor_scripts() {
 add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_scripts' );
 
 /**
- * Enqueue plugin specific editor styles
- *
- * @TODO Move the contextual styles to add_editor_style when fixed in core.
+ * Enqueue plugin specific editor styles.
  *
  * @since 2.0.0
  */
@@ -77,6 +75,15 @@ function enqueue_editor_styles() {
 		array(),
 		$asset_file['version']
 	);
+}
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_styles' );
+
+/**
+ * Enqueue block specific editor styles (contextual indicators, opacity, etc.)
+ *
+ * @since 3.4.0
+ */
+function enqueue_block_editor_styles() {
 
 	// Load the contextual indicator styles if enabled.
 	if ( get_plugin_setting( 'enable_contextual_indicators', true ) ) {
@@ -132,13 +139,13 @@ function enqueue_editor_styles() {
 			$inline_style = '.block-visibility__has-visibility:not(.is-selected):not(.has-child-selected)' . $excluded_blocks_selectors . ' > *:not(.wp-block-cover__background) { opacity: ' . $opacity . ' }';
 
 			wp_add_inline_style(
-				'block-visibility-editor-styles',
+				'block-visibility-contextual-indicator-styles',
 				$inline_style
 			);
 		}
 	}
 }
-add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_styles' );
+add_action( 'enqueue_block_assets', __NAMESPACE__ . '\enqueue_block_editor_styles' );
 
 /**
  * Fetch the value of the given plugin setting.
