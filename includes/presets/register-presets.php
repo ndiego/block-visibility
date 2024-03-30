@@ -23,6 +23,7 @@ function register_visibility_preset_post_type() {
 		'labels'       => $labels,
 		'public'       => false,
 		'query_var'    => false,
+		'rewrite'      => false,
 		'show_in_rest' => true,
 		'supports'     => array( 'title', 'custom-fields' ),
 	);
