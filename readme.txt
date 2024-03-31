@@ -205,6 +205,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 * To use conditional opacity, you now must also have conditional indicators active. 
 * Set rewrites to false for the `visibility_preset` post type.
 * Update the deprecated `__experimentalGetSettings` function with the stable `__getSettings` version.
+* [WooCommerce] When retrieving orders, both processing and completed orders are now included.
 
 **Fixed**
 
