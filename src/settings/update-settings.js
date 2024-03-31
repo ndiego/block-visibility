@@ -8,11 +8,20 @@ import { assign } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Animate, Button, Modal, Spinner } from '@wordpress/components';
+import {
+	Animate,
+	Button,
+	Modal,
+	Spinner,
+	DropdownMenu,
+	MenuGroup,
+	MenuItem,
+} from '@wordpress/components';
 import { store as coreStore } from '@wordpress/core-data';
 import { useDispatch } from '@wordpress/data';
-import { useState } from '@wordpress/element';
-import { cloud, Icon } from '@wordpress/icons';
+import { useRef, useState } from '@wordpress/element';
+import { cloud, Icon, moreVertical } from '@wordpress/icons';
+import { downloadBlob } from '@wordpress/blob';
 
 /**
  * Renders the update settings buttons and animation
@@ -75,6 +84,100 @@ export default function UpdateSettings( props ) {
 		}
 	}
 
+	const ImportJsonComponent = () => {
+		// Use useRef to reference the hidden file input element
+		const fileInputRef = useRef( null );
+
+		// Function to trigger the file input click
+		const handleImportClick = () => {
+			fileInputRef.current.click();
+		};
+
+		// Function to handle file selection and read the file
+		const handleFileChange = ( event ) => {
+			const file = event.target.files[ 0 ];
+			if ( ! file ) {
+				return;
+			}
+
+			const reader = new window.FileReader();
+			reader.onload = ( e ) => {
+				try {
+					// Parse the JSON content to an object
+					const jsonObj = JSON.parse( e.target.result );
+					console.log( jsonObj ); // Handle the parsed object here
+					// For example, you could set this to state or pass it up to a parent component
+				} catch ( error ) {
+					console.error( 'Error parsing JSON:', error );
+				}
+			};
+
+			reader.readAsText( file );
+		};
+
+		return (
+			<MenuItem
+				onClick={ () => handleImportClick() }
+				disabled={ status === 'saving' }
+			>
+				{ __( 'Import', 'block-visibility' ) }
+				<input
+					type="file"
+					ref={ fileInputRef }
+					onChange={ handleFileChange }
+					style={ { display: 'none' } }
+					accept=".json"
+				/>
+			</MenuItem>
+		);
+	};
+
+	const settingToolsDropdown = (
+		<DropdownMenu
+			className="setting-tools-dropdown"
+			label={ __( 'Setting Tools', 'block-visibility' ) }
+			icon={ moreVertical }
+			popoverProps={ {
+				focusOnMount: 'container',
+				placement: 'bottom-end',
+			} }
+			toggleProps={ {
+				isSmall: true,
+			} }
+		>
+			{ ( { onClose } ) => (
+				<>
+					<MenuGroup
+						label={ __( 'Setting Tools', 'block-visibility' ) }
+					>
+						<MenuItem
+							onClick={ () =>
+								downloadBlob(
+									'block-visibility-settings.json',
+									JSON.stringify( settings, null, 2 ),
+									'application/json'
+								)
+							}
+							disabled={ status === 'saving' }
+						>
+							{ __( 'Export', 'block-visibility' ) }
+						</MenuItem>
+						<ImportJsonComponent />
+						<MenuItem
+							onClick={ () => {
+								setResetModalOpen( true );
+								onClose();
+							} }
+							disabled={ status === 'saving' }
+						>
+							{ __( 'Reset', 'block-visibility' ) }
+						</MenuItem>
+					</MenuGroup>
+				</>
+			) }
+		</DropdownMenu>
+	);
+
 	return (
 		<>
 			<div className="setting-controls__save-settings">
@@ -122,6 +225,7 @@ export default function UpdateSettings( props ) {
 				>
 					{ updateButton }
 				</Button>
+				{ settingToolsDropdown }
 			</div>
 			{ resetModalOpen && (
 				<Modal
