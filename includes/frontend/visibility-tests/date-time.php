@@ -14,7 +14,6 @@ defined( 'ABSPATH' ) || exit;
  * WordPress dependencies
  */
 use DateTime;
-use DateTimeZone;
 
 /**
  * Internal dependencies
@@ -142,8 +141,10 @@ function run_schedule_test( $start, $end, $is_seasonal ) {
 	}
 
 	// Current time based on the date/time settings set in the WP admin.
-	$current = current_datetime();
+	$currentImmutable = current_datetime();
+	$current          = DateTime::createFromImmutable( $currentImmutable );
 
+	// Seasonal schedules require both a start and end date.
 	if ( $is_seasonal && $start && $end ) {
 
 		// Normalize both dates to the current year for comparison.
@@ -155,11 +156,11 @@ function run_schedule_test( $start, $end, $is_seasonal ) {
 		// Adjust end date to the next year if it comes before the start date.
 		if ( $start > $end ) {
 			$end->modify( '+1 year' );
-		}
 
-		// Handle cases where the current date is at the start of the year but the date range spans the new year.
-		if ( $start > $end && $current < $start ) {
-			$current->modify( '+1 year' );
+			// Handle cases where the current date is at the start of the year but the date range spans the new year.
+			if ( $current < $start ) {
+				$current->modify( '+1 year' );
+			}
 		}
 
 		// Check if the current date falls between the normalized start and end dates.
