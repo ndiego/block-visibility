@@ -562,6 +562,10 @@ $mobile: 426px;
 
 						.select-control-container {
 							min-width: 50%;
+
+							.settings-label {
+								margin-top: 0;
+							}
 						}
 	
 						&:last-child {
