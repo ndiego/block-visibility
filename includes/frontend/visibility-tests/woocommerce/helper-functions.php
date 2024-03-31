@@ -190,7 +190,7 @@ function get_payments_by_date() {
 		wc_get_orders(
 			array(
 				'customer_id' => get_current_user_id(),
-				'status'      => array( 'wc-completed' ),
+				'status'      => array( 'wc-completed', 'wc-processing' ),
 			)
 		);
 
