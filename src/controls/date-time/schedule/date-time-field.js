@@ -17,6 +17,7 @@ export default function DateTimeField( props ) {
 		label,
 		title,
 		hasDateTime,
+		isSeasonal,
 		setAttribute,
 		setPickerOpen,
 		setPickerType,
@@ -31,7 +32,13 @@ export default function DateTimeField( props ) {
 					setPickerOpen( true );
 				} }
 			>
-				<span>{ label }</span>
+				<span
+					className={
+						isSeasonal && ! hasDateTime && 'seasonal-label'
+					}
+				>
+					{ label }
+				</span>
 			</Button>
 			{ hasDateTime && (
 				<Button

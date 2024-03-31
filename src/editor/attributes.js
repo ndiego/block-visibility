@@ -144,6 +144,9 @@ export const blockVisibilityProps = {
 											end: {
 												type: 'string',
 											},
+											isSeasonal: {
+												type: 'boolean',
+											},
 											dayOfWeek: {
 												type: 'object',
 												properties: {

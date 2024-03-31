@@ -570,8 +570,16 @@
                                         padding: 2px;
                                         margin: 5px 4px;
                                     }
+
+									.seasonal-label {
+										color: rgb(117, 117, 117);
+									}
                                 }
                             }
+                        }
+
+                        .control-fields-item__is-seasonal {
+                            margin-top: 16px;
                         }
                     }
 
@@ -778,6 +786,23 @@
             font-weight: 600;
             line-height: 1.2;
             margin: 0;
+        }
+    }
+
+    // Hide the year field/label when schedule is seasonal.
+    &.is-seasonal {
+        .components-datetime__time-field-year {
+            display: none;
+        }
+
+        // Not the ideal solution, but does the trick.
+        .components-datetime__date {
+            h3.components-heading {
+                font-size: 0;
+                strong {
+                    font-size: 13px;
+                }
+            }
         }
     }
 

@@ -11,6 +11,12 @@ namespace BlockVisibility\Frontend\VisibilityTests;
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * WordPress dependencies
+ */
+use DateTime;
+use DateTimeZone;
+
+/**
  * Internal dependencies
  */
 use function BlockVisibility\Utils\is_control_enabled;
@@ -60,11 +66,12 @@ function date_time_test( $is_visible, $settings, $controls ) {
 			$enable = isset( $schedule['enable'] ) ? $schedule['enable'] : true;
 
 			if ( $enable ) {
-				$start = isset( $schedule['start'] ) ? $schedule['start'] : null;
-				$end   = isset( $schedule['end'] ) ? $schedule['end'] : null;
+				$start       = isset( $schedule['start'] ) ? $schedule['start'] : null;
+				$end         = isset( $schedule['end'] ) ? $schedule['end'] : null;
+				$is_seasonal = isset( $schedule['isSeasonal'] ) ? $schedule['isSeasonal'] : false;
 
 				$test_result =
-					run_schedule_test( $start, $end );
+					run_schedule_test( $start, $end, $is_seasonal );
 
 				// Run the day of week test if enabled.
 				if ( is_control_enabled( $settings, 'date_time', 'enable_day_of_week' ) ) {
@@ -113,11 +120,12 @@ add_filter( 'block_visibility_control_set_is_block_visible', __NAMESPACE__ . '\d
  *
  * @since 1.8.0
  *
- * @param string $start The start date/time string.
- * @param string $end   The end date/time string.
- * @return boolean      Return pass if should be visible, fail if not.
+ * @param string  $start       The start date/time string.
+ * @param string  $end         The end date/time string.
+ * @param boolean $is_seasonal Whether the schedule is seasonal or not.
+ * @return boolean             Return pass if should be visible, fail if not.
  */
-function run_schedule_test( $start, $end ) {
+function run_schedule_test( $start, $end, $is_seasonal ) {
 
 	// If there is no saved start or end date, skip the test unless
 	// hide_on_schedules is set to true.
@@ -129,14 +137,36 @@ function run_schedule_test( $start, $end ) {
 	$end   = $end ? create_date_time( $end, false ) : null;
 
 	// If the start date is after the end date, skip test and throw error.
-	if ( ( $start && $end ) && $start > $end ) {
+	if ( ( $start && $end ) && $start > $end && ! $is_seasonal ) {
 		return 'error';
 	}
 
 	// Current time based on the date/time settings set in the WP admin.
 	$current = current_datetime();
 
-	if ( ( $start && $start > $current ) || ( $end && $end < $current ) ) {
+	if ( $is_seasonal && $start && $end ) {
+
+		// Normalize both dates to the current year for comparison.
+		$current_year = $current->format( 'Y' );
+
+		$start->setDate( $current_year, $start->format( 'm' ), $start->format( 'd' ) );
+		$end->setDate( $current_year, $end->format( 'm' ), $end->format( 'd' ) );
+
+		// Adjust end date to the next year if it comes before the start date.
+		if ( $start > $end ) {
+			$end->modify( '+1 year' );
+		}
+
+		// Handle cases where the current date is at the start of the year but the date range spans the new year.
+		if ( $start > $end && $current < $start ) {
+			$current->modify( '+1 year' );
+		}
+
+		// Check if the current date falls between the normalized start and end dates.
+		if ( $current < $start || $current > $end ) {
+			return 'hidden';
+		}
+	} elseif ( ( $start && $start > $current ) || ( $end && $end < $current ) ) {
 		return 'hidden';
 	}
 

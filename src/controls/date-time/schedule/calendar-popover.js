@@ -1,10 +1,15 @@
 /**
+ * External dependencies
+ */
+import classnames from 'classnames';
+
+/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
 import { Button, DateTimePicker, Popover } from '@wordpress/components';
 import { closeSmall } from '@wordpress/icons';
-import { __experimentalGetSettings } from '@wordpress/date'; // eslint-disable-line
+import { getSettings } from '@wordpress/date'; // eslint-disable-line
 
 /**
  * Renders the popover for the date/time calender input
@@ -13,9 +18,15 @@ import { __experimentalGetSettings } from '@wordpress/date'; // eslint-disable-l
  * @param {Object} props All the props passed to this function
  */
 export default function CalendarPopover( props ) {
-	const { currentDate, label, setAttribute, setPickerOpen, pickerType } =
-		props;
-	const dateSettings = __experimentalGetSettings();
+	const {
+		currentDate,
+		label,
+		setAttribute,
+		setPickerOpen,
+		pickerType,
+		isSeasonal,
+	} = props;
+	const dateSettings = getSettings();
 
 	// To know if the current time format is a 12 hour time, look for "a".
 	// Also make sure this "a" is not escaped by a "/".
@@ -30,7 +41,9 @@ export default function CalendarPopover( props ) {
 
 	return (
 		<Popover
-			className="block-visibility__date-time-popover"
+			className={ classnames( 'block-visibility__date-time-popover', {
+				'is-seasonal': isSeasonal,
+			} ) }
 			focusOnMount={ true }
 			onClose={ () => setPickerOpen( false ) }
 			placement="left-start"

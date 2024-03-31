@@ -16,6 +16,7 @@ import {
 	MenuItem,
 	Notice,
 	TextControl,
+	ToggleControl,
 } from '@wordpress/components';
 import { calendar, pencil, moreVertical } from '@wordpress/icons';
 import { useState } from '@wordpress/element';
@@ -65,6 +66,7 @@ export default function Schedule( props ) {
 	const enable = scheduleAtts?.enable ?? true;
 	const start = scheduleAtts?.start ?? null;
 	const end = scheduleAtts?.end ?? null;
+	const isSeasonal = scheduleAtts?.isSeasonal ?? false;
 	const dowEnabled = scheduleAtts?.dayOfWeek?.enable ?? false;
 	const todEnabled = scheduleAtts?.timeOfDay?.enable ?? false;
 
@@ -73,11 +75,17 @@ export default function Schedule( props ) {
 	const scheduleTitle = title ? title : __( 'Schedule', 'block-visibility' );
 	const startDateLabel = formatDateLabel(
 		start,
-		__( 'Now', 'block-visibility' )
+		isSeasonal
+			? __( 'Select start date', 'block-visibility' )
+			: __( 'Now', 'block-visibility' ),
+		isSeasonal
 	);
 	const endDateLabel = formatDateLabel(
 		end,
-		__( 'Forever', 'block-visibility' )
+		isSeasonal
+			? __( 'Select end date', 'block-visibility' )
+			: __( 'Forever', 'block-visibility' ),
+		isSeasonal
 	);
 
 	// If there is no start date/time selected, but there is an end, default the
@@ -113,8 +121,10 @@ export default function Schedule( props ) {
 
 	// If the start time is greater or equal to the end time, display a warning.
 	let alert = false;
-	if ( start && end ) {
-		alert = start >= end ? true : false;
+	if ( ! isSeasonal && start && end ) {
+		alert = start >= end;
+	} else if ( isSeasonal && ( ( start && ! end ) || ( ! start && end ) ) ) {
+		alert = true;
 	}
 
 	function duplicateSchedule() {
@@ -258,6 +268,7 @@ export default function Schedule( props ) {
 							) }
 							dateType="start"
 							hasDateTime={ start }
+							isSeasonal={ isSeasonal }
 							setAttribute={ setAttribute }
 							setPickerType={ setPickerType }
 							setPickerOpen={ setPickerOpen }
@@ -275,6 +286,7 @@ export default function Schedule( props ) {
 							) }
 							dateType="end"
 							hasDateTime={ end }
+							isSeasonal={ isSeasonal }
 							setAttribute={ setAttribute }
 							setPickerType={ setPickerType }
 							setPickerOpen={ setPickerOpen }
@@ -296,16 +308,37 @@ export default function Schedule( props ) {
 									: __( 'End Date/Time', 'block-visibility' )
 							}
 							isOpen={ setPickerOpen }
+							isSeasonal={ isSeasonal }
 							setAttribute={ setAttribute }
 							setPickerOpen={ setPickerOpen }
 							pickerType={ pickerType }
 						/>
 					) }
 				</div>
-				{ alert && (
+				<div className="control-fields-item__is-seasonal">
+					<ToggleControl
+						label={ __(
+							'Make schedule seasonal',
+							'block-visibility'
+						) }
+						checked={ isSeasonal }
+						onChange={ () =>
+							setAttribute( 'isSeasonal', false, ! isSeasonal )
+						}
+					/>
+				</div>
+				{ alert && ! isSeasonal && (
 					<Notice status="warning" isDismissible={ false }>
 						{ __(
 							'The start time is after the stop time. Please fix for date/time settings to function properly.',
+							'block-visibility'
+						) }
+					</Notice>
+				) }
+				{ alert && isSeasonal && (
+					<Notice status="warning" isDismissible={ false }>
+						{ __(
+							'When creating a seasonal schedule, you much select both a start and end date.',
 							'block-visibility'
 						) }
 					</Notice>
