@@ -191,13 +191,24 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ===
 
-= 3.4.0 - 2024-01-18 =
+= 3.4.0 - 2024-04-01 =
+
+**Added**
+
+* [Date & Time] Add the ability to set seasonal (year-agnostic) schedules.
 
 **Changed**
 
 * Update Playground blueprint with improved demo content.
 * Update "Tested up to" to WordPress 6.5. 
 * Update "Requires at least" to WordPress 6.3.
+* To use conditional opacity, you now must also have conditional indicators active. 
+* Set rewrites to false for the `visibility_preset` post type.
+* Update the deprecated `__experimentalGetSettings` function with the stable `__getSettings` version.
+
+**Fixed**
+
+* Fix enqueue styles console errors by enqueuing the conditional indicator stylesheet using `enqueue_block_assets`.
 
 = 3.3.0 - 2024-01-18 =
 
