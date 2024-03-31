@@ -64,13 +64,6 @@ export default function hasDateTime(
 			scheduleTest = false;
 		}
 
-		// This test needs to go last to check for config error.
-		if ( enable ) {
-			if ( start && end && start >= end ) {
-				scheduleTest = false;
-			}
-		}
-
 		indicatorTestArray.push( scheduleTest );
 	} );
 
