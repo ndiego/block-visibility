@@ -3,7 +3,7 @@
  */
 import { __, _n } from '@wordpress/i18n';
 import { Button, Notice } from '@wordpress/components';
- import { __experimentalGetSettings } from '@wordpress/date'; // eslint-disable-line
+ import { getSettings } from '@wordpress/date'; // eslint-disable-line
 import { closeSmall } from '@wordpress/icons';
 
 /**
@@ -19,7 +19,7 @@ import TimePicker from './time-picker';
  */
 export default function TimeOfDay( props ) {
 	const { scheduleAtts, setAttribute } = props;
-	const dateSettings = __experimentalGetSettings();
+	const dateSettings = getSettings();
 
 	// To know if the current time format is a 12 hour time, look for "a".
 	// Also make sure this "a" is not escaped by a "/".

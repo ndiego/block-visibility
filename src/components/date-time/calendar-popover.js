@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { DatePicker, DateTimePicker, Popover } from '@wordpress/components';
-import { __experimentalGetSettings } from '@wordpress/date'; // eslint-disable-line
+import { getSettings } from '@wordpress/date'; // eslint-disable-line
 
 /**
  * Renders the popover for the date/time calender input
@@ -12,7 +12,7 @@ import { __experimentalGetSettings } from '@wordpress/date'; // eslint-disable-l
  */
 export default function CalendarPopover( props ) {
 	const { value, onDateChange, setPopoverOpen, includeTime } = props;
-	const dateSettings = __experimentalGetSettings();
+	const dateSettings = getSettings();
 
 	// To know if the current time format is a 12 hour time, look for "a".
 	// Also make sure this "a" is not escaped by a "/".

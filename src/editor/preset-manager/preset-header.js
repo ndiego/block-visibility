@@ -23,7 +23,7 @@ import {
 	VisuallyHidden,
 } from '@wordpress/components';
 import { Icon, moreVertical, plus, external } from '@wordpress/icons';
-import { __experimentalGetSettings, format } from '@wordpress/date'; // eslint-disable-line
+import { getSettings, format } from '@wordpress/date'; // eslint-disable-line
 
 /**
  * Internal dependencies.
@@ -134,7 +134,7 @@ export default function PresetHeader( props ) {
 	const enable = presetAttributes?.enable ?? true;
 	const hideBlock = presetAttributes?.hideBlock ?? false;
 	const layout = presetAttributes?.layout ?? 'columns';
-	const dateSettings = __experimentalGetSettings();
+	const dateSettings = getSettings();
 
 	function deletePreset() {
 		deleteEntityRecord( 'postType', 'visibility_preset', id );

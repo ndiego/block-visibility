@@ -9,7 +9,7 @@ import classnames from 'classnames';
 import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
 import { calendar, closeSmall } from '@wordpress/icons';
-import { __experimentalGetSettings, format } from '@wordpress/date'; // eslint-disable-line
+import { getSettings, format } from '@wordpress/date'; // eslint-disable-line
 
 /**
  * Renders the date/time field (buttons)
@@ -24,7 +24,7 @@ export default function DateTimeField( props ) {
 		? __( 'Select Date and Time…', 'block-visibility' )
 		: __( 'Select Date…', 'block-visibility' );
 
-	const dateSettings = __experimentalGetSettings();
+	const dateSettings = getSettings();
 
 	if ( value ) {
 		// Format the date time sting to match the WP admin display settings.
