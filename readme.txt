@@ -191,6 +191,12 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ===
 
+= 3.5.0 - 2024-TBD =
+
+**Fixed**
+
+* Fixed the `useCommand` import now that 6.3 is the minimum version.
+
 = 3.4.0 - 2024-04-01 =
 
 **Added**
