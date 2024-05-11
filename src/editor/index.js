@@ -14,6 +14,7 @@ import { addFilter, applyFilters } from '@wordpress/hooks';
 import { hasBlockSupport } from '@wordpress/blocks';
 import { registerPlugin } from '@wordpress/plugins';
 import { Modal } from '@wordpress/components';
+import { useCommand } from '@wordpress/commands';
 import { PluginMoreMenuItem } from '@wordpress/edit-post';
 
 /**
@@ -168,17 +169,13 @@ function TogglePresetManager() {
 	let canEdit = false;
 
 	// Allow the Command Palette to open the Preset Manager.
-	// Check for wp.commands and disable functionality in <6.3.
-	// @TODO remove check when minimum version bumped to 6.3+.
-	if ( wp.commands !== undefined ) {
-		wp.commands.useCommand( {
-			name: 'manage-visibility-presets',
-			label: __( 'Manage Visibility Presets', 'block-visibility' ),
-			icon: visibilityAlt,
-			callback: () => setModalOpen( true ),
-			context: 'block-editor',
-		} );
-	}
+	useCommand( {
+		name: 'manage-visibility-presets',
+		label: __( 'Manage Visibility Presets', 'block-visibility' ),
+		icon: visibilityAlt,
+		callback: () => setModalOpen( true ),
+		context: 'block-editor',
+	} );
 
 	// While roles should always be an array, double check.
 	if ( Array.isArray( roles ) ) {
