@@ -15,7 +15,11 @@ import { hasBlockSupport } from '@wordpress/blocks';
 import { registerPlugin } from '@wordpress/plugins';
 import { Modal } from '@wordpress/components';
 import { useCommand } from '@wordpress/commands';
-import { PluginMoreMenuItem } from '@wordpress/edit-post';
+
+// Needed for backward compatibility.
+import { PluginMoreMenuItem as PostEditorPluginMoreMenuItem } from '@wordpress/edit-post'; // Slot for the Post Editor.
+import { PluginMoreMenuItem as SiteEditorPluginMoreMenuItem } from '@wordpress/edit-site'; // Slot for the Site Editor.
+import { PluginMoreMenuItem as UnifiedPluginMoreMenuItem } from '@wordpress/editor';       // Slot for the unified Editor.
 
 /**
  * Internal dependencies
@@ -199,12 +203,29 @@ function TogglePresetManager() {
 
 	return (
 		<>
-			<PluginMoreMenuItem
-				icon={ visibilityAlt }
-				onClick={ () => setModalOpen( true ) }
-			>
-				{ __( 'Block Visibility Presets', 'block-visibility' ) }
-			</PluginMoreMenuItem>
+			{ UnifiedPluginMoreMenuItem ? (
+				<UnifiedPluginMoreMenuItem
+					icon={ visibilityAlt }
+					onClick={ () => setModalOpen( true ) }
+				>
+					{ __( 'Block Visibility Presets', 'block-visibility' ) }
+				</UnifiedPluginMoreMenuItem>
+			) : (
+				<>
+					<PostEditorPluginMoreMenuItem
+						icon={ visibilityAlt }
+						onClick={ () => setModalOpen( true ) }
+					>
+						{ __( 'Block Visibility Presets', 'block-visibility' ) }
+					</PostEditorPluginMoreMenuItem>
+					<SiteEditorPluginMoreMenuItem
+						icon={ visibilityAlt }
+						onClick={ () => setModalOpen( true ) }
+					>
+						{ __( 'Block Visibility Presets', 'block-visibility' ) }
+					</SiteEditorPluginMoreMenuItem>
+				</>
+			) }
 			{ isModalOpen && (
 				<Modal
 					className="block-visibility__preset-manager-modal"
