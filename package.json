@@ -17,7 +17,8 @@
 		"lint:js:src:fix": "wp-scripts lint-js ./src --fix",
 		"start": "wp-scripts start",
 		"packages-update": "wp-scripts packages-update",
-		"update-pot": "wp i18n make-pot . languages/block-visibility.pot --exclude=src"
+		"update-pot": "wp i18n make-pot . languages/block-visibility.pot --exclude=src",
+		"plugin-zip": "wp-scripts plugin-zip"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^24.6.0",
