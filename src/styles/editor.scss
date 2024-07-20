@@ -595,13 +595,14 @@
                                 margin-bottom: 0;
                             }
             
-                            .components-base-control__field {
+                            .components-base-control__field, 
+                            .components-base-control__field .components-h-stack {
                                 display: flex;
                                 flex-direction: column;
                                 margin-bottom: 0;
             
                                 .components-checkbox-control__input-container {
-                                    margin: 0 0 3px 0;
+                                    margin: 0;
                                 }
                             }
             
