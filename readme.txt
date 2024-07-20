@@ -5,7 +5,7 @@ Tags:              visibility, dynamic content, conditional content, conditional
 Requires at least: 6.4
 Tested up to:      6.6
 Requires PHP:      7.4
-Stable tag:        3.4.1
+Stable tag:        3.5.0
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -167,7 +167,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ===
 
-= 3.4.1 - 2024-07-20 =
+= 3.5.0 - 2024-07-20 =
 
 **Changed**
 
