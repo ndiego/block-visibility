@@ -178,7 +178,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 **Fixed**
 
 * [Date & Time] Fix style bug in the day-of-week controls.
-* Fix the `useCommand` import now that 6.3 is the minimum version.
+* Fix the `useCommand` import now that 6.4 is the minimum version.
 
 = 3.4.0 - 2024-04-01 =
 
