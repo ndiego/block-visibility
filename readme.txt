@@ -2,28 +2,22 @@
 Author URI:        https://www.nickdiego.com/?bv_query=readme
 Contributors:      ndiego, outermostdesign
 Tags:              visibility, dynamic content, conditional content, conditional blocks, restrict blocks
-Requires at least: 6.3
-Tested up to:      6.5
+Requires at least: 6.4
+Tested up to:      6.6
 Requires PHP:      7.4
-Stable tag:        3.4.0
+Stable tag:        3.4.1
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
-Show or hide any WordPress block with ease. Schedule when blocks should be visible. Restrict blocks to specific screen sizes, user roles, post types, and more.
+Easily show or hide any WordPress block. Schedule block visibility. Restrict blocks to specific screen sizes, user roles, post types, and more.
 
 == Description ==
 
-Effortlessly create dynamic content in WordPress that will increase conversions, enhance the user experience, and improve your workflow.
+Easily create dynamic content in WordPress that will increase conversions, enhance the user experience, and improve your workflow.
 
 With this **no-code** solution, control which blocks are visible on your website and who can see them. Schedule content to show or hide at a specific time. Display exclusive promotions to your customers or members. Restrict blocks to specific user roles, screen sizes, query strings, WooCommerce products, EDD downloads, ACF fields, WP Fusion tags, and more.
 
 Block Visibility is built exclusively for the WordPress Editor (Gutenberg) and is designed to work with **any** WordPress block. This includes blocks natively provided by WordPress, third-party blocks, and even block-based widgets.
-
-=== See How It Works ===
-
-https://youtu.be/CW1L4vBpXjw
-
-For more informational videos, visit our [YouTube channel](https://www.youtube.com/channel/UCDsTrm-1766AmNqwdzwJ4KQ).
 
 === Create Conditional Blocks in Seconds! ===
 
@@ -109,24 +103,6 @@ Block Visibility is designed to work with **any** block and is tested with these
 * [Easy Digital Downloads](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-how-to-use-the-easy-digital-downloads-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme)
 * [WP Fusion](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-wp-fusion-control/)
 
-**Compatibility**
-
-* Jetpack
-* CoBlocks
-* Redux Framework
-* Ultimate Add-ons for Gutenberg
-* Kadence Blocks
-* GenerateBlocks
-* Otter Blocks
-* Atomic Blocks
-* Gutentor
-* Stackable
-* Getwid
-* EditorsKit
-* Genesis Blocks
-
-Find an issue? Let us know in the plugin support forum, and we will investigate ASAP. Excellent compatibility with the greater WordPress block ecosystem is a top priority.
-
 === Stay Connected ===
 
 Stay up-to-date on Block Visibility using the links below. The plugin is also being developed transparently on GitHub, so give it a star and follow along! 😉
@@ -191,11 +167,18 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ===
 
-= 3.5.0 - 2024-TBD =
+= 3.4.1 - 2024-07-20 =
+
+**Changed**
+
+* Update "Tested up to" to WordPress 6.6. 
+* Update "Requires at least" to WordPress 6.4.
+* Update the `PluginMoreMenuItem` slot usage to support unified slots in 6.6 and ensure backward compatibility.
 
 **Fixed**
 
-* Fixed the `useCommand` import now that 6.3 is the minimum version.
+* [Date & Time] Fix style bug in the day-of-week controls.
+* Fix the `useCommand` import now that 6.3 is the minimum version.
 
 = 3.4.0 - 2024-04-01 =
 
