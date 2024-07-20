@@ -1,29 +1,45 @@
 {
 	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"landingPage": "/wp-admin/post.php?post=6&action=edit",
+	"login": true,
 	"features": {
 		"networking": true
 	},
 	"steps": [
 		{
-			"step": "login"
+			"step": "updateUserMeta",
+			"meta": {
+				"admin_color": "modern",
+				"show_welcome_panel": 0
+			},
+			"userId": 1
+		},
+		{
+			"step": "setSiteOptions",
+			"options": {
+				"blogname": "Block Visibility"
+			}
 		},
 		{
 			"step": "installPlugin",
 			"pluginZipFile": {
 				"resource": "wordpress.org/plugins",
 				"slug": "block-visibility"
-			},
-			"options": {
-				"activate": true
 			}
 		},
 		{
-			"step": "importFile",
+			"step": "installTheme",
+			"themeZipFile": {
+				"resource": "wordpress.org/themes",
+				"slug": "twentytwentyfour"
+			}
+		},
+		{
+			"step": "importWxr",
 			"file": {
 				"resource": "url",
 				"url": "https://raw.githubusercontent.com/ndiego/block-visibility/main/_playground/demo-content.xml"
 			}
 		}
-	],
-	"landingPage": "/wp-admin/post.php?post=6&action=edit"
+	]
 }

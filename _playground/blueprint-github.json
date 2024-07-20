@@ -23,8 +23,8 @@
 		{
 			"step": "installPlugin",
 			"pluginZipFile": {
-				"resource": "wordpress.org/plugins",
-				"slug": "block-visibility"
+				"resource": "url",
+				"url": "https://github-proxy.com/proxy/?repo=ndiego/block-visibility&branch=main"
 			}
 		},
 		{
