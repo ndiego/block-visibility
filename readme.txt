@@ -167,6 +167,16 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ===
 
+= 3.X.X - 2024-TBD =
+
+**Changed**
+
+* Update the `render_block` callback function to only fetch plugin settings if a block has visibility conditions set. 
+
+**Fixed**
+
+* Fix Widget Editor notice in WordPress 6.6+.
+
 = 3.5.0 - 2024-07-20 =
 
 **Changed**
