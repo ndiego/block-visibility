@@ -30,14 +30,9 @@ function enqueue_editor_scripts() {
 
 	// Remove wp-edit-post if on the Widgets screen, otherwise WordPress will throw an error.
 	if ( 'widgets' === get_current_screen()->id ) {
-		$dependencies = array_filter(
-			$dependencies,
-			function ( $dep ) {
-				return ( 'wp-edit-post' !== $dep );
-			}
-		);
+		$dependencies = array_diff( $dependencies, [ 'wp-editor', 'wp-edit-post', 'wp-edit-site' ] );
 	}
-
+	
 	wp_enqueue_script(
 		'block-visibility-editor-scripts',
 		BLOCK_VISIBILITY_PLUGIN_URL . 'build/block-visibility-editor.js',
