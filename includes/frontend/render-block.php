@@ -211,19 +211,19 @@ function append_content_classes( $block_content, $content_classes ) {
  */
 function render_with_visibility( $block_content, $block ) {
 
-	// Get the plugin core settings.
-	$settings   = get_option( 'block_visibility_settings' );
-	$attributes = isset( $block['attrs']['blockVisibility'] )
-		? $block['attrs']['blockVisibility']
-		: null;
+	// Get the visibility settings.
+	$attributes = $block['attrs']['blockVisibility'] ?? null;
 
-	// Make sure we are allowed to control visibility for this block type and
-	// ensure the block actually has visibility settings set. Otherwise, return
-	// the block content.
-	if (
-		is_block_type_disabled( $settings, $block ) ||
-		! isset( $attributes )
-	) {
+	// Return early if the block does not have visibility settings.
+	if ( ! $attributes ) {
+		return $block_content;
+	}
+	
+	// Get the plugin settings.
+	$settings = get_option( 'block_visibility_settings' );
+
+	// Return early if visibility control is disabled for this block type.
+	if ( is_block_type_disabled( $settings, $block ) ) {
 		return $block_content;
 	}
 
