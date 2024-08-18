@@ -11,6 +11,11 @@ namespace BlockVisibility\Frontend;
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * WordPress dependencies
+ */
+use WP_HTML_Tag_Processor;
+
+/**
  * Internal dependencies
  */
 use function BlockVisibility\Frontend\VisibilityTests\hide_block_test;
@@ -140,10 +145,7 @@ function add_custom_classes( $settings, $attributes ) {
  * Append custom classes to the block frontend content. This is used primarily
  * by the Screen Size control.
  *
- * This function is heavily influenced/taken from the WordPress core elements
- * block supports code: https://github.com/WordPress/wordpress-develop/blob/trunk/src/wp-includes/block-supports/elements.php
- *
- * @since 2.4.1
+ * @since 3.6.0
  *
  * @param string $block_content   The block frontend output.
  * @param array  $content_classes Custom classes to be added in array form.
@@ -157,47 +159,15 @@ function append_content_classes( $block_content, $content_classes ) {
 	}
 
 	// Remove duplicate classes and turn into string.
-	$classes = array_unique( $content_classes );
-	$classes = implode( ' ', $classes );
+	$class_string = implode( ' ', array_unique( $content_classes ) );
 
-	// Retrieve the opening tag of the first HTML element.
-	$html_element_matches = array();
-	preg_match( '/<[^>]+>/', $block_content, $html_element_matches, PREG_OFFSET_CAPTURE );
+	$tags = new WP_HTML_Tag_Processor( $block_content );
 
-	// In the case that a block is doing something unexpected with rendering
-	// block content, and there are not HTML element matches, bail.
-	if ( empty( $html_element_matches ) ) {
-		return $block_content;
+	if ( $tags->next_tag() ) {
+		$tags->add_class( $class_string );
 	}
 
-	$first_element = $html_element_matches[0][0];
-
-	// If the first HTML element has a class attribute just add the new class.
-	if ( strpos( $first_element, 'class="' ) !== false ) {
-		$block_content = preg_replace(
-			'/' . preg_quote( 'class="', '/' ) . '/',
-			'class="' . $classes . ' ',
-			$block_content,
-			1
-		);
-	} elseif ( strpos( $first_element, "class='" ) !== false ) {
-
-		// We also need to take into account markup that uses single quotes.
-		$block_content = preg_replace(
-			'/' . preg_quote( "class='", '/' ) . '/',
-			"class='" . $classes . ' ',
-			$block_content,
-			1
-		);
-	} else {
-
-		// If the first HTML element has no class attribute we should inject the
-		// attribute before the attribute at the end.
-		$first_element_offset = $html_element_matches[0][1];
-		$block_content        = substr_replace( $block_content, ' class="' . $classes . '"', $first_element_offset + strlen( $first_element ) - 1, 0 );
-	}
-
-	return $block_content;
+	return $tags->get_updated_html();
 }
 
 /**
@@ -238,7 +208,7 @@ function render_with_visibility( $block_content, $block ) {
 		$content_classes = add_custom_classes( $settings, $attributes );
 
 		if ( ! empty( $content_classes ) ) {
-			$block_content = append_content_classes( $block_content, $content_classes );
+			$block_content = append_content_classess( $block_content, $content_classes );
 		}
 
 		return $block_content;
