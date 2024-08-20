@@ -169,8 +169,13 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 = 3.X.X - 2024-TBD =
 
+**Added**
+
+* [Location] Added ability to show/hide a block if the current post has an excerpt.
+
 **Changed**
 
+* Front-end classes are now implemented using the HTML API.
 * Update the `render_block` callback function to only fetch plugin settings if a block has visibility conditions set. 
 
 **Fixed**
