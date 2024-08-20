@@ -174,12 +174,16 @@ function run_location_rule_tests( $rule ) {
 			$test_result = run_location_author_test( $rule );
 			break;
 
-		case 'attributesComments':
-			$test_result = run_location_comments_test( $rule );
-			break;
-
 		case 'attributesThumbnail':
 			$test_result = run_location_thumbnail_test( $rule );
+			break;
+
+		case 'attributesExcerpt':
+			$test_result = run_location_excerpt_test( $rule );
+			break;
+
+		case 'attributesComments':
+			$test_result = run_location_comments_test( $rule );
 			break;
 
 		case 'attributesHierarchy':
@@ -490,6 +494,82 @@ function run_location_author_test( $rule ) {
 }
 
 /**
+ * Run the Location thumbnail test.
+ *
+ * @since 3.0.0
+ *
+ * @param array $rule All rule settings.
+ * @return string     Returns 'visible', 'hidden', or 'error'.
+ */
+function run_location_thumbnail_test( $rule ) {
+
+	if ( empty( $rule['value'] ) ) {
+        return 'error';
+    }
+
+	$current_post_type  = get_post_type();
+
+	// If this rule is active and the post type does not support thumbnails, hide the block.
+	if ( ! post_type_supports( $current_post_type, 'thumbnail' ) ) {
+		return 'hidden';
+	}
+
+	// Assume error and try to disprove.
+	$test_result   = 'error';
+	$has_thumbnail = has_post_thumbnail();
+
+	switch ( $rule['value'] ) {
+        case 'hasThumbnail':
+            $test_result = $has_thumbnail ? 'visible' : 'hidden';
+            break;
+
+        case 'noThumbnail':
+            $test_result = ! $has_thumbnail ? 'visible' : 'hidden';
+            break;
+    }
+
+	return $test_result;
+}
+
+/**
+ * Run the Location excerpt test.
+ *
+ * @since 3.6.0
+ *
+ * @param array $rule All rule settings.
+ * @return string     Returns 'visible', 'hidden', or 'error'.
+ */
+function run_location_excerpt_test( $rule ) {
+
+	if ( empty( $rule['value'] ) ) {
+        return 'error';
+    }
+
+    $current_post_type = get_post_type();
+
+	// If this rule is active and the post type does not support excerpt, hide the block.
+    if ( ! post_type_supports( $current_post_type, 'excerpt' ) ) {
+        return 'hidden';
+    }
+
+	// Assume error and try to disprove.
+	$test_result = 'error';
+	$has_excerpt = has_excerpt();
+
+    switch ( $rule['value'] ) {
+        case 'hasExcerpt':
+            $test_result = $has_excerpt ? 'visible' : 'hidden';
+            break;
+
+        case 'noExcerpt':
+            $test_result = ! $has_excerpt ? 'visible' : 'hidden';
+            break;
+    }
+
+    return $test_result;
+}
+
+/**
  * Run the Location comments test.
  *
  * @since 3.0.0
@@ -539,45 +619,6 @@ function run_location_comments_test( $rule ) {
 		);
 
 		$test_result = $result ? 'visible' : 'hidden';
-	}
-
-	return $test_result;
-}
-
-/**
- * Run the Location thumbnail test.
- *
- * @since 3.0.0
- *
- * @param array $rule All rule settings.
- * @return string     Returns 'visible', 'hidden', or 'error'.
- */
-function run_location_thumbnail_test( $rule ) {
-
-	if ( ! isset( $rule['value'] ) ) {
-		return 'error';
-	}
-
-	$current_post_type  = get_post_type();
-	$supports_thumbnail = post_type_supports( $current_post_type, 'thumbnail' );
-
-	// If this rule is active and the post type does not support thumbnails, hide the block.
-	if ( ! $supports_thumbnail ) {
-		return 'hidden';
-	}
-
-	// Assume error and try to disprove.
-	$test_result = 'error';
-
-	$has_thumbnail = has_post_thumbnail();
-
-	if ( 'hasThumbnail' === $rule['value'] ) {
-
-		$test_result = $has_thumbnail ? 'visible' : 'hidden';
-
-	} elseif ( 'noThumbnail' === $rule['value'] ) {
-
-		$test_result = ! $has_thumbnail ? 'visible' : 'hidden';
 	}
 
 	return $test_result;

@@ -436,6 +436,60 @@ export function GetAllFields() {
 			],
 		},
 		{
+			value: 'attributesThumbnail',
+			label: __( 'Featured Image', 'block-visibility' ),
+			group: 'attributes',
+			fields: [
+				{
+					type: 'valueField',
+					valueType: 'select',
+					options: [
+						{
+							value: 'hasThumbnail',
+							label: __(
+								'Post has a featured image',
+								'block-visibility'
+							),
+						},
+						{
+							value: 'noThumbnail',
+							label: __(
+								'Post has no featured image',
+								'block-visibility'
+							),
+						},
+					],
+				},
+			],
+		},
+		{
+			value: 'attributesExcerpt',
+			label: __( 'Excerpt', 'block-visibility' ),
+			group: 'attributes',
+			fields: [
+				{
+					type: 'valueField',
+					valueType: 'select',
+					options: [
+						{
+							value: 'hasExcerpt',
+							label: __(
+								'Post has an excerpt',
+								'block-visibility'
+							),
+						},
+						{
+							value: 'noExcerpt',
+							label: __(
+								'Post has no excerpt',
+								'block-visibility'
+							),
+						},
+					],
+				},
+			],
+		},
+		{
 			value: 'attributesComments',
 			label: __( 'Comments', 'block-visibility' ),
 			group: 'attributes',
@@ -493,33 +547,6 @@ export function GetAllFields() {
 				},
 			],
 			hasSimplifiedLayout: true,
-		},
-		{
-			value: 'attributesThumbnail',
-			label: __( 'Featured Image', 'block-visibility' ),
-			group: 'attributes',
-			fields: [
-				{
-					type: 'valueField',
-					valueType: 'select',
-					options: [
-						{
-							value: 'hasThumbnail',
-							label: __(
-								'Post has a featured image',
-								'block-visibility'
-							),
-						},
-						{
-							value: 'noThumbnail',
-							label: __(
-								'Post has no featured image',
-								'block-visibility'
-							),
-						},
-					],
-				},
-			],
 		},
 		{
 			value: 'attributesHierarchy',
