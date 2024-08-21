@@ -208,7 +208,7 @@ function render_with_visibility( $block_content, $block ) {
 		$content_classes = add_custom_classes( $settings, $attributes );
 
 		if ( ! empty( $content_classes ) ) {
-			$block_content = append_content_classess( $block_content, $content_classes );
+			$block_content = append_content_classes( $block_content, $content_classes );
 		}
 
 		return $block_content;
