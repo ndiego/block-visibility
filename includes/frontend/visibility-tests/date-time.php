@@ -141,8 +141,8 @@ function run_schedule_test( $start, $end, $is_seasonal ) {
 	}
 
 	// Current time based on the date/time settings set in the WP admin.
-	$currentImmutable = current_datetime();
-	$current          = DateTime::createFromImmutable( $currentImmutable );
+	$current_immutable = current_datetime();
+	$current           = DateTime::createFromImmutable( $current_immutable );
 
 	// Seasonal schedules require both a start and end date.
 	if ( $is_seasonal && $start && $end ) {

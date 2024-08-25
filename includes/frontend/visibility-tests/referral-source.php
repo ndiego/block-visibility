@@ -67,7 +67,7 @@ function referral_source_test( $is_visible, $settings, $controls ) {
 
 		foreach ( $contains as $value ) {
 			if ( false !== strpos( $referrer, $value ) ) {
-				$any_matches++;
+				++$any_matches;
 			}
 		}
 

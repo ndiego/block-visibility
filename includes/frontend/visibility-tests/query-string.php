@@ -61,9 +61,9 @@ function query_string_test( $is_visible, $settings, $controls ) {
 
 			if ( isset( $_REQUEST[ $param ] ) ) { // phpcs:ignore
 				if ( ! $value || '*' === $value ) {
-					$any_matches++;
+					++$any_matches;
 				} elseif ( $value === $_REQUEST[ $param ] ) { // phpcs:ignore
-					$any_matches++;
+					++$any_matches;
 				}
 			}
 		}
@@ -83,9 +83,9 @@ function query_string_test( $is_visible, $settings, $controls ) {
 
 			if ( isset( $_REQUEST[ $param ] ) ) { // phpcs:ignore
 				if ( is_null( $value ) || '*' === $value ) {
-					$all_matches++;
+					++$all_matches;
 				} elseif ( $value === $_REQUEST[ $param ] ) { // phpcs:ignore
-					$all_matches++;
+					++$all_matches;
 				}
 			}
 		}

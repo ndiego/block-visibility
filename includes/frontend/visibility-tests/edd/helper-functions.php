@@ -200,7 +200,7 @@ function get_payments_by_date( $user_id ) {
 				'downloads'  => $purchased_downloads,
 				'categories' => $purchased_cats,
 			);
-		};
+		}
 	}
 
 	if ( ! empty( $payment_dates ) ) {
@@ -254,7 +254,7 @@ function get_product_information_from_orders( $user_id ) {
 	foreach ( $payments as $payment ) {
 		if ( 'complete' === $payment->status ) {
 			$products_by_payment[] = $payment->downloads;
-		};
+		}
 	}
 
 	if ( empty( $products_by_payment ) ) {

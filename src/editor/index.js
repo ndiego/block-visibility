@@ -19,7 +19,7 @@ import { useCommand } from '@wordpress/commands';
 // Needed for backward compatibility.
 import { PluginMoreMenuItem as PostEditorPluginMoreMenuItem } from '@wordpress/edit-post'; // Slot for the Post Editor.
 import { PluginMoreMenuItem as SiteEditorPluginMoreMenuItem } from '@wordpress/edit-site'; // Slot for the Site Editor.
-import { PluginMoreMenuItem as UnifiedPluginMoreMenuItem } from '@wordpress/editor';       // Slot for the unified Editor.
+import { PluginMoreMenuItem as UnifiedPluginMoreMenuItem } from '@wordpress/editor'; // Slot for the unified Editor.
 
 /**
  * Internal dependencies

@@ -188,7 +188,7 @@ function render_with_visibility( $block_content, $block ) {
 	if ( ! $attributes ) {
 		return $block_content;
 	}
-	
+
 	// Get the plugin settings.
 	$settings = get_option( 'block_visibility_settings' );
 

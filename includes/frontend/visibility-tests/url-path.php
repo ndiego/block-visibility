@@ -55,7 +55,7 @@ function url_path_test( $is_visible, $settings, $controls ) {
 
 		foreach ( $contains as $path ) {
 			if ( false !== strpos( $paths, $path ) ) {
-				$any_matches++;
+				++$any_matches;
 			}
 		}
 
