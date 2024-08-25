@@ -167,53 +167,54 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ===
 
-= 3.X.X - 2024-TBD =
+= 3.6.0 - 2024-TBD =
 
 **Added**
 
-* [Location] Added ability to show/hide a block if the current post has an excerpt.
+* [Location] Added ability to show/hide blocks in archive templates based on taxonomy attributes (Hierarchy, Relative Hierarchy, and Supports).
+* [Location] Added ability to show/hide blocks if the current post has an excerpt.
 
 **Changed**
 
 * Front-end classes are now implemented using the HTML API.
-* Update the `render_block` callback function to only fetch plugin settings if a block has visibility conditions set. 
+* Updated the `render_block` callback function to only fetch plugin settings if a block has visibility conditions set. 
 
 **Fixed**
 
-* Fix Widget Editor notice in WordPress 6.6+.
+* Fixed Widget Editor notice in WordPress 6.6+.
 
 = 3.5.0 - 2024-07-20 =
 
 **Changed**
 
-* Update "Tested up to" to WordPress 6.6. 
-* Update "Requires at least" to WordPress 6.4.
-* Update the `PluginMoreMenuItem` slot usage to support unified slots in 6.6 and ensure backward compatibility.
+* Updated "Tested up to" to WordPress 6.6. 
+* Updated "Requires at least" to WordPress 6.4.
+* Updated the `PluginMoreMenuItem` slot usage to support unified slots in 6.6 and ensure backward compatibility.
 
 **Fixed**
 
-* [Date & Time] Fix style bug in the day-of-week controls.
-* Fix the `useCommand` import now that 6.4 is the minimum version.
+* [Date & Time] Fixed style bug in the day-of-week controls.
+* Fixed the `useCommand` import now that 6.4 is the minimum version.
 
 = 3.4.0 - 2024-04-01 =
 
 **Added**
 
-* [Date & Time] Add the ability to set seasonal (year-agnostic) schedules.
+* [Date & Time] Added the ability to set seasonal (year-agnostic) schedules.
 
 **Changed**
 
-* Update Playground blueprint with improved demo content.
-* Update "Tested up to" to WordPress 6.5. 
-* Update "Requires at least" to WordPress 6.3.
+* Updated Playground blueprint with improved demo content.
+* Updated "Tested up to" to WordPress 6.5. 
+* Updated "Requires at least" to WordPress 6.3.
 * To use conditional opacity, you now must also have conditional indicators active. 
 * Set rewrites to false for the `visibility_preset` post type.
-* Update the deprecated `__experimentalGetSettings` function with the stable `__getSettings` version.
+* Updated the deprecated `__experimentalGetSettings` function with the stable `__getSettings` version.
 * [WooCommerce] When retrieving orders, both processing and completed orders are now included.
 
 **Fixed**
 
-* Fix enqueue styles console errors by enqueuing the conditional indicator stylesheet using `enqueue_block_assets`.
+* Fixed enqueue styles console errors by enqueuing the conditional indicator stylesheet using `enqueue_block_assets`.
 
 = 3.3.0 - 2024-01-18 =
 
