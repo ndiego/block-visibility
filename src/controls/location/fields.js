@@ -9,6 +9,84 @@ import { useMemo } from '@wordpress/element';
  */
 import usePostTypes from './utils/use-post-types';
 import useTaxonomies from './utils/use-taxonomies';
+import prepareGroupedFields from './../utils/prepare-grouped-field';
+
+const valueOperators = [
+	{
+		value: 'equal',
+		label: __( 'Is equal to', 'block-visibility' ),
+	},
+	{
+		value: 'notEqual',
+		label: __( 'Is not equal to', 'block-visibility' ),
+	},
+	{
+		value: 'greaterThan',
+		label: __( 'Is greater than', 'block-visibility' ),
+	},
+	{
+		value: 'lessThan',
+		label: __( 'Is less than', 'block-visibility' ),
+	},
+	{
+		value: 'greaterThanEqual',
+		label: __( 'Is greater or equal to', 'block-visibility' ),
+	},
+	{
+		value: 'lessThanEqual',
+		label: __( 'Is less than or equal to', 'block-visibility' ),
+	},
+];
+
+const taxonomyOperators = [
+	{
+		value: 'atLeastOne',
+		label: __( 'Is at least one of the selected', 'block-visibility' ),
+	},
+	{
+		value: 'all',
+		label: __( 'Is all of the selected', 'block-visibility' ),
+	},
+	{
+		value: 'none',
+		label: __( 'Is none of the selected', 'block-visibility' ),
+	},
+	{
+		value: 'noTerms',
+		label: __( 'Post has no taxonomy terms', 'block-visibility' ),
+	},
+];
+
+const anyOperators = [
+	{
+		value: 'any',
+		label: __( 'Is any of the selected', 'block-visibility' ),
+	},
+	{
+		value: 'none',
+		label: __( 'Is none of the selected', 'block-visibility' ),
+	},
+];
+
+const booleanOperators = [
+	{
+		value: 'equal',
+		label: __( 'Is equal to', 'block-visibility' ),
+	},
+	{
+		value: 'notEqual',
+		label: __( 'Is not equal to', 'block-visibility' ),
+	},
+];
+
+const operatorPlaceholder = __( 'Select Condition…', 'block-visibility' );
+const selectTypePlaceholder = __( 'Select Type…', 'block-visibility' );
+const selectPostsPlaceholder = __( 'Select Posts…', 'block-visibility' );
+
+const archiveHelp = __(
+	'Apply this condition to blocks in archive templates.',
+	'block-visibility'
+);
 
 /**
  * Get all available field groups.
@@ -33,6 +111,10 @@ export function getFieldGroups() {
 		{
 			value: 'archive',
 			label: __( 'Archive', 'block-visibility' ),
+		},
+		{
+			value: 'taxonomy',
+			label: __( 'Taxonomy Attributes', 'block-visibility' ),
 		},
 	];
 
@@ -91,6 +173,7 @@ export function GetAllFields() {
 						const options = {
 							value: taxonomyData[ 0 ].slug,
 							label,
+							hierarchical: taxonomyData[ 0 ]?.hierarchical,
 						};
 
 						postTypeData.options.push( options );
@@ -103,6 +186,22 @@ export function GetAllFields() {
 
 		return data;
 	}, [ postTypes ] );
+
+	const hierachicalTaxonomiesByPostType = taxonomiesByPostType.map( function (
+		taxonomy
+	) {
+		const newOptions = taxonomy.options.map( function ( option ) {
+			return {
+				...option,
+				...( option.hierarchical === false && { isDisabled: true } ),
+			};
+		} );
+
+		return {
+			...taxonomy,
+			options: newOptions,
+		};
+	} );
 
 	// Create a simple array of post types.
 	const postTypesList = useMemo( () => {
@@ -125,78 +224,6 @@ export function GetAllFields() {
 	const postTypesWithArchives = postTypes.filter(
 		( option ) => option?.hasArchive
 	);
-
-	const valueOperators = [
-		{
-			value: 'equal',
-			label: __( 'Is equal to', 'block-visibility' ),
-		},
-		{
-			value: 'notEqual',
-			label: __( 'Is not equal to', 'block-visibility' ),
-		},
-		{
-			value: 'greaterThan',
-			label: __( 'Is greater than', 'block-visibility' ),
-		},
-		{
-			value: 'lessThan',
-			label: __( 'Is less than', 'block-visibility' ),
-		},
-		{
-			value: 'greaterThanEqual',
-			label: __( 'Is greater or equal to', 'block-visibility' ),
-		},
-		{
-			value: 'lessThanEqual',
-			label: __( 'Is less than or equal to', 'block-visibility' ),
-		},
-	];
-
-	const taxonomyOperators = [
-		{
-			value: 'atLeastOne',
-			label: __( 'Is at least one of the selected', 'block-visibility' ),
-		},
-		{
-			value: 'all',
-			label: __( 'Is all of the selected', 'block-visibility' ),
-		},
-		{
-			value: 'none',
-			label: __( 'Is none of the selected', 'block-visibility' ),
-		},
-		{
-			value: 'noTerms',
-			label: __( 'Post has no taxonomy terms', 'block-visibility' ),
-		},
-	];
-
-	const anyOperators = [
-		{
-			value: 'any',
-			label: __( 'Is any of the selected', 'block-visibility' ),
-		},
-		{
-			value: 'none',
-			label: __( 'Is none of the selected', 'block-visibility' ),
-		},
-	];
-
-	const booleanOperators = [
-		{
-			value: 'equal',
-			label: __( 'Is equal to', 'block-visibility' ),
-		},
-		{
-			value: 'notEqual',
-			label: __( 'Is not equal to', 'block-visibility' ),
-		},
-	];
-
-	const operatorPlaceholder = __( 'Select Condition…', 'block-visibility' );
-	const selectTypePlaceholder = __( 'Select Type…', 'block-visibility' );
-	const selectPostsPlaceholder = __( 'Select Posts…', 'block-visibility' );
 
 	const fields = [
 		{
@@ -550,7 +577,7 @@ export function GetAllFields() {
 		},
 		{
 			value: 'attributesHierarchy',
-			label: __( 'Hierarchy', 'block-visibility' ),
+			label: __( 'Post Hierarchy', 'block-visibility' ),
 			group: 'attributes',
 			fields: [
 				{
@@ -599,7 +626,7 @@ export function GetAllFields() {
 		},
 		{
 			value: 'attributesRelativeHierarchy',
-			label: __( 'Relative Hierarchy', 'block-visibility' ),
+			label: __( 'Relative Post Hierarchy', 'block-visibility' ),
 			group: 'attributes',
 			fields: [
 				{
@@ -717,6 +744,7 @@ export function GetAllFields() {
 		{
 			value: 'archiveType',
 			label: __( 'Archive Type', 'block-visibility' ),
+			help: archiveHelp,
 			group: 'archive',
 			fields: [
 				{
@@ -761,6 +789,7 @@ export function GetAllFields() {
 		{
 			value: 'archive',
 			label: __( 'Archive', 'block-visibility' ),
+			help: archiveHelp,
 			group: 'archive',
 			fields: [
 				{
@@ -812,6 +841,164 @@ export function GetAllFields() {
 				},
 			],
 		},
+		// Taxonomy attribute fields
+		{
+			value: 'taxonomyTermHierarchy',
+			label: __( 'Term Hierarchy', 'block-visibility' ),
+			help: archiveHelp,
+			group: 'taxonomy',
+			fields: [
+				{
+					type: 'operatorField',
+					valueType: 'select',
+					options: [
+						{
+							value: 'is',
+							label: __( 'Term is a', 'block-visibility' ),
+						},
+						{
+							value: 'isNot',
+							label: __( 'Term is not a', 'block-visibility' ),
+						},
+					],
+					placeholder: operatorPlaceholder,
+				},
+				{
+					type: 'valueField',
+					valueType: 'select',
+					options: [
+						{
+							value: 'topLevel',
+							label: __(
+								'Top level term (no parent)',
+								'block-visibility'
+							),
+						},
+						{
+							value: 'parent',
+							label: __(
+								'Parent (has children)',
+								'block-visibility'
+							),
+						},
+						{
+							value: 'child',
+							label: __(
+								'Child (has parent)',
+								'block-visibility'
+							),
+						},
+					],
+				},
+			],
+		},
+		{
+			value: 'taxonomyTermRelativeHierarchy',
+			label: __( 'Relative Term Hierarchy', 'block-visibility' ),
+			help: archiveHelp,
+			group: 'taxonomy',
+			fields: [
+				{
+					type: 'subField',
+					valueType: 'select',
+					options: hierachicalTaxonomiesByPostType,
+					placeholder: __(
+						'Select Taxonomy Type…',
+						'block-visibility'
+					),
+					hasGroupedOptions: true,
+					isLoading: hierachicalTaxonomiesByPostType.length === 0,
+					triggerReset: true,
+				},
+				{
+					type: 'operatorField',
+					valueType: 'select',
+					options: [
+						{
+							value: 'parentOf',
+							label: __( 'Is a parent of', 'block-visibility' ),
+						},
+						{
+							value: 'notParentOf',
+							label: __(
+								'Is not a parent of',
+								'block-visibility'
+							),
+						},
+						{
+							value: 'childOf',
+							label: __( 'Is a child of', 'block-visibility' ),
+						},
+						{
+							value: 'notChildOf',
+							label: __(
+								'Is not a child of',
+								'block-visibility'
+							),
+						},
+					],
+					placeholder: operatorPlaceholder,
+				},
+				{
+					type: 'valueField',
+					conditionalValueTypes: [
+						{
+							dependencyType: 'subField',
+							dependencyValues: taxonomiesList,
+							valueTypes: [
+								{ value: 'default', valueType: 'termSelect' },
+							],
+						},
+					],
+					displayConditions: [
+						{
+							dependencyType: 'subField',
+							dependencyValues: taxonomiesList,
+						},
+					],
+					placeholder: selectPostsPlaceholder,
+				},
+			],
+		},
+		{
+			value: 'taxonomySupports',
+			label: __( 'Supports', 'block-visibility' ),
+			help: archiveHelp,
+			group: 'taxonomy',
+			fields: [
+				{
+					type: 'operatorField',
+					valueType: 'select',
+					options: [
+						{
+							value: 'supports',
+							label: __(
+								'Taxonomy supports',
+								'block-visibility'
+							),
+						},
+						{
+							value: 'notSupport',
+							label: __(
+								'Taxonomy does not support',
+								'block-visibility'
+							),
+						},
+					],
+					placeholder: operatorPlaceholder,
+				},
+				{
+					type: 'valueField',
+					valueType: 'select',
+					options: [
+						{
+							value: 'hierarchical',
+							label: __( 'Term Hierarchy', 'block-visibility' ),
+						},
+					],
+				},
+			],
+		},
 	];
 
 	return fields;
@@ -822,28 +1009,8 @@ export function GetAllFields() {
  * proper field groups.
  *
  * @since 3.0.0
- * @param {Object} variables All plugin variables available via the REST API
  * @return {string} All fields perpared in their respective field groups
  */
-export function getGroupedFields( variables ) {
-	const groups = getFieldGroups();
-	const fields = GetAllFields( variables );
-	const preparedFields = [];
-
-	groups.forEach( ( group ) => {
-		const groupValue = group?.value ?? '';
-		const groupLabel = group?.label ?? '';
-
-		const groupOptions = fields.filter(
-			( field ) => field.group === groupValue
-		);
-
-		preparedFields.push( {
-			value: groupValue,
-			label: groupLabel,
-			options: groupOptions,
-		} );
-	} );
-
-	return preparedFields;
+export function getGroupedFields() {
+	return prepareGroupedFields( getFieldGroups(), GetAllFields() );
 }
