@@ -4,6 +4,11 @@
 import { __ } from '@wordpress/i18n';
 
 /**
+ * Internal dependencies
+ */
+import prepareGroupedFields from './../utils/prepare-grouped-field';
+
+/**
  * Get all available field groups.
  *
  * @since 3.1.0
@@ -684,24 +689,5 @@ export function getAllFields() {
  * @return {string} All fields perpared in their respective field groups
  */
 export function getGroupedFields() {
-	const groups = getFieldGroups();
-	const fields = getAllFields();
-	const preparedFields = [];
-
-	groups.forEach( ( group ) => {
-		const groupValue = group?.value ?? '';
-		const groupLabel = group?.label ?? '';
-
-		const groupOptions = fields.filter(
-			( field ) => field.group === groupValue
-		);
-
-		preparedFields.push( {
-			value: groupValue,
-			label: groupLabel,
-			options: groupOptions,
-		} );
-	} );
-
-	return preparedFields;
+	return prepareGroupedFields( getFieldGroups(), getAllFields() );
 }

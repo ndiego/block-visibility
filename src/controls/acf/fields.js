@@ -3,6 +3,11 @@
  */
 import { __ } from '@wordpress/i18n';
 
+/**
+ * Internal dependencies
+ */
+import prepareGroupedFields from './../utils/prepare-grouped-field';
+
 const acfFields = [
 	{
 		type: 'text',
@@ -291,30 +296,10 @@ export function getAllFields( variables ) {
  * proper field groups.
  *
  * @since 1.9.0
- * @param {Object} variables All plugin variables available via the REST API
  * @return {string} All fields perpared in their respective field groups
  */
-export function getGroupedFields( variables ) {
-	const groups = getFieldGroups( variables );
-	const fields = getAllFields( variables );
-	const groupedFields = [];
-
-	groups.forEach( ( group ) => {
-		const groupValue = group?.value ?? '';
-		const groupLabel = group?.label ?? '';
-
-		const groupOptions = fields.filter(
-			( field ) => field.group === groupValue
-		);
-
-		groupedFields.push( {
-			value: groupValue,
-			label: groupLabel,
-			options: groupOptions,
-		} );
-	} );
-
-	return groupedFields;
+export function getGroupedFields() {
+	return prepareGroupedFields( getFieldGroups(), getAllFields() );
 }
 
 /**

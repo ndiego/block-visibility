@@ -24,13 +24,7 @@ import links from './../../utils/links';
  * @param {Object} props All the props passed to this function
  */
 export default function Location( props ) {
-	const {
-		controlSetAtts,
-		enabledControls,
-		setControlAtts,
-		settings,
-		variables,
-	} = props;
+	const { controlSetAtts, enabledControls, setControlAtts, settings } = props;
 	const controlActive = enabledControls.some(
 		( control ) => control.settingSlug === 'location' && control?.isActive
 	);
@@ -67,8 +61,8 @@ export default function Location( props ) {
 		);
 	};
 
+	const allFields = GetAllFields();
 	const groupedFields = getGroupedFields();
-	const allFields = GetAllFields( variables );
 
 	return (
 		<div className="controls-panel-item location-control">

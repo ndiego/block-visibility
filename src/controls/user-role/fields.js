@@ -7,6 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import useAllUsers from './utils/use-all-users';
+import prepareGroupedFields from './../utils/prepare-grouped-field';
 
 /**
  * Get all available field groups.
@@ -132,24 +133,5 @@ export function GetAllFields( variables ) {
  * @return {string} All fields perpared in their respective field groups
  */
 export function getGroupedFields( variables ) {
-	const groups = getFieldGroups( variables );
-	const fields = GetAllFields( variables );
-	const groupedFields = [];
-
-	groups.forEach( ( group ) => {
-		const groupValue = group?.value ?? '';
-		const groupLabel = group?.label ?? '';
-
-		const groupOptions = fields.filter(
-			( field ) => field.group === groupValue
-		);
-
-		groupedFields.push( {
-			value: groupValue,
-			label: groupLabel,
-			options: groupOptions,
-		} );
-	} );
-
-	return groupedFields;
+	return prepareGroupedFields( getFieldGroups(), GetAllFields( variables ) );
 }
