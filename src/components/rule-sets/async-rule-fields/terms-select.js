@@ -41,6 +41,7 @@ export default function TermsSelect( props ) {
 		taxonomySlug,
 		triggerReset,
 		value,
+		isMulti,
 	} = props;
 
 	const availableTerms = useEntityRecords(
@@ -58,9 +59,9 @@ export default function TermsSelect( props ) {
 		} );
 	}, [ availableTerms.records ] );
 
-	const selectedTerms = termsOptions.filter( ( term ) =>
-		value.includes( term.value )
-	);
+	const selectedTerms = termsOptions.filter( ( term ) => {
+		return isMulti ? value.includes( term.value ) : value === term.value;
+	} );
 
 	return (
 		<>
@@ -87,14 +88,14 @@ export default function TermsSelect( props ) {
 				onChange={ ( values ) =>
 					handleRuleChange(
 						values,
-						'multiSelect', // Need for value handling.
+						isMulti ? 'multiSelect' : 'select', // Need for value handling.
 						fieldType,
 						fieldName,
 						triggerReset
 					)
 				}
 				isLoading={ availableTerms.isResolving }
-				isMulti
+				isMulti={ isMulti }
 			/>
 			{ help && (
 				<div className="control-fields-item__help for-select-component">

@@ -197,7 +197,7 @@ export default function RuleField( props ) {
 				{ ...props }
 			/>
 		);
-	} else if ( valueType === 'termsSelect' ) {
+	} else if ( valueType === 'termsSelect' || valueType === 'termSelect' ) {
 		let taxonomySlug;
 
 		// A defined variant will take precedent.
@@ -213,6 +213,7 @@ export default function RuleField( props ) {
 				taxonomySlug={ taxonomySlug }
 				className={ className }
 				value={ value }
+				isMulti={ valueType === 'termsSelect' }
 				{ ...props }
 			/>
 		);
