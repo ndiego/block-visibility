@@ -198,13 +198,26 @@ function run_location_rule_tests( $rule ) {
 			$test_result = run_location_supports_test( $rule );
 			break;
 
-		// Archive rules tests.
+		// Archive rule tests.
 		case 'archiveType':
 			$test_result = run_location_archive_type_test( $rule );
 			break;
 
 		case 'archive':
 			$test_result = run_location_archive_test( $rule );
+			break;
+
+		// Taxonomy attributes rule tests.
+		case 'taxonomyTermHierarchy':
+			$test_result = run_location_taxonomy_term_hierarchy_test( $rule );
+			break;
+
+		case 'taxonomyTermRelativeHierarchy':
+			$test_result = run_location_taxonomy_term_relative_hierarchy_test( $rule );
+			break;
+
+		case 'taxonomySupports':
+			$test_result = run_location_taxonomy_supports_test( $rule );
 			break;
 
 		default:
@@ -504,10 +517,10 @@ function run_location_author_test( $rule ) {
 function run_location_thumbnail_test( $rule ) {
 
 	if ( empty( $rule['value'] ) ) {
-        return 'error';
-    }
+		return 'error';
+	}
 
-	$current_post_type  = get_post_type();
+	$current_post_type = get_post_type();
 
 	// If this rule is active and the post type does not support thumbnails, hide the block.
 	if ( ! post_type_supports( $current_post_type, 'thumbnail' ) ) {
@@ -519,14 +532,14 @@ function run_location_thumbnail_test( $rule ) {
 	$has_thumbnail = has_post_thumbnail();
 
 	switch ( $rule['value'] ) {
-        case 'hasThumbnail':
-            $test_result = $has_thumbnail ? 'visible' : 'hidden';
-            break;
+		case 'hasThumbnail':
+			$test_result = $has_thumbnail ? 'visible' : 'hidden';
+			break;
 
-        case 'noThumbnail':
-            $test_result = ! $has_thumbnail ? 'visible' : 'hidden';
-            break;
-    }
+		case 'noThumbnail':
+			$test_result = ! $has_thumbnail ? 'visible' : 'hidden';
+			break;
+	}
 
 	return $test_result;
 }
@@ -542,31 +555,31 @@ function run_location_thumbnail_test( $rule ) {
 function run_location_excerpt_test( $rule ) {
 
 	if ( empty( $rule['value'] ) ) {
-        return 'error';
-    }
+		return 'error';
+	}
 
-    $current_post_type = get_post_type();
+	$current_post_type = get_post_type();
 
 	// If this rule is active and the post type does not support excerpt, hide the block.
-    if ( ! post_type_supports( $current_post_type, 'excerpt' ) ) {
-        return 'hidden';
-    }
+	if ( ! post_type_supports( $current_post_type, 'excerpt' ) ) {
+		return 'hidden';
+	}
 
 	// Assume error and try to disprove.
 	$test_result = 'error';
 	$has_excerpt = has_excerpt();
 
-    switch ( $rule['value'] ) {
-        case 'hasExcerpt':
-            $test_result = $has_excerpt ? 'visible' : 'hidden';
-            break;
+	switch ( $rule['value'] ) {
+		case 'hasExcerpt':
+			$test_result = $has_excerpt ? 'visible' : 'hidden';
+			break;
 
-        case 'noExcerpt':
-            $test_result = ! $has_excerpt ? 'visible' : 'hidden';
-            break;
-    }
+		case 'noExcerpt':
+			$test_result = ! $has_excerpt ? 'visible' : 'hidden';
+			break;
+	}
 
-    return $test_result;
+	return $test_result;
 }
 
 /**
@@ -655,7 +668,7 @@ function run_location_hierarchy_test( $rule ) {
 			break;
 
 		case 'parent':
-			$result = 0 !== count( $child_pages );
+			$result = ! empty( $child_pages );
 			break;
 
 		case 'child':
@@ -680,7 +693,7 @@ function run_location_hierarchy_test( $rule ) {
 }
 
 /**
- * Run the relative Location hierarchy test.
+ * Run the Location relative hierarchy test.
  *
  * @since 3.0.0
  *
@@ -695,6 +708,11 @@ function run_location_relative_hierarchy_test( $rule ) {
 		! isset( $rule['value'] )
 	) {
 		return 'error';
+	}
+
+	// The current post type does not belong to the selected post type, so hide the block.
+	if ( get_post_type() !== $rule['subField'] ) {
+		return 'hidden';
 	}
 
 	// Assume error and try to disprove.
@@ -816,34 +834,34 @@ function run_location_archive_type_test( $rule ) {
 		$results = array();
 
 		foreach ( $types as $type ) {
+			switch ( $type ) {
+				case 'post':
+					$results[] = is_home() ? 'true' : 'false';
+					break;
 
-			if ( 'post' === $type ) {
+				case 'category':
+					$results[] = is_category() ? 'true' : 'false';
+					break;
 
-				$results[] = is_home() ? 'true' : 'false';
+				case 'post_tag':
+					$results[] = is_tag() ? 'true' : 'false';
+					break;
 
-			} elseif ( 'category' === $type ) {
+				case 'author':
+					$results[] = is_author() ? 'true' : 'false';
+					break;
 
-				$results[] = is_category() ? 'true' : 'false';
+				case 'date':
+					$results[] = is_date() ? 'true' : 'false';
+					break;
 
-			} elseif ( 'post_tag' === $type ) {
-
-				$results[] = is_tag() ? 'true' : 'false';
-
-			} elseif ( 'author' === $type ) {
-
-				$results[] = is_author() ? 'true' : 'false';
-
-			} elseif ( 'date' === $type ) {
-
-				$results[] = is_date() ? 'true' : 'false';
-
-			} else {
-
-				// If not one of the predefined types, check against all tax archives and post type archives.
-				$results[] =
-					( is_tax( $type ) || is_post_type_archive( $type ) )
-						? 'true'
-						: 'false';
+				default:
+					// If not one of the predefined types, check against all tax archives and post type archives.
+					$results[] =
+						( is_tax( $type ) || is_post_type_archive( $type ) )
+							? 'true'
+							: 'false';
+					break;
 			}
 		}
 
@@ -912,6 +930,231 @@ function run_location_archive_test( $rule ) {
 		}
 
 		$test_result = any_value_compare( $operator, $results );
+	}
+
+	return $test_result;
+}
+
+/**
+ * Run the Location taxonomy term hierarchy test.
+ *
+ * @since 3.6.0
+ *
+ * @param array $rule All rule settings.
+ * @return string     Returns 'visible', 'hidden', or 'error'.
+ */
+function run_location_taxonomy_term_hierarchy_test( $rule ) {
+
+	if (
+		empty( $rule['operator'] ) ||
+		empty( $rule['value'] )
+	) {
+		return 'error';
+	}
+
+	// If this rule is enabled and we are not on an archive page, hide the block.
+	if ( ! is_archive() ) {
+		return 'hidden';
+	}
+
+	// Get the current queried object.
+	$current_term = get_queried_object();
+
+	// Check if the current term is a valid WP_Term object, otherwise throw an error.
+	if ( ! ( $current_term instanceof \WP_Term ) ) {
+		return 'error';
+	}
+
+	// Assume error and try to disprove.
+	$test_result = 'error';
+
+	$operator   = $rule['operator'];
+	$hierarchy  = $rule['value'];
+	$term_id    = $current_term->term_id;
+	$taxonomy   = $current_term->taxonomy;
+	$has_parent = $current_term->parent;
+
+	$child_terms = get_terms(
+		array(
+			'taxonomy'   => $taxonomy,
+			'parent'     => $term_id,
+			'hide_empty' => false, // Set to true to hide terms without posts.
+		)
+	);
+	$child_terms = $child_terms ? $child_terms : array();
+
+	switch ( $hierarchy ) {
+		case 'topLevel':
+			$result = ! $has_parent;
+			break;
+
+		case 'parent':
+			$result = ! empty( $child_terms );
+			break;
+
+		case 'child':
+			$result = $has_parent;
+			break;
+
+		default:
+			$result = false;
+			break;
+	}
+
+	if ( 'is' === $operator ) {
+
+		$test_result = $result ? 'visible' : 'hidden';
+
+	} elseif ( 'isNot' === $operator ) {
+
+		$test_result = ! $result ? 'visible' : 'hidden';
+	}
+
+	return $test_result;
+}
+
+/**
+ * Run the Location taxonomy term relative hierarchy test.
+ *
+ * @since 3.6.0
+ *
+ * @param array $rule All rule settings.
+ * @return string     Returns 'visible', 'hidden', or 'error'.
+ */
+function run_location_taxonomy_term_relative_hierarchy_test( $rule ) {
+
+	if (
+		empty( $rule['subField'] ) ||
+		empty( $rule['operator'] ) ||
+		empty( $rule['value'] )
+	) {
+		return 'error';
+	}
+
+	// If this rule is enabled and we are not on an archive page, hide the block.
+	if ( ! is_archive() ) {
+		return 'hidden';
+	}
+
+	// Get the current queried object.
+	$current_term = get_queried_object();
+
+	// Check if the current term is a valid WP_Term object.
+	if ( ! ( $current_term instanceof \WP_Term ) ) {
+		return 'error';
+	}
+
+	// Assume error and try to disprove.
+	$test_result = 'error';
+
+	$relative_id = $rule['value'];
+	$hierarchy   = $rule['operator'];
+	$term_id     = $current_term->term_id;
+	$taxonomy    = $current_term->taxonomy;
+	$parent_id   = $current_term->parent;
+
+	// The current term does not belong to the selected taxonomy, throw error.
+	if ( $taxonomy !== $rule['subField'] ) {
+		return 'hidden';
+	}
+
+	$child_terms = get_terms(
+		array(
+			'taxonomy'   => $taxonomy,
+			'parent'     => $term_id,
+			'hide_empty' => false, // Set to true to hide terms without posts.
+		)
+	);
+	$child_terms = $child_terms ? $child_terms : array();
+
+	$child_term_ids = array();
+
+	foreach ( $child_terms as $term ) {
+		$child_term_ids[] = $term->term_id;
+	}
+
+	switch ( $hierarchy ) {
+		case 'parentOf':
+			$result = in_array( $relative_id, $child_term_ids, true );
+			break;
+
+		case 'notParentOf':
+			$result = ! in_array( $relative_id, $child_term_ids, true );
+			break;
+
+		case 'childOf':
+			$result = $parent_id === $relative_id;
+			break;
+
+		case 'notChildOf':
+			$result = $parent_id !== $relative_id;
+			break;
+
+		default:
+			$result = false;
+			break;
+	}
+
+	$test_result = $result ? 'visible' : 'hidden';
+
+	return $test_result;
+}
+
+/**
+ * Run the Location taxonomy supports test.
+ *
+ * @since 3.6.0
+ *
+ * @param array $rule All rule settings.
+ * @return string     Returns 'visible', 'hidden', or 'error'.
+ */
+function run_location_taxonomy_supports_test( $rule ) {
+
+	if (
+		empty( $rule['operator'] ) ||
+		empty( $rule['value'] )
+	) {
+		return 'error';
+	}
+
+	// If this rule is enabled and we are not on an archive page, hide the block.
+	if ( ! is_archive() ) {
+		return 'hidden';
+	}
+
+	// Get the current queried object.
+	$current_term = get_queried_object();
+
+	// Check if the current term is a valid WP_Term object.
+	if ( ! ( $current_term instanceof \WP_Term ) ) {
+		return 'error';
+	}
+
+	// Assume error and try to disprove.
+	$test_result = 'error';
+
+	$operator        = $rule['operator'];
+	$param_supported = $rule['value'];
+	$taxonomy        = $current_term->taxonomy;
+	$taxonomy_obj    = get_taxonomy( $taxonomy );
+
+	switch ( $param_supported ) {
+		case 'hierarchical':
+			$result = $taxonomy_obj && $taxonomy_obj->hierarchical;
+			break;
+
+		default:
+			$result = false;
+			break;
+	}
+
+	if ( 'supports' === $operator ) {
+
+		$test_result = $result ? 'visible' : 'hidden';
+
+	} elseif ( 'notSupport' === $operator ) {
+
+		$test_result = ! $result ? 'visible' : 'hidden';
 	}
 
 	return $test_result;
