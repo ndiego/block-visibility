@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import { assign } from 'lodash';
 import classnames from 'classnames';
 
 /**
@@ -58,24 +57,6 @@ export default function Rule( props ) {
 	const hasMultipleSubFields = selectedRule?.hasMultipleSubFields ?? false;
 	const hasSimplifiedLayout = selectedRule?.hasSimplifiedLayout ?? false;
 
-	const removeRule = () => {
-		const newRuleSets = [ ...ruleSets ];
-
-		const newRules = ruleSet.rules.filter(
-			( value, index ) => index !== ruleIndex
-		);
-
-		newRuleSets[ ruleSetIndex ] = assign(
-			{ ...ruleSet },
-			{ rules: [ ...newRules ] }
-		);
-
-		setControlAtts(
-			controlName,
-			assign( { ...controlAtts }, { ruleSets: [ ...newRuleSets ] } )
-		);
-	};
-
 	let defaultRuleLabel = ruleLabel;
 
 	if ( ! defaultRuleLabel ) {
@@ -94,6 +75,28 @@ export default function Rule( props ) {
 		};
 	}
 
+	const removeRule = () => {
+		// Clone the current rule sets and remove the rule at the specified index.
+		const updatedRuleSets = [ ...ruleSets ];
+
+		// Filter out the rule at the given index.
+		const updatedRules = ruleSet.rules.filter(
+			( _value, index ) => index !== ruleIndex
+		);
+
+		// Update the rules in the specific rule set.
+		updatedRuleSets[ ruleSetIndex ] = {
+			...ruleSet,
+			rules: updatedRules,
+		};
+
+		// Update the control attributes with the new rule sets.
+		setControlAtts( controlName, {
+			...controlAtts,
+			ruleSets: updatedRuleSets,
+		} );
+	};
+
 	const handleRuleChange = (
 		value,
 		valueType,
@@ -106,68 +109,59 @@ export default function Rule( props ) {
 		if ( valueType === 'select' ) {
 			newValue = value.value;
 		} else if ( valueType === 'multiSelect' ) {
-			newValue = [];
-
-			if ( value.length !== 0 ) {
-				value.forEach( ( v ) => {
-					newValue.push( v.value );
-				} );
-			}
+			newValue = value.length ? value.map( ( v ) => v.value ) : [];
 		} else {
 			newValue = value;
 		}
 
-		const newRuleSets = [ ...ruleSets ];
-		const newRules = [ ...ruleSet.rules ];
+		// Clone current rule sets and rules for modification.
+		const updatedRuleSets = [ ...ruleSets ];
+		const updatedRules = [ ...ruleSet.rules ];
+		const currentRule = { ...updatedRules[ ruleIndex ] };
 
-		if ( fieldType === 'ruleField' ) {
-			// If we have grouped field, reset the all fields when the
-			// ruleField is reset. This isn't need when fields aren't grouped.
-			newRules[ ruleIndex ] = groupedFields
+		// Update rule based on field type.
+		if ( 'ruleField' === fieldType ) {
+			updatedRules[ ruleIndex ] = groupedFields
 				? { field: newValue }
-				: assign( { ...newRules[ ruleIndex ] }, { field: newValue } );
-		} else if ( fieldType === 'subField' ) {
+				: { ...currentRule, field: newValue };
+		} else if ( 'subField' === fieldType ) {
 			if ( hasMultipleSubFields ) {
-				newRules[ ruleIndex ] = assign(
-					{ ...newRules[ ruleIndex ] },
-					{
-						subFields: {
-							...newRules[ ruleIndex ].subFields,
-							[ fieldName ]: newValue,
-						},
-					}
-				);
+				updatedRules[ ruleIndex ] = {
+					...currentRule,
+					subFields: {
+						...currentRule.subFields,
+						[ fieldName ]: newValue,
+					},
+				};
 			} else {
-				newRules[ ruleIndex ] = assign(
-					{ ...newRules[ ruleIndex ] },
-					{ subField: newValue }
-				);
+				updatedRules[ ruleIndex ] = {
+					...currentRule,
+					subField: newValue,
+				};
 			}
 
-			// If a select field is changed, reset the corresponding operator
-			// and value.
+			// If a select field is changed, reset the corresponding operator and value.
 			if ( reset ) {
-				delete newRules[ ruleIndex ].value;
+				delete updatedRules[ ruleIndex ].value;
 			}
 		} else {
 			// Convert field type to actual field parameter.
-			const field = fieldType === 'operatorField' ? 'operator' : 'value';
-
-			newRules[ ruleIndex ] = assign(
-				{ ...newRules[ ruleIndex ] },
-				{ [ field ]: newValue }
-			);
+			const fieldParam =
+				'operatorField' === fieldType ? 'operator' : 'value';
+			updatedRules[ ruleIndex ] = {
+				...currentRule,
+				[ fieldParam ]: newValue,
+			};
 		}
 
-		newRuleSets[ ruleSetIndex ] = assign(
-			{ ...ruleSet },
-			{ rules: newRules }
-		);
+		// Update the rule set with the modified rules.
+		updatedRuleSets[ ruleSetIndex ] = { ...ruleSet, rules: updatedRules };
 
-		setControlAtts(
-			controlName,
-			assign( { ...controlAtts }, { ruleSets: [ ...newRuleSets ] } )
-		);
+		// Update control attributes.
+		setControlAtts( controlName, {
+			...controlAtts,
+			ruleSets: updatedRuleSets,
+		} );
 	};
 
 	return (
@@ -365,6 +359,9 @@ export default function Rule( props ) {
 								) {
 									const conditionOptions =
 										condition?.options ?? [];
+									const defaultOptions =
+										condition?.defaultOptions ?? [];
+
 									const filteredOptions =
 										conditionOptions.filter(
 											( option ) =>
@@ -373,7 +370,7 @@ export default function Rule( props ) {
 
 									options =
 										filteredOptions[ 0 ]?.valueOptions ??
-										[];
+										defaultOptions;
 									placeholder = condition?.placeholder ?? '';
 								} else if (
 									condition.dependencyValues.includes(
