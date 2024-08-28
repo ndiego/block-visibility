@@ -19,6 +19,7 @@
 defined( 'ABSPATH' ) || exit;
 
 if ( ! defined( 'BLOCK_VISIBILITY_PLUGIN_FILE' ) ) {
+	define( 'BLOCK_VISIBILITY_VERSION', '3.5.0' );
 	define( 'BLOCK_VISIBILITY_PLUGIN_FILE', __FILE__ );
 }
 
