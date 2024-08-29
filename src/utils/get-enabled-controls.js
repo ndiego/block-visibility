@@ -119,10 +119,6 @@ export function getControls() {
 
 	controls = applyFilters( 'blockVisibility.controls', controls );
 
-	// Deprecated filters as of v2.5.1, use blockVisibility.controls instead.
-	controls = applyFilters( 'blockVisibility.coreControls', controls );
-	controls = applyFilters( 'blockVisibility.integrationControls', controls );
-
 	// Remove any duplicate controls.
 	controls = controls.filter(
 		( value, index, self ) =>
