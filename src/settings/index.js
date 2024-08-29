@@ -192,8 +192,8 @@ function useTabNavigation( settingTabs ) {
 
 	const updateUrl = useCallback( ( tabName ) => {
 		urlParams.set( 'tab', tabName );
-		console.log( history );
-		if ( history.pushState ) {
+
+		if ( history.pushState ) { // eslint-disable-line
 			const newUrl =
 				window.location.protocol +
 				'//' +
