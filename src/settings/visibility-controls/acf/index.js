@@ -60,7 +60,7 @@ export default function ACF( props ) {
 							'The Advanced Custom Fields (ACF) control allows you to conditionally display blocks, including ACF blocks, based on ACF fields.',
 							'block-visibility'
 						) }
-						link={ links.settingsACF }
+						link={ links.settings.acf }
 					/>
 				</div>
 			</div>

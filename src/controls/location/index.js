@@ -74,7 +74,7 @@ export default function Location( props ) {
 							'The Location control allows you to configure block visibility based on where the block is located on your website using various rules.',
 							'block-visibility'
 						) }
-						link={ links.editorLocation }
+						link={ links.editor.location }
 						position="bottom center"
 					/>
 				) }

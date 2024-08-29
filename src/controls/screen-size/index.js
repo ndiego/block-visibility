@@ -167,7 +167,7 @@ export default function ScreenSize( props ) {
 								'The Screen Size control allows you to configure block visibility based on the width of the current screen.',
 								'block-visibility'
 							) }
-							link={ links.editorScreenSize }
+							link={ links.editor.screenSize }
 							position="bottom center"
 						/>
 					) }
@@ -184,7 +184,7 @@ export default function ScreenSize( props ) {
 								{
 									a: (
 										<ExternalLink // eslint-disable-line
-											href={ links.editorScreenSize }
+											href={ links.editor.screenSize }
 											target="_blank"
 											rel="noreferrer"
 										/>

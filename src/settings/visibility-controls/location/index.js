@@ -52,7 +52,7 @@ export default function Location( props ) {
 							'The Location control allows you to conditionally display blocks based on where the block is located on your website. This includes page and post types, taxonomies, and more.',
 							'block-visibility'
 						) }
-						link={ links.settingsLocation }
+						link={ links.settings.location }
 					/>
 				</div>
 			</div>

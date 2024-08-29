@@ -101,7 +101,7 @@ export default function ACF( props ) {
 							'The Advanced Custom Fields (ACF) control allows you to configure block visibility based on various field-related rules, which form rule sets.',
 							'block-visibility'
 						) }
-						link={ links.editorACF }
+						link={ links.editor.acf }
 						position="bottom right"
 					/>
 				) }

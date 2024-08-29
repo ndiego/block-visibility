@@ -166,7 +166,7 @@ function BlockManager( props ) {
 							'If you are looking for a block and do not see it listed, you may need to enable Full Control Mode on the General Settings tab.',
 							'block-visibility'
 						) }
-						link={ links.settingsBlockManager }
+						link={ links.settings.blockManager }
 					/>
 				</div>
 				<UpdateSettings

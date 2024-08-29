@@ -52,7 +52,7 @@ export default function HideBlock( props ) {
 							"The Hide Block control allows you to hide blocks easily on your website's front end. This control overrides all other controls when enabled on a block.",
 							'block-visibility'
 						) }
-						link={ links.settingsHideBlock }
+						link={ links.settings.hideBlock }
 					/>
 				</div>
 			</div>

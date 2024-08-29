@@ -59,7 +59,7 @@ export default function UrlPath( props ) {
 							"The URL Path control allows you to configure block visibility based on the URL of the page that it's located on.",
 							'block-visibility'
 						) }
-						link={ links.editorUrlPath }
+						link={ links.editor.urlPath }
 						position="bottom center"
 					/>
 				) }

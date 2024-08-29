@@ -46,7 +46,7 @@ export default function HideBlock( props ) {
 							'The Hide Block control overrides all other visibility controls when enabled.',
 							'block-visibility'
 						) }
-						link={ links.editorHideBlock }
+						link={ links.editor.hideBlock }
 						position="bottom center"
 					/>
 				) }

@@ -171,7 +171,7 @@ export default function VisibilityPresets( props ) {
 								'A Visibility Preset is a collection of visibility conditions that can be applied to any number of blocks. This allows you to independently configure and manage the visibility of multiple blocks at once.',
 								'block-visibility'
 							) }
-							link={ links.editorVisibilityPresets }
+							link={ links.editor.visibilityPresets }
 							position="bottom center"
 						/>
 					) }

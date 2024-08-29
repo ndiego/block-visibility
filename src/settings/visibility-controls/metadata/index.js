@@ -52,7 +52,7 @@ export default function Metadata( props ) {
 							'The Metadata control allows you to conditionally display a block based on post or user metadata. Metadata is often referred to as Custom Fields. If you are already using the Advanced Custom Fields plugin, use the ACF control over the Metadata control.',
 							'block-visibility'
 						) }
-						link={ links.settingsMetadata }
+						link={ links.settings.metadata }
 					/>
 				</div>
 			</div>

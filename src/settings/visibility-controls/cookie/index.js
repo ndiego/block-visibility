@@ -52,7 +52,7 @@ export default function Cookie( props ) {
 							'The Cookie control allows you to conditionally display a block based on HTML cookies.',
 							'block-visibility'
 						) }
-						link={ links.settingsCookie }
+						link={ links.settings.cookie }
 					/>
 				</div>
 			</div>

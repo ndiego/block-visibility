@@ -210,7 +210,7 @@ export default function WPFusion( props ) {
 							'Note that the available fields depend on the User Role control settings. If the User Role control is disabled, only the Required Tags (Not) field will be available.',
 							'block-visibility'
 						) }
-						link={ links.editorWpFusion }
+						link={ links.editor.wpFusion }
 						position="bottom center"
 					/>
 				) }

@@ -176,7 +176,7 @@ export default function UserRole( props ) {
 							"The User Role control allows you to configure block visibility based on the current user's role or specific users.",
 							'block-visibility'
 						) }
-						link={ links.editorUserRole }
+						link={ links.editor.userRole }
 						position="bottom center"
 					/>
 				) }

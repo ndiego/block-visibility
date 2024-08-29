@@ -52,7 +52,7 @@ export default function QueryString( props ) {
 							'The Query String control allows you to conditionally display blocks based on URL query strings.',
 							'block-visibility'
 						) }
-						link={ links.settingsQueryString }
+						link={ links.settings.queryString }
 					/>
 				</div>
 			</div>

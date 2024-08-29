@@ -152,7 +152,7 @@ export default function ScreenSize( props ) {
 							"The Screen Size control allows you to conditionally display blocks on the current width of the browser window, or in other words, the screen size of a user's device.",
 							'block-visibility'
 						) }
-						link={ links.settingsScreenSize }
+						link={ links.settings.screenSize }
 					/>
 				</div>
 				{ screenSizeControls }
@@ -167,7 +167,7 @@ export default function ScreenSize( props ) {
 							'Note that once enabled, any block that is only using the advanced controls to hide at extra large or extra small breakpoints will become visible again if you disable this setting in the future.',
 							'block-visibility'
 						) }
-						link={ links.settingsScreenSize }
+						link={ links.settings.screenSize }
 					/>
 				</div>
 				<div className="settings-type__toggle has-info-popover subsetting">
@@ -177,7 +177,7 @@ export default function ScreenSize( props ) {
 							'By default, the CSS needed for the Screen Size controls is loaded on the front end of your website. If disabled, you will need to add the CSS manually to your theme for the Screen Size controls to work properly. This CSS code is available via the "Preview Frontend CSS" button.',
 							'block-visibility'
 						) }
-						link={ links.settingsScreenSize }
+						link={ links.settings.screenSize }
 					/>
 				</div>
 			</div>

@@ -82,7 +82,7 @@ export default function Breakpoints( props ) {
 						'The default breakpoints are Large (992px) and Medium (768px). Advanced screen size controls add Extra Large (1200px) and Small (576px).',
 						'block-visibility'
 					) }
-					link={ links.settingsScreenSize }
+					link={ links.settings.screenSize }
 				/>
 			</div>
 			{ Object.entries( breakpoints ).map( ( [ breakpoint, labels ] ) => {

@@ -55,7 +55,7 @@ export default function BrowserDevice( props ) {
 							'The Browser & Device control allows you to conditionally display a block based on the device or web browser the current user is using to visit your website.',
 							'block-visibility'
 						) }
-						link={ links.settingsBrowserDevice }
+						link={ links.settings.browserDevice }
 					/>
 				</div>
 			</div>

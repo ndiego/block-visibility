@@ -52,7 +52,7 @@ export default function UrlPath( props ) {
 							'The URL Path control allows you to conditionally display a block based on the URL of the page that the block is on.',
 							'block-visibility'
 						) }
-						link={ links.settingsUrlPath }
+						link={ links.settings.urlPath }
 					/>
 				</div>
 			</div>

@@ -67,7 +67,7 @@ export default function VisibilityControls( props ) {
 							'When a visibility control is disabled, blocks that rely on the disabled control will become visible again unless other enabled controls hide them.',
 							'block-visibility'
 						) }
-						link={ links.settingsVisibilityControls }
+						link={ links.settings.visibilityControls }
 					/>
 				</div>
 				<UpdateSettings

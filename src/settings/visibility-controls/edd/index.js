@@ -82,7 +82,7 @@ export default function EDD( props ) {
 							'The Easy Digital Downloads control allows you to conditionally display blocks based on a variety of store-related rules. This includes shopping cart contents, customer order history, and more.',
 							'block-visibility'
 						) }
-						link={ links.settingsEDD }
+						link={ links.settings.edd }
 					/>
 				</div>
 				<div className="settings-type__toggle has-info-popover subsetting">
@@ -92,7 +92,7 @@ export default function EDD( props ) {
 							'Display each variable price separately for downloads with variable pricing in the Easy Digital Downloads control. Downloads without variable pricing display as usual.',
 							'block-visibility'
 						) }
-						link={ links.settingsEDD }
+						link={ links.settings.edd }
 					/>
 				</div>
 			</div>

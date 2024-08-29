@@ -65,7 +65,7 @@ export default function ReferralSource( props ) {
 							'The Referral Source control allows you to configure block visibility based on the referral source URL. Restrict visibility by specific domains, complete URLs, or URL fragments.',
 							'block-visibility'
 						) }
-						link={ links.editorReferralSource }
+						link={ links.editor.referralSource }
 						position="bottom center"
 					/>
 				) }
@@ -140,7 +140,7 @@ export default function ReferralSource( props ) {
 								'block-visibility'
 							),
 							{
-							a: <ExternalLink href={ links.editorReferralSource } />, // eslint-disable-line
+							a: <ExternalLink href={ links.editor.referralSource } />, // eslint-disable-line
 							}
 						)
 					}

@@ -52,7 +52,7 @@ export default function VisibilityPresets( props ) {
 							'Visibility Presets allow you to configure visibility controls globally and then apply them to individual blocks.',
 							'block-visibility'
 						) }
-						link={ links.settingsVisibilityPresets }
+						link={ links.settings.visibilityPresets }
 					/>
 				</div>
 			</div>

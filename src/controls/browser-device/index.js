@@ -75,7 +75,7 @@ export default function BrowserDevice( props ) {
 							"The Browser & Device control allows you to configure block visibility based on the current user's browser or device.",
 							'block-visibility'
 						) }
-						link={ links.editorBrowserDevice }
+						link={ links.editor.browserDevice }
 						position="bottom center"
 					/>
 				) }

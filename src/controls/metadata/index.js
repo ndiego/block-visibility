@@ -74,7 +74,7 @@ export default function Metadata( props ) {
 							'The Metadata control allows you to configure block visibility based on post or user metadata.',
 							'block-visibility'
 						) }
-						link={ links.editorMetadata }
+						link={ links.editor.metadata }
 						position="bottom center"
 					/>
 				) }

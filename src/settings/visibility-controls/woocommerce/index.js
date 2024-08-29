@@ -82,7 +82,7 @@ export default function WooCommerce( props ) {
 							'The WooCommerce control allows you to conditionally display blocks based on a variety of store-related rules. This includes shopping cart contents, customer order history, and more.',
 							'block-visibility'
 						) }
-						link={ links.settingsWoocommerce }
+						link={ links.settings.woocommerce }
 					/>
 				</div>
 				<div className="settings-type__toggle has-info-popover subsetting">
@@ -92,7 +92,7 @@ export default function WooCommerce( props ) {
 							'For products with variable pricing, display each variable price separately in the WooCommerce control. Products without variable pricing display as usual.',
 							'block-visibility'
 						) }
-						link={ links.settingsWoocommerce }
+						link={ links.settings.woocommerce }
 					/>
 				</div>
 			</div>

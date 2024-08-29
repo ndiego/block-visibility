@@ -155,7 +155,7 @@ export default function Editor( props ) {
 						'Settings that impact the Editor, such as contextual indicators for when a block has visibility controls, as well as additional toolbar options.',
 						'block-visibility'
 					) }
-					link={ links.settingsGeneral }
+					link={ links.settings.general }
 				/>
 			</div>
 			<div className="settings-panel__container">

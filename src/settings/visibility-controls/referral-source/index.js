@@ -52,7 +52,7 @@ export default function ReferralSource( props ) {
 							'The Referral Source control allows you to conditionally display blocks based on the domain or URL from which visitors arrive at your site.',
 							'block-visibility'
 						) }
-						link={ links.settingsReferralSource }
+						link={ links.settings.referralSource }
 					/>
 				</div>
 			</div>

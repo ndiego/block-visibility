@@ -60,7 +60,7 @@ export default function WPFusion( props ) {
 							'The WP Fusion control allows you to conditionally display blocks based on WP Fusion tags.',
 							'block-visibility'
 						) }
-						link={ links.settingsWpFusion }
+						link={ links.settings.wpFusion }
 					/>
 				</div>
 			</div>

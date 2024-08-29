@@ -73,7 +73,7 @@ export default function Cookie( props ) {
 							'The Cookie control allows you to configure block visibility based on HTML cookies.',
 							'block-visibility'
 						) }
-						link={ links.editorCookie }
+						link={ links.editor.cookie }
 						position="bottom center"
 					/>
 				) }

@@ -56,7 +56,7 @@ export default function ScreenSizeControls( props ) {
 						'The default controls are Desktop, Tablet, and Mobile. Advanced screen size controls add Large Desktop and Mobile (portrait).',
 						'block-visibility'
 					) }
-					link={ links.settingsScreenSize }
+					link={ links.settings.screenSize }
 				/>
 			</div>
 			{ enableAdvancedControls && (

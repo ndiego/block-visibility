@@ -24,17 +24,17 @@ export default function Masthead( props ) {
 	const displayLinks = {
 		review: {
 			title: __( 'Review', 'block-visibility' ),
-			url: links.blockVisibilityOrgReviews,
+			url: links.general.orgReviews,
 			icon: starFilled,
 		},
 		support: {
 			title: __( 'Support', 'block-visibility' ),
-			url: links.blockVisibilityOrgSupport,
+			url: links.general.orgSupport,
 			icon: lifesaver,
 		},
 		knowledgeBase: {
 			title: __( 'Knowledge Base', 'block-visibility' ),
-			url: links.settingsKnowledgeBase,
+			url: links.settings.knowledgeBase,
 			icon: institution,
 		},
 	};

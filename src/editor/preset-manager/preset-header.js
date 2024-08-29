@@ -211,7 +211,7 @@ export default function PresetHeader( props ) {
 							{ __( 'Duplicate', 'block-visibility' ) }
 						</MenuItem>
 						<a
-							href={ links.editorVisibilityPresets }
+							href={ links.editor.visibilityPresets }
 							target="_blank"
 							role="menuitem"
 							rel="noopener noreferrer"

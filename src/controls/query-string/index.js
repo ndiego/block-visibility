@@ -61,7 +61,7 @@ export default function QueryString( props ) {
 							'The Query String control allows you to configure block visibility based on URL query strings.',
 							'block-visibility'
 						) }
-						link={ links.editorQueryString }
+						link={ links.editor.queryString }
 						position="bottom center"
 					/>
 				) }

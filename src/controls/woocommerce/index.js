@@ -85,7 +85,7 @@ export default function WooCommerce( props ) {
 							'The WooCommerce control allows you to configure block visibility based on various store-related rules.',
 							'block-visibility'
 						) }
-						link={ links.editorWoocommerce }
+						link={ links.editor.woocommerce }
 						position="bottom center"
 					/>
 				) }

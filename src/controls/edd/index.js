@@ -86,7 +86,7 @@ export default function EDD( props ) {
 							'The Easy Digital Downloads control allows you to configure block visibility based on a variety of store-related rules.',
 							'block-visibility'
 						) }
-						link={ links.editorEDD }
+						link={ links.editor.edd }
 						position="bottom center"
 					/>
 				) }

@@ -57,7 +57,7 @@ export default function Integrations( props ) {
 							'Visit the plugin Knowledge Base for more information on configuring third-party integration controls and what integrations are currently available in Block Visibility.',
 							'block-visibility'
 						) }
-						link={ links.settingsVisibilityContolsIntegrations }
+						link={ links.settings.visibilityControlsIntegrations }
 					/>
 				</div>
 				<UpdateSettings

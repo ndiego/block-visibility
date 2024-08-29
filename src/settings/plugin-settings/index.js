@@ -53,7 +53,7 @@ export default function PluginSettings( props ) {
 							'The settings below allow you to configure general functionality for the Block Visibility plugin.',
 							'block-visibility'
 						) }
-						link={ links.settingsGeneral }
+						link={ links.settings.general }
 					/>
 				</div>
 				<UpdateSettings

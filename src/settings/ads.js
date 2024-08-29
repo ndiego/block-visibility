@@ -34,7 +34,7 @@ export default function Ads( props ) {
 						'block-visibility'
 					) }
 					<ExternalLink // eslint-disable-line
-						href={ links.blockVisibilityOrgSupport }
+						href={ links.general.orgSupport }
 						target="_blank"
 						rel="noreferrer"
 					>
@@ -47,7 +47,7 @@ export default function Ads( props ) {
 						'block-visibility'
 					) }
 					<ExternalLink // eslint-disable-line
-						href={ links.settingsKnowledgeBase }
+						href={ links.settings.knowledgeBase }
 						target="_blank"
 					>
 						{ __( 'View Knowledge Base', 'block-visibility' ) }
@@ -64,7 +64,7 @@ export default function Ads( props ) {
 						'block-visibility'
 					) }
 					<ExternalLink // eslint-disable-line
-						href={ links.blockVisibilityOrgReviews }
+						href={ links.general.orgReviews }
 						target="_blank"
 						rel="noreferrer"
 					>

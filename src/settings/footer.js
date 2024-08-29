@@ -23,25 +23,25 @@ export default function Footer( props ) {
 	const displayLinks = {
 		plugin: {
 			title: __( 'Block Visibility', 'block-visibility' ) + ' ' + pluginVariables.version, // eslint-disable-line
-			url: links.settingsHome,
+			url: links.settings.home,
 			rel: 'external',
 		},
 		docs: {
 			title: __( 'Knowledge Base', 'block-visibility' ),
-			url: links.settingsKnowledgeBase,
+			url: links.settings.knowledgeBase,
 			rel: 'external',
 		},
 		support: {
 			title: __( 'Support', 'block-visibility' ),
-			url: links.blockVisibilityOrgSupport,
+			url: links.general.orgSupport,
 		},
 		repo: {
 			title: __( 'GitHub', 'block-visibility' ),
-			url: links.gitHub,
+			url: links.general.gitHub,
 		},
 		twitter: {
 			title: __( 'Twitter', 'block-visibility' ),
-			url: links.twitter,
+			url: links.general.twitter,
 		},
 	};
 

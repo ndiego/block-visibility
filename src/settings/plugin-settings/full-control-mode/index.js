@@ -42,7 +42,7 @@ export default function FullControlMode( props ) {
 								strong: <strong />,
 								a: (
 									<ExternalLink // eslint-disable-line
-										href={ links.settingsGeneral }
+										href={ links.settings.general }
 										target="_blank"
 										rel="noreferrer"
 									/>
@@ -63,7 +63,7 @@ export default function FullControlMode( props ) {
 							"Some blocks do not have visibility controls enabled by default. These include child blocks and blocks that may exist in WordPress but cannot be added directly to the Editor. You will not need Full Control Mode most of the time, but it's here in case you do.",
 							'block-visibility'
 						) }
-						link={ links.settingsGeneral }
+						link={ links.settings.general }
 					/>
 				</div>
 			</div>

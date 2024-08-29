@@ -98,7 +98,7 @@ export default function ControlSets( props ) {
 							'Multiple control sets allow you to create "OR" conditions between each set.',
 							'block-visibility'
 						) }
-						link={ links.editorVisibilityPresets }
+						link={ links.editor.visibilityPresets }
 						position="bottom center"
 					/>
 				</div>

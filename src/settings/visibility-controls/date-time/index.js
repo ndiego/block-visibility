@@ -97,7 +97,7 @@ export default function DateTime( props ) {
 							'The Date & Time control allows you to conditionally display blocks based on time and date settings, which includes the ability to schedule blocks.',
 							'block-visibility'
 						) }
-						link={ links.settingsDateTime }
+						link={ links.settings.dateTime }
 					/>
 				</div>
 				<div className="settings-type__toggle has-info-popover first subsetting">
@@ -107,7 +107,7 @@ export default function DateTime( props ) {
 							'The Day of Week control adds functionality to the main Date & Time control. It allows you to conditionally display blocks based on specific days of the week within a given schedule.',
 							'block-visibility'
 						) }
-						link={ links.settingsDateTime }
+						link={ links.settings.dateTime }
 					/>
 				</div>
 				<div className="settings-type__toggle has-info-popover subsetting">
@@ -117,7 +117,7 @@ export default function DateTime( props ) {
 							'The Time of Day adds functionality to the main Date & Time control. It allows you to conditionally display blocks at specific time intervals on each day of a given schedule.',
 							'block-visibility'
 						) }
-						link={ links.settingsDateTime }
+						link={ links.settings.dateTime }
 					/>
 				</div>
 			</div>
