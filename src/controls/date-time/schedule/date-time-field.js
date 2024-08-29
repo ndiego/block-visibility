@@ -46,7 +46,7 @@ export default function DateTimeField( props ) {
 					className="clear-date-time"
 					title={ __( 'Clear date/time', 'block-visibility' ) }
 					onClick={ () => setAttribute( dateType, false, '' ) }
-					isSmall
+					size="small"
 				/>
 			) }
 		</div>

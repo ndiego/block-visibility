@@ -184,7 +184,7 @@ export default function VisibilityPresets( props ) {
 								}
 								onClick={ () => setModalOpen( true ) }
 								label={ buttonText }
-								isSmall
+								size="small"
 							/>
 						) }
 					</div>

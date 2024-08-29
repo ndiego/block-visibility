@@ -112,8 +112,8 @@ export function ImportModal( props ) {
 							) }
 							onClick={ () => pasteFromClipboard() }
 							disabled={ input || ! isPageSecure }
-							isTertiary
-							isSmall
+							variant="tertiary"
+							size="small"
 							icon={ paste }
 						/>
 						<TextareaControl
@@ -132,13 +132,13 @@ export function ImportModal( props ) {
 					</div>
 					<div className="block-visibility__import-modal--buttons">
 						<Button
-							isSecondary
+							variant="secondary"
 							onClick={ () => setModalOpen( false ) }
 						>
 							{ __( 'Cancel', 'block-visibility' ) }
 						</Button>
 						<Button
-							isPrimary
+							variant="primary"
 							onClick={ () => importSettings( input ) }
 							disabled={ ! isValid || ! input }
 						>

@@ -84,7 +84,7 @@ export default function BrowserDevice( props ) {
 						icon={ plus }
 						onClick={ () => addRuleSet() }
 						label={ __( 'Add rule set', 'block-visibility' ) }
-						isSmall
+						size="small"
 					/>
 				</div>
 			</h3>

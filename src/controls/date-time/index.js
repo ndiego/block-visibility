@@ -83,7 +83,7 @@ export default function DateTime( props ) {
 						icon={ plus }
 						onClick={ () => addSchedule() }
 						label={ __( 'Add schedule', 'block-visibility' ) }
-						isSmall
+						size="small"
 					/>
 				</div>
 			</h3>

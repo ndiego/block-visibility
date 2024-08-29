@@ -380,7 +380,7 @@ export default function Schedule( props ) {
 									! todEnabled
 								)
 							}
-							isSmall
+							size="small"
 							label={ __(
 								'Set time of day controls',
 								'block-visibility'
@@ -398,7 +398,7 @@ export default function Schedule( props ) {
 									! dowEnabled
 								)
 							}
-							isSmall
+							size="small"
 							label={ __(
 								'Set day of week controls',
 								'block-visibility'

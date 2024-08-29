@@ -111,13 +111,13 @@ export default function PresetSidebar( props ) {
 			</p>
 			<div className="block-visibility__confirmation-modal--buttons">
 				<Button
-					isSecondary
+					variant="secondary"
 					onClick={ () => setConfirmModalAtts( { open: false } ) }
 				>
 					{ __( 'Cancel', 'block-visibility' ) }
 				</Button>
 				<Button
-					isPrimary
+					variant="primary"
 					onClick={ () => {
 						if ( confirmModalAtts?.type === 'edit' ) {
 							editPreset( confirmModalAtts?.id );

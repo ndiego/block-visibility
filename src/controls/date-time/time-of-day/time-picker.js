@@ -185,16 +185,14 @@ export default function TimePicker( props ) {
 				{ is12Hour && (
 					<ButtonGroup className="time-picker__fields-am-pm">
 						<Button
-							isPrimary={ am === 'AM' }
-							isSecondary={ am !== 'AM' }
+							variant={ am === 'AM' ? 'primary' : 'secondary' }
 							onClick={ updateAmPm( 'AM' ) }
 							className="time-picker__am-button"
 						>
 							{ __( 'AM', 'block-visibility' ) }
 						</Button>
 						<Button
-							isPrimary={ am === 'PM' }
-							isSecondary={ am !== 'PM' }
+							variant={ am === 'PM' ? 'primary' : 'secondary' }
 							onClick={ updateAmPm( 'PM' ) }
 							className="time-picker__pm-button"
 						>

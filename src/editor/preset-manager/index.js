@@ -88,7 +88,10 @@ export default function PresetManager() {
 			<div className="preset-manager__content">
 				{ isEmpty( presetAttributes ) && (
 					<div className="preset-manager__content-placeholder">
-						<Button isPrimary onClick={ () => addNewPreset() }>
+						<Button
+							variant="primary"
+							onClick={ () => addNewPreset() }
+						>
 							{ __( 'New preset', 'block-visibility' ) }
 						</Button>
 						<p>

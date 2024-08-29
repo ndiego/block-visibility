@@ -55,7 +55,7 @@ export default function CalendarPopover( props ) {
 					label={ __( 'Close', 'block-visibility' ) }
 					onClick={ () => setPickerOpen( false ) }
 					icon={ closeSmall }
-					isSmall
+					size="small"
 				/>
 			</div>
 			<DateTimePicker

@@ -107,7 +107,7 @@ export default function UpdateSettings( props ) {
 					<Button
 						className="reset-settings__save-button"
 						onClick={ () => setResetModalOpen( true ) }
-						isTertiary
+						variant="tertiary"
 					>
 						{ __( 'Reset Settings', 'block-visibility' ) }
 					</Button>
@@ -118,7 +118,7 @@ export default function UpdateSettings( props ) {
 					} ) }
 					onClick={ () => onSettingsChange() }
 					disabled={ ! hasUpdates && status !== 'error' }
-					isPrimary
+					variant="primary"
 				>
 					{ updateButton }
 				</Button>
@@ -138,13 +138,13 @@ export default function UpdateSettings( props ) {
 					<div className="block-visibility__reset-modal--buttons">
 						<div className="block-visibility__reset-modal--buttons-reset">
 							<Button
-								isPrimary
+								variant="primary"
 								onClick={ () => onSettingsChange( 'reset' ) }
 							>
 								{ __( 'Reset', 'block-visibility' ) }
 							</Button>
 							<Button
-								isSecondary
+								variant="secondary"
 								onClick={ () => onSettingsChange( 'resetAll' ) }
 							>
 								{ __( 'Reset All', 'block-visibility' ) }
@@ -152,7 +152,7 @@ export default function UpdateSettings( props ) {
 							{ status === 'resetting' && <Spinner /> }
 						</div>
 						<Button
-							isTertiary
+							variant="tertiary"
 							onClick={ () => setResetModalOpen( false ) }
 						>
 							{ __( 'Cancel', 'block-visibility' ) }

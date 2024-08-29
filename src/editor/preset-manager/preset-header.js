@@ -179,12 +179,12 @@ export default function PresetHeader( props ) {
 			</p>
 			<div className="block-visibility__confirmation-modal--buttons">
 				<Button
-					isSecondary
+					variant="secondary"
 					onClick={ () => setDeleteModalOpen( false ) }
 				>
 					{ __( 'Cancel', 'block-visibility' ) }
 				</Button>
-				<Button isPrimary onClick={ () => deletePreset( id ) }>
+				<Button variant="primary" onClick={ () => deletePreset( id ) }>
 					{ __( 'Remove', 'block-visibility' ) }
 				</Button>
 			</div>
@@ -262,7 +262,7 @@ export default function PresetHeader( props ) {
 						label={ __( 'Add control set', 'block-visibility' ) }
 						icon={ plus }
 						onClick={ addControlSet }
-						isPrimary
+						variant="primary"
 					/>
 					<Button
 						label={ __( 'Display as rows', 'block-visibility' ) }
@@ -286,7 +286,7 @@ export default function PresetHeader( props ) {
 							triggerAction( id ? 'update' : 'publish' )
 						}
 						disabled={ ! hasUpdates && status !== 'error' }
-						isPrimary
+						variant="primary"
 					>
 						{ publishUpdateLabel }
 					</Button>

@@ -233,14 +233,14 @@ export default function ControlSetHeader( props ) {
 							controlSets.length <= 1
 						}
 						icon={ trash }
-						isSmall
+						size="small"
 						label={ __( 'Remove', 'block-visibility' ) }
 						onClick={ () => removeControlSet() }
 					/>
 					<Button
 						disabled={ activeSetControls.length === 0 }
 						icon={ ungroup }
-						isSmall
+						size="small"
 						label={ __( 'Duplicate', 'block-visibility' ) }
 						onClick={ () => duplicateControlSet() }
 						style={ { padding: 0 } }

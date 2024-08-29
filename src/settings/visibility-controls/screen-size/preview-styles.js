@@ -24,7 +24,10 @@ export default function PreviewStyles( props ) {
 
 	return (
 		<div className="breakpoint-css-preview subsetting">
-			<Button onClick={ () => setPreview( ! preview ) } isSecondary>
+			<Button
+				onClick={ () => setPreview( ! preview ) }
+				variant="secondary"
+			>
 				{ [
 					! preview &&
 						__( 'Preview Frontend CSS', 'block-visibility' ),

@@ -161,8 +161,8 @@ export default function ControlSets( props ) {
 								) }
 								icon={ plus }
 								onClick={ addControlSet }
-								isPrimary
-								isSmall
+								variant="primary"
+								size="small"
 							/>
 						</div>
 					</div>
