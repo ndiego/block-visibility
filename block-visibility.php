@@ -8,34 +8,37 @@
  * Requires PHP:        7.4
  * Author:              Nick Diego
  * Author URI:          https://www.nickdiego.com
- * License:             GPLv2
- * License URI:         https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * License:             GPL-2.0-or-later
+ * License URI:         https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:         block-visibility
  * Domain Path:         /languages
  *
  * @package block-visibility
  */
 
+namespace BlockVisibility;
+
 defined( 'ABSPATH' ) || exit;
 
-if ( ! defined( 'BLOCK_VISIBILITY_PLUGIN_FILE' ) ) {
-	define( 'BLOCK_VISIBILITY_VERSION', '3.5.0' );
-	define( 'BLOCK_VISIBILITY_PLUGIN_FILE', __FILE__ );
-}
+define( 'BLOCK_VISIBILITY_VERSION', '3.5.0' );
+define( 'BLOCK_VISIBILITY_PLUGIN_FILE', __FILE__ );
+define( 'BLOCK_VISIBILITY_ABSPATH', dirname( BLOCK_VISIBILITY_PLUGIN_FILE ) . '/' );
+define( 'BLOCK_VISIBILITY_PLUGIN_URL', plugin_dir_url( BLOCK_VISIBILITY_PLUGIN_FILE ) );
+define( 'BLOCK_VISIBILITY_PLUGIN_BASENAME', plugin_basename( BLOCK_VISIBILITY_PLUGIN_FILE ) );
+define( 'BLOCK_VISIBILITY_SETTINGS_URL', admin_url( 'options-general.php?page=block-visibility-settings' ) );
 
-if ( ! class_exists( 'Block_Visibility' ) ) {
-	include_once dirname( BLOCK_VISIBILITY_PLUGIN_FILE ) . '/includes/class-block-visibility.php';
-}
+// Include the main Block_Visibility class.
+include_once BLOCK_VISIBILITY_ABSPATH . 'includes/class-block-visibility.php';
 
 /**
- * The main function that returns the Block Visibility class
+ * Initialize the Block Visibility plugin.
  *
- * @since 1.0.0
- * @return object|Block_Visibility
+ * @since 3.6.0
+ * 
+ * @return void
  */
-function block_visibility_load_plugin() {
-	return Block_Visibility::instance();
+function init() {
+    $plugin = new \Block_Visibility();
+    $plugin->init();
 }
-
-// Get the plugin running.
-add_action( 'plugins_loaded', 'block_visibility_load_plugin' );
+add_action( 'plugins_loaded', __NAMESPACE__ . '\init' );
