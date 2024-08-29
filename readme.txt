@@ -178,6 +178,12 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 * Front-end classes are now implemented using the HTML API.
 * Updated the `render_block` callback function to only fetch plugin settings if a block has visibility conditions set. 
+* Updated deprecated Button component variant and size properties.
+* Refactored the main plugin class.
+* Refactored the setting tabs.
+* Refactored the link utility and updated all plugin links.
+* Removed control filters deprecated in v2.5.1.
+* Removed all usage of `get_file_data()`.
 
 **Fixed**
 
