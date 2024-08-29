@@ -1,6 +1,6 @@
 <?php
 /**
- * Register the plugin settings
+ * Register the plugin settings.
  *
  * @package block-visibility
  * @since   1.0.0
@@ -11,7 +11,7 @@ namespace BlockVisibility;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Register plugin settings.
+ * Register the plugin settings.
  *
  * @since 1.0.0
  */
