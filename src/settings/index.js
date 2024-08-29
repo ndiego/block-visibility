@@ -9,7 +9,7 @@ import classnames from 'classnames';
 import { __ } from '@wordpress/i18n';
 import { dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
-import { useState, render } from '@wordpress/element';
+import { useCallback, useMemo, useState, render } from '@wordpress/element';
 import { registerCoreBlocks } from '@wordpress/block-library';
 import {
 	Spinner,
@@ -68,10 +68,83 @@ function Settings() {
 	const [ settings, setSettings ] = useState( null );
 	const settingsData = useEntityRecord( 'block-visibility/v1', 'settings' );
 	const variablesData = useEntityRecord( 'block-visibility/v1', 'variables' );
-
-	function onSetSettings( newSettings ) {
+	const onSetSettings = useCallback( ( newSettings ) => {
 		setSettings( newSettings );
-	}
+	}, [] );
+
+	const settingTabs = useMemo( () => {
+		const tabs = [
+			{
+				name: 'plugin-settings',
+				title: __( 'General Settings', 'block-visibility' ),
+				className: 'setting-tabs__plugin-settings',
+			},
+			{
+				name: 'visibility-controls',
+				title: __( 'Visibility Controls', 'block-visibility' ),
+				className: 'setting-tabs__visibility-controls',
+			},
+			{
+				name: 'block-manager',
+				title: __( 'Block Manager', 'block-visibility' ),
+				className: 'setting-tabs__blocks-manager',
+			},
+		];
+
+		return applyFilters( 'blockVisibility.SettingTabs', tabs );
+	}, [] );
+
+	const { initialTab, updateUrl } = useTabNavigation( settingTabs );
+
+	const currentSettings = useMemo(
+		() => settings ?? settingsData.record,
+		[ settings, settingsData.record ]
+	);
+
+	const renderTab = useCallback(
+		( tab ) => {
+			const commonProps = {
+				settings: currentSettings,
+				setSettings: onSetSettings,
+				variables: variablesData.record,
+			};
+
+			switch ( tab.name ) {
+				case 'visibility-controls':
+					return (
+						<>
+							<Ads variables={ variablesData.record } />
+							<VisibilityControls { ...commonProps } />
+						</>
+					);
+				case 'block-manager':
+					return (
+						<>
+							<Ads variables={ variablesData.record } />
+							<BlockManager { ...commonProps } />
+						</>
+					);
+				case 'plugin-settings':
+					return (
+						<>
+							<Ads variables={ variablesData.record } />
+							<PluginSettings { ...commonProps } />
+						</>
+					);
+				default:
+					return (
+						<>
+							<Slot name="SettingTabs" />
+							<AdditionalSettingTabs
+								tabName={ tab.name }
+								{ ...commonProps }
+							/>
+						</>
+					);
+			}
+		},
+		[ currentSettings, onSetSettings, variablesData.record ]
+	);
 
 	// Display loading/error message while settings are being fetched.
 	if ( ! settingsData.hasResolved || ! variablesData.hasResolved ) {
@@ -85,38 +158,42 @@ function Settings() {
 		);
 	}
 
-	const settingTabs = [
-		{
-			name: 'plugin-settings',
-			title: __( 'General Settings', 'block-visibility' ),
-			className: 'setting-tabs__plugin-settings',
-		},
-		{
-			name: 'visibility-controls',
-			title: __( 'Visibility Controls', 'block-visibility' ),
-			className: 'setting-tabs__visibility-controls',
-		},
-		{
-			name: 'block-manager',
-			title: __( 'Block Manager', 'block-visibility' ),
-			className: 'setting-tabs__blocks-manager',
-		},
-	];
+	return (
+		<SlotFillProvider>
+			<Masthead variables={ variablesData.record } />
+			<TabPanel
+				className={ classnames( {
+					'setting-tabs': true,
+					is_pro: variablesData.record?.is_pro,
+				} ) }
+				activeClass="active-tab"
+				initialTabName={ initialTab }
+				tabs={ settingTabs }
+				onSelect={ updateUrl }
+			>
+				{ renderTab }
+			</TabPanel>
+			<Footer variables={ variablesData.record } />
+		</SlotFillProvider>
+	);
+}
 
-	applyFilters( 'blockVisibility.SettingTabs', settingTabs );
-
-	// Switch the default settings tab based on the URL tab query
+// URL-related logic for setting tabs.
+function useTabNavigation( settingTabs ) {
 	const urlParams = new URLSearchParams( window.location.search );
 	const requestedTab = urlParams.get( 'tab' );
-	const initialTab = findKey( settingTabs, [ 'name', requestedTab ] )
-		? requestedTab
-		: 'plugin-settings';
+	const initialTab = useMemo(
+		() =>
+			findKey( settingTabs, [ 'name', requestedTab ] )
+				? requestedTab
+				: 'plugin-settings',
+		[ settingTabs, requestedTab ]
+	);
 
-	// Update URL based on the current tab
-	const updateUrl = ( tabName ) => {
+	const updateUrl = useCallback( ( tabName ) => {
 		urlParams.set( 'tab', tabName );
-
-		if ( history.pushState ) { // eslint-disable-line
+		console.log( history );
+		if ( history.pushState ) {
 			const newUrl =
 				window.location.protocol +
 				'//' +
@@ -130,82 +207,9 @@ function Settings() {
 		} else {
 			window.location.search = urlParams.toString();
 		}
-	};
+	}, [] );
 
-	return (
-		<SlotFillProvider>
-			<Masthead variables={ variablesData.record } />
-			<TabPanel
-				className={ classnames( {
-					'setting-tabs': true,
-					is_pro: variablesData.record?.is_pro,
-				} ) }
-				activeClass="active-tab"
-				initialTabName={ initialTab }
-				tabs={ settingTabs }
-				onSelect={ ( tabName ) => updateUrl( tabName ) }
-			>
-				{ ( tab ) => {
-					switch ( tab.name ) {
-						case 'visibility-controls':
-							return (
-								<>
-									<Ads variables={ variablesData.record } />
-									<VisibilityControls
-										settings={
-											settings ?? settingsData.record
-										}
-										setSettings={ onSetSettings }
-										variables={ variablesData.record }
-									/>
-								</>
-							);
-						case 'block-manager':
-							return (
-								<>
-									<Ads variables={ variablesData.record } />
-									<BlockManager
-										settings={
-											settings ?? settingsData.record
-										}
-										setSettings={ onSetSettings }
-										variables={ variablesData.record }
-									/>
-								</>
-							);
-						case 'plugin-settings':
-							return (
-								<>
-									<Ads variables={ variablesData.record } />
-									<PluginSettings
-										settings={
-											settings ?? settingsData.record
-										}
-										setSettings={ onSetSettings }
-										variables={ variablesData.record }
-									/>
-								</>
-							);
-						default:
-							return (
-								<>
-									<Slot name="SettingTabs" />
-									<AdditionalSettingTabs
-										tabName={ tab.name }
-										settings={
-											settings ?? settingsData.record
-										}
-										setSettings={ onSetSettings }
-										variables={ variablesData.record }
-									/>
-								</>
-							);
-					}
-				} }
-			</TabPanel>
-			<Footer variables={ variablesData.record } />
-		</SlotFillProvider>
-	);
+	return { initialTab, updateUrl };
 }
 
 wp.domReady( () => {
