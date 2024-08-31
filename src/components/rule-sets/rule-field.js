@@ -13,7 +13,7 @@ import { TextControl, ToggleControl } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import DateTime from '../date-time';
+import DateTimeControl from '../date-time';
 import AuthorsSelect from './async-rule-fields/authors-select';
 import TermsSelect from './async-rule-fields/terms-select';
 import PostsSelect from './async-rule-fields/posts-select';
@@ -155,7 +155,7 @@ export default function RuleField( props ) {
 		);
 	} else if ( valueType === 'date' || valueType === 'dateTime' ) {
 		return (
-			<DateTime
+			<DateTimeControl
 				className={ className }
 				value={ value }
 				onChange={ ( v ) =>
@@ -169,6 +169,7 @@ export default function RuleField( props ) {
 				}
 				includeTime={ valueType === 'dateTime' ? true : false }
 				help={ help }
+				{ ...props }
 			/>
 		);
 	} else if ( valueType === 'toggle' ) {

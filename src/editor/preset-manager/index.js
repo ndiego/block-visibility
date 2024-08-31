@@ -131,6 +131,7 @@ export default function PresetManager() {
 							setHasUpdates={ setHasUpdates }
 							settings={ settings }
 							variables={ variables }
+							isPreset
 						/>
 					</>
 				) }

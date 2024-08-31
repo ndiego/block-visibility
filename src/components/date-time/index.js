@@ -33,6 +33,7 @@ export default function DateTimeControl( props ) {
 					onDateChange={ ( date ) => onChange( date ) }
 					setPopoverOpen={ setPopoverOpen }
 					includeTime={ includeTime }
+					{ ...props }
 				/>
 			) }
 			{ help && (

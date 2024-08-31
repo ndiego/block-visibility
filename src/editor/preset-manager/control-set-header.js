@@ -149,8 +149,6 @@ export default function ControlSetHeader( props ) {
 				className:
 					'block-visibility__control-popover visibility-controls',
 				focusOnMount: 'container',
-				placement: 'left-start',
-				offset: 259,
 			} }
 			toggleProps={ {
 				isSmall: true,

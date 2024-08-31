@@ -47,6 +47,7 @@ export default function Schedule( props ) {
 		setControlAtts,
 		hideOnSchedules,
 		settings,
+		isPreset,
 	} = props;
 	const [ pickerOpen, setPickerOpen ] = useState( false );
 	const [ pickerType, setPickerType ] = useState( null );
@@ -203,8 +204,10 @@ export default function Schedule( props ) {
 			icon={ moreVertical }
 			popoverProps={ {
 				focusOnMount: 'container',
-				placement: 'left-start',
-				offset: 259,
+				...( ! isPreset && {
+					placement: 'left-start',
+					offset: 259,
+				} ),
 			} }
 		>
 			{ ( { onClose } ) => (
@@ -312,6 +315,7 @@ export default function Schedule( props ) {
 							setAttribute={ setAttribute }
 							setPickerOpen={ setPickerOpen }
 							pickerType={ pickerType }
+							{ ...props }
 						/>
 					) }
 				</div>

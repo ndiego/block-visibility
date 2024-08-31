@@ -37,6 +37,7 @@ export default function RuleSets( props ) {
 		controlName,
 		controlAtts,
 		setControlAtts,
+		isPreset,
 	} = props;
 
 	const title = ruleSet?.title ?? '';
@@ -103,6 +104,10 @@ export default function RuleSets( props ) {
 			popoverProps={ {
 				className: 'block-visibility__control-popover edit-title',
 				focusOnMount: 'container',
+				...( ! isPreset && {
+					placement: 'left-start',
+					offset: 94,
+				} ),
 			} }
 		>
 			{ () => (
@@ -128,8 +133,10 @@ export default function RuleSets( props ) {
 			icon={ moreVertical }
 			popoverProps={ {
 				focusOnMount: 'container',
-				placement: 'left-start',
-				offset: 259,
+				...( ! isPreset && {
+					placement: 'left-start',
+					offset: 259,
+				} ),
 			} }
 		>
 			{ ( { onClose } ) => (

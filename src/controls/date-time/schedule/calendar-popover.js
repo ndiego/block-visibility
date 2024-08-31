@@ -25,6 +25,7 @@ export default function CalendarPopover( props ) {
 		setPickerOpen,
 		pickerType,
 		isSeasonal,
+		isPreset,
 	} = props;
 	const dateSettings = getSettings();
 
@@ -46,8 +47,8 @@ export default function CalendarPopover( props ) {
 			} ) }
 			focusOnMount={ true }
 			onClose={ () => setPickerOpen( false ) }
-			placement="left-start"
-			offset={ 8 }
+			placement={ ! isPreset ? 'left-start' : undefined }
+			offset={ ! isPreset ? 36 : undefined }
 		>
 			<div className="date-time-popover__header">
 				<h2>{ label }</h2>

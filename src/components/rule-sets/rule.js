@@ -196,6 +196,7 @@ export default function Rule( props ) {
 							}
 							handleRuleChange={ handleRuleChange }
 							hasGroupedOptions={ true }
+							{ ...props }
 						/>
 					) }
 					{ hasHelp && helpPosition === 'top' && (
@@ -407,6 +408,7 @@ export default function Rule( props ) {
 								help={ field?.help ?? '' }
 								isLoading={ field?.isLoading }
 								triggerReset={ field?.triggerReset ?? false }
+								{ ...props }
 							/>
 						);
 					} ) }
