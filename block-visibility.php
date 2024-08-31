@@ -28,17 +28,17 @@ define( 'BLOCK_VISIBILITY_PLUGIN_BASENAME', plugin_basename( BLOCK_VISIBILITY_PL
 define( 'BLOCK_VISIBILITY_SETTINGS_URL', admin_url( 'options-general.php?page=block-visibility-settings' ) );
 
 // Include the main Block_Visibility class.
-include_once BLOCK_VISIBILITY_ABSPATH . 'includes/class-block-visibility.php';
+require_once BLOCK_VISIBILITY_ABSPATH . 'includes/class-block-visibility.php';
 
 /**
  * Initialize the Block Visibility plugin.
  *
  * @since 3.6.0
- * 
+ *
  * @return void
  */
 function init() {
-    $plugin = new \Block_Visibility();
-    $plugin->init();
+	$plugin = new \Block_Visibility();
+	$plugin->init();
 }
 add_action( 'plugins_loaded', __NAMESPACE__ . '\init' );

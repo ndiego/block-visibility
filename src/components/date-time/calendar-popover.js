@@ -11,9 +11,9 @@ import { getSettings } from '@wordpress/date'; // eslint-disable-line
  * @param {Object} props All the props passed to this function
  */
 export default function CalendarPopover( props ) {
-	const { value, onDateChange, setPopoverOpen, includeTime, isPreset } = props;
+	const { value, onDateChange, setPopoverOpen, includeTime, isPreset } =
+		props;
 	const dateSettings = getSettings();
-	console.log( isPreset );
 
 	// To know if the current time format is a 12 hour time, look for "a".
 	// Also make sure this "a" is not escaped by a "/".

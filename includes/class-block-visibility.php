@@ -14,16 +14,16 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.0.0
  */
 class Block_Visibility {
-	
+
 	/**
 	 * Initialize the plugin.
 	 *
 	 * @since 3.6.0
 	 */
 	public function init() {
-        $this->includes();
-        $this->init_hooks();
-    }
+		$this->includes();
+		$this->init_hooks();
+	}
 
 	/**
 	 * Include required files.
