@@ -16,11 +16,6 @@ import { registerPlugin } from '@wordpress/plugins';
 import { Modal } from '@wordpress/components';
 import { useCommand } from '@wordpress/commands';
 
-// Needed for backward compatibility.
-import { PluginMoreMenuItem as PostEditorPluginMoreMenuItem } from '@wordpress/edit-post'; // Slot for the Post Editor.
-import { PluginMoreMenuItem as SiteEditorPluginMoreMenuItem } from '@wordpress/edit-site'; // Slot for the Site Editor.
-import { PluginMoreMenuItem as UnifiedPluginMoreMenuItem } from '@wordpress/editor'; // Slot for the unified Editor.
-
 /**
  * Internal dependencies
  */
@@ -161,89 +156,93 @@ registerPlugin( 'block-visibility-toolbar-options-hide-block', {
 	render: getToolbarControls,
 } );
 
-/**
- * Toggle the Preset Manager.
- *
- * Adds a sidebar button in the Post Editor and a Command Palette command.
- */
-function TogglePresetManager() {
-	const [ isModalOpen, setModalOpen ] = useState( false );
-	const variablesData = useEntityRecord( 'block-visibility/v1', 'variables' );
-	const roles = variablesData?.record?.current_users_roles ?? [];
-	let canEdit = false;
+wp.domReady( () => {
+	/**
+	 * Needed for backward compatibility.
+	 * See: https://make.wordpress.org/core/2024/06/18/editor-unified-extensibility-apis-in-6-6/
+	 *
+	 * Unfortunately, we cannout use the import method implemented in v3.5.0,
+	 * because this causes a block error in the Navigation block.
+	 * See: https://github.com/ndiego/block-visibility/issues/111
+	 *
+	 * TODO: Remove once once WordPress 6.7 is released and the minimum required
+	 * version of WordPress is updated to 6.6.
+	 */
+	const PluginMoreMenuItem =
+		wp.editor?.PluginMoreMenuItem ??
+		wp.editPost?.PluginMoreMenuItem ??
+		wp.editSite?.PluginMoreMenuItem;
 
-	// Allow the Command Palette to open the Preset Manager.
-	useCommand( {
-		name: 'manage-visibility-presets',
-		label: __( 'Manage Visibility Presets', 'block-visibility' ),
-		icon: visibilityAlt,
-		callback: () => setModalOpen( true ),
-		context: 'block-editor',
-	} );
+	/**
+	 * Toggle the Preset Manager.
+	 *
+	 * Adds a sidebar button in the Post Editor and a Command Palette command.
+	 */
+	function TogglePresetManager() {
+		const [ isModalOpen, setModalOpen ] = useState( false );
+		const variablesData = useEntityRecord(
+			'block-visibility/v1',
+			'variables'
+		);
+		const roles = variablesData?.record?.current_users_roles ?? [];
+		let canEdit = false;
 
-	// While roles should always be an array, double check.
-	if ( Array.isArray( roles ) ) {
-		const allowedRoles = [ 'super-admin', 'administrator', 'editor' ];
-		canEdit = roles.some( ( role ) => allowedRoles.includes( role ) );
-	} else {
-		// Temporary patch to correct for third-party plugin conflict.
-		// @TODO remove once conflict is resolved.
-		canEdit = true;
-	}
+		// Allow the Command Palette to open the Preset Manager.
+		useCommand( {
+			name: 'manage-visibility-presets',
+			label: __( 'Manage Visibility Presets', 'block-visibility' ),
+			icon: visibilityAlt,
+			callback: () => setModalOpen( true ),
+			context: 'block-editor',
+		} );
 
-	if ( ! canEdit ) {
-		return null;
-	}
+		// While roles should always be an array, double check.
+		if ( Array.isArray( roles ) ) {
+			const allowedRoles = [ 'super-admin', 'administrator', 'editor' ];
+			canEdit = roles.some( ( role ) => allowedRoles.includes( role ) );
+		} else {
+			// Temporary patch to correct for third-party plugin conflict.
+			// @TODO remove once conflict is resolved.
+			canEdit = true;
+		}
 
-	// Editor plugins are not supported in the block-based Widget Editor.
-	// Note: pagenow is a global variable provided by WordPress.
-	if ( pagenow === 'widgets' ) { // eslint-disable-line
-		return null;
-	}
+		if ( ! canEdit ) {
+			return null;
+		}
 
-	return (
-		<>
-			{ UnifiedPluginMoreMenuItem ? (
-				<UnifiedPluginMoreMenuItem
+		// Editor plugins are not supported in the block-based Widget Editor.
+		// Note: pagenow is a global variable provided by WordPress.
+		if ( pagenow === 'widgets' ) { // eslint-disable-line
+			return null;
+		}
+
+		return (
+			<>
+				<PluginMoreMenuItem
 					icon={ visibilityAlt }
 					onClick={ () => setModalOpen( true ) }
 				>
 					{ __( 'Block Visibility Presets', 'block-visibility' ) }
-				</UnifiedPluginMoreMenuItem>
-			) : (
-				<>
-					<PostEditorPluginMoreMenuItem
-						icon={ visibilityAlt }
-						onClick={ () => setModalOpen( true ) }
+				</PluginMoreMenuItem>
+				{ isModalOpen && (
+					<Modal
+						className="block-visibility__preset-manager-modal"
+						title={ __(
+							'Block Visibility Presets',
+							'block-visibility'
+						) }
+						onRequestClose={ () => setModalOpen( false ) }
+						shouldCloseOnClickOutside={ false }
+						isFullScreen
 					>
-						{ __( 'Block Visibility Presets', 'block-visibility' ) }
-					</PostEditorPluginMoreMenuItem>
-					<SiteEditorPluginMoreMenuItem
-						icon={ visibilityAlt }
-						onClick={ () => setModalOpen( true ) }
-					>
-						{ __( 'Block Visibility Presets', 'block-visibility' ) }
-					</SiteEditorPluginMoreMenuItem>
-				</>
-			) }
-			{ isModalOpen && (
-				<Modal
-					className="block-visibility__preset-manager-modal"
-					title={ __(
-						'Block Visibility Presets',
-						'block-visibility'
-					) }
-					onRequestClose={ () => setModalOpen( false ) }
-					shouldCloseOnClickOutside={ false }
-					isFullScreen
-				>
-					<PresetManager />
-				</Modal>
-			) }
-		</>
-	);
-}
+						<PresetManager />
+					</Modal>
+				) }
+			</>
+		);
+	}
 
-registerPlugin( 'block-visibility-preset-manager', {
-	render: TogglePresetManager,
+	registerPlugin( 'block-visibility-preset-manager', {
+		render: TogglePresetManager,
+	} );
 } );
