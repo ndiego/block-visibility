@@ -188,6 +188,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 **Fixed**
 
+* Fixed backward compatibility error due to the unified extensibility APIs in WordPress 6.6.
 * Fixed Widget Editor notice in WordPress 6.6+.
 * Fixed spacing in the Day of Week control.
 
