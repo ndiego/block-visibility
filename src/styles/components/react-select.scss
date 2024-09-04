@@ -3,11 +3,11 @@
 
     .react-select__control {
         border-radius: 2px;
-        border: 1px solid #1e1e1e;
+        border: 1px solid var(--wp-components-color-gray-600, #949494);
         min-height: 40px;
 
         &:hover {
-            border: 1px solid #1e1e1e;
+            border: 1px solid var(--wp-components-color-gray-600, #949494);
         }
 
         &:focus,

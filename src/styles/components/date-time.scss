@@ -2,7 +2,7 @@
 .block-visibility__date-time {
 	.date-time__date-time-field {
 		border-radius: 2px;
-        border: 1px solid #1e1e1e;
+        border: 1px solid var(--wp-components-color-gray-600, #949494);
         min-height: 40px;
         display: flex;
         justify-content: space-between;
