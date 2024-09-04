@@ -180,6 +180,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 * Updated the `render_block` callback function to only fetch plugin settings if a block has visibility conditions set. 
 * Updated deprecated Button component variant and size properties.
 * Updated popover placement and offsets.
+* Updated component styling to match Core.
 * Refactored the main plugin class.
 * Refactored the setting tabs.
 * Refactored the link utility and updated all plugin links.
@@ -191,6 +192,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 * Fixed backward compatibility error due to the unified extensibility APIs in WordPress 6.6.
 * Fixed Widget Editor notice in WordPress 6.6+.
 * Fixed spacing in the Day of Week control.
+* Fixed Firefox content overflow issue with the React Select component.
 
 = 3.5.0 - 2024-07-20 =
 
