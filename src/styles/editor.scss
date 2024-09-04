@@ -1354,6 +1354,11 @@
                         width: 100%;
                         max-width: 100%;
 
+                        // Patch for Firefox overflow issue.
+                        .block-visibility__react-select {
+                            max-width: none;
+                        }
+
                         .date-time-control__schedules {
                             grid-template-columns: repeat( auto-fit, minmax( 460px, 1fr ) );
                             grid-row-gap: 24px;

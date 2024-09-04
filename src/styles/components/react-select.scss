@@ -1,6 +1,9 @@
 // Custom styling to make react-select components look more like WordPress.
 .block-visibility__react-select {
 
+    // Patch for Firefox overflow issue.
+    max-width: 248px;
+
     .react-select__control {
         border-radius: 2px;
         border: 1px solid var(--wp-components-color-gray-600, #949494);
