@@ -25,7 +25,12 @@ import { plus, settings as settingsIcon } from '@wordpress/icons';
 import { InformationPopover } from './../../components';
 import PresetManager from './../../editor/preset-manager';
 import links from './../../utils/links';
-import { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } from './../../utils/react-select-utils';
+import {
+	ClearIndicator,
+	DropdownIndicator,
+	IndicatorSeparator,
+	MultiValueRemove,
+} from './../../utils/react-select-utils';
 
 /**
  * Add the Visibility Presets control
@@ -204,7 +209,10 @@ export default function VisibilityPresets( props ) {
 						<Select
 							className="block-visibility__react-select"
 							classNamePrefix="react-select"
-							components={ { DropdownIndicator, IndicatorSeparator } }
+							components={ {
+								DropdownIndicator,
+								IndicatorSeparator,
+							} }
 							options={ operators }
 							value={ operators.filter(
 								( operator ) =>
@@ -221,7 +229,12 @@ export default function VisibilityPresets( props ) {
 						<Select
 							className="block-visibility__react-select"
 							classNamePrefix="react-select"
-							components={ { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } }
+							components={ {
+								ClearIndicator,
+								DropdownIndicator,
+								IndicatorSeparator,
+								MultiValueRemove,
+							} }
 							options={ isEmpty( presets ) ? null : presets }
 							value={ selectedPresets }
 							placeholder={ placeholder }

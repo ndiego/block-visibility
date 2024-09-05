@@ -18,7 +18,12 @@ import AuthorsSelect from './async-rule-fields/authors-select';
 import TermsSelect from './async-rule-fields/terms-select';
 import PostsSelect from './async-rule-fields/posts-select';
 import ProductsSelect from './async-rule-fields/products-select';
-import { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } from '../../utils/react-select-utils';
+import {
+	ClearIndicator,
+	DropdownIndicator,
+	IndicatorSeparator,
+	MultiValueRemove,
+} from '../../utils/react-select-utils';
 
 /**
  * Render the individual rule fields.
@@ -127,7 +132,12 @@ export default function RuleField( props ) {
 				<Select
 					aria-labelledby={ `${ fieldId }_label` }
 					inputId={ `${ fieldId }_select` }
-					components={ { ClearIndicator, MultiValueRemove, IndicatorSeparator, DropdownIndicator } }
+					components={ {
+						ClearIndicator,
+						MultiValueRemove,
+						IndicatorSeparator,
+						DropdownIndicator,
+					} }
 					className={ classnames(
 						'block-visibility__react-select',
 						className

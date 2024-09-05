@@ -15,7 +15,12 @@ import { decodeEntities } from '@wordpress/html-entities';
 /**
  * Internal dependencies
  */
-import { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } from '../../../utils/react-select-utils';
+import {
+	ClearIndicator,
+	DropdownIndicator,
+	IndicatorSeparator,
+	MultiValueRemove,
+} from '../../../utils/react-select-utils';
 
 /**
  * Module Constants
@@ -82,7 +87,12 @@ export default function AuthorsSelect( props ) {
 			) }
 			<Select
 				aria-labelledby={ `${ fieldId }` }
-				components={ { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } }
+				components={ {
+					ClearIndicator,
+					DropdownIndicator,
+					IndicatorSeparator,
+					MultiValueRemove,
+				} }
 				inputId={ `${ fieldId }_select` }
 				className={ classnames(
 					'block-visibility__react-select',

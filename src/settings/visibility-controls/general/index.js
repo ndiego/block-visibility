@@ -14,7 +14,12 @@ import { Slot, ToggleControl } from '@wordpress/components';
  */
 import getEnabledControls from './../../../utils/get-enabled-controls';
 import { InformationPopover } from './../../../components';
-import { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } from './../../../utils/react-select-utils';
+import {
+	ClearIndicator,
+	DropdownIndicator,
+	IndicatorSeparator,
+	MultiValueRemove,
+} from './../../../utils/react-select-utils';
 
 /**
  * Renders the general visibility control settings.
@@ -143,7 +148,12 @@ export default function General( props ) {
 						<Select
 							className="block-visibility__react-select"
 							classNamePrefix="react-select"
-							components={ { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } }
+							components={ {
+								ClearIndicator,
+								DropdownIndicator,
+								IndicatorSeparator,
+								MultiValueRemove,
+							} }
 							styles={ customStyles }
 							isClearable={ selectedControls.some(
 								( control ) => ! control.isFixed

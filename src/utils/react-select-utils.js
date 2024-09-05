@@ -12,25 +12,25 @@ export const IndicatorSeparator = () => {
 	return null;
 };
 
-export const DropdownIndicator = props => {
+export const DropdownIndicator = ( props ) => {
 	return (
-		<components.DropdownIndicator {...props}>
+		<components.DropdownIndicator { ...props }>
 			{ chevronDown }
 		</components.DropdownIndicator>
 	);
 };
 
-export const ClearIndicator = props => {
+export const ClearIndicator = ( props ) => {
 	return (
-		<components.ClearIndicator {...props}>
+		<components.ClearIndicator { ...props }>
 			{ close }
 		</components.ClearIndicator>
 	);
 };
 
-export const MultiValueRemove = props => {
+export const MultiValueRemove = ( props ) => {
 	return (
-		<components.MultiValueRemove {...props}>
+		<components.MultiValueRemove { ...props }>
 			{ close }
 		</components.MultiValueRemove>
 	);

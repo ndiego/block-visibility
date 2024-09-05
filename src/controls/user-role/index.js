@@ -15,7 +15,10 @@ import { plus } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
-import { DropdownIndicator, IndicatorSeparator } from '../../utils/react-select-utils';
+import {
+	DropdownIndicator,
+	IndicatorSeparator,
+} from '../../utils/react-select-utils';
 
 /**
  * Internal dependencies

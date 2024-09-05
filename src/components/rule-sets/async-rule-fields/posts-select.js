@@ -16,7 +16,12 @@ import { decodeEntities } from '@wordpress/html-entities';
 /**
  * Internal dependencies
  */
-import { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } from '../../../utils/react-select-utils';
+import {
+	ClearIndicator,
+	DropdownIndicator,
+	IndicatorSeparator,
+	MultiValueRemove,
+} from '../../../utils/react-select-utils';
 
 /**
  * Format a post title and conditionally prefix with statuses.
@@ -217,7 +222,12 @@ export default function PostsSelect( props ) {
 			) }
 			<Select
 				aria-labelledby={ `${ fieldId }` }
-				components={ { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } }
+				components={ {
+					ClearIndicator,
+					DropdownIndicator,
+					IndicatorSeparator,
+					MultiValueRemove,
+				} }
 				inputId={ `${ fieldId }_select` }
 				className={ classnames(
 					'block-visibility__react-select',
