@@ -12,6 +12,11 @@ import { useMemo } from '@wordpress/element';
 import { decodeEntities } from '@wordpress/html-entities';
 
 /**
+ * Internal dependencies
+ */
+import { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } from '../../../utils/react-select-utils';
+
+/**
  * Module Constants
  */
 const DEFAULT_QUERY = {
@@ -76,6 +81,7 @@ export default function TermsSelect( props ) {
 			) }
 			<Select
 				aria-labelledby={ `${ fieldId }` }
+				components={ { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } }
 				inputId={ `${ fieldId }_select` }
 				className={ classnames(
 					'block-visibility__react-select',

@@ -51,6 +51,18 @@ export const columns = (
 	</SVG>
 );
 
+export const chevronDown = (
+	<SVG width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<Path d="M16 10.8571L12 14L8 10.8571L8.65455 10L12 12.5714L15.2727 10L16 10.8571Z" fill="#1e1e1e"/>
+	</SVG>
+);
+
+export const close = (
+	<SVG width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<Path d="M12 12.8328L14.9164 15.75L15.75 14.9172L12.8336 12L15.75 9.0836L14.9172 8.25079L12 11.1656L9.0836 8.25L8.25 9.08281L11.1664 12L8.25 14.9164L9.08281 15.75L12 12.8328Z" fill="black"/>
+	</SVG>
+);
+
 export const edd = (
 	<SVG xmlns="http://www.w3.org/2000/SVG" viewBox="0 0 24 24">
 		<Path

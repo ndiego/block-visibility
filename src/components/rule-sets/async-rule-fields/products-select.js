@@ -14,6 +14,11 @@ import { addQueryArgs } from '@wordpress/url';
 import apiFetch from '@wordpress/api-fetch';
 
 /**
+ * Internal dependencies
+ */
+import { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } from '../../../utils/react-select-utils';
+
+/**
  * Render an products select field for EDD and WooCommerce.
  *
  * @since 3.1.0
@@ -170,6 +175,7 @@ export default function ProductsSelect( props ) {
 			) }
 			<Select
 				aria-labelledby={ `${ fieldId }` }
+				components={ { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } }
 				inputId={ `${ fieldId }_select` }
 				className={ classnames(
 					'block-visibility__react-select',

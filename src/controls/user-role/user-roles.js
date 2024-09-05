@@ -11,6 +11,11 @@ import { __, sprintf } from '@wordpress/i18n';
 import { ToggleControl } from '@wordpress/components';
 
 /**
+ * Internal dependencies
+ */
+import { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } from '../../utils/react-select-utils';
+
+/**
  * Add the User Roles control to the main Visibility By User Role control
  *
  * @since 1.0.0
@@ -65,6 +70,7 @@ export default function UserRoles( props ) {
 			<Select
 				className="block-visibility__react-select"
 				classNamePrefix="react-select"
+				components={ { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemoves } }
 				options={ roles }
 				value={ selectedRoles }
 				placeholder={ __( 'Select Role…', 'block-visibility' ) }

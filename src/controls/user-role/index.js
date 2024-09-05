@@ -15,6 +15,11 @@ import { plus } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
+import { DropdownIndicator, IndicatorSeparator } from '../../utils/react-select-utils';
+
+/**
+ * Internal dependencies
+ */
 import UserRoles from './user-roles';
 import UserRuleSets from './user-rule-sets';
 import Users from './users';
@@ -196,6 +201,7 @@ export default function UserRole( props ) {
 					<Select
 						className="block-visibility__react-select"
 						classNamePrefix="react-select"
+						components={ { DropdownIndicator, IndicatorSeparator } }
 						options={ options }
 						value={ selectedOption }
 						onChange={ ( value ) =>

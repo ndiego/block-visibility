@@ -18,6 +18,7 @@ import { createInterpolateElement } from '@wordpress/element';
 import { wpFusion as wpFusionIcon } from './../../utils/icons';
 import links from './../../utils/links';
 import { InformationPopover } from './../../components';
+import { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } from './../../utils/react-select-utils';
 
 /**
  * Add the Wp Fusion controls
@@ -97,6 +98,7 @@ export default function WPFusion( props ) {
 				<Select
 					className="block-visibility__react-select"
 					classNamePrefix="react-select"
+					components={ { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } }
 					options={ availableTags }
 					value={ tagsAny }
 					placeholder={ __( 'Select Tag…', 'block-visibility' ) }
@@ -129,6 +131,7 @@ export default function WPFusion( props ) {
 				<Select
 					className="block-visibility__react-select"
 					classNamePrefix="react-select"
+					components={ { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } }
 					options={ availableTags }
 					value={ tagsAll }
 					placeholder={ __( 'Select Tag…', 'block-visibility' ) }
@@ -174,6 +177,7 @@ export default function WPFusion( props ) {
 			<Select
 				className="block-visibility__react-select"
 				classNamePrefix="react-select"
+				components={ { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } }
 				options={ availableTags }
 				value={ tagsNot }
 				placeholder={ __( 'Select Tag…', 'block-visibility' ) }

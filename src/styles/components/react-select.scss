@@ -72,12 +72,25 @@
 
     .react-select__clear-indicator,
     .react-select__dropdown-indicator {
-        padding: 6px;
+        padding: 0;
 
         &:hover {
             color: #007cba;
             color: var(--wp-admin-theme-color);
             cursor: pointer;
+        }
+    }
+
+    .react-select__dropdown-indicator {
+        margin-right: 6px;
+    }
+
+    .react-select__multi-value__remove {
+        margin: 0;
+        padding: 0;
+
+        &:hover {
+            background: none;
         }
     }
 

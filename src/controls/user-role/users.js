@@ -14,6 +14,7 @@ import { ToggleControl, Notice } from '@wordpress/components';
  * Internal dependencies
  */
 import useAllUsers from './utils/use-all-users';
+import { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } from '../../utils/react-select-utils';
 
 /**
  * Add the Selected Users control to the main Visibility By User Role control
@@ -82,6 +83,7 @@ export default function Users( props ) {
 			<Select
 				className="block-visibility__react-select"
 				classNamePrefix="react-select"
+				components={ { ClearIndicator, DropdownIndicator, IndicatorSeparator, MultiValueRemove } }
 				options={ users }
 				value={ selectedUsers }
 				placeholder={ __( 'Select Users…', 'block-visibility' ) }
