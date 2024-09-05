@@ -5,7 +5,7 @@ Tags:              visibility, dynamic content, conditional content, conditional
 Requires at least: 6.4
 Tested up to:      6.6
 Requires PHP:      7.4
-Stable tag:        3.5.0
+Stable tag:        3.6.0
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -167,7 +167,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ===
 
-= 3.6.0 - 2024-TBD =
+= 3.6.0 - 2024-09-05 =
 
 **Added**
 
@@ -180,7 +180,8 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 * Updated the `render_block` callback function to only fetch plugin settings if a block has visibility conditions set. 
 * Updated deprecated Button component variant and size properties.
 * Updated popover placement and offsets.
-* Updated component styling to match Core.
+* Updated general component styling to match Core.
+* Updated React Select component to match Select controls in Core.
 * Refactored the main plugin class.
 * Refactored the setting tabs.
 * Refactored the link utility and updated all plugin links.
