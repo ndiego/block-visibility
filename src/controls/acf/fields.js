@@ -298,8 +298,8 @@ export function getAllFields( variables ) {
  * @since 1.9.0
  * @return {string} All fields perpared in their respective field groups
  */
-export function getGroupedFields() {
-	return prepareGroupedFields( getFieldGroups(), getAllFields() );
+export function getGroupedFields( variables ) {
+	return prepareGroupedFields( getFieldGroups( variables ), getAllFields( variables ) );
 }
 
 /**
