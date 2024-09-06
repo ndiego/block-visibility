@@ -5,7 +5,7 @@ Tags:              visibility, dynamic content, conditional content, conditional
 Requires at least: 6.4
 Tested up to:      6.6
 Requires PHP:      7.4
-Stable tag:        3.6.0
+Stable tag:        3.6.1
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -166,6 +166,12 @@ Visibility is controlled primarily on the server, so if a block should be hidden
 The **one exception** to this is the Screen Size block controls. Visibility by screen size requires the use of CSS. This CSS is loaded to the front end of your site if, and only if, these controls are enabled. You can opt to disable this CSS and add the necessary styles yourself. Visit the plugin [Knowledge Base](https://blockvisibilitywp.com/knowledge-base/how-to-use-the-screen-size-control/?bv_query=readme&utm_source=block_visibility&utm_medium=plugin&utm_campaign=readme) to learn more.
 
 == Changelog ===
+
+= 3.6.1 - 2024-09-06 =
+
+**Fixed**
+
+* [ACF] Fixed bug where ACF fields were not being displayed following the v3.6.0 update.
 
 = 3.6.0 - 2024-09-05 =
 
