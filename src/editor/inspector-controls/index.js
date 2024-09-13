@@ -7,7 +7,11 @@ import { assign, isEmpty } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { withFilters, Spinner } from '@wordpress/components';
+import { 
+	withFilters, 
+	Spinner,
+	__experimentalUseSlotFills as useSlotFills,
+} from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import { useEntityRecord } from '@wordpress/core-data';
 import { select } from '@wordpress/data';
@@ -44,10 +48,24 @@ export default function VisibilityInspectorControls( props ) {
 	const settingsData = useEntityRecord( 'block-visibility/v1', 'settings' );
 	const variablesData = useEntityRecord( 'block-visibility/v1', 'variables' );
 
+	// Determine how many other panels have been slotted into the Settings tab.
+	// see: https://github.com/WordPress/gutenberg/blob/d27c43fda419995a80b1cbdeafe2b24d9a0e2164/packages/block-editor/src/components/inspector-controls-tabs/use-inspector-controls-tabs.js#L52
+	const settingFills = [
+		...( useSlotFills( 'InspectorControls' ) || [] ),
+		...( useSlotFills( 'InspectorControlsPosition' ) || [] ),
+	];
+	
+	console.log( settingFills );
+
+	// This is not consistent. When the page loads, the Visibility panel is not counted. 
+	// But after clicking around to various blocks, the Editor starts counting the 
+	// Visibility panel as a setting Slot. 
+	const tab = settingFills.length > 1 ? 'settings' : 'styles';
+
 	// Display a default panel with spinner when settings and variables are loading.
 	if ( settingsData.isResolving || variablesData.isResolving ) {
 		return (
-			<InspectorControls group="settings">
+			<InspectorControls group={ tab }>
 				<div className="block-visibility__controls-panel">
 					<div className="controls-panel-header">
 						<h2>{ __( 'Visibility', 'block-visibility' ) }</h2>
@@ -151,7 +169,7 @@ export default function VisibilityInspectorControls( props ) {
 		// of SlotFill, and is "inside" of a <SlotFillProvider> component.
 		// Therefore we can freely use SlofFill without needing to add the
 		// provider ourselves.
-		<InspectorControls group="settings">
+		<InspectorControls group={ tab }>
 			<div className="block-visibility__controls-panel">
 				<ControlsPanel
 					blockAtts={ blockAtts }
