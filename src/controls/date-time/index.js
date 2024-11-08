@@ -92,7 +92,7 @@ export default function DateTime( props ) {
 					{ sprintf(
 						// Translators: Whether the block is hidden or visible.
 						__(
-							'%s the block if at least one schedule applies.',
+							'%s the block if any schedule applies.',
 							'block-visibility'
 						),
 						hideOnSchedules

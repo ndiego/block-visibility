@@ -92,7 +92,7 @@ export default function Location( props ) {
 					{ sprintf(
 						// Translators: Whether the block is hidden or visible.
 						__(
-							'%s the block if at least one rule set applies.',
+							'%s the block if any rule set applies.',
 							'block-visibility'
 						),
 						hideOnRuleSets

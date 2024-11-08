@@ -49,7 +49,7 @@ export default function UserRuleSets( props ) {
 						{ sprintf(
 							// Translators: Whether the block is hidden or visible.
 							__(
-								'%s the block if at least one user rule set applies.',
+								'%s the block if any user rule set applies.',
 								'block-visibility'
 							),
 							hideOnRuleSets

@@ -207,7 +207,7 @@ export default function WPFusion( props ) {
 			{ enableNotices && (
 				<div className="components-base-control__help">
 					{ __(
-						'Hide from logged-in users with at least one of the selected tags.',
+						'Hide from logged-in users with any of the selected tags.',
 						'block-visibility'
 					) }
 				</div>

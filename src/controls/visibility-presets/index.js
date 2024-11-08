@@ -150,7 +150,7 @@ export default function VisibilityPresets( props ) {
 		{
 			value: 'atLeastOne',
 			label: __(
-				'At least one selected preset applies',
+				'Any selected preset applies',
 				'block-visibility'
 			),
 		},

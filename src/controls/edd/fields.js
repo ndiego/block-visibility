@@ -116,7 +116,7 @@ export function getAllFields() {
 	const containsOperators = [
 		{
 			value: 'atLeastOne',
-			label: __( 'At least one of the selected', 'block-visibility' ),
+			label: __( 'Any of the selected', 'block-visibility' ),
 		},
 		{
 			value: 'all',

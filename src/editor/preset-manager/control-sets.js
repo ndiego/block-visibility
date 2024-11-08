@@ -104,7 +104,7 @@ export default function ControlSets( props ) {
 				</div>
 				<div className="control-sets__description">
 					{ __(
-						'Show the block if at least one control set applies.',
+						'Show the block if any control set applies.',
 						'block-visibility'
 					) }
 				</div>

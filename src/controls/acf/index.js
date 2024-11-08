@@ -119,7 +119,7 @@ export default function ACF( props ) {
 					{ sprintf(
 						// Translators: Whether the block is hidden or visible.
 						__(
-							'%s the block if at least one rule set applies. Rules associated with users will fail if the current user is not logged in.',
+							'%s the block if any rule set applies. Rules associated with users will fail if the current user is not logged in.',
 							'block-visibility'
 						),
 						hideOnRuleSets

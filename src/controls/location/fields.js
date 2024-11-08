@@ -41,7 +41,7 @@ const valueOperators = [
 const taxonomyOperators = [
 	{
 		value: 'atLeastOne',
-		label: __( 'Is at least one of the selected', 'block-visibility' ),
+		label: __( 'Is any of the selected', 'block-visibility' ),
 	},
 	{
 		value: 'all',

@@ -88,7 +88,7 @@ export default function QueryString( props ) {
 					help={
 						enableNotices &&
 						__(
-							'Show the block if at least one of the provided URL query strings is present.',
+							'Show the block if any of the provided URL query strings are present.',
 							'block-visibility'
 						)
 					}
@@ -143,7 +143,7 @@ export default function QueryString( props ) {
 					help={
 						enableNotices &&
 						__(
-							'Hide the block if at least one of the provided URL query strings is present.',
+							'Hide the block if any of the provided URL query strings are present.',
 							'block-visibility'
 						)
 					}

@@ -173,6 +173,7 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 * Updated "Tested up to" to WordPress 6.7. 
 * Updated "Requires at least" to WordPress 6.5.
+* Remove typographic widows from descriptions.
 
 = 3.6.1 - 2024-09-06 =
 

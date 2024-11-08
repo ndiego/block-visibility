@@ -92,7 +92,7 @@ export default function Metadata( props ) {
 					{ sprintf(
 						// Translators: Whether the block is hidden or visible.
 						__(
-							'%s the block if at least one rule set applies. Rules targeting user metadata will fail if the current user is not logged in.',
+							'%s the block if any rule set applies. Rules targeting user metadata will fail if the current user is not logged in.',
 							'block-visibility'
 						),
 						hideOnRuleSets

@@ -94,7 +94,7 @@ export default function ReferralSource( props ) {
 					help={
 						enableNotices &&
 						__(
-							'Show the block if the referral URL contains at least one of the provided values.',
+							'Show the block if the referral URL contains any of the provided values.',
 							'block-visibility'
 						)
 					}
@@ -117,7 +117,7 @@ export default function ReferralSource( props ) {
 					help={
 						enableNotices &&
 						__(
-							'Hide the block if the referral URL contains at least one of the provided values.',
+							'Hide the block if the referral URL contains any of the provided values.',
 							'block-visibility'
 						)
 					}

@@ -83,7 +83,7 @@ export default function UrlPath( props ) {
 					help={
 						enableNotices &&
 						__(
-							'Only visible when the current URL contains at least one of the provided paths.',
+							'Only visible when the current URL contains any of the provided paths.',
 							'block-visibility'
 						)
 					}
@@ -106,7 +106,7 @@ export default function UrlPath( props ) {
 					help={
 						enableNotices &&
 						__(
-							'Hide when the current URL contains at least one of the provided paths.',
+							'Hide when the current URL contains any of the provided paths.',
 							'block-visibility'
 						)
 					}
