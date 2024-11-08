@@ -31,7 +31,7 @@ Block Visibility also includes direct integrations for the following third-party
 
 ## Requirements
 
-- WordPress 6.4+
+- WordPress 6.5+
 - PHP 7.4+
 
 ## Development
