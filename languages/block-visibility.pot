@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-11-08T18:36:33+00:00\n"
+"POT-Creation-Date: 2024-11-08T18:51:30+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: block-visibility\n"
@@ -843,7 +843,7 @@ msgstr ""
 
 #. Translators: Whether the block is hidden or visible.
 #: build/block-visibility-editor.js:28
-msgid "%s the block if at least one rule set applies. Rules associated with users will fail if the current user is not logged in."
+msgid "%s the block if any rule set applies. Rules associated with users will fail if the current user is not logged in."
 msgstr ""
 
 #: build/block-visibility-editor.js:28
@@ -976,7 +976,7 @@ msgstr ""
 #: build/block-visibility-editor.js:43
 #: build/block-visibility-editor.js:46
 #: build/block-visibility-editor.js:64
-msgid "%s the block if at least one rule set applies."
+msgid "%s the block if any rule set applies."
 msgstr ""
 
 #: build/block-visibility-editor.js:31
@@ -1158,7 +1158,7 @@ msgstr ""
 
 #. Translators: Whether the block is hidden or visible.
 #: build/block-visibility-editor.js:40
-msgid "%s the block if at least one schedule applies."
+msgid "%s the block if any schedule applies."
 msgstr ""
 
 #: build/block-visibility-editor.js:40
@@ -1243,7 +1243,7 @@ msgstr ""
 
 #: build/block-visibility-editor.js:40
 #: build/block-visibility-editor.js:61
-msgid "At least one of the selected"
+msgid "Any of the selected"
 msgstr ""
 
 #: build/block-visibility-editor.js:40
@@ -1460,11 +1460,6 @@ msgstr ""
 
 #: build/block-visibility-editor.js:43
 msgid "Hide the block from everyone"
-msgstr ""
-
-#: build/block-visibility-editor.js:43
-#: build/block-visibility-editor.js:52
-msgid "Is at least one of the selected"
 msgstr ""
 
 #: build/block-visibility-editor.js:43
@@ -1762,7 +1757,7 @@ msgstr ""
 
 #. Translators: Whether the block is hidden or visible.
 #: build/block-visibility-editor.js:49
-msgid "%s the block if at least one rule set applies. Rules targeting user metadata will fail if the current user is not logged in."
+msgid "%s the block if any rule set applies. Rules targeting user metadata will fail if the current user is not logged in."
 msgstr ""
 
 #: build/block-visibility-editor.js:49
@@ -1782,7 +1777,7 @@ msgid "Required Queries <span>(Any)</span>"
 msgstr ""
 
 #: build/block-visibility-editor.js:49
-msgid "Show the block if at least one of the provided URL query strings is present."
+msgid "Show the block if any of the provided URL query strings are present."
 msgstr ""
 
 #: build/block-visibility-editor.js:49
@@ -1798,7 +1793,7 @@ msgid "Required Queries <span>(Not)</span>"
 msgstr ""
 
 #: build/block-visibility-editor.js:49
-msgid "Hide the block if at least one of the provided URL query strings is present."
+msgid "Hide the block if any of the provided URL query strings are present."
 msgstr ""
 
 #: build/block-visibility-editor.js:49
@@ -1814,7 +1809,7 @@ msgid "Referral URL <span>(Contains)</span>"
 msgstr ""
 
 #: build/block-visibility-editor.js:49
-msgid "Show the block if the referral URL contains at least one of the provided values."
+msgid "Show the block if the referral URL contains any of the provided values."
 msgstr ""
 
 #: build/block-visibility-editor.js:49
@@ -1822,7 +1817,7 @@ msgid "Referral URL <span>(Does Not Contain)</span>"
 msgstr ""
 
 #: build/block-visibility-editor.js:49
-msgid "Hide the block if the referral URL contains at least one of the provided values."
+msgid "Hide the block if the referral URL contains any of the provided values."
 msgstr ""
 
 #: build/block-visibility-editor.js:49
@@ -1846,7 +1841,7 @@ msgid "URL Path <span>(Contains)</span>"
 msgstr ""
 
 #: build/block-visibility-editor.js:49
-msgid "Only visible when the current URL contains at least one of the provided paths."
+msgid "Only visible when the current URL contains any of the provided paths."
 msgstr ""
 
 #: build/block-visibility-editor.js:49
@@ -1854,7 +1849,7 @@ msgid "URL Path <span>(Does Not Contain)</span>"
 msgstr ""
 
 #: build/block-visibility-editor.js:49
-msgid "Hide when the current URL contains at least one of the provided paths."
+msgid "Hide when the current URL contains any of the provided paths."
 msgstr ""
 
 #: build/block-visibility-editor.js:49
@@ -1939,7 +1934,7 @@ msgstr ""
 
 #. Translators: Whether the block is hidden or visible.
 #: build/block-visibility-editor.js:55
-msgid "%s the block if at least one user rule set applies."
+msgid "%s the block if any user rule set applies."
 msgstr ""
 
 #: build/block-visibility-editor.js:55
@@ -2020,7 +2015,7 @@ msgid "Manage presets"
 msgstr ""
 
 #: build/block-visibility-editor.js:58
-msgid "At least one selected preset applies"
+msgid "Any selected preset applies"
 msgstr ""
 
 #: build/block-visibility-editor.js:58
@@ -2105,7 +2100,7 @@ msgid "Required Tags <span>(Not)</span>"
 msgstr ""
 
 #: build/block-visibility-editor.js:64
-msgid "Hide from logged-in users with at least one of the selected tags."
+msgid "Hide from logged-in users with any of the selected tags."
 msgstr ""
 
 #: build/block-visibility-editor.js:64
@@ -2137,7 +2132,7 @@ msgid "Multiple control sets allow you to create \"OR\" conditions between each 
 msgstr ""
 
 #: build/block-visibility-editor.js:64
-msgid "Show the block if at least one control set applies."
+msgid "Show the block if any control set applies."
 msgstr ""
 
 #: build/block-visibility-editor.js:64
