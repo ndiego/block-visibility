@@ -608,7 +608,7 @@ function run_customer_time_since_order_test( $rule ) {
 	$current = current_datetime();
 
 	// Calculate the number of days between the two dates, then add 1.
-	$days_between = $current->diff( $payment_date, true )->d;
+	$days_between = $current->diff( $payment_date, true )->days;
 	$days_between = ++$days_between;
 
 	$test_result = integer_value_compare( $operator, $rule_value, $days_between );
@@ -671,7 +671,7 @@ function run_customer_time_since_product_ordered_test( $rule ) {
 			$current = current_datetime();
 
 			// Calculate the number of days between the two dates, then add 1.
-			$days_between = $current->diff( $order_date, true )->d;
+			$days_between = $current->diff( $order_date, true )->days;
 			$days_between = ++$days_between;
 		} else {
 			$days_between = 'not-ordered';
@@ -748,7 +748,7 @@ function run_customer_time_since_category_ordered_test( $rule ) {
 			$current = current_datetime();
 
 			// Calculate the number of days between the two dates, then add 1.
-			$days_between = $current->diff( $order_date, true )->d;
+			$days_between = $current->diff( $order_date, true )->days;
 			$days_between = ++$days_between;
 		} else {
 			$days_between = 'not-ordered';
