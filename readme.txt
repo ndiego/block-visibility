@@ -5,7 +5,7 @@ Tags:              visibility, dynamic content, conditional content, conditional
 Requires at least: 6.5
 Tested up to:      6.7
 Requires PHP:      7.4
-Stable tag:        3.7.0
+Stable tag:        3.7.1
 License:           GPL-2.0
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -167,11 +167,12 @@ The **one exception** to this is the Screen Size block controls. Visibility by s
 
 == Changelog ===
 
-= 3.8.0 - 2024-12-TBD =
+= 3.7.1 - 2024-12-08 =
 
 **Fixed**
 
 * [WooCommerce] Fixed bug where the "Time Since Order" rule was no calculating the correct number of days.
+
 = 3.7.0 - 2024-11-08 =
 
 **Changed**
