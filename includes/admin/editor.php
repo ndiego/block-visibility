@@ -44,7 +44,7 @@ function enqueue_editor_scripts() {
 	// Create a global variable to indicate whether we are in full control mode
 	// or not. This is needed for the Block Visibility attribute filter since
 	// it will not allow us to fetch this data directly.
-	$is_full_control_mode = 'const blockVisibilityFullControlMode = ' . wp_json_encode( get_plugin_setting( 'enable_full_control_mode', true ) ) . ';';
+	$is_full_control_mode = 'var blockVisibilityFullControlMode = ' . wp_json_encode( get_plugin_setting( 'enable_full_control_mode', true ) ) . ';';
 
 	wp_add_inline_script(
 		'block-visibility-editor-scripts',
