@@ -2,7 +2,10 @@
 
 ![Block Visibility](https://github.com/ndiego/block-visibility/blob/main/_wordpress-org/banner-1544x500.png)
 
-[![Active Installs](https://img.shields.io/wordpress/plugin/installs/block-visibility?logo=wordpress&logoColor=%23fff&label=Active%20Installs&labelColor=%2323282D&color=%2323282D)](https://wordpress.org/plugins/block-visibility/) [![Playground Demo Link](https://img.shields.io/wordpress/plugin/v/block-visibility?logo=wordpress&logoColor=%23fff&label=Playground%20Demo&labelColor=%233858e9&color=%233858e9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/ndiego/block-visibility/main/_playground/blueprint.json)
+[![Active Installs](https://img.shields.io/wordpress/plugin/installs/block-visibility?logo=wordpress&logoColor=%23fff&label=Active%20Installs&labelColor=%2323282D&color=%2323282D)](https://wordpress.org/plugins/block-visibility/) [![Playground Demo Link](https://img.shields.io/wordpress/plugin/v/block-visibility?logo=wordpress&logoColor=%23fff&label=Playground%20Demo&labelColor=%233858e9&color=%233858e9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/ndiego/block-visibility/main/_playground/blueprint.json) [![Studio Demo Link](https://img.shields.io/wordpress/plugin/v/block-visibility?logo=wordpress&logoColor=%23fff&label=Open%20in%20WordPress%20Studio&labelColor=%2323282D&color=%2323282D)](https://wp.com/open?deep_link=add-site%3Fblueprint_url%3Dhttps%253A%252F%252Fraw.githubusercontent.com%252Fndiego%252Fblock-visibility%252Frefs%252Fheads%252Fmain%252F_playground%252Fblueprint.json
+)
+
+
 
 [Block Visibility](https://wordpress.org/plugins/block-visibility/) allows you to dynamically control which blocks are visible on your WordPress website and who can see them, which includes the ability to schedule blocks.
 
