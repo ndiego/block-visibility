@@ -33,7 +33,7 @@ export default function Ads( props ) {
 						'Whether you need help or have a new feature request, please create a topic in the support forum on WordPress.org.',
 						'block-visibility'
 					) }
-					<ExternalLink // eslint-disable-line
+					<ExternalLink
 						href={ links.general.orgSupport }
 						target="_blank"
 						rel="noreferrer"
@@ -46,7 +46,7 @@ export default function Ads( props ) {
 						'Detailed documentation is also available on the plugin website.',
 						'block-visibility'
 					) }
-					<ExternalLink // eslint-disable-line
+					<ExternalLink
 						href={ links.settings.knowledgeBase }
 						target="_blank"
 					>
@@ -63,7 +63,7 @@ export default function Ads( props ) {
 						'If you are enjoying Block Visibility and find it useful, please consider leaving a ★★★★★ review on WordPress.org. Your feedback is greatly appreciated and helps others discover the plugin.',
 						'block-visibility'
 					) }
-					<ExternalLink // eslint-disable-line
+					<ExternalLink
 						href={ links.general.orgReviews }
 						target="_blank"
 						rel="noreferrer"

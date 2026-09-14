@@ -9,7 +9,7 @@ import classnames from 'classnames';
 import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
 import { calendar, closeSmall } from '@wordpress/icons';
-import { getSettings, format } from '@wordpress/date'; // eslint-disable-line
+import { getSettings, format } from '@wordpress/date';
 
 /**
  * Renders the date/time field (buttons)

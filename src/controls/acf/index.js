@@ -117,7 +117,7 @@ export default function ACF( props ) {
 			{ enableNotices && (
 				<div className="controls-panel-item__description">
 					{ sprintf(
-						// Translators: Whether the block is hidden or visible.
+						// translators: %s: Whether the block is hidden or visible.
 						__(
 							'%s the block if any rule set applies. Rules associated with users will fail if the current user is not logged in.',
 							'block-visibility'

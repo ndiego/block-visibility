@@ -183,7 +183,7 @@ export default function ScreenSize( props ) {
 								),
 								{
 									a: (
-										<ExternalLink // eslint-disable-line
+										<ExternalLink
 											href={ links.editor.screenSize }
 											target="_blank"
 											rel="noreferrer"

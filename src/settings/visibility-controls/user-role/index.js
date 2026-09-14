@@ -20,7 +20,7 @@ export default function UserRole( props ) {
 	const { visibilityControls, setVisibilityControls } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enable = visibilityControls?.visibility_by_role?.enable ?? true; // eslint-disable-line
+	const enable = visibilityControls?.visibility_by_role?.enable ?? true;
 	const enableUserRoles = visibilityControls?.visibility_by_role?.enable_user_roles ?? true; // eslint-disable-line
 	const enableUsers = visibilityControls?.visibility_by_role?.enable_users ?? true; // eslint-disable-line
 	const enableUserRuleSets = visibilityControls?.visibility_by_role?.enable_user_rule_sets ?? true; // eslint-disable-line

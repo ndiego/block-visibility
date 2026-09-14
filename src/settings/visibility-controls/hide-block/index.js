@@ -20,7 +20,7 @@ export default function HideBlock( props ) {
 	const { visibilityControls, setVisibilityControls } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enable = visibilityControls?.hide_block?.enable ?? true; // eslint-disable-line
+	const enable = visibilityControls?.hide_block?.enable ?? true;
 
 	return (
 		<div className="settings-panel control-hide-block">

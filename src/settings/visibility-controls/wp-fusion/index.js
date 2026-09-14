@@ -27,7 +27,7 @@ export default function WPFusion( props ) {
 	}
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enable = visibilityControls?.wp_fusion?.enable ?? true; // eslint-disable-line
+	const enable = visibilityControls?.wp_fusion?.enable ?? true;
 
 	return (
 		<div className="settings-panel control-wp-fusion">

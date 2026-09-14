@@ -90,7 +90,7 @@ export default function DateTime( props ) {
 			{ enableNotices && (
 				<div className="controls-panel-item__description">
 					{ sprintf(
-						// Translators: Whether the block is hidden or visible.
+						// translators: %s: Whether the block is hidden or visible.
 						__(
 							'%s the block if any schedule applies.',
 							'block-visibility'

@@ -50,7 +50,9 @@ export default function Rule( props ) {
 		selectedRule = selectedRule[ 0 ];
 	}
 
-	const ruleFields = groupedFields ? selectedRule?.fields ?? [] : allFields;
+	const ruleFields = groupedFields
+		? ( selectedRule?.fields ?? [] )
+		: allFields;
 
 	const hasHelp = selectedRule?.help ?? false;
 	const helpPosition = selectedRule?.helpPosition ?? 'bottom';
@@ -63,7 +65,7 @@ export default function Rule( props ) {
 		defaultRuleLabel = () => {
 			if ( ruleIndex === 0 ) {
 				return sprintf(
-					// Translators: Whether the block is hidden or visible.
+					// translators: %s: Whether the block is hidden or visible.
 					__( '%s the block if', 'block-visibility' ),
 					hideOnRuleSets
 						? __( 'Hide', 'block-visibility' )

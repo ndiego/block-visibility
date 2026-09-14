@@ -149,10 +149,7 @@ export default function VisibilityPresets( props ) {
 	const operators = [
 		{
 			value: 'atLeastOne',
-			label: __(
-				'Any selected preset applies',
-				'block-visibility'
-			),
+			label: __( 'Any selected preset applies', 'block-visibility' ),
 		},
 		{
 			value: 'all',
@@ -198,7 +195,7 @@ export default function VisibilityPresets( props ) {
 				<div className="controls-panel-item__control-fields">
 					<div className="control-fields-item__label">
 						{ sprintf(
-							// Translators: Whether the block is hidden or visible.
+							// translators: %s: Whether the block is hidden or visible.
 							__( '%s the block if', 'block-visibility' ),
 							hideOnPresets
 								? __( 'Hide', 'block-visibility' )

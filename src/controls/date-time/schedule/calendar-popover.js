@@ -9,7 +9,7 @@ import classnames from 'classnames';
 import { __ } from '@wordpress/i18n';
 import { Button, DateTimePicker, Popover } from '@wordpress/components';
 import { closeSmall } from '@wordpress/icons';
-import { getSettings } from '@wordpress/date'; // eslint-disable-line
+import { getSettings } from '@wordpress/date';
 
 /**
  * Renders the popover for the date/time calender input

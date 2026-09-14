@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { DatePicker, DateTimePicker, Popover } from '@wordpress/components';
-import { getSettings } from '@wordpress/date'; // eslint-disable-line
+import { getSettings } from '@wordpress/date';
 
 /**
  * Renders the popover for the date/time calender input

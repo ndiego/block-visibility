@@ -23,7 +23,7 @@ import {
 	VisuallyHidden,
 } from '@wordpress/components';
 import { Icon, moreVertical, plus, external } from '@wordpress/icons';
-import { getSettings, format } from '@wordpress/date'; // eslint-disable-line
+import { getSettings, format } from '@wordpress/date';
 
 /**
  * Internal dependencies.
@@ -69,7 +69,7 @@ export default function PresetHeader( props ) {
 						// translators: %s: Title of preset.
 						__( '%s (copy)', 'block-visibility' ),
 						title
-				  )
+					)
 				: title;
 
 		const meta = {

@@ -451,12 +451,12 @@ $mobile: 426px;
 						background-image: linear-gradient(
 							-45deg,
 							#1989c1 28%,
-							color(#1989c1 shade(20%)) 28%,
-							color(#1989c1 shade(20%)) 72%,
+							#146e9a 28%,
+							#146e9a 72%,
 							#1989c1 72%
 						);
 						/* stylelint-enable */
-						border-color: color(#1989c1);
+						border-color: #1989c1;
 					}
 				}
 
