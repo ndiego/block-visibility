@@ -1,20 +1,21 @@
-# Copyright (C) 2024 Nick Diego
+# Copyright (C) 2026 Nick Diego
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Block Visibility 3.7.1\n"
+"Project-Id-Version: Block Visibility 3.8.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/block-visibility\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-12-08T16:09:23+00:00\n"
+"POT-Creation-Date: 2026-09-14T20:34:54+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.7.1\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: block-visibility\n"
 
 #. Plugin Name of the plugin
+#: block-visibility.php
 #: includes/admin/settings.php:31
 #: includes/admin/settings.php:32
 #: build/block-visibility-settings.js:1
@@ -22,18 +23,22 @@ msgid "Block Visibility"
 msgstr ""
 
 #. Plugin URI of the plugin
+#: block-visibility.php
 msgid "https://www.blockvisibilitywp.com/"
 msgstr ""
 
 #. Description of the plugin
+#: block-visibility.php
 msgid "Provides visibility controls and scheduling functionality to all WordPress blocks."
 msgstr ""
 
 #. Author of the plugin
+#: block-visibility.php
 msgid "Nick Diego"
 msgstr ""
 
 #. Author URI of the plugin
+#: block-visibility.php
 msgid "https://www.nickdiego.com"
 msgstr ""
 
@@ -63,6 +68,7 @@ msgstr ""
 
 #. translators: %1$s star rating.
 #: includes/admin/settings.php:129
+#, php-format
 msgid "Thank you for using Block Visibility. Please rate the plugin %1$s on %2$sWordPress.org%3$s to help us spread the word."
 msgstr ""
 
@@ -271,6 +277,7 @@ msgstr ""
 
 #. translators: %s: Title of preset.
 #: build/block-visibility-editor.js:10
+#, js-format
 msgid "%s (copy)"
 msgstr ""
 
@@ -358,11 +365,13 @@ msgstr ""
 
 #. translators: %s: Date/time preset was created.
 #: build/block-visibility-editor.js:13
+#, js-format
 msgid "Modified: %s"
 msgstr ""
 
 #. translators: %s: Id of preset.
 #: build/block-visibility-editor.js:16
+#, js-format
 msgid "Id: %s"
 msgstr ""
 
@@ -748,9 +757,10 @@ msgstr ""
 msgid "Detect current product"
 msgstr ""
 
-#. Translators: Whether the block is hidden or visible.
+#. translators: %s: Whether the block is hidden or visible.
 #: build/block-visibility-editor.js:25
 #: build/block-visibility-editor.js:61
+#, js-format
 msgid "%s the block if"
 msgstr ""
 
@@ -841,8 +851,9 @@ msgstr ""
 msgid "Add rule set"
 msgstr ""
 
-#. Translators: Whether the block is hidden or visible.
+#. translators: %s: Whether the block is hidden or visible.
 #: build/block-visibility-editor.js:28
+#, js-format
 msgid "%s the block if any rule set applies. Rules associated with users will fail if the current user is not logged in."
 msgstr ""
 
@@ -970,12 +981,13 @@ msgstr ""
 msgid "The Browser & Device control allows you to configure block visibility based on the current user's browser or device."
 msgstr ""
 
-#. Translators: Whether the block is hidden or visible.
+#. translators: %s: Whether the block is hidden or visible.
 #: build/block-visibility-editor.js:31
 #: build/block-visibility-editor.js:34
 #: build/block-visibility-editor.js:43
 #: build/block-visibility-editor.js:46
 #: build/block-visibility-editor.js:64
+#, js-format
 msgid "%s the block if any rule set applies."
 msgstr ""
 
@@ -1107,8 +1119,9 @@ msgstr ""
 msgid "Remove schedule"
 msgstr ""
 
-#. Translators: Whether the block is hidden or visible.
+#. translators: %s: Whether the block is hidden or visible.
 #: build/block-visibility-editor.js:37
+#, js-format
 msgid "%s the block"
 msgstr ""
 
@@ -1156,8 +1169,9 @@ msgstr ""
 msgid "Add schedule"
 msgstr ""
 
-#. Translators: Whether the block is hidden or visible.
+#. translators: %s: Whether the block is hidden or visible.
 #: build/block-visibility-editor.js:40
+#, js-format
 msgid "%s the block if any schedule applies."
 msgstr ""
 
@@ -1755,8 +1769,9 @@ msgstr ""
 msgid "The Metadata control allows you to configure block visibility based on post or user metadata."
 msgstr ""
 
-#. Translators: Whether the block is hidden or visible.
+#. translators: %s: Whether the block is hidden or visible.
 #: build/block-visibility-editor.js:49
+#, js-format
 msgid "%s the block if any rule set applies. Rules targeting user metadata will fail if the current user is not logged in."
 msgstr ""
 
@@ -1894,8 +1909,9 @@ msgstr ""
 msgid "Show the block to"
 msgstr ""
 
-#. Translators: Whether the block is hidden or visible.
+#. translators: %s: Whether the block is hidden or visible.
 #: build/block-visibility-editor.js:52
+#, js-format
 msgid "%s users with at least one of the selected roles."
 msgstr ""
 
@@ -1932,8 +1948,9 @@ msgstr ""
 msgid "User Rule Type"
 msgstr ""
 
-#. Translators: Whether the block is hidden or visible.
+#. translators: %s: Whether the block is hidden or visible.
 #: build/block-visibility-editor.js:55
+#, js-format
 msgid "%s the block if any user rule set applies."
 msgstr ""
 
@@ -1945,8 +1962,9 @@ msgstr ""
 msgid "Website Administrators can only configure the Users option. Please choose another option."
 msgstr ""
 
-#. Translators: Whether the block is hidden or visible.
+#. translators: %s: Whether the block is hidden or visible.
 #: build/block-visibility-editor.js:58
+#, js-format
 msgid "%s the selected users."
 msgstr ""
 
@@ -2163,21 +2181,25 @@ msgstr ""
 
 #. translators: %s: The name of the control being toggled e.g. "Hide Block".
 #: build/block-visibility-editor.js:67
+#, js-format
 msgid "Toggle %s"
 msgstr ""
 
 #. translators: %s: The name of the control being toggled e.g. "Hide Block".
 #: build/block-visibility-editor.js:70
+#, js-format
 msgid "%s toggled"
 msgstr ""
 
 #. translators: %s: The name of the control being reset e.g. "Hide Block".
 #: build/block-visibility-editor.js:73
+#, js-format
 msgid "Reset %s"
 msgstr ""
 
 #. translators: %s: The name of the control being reset e.g. "Hide Block".
 #: build/block-visibility-editor.js:76
+#, js-format
 msgid "%s reset to default"
 msgstr ""
 
@@ -2394,6 +2416,7 @@ msgstr ""
 
 #. translators: %s: extra large breakpoint
 #: build/block-visibility-settings.js:4
+#, js-format
 msgid "Allows users to hide blocks on extra large screen sizes, %s and up."
 msgstr ""
 
@@ -2403,11 +2426,13 @@ msgstr ""
 
 #. translators: %s large breakpoint
 #: build/block-visibility-settings.js:7
+#, js-format
 msgid "Allows users to hide blocks on large screen sizes, %s and up."
 msgstr ""
 
 #. translators: %1$s: large breakpoint %2$s: extra large breakpoint
 #: build/block-visibility-settings.js:10
+#, js-format
 msgid "Allows users to hide blocks on large screen sizes, between %1$s and %2$s."
 msgstr ""
 
@@ -2417,6 +2442,7 @@ msgstr ""
 
 #. translators: %1$s: medium breakpoint %2$s: large breakpoint
 #: build/block-visibility-settings.js:13
+#, js-format
 msgid "Allows users to hide blocks on medium screen sizes, between %1$s and %2$s."
 msgstr ""
 
@@ -2430,11 +2456,13 @@ msgstr ""
 
 #. translators: %s: medium breakpoint
 #: build/block-visibility-settings.js:16
+#, js-format
 msgid "Allows users to hide blocks on small screen sizes, less than %s."
 msgstr ""
 
 #. translators: %1$s: small breakpoint %2$s: medium breakpoint
 #: build/block-visibility-settings.js:19
+#, js-format
 msgid "Allows users to hide blocks on small screen sizes, between %1$s and %2$s."
 msgstr ""
 
@@ -2444,6 +2472,7 @@ msgstr ""
 
 #. translators: %s: small breakpoint
 #: build/block-visibility-settings.js:22
+#, js-format
 msgid "Allows users to hide blocks on extra small screen sizes, less than %s."
 msgstr ""
 
@@ -2629,6 +2658,7 @@ msgstr ""
 
 #. translators: %s: The total number of visible block types
 #: build/block-visibility-settings.js:23
+#, js-format
 msgid "Visibility is disabled for %s block type"
 msgid_plural "Visibility is disabled for %s block types"
 msgstr[0] ""
