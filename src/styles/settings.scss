@@ -1,4 +1,4 @@
-@import './common';
+@import "./common";
 
 // Media query variables
 $desktop: 1024px;
@@ -15,6 +15,8 @@ $mobile: 426px;
 	display: none;
 }
 
+/* ID is rendered by PHP and uses the plugin's BEM naming. */
+/* stylelint-disable-next-line selector-id-pattern */
 #block-visibility__plugin-settings {
 	margin-left: -20px;
 
@@ -66,6 +68,7 @@ $mobile: 426px;
 		}
 
 		.masthead__branding {
+
 			h1 {
 				color: #222;
 				font-size: 20px;
@@ -107,9 +110,9 @@ $mobile: 426px;
 
 		.masthead__plugin-links {
 			font-size: 13px;
-		    display: flex;
-		    justify-content: flex-end;
-		    align-items: center;
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
 
 			a {
 				align-items: center;
@@ -121,7 +124,7 @@ $mobile: 426px;
 				text-decoration: none;
 
 				svg {
-					fill: currentColor;
+					fill: currentcolor;
 					vertical-align: middle;
 				}
 
@@ -137,6 +140,7 @@ $mobile: 426px;
 			}
 
 			@media ( max-width: $tablet ) {
+
 				a {
 					margin-left: 8px;
 
@@ -154,6 +158,7 @@ $mobile: 426px;
 		}
 
 		.masthead__notice {
+
 			a {
 				display: inline;
 				margin: 0;
@@ -168,7 +173,7 @@ $mobile: 426px;
 
 	.footer {
 		padding: 10px 30px;
-		box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
+		box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0, 0, 0, 0.04);
 		text-align: center;
 
 		.inner-container {
@@ -209,7 +214,7 @@ $mobile: 426px;
 
 		.components-tab-panel__tabs {
 			justify-content: center;
-			box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
+			box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0, 0, 0, 0.04);
 			padding-bottom: 0;
 
 			.components-tab-panel__tabs-item {
@@ -225,11 +230,11 @@ $mobile: 426px;
 
 		.components-tab-panel__tab-content {
 			padding: 40px 20px;
-		    display: flex;
-		    flex-direction: row-reverse;
-		    justify-content: center;
-		    max-width: 1024px;
-		    margin: 0 auto;
+			display: flex;
+			flex-direction: row-reverse;
+			justify-content: center;
+			max-width: 1024px;
+			margin: 0 auto;
 
 			@media ( max-width: $tablet ) {
 				flex-direction: column-reverse;
@@ -252,16 +257,16 @@ $mobile: 426px;
 
 				@media ( max-width: $tablet ) {
 					margin-left: 0;
-					max-width: 100%
+					max-width: 100%;
 				}
 
-				&>div {
-					background: #ffffff;
-					box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
+				> div {
+					background: #fff;
+					box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0, 0, 0, 0.04);
 					padding: 18px 24px;
 					margin-bottom: 24px;
 
-					&>*:last-child {
+					> *:last-child {
 						margin-bottom: 0;
 					}
 				}
@@ -270,17 +275,18 @@ $mobile: 426px;
 					margin-bottom: 20px;
 				}
 
-				p, li {
-					font-size: .9em;
+				p,
+				li {
+					font-size: 0.9em;
 				}
 
 				li {
 					position: relative;
-    				padding-left: 22px;
+					padding-left: 22px;
 					font-weight: 600;
 				}
 
-				li:before {
+				li::before {
 					content: "";
 					position: absolute;
 					top: 0;
@@ -292,15 +298,15 @@ $mobile: 426px;
 					mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z'/></svg>");
 					-webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z'/></svg>");
 					mask-size: 16px;
-				    -webkit-mask-size: 16px;
-				    mask-repeat: no-repeat;
-				    -webkit-mask-repeat: no-repeat;
-				    mask-position: left;
-				    -webkit-mask-position: left;
+					-webkit-mask-size: 16px;
+					mask-repeat: no-repeat;
+					-webkit-mask-repeat: no-repeat;
+					mask-position: left;
+					-webkit-mask-position: left;
 				}
 
 				a:hover {
-					opacity: .8;
+					opacity: 0.8;
 				}
 
 				.ads-container__header {
@@ -312,7 +318,7 @@ $mobile: 426px;
 				.ads-container__support {
 					position: relative;
 
-					&:before {
+					&::before {
 						content: "";
 						position: absolute;
 						top: 0;
@@ -325,13 +331,13 @@ $mobile: 426px;
 						-webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12,2C6.48,2,2,6.48,2,12c0,5.52,4.48,10,10,10s10-4.48,10-10C22,6.48,17.52,2,12,2z M19.46,9.12l-2.78,1.15 c-0.51-1.36-1.58-2.44-2.95-2.94l1.15-2.78C16.98,5.35,18.65,7.02,19.46,9.12z M12,15c-1.66,0-3-1.34-3-3s1.34-3,3-3s3,1.34,3,3 S13.66,15,12,15z M9.13,4.54l1.17,2.78c-1.38,0.5-2.47,1.59-2.98,2.97L4.54,9.13C5.35,7.02,7.02,5.35,9.13,4.54z M4.54,14.87 l2.78-1.15c0.51,1.38,1.59,2.46,2.97,2.96l-1.17,2.78C7.02,18.65,5.35,16.98,4.54,14.87z M14.88,19.46l-1.15-2.78 c1.37-0.51,2.45-1.59,2.95-2.97l2.78,1.17C18.65,16.98,16.98,18.65,14.88,19.46z'/></svg>");
 						mask-size: 200px;
 						-webkit-mask-size: 200px;
-					    mask-repeat: no-repeat;
-					    -webkit-mask-repeat: no-repeat;
-					    mask-position: 140px;
-					    -webkit-mask-position: 140px;
+						mask-repeat: no-repeat;
+						-webkit-mask-repeat: no-repeat;
+						mask-position: 140px;
+						-webkit-mask-position: 140px;
 					}
 
-					&>* {
+					> * {
 						position: relative;
 						z-index: 1;
 					}
@@ -349,7 +355,7 @@ $mobile: 426px;
 					color: #fff;
 					position: relative;
 
-					&:before {
+					&::before {
 						content: "";
 						position: absolute;
 						top: 0;
@@ -362,13 +368,13 @@ $mobile: 426px;
 						-webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><polygon points='12 17.7371778 5.81966011 21.5 7.49246652 14.4659011 2 9.75735421 9.2141911 9.1728642 12 2.5 14.7858089 9.1728642 22 9.75735421 16.5075335 14.4659011 18.1803399 21.5'></polygon></svg>");
 						mask-size: 200px;
 						-webkit-mask-size: 200px;
-					    mask-repeat: no-repeat;
-					    -webkit-mask-repeat: no-repeat;
-					    mask-position: -100px;
-					    -webkit-mask-position: -100px;
+						mask-repeat: no-repeat;
+						-webkit-mask-repeat: no-repeat;
+						mask-position: -100px;
+						-webkit-mask-position: -100px;
 					}
 
-					&>* {
+					> * {
 						position: relative;
 						z-index: 1;
 					}
@@ -383,12 +389,13 @@ $mobile: 426px;
 
 				.components-external-link__icon {
 					width: 1.2em;
-					margin: 0 .2em 0;
+					margin: 0 0.2em 0;
 				}
 			}
 		}
 
 		.setting-tabs__tab-description {
+
 			h2 {
 				font-size: 30px;
 				font-weight: 400;
@@ -396,7 +403,7 @@ $mobile: 426px;
 			}
 
 			p {
-				color: #32373C;
+				color: #32373c;
 				font-size: 15px;
 				line-height: 1.4;
 				margin: 0;
@@ -443,10 +450,12 @@ $mobile: 426px;
 				}
 
 				.save-settings__save-button {
+
 					&.is-busy {
-						color: #ffffff;
+						color: #fff;
 						background-size: 100px 100%;
-						// Disable reason: This function call looks nicer when each argument is on its own line.
+						// Disable reason: This function call looks nicer
+						// when each argument is on its own line.
 						/* stylelint-disable */
 						background-image: linear-gradient(
 							-45deg,
@@ -487,7 +496,7 @@ $mobile: 426px;
 
 		.setting-tabs__setting-panels {
 			display: grid;
-			grid-gap: 24px;
+			gap: 24px;
 
 			&__sub-panel {
 				display: flex;
@@ -496,10 +505,11 @@ $mobile: 426px;
 			}
 
 			.settings-panel {
+
 				.settings-panel__header {
 					align-items: center;
 					background: #fff;
-					box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
+					box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0, 0, 0, 0.04);
 					box-sizing: border-box;
 					display: flex;
 					font-size: 14px;
@@ -507,42 +517,42 @@ $mobile: 426px;
 					margin-bottom: 1px;
 					min-height: 54px;
 					padding: 16px 24px;
-	
+
 					.settings-panel__header-title {
 						font-weight: 500;
 						display: flex;
 						align-items: center;
-	
-						&>svg {
+
+						> svg {
 							width: 18px;
 							margin-right: 10px;
 						}
 					}
 				}
-	
+
 				.settings-panel__container {
 					background: #fff;
 					padding: 24px;
-					box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
-	
+					box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0, 0, 0, 0.04);
+
 					.settings-type__toggle {
 						margin-bottom: 18px;
-	
+
 						&.has-info-popover {
 							align-items: center;
 							display: flex;
 							gap: 12px;
 							justify-content: space-between;
 						}
-	
+
 						&.first {
 							margin-top: 24px;
 						}
-	
+
 						&:last-child {
 							margin-bottom: 0;
 						}
-	
+
 						.components-toggle-control {
 							margin-bottom: 0;
 
@@ -556,7 +566,7 @@ $mobile: 426px;
 							}
 						}
 					}
-	
+
 					.settings-type__select {
 						margin-bottom: 24px;
 
@@ -567,30 +577,31 @@ $mobile: 426px;
 								margin-top: 0;
 							}
 						}
-	
+
 						&:last-child {
 							margin-bottom: 0;
 						}
-	
+
 						&.has-info-popover {
 							align-items: center;
 							display: flex;
 							gap: 12px;
 							justify-content: space-between;
 						}
-	
+
 						.block-visibility__react-select {
 							margin-top: 12px;
 							width: 100%;
 						}
 					}
-	
+
 					.settings-type__color {
 						display: flex;
 						align-items: flex-start;
 						justify-content: space-between;
-	
+
 						.settings-type__color-selected {
+
 							.components-base-control__field {
 								display: flex;
 								align-items: center;
@@ -598,50 +609,52 @@ $mobile: 426px;
 								margin-top: 5px;
 							}
 						}
-	
+
 						.components-base-control__label {
 							margin-bottom: 0;
 						}
-	
+
 						/* Fix needed for Gutenberg 12.7+ */
 						.component-color-indicator {
 							margin-left: 0.5rem;
 						}
-	
+
 						.components-circular-option-picker {
 							display: flex;
 							align-items: center;
-	
+
 							@media ( max-width: $tablet ) {
 								display: block;
 							}
 						}
-	
+
 						.components-circular-option-picker__custom-clear-wrapper {
 							justify-content: flex-start;
 							margin: 10px 0 10px 20px;
-	
+
 							@media ( max-width: $tablet ) {
 								margin: 10px 0;
 							}
 						}
-	
-						.components-circular-option-picker__option:focus:after {
+
+						.components-circular-option-picker__option:focus::after {
 							top: -4px;
 							left: -4px;
 						}
-	
+
 						.components-button.is-pressed:focus:not(:disabled) {
 							box-shadow: none;
 							outline: none;
 						}
-	
+
 						/* Fix for incorrect tooltip formatting */
 						.components-circular-option-picker__option-wrapper {
+
 							button {
-								&>span {
+
+								> span {
 									position: absolute;
-	
+
 									* {
 										position: absolute;
 										font-size: 10px !important;
@@ -650,7 +663,7 @@ $mobile: 426px;
 							}
 						}
 					}
-	
+
 					/* Align the range control with the color picker. */
 					.settings-type__range {
 						max-width: 200px;
@@ -659,11 +672,11 @@ $mobile: 426px;
 							align-items: center;
 						}
 					}
-	
+
 					.subsetting {
 						margin-left: 24px;
 					}
-					
+
 					.settings-label {
 						align-items: center;
 						display: flex;
@@ -674,14 +687,16 @@ $mobile: 426px;
 						text-transform: uppercase;
 					}
 
-					&> {
+					> {
+
 						.settings-label {
+
 							&:first-child {
 								margin-top: 0;
 							}
 						}
 					}
-	
+
 					.settings-panel__help {
 						font-size: 12px;
 						font-style: normal;
@@ -693,14 +708,15 @@ $mobile: 426px;
 					}
 
 					.components-input-control {
+
 						input {
 							min-height: 40px;
 						}
 					}
-	
+
 					.components-disabled {
-						opacity: .4;
-	
+						opacity: 0.4;
+
 						.components-form-toggle {
 							opacity: 1;
 						}
@@ -709,6 +725,7 @@ $mobile: 426px;
 
 				// Make panels with upsells look a bit better.
 				&.has-upsell {
+
 					.settings-panel__container {
 						padding-bottom: 32px;
 					}
@@ -775,7 +792,7 @@ $mobile: 426px;
 		pre {
 			border: 1px solid #ccd0d4;
 			color: #555;
-			font-size: .9em;
+			font-size: 0.9em;
 			padding: 20px;
 			margin-top: 20px;
 		}
@@ -795,7 +812,7 @@ $mobile: 426px;
 
 		@media ( max-width: $tablet ) {
 			margin-right: 0;
-			margin-bottom: 30px
+			margin-bottom: 30px;
 		}
 	}
 
@@ -812,13 +829,15 @@ $mobile: 426px;
 
 		@media ( max-width: $tablet ) {
 			width: 100%;
-			margin-bottom: 30px
+			margin-bottom: 30px;
 		}
 	}
 
 	/* Specific styles for the Block Manager tab */
 	.is_pro {
+
 		.setting-tabs__block-manager {
+
 			.block-manager__category-container {
 				grid-template-columns: repeat(2, 1fr);
 
@@ -829,27 +848,27 @@ $mobile: 426px;
 		}
 
 		.setting-tabs__setting-panels {
-		   display: grid;
-		   grid-template-columns: 1fr 1fr;
-		   gap: 24px;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 24px;
 
-		   @media ( max-width: $tablet ) {
-			   grid-template-columns: 1fr;
-		   }
+			@media ( max-width: $tablet ) {
+				grid-template-columns: 1fr;
+			}
 
-		   .setting-tabs__setting-controls,
-		   .two-columns {
-			   grid-column: 1 / span 2;
+			.setting-tabs__setting-controls,
+			.two-columns {
+				grid-column: 1 / span 2;
 
-			   @media ( max-width: $tablet ) {
-				   grid-column: 1;
-			   }
-		   }
+				@media ( max-width: $tablet ) {
+					grid-column: 1;
+				}
+			}
 
-		   .settings-panel {
-			   margin-bottom: 0;
-		   }
-	   }
+			.settings-panel {
+				margin-bottom: 0;
+			}
+		}
 	}
 
 	/* Specific styles for the Block Manager tab */
@@ -857,12 +876,12 @@ $mobile: 426px;
 
 		.block-manager__category-container {
 			display: grid;
-			grid-gap: 24px;
+			gap: 24px;
 		}
 
 		.block-manager__block-category {
-			background: #FFFFFF;
-			box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0,0,0,.04);
+			background: #fff;
+			box-shadow: 0 0 0 1px #ccd0d4, 0 1px 1px 1px rgba(0, 0, 0, 0.04);
 			box-sizing: border-box;
 
 			.components-base-control {
@@ -875,7 +894,7 @@ $mobile: 426px;
 
 			.block-category__title {
 				font-size: 14px;
-				font-weight: bold;
+				font-weight: 700;
 				letter-spacing: 0.25px;
 				padding: 16px 24px;
 				border-bottom: 1px solid #ccd0d4;
@@ -895,7 +914,7 @@ $mobile: 426px;
 					label {
 						flex: 1;
 
-						&>span {
+						> span {
 							display: flex;
 							justify-content: space-between;
 							align-items: center;
@@ -930,7 +949,7 @@ $mobile: 426px;
 					label {
 						flex: 1;
 
-						&>span {
+						> span {
 							display: flex;
 							justify-content: space-between;
 							align-items: center;
@@ -941,8 +960,10 @@ $mobile: 426px;
 		}
 	}
 
-	/* Custom styling to make react-select components look like WordPress. */
-	@import './components/react-select';
+	/* Custom styling to make react-select components look like WordPress.
+	   Nested on purpose so the partial stays scoped to this rule. */
+	/* stylelint-disable-next-line no-invalid-position-at-import-rule */
+	@import "./components/react-select";
 }
 
 .block-visibility__reset-modal {

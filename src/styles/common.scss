@@ -11,18 +11,19 @@
 		svg {
 			width: 22px;
 		}
-		
+
 		&:hover,
-		&[aria-expanded=true] {
+		&[aria-expanded="true"] {
 			opacity: 1;
 		}
 	}
 }
 
 .information-popover__popover {
+
 	p {
 		font-size: 13px;
-		color: #32373C;
+		color: #32373c;
 		line-height: 1.5;
 		margin: 0 0 1em;
 
@@ -32,6 +33,7 @@
 	}
 
 	.components-external-link {
+
 		svg {
 			margin: 0 2px;
 		}
@@ -47,7 +49,7 @@
 		max-width: 250px;
 
 		// Backward compatibility fix for WordPress 6.0 and lower.
-		&> div {
+		> div {
 			padding: 0;
 		}
 	}
