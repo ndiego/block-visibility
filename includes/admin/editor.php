@@ -162,3 +162,46 @@ function get_plugin_setting( $setting, $is_boolean = false ) {
 
 	return false;
 }
+
+/**
+ * Register a fallback for the `react-jsx-runtime` script.
+ *
+ * The compiled plugin scripts depend on the `react-jsx-runtime` script handle,
+ * which WordPress core only provides as of 6.6. On older versions, register a
+ * lightweight shim built on the public `React.createElement` API so the
+ * dependency resolves and the scripts still load.
+ */
+function register_jsx_runtime_fallback() {
+	if ( wp_script_is( 'react-jsx-runtime', 'registered' ) ) {
+		return;
+	}
+
+	wp_register_script(
+		'react-jsx-runtime',
+		false,
+		array( 'react' ),
+		BLOCK_VISIBILITY_VERSION,
+		false
+	);
+
+	wp_add_inline_script(
+		'react-jsx-runtime',
+		'( function () {
+			if ( window.ReactJSXRuntime ) {
+				return;
+			}
+			function jsx( type, props, key ) {
+				if ( undefined !== key ) {
+					props = Object.assign( {}, props, { key: key } );
+				}
+				return window.React.createElement( type, props );
+			}
+			window.ReactJSXRuntime = {
+				Fragment: window.React.Fragment,
+				jsx: jsx,
+				jsxs: jsx,
+			};
+		} )();'
+	);
+}
+add_action( 'init', __NAMESPACE__ . '\register_jsx_runtime_fallback' );
