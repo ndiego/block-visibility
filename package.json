@@ -9,6 +9,10 @@
 		"url": "git://github.com/ndiego/block-visibility.git"
 	},
 	"homepage": "https://www.blockvisibilitywp.com",
+	"engines": {
+		"node": ">=22.13.0",
+		"npm": ">=10"
+	},
 	"scripts": {
 		"build": "wp-scripts build",
 		"lint:css": "wp-scripts lint-style",
