@@ -251,7 +251,7 @@ export default function Schedule( props ) {
 			<div className="schedules-item__fields__date-time">
 				<div className="control-fields-item__label">
 					{ sprintf(
-						// Translators: Whether the block is hidden or visible.
+						// translators: %s: Whether the block is hidden or visible.
 						__( '%s the block', 'block-visibility' ),
 						hideOnSchedules
 							? __( 'Hide', 'block-visibility' )
@@ -307,7 +307,7 @@ export default function Schedule( props ) {
 									? __(
 											'Start Date/Time',
 											'block-visibility'
-									  )
+										)
 									: __( 'End Date/Time', 'block-visibility' )
 							}
 							isOpen={ setPickerOpen }

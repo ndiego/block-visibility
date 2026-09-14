@@ -50,7 +50,7 @@ export default function General( props ) {
 
 	// Manually set defaults, this ensures the main settings function properly
 	const enableLocalControls = visibilityControls?.general?.enable_local_controls ?? true; // eslint-disable-line
-	const defaultControls = pluginSettings?.default_controls ?? []; // eslint-disable-line
+	const defaultControls = pluginSettings?.default_controls ?? [];
 	const selectedControls = defaultControlOptions.filter( ( control ) =>
 		defaultControls.includes( control.value )
 	);
@@ -119,7 +119,7 @@ export default function General( props ) {
 						backgroundColor: '#757575',
 						color: '#ffffff',
 						paddingRight: 6,
-				  }
+					}
 				: base;
 		},
 		multiValueRemove: ( base, state ) => {

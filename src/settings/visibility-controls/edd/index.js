@@ -28,7 +28,7 @@ export default function EDD( props ) {
 	}
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enable = visibilityControls?.edd?.enable ?? true; // eslint-disable-line
+	const enable = visibilityControls?.edd?.enable ?? true;
 	const enableVariablePricing = visibilityControls?.edd?.enable_variable_pricing ?? true; // eslint-disable-line
 
 	let variablePriceControl = (

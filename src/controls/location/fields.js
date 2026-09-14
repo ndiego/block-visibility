@@ -187,21 +187,23 @@ export function GetAllFields() {
 		return data;
 	}, [ postTypes ] );
 
-	const hierachicalTaxonomiesByPostType = taxonomiesByPostType.map( function (
-		taxonomy
-	) {
-		const newOptions = taxonomy.options.map( function ( option ) {
-			return {
-				...option,
-				...( option.hierarchical === false && { isDisabled: true } ),
-			};
-		} );
+	const hierachicalTaxonomiesByPostType = taxonomiesByPostType.map(
+		function ( taxonomy ) {
+			const newOptions = taxonomy.options.map( function ( option ) {
+				return {
+					...option,
+					...( option.hierarchical === false && {
+						isDisabled: true,
+					} ),
+				};
+			} );
 
-		return {
-			...taxonomy,
-			options: newOptions,
-		};
-	} );
+			return {
+				...taxonomy,
+				options: newOptions,
+			};
+		}
+	);
 
 	// Create a simple array of post types.
 	const postTypesList = useMemo( () => {

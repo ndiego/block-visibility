@@ -162,7 +162,7 @@ function isValidJson( string ) {
 	// First check if actually JSON.
 	try {
 		JSON.parse( string );
-	} catch ( e ) {
+	} catch {
 		return false;
 	}
 

@@ -14,7 +14,7 @@ export default function FullControlMode( props ) {
 	const { pluginSettings, setPluginSettings } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
-	const removeOnUninstall = pluginSettings?.remove_on_uninstall ?? false; // eslint-disable-line
+	const removeOnUninstall = pluginSettings?.remove_on_uninstall ?? false;
 
 	return (
 		<div className="settings-panel">

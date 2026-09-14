@@ -27,7 +27,7 @@ export default function ACF( props ) {
 	}
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enable = visibilityControls?.acf?.enable ?? true; // eslint-disable-line
+	const enable = visibilityControls?.acf?.enable ?? true;
 
 	return (
 		<div className="settings-panel control-acf">

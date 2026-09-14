@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { getSettings, format } from '@wordpress/date'; // eslint-disable-line
+import { getSettings, format } from '@wordpress/date';
 
 /**
  * Format the given date.

@@ -20,7 +20,7 @@ export default function UserPermissions( props ) {
 	const { pluginSettings, setPluginSettings } = props;
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enable = pluginSettings?.enable_user_role_restrictions ?? false; // eslint-disable-line
+	const enable = pluginSettings?.enable_user_role_restrictions ?? false;
 
 	let userRolesElement = (
 		<EnabledUserRoles

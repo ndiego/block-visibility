@@ -29,10 +29,10 @@ export default function Editor( props ) {
 	// Manually set defaults, this ensures the main settings function properly
 	const enableContextualIndicators = pluginSettings?.enable_contextual_indicators ?? true; // eslint-disable-line
 	const contextualIndicatorColor = pluginSettings?.contextual_indicator_color ?? ''; // eslint-disable-line
-	const enableBlockOpacity = pluginSettings?.enable_block_opacity ?? false; // eslint-disable-line
-	const blockOpacity = pluginSettings?.block_opacity ?? 100; // eslint-disable-line
+	const enableBlockOpacity = pluginSettings?.enable_block_opacity ?? false;
+	const blockOpacity = pluginSettings?.block_opacity ?? 100;
 	const enableToolbarControls = pluginSettings?.enable_toolbar_controls ?? true; // eslint-disable-line
-	const enableEditorNotices = pluginSettings?.enable_editor_notices ?? true; // eslint-disable-line
+	const enableEditorNotices = pluginSettings?.enable_editor_notices ?? true;
 	const enableControlSetUtilities = pluginSettings?.enable_control_set_utilities ?? true; // eslint-disable-line
 
 	const colors = [

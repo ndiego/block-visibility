@@ -296,10 +296,14 @@ export function getAllFields( variables ) {
  * proper field groups.
  *
  * @since 1.9.0
+ * @param {Object} variables The visibility control variables
  * @return {string} All fields perpared in their respective field groups
  */
 export function getGroupedFields( variables ) {
-	return prepareGroupedFields( getFieldGroups( variables ), getAllFields( variables ) );
+	return prepareGroupedFields(
+		getFieldGroups( variables ),
+		getAllFields( variables )
+	);
 }
 
 /**

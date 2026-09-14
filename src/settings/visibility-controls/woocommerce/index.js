@@ -28,7 +28,7 @@ export default function WooCommerce( props ) {
 	}
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enable = visibilityControls?.woocommerce?.enable ?? true; // eslint-disable-line
+	const enable = visibilityControls?.woocommerce?.enable ?? true;
 	const enableVariablePricing = visibilityControls?.woocommerce?.enable_variable_pricing ?? true; // eslint-disable-line
 
 	let variablePriceControl = (

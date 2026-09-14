@@ -20,7 +20,7 @@ export default function EnabledUserRoles( props ) {
 	const roles = [ 'editor', 'author', 'contributor' ];
 
 	// Manually set defaults, this ensures the main settings function properly
-	const enabledRoles = pluginSettings?.enabled_user_roles ?? []; // eslint-disable-line
+	const enabledRoles = pluginSettings?.enabled_user_roles ?? [];
 
 	return (
 		<div className="subsetting">

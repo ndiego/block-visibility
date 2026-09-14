@@ -79,7 +79,7 @@ export default function Users( props ) {
 			{ enableNotices && (
 				<div className="components-base-control__help">
 					{ sprintf(
-						// Translators: Whether the block is hidden or visible.
+						// translators: %s: Whether the block is hidden or visible.
 						__( '%s the selected users.', 'block-visibility' ),
 						label
 					) }

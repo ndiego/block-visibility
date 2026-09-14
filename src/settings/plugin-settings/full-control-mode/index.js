@@ -41,7 +41,7 @@ export default function FullControlMode( props ) {
 							{
 								strong: <strong />,
 								a: (
-									<ExternalLink // eslint-disable-line
+									<ExternalLink
 										href={ links.settings.general }
 										target="_blank"
 										rel="noreferrer"

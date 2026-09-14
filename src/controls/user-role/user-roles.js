@@ -63,7 +63,7 @@ export default function UserRoles( props ) {
 			{ enableNotices && (
 				<div className="components-base-control__help">
 					{ sprintf(
-						// Translators: Whether the block is hidden or visible.
+						// translators: %s: Whether the block is hidden or visible.
 						__(
 							'%s users with at least one of the selected roles.',
 							'block-visibility'

@@ -47,7 +47,7 @@ export default function UserRuleSets( props ) {
 				{ enableNotices && (
 					<div className="components-base-control__help">
 						{ sprintf(
-							// Translators: Whether the block is hidden or visible.
+							// translators: %s: Whether the block is hidden or visible.
 							__(
 								'%s the block if any user rule set applies.',
 								'block-visibility'
