@@ -53,176 +53,195 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
 // Contextual indicator styles
 .block-visibility__has-visibility {
 
-    // Ensure no indicator styling is applied when a block is selected.
-    &:not(.is-selected):not(.has-child-selected) {
-        outline: 1px dashed var(--wp-admin-theme-color);
+	// Ensure no indicator styling is applied when a block is selected.
+	&:not(.is-selected):not(.has-child-selected) {
+		outline: 1px dashed var(--wp-admin-theme-color);
 
-        // Fix for the blocks that are placeholders, like the shortcodes block
-        &.components-placeholder.components-placeholder,
-        &.components-placeholder {
-            outline: 1px dashed var(--wp-admin-theme-color);
-        }
-    
-        &:after {
-            content: "";
-            position: absolute;
-            min-height: 29px;
-            min-width: 28px;
-            top: 0;
-            right: 0;
-            background-color: var(--wp-admin-theme-color);
-            -webkit-mask-size: 24px 24px;
-            mask-size: 24px 24px;
-            -webkit-mask-position: calc( 100% - 4px ) 4px;
-            mask-position: calc( 100% - 4px ) 4px;
-            -webkit-mask-repeat: no-repeat;
-            mask-repeat: no-repeat;
-    
-            // Fixes opacity overlay error with the Cover block.
-            z-index: 1;
-        }
-    
-        // This serves as a default.
-        &:after {
-            mask-image: url( $icon__visible );
-            -webkit-mask-image: url( $icon__visible );
-        }
-    
-        &.block-visibility__has-date-time {
-            &:after {
-                mask-image: url( $icon__date-time );
-                -webkit-mask-image: url( $icon__date-time );
-            }
-        }
-    
-        &.block-visibility__has-user-role {
-            &:after {
-                mask-image: url( $icon__user-role );
-                -webkit-mask-image: url( $icon__user-role );
-            }
-        }
-    
-        &.block-visibility__has-screen-size {
-            &:after {
-                mask-image: url( $icon__screen-size );
-                -webkit-mask-image: url( $icon__screen-size );
-            }
-        }
-    
-        &.block-visibility__has-query-string {
-            &:after {
-                mask-image: url( $icon__query-string );
-                -webkit-mask-image: url( $icon__query-string );
-            }
-        }
-    
-        &.block-visibility__has-location {
-            &:after {
-                mask-image: url( $icon__location );
-                -webkit-mask-image: url( $icon__location );
-            }
-        }
-    
-        &.block-visibility__has-referral-source {
-            &:after {
-                mask-image: url( $icon__referral-source );
-                -webkit-mask-image: url( $icon__referral-source );
-            }
-        }
-    
-        &.block-visibility__has-url-path {
-            &:after {
-                mask-image: url( $icon__url-path );
-                -webkit-mask-image: url( $icon__url-path );
-            }
-        }
-    
-        &.block-visibility__has-browser-device {
-            &:after {
-                mask-image: url( $icon__browser-device );
-                -webkit-mask-image: url( $icon__browser-device );
-            }
-        }
-    
-        &.block-visibility__has-metadata {
-            &:after {
-                mask-image: url( $icon__metadata );
-                -webkit-mask-image: url( $icon__metadata );
-            }
-        }
-    
-        &.block-visibility__has-cookie {
-            &:after {
-                mask-image: url( $icon__cookie );
-                -webkit-mask-image: url( $icon__cookie );
-            }
-        }
-    
-        &.block-visibility__has-wp-fusion {
-            &:after {
-                mask-image: url( $icon__wp-fusion );
-                -webkit-mask-image: url( $icon__wp-fusion );
-            }
-        }
-    
-        // Integration styles.
-        &.block-visibility__has-acf {
-            &:after {
-                mask-image: url( $icon__acf );
-                -webkit-mask-image: url( $icon__acf );
-            }
-        }
+		// Fix for the blocks that are placeholders, like the shortcodes block
+		&.components-placeholder.components-placeholder,
+		&.components-placeholder {
+			outline: 1px dashed var(--wp-admin-theme-color);
+		}
 
-        &.block-visibility__has-edd {
-            &:after {
-                mask-image: url( $icon__edd );
-                -webkit-mask-image: url( $icon__edd );
-            }
-        }
-    
-        &.block-visibility__has-woocommerce {
-            &:after {
-                mask-image: url( $icon__woocommerce );
-                -webkit-mask-image: url( $icon__woocommerce );
-            }
-        }
-    
-        // When multiple controls are enabled.
-        &.block-visibility__has-2-controls {
-            &:after {
-                mask-image: url( $icon__two-controls );
-                -webkit-mask-image: url( $icon__two-controls );
-            }
-        }
-    
-        &.block-visibility__has-3-controls {
-            &:after {
-                mask-image: url( $icon__three-controls );
-                -webkit-mask-image: url( $icon__three-controls );
-            }
-        }
-    
-        &.block-visibility__has-4-controls {
-            &:after {
-                mask-image: url( $icon__four-controls );
-                -webkit-mask-image: url( $icon__four-controls );
-            }
-        }
-    
-        &.block-visibility__has-5-controls {
-            &:after {
-                mask-image: url( $icon__five-controls );
-                -webkit-mask-image: url( $icon__five-controls );
-            }
-        }
-    
-        &.block-visibility__is-hidden {
-            &:after {
-                mask-image: url( $icon__hidden ) !important;
-                -webkit-mask-image: url( $icon__hidden ) !important;
-            }
-        }
-    }
+		&::after {
+			content: "";
+			position: absolute;
+			min-height: 29px;
+			min-width: 28px;
+			top: 0;
+			right: 0;
+			background-color: var(--wp-admin-theme-color);
+			-webkit-mask-size: 24px 24px;
+			mask-size: 24px 24px;
+			-webkit-mask-position: calc(100% - 4px) 4px;
+			mask-position: calc(100% - 4px) 4px;
+			-webkit-mask-repeat: no-repeat;
+			mask-repeat: no-repeat;
+
+			// Fixes opacity overlay error with the Cover block.
+			z-index: 1;
+		}
+
+		// This serves as a default.
+		&::after {
+			mask-image: url($icon__visible);
+			-webkit-mask-image: url($icon__visible);
+		}
+
+		&.block-visibility__has-date-time {
+
+			&::after {
+				mask-image: url($icon__date-time);
+				-webkit-mask-image: url($icon__date-time);
+			}
+		}
+
+		&.block-visibility__has-user-role {
+
+			&::after {
+				mask-image: url($icon__user-role);
+				-webkit-mask-image: url($icon__user-role);
+			}
+		}
+
+		&.block-visibility__has-screen-size {
+
+			&::after {
+				mask-image: url($icon__screen-size);
+				-webkit-mask-image: url($icon__screen-size);
+			}
+		}
+
+		&.block-visibility__has-query-string {
+
+			&::after {
+				mask-image: url($icon__query-string);
+				-webkit-mask-image: url($icon__query-string);
+			}
+		}
+
+		&.block-visibility__has-location {
+
+			&::after {
+				mask-image: url($icon__location);
+				-webkit-mask-image: url($icon__location);
+			}
+		}
+
+		&.block-visibility__has-referral-source {
+
+			&::after {
+				mask-image: url($icon__referral-source);
+				-webkit-mask-image: url($icon__referral-source);
+			}
+		}
+
+		&.block-visibility__has-url-path {
+
+			&::after {
+				mask-image: url($icon__url-path);
+				-webkit-mask-image: url($icon__url-path);
+			}
+		}
+
+		&.block-visibility__has-browser-device {
+
+			&::after {
+				mask-image: url($icon__browser-device);
+				-webkit-mask-image: url($icon__browser-device);
+			}
+		}
+
+		&.block-visibility__has-metadata {
+
+			&::after {
+				mask-image: url($icon__metadata);
+				-webkit-mask-image: url($icon__metadata);
+			}
+		}
+
+		&.block-visibility__has-cookie {
+
+			&::after {
+				mask-image: url($icon__cookie);
+				-webkit-mask-image: url($icon__cookie);
+			}
+		}
+
+		&.block-visibility__has-wp-fusion {
+
+			&::after {
+				mask-image: url($icon__wp-fusion);
+				-webkit-mask-image: url($icon__wp-fusion);
+			}
+		}
+
+		// Integration styles.
+		&.block-visibility__has-acf {
+
+			&::after {
+				mask-image: url($icon__acf);
+				-webkit-mask-image: url($icon__acf);
+			}
+		}
+
+		&.block-visibility__has-edd {
+
+			&::after {
+				mask-image: url($icon__edd);
+				-webkit-mask-image: url($icon__edd);
+			}
+		}
+
+		&.block-visibility__has-woocommerce {
+
+			&::after {
+				mask-image: url($icon__woocommerce);
+				-webkit-mask-image: url($icon__woocommerce);
+			}
+		}
+
+		// When multiple controls are enabled.
+		&.block-visibility__has-2-controls {
+
+			&::after {
+				mask-image: url($icon__two-controls);
+				-webkit-mask-image: url($icon__two-controls);
+			}
+		}
+
+		&.block-visibility__has-3-controls {
+
+			&::after {
+				mask-image: url($icon__three-controls);
+				-webkit-mask-image: url($icon__three-controls);
+			}
+		}
+
+		&.block-visibility__has-4-controls {
+
+			&::after {
+				mask-image: url($icon__four-controls);
+				-webkit-mask-image: url($icon__four-controls);
+			}
+		}
+
+		&.block-visibility__has-5-controls {
+
+			&::after {
+				mask-image: url($icon__five-controls);
+				-webkit-mask-image: url($icon__five-controls);
+			}
+		}
+
+		&.block-visibility__is-hidden {
+
+			&::after {
+				mask-image: url($icon__hidden) !important;
+				-webkit-mask-image: url($icon__hidden) !important;
+			}
+		}
+	}
 }
 
 /**
@@ -234,29 +253,31 @@ $icon__five-controls: $svg-start + $five-controls + $svg-end;
  * This also tackles some styling issues in the Site Editor in Gutenberg 11.1.
  */
 .is-outline-mode {
-    .wp-block {
-        &.block-visibility__has-visibility {
 
-            &.is-hovered:not(.is-selected):not(.has-child-selected) {
-                outline-color: var(--wp-admin-theme-color);
-                outline-style: solid;
+	.wp-block {
 
-                &:after {
-                    content: none
-                }
-            }
-        }
+		&.block-visibility__has-visibility {
 
-        &>.block-visibility__has-visibility {
+			&.is-hovered:not(.is-selected):not(.has-child-selected) {
+				outline-color: var(--wp-admin-theme-color);
+				outline-style: solid;
 
-            &.is-hovered:not(.is-selected):not(.has-child-selected) {
-                outline-color: var(--wp-admin-theme-color);
-                outline-style: solid;
+				&::after {
+					content: none;
+				}
+			}
+		}
 
-                &:after {
-                   content: none;
-                }
-            }
-        }
-    }
+		> .block-visibility__has-visibility {
+
+			&.is-hovered:not(.is-selected):not(.has-child-selected) {
+				outline-color: var(--wp-admin-theme-color);
+				outline-style: solid;
+
+				&::after {
+					content: none;
+				}
+			}
+		}
+	}
 }
