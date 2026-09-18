@@ -659,8 +659,14 @@ function run_location_hierarchy_test( $rule ) {
 
 	$post_id     = get_the_ID();
 	$has_parent  = wp_get_post_parent_id( $post_id );
-	$child_pages = get_pages( array( 'child_of' => $post_id ) );
-	$child_pages = $child_pages ? $child_pages : array();
+	$child_pages = $post_id ? get_children(
+		array(
+			'post_parent' => $post_id,
+			'post_type'   => get_post_type( $post_id ),
+			'post_status' => 'publish',
+			'numberposts' => 1,
+		)
+	) : array();
 
 	switch ( $hierarchy ) {
 		case 'topLevel':
@@ -724,7 +730,12 @@ function run_location_relative_hierarchy_test( $rule ) {
 
 	$post_id     = get_the_ID();
 	$parent_id   = wp_get_post_parent_id( $post_id );
-	$child_pages = get_pages( array( 'child_of' => $post_id ) );
+	$child_pages = get_pages(
+		array(
+			'child_of'  => $post_id,
+			'post_type' => get_post_type( $post_id ),
+		)
+	);
 	$child_pages = $child_pages ? $child_pages : array();
 
 	$child_page_ids = array();
